@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Mentor-Views2"
+            author="Justin Kruger"
+            author_email="jdavid.net@gmail.com" height="800">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="settitle" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <link rel="stylesheet" href="css/gadget.css?11" type="text/css" media="screen, projection">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript">
+    if( typeof(console) == "undefined" ){ var console = { "log" :function(){} }; }
+    var Questions = {};
+   
+    os.ready(function(){
+    	//TODO: update this if you change the HTML.
+    	//TODO: use this function createMentorDataMap(); // uncomment below.
+    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidermiology\":\"Epidermiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"lead\":\"Lead Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
+    	Questions = gadgets.json.parse(Questions);
+    	console.log( "questions", Questions );
+    });
+    
+	    $(document).ready(function(){
+		
+			$('.moreless').toggle(
+				function(){
+					$(this).text('( less... )')
+						.parents('.section')
+						.children('.roundbox')
+						.slideDown('fast', function(){ 
+								gadgets.window.adjustHeight();
+								});
+				},
+				function(){
+					$(this).text('( more... )')
+						.parents('.section')
+						.children('.roundbox')
+						.slideUp('fast', function(){
+							gadgets.window.adjustHeight();
+							});
+				});
+				
+				
+				function renderNav(){
+					var supported_views = gadgets.views.getSupportedViews();
+					var views = {};
+					//console.log('gadgets.views.getSupportedViews()', gadgets.views.getSupportedViews(), JSON.stringify( gadgets.views.getSupportedViews() ) );
+					var nav = $('<ul/>');
+					
+					//add this so that when i am on a container that does not naitively support canvas.owener, it's still accessible.
+					views["canvas.owner"] = { "name_":"canvas.owner"  };
+					views["update"] = { "name_":"update"  };
+					
+					//getting rid of the dups
+					$.each(supported_views, function(){ views[this.name_] = this; });
+					
+					$.each(views, function(){
+						$(nav).append( '<li>' + this.name_ + '</li>' );	
+					});
+					
+					$('.viewnav').append("<div style='font-weight:bold;font-size:1.1em;'>Navigation</div>");
+					$('.viewnav').append(nav);
+					$('.viewnav').wrap("<div class='roundbox'/>");
+					
+					$('.viewnav li')
+						.click(function(){
+								gadgets.views.requestNavigateTo( $(this).text() );
+						});
+						
+					gadgets.window.adjustHeight();
+				}
+				renderNav();
+				
+				function renderParams(){
+					var params = gadgets.views.getParams();
+					var ul = $('<ul/>');
+					var c = 0;
+					console.log( params );
+					
+					
+					for(p in params){
+						$(ul).append( '<li><label>' + p + ' =</label><span class="pvalue">'+params[p]+'</span></li>' );
+						c++;	
+					}
+					if(c>0){
+						$('.params').append("<div style='font-weight:bold;font-size:1.1em;'>Params</div>");
+						$('.params').append(ul);
+						$('.params').wrap("<div class='roundbox'/>");
+						gadgets.window.adjustHeight();
+					}
+					
+				}
+				//renderParams();
+				
+				$('.question fieldset').each(function(){ 
+					
+					var question = $(this);
+					
+					$(this).find('input[type=radio]').change(function(){
+						var str = [];
+						$(question).find('input:checked').each(function(){
+							str.push($(this).val());
+						}); 
+						//console.log( this.name, this.value, str );
+						var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+						//console.log(map);
+						updateAppData( map );				
+					});
+					
+					$(this).find('input[type=checkbox]').change(function(){
+						var str = [];
+						$(question).find('input:checked').each(function(){
+							str.push($(this).val());
+						}); 
+						str = str.join(", ");
+						//console.log( this.name, this.value, str );
+						var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+						//console.log(map);
+						updateAppData( map );
+					});
+					
+					$(this).find('input[name], textarea[name]')
+						.not('[type=checkbox]').not('[type=radio]')
+						.change(function(){
+							
+							
+							var str = $(this).val() || "";
+							//console.log( $(this), str );
+							
+							
+							var map = gadgets.json.parse( "{ \"" + $(this).attr('name') + "\" : \"" + str + "\" }" );
+							//console.log(map);
+							updateAppData( map );
+						
+						});
+					 
+				});
+				
+				/*
+				function fetchOwner(){
+					osapi.people.getOwner()
+						.execute(function(result){
+							console.log(result.id);
+					});
+				}
+				*/
+				
+				
+				
+				function updateAppData(map){
+					$.extend(true, map, {'lastUpdate': new Date().getTime()});
+					osapi.appdata.update(  {'userId': '@viewer', 'appId':'@app', 'data': map } )
+						.execute(function(result){
+							console.log(result, map);
+						});
+				}
+				
+				
+				
+				
+		});
+		
+		//on canvas.owner update
+		function displayAppSummary(){
+			$(document).ready(function(){
+			var fields = {};
+			fields = Questions;
+			fields["lastUpdate"] ={name: "lastUpdate"}; //let's fetch this too.
+			
+			var keys = [];
+			/*
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			*/
+			
+			console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f].name);
+			}
+			console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log('"appdata response"');
+					console.log(result, keys);
+					
+					var fr = {};
+					$('.detail[fr][test]').each(function(){
+						console.log('detail for', $(this).attr('fr'));
+						fr[$(this).attr('fr')] = $(this).attr('test');
+						
+					});
+					
+					//this is a weird way to access the @owner without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						console.log( n, result[n], result );
+						break;
+					}
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for radio and checkboxes
+						var type = Questions[keys[k]].type
+						console.log( 'type', type );
+						if( type == 'radio' || type == 'checkbox'){
+							var v = 0;
+							var answer = [];
+							var comma = "";
+							for(v = 0; v < vals.length; v++){
+								//console.log('each val', vals[v]);
+								
+								//TODO:if things change, it will break here.
+								answer.push( Questions[keys[k]].labels[vals[v]] );
+								
+								if( typeof(fr[keys[k]]) != 'undefined' && fr[keys[k]] == vals[v] ){
+									console.log( 'detail >>', fr, fr[keys[k]], vals[v]);
+									$('.detail[test='+ fr[keys[k]] +'][fr='+ keys[k] +']').show();								
+								}
+							}//for
+							comma = answer.join(", ");
+							console.log( 'comma', comma );
+							
+							$('div.answer[name='+keys[k]+']').each(function(){
+								console.log('"answer"', keys[k]);
+								$(this).find('.answerresponse[type=comma]').text( comma );
+								$(this).find('.answerresponse[type=list]')
+									.each(function(){
+										var ul = $('<ul/>');
+										for(var a=0,al= answer.length; a < al; a++){
+											ul.append( $('<li/>').text( answer[a] ) );
+										}
+										$(this).append(ul);
+								});
+								$(this).show();
+								$(this).parents('.section').show();
+								gadgets.window.adjustHeight();
+							});
+						}//if
+						
+						if( type == 'text' || type == 'email' || type == 'phone' ){
+							$('span[name='+ keys[k] +']').each(function(){
+									/*if(appdata[keys[k]].length < 1){ return this; }*/
+									
+									$(this).text(appdata[keys[k]]);
+									$(this).show();
+									$(this).parents('.section').show();
+									gadgets.window.adjustHeight();
+								});
+						}
+						
+						if( type == 'textarea' ){
+							$('div.answer[name='+keys[k]+']').each(function(){
+								$(this).find('.answerresponse[type=textarea]')
+									.append('<p/>').append(appdata[keys[k]]);
+								$(this).show();
+								$(this).parents('.section').show();
+								gadgets.window.adjustHeight();
+							});
+						}
+					}
+					
+					
+				});//osapi.appdata.get
+			});//document.ready
+		}
+		
+		function displayAppData(){
+			$(document).ready(function(){
+			var fields = {};
+			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
+			
+			var keys = [];
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			//console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f]);
+			}
+			//console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log(result, keys);
+					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
+					
+					//this is a weird way to access the @viewer without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						//console.log( n, result[n], result );
+						break;
+					}
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							//console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for each value stored in the array let's check it on the form
+						var v = 0;
+						for(v = 0; v < vals.length; v++){
+							//console.log('each val', vals[v]);
+							
+							//this will work for radio and checkboxes, let's filter based on form name, and it's value attribute
+							$('[name='+ keys[k] +']')
+								.filter('input[type=radio], input[type=checkbox]')
+								.filter('[value='+ vals[v] +']')
+								.each(function(){
+									//console.log('update checked attr', this);
+									$(this).attr('checked','checked');
+								});
+						}
+						
+						$('[name='+ keys[k] +']')
+								.filter('input, textarea')
+								.not('[type=radio],[type=checkbox]')
+								.each(function(){
+									//console.log('update text', vals);
+									$(this).val( vals.join(", "));
+								});
+								
+						gadgets.window.adjustHeight();
+						
+					}
+					
+					
+					
+				});/*osapi.appdata.get*/
+			});/*document.ready*/
+		}
+		
+    </script>]]></Content>
+    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		displayAppSummary();
+    	});
+    	
+    	var fields = [
+    		"lastUpdate", 
+    		"privacy", 
+    		"primaryResearch", 
+    		"interestArea", 
+    		"availableMentorFaculty", 
+    		"facultyMenteeLevel", 
+    		"facultyContactPref", 
+    		"facultyAssitiantName", 
+    		"facultyAssitiantEmail", 
+    		"facultyAssitiantPhone", 
+    		"facultyNarative", 
+    		"availableMentorStudents", 
+    		"studentMenteeLevel", 
+    		"studentContactPref", 
+    		"studentAssistantName", 
+    		"studentAssistantEmail", 
+    		"studentAssistantPhone", 
+    		"studentNarative"
+    		];
+    </script>
+    <div class='debug params'></div>
+    <div class='viewnav'></div>
+    <div id='Profile'>
+
+		<div class='header'>
+		<h1>Mentorship Information</h1>
+		</div>
+		
+		<div class='roundbox'>
+		<div class='updated'>
+			Last Updated <span>September 22nd, 2010</span>
+		</div>
+		
+		<div class='answer' name="primaryResearch">
+		<span class='answertitle'>Primary type of Research:</span>
+		<span class='answerresponse' type="comma"></span>
+		</div>
+		
+		<div class='answer' name="interestArea">
+		<span class='answertitle'>Mentorship Areas of Interest:</span>
+		<span class='answerresponse' type="comma"></span>
+		</div><!-- .answer -->
+		
+		<div class='section' style="display:none;">
+		<h4>For Faculty </h4>
+		<div class='roundbox lgrey'>
+		
+		<div class='answer' name="facultyNarative">
+		<span class='answerresponse' type='textarea'></span>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="facultyContactPref">
+		<span class='detailtitle'>Contact for Mentoring:</span>
+		<span class='answerresponse' type='comma'></span>
+		<div class='detail' test="assistant" fr="facultyContactPref">
+			<span name="facultyAssistantName"></span>
+			<span name="facultyAssistantPhone"></span>
+			<span name="facultyAssistantEmail"></span>
+		</div>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="availableMentorFaculty">
+		<span class='detailtitle'>Mentoring Opportunities Available:</span>
+		<span class='answerresponse' type='list'></span>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="facultyMenteeLevel">
+		<span class='detailtitle'>Mentoring Opportunities for:</span>
+		<span class='answerresponse' type='list'></span>
+		</div><!-- .answer -->
+		
+		</div><!-- .roundbox .lgrey -->
+		</div><!-- .section -->
+		
+		<div class='section' style="display:none;">
+		<h4>For Students </h4>
+		<div class='roundbox lgrey'>
+		
+		<div class='answer' name="studentNarative">
+		<span class='answerresponse' type='textarea'></span>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="studentContactPref">
+		<span class='detailtitle'>Contact for Mentoring:</span>
+		<span class='answerresponse' type='comma'></span>
+		<div class='detail' test="assistant" fr="studentContactPref">
+			<span name="studentAssistantName"></span>
+			<span name="studentAssistantPhone"></span>
+			<span name="studentAssistantEmail"></span>
+		</div>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="availableMentorStudents">
+		<span class='detailtitle'>Mentoring Opportunities Available:</span>
+		<span class='answerresponse' type='list'></span>
+		</div><!-- .answer -->
+		
+		<div class='answer' name="studentMenteeLevel">
+		<span class='detailtitle'>Mentoring Opportunities for:</span>
+		<span class='answerresponse' type='list'></span>
+		</div><!-- .answer -->
+		
+		</div><!-- .roundbox .lgrey -->
+		</div><!-- .section -->
+		
+		</div><!-- .roundbox -->
+	
+	</div>]]></Content>
+    <Content type="html" view="preview"><![CDATA[<!--HTML-->
+    <div class='debug params'></div>
+    <div class='viewnav'></div>
+    <div id='Profile'>
+
+		<div class='header'>
+		<h1>Mentorship Information</h1>
+		</div>
+		
+		
+		<div class='roundbox'>
+		<div class='updated'>
+			Last Updated <span>September 22nd, 2010</span>
+		</div>
+		
+		<div class='answer'>
+		<span class='answertitle'>Primary type of Research:</span><span class='answerresponse'>Clinical</span>
+		</div>
+		
+		<div class='answer'>
+		<span class='answertitle'>Mentorship Areas of Interest:</span><span class='answerresponse'>Human, Health Services</span>
+		</div>
+		
+		<div class='section'>
+		<h4>For Faculty </h4>
+		<div class='roundbox lgrey'>
+		
+		<div class='answer'>
+		<span class='answerresponse'><p>
+		My research team is mostly involved in multi-center trials.  Most work would relate to secondary data analysis of databases presently available
+		</p></span>
+		</div><!-- .answer -->
+		
+		<div class='answer'>
+		<span class="detailtitle">Contact for Mentoring:</span>
+		<span class="answerresponse"><em>Email:</em> clay.johnston@ucsfmedctr.edu</span>
+		</div>
+		
+		<div class='answer'>
+		<span class="detailtitle">Mentoring Opportunities Available:</span>
+		<span class='answerresponse'>
+		<ul>
+			<li>Research Mentor</li>
+			<li>Career Mentor</li>
+		</ul>
+		</span>
+		</div><!-- .answer -->
+		
+		<div class='answer'>
+		<span class="detailtitle">Mentoring Opportunities for:</span>
+		<span class='answerresponse'>
+		<ul>
+			<li>Junior Faculty</li>
+			<li>Mid-Level Faculty</li>
+		</ul>
+		</span>
+		</div><!-- .answer -->
+		
+		</div><!-- .roundbox .lgrey -->
+		</div><!-- .section -->
+		
+		<div class='section'>
+		<h4>For Students </h4>
+		<div class='roundbox lgrey'>
+		<div class='answer'>
+		
+		<span class='answerresponse'><p>
+		My research involves participant recruitment, retention, interviews, questionnaire completion by participants
+		</p></span>
+		</div><!-- .answer -->
+		
+		
+		</div><!-- .roundbox .lgrey -->
+		</div><!-- .section -->
+		
+		</div><!-- .roundbox -->
+	
+	</div>]]></Content>
+    <Content type="html" view="canvas.owner, canvas, update"><![CDATA[<!--HTML-->
+    <script type="text/javascript" >
+    /**
+     	any custom scripts for this view
+    */
+    $(document).ready(function(){
+    	function createMentorDataMap(){
+			//get question names
+			$('.question fieldset li').find('input[name]').each(function(){
+				var name = $(this).attr('name');
+				var type = $(this).attr('type');
+				Questions[name] = Questions[name] || {};
+				Questions[name].name = name;
+				Questions[name].type = type;
+			});
+			
+			$('.question fieldset textarea[name]').each(function(){
+				var name = $(this).attr('name');
+				var type = 'textarea';
+				Questions[name] = Questions[name] || {};
+				Questions[name].name = name;
+				Questions[name].type = type;
+			});
+			
+			
+			//get label names for checkboxes and radio buttons.
+			$('.question fieldset li')
+				.has('input[name][value][type=radio],input[name][value][type=checkbox]')
+				.each(function(){
+				
+				var name = $(this).find('input[name][value],textarea[name][value]').attr('name');
+				var value = $(this).find('input[name][value],textarea[name][value]').val();
+				var label = $(this).find('label').text();
+				
+				Questions[name] = Questions[name] || {};
+				Questions[name].labels = Questions[name].labels || {};
+				Questions[name].labels[value] = label;
+				
+			});
+		
+			console.log( Questions, gadgets.json.stringify(Questions).replace(/\"/gi, "\\\"") );
+		}
+		
+		/*
+		use this function to create a new set of labels.
+    	createMentorDataMap();
+    	*/
+    	
+    	displayAppData();
+    });
+	
+	</script>
+	<div class='debug params'></div>
+	<div class='viewnav'></div>
+    <div id='AddEdit'>
+	<div class='controls'>
+	<fieldset>
+		<!-- <input type="radio" name="privacy" value="public"><label>Public</label> -->
+		<input type="radio" name="privacy" value="owner" ><label>Private</label>
+		<input type="radio" name="privacy" value="network" ><label>UCSF Only</label>
+	</fieldset>
+	</div>
+	<div class='header'>
+	<h1>Add / Edit Mentorship Information</h1>
+	</div>
+	
+	<div class='notes'>
+	<fieldset>
+		<li>This is Data Visible to UCSF only</li>
+		<li>Data has been saved.</li>
+	</fieldset>
+	</div>
+	
+	<div class='roundbox'>
+	<div class='updated'>
+		Last Updated <span>September 22nd, 2010</span>
+	</div>
+	
+	<h3>Your Mentorship Profile</h3>
+	
+	<div class='infonote'>
+	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
+	</div>
+	
+	<!--
+	<div class='question' style="display:none;">
+	<h4>Availability for Mentorship:</h4>
+	<fieldset><ul>
+	<li><input type="radio" name="available" value="open"><label>Open</label></li>
+	<li><input type="radio" name="available" value="limited"><label>Limited</label></li>
+	<li><input type="radio" name="available" value="not"><label>Not Availible</label></li>
+	</ul></fieldset>
+	</div>
+	-->
+	
+	<div class='question'>
+	<h4>Primary type of Research:</h4> <span>(select one)</span>
+	<fieldset><ul>
+	<li><input type="radio" name="primaryResearch" value="clinical"><label>Clinical</label></li>
+	<li><input type="radio" name="primaryResearch" value="laboratory"><label>Laboratory-based</label></li>
+	<li><input type="radio" name="primaryResearch" value="socialScience"><label>Social Science</label></li>
+	</ul></fieldset>
+	</div>
+	
+	<div class='question'>
+	<h4>Mentorship Areas of Interest:</h4> <span>(check all that apply)</span>
+	<fieldset><ul>
+	<li><input type="checkbox" name="interestArea" value="animal"><label>Animal</label></li>
+	<li><input type="checkbox" name="interestArea" value="cell"><label>Cell</label></li>
+	<li><input type="checkbox" name="interestArea" value="epidermiology"><label>Epidermiology</label></li>
+	<li><input type="checkbox" name="interestArea" value="globalHealth"><label>Global Health</label></li>
+	<li><input type="checkbox" name="interestArea" value="human"><label>Human</label></li>
+	<li><input type="checkbox" name="interestArea" value="healthServices"><label>Health Services</label></li>
+	<li><input type="checkbox" name="interestArea" value="publicHealthPolicy"><label>Public Health/ Policy</label></li>
+	<li><input type="checkbox" name="interestArea" value="socialBehavioral"><label>Social/ Behavioral</label></li>
+	<li><input type="checkbox" name="interestArea" value="healthProfessionEducation"><label>Health Professions Education</label></li>
+	</ul></fieldset>
+	</div>
+	
+	<div class=' section'>
+	<h3>Availability to Mentor Faculty <span class='moreless'>( more... )</span> </h3>
+	<div class="roundbox lgrey moreless-section" >
+	 <div class='updated'>
+		Last Updated <span>September 22nd, 2010</span>
+	</div>
+	
+	<div class='infonote'>
+	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
+	</div>
+	
+	<div class='question'>
+	<h4>Availabile to Mentor as:</h4> <span>(check all that apply)</span>
+	<fieldset><ul>
+	<li><input type="checkbox" name="availableMentorFaculty" value="lead"><label>Lead Mentor</label></li>
+	<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
+	<li><input type="checkbox" name="availableMentorFaculty" value="research"><label>Research Mentor</label></li>
+	<li><input type="checkbox" name="availableMentorFaculty" value="career"><label>Career Mentor</label></li>
+	</ul></fieldset>
+	</div> <!-- .question -->
+	
+	<div class='question'>
+	<h4>Prefered Mentee Level:</h4> <span>(check all that apply)</span>
+	<fieldset><ul>
+	<li><input type="checkbox" name="facultyMenteeLevel" value="junior"><label>Junior Faculty</label></li>
+	<li><input type="checkbox" name="facultyMenteeLevel" value="mid"><label>Mid-level Faculty</label></li>
+	<li><input type="checkbox" name="facultyMenteeLevel" value="senior"><label>Senior Faculty</label></li>
+	</ul></fieldset>
+	</div> <!-- .question -->
+	
+	<div class='question'>
+	<h4>My Contact Preference:</h4>
+	<fieldset><ul>
+		<li><input type="checkbox" name="facultyContactPref" value="email"><label>Email</label></li>
+		<li><input type="checkbox" name="facultyContactPref" value="phone"><label>Phone</label></li>
+		<li><input type="checkbox" name="facultyContactPref" value="assistant"><label>Assistant</label></li>
+	</ul></fieldset>
+	
+	<div class='question'>
+	<h5>Assitiant Details</h5>
+	<fieldset class='details'>
+	<ul>
+	<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
+	<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
+	<li class='phonedetail'><label class='textlabel'>Phone</label><input type="phone" name="facultyAssistantPhone"></li>
+	</ul>
+	</fieldset>
+	</div> <!-- .question -->
+	
+	</div> <!-- .question -->
+	
+	
+	
+	<div class='question'>
+	<h4>Narative to Potential Faculty Mentee:</h4>
+	<fieldset>
+	<textarea rows='4' cols='50' class='roundbox' name="facultyNarative"></textarea>
+	</fieldset>
+	</div> <!-- .question -->
+	
+	</div> <!-- .roundbox -->
+	</div> <!-- .question .section -->
+	
+	<div class=' section'>
+	
+	<h3>Availability to Mentor Students <span class='moreless'>( more... )</span></h3>
+	
+	<div class="roundbox lgrey moreless-section">
+	 <div class='updated'>
+		Last Updated <span>September 22nd, 2010</span>
+	</div>
+	
+	<div class='infonote'>
+	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
+	</div>
+	
+	<div class='question'>
+	<h4>Availabile to Mentor as:</h4> <span>(check all that apply)</span>
+	<fieldset><ul>
+	<li><input type="checkbox" name="availableMentorStudents" value="research"><label>Research Mentor</label></li>
+	<li><input type="checkbox" name="availableMentorStudents" value="career"><label>Career Mentor</label></li>
+	</ul></fieldset>
+	</div>
+	
+	<div class='question'>
+	<h4>Prefered Mentee Level:</h4> <span>(check all that apply)</span>
+	<fieldset><ul>
+	<li><input type="checkbox" name="studentMenteeLevel" value="professional"><label>Professional Student</label></li>
+	<li><input type="checkbox" name="studentMenteeLevel" value="graduate"><label>Graduate Student</label></li>
+	<li><input type="checkbox" name="studentMenteeLevel" value="resident"><label>Resident</label></li>
+	<li><input type="checkbox" name="studentMenteeLevel" value="post-doc"><label>Post-doc</label></li>
+	<li><input type="checkbox" name="studentMenteeLevel" value="fellow"><label>Fellow</label></li>
+	</ul></fieldset>
+	</div>
+	
+	<div class='question'>
+	<h4>My Contact Preference:</h4>
+	<fieldset><ul>
+		<li><input type="checkbox" name="studentContactPref" value="email"><label>Email</label></li>
+		<li><input type="checkbox" name="studentContactPref" value="phone"><label>Phone</label></li>
+		<li><input type="checkbox" name="studentContactPref" value="assistant"><label>Assistant</label></li>
+	</ul></fieldset>
+	
+	<div class='question'>
+	<h5>Assitiant Details</h5>
+	<fieldset class='details'>
+	<ul>
+	<li class='namedetail'><label class='textlabel' >Name</label><input type="text" name="studentAssistantName"></li>
+	<li class='emaildetail'><label class='textlabel' >Email</label><input type="email" name="studentAssistantEmail"></li>
+	<li class='phonedetail'><label class='textlabel' >Phone</label><input type="phone" name="studentAssistantPhone"></li>
+	</ul>
+	</fieldset>
+	</div> <!-- .question -->
+	
+	
+	</div>
+	
+	
+	
+	<div class='question'>
+	<h4>Narative to Potential Student Mentees:</h4>
+	<fieldset>
+	<textarea rows='4' cols='50' class='roundbox' name="studentNarative"></textarea>
+	</fieldset>
+	</div> <!-- .question -->
+	
+	</div> <!-- .roundbox -->
+	</div> <!-- .question .section -->
+	
+	
+	</div><!-- .roundbox -->
+	
+</div>]]></Content>
+</Module>

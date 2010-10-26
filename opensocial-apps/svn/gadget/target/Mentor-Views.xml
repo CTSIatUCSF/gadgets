@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Mentor-Views"
+            author="Justin Kruger"
+            author_email="jdavid.net@gmail.com" height="800">
+        <Require feature="opensocial-0.8" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="settitle" />
+    </ModulePrefs>
+    <Content type="html" view="default, all, canvas, canvas.owner, profile, home, preview"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>]]></Content>
+    <Content type="html" view="all"><![CDATA[<!--HTML-->
+     <script type="text/javascript">
+     function ready(){
+     	console.log( gadgets.views.getCurrentView() );
+     	 $("#default .view").text( gadgets.views.getCurrentView().name_ );
+     }
+     
+     	gadgets.util.registerOnLoadHandler( ready );
+     </script>
+     <div id="default">
+    	<div><span>Current View</span><span class="view"></span>
+     </div>]]></Content>
+    <Content type="html" view="canvas"><![CDATA[<!--HTML-->
+     <div id="canvas">
+     <h1>canvas</h1>
+     </div>]]></Content>
+</Module>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="similarSlideShare"
+            title="SlideShare-Personal"
             author="Justin Kruger"
-            author_email="jdavid.net@gmail.com" height="800">
+            author_email="jdavid.net@gmail.com"
+            description="A Simple app to display your own slides from SlideShare.net" height="800">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="flash" />
@@ -378,9 +379,7 @@
 		</ul>
 		</fieldset>
 	</div> <!-- .question -->
-    </div>
-    
-    ]]></Content>
+    </div>]]></Content>
     <Content type="html" view="home, profile, canvas, preview, update"><![CDATA[<!--HTML-->
     <script type="text/javascript">	
     
@@ -482,6 +481,5 @@
     			Get your own Widget</a>
     	</div>
     </div>
-    -->
-    ]]></Content>
+    -->]]></Content>
 </Module>

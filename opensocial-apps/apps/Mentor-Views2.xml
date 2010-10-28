@@ -156,7 +156,7 @@
 				
 				
 				function updateAppData(map){
-					$.extend(true, map, {'lastUpdate': new Date().getTime()});
+					$.extend(true, map, {'lastUpdate': new Date().getTime().toString() });
 					osapi.appdata.update(  {'userId': '@viewer', 'appId':'@app', 'data': map } )
 						.execute(function(result){
 							console.log(result, map);

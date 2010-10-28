@@ -11,12 +11,13 @@
         <Require feature="osapi"/>
     </ModulePrefs>
     <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
     <!-- #includes -->
-    <link rel="stylesheet" href="css/gadget.css?11" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript">
-    if( typeof(console) == "undefined" ){ var console = { "log" :function(){} }; }
+    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     var Questions = {};
    
     os.ready(function(){
@@ -170,6 +171,9 @@
 		//on canvas.owner update
 		function displayAppSummary(){
 			$(document).ready(function(){
+			
+			os.ready(function(){
+			
 			var fields = {};
 			fields = Questions;
 			fields["lastUpdate"] ={name: "lastUpdate"}; //let's fetch this too.
@@ -283,11 +287,13 @@
 					
 					
 				});//osapi.appdata.get
+			});//os.ready
 			});//document.ready
 		}
 		
 		function displayAppData(){
 			$(document).ready(function(){
+			os.ready(function(){
 			var fields = {};
 			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
 			
@@ -358,6 +364,7 @@
 					
 					
 				});/*osapi.appdata.get*/
+				});//os.ready
 			});/*document.ready*/
 		}
 		

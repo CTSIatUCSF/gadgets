@@ -1,4 +1,4 @@
-UCSF 	= UCSF || {}; 
+window.UCSF 	= window.UCSF || {}; 
 UCSF.UI = UCSF.UI || {};
 
 UCSF.UI.applyMoreLess = function(){

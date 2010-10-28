@@ -2,9 +2,9 @@
  * a small framework to simplify opensocial
  * author: justin kruger
  */
-if( typeof(console) == "undefined" ){ var console = { "log" :function(){} }; }
+if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
 
-var os = os || {}; 		//opensocial
+window.os = window.os || {}; 	//opensocial helpers
 os.isReady = false;		//need to wait for the container to load **slow
 os.readyList = [];
 

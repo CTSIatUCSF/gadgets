@@ -19,7 +19,8 @@
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     <script type="text/javascript">
-    UCSF 			= UCSF || {};
+    
+    window.UCSF 	= window.UCSF || {};
     UCSF.SlideShare	= UCSF.SlideShare || {};
     
     $(document).ready(function(){
@@ -41,6 +42,9 @@
 						console.log(result, map);
 					});
 			}
+			
+			console.log("a target fix");
+			$('a').attr("test","_blank");
 	});
 	
 	UCSF.SlideShare.api_key 	= "dPfswfX7";
@@ -361,6 +365,8 @@
     <div class='debug params'></div>
 	<div class='viewnav'></div>
 	
+	<a href="http://jdavid.net/" >Justin Kruger</a>
+	
 	<div id="settings">
     <div class='question'>
 	<h5>Slideshare.net</h5>
@@ -377,6 +383,7 @@
     <script type="text/javascript">	
     
     </script>
+    
    <!--
     <div style="width:577px;margin:auto;">
     	<object style="margin:0px" width="575" height="410">

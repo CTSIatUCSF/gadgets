@@ -1,5 +1,15 @@
 /**
-	titlecolor: #CA7C29;
+	profileTitleColor: 		#CA7C29;
+	homeTitleColor:		 	#746A42;
+	
+	sectionHiddenColor:		#CC0000;
+	sectionVisibleColor:	#4FAA4F;
+	
+	hideshowDisabledColor:	#3B6394;
+	hideshowSelectedColor:	Black;
+	
+	
+	
 
 
 */
@@ -9,7 +19,6 @@ div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h
 { 	margin:0px; padding:0px; border:none; 
 	font-family: arial, helvetica, verdana, sans-serif; 
 	font-size:14px; line-height:1.2em; 
-	color:#000;
 	text-indent:0px;
 	border-radius:5px;}
 
@@ -102,3 +111,10 @@ ul { list-style-type:none; }
 .answerresponse p { font-style:normal; }
 .answerresponse ul { margin:.2em; }
 .answerresponse li { margin:.2em; margin-left:2em; list-style:disc;}
+
+#hideshow { text-align:center; }
+#hideshow .hideshow_message	{ display:inline; font-weight:bold; }
+#hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
+#hideshow .hidden_message 	{ color:#CC0000; }
+#hideshow .visible_message 	{ color:#00CC00; }
+#hideshow .selected			{ color:black; font-weight:bold; cursor:none; }

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="HideShow"
+            author="Justin Kruger"
+            author_email="jdavid.net@gmail.com" height="800">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="settitle" />
+        <Require feature="osapi" />
+        <Optional feature="content-rewrite">
+            <Param name="exclude-urls">/.*/</Param>
+            <Param name="expires">86400</Param>
+        </Optional>
+    </ModulePrefs>
+    <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <!DOCTYPE html>
+    <!-- 
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/People.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/header_footer.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/profiles.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/ui.dropdownchecklist.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/comboTreeCheck.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/suckerfish.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/ctsi.css" type="text/css" media="screen, projection">-->
+    
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js"></script>
+]]></Content>
+<Content type="html" view="home, canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+<!-- HideShow -->
+<!-- a control that is visible on some views, but not all. -->
+<style>
+    #hideshow { text-align:center; }
+    #hideshow .hideshow_message	{ display:inline; font-weight:bold; }
+    #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
+    #hideshow .hidden_message 	{ color:#CC0000; }
+    #hideshow .visible_message 	{ color:#00CC00; }
+    #hideshow .selected			{ color:black; font-weight:bold; cursor:none; }
+    
+</style>
+<script type="text/javascript" >
+    $(document).ready(function(){ os.ready(function(){
+	    function getHideShow(){
+    		osapi.appdata.get(
+    			{ 	'userId': '@viewer',
+    				'appId':'@app',
+    				'keys': ['VISIBLE']
+    			}).execute(function(response){
+    				console.log( '#hideshow .get', os.osapi.getViewerFromResult(response) , response );
+    				
+    				var visible = (os.osapi.getViewerFromResult(response).VISIBLE === 'Y');
+    				
+    				//the default should be to hide
+    				$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
+    				
+    				$('#hideshow .hideshow_message').text(
+    					visible ?
+    						'This section is VISIBLE to the public' :
+    						'This section is HIDDEN from the public' 
+    						);
+    				
+    				if(visible){
+    					$('#hideshow .hideshow_message').addClass('visible_message').removeClass('hidden_message');
+    					$('#hideshow .show').addClass('selected').unbind('click');
+    					$('#hideshow .hide').removeClass('selected').click(function(){
+    							updateHideShow('');
+    					});
+    					
+    				}else{
+    					$('#hideshow .hideshow_message').addClass('hidden_message').removeClass('visible_message');
+    					$('#hideshow .hide').addClass('selected').unbind('click');
+    					$('#hideshow .show').removeClass('selected').click(function(){
+    							updateHideShow('Y');
+    					});
+    				}
+    			});
+	    }getHideShow();
+	    
+	    function updateHideShow(show){
+	    	var value = (show === 'Y') ? 'Y' : 'N';
+	    	osapi.appdata.update(
+	    		{ 	'userId': '@viewer',
+    				'appId':'@app',
+    				'data': { 'VISIBLE': value.toString() }
+    			}).execute(function(response){
+    				console.log( '#hideshow .update', os.osapi.getViewerFromResult(response), response );
+    				getHideShow();
+    			});
+	    
+	    };
+	    
+	    
+	    
+    });});
+    </script>
+    
+    <div id="hideshow">
+    <div class="hideshow_message"><!-- Hide Show Message --></div><div class="hideshow_control"><span class='hide'>Hide</span> | <span class='show'>Show</span></div>
+    </div>
+<!-- HideShow end -->
+]]></Content>
+<Content type="html" view="profile"><![CDATA[<!--HTML-->
+<h1>Profile</h1>
+<p>
+The profile view assumes an anonymous user that is looking at the page owner's profile.
+Gadgets, Widgets or Apps on these pages should be small, fast loading summaries of data
+related to that app. They should be minimally interactive, and may direct a user to a
+Preview, Canvas, Home, or Profile view.
+</p>
+]]></Content>
+<Content type="html" view="home"><![CDATA[<!--HTML-->
+<h1>Home</h1>
+<p>
+The home view, assumes that the owner and viewer are the same, and will load a number of
+Apps, Widgets or Gadgets on the same web page. Home views should load quickly and have a
+minimal amount of interactivity.  Home views usually direct to a 'full' screen view like
+the canvas page for more interactivity, and administration, where there is only one app
+loaded on the web page.
+</p>
+]]></Content>
+<Content type="html" view="canvas"><![CDATA[<!--HTML-->
+<h1>Canvas</h1>
+<p>
+A large application view that either the owner or the viewer of the application can see.  
+Usually the network requires the veiwer to be a registered and "loged in" user, since most
+apps will require access to the api(s) which will either need viewer or owner access.
+</p>
+<p>
+The preview view is more or less meant for users that are not yet logged in or have not 
+yet installed the application, and are looking for an exmple of the app before granting access.
+</p>
+]]></Content>
+<Content type="html" view="canvas.owner, update"><![CDATA[<!--HTML-->
+<h1>Canvas.owner</h1>
+<p>
+In many cases for opensocial apps there are things that only make sense in the context of
+the viewer being the owner. Using canvas.owner in the UCSF context implies that the app is
+in a large format, and that the owner = viewer.  This is great for admin pannels of apps or
+for apps that are specifically ment for the context of the user.
+</p>
+<p>
+Because of how primary and secondary names are used, canvas.owner might get a name without a
+"dot" notation like "update".
+</p>
+]]></Content>
+<Content type="html" view="preview"><![CDATA[<!--HTML-->
+<h1>preview</h1>
+<p>
+The preview view is more or less meant for users that are not yet logged in or have not 
+yet installed the application, and are looking for an exmple of the app before granting access.
+</p>
+]]></Content>
+</Module>

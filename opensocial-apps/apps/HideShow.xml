@@ -17,17 +17,6 @@
     <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
-    <!-- 
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/People.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/header_footer.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/profiles.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/ui.dropdownchecklist.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/comboTreeCheck.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/suckerfish.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/ctsi.css" type="text/css" media="screen, projection">-->
-    
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
@@ -56,7 +45,7 @@
     			}).execute(function(response){
     				console.log( '#hideshow .get', os.osapi.getViewerFromResult(response) , response );
     				
-    				var visible = (os.osapi.getViewerFromResult(response).VISIBLE === 'Y');
+    				var visible = (os.osapi.getViewerFromResult(response).VISIBLE || false === 'Y');
     				
     				//the default should be to hide
     				$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
@@ -82,7 +71,9 @@
     					});
     				}
     			});
-	    }getHideShow();
+	    }
+	    
+	    getHideShow();
 	    
 	    function updateHideShow(show){
 	    	var value = (show === 'Y') ? 'Y' : 'N';

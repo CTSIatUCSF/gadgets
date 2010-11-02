@@ -80,6 +80,7 @@
 	    	osapi.appdata.update(
 	    		{ 	'userId': '@viewer',
     				'appId':'@app',
+    				'groupId':'@self',
     				'data': { 'VISIBLE': value.toString() }
     			}).execute(function(response){
     				console.log( '#hideshow .update', os.osapi.getViewerFromResult(response), response );

@@ -1,20 +1,3 @@
-/**
-	profileTitleColor: 		#CA7C29;
-	homeTitleColor:		 	#746A42;
-	
-	sectionHiddenColor:		#CC0000;
-	sectionVisibleColor:	#4FAA4F;
-	
-	hideshowDisabledColor:	#3B6394;
-	hideshowSelectedColor:	Black;
-	
-	
-	
-
-
-*/
-
-
 div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h5, h6, h7, h8, h9, fieldset
 { 	margin:0px; padding:0px; border:none; 
 	font-family: arial, helvetica, verdana, sans-serif; 
@@ -117,4 +100,16 @@ ul { list-style-type:none; }
 #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
 #hideshow .hidden_message 	{ color:#CC0000; }
 #hideshow .visible_message 	{ color:#00CC00; }
-#hideshow .selected			{ color:black; font-weight:bold; cursor:none; }
+#hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
+
+/*
+	profileTitleColor: 		#CA7C29;
+	homeTitleColor:		 	#746A42;
+	
+	sectionHiddenColor:		#CC0000;
+	sectionVisibleColor:	#4FAA4F;
+	
+	hideshowDisabledColor:	#3B6394;
+	hideshowSelectedColor:	Black;
+
+*/

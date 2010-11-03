@@ -45,7 +45,7 @@
     			}).execute(function(response){
     				console.log( '#hideshow .get', os.osapi.getViewerFromResult(response) , response );
     				
-    				var visible = (os.osapi.getViewerFromResult(response).VISIBLE || false === 'Y');
+    				var visible = ( (os.osapi.getViewerFromResult(response).VISIBLE || false ) === 'Y');
     				
     				//the default should be to hide
     				$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
@@ -58,19 +58,24 @@
     				
     				if(visible){
     					$('#hideshow .hideshow_message').addClass('visible_message').removeClass('hidden_message');
-    					$('#hideshow .show').addClass('selected').unbind('click');
-    					$('#hideshow .hide').removeClass('selected').click(function(){
-    							updateHideShow('');
-    					});
+    					$('#hideshow .show').addClass('selected').unbind('click', showHideShow );
+    					$('#hideshow .hide').removeClass('selected').unbind('click', hideHideShow ).click( hideHideShow );
     					
     				}else{
     					$('#hideshow .hideshow_message').addClass('hidden_message').removeClass('visible_message');
-    					$('#hideshow .hide').addClass('selected').unbind('click');
-    					$('#hideshow .show').removeClass('selected').click(function(){
-    							updateHideShow('Y');
-    					});
+    					$('#hideshow .hide').addClass('selected').unbind('click', hideHideShow);
+    					$('#hideshow .show').removeClass('selected').unbind('click', showHideShow ).click( showHideShow );
     				}
     			});
+	    }
+	    
+	    function hideHideShow(){
+	    	updateHideShow('N');
+	    }
+	    
+	    function showHideShow(){
+	    
+	    	updateHideShow('Y');
 	    }
 	    
 	    getHideShow();
@@ -80,7 +85,6 @@
 	    	osapi.appdata.update(
 	    		{ 	'userId': '@viewer',
     				'appId':'@app',
-    				'groupId':'@self',
     				'data': { 'VISIBLE': value.toString() }
     			}).execute(function(response){
     				console.log( '#hideshow .update', os.osapi.getViewerFromResult(response), response );

@@ -40,6 +40,7 @@
 	    function getHideShow(){
     		osapi.appdata.get(
     			{ 	'userId': '@viewer',
+    				'groupId': '@self',
     				'appId':'@app',
     				'keys': ['VISIBLE']
     			}).execute(function(response){
@@ -84,6 +85,7 @@
 	    	var value = (show === 'Y') ? 'Y' : 'N';
 	    	osapi.appdata.update(
 	    		{ 	'userId': '@viewer',
+	    			'groupId': '@self',
     				'appId':'@app',
     				'data': { 'VISIBLE': value.toString() }
     			}).execute(function(response){

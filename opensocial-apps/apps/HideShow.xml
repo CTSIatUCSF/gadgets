@@ -42,7 +42,7 @@
     			{ 	'userId': '@viewer',
     				'groupId': '@self',
     				'appId':'@app',
-    				'keys': ['VISIBLE']
+    				'fields': ['VISIBLE']
     			}).execute(function(response){
     				console.log( '#hideshow .get', os.osapi.getViewerFromResult(response) , response );
     				

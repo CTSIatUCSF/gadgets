@@ -115,5 +115,5 @@ ul { list-style-type:none; }
 #hideshow .hideshow_message	{ display:inline; font-weight:bold; }
 #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
 #hideshow .hidden_message 	{ color:#CC0000; }
-#hideshow .visible_message 	{ color:#00CC00; }
+#hideshow .visible_message 	{ color:#4FAA4F; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }

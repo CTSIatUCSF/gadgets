@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-    <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/ucsf.js"></script>
+    <script type="text/javascript" src="js/os.js?1" ></script>
+    <script type="text/javascript" src="js/ucsf.js?1"></script>
     <script type="text/javascript">
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     var Questions = {};

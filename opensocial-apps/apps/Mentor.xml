@@ -45,6 +45,24 @@
     //UCSF.UI.DebugNav();
     //UCSF.UI.DebugParams();
     
+    $(document).ready(function(){ os.ready(function(){
+    	$('a.nav').each( function(){
+    		$(this).attr('target','_self');
+    		$(this).click(function(){
+    			var view = $(this).attr('href');
+    			
+    			view = view.substr(view.lastIndexOf('#') + 1);
+    			try{
+					gadgets.views.requestNavigateTo( view );
+				}catch(e){
+					console.log(e);
+				}
+    		});
+    	});// a.nav
+    	
+    }); });
+    
+    
     UCSF.Mentor.addOnChangeHandlers = function(){
     	$(document).ready(function(){ os.ready(function(){
     	
@@ -122,6 +140,9 @@
 						'data': map 
 					} )
 					.execute(function(result){
+					
+						//TODO: if works navigate
+						gadgets.views.requestNavigateTo( "home" );
 						console.log(result, map);
 					});
 			}
@@ -375,9 +396,33 @@
     </script>
     ]]></Content>
     
+    <Content type="html" view="home"><![CDATA[<!--HTML-->
+	<div class='header'>
+		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span>
+	</div>    
+    ]]></Content>
+    <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+	<div class='header'>
+		<h1>Mentorship Information</h1>
+		<div class="navlist" >
+			<ul>
+			<li><span class="mentor_save" style="font-size:1.1em; cursor:pointer; color:#1E416C; text-decoration:underline; ">Save</span></li>
+			<li><a href="#home" class="nav" >Close</a></li>
+			</ul>
+		</div>
+	</div>    
+    ]]></Content>
+    <Content type="html" view="profile, preview"><![CDATA[<!--HTML-->
+	<div class='header'>
+		<h1>Mentorship Information</h1>
+	</div>    
+    ]]></Content>
+    
+    
     <Content type="html" view="home, canvas, canvas.owner, update"><![CDATA[<!--HTML-->
 	<!-- HideShow -->
 	<!-- a control that is visible on some views, but not all. -->
+
 	<div id="hideshow"></div>
 	<!-- HideShow end -->
 	]]></Content>
@@ -410,13 +455,11 @@
     </script>
     <div class='debug params'></div>
     <!-- <div class='viewnav'></div> -->
-    <div id='Profile'>
+    <div id='Profile' class="clearbox">
 
-		<div class='header'>
-		<h1>Mentorship Information</h1>
-		</div>
 		
-		<div class='roundbox'>
+		
+		<div class='clearbox'>
 		<div class='updated'>
 			Last Updated <span>September 22nd, 2010</span>
 		</div>
@@ -493,7 +536,7 @@
 		</div><!-- .roundbox .lgrey -->
 		</div><!-- .section -->
 		
-		</div><!-- .roundbox -->
+		</div><!-- .clearbox -->
 	
 	</div>]]></Content>
     <Content type="html" view="preview"><![CDATA[<!--HTML-->
@@ -501,12 +544,7 @@
     <!-- <div class='viewnav'></div> -->
     <div id='Profile'>
 
-		<div class='header'>
-		<h1>Mentorship Information</h1>
-		</div>
-		
-		
-		<div class='roundbox'>
+		<div class='clearbox'>
 		<div class='updated'>
 			Last Updated <span>September 22nd, 2010</span>
 		</div>
@@ -571,7 +609,7 @@
 		</div><!-- .roundbox .lgrey -->
 		</div><!-- .section -->
 		
-		</div><!-- .roundbox -->
+		</div><!-- .clearbox -->
 	
 	</div>]]></Content>
     <Content type="html" view="canvas.owner, canvas, update"><![CDATA[<!--HTML-->
@@ -628,27 +666,10 @@
 	</script>
 	<div class='debug params'></div>
 	<!-- <div class='viewnav'></div> -->
-    <div id='AddEdit'>
+    <div id='AddEdit' class="clearbox">
 	<!-- 
-	<div class='controls'>
-	<fieldset>
-		<input type="radio" name="privacy" value="public"><label>Public</label> 
-		<input type="radio" name="privacy" value="owner" ><label>Private</label>
-		<input type="radio" name="privacy" value="network" ><label>UCSF Only</label>
-	</fieldset>
-	</div>-->
-	<div class='header'>
-	<h1>Add / Edit Mentorship Information</h1>
-	</div>
 	
-	<div class='notes'>
-	<fieldset>
-		<li>This is Data Visible to UCSF only</li>
-		<li>Data has been saved.</li>
-	</fieldset>
-	</div>
-	
-	<div class='roundbox'>
+	<div class='clearbox'>
 	<div class='updated'>
 		Last Updated <span>September 22nd, 2010</span>
 	</div>
@@ -820,13 +841,13 @@
 	</fieldset>
 	</div> <!-- .question -->
 	
-	</div> <!-- .roundbox -->
+	</div> <!-- .clearbox -->
 	</div> <!-- .question .section -->
 	
 		<div style="font-size:1.1em; cursor:pointer; text-align:center; color:#1E416C;">
 			<ul><li><span class="mentor_save">save</span></li><ul>
 		</div>
-	</div><!-- .roundbox -->
+	</div><!-- .clearbox -->
 	
 	
 	

@@ -20,12 +20,19 @@ div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h
 h1 { font-size:1.2em; margin-top:1em; padding:.3em; padding-left:0em; color:#CA7C29;}
 h2 { font-size:1.0em; margin-top:0.9em; padding:.3em; padding-left:0em; color:#222;}
 h3 { font-size:1.0em; margin-top:0.8em; padding:.3em; padding-left:0em; color:#222;}
-h4 { font-size:0.9em; margin-top:0.7em; color:#333;}
-h5 { font-size:0.8em; margin-top:0.6em; color:#333;}
+h4 { font-size:0.9em; margin-top:0.7em; padding:.3em; padding-left:0em; color:#333;}
+h5 { font-size:0.8em; margin-top:0.6em; padding:.3em; padding-left:0em; color:#333;}
 
 h4 + span { font-size:.9em; font-style:italic; color:#444; }
 
-.header, .header * { float:left; }
+.header { float:left; }
+.header { padding:.5em; }
+.header * { display: inline-block; margin:0px; padding:0px; line-height:1em; }
+
+.navlist ul * { display:inline-block; margin-left:1em; margin-right:0em; }
+.navlist ul li * { text-decoration:underline; padding:.3em; } 
+.navlist ul li span:hover,
+.navlist ul li a:hover { background:#ddd;}
 
 div { display:block; }
 span { display:inline; }
@@ -62,8 +69,6 @@ ul { list-style-type:none; }
 			cursor:pointer; }
 .moreless-section { display:none; }
 
-.header { padding-left:.5em; }
-
 .notes { alignment:center; margin-right:auto; margin-left:auto; display:none;}
 .notes { font-size:.8em; }
 .notes li { border:1px solid #aaa; padding:.2em; padding-left:1em; padding-right:1em;}
@@ -78,7 +83,8 @@ ul { list-style-type:none; }
 			border:1px solid #CA7C29; padding:1em;
 			color:#444; line-height:1.5em; }
 
-.roundbox { border:1px solid #aaa; border-radius:5px; -moz-border-radius:5px;  -webkit-border-radius:5px; padding:10px; margin:5px; clear:both;}
+.roundbox { border:1px solid #aaa; border-radius:5px; -moz-border-radius:5px;  -webkit-border-radius:5px; }
+.clearbox { margin:5px; clear:both; }
 .lgrey { background-color:#f4f4f4; }
 
 .question { margin:1em; }
@@ -86,12 +92,12 @@ ul { list-style-type:none; }
 .question li { display:inline-block; width:15em; }
 .question ul { width:33em; margin-top:.5em;}
 
-.question .details { width:35em; }
+.question .details { width:34em; padding:0.75em; margin:0.5em; margin-left:0px; }
 .question .details * { margin:0px; padding:0px; }
 .question .details label { display:block; }
 .question .details input { width:15em; }
 .question .details .namedetail { display:block; margin-bottom:1em;}
-.question .details .namedetail input{ width:33em; }
+.question .details .namedetail input{ width:32em; }
 .question .details .phonedetail { margin-left:2em; }
 /*
 .question .textlabel{ width:5em; }

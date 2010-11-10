@@ -21,88 +21,12 @@
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/UCSF.js"></script>
+    <script type="text/javascript" src="js/ucsf.js?1"></script>
 ]]></Content>
 <Content type="html" view="home, canvas, canvas.owner, update"><![CDATA[<!--HTML-->
 <!-- HideShow -->
 <!-- a control that is visible on some views, but not all. -->
-<style>
-    #hideshow { text-align:center; }
-    #hideshow .hideshow_message	{ display:inline; font-weight:bold; }
-    #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
-    #hideshow .hidden_message 	{ color:#CC0000; }
-    #hideshow .visible_message 	{ color:#00CC00; }
-    #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
-    
-</style>
-<script type="text/javascript" >
-    $(document).ready(function(){ os.ready(function(){
-	    function getHideShow(){
-    		osapi.appdata.get(
-    			{ 	'userId': '@viewer',
-    				'groupId': '@self',
-    				'appId':'@app',
-    				'fields': ['VISIBLE']
-    			}).execute(function(response){
-    				console.log( '#hideshow .get', os.osapi.getViewerFromResult(response) , response );
-    				
-    				var visible = ( (os.osapi.getViewerFromResult(response).VISIBLE || false ) === 'Y');
-    				
-    				//the default should be to hide
-    				$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
-    				
-    				$('#hideshow .hideshow_message').text(
-    					visible ?
-    						'This section is VISIBLE to the public' :
-    						'This section is HIDDEN from the public' 
-    						);
-    				
-    				if(visible){
-    					$('#hideshow .hideshow_message').addClass('visible_message').removeClass('hidden_message');
-    					$('#hideshow .show').addClass('selected').unbind('click', showHideShow );
-    					$('#hideshow .hide').removeClass('selected').unbind('click', hideHideShow ).click( hideHideShow );
-    					
-    				}else{
-    					$('#hideshow .hideshow_message').addClass('hidden_message').removeClass('visible_message');
-    					$('#hideshow .hide').addClass('selected').unbind('click', hideHideShow);
-    					$('#hideshow .show').removeClass('selected').unbind('click', showHideShow ).click( showHideShow );
-    				}
-    			});
-	    }
-	    
-	    function hideHideShow(){
-	    	updateHideShow('N');
-	    }
-	    
-	    function showHideShow(){
-	    
-	    	updateHideShow('Y');
-	    }
-	    
-	    getHideShow();
-	    
-	    function updateHideShow(show){
-	    	var value = (show === 'Y') ? 'Y' : 'N';
-	    	osapi.appdata.update(
-	    		{ 	'userId': '@viewer',
-	    			'groupId': '@self',
-    				'appId':'@app',
-    				'data': { 'VISIBLE': value.toString() }
-    			}).execute(function(response){
-    				console.log( '#hideshow .update', os.osapi.getViewerFromResult(response), response );
-    				getHideShow();
-    			});
-	    
-	    };
-	    
-	    
-	    
-    });});
-    </script>
-    
-    <div id="hideshow">
-    <div class="hideshow_message"><!-- Hide Show Message --></div><div class="hideshow_control"><span class='hide'>Hide</span> | <span class='show'>Show</span></div>
-    </div>
+<div id="hideshow"></div>
 <!-- HideShow end -->
 ]]></Content>
 <Content type="html" view="profile"><![CDATA[<!--HTML-->

@@ -16,178 +16,168 @@
     <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/People.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/header_footer.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/profiles.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/resnav.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/ui.dropdownchecklist.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/CSS/comboTreeCheck.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/suckerfish.css" type="text/css" media="screen, projection">
-    <!-- <link rel="stylesheet" href="http://profiles.ucsf.edu/template_files/ctsi.css" type="text/css" media="screen, projection">-->
     
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/ucsf.js"></script>
     <script type="text/javascript">
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     var Questions = {};
+    
+    window.UCSF = UCSF || {};
+    UCSF.Mentor = UCSF.Mentor || {};
    
     os.ready(function(){
     	//TODO: update this if you change the HTML.
     	//TODO: use this function createMentorDataMap(); // uncomment below.
-    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidermiology\":\"Epidermiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"lead\":\"Lead Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
+    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidemiology\":\"Epidemiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"lead\":\"Lead Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
     	Questions = gadgets.json.parse(Questions);
     	console.log( "questions", Questions );
     });
     
-	    $(document).ready(function(){
-		
-			$('.moreless').toggle(
-				function(){
-					$(this).text('( less... )')
-						.parents('.section')
-						.children('.roundbox')
-						.slideDown('fast', function(){ 
-								gadgets.window.adjustHeight();
-								});
-				},
-				function(){
-					$(this).text('( more... )')
-						.parents('.section')
-						.children('.roundbox')
-						.slideUp('fast', function(){
-							gadgets.window.adjustHeight();
-							});
+    //INIT:
+    //Inits the UI
+    
+    UCSF.UI.MoreLess();
+    
+    //UCSF.UI.DebugNav();
+    //UCSF.UI.DebugParams();
+    
+    UCSF.Mentor.addOnChangeHandlers = function(){
+    	$(document).ready(function(){ os.ready(function(){
+    	
+    		//private function to update appData based on an onChange Event
+    		function updateAppData(map){
+				$.extend(true, map, {'lastUpdate': new Date().getTime().toString() });
+				osapi.appdata.update(  
+					{	'userId': '@viewer', 
+						'appId':'@app', 
+						'data': map 
+					} )
+					.execute(function(result){
+						console.log(result, map);
+					});
+			}
+  			
+  			//find questions on the form
+			$('.question fieldset').each(function(){ 
+				//the current question
+				var question = $(this);
+				
+				
+				$(this).find('input[type=radio]').change(function(){
+					var str = [];
+					$(question).find('input:checked').each(function(){
+						str.push($(this).val());
+					}); 
+					//console.log( this.name, this.value, str );
+					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+					//console.log(map);
+					updateAppData( map );				
 				});
 				
 				
-				function renderNav(){
-					var supported_views = gadgets.views.getSupportedViews();
-					var views = {};
-					//console.log('gadgets.views.getSupportedViews()', gadgets.views.getSupportedViews(), JSON.stringify( gadgets.views.getSupportedViews() ) );
-					var nav = $('<ul/>');
-					
-					//add this so that when i am on a container that does not naitively support canvas.owener, it's still accessible.
-					views["canvas.owner"] = { "name_":"canvas.owner"  };
-					views["update"] = { "name_":"update"  };
-					
-					//getting rid of the dups
-					$.each(supported_views, function(){ views[this.name_] = this; });
-					
-					$.each(views, function(){
-						$(nav).append( '<li>' + this.name_ + '</li>' );	
-					});
-					
-					$('.viewnav').append("<div style='font-weight:bold;font-size:1.1em;'>Navigation</div>");
-					$('.viewnav').append(nav);
-					$('.viewnav').wrap("<div class='roundbox'/>");
-					
-					$('.viewnav li')
-						.click(function(){
-								gadgets.views.requestNavigateTo( $(this).text() );
-						});
+				$(this).find('input[type=checkbox]').change(function(){
+					var str = [];
+					$(question).find('input:checked').each(function(){
+						str.push($(this).val());
+					}); 
+					str = str.join(", ");
+					//console.log( this.name, this.value, str );
+					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+					//console.log(map);
+					updateAppData( map );
+				});
+			
+				$(this).find('input[name], textarea[name]')
+					.not('[type=checkbox]').not('[type=radio]')
+					.change(function(){
 						
-					gadgets.window.adjustHeight();
-				}
-				renderNav();
-				
-				function renderParams(){
-					var params = gadgets.views.getParams();
-					var ul = $('<ul/>');
-					var c = 0;
-					console.log( params );
-					
-					
-					for(p in params){
-						$(ul).append( '<li><label>' + p + ' =</label><span class="pvalue">'+params[p]+'</span></li>' );
-						c++;	
-					}
-					if(c>0){
-						$('.params').append("<div style='font-weight:bold;font-size:1.1em;'>Params</div>");
-						$('.params').append(ul);
-						$('.params').wrap("<div class='roundbox'/>");
-						gadgets.window.adjustHeight();
-					}
-					
-				}
-				//renderParams();
-				
-				$('.question fieldset').each(function(){ 
-					
-					var question = $(this);
-					
-					$(this).find('input[type=radio]').change(function(){
-						var str = [];
-						$(question).find('input:checked').each(function(){
-							str.push($(this).val());
-						}); 
-						//console.log( this.name, this.value, str );
-						var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
-						//console.log(map);
-						updateAppData( map );				
-					});
-					
-					$(this).find('input[type=checkbox]').change(function(){
-						var str = [];
-						$(question).find('input:checked').each(function(){
-							str.push($(this).val());
-						}); 
-						str = str.join(", ");
-						//console.log( this.name, this.value, str );
-						var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+						var str = $(this).val() || "";
+						//console.log( $(this), str );
+						
+						var map = gadgets.json.parse( "{ \"" + $(this).attr('name') + "\" : \"" + str + "\" }" );
 						//console.log(map);
 						updateAppData( map );
+					
+					});
+			 
+			});// .question fieldset
+		});}); //jquery.ready //os.ready
+	};
+	
+	//UCSF.Mentor.addOnChangeHandlers();
+	
+	
+	UCSF.Mentor.addSaveHandler = function(){
+		$(document).ready( function(){ os.ready( function(){
+			
+			function updateAppData(map){
+				$.extend(true, map, {"lastUpdate" : new Date().getTime().toString() });
+				osapi.appdata.update(  
+					{	'userId': '@viewer', 
+						'appId':'@app', 
+						'data': map 
+					} )
+					.execute(function(result){
+						console.log(result, map);
+					});
+			}
+			
+			function createMentorDataMap(){
+			
+				
+				var updateMap = {};
+				
+				$('.question fieldset').each( function(){
+					
+					
+					var question = $(this);
+					var name = $(question).find('input[name],textarea[name]').attr('name');
+					
+					var arr = [];
+					var str = "";
+					$(question).find("input[type=radio]:checked,input[type=checkbox]:checked").each(function(){
+							arr.push( $(this).val() );
 					});
 					
-					$(this).find('input[name], textarea[name]')
+					str = arr.join(", ");
+				
+					$(question).find('input[name], textarea[name]')
 						.not('[type=checkbox]').not('[type=radio]')
-						.change(function(){
-							
-							
-							var str = $(this).val() || "";
-							//console.log( $(this), str );
-							
-							
-							var map = gadgets.json.parse( "{ \"" + $(this).attr('name') + "\" : \"" + str + "\" }" );
-							//console.log(map);
-							updateAppData( map );
+						.each(function(){
+								str = $(this).val() || "";
+							});
 						
-						});
-					 
+					updateMap[name] = str;
+					
 				});
 				
-				/*
-				function fetchOwner(){
-					osapi.people.getOwner()
-						.execute(function(result){
-							console.log(result.id);
-					});
-				}
-				*/
 				
 				
+				console.log( updateMap, gadgets.json.stringify(updateMap).replace( /\"/gi, "\\\"") );
 				
-				function updateAppData(map){
-					$.extend(true, map, {'lastUpdate': new Date().getTime().toString() });
-					osapi.appdata.update(  {'userId': '@viewer', 'appId':'@app', 'data': map } )
-						.execute(function(result){
-							console.log(result, map);
-						});
-				}
+				return updateMap;
 				
-				
-				
-				
-		});
+			}
+			
+			
+			$('.mentor_save').click(function(){
+				updateAppData( createMentorDataMap() );
+			});
+			
+			
+		});}); //jquery.ready //os.ready
+	};
+	UCSF.Mentor.addSaveHandler();
+	
+	
+	//on canvas.owner update
+	UCSF.Mentor.displayAppSummary = function(){
+		$(document).ready(function(){ os.ready(function(){
 		
-		//on canvas.owner update
-		function displayAppSummary(){
-			$(document).ready(function(){
-			
-			os.ready(function(){
-			
 			var fields = {};
 			fields = Questions;
 			fields["lastUpdate"] ={name: "lastUpdate"}; //let's fetch this too.
@@ -205,7 +195,7 @@
 			}
 			console.log( fields, keys );
 			
-			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
 				.execute(function(result){
 					console.log('"appdata response"');
 					console.log(result, keys);
@@ -277,7 +267,7 @@
 							});
 						}//if
 						
-						if( type == 'text' || type == 'email' || type == 'phone' ){
+						if( type == 'text' || type == 'email' || type == 'tel' ){
 							$('span[name='+ keys[k] +']').each(function(){
 									/*if(appdata[keys[k]].length < 1){ return this; }*/
 									
@@ -301,13 +291,13 @@
 					
 					
 				});//osapi.appdata.get
-			});//os.ready
-			});//document.ready
-		}
-		
-		function displayAppData(){
-			$(document).ready(function(){
-			os.ready(function(){
+			
+			});});  //jquery.ready //os.ready
+		};
+	
+	
+	UCSF.Mentor.displayAppData = function(){
+		$(document).ready(function(){ os.ready(function(){
 			var fields = {};
 			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
 			
@@ -321,7 +311,7 @@
 			}
 			//console.log( fields, keys );
 			
-			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
 				.execute(function(result){
 					console.log(result, keys);
 					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
@@ -377,17 +367,25 @@
 					
 					
 					
-				});/*osapi.appdata.get*/
-				});//os.ready
-			});/*document.ready*/
-		}
+				}); /* osapi.appdata.get */
+				
+			});}); /* jquery.ready os.ready */
+		};
 		
-    </script>]]></Content>
+    </script>
+    ]]></Content>
+    
+    <Content type="html" view="home, canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+	<!-- HideShow -->
+	<!-- a control that is visible on some views, but not all. -->
+	<div id="hideshow"></div>
+	<!-- HideShow end -->
+	]]></Content>
+
     <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
     <script type="text/javascript">
-    	$(document).ready(function(){
-    		displayAppSummary();
-    	});
+    	
+    	UCSF.Mentor.displayAppSummary();
     	
     	var fields = [
     		"lastUpdate", 
@@ -411,7 +409,7 @@
     		];
     </script>
     <div class='debug params'></div>
-    <div class='viewnav'></div>
+    <!-- <div class='viewnav'></div> -->
     <div id='Profile'>
 
 		<div class='header'>
@@ -500,7 +498,7 @@
 	</div>]]></Content>
     <Content type="html" view="preview"><![CDATA[<!--HTML-->
     <div class='debug params'></div>
-    <div class='viewnav'></div>
+    <!-- <div class='viewnav'></div> -->
     <div id='Profile'>
 
 		<div class='header'>
@@ -624,20 +622,21 @@
     	createMentorDataMap();
     	*/
     	
-    	displayAppData();
+    	UCSF.Mentor.displayAppData();
     });
 	
 	</script>
 	<div class='debug params'></div>
-	<div class='viewnav'></div>
+	<!-- <div class='viewnav'></div> -->
     <div id='AddEdit'>
+	<!-- 
 	<div class='controls'>
 	<fieldset>
-		<!-- <input type="radio" name="privacy" value="public"><label>Public</label> -->
+		<input type="radio" name="privacy" value="public"><label>Public</label> 
 		<input type="radio" name="privacy" value="owner" ><label>Private</label>
 		<input type="radio" name="privacy" value="network" ><label>UCSF Only</label>
 	</fieldset>
-	</div>
+	</div>-->
 	<div class='header'>
 	<h1>Add / Edit Mentorship Information</h1>
 	</div>
@@ -654,7 +653,7 @@
 		Last Updated <span>September 22nd, 2010</span>
 	</div>
 	
-	<h3>Your Mentorship Profile</h3>
+	<h3>Mentorship Profile</h3>
 	
 	<div class='infonote'>
 	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
@@ -685,7 +684,7 @@
 	<fieldset><ul>
 	<li><input type="checkbox" name="interestArea" value="animal"><label>Animal</label></li>
 	<li><input type="checkbox" name="interestArea" value="cell"><label>Cell</label></li>
-	<li><input type="checkbox" name="interestArea" value="epidermiology"><label>Epidermiology</label></li>
+	<li><input type="checkbox" name="interestArea" value="epidemiology"><label>Epidemiology</label></li>
 	<li><input type="checkbox" name="interestArea" value="globalHealth"><label>Global Health</label></li>
 	<li><input type="checkbox" name="interestArea" value="human"><label>Human</label></li>
 	<li><input type="checkbox" name="interestArea" value="healthServices"><label>Health Services</label></li>
@@ -707,7 +706,7 @@
 	</div>
 	
 	<div class='question'>
-	<h4>Availabile to Mentor as:</h4> <span>(check all that apply)</span>
+	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span>
 	<fieldset><ul>
 	<li><input type="checkbox" name="availableMentorFaculty" value="lead"><label>Lead Mentor</label></li>
 	<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
@@ -717,7 +716,7 @@
 	</div> <!-- .question -->
 	
 	<div class='question'>
-	<h4>Prefered Mentee Level:</h4> <span>(check all that apply)</span>
+	<h4>Preferred Mentee Level:</h4> <span>(check all that apply)</span>
 	<fieldset><ul>
 	<li><input type="checkbox" name="facultyMenteeLevel" value="junior"><label>Junior Faculty</label></li>
 	<li><input type="checkbox" name="facultyMenteeLevel" value="mid"><label>Mid-level Faculty</label></li>
@@ -734,12 +733,12 @@
 	</ul></fieldset>
 	
 	<div class='question'>
-	<h5>Assitiant Details</h5>
-	<fieldset class='details'>
+	<h5>Assistant Details</h5>
+	<fieldset class='details roundbox'>
 	<ul>
 	<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
 	<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
-	<li class='phonedetail'><label class='textlabel'>Phone</label><input type="phone" name="facultyAssistantPhone"></li>
+	<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
 	</ul>
 	</fieldset>
 	</div> <!-- .question -->
@@ -749,9 +748,9 @@
 	
 	
 	<div class='question'>
-	<h4>Narative to Potential Faculty Mentee:</h4>
+	<h4>Narrative to Potential Faculty Mentee:</h4>
 	<fieldset>
-	<textarea rows='4' cols='50' class='roundbox' name="facultyNarative"></textarea>
+	<textarea rows='4' cols='56' class='roundbox' name="facultyNarative"></textarea>
 	</fieldset>
 	</div> <!-- .question -->
 	
@@ -772,7 +771,7 @@
 	</div>
 	
 	<div class='question'>
-	<h4>Availabile to Mentor as:</h4> <span>(check all that apply)</span>
+	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span>
 	<fieldset><ul>
 	<li><input type="checkbox" name="availableMentorStudents" value="research"><label>Research Mentor</label></li>
 	<li><input type="checkbox" name="availableMentorStudents" value="career"><label>Career Mentor</label></li>
@@ -780,7 +779,7 @@
 	</div>
 	
 	<div class='question'>
-	<h4>Prefered Mentee Level:</h4> <span>(check all that apply)</span>
+	<h4>Preferred Mentee Level:</h4> <span>(check all that apply)</span>
 	<fieldset><ul>
 	<li><input type="checkbox" name="studentMenteeLevel" value="professional"><label>Professional Student</label></li>
 	<li><input type="checkbox" name="studentMenteeLevel" value="graduate"><label>Graduate Student</label></li>
@@ -799,12 +798,12 @@
 	</ul></fieldset>
 	
 	<div class='question'>
-	<h5>Assitiant Details</h5>
-	<fieldset class='details'>
+	<h5>Assistant Details</h5>
+	<fieldset class='details roundbox'>
 	<ul>
 	<li class='namedetail'><label class='textlabel' >Name</label><input type="text" name="studentAssistantName"></li>
 	<li class='emaildetail'><label class='textlabel' >Email</label><input type="email" name="studentAssistantEmail"></li>
-	<li class='phonedetail'><label class='textlabel' >Phone</label><input type="phone" name="studentAssistantPhone"></li>
+	<li class='phonedetail'><label class='textlabel' >Phone</label><input type="tel" name="studentAssistantPhone"></li>
 	</ul>
 	</fieldset>
 	</div> <!-- .question -->
@@ -815,17 +814,21 @@
 	
 	
 	<div class='question'>
-	<h4>Narative to Potential Student Mentees:</h4>
+	<h4>Narrative to Potential Student Mentees:</h4>
 	<fieldset>
-	<textarea rows='4' cols='50' class='roundbox' name="studentNarative"></textarea>
+	<textarea rows='4' cols='56' class='roundbox' name="studentNarative"></textarea>
 	</fieldset>
 	</div> <!-- .question -->
 	
 	</div> <!-- .roundbox -->
 	</div> <!-- .question .section -->
 	
-	
+		<div style="font-size:1.1em; cursor:pointer; text-align:center; color:#1E416C;">
+			<ul><li><span class="mentor_save">save</span></li><ul>
+		</div>
 	</div><!-- .roundbox -->
+	
+	
 	
 </div>]]></Content>
 </Module>

@@ -1,17 +1,31 @@
+/*
+	profileTitleColor: 		#CA7C29;
+	homeTitleColor:		 	#746A42;
+	
+	sectionHiddenColor:		#CC0000;
+	sectionVisibleColor:	#4FAA4F;
+	
+	hideshowDisabledColor:	#3B6394;
+	hideshowSelectedColor:	Black;
+
+*/
+
 div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h5, h6, h7, h8, h9, fieldset
 { 	margin:0px; padding:0px; border:none; 
 	font-family: arial, helvetica, verdana, sans-serif; 
-	font-size:14px; line-height:1.2em; 
+	font-size:13px; line-height:1.1em; 
 	text-indent:0px;
 	border-radius:5px;}
 
-h1 { font-size:1.6em; margin-top:1.4em; padding:.3em; padding-left:0em; color:#CA7C29;}
-h2 { font-size:1.4em; margin-top:1.2em; padding:.3em; padding-left:0em; color:#222;}
-h3 { font-size:1.3em; margin-top:1.0em; padding:.3em; padding-left:0em; color:#222;}
-h4 { font-size:1.2em; margin-top:0.8em; color:#333;}
-h5 { font-size:0.9em; margin-top:0.5em; color:#333;}
+h1 { font-size:1.2em; margin-top:1em; padding:.3em; padding-left:0em; color:#CA7C29;}
+h2 { font-size:1.0em; margin-top:0.9em; padding:.3em; padding-left:0em; color:#222;}
+h3 { font-size:1.0em; margin-top:0.8em; padding:.3em; padding-left:0em; color:#222;}
+h4 { font-size:0.9em; margin-top:0.7em; color:#333;}
+h5 { font-size:0.8em; margin-top:0.6em; color:#333;}
 
 h4 + span { font-size:.9em; font-style:italic; color:#444; }
+
+.header, .header * { float:left; }
 
 div { display:block; }
 span { display:inline; }
@@ -72,11 +86,13 @@ ul { list-style-type:none; }
 .question li { display:inline-block; width:15em; }
 .question ul { width:33em; margin-top:.5em;}
 
+.question .details { width:35em; }
 .question .details * { margin:0px; padding:0px; }
 .question .details label { display:block; }
 .question .details input { width:15em; }
 .question .details .namedetail { display:block; margin-bottom:1em;}
 .question .details .namedetail input{ width:33em; }
+.question .details .phonedetail { margin-left:2em; }
 /*
 .question .textlabel{ width:5em; }
 .question .namedetail { margin-bottom:.5em; width:35em; }
@@ -101,15 +117,3 @@ ul { list-style-type:none; }
 #hideshow .hidden_message 	{ color:#CC0000; }
 #hideshow .visible_message 	{ color:#00CC00; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
-
-/*
-	profileTitleColor: 		#CA7C29;
-	homeTitleColor:		 	#746A42;
-	
-	sectionHiddenColor:		#CC0000;
-	sectionVisibleColor:	#4FAA4F;
-	
-	hideshowDisabledColor:	#3B6394;
-	hideshowSelectedColor:	Black;
-
-*/

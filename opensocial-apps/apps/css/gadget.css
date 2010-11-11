@@ -29,8 +29,8 @@ h4 + span { font-size:.9em; font-style:italic; color:#444; }
 .header { padding:.5em; }
 .header * { display: inline-block; margin:0px; padding:0px; line-height:1em; }
 
-.navlist ul * { display:inline-block; margin-left:1em; margin-right:0em; }
-.navlist ul li * { text-decoration:underline; padding:.3em; } 
+.navlist ul * { display:inline-block; margin-left:.3em; margin-right:0em; }
+.navlist ul li * { text-decoration:underline; padding:.2em; } 
 .navlist ul li span:hover,
 .navlist ul li a:hover { background:#ddd;}
 

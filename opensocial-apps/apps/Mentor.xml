@@ -194,6 +194,21 @@
 	};
 	UCSF.Mentor.addSaveHandler();
 	
+	UCSF.Mentor.displayLastUpdated = function(){
+		$(document).ready(function(){ os.ready(function(){
+			osapi.appdata.get( {
+				'userId': '@owner',
+				 'appId':'@app', 
+				 'fields':['lastUpdate'] } )
+				.execute(function(result){
+					result = os.osapi.getOwnerFromResult( result );
+					var d = new Date(parseInt(result['lastUpdate']));
+					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
+					$('.updated span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+				});
+		});}); // jquery.ready os.ready
+	};
+	UCSF.Mentor.displayLastUpdated();
 	
 	//on canvas.owner update
 	UCSF.Mentor.displayAppSummary = function(){
@@ -277,14 +292,23 @@
 								$(this).find('.answerresponse[type=list]')
 									.each(function(){
 										var ul = $('<ul/>');
+										//console.log('.answerresponse answer.length', answer.length);
 										for(var a=0,al= answer.length; a < al; a++){
 											ul.append( $('<li/>').text( answer[a] ) );
 										}
-										$(this).append(ul);
+										if( ul.children().length ){
+											$(this).append(ul);
+										}
 								});
-								$(this).show();
-								$(this).parents('.section').show();
-								gadgets.window.adjustHeight();
+								
+								console.log( '.answerresponse contents.length', $(this), $(this).contents().length );
+								var content = $(this).find('.answerresponse').contents();
+								if( content.length ){
+									if( content.length == 1 && content[0].length == 0){ continue; }
+									$(this).show();
+									$(this).parents('.section').show();
+									gadgets.window.adjustHeight();
+								}
 							});
 						}//if
 						
@@ -466,12 +490,12 @@
 		
 		<div class='answer' name="primaryResearch">
 		<span class='answertitle'>Primary type of Research:</span>
-		<span class='answerresponse' type="comma"></span>
+		<span class='answerresponse' type="list"></span><!-- type=comma -->
 		</div>
 		
 		<div class='answer' name="interestArea">
 		<span class='answertitle'>Mentorship Areas of Interest:</span>
-		<span class='answerresponse' type="comma"></span>
+		<span class='answerresponse' type="list"></span><!-- type=comma -->
 		</div><!-- .answer -->
 		
 		<div class='section' style="display:none;">

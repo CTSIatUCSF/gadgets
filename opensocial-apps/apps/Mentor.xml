@@ -303,8 +303,10 @@
 								
 								console.log( '.answerresponse contents.length', $(this), $(this).contents().length );
 								var content = $(this).find('.answerresponse').contents();
+								var p = $(this).find('.answerresponse>p').contents();
 								if( content.length ){
-									if( content.length == 1 && content[0].length == 0){ continue; }
+									if( content.length == 1 && content[0].length == 0){ return; }
+									if( p.length == 1 && p[0].length == 0){ return; }
 									$(this).show();
 									$(this).parents('.section').show();
 									gadgets.window.adjustHeight();
@@ -422,7 +424,7 @@
     
     <Content type="html" view="home"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span>
+		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
 	</div>    
     ]]></Content>
     <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
@@ -431,24 +433,29 @@
 		<div class="navlist" >
 			<ul>
 			<li><span class="mentor_save" style="font-size:1.1em; cursor:pointer; color:#1E416C; text-decoration:underline; ">Save</span></li>
-			<li><a href="#home" class="nav" >Close</a></li>
+			<li><a href="#home" class="nav" >Cancel</a></li>
 			</ul>
-		</div>
+		</div> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
 	</div>    
     ]]></Content>
     <Content type="html" view="profile, preview"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information</h1>
+		<h1>Mentorship Information</h1> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
 	</div>    
     ]]></Content>
     
     
-    <Content type="html" view="home, canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="home"><![CDATA[<!--HTML-->
 	<!-- HideShow -->
 	<!-- a control that is visible on some views, but not all. -->
 
 	<div id="hideshow"></div>
 	<!-- HideShow end -->
+	
+	<div class='updated'>
+		<br/>
+		Last Updated <span>September 22nd, 2010</span>
+	</div>
 	]]></Content>
 
     <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
@@ -484,9 +491,7 @@
 		
 		
 		<div class='clearbox'>
-		<div class='updated'>
-			Last Updated <span>September 22nd, 2010</span>
-		</div>
+		
 		
 		<div class='answer' name="primaryResearch">
 		<span class='answertitle'>Primary type of Research:</span>
@@ -499,8 +504,8 @@
 		</div><!-- .answer -->
 		
 		<div class='section' style="display:none;">
-		<h4>For Faculty </h4>
-		<div class='roundbox lgrey'>
+		<h4>For Faculty <span class='moreless'>( more... )</span></h4>
+		<div class='roundbox lgrey moreless-section'>
 		
 		<div class='answer' name="facultyNarative">
 		<span class='answerresponse' type='textarea'></span>
@@ -517,7 +522,7 @@
 		</div><!-- .answer -->
 		
 		<div class='answer' name="availableMentorFaculty">
-		<span class='detailtitle'>Mentoring Opportunities Available:</span>
+		<span class='detailtitle'>Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
 		<span class='answerresponse' type='list'></span>
 		</div><!-- .answer -->
 		
@@ -530,8 +535,8 @@
 		</div><!-- .section -->
 		
 		<div class='section' style="display:none;">
-		<h4>For Students </h4>
-		<div class='roundbox lgrey'>
+		<h4>For Students <span class='moreless'>( more... )</span></h4>
+		<div class='roundbox lgrey moreless-section'>
 		
 		<div class='answer' name="studentNarative">
 		<span class='answerresponse' type='textarea'></span>
@@ -548,7 +553,7 @@
 		</div><!-- .answer -->
 		
 		<div class='answer' name="availableMentorStudents">
-		<span class='detailtitle'>Mentoring Opportunities Available:</span>
+		<span class='detailtitle'>Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
 		<span class='answerresponse' type='list'></span>
 		</div><!-- .answer -->
 		
@@ -597,7 +602,7 @@
 		</div>
 		
 		<div class='answer'>
-		<span class="detailtitle">Mentoring Opportunities Available:</span>
+		<span class="detailtitle">Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
 		<span class='answerresponse'>
 		<ul>
 			<li>Research Mentor</li>
@@ -607,7 +612,7 @@
 		</div><!-- .answer -->
 		
 		<div class='answer'>
-		<span class="detailtitle">Mentoring Opportunities for:</span>
+		<span class="detailtitle">Mentoring Opportunities for:</span> 
 		<span class='answerresponse'>
 		<ul>
 			<li>Junior Faculty</li>
@@ -691,29 +696,10 @@
 	<div class='debug params'></div>
 	<!-- <div class='viewnav'></div> -->
     <div id='AddEdit' class="clearbox">
-	<!-- 
-	
-	<div class='clearbox'>
 	<div class='updated'>
+		<br/>
 		Last Updated <span>September 22nd, 2010</span>
 	</div>
-	
-	<h3>Mentorship Profile</h3>
-	
-	<div class='infonote'>
-	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
-	</div>
-	
-	<!--
-	<div class='question' style="display:none;">
-	<h4>Availability for Mentorship:</h4>
-	<fieldset><ul>
-	<li><input type="radio" name="available" value="open"><label>Open</label></li>
-	<li><input type="radio" name="available" value="limited"><label>Limited</label></li>
-	<li><input type="radio" name="available" value="not"><label>Not Availible</label></li>
-	</ul></fieldset>
-	</div>
-	-->
 	
 	<div class='question'>
 	<h4>Primary type of Research:</h4> <span>(select one)</span>
@@ -751,7 +737,7 @@
 	</div>
 	
 	<div class='question'>
-	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span>
+	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
 	<fieldset><ul>
 	<li><input type="checkbox" name="availableMentorFaculty" value="lead"><label>Lead Mentor</label></li>
 	<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
@@ -816,7 +802,7 @@
 	</div>
 	
 	<div class='question'>
-	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span>
+	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
 	<fieldset><ul>
 	<li><input type="checkbox" name="availableMentorStudents" value="research"><label>Research Mentor</label></li>
 	<li><input type="checkbox" name="availableMentorStudents" value="career"><label>Career Mentor</label></li>
@@ -867,10 +853,10 @@
 	
 	</div> <!-- .clearbox -->
 	</div> <!-- .question .section -->
-	
+	<!--
 		<div style="font-size:1.1em; cursor:pointer; text-align:center; color:#1E416C;">
 			<ul><li><span class="mentor_save">save</span></li><ul>
-		</div>
+		</div>-->
 	</div><!-- .clearbox -->
 	
 	

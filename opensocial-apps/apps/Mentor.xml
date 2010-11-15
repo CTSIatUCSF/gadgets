@@ -152,28 +152,38 @@
 				
 				var updateMap = {};
 				
-				$('.question fieldset').each( function(){
+				$('.question>fieldset').each( function(){
 					
 					
 					var question = $(this);
-					var name = $(question).find('input[name],textarea[name]').attr('name');
+					//var name = "";
+					var namearr = [];
 					
-					var arr = [];
-					var str = "";
-					$(question).find("input[type=radio]:checked,input[type=checkbox]:checked").each(function(){
-							arr.push( $(this).val() );
+					$(question).find('input[name],textarea[name]').each(function(){
+						namearr[ $(this).attr('name') ] = $(this).attr('name');
 					});
 					
-					str = arr.join(", ");
-				
-					$(question).find('input[name], textarea[name]')
-						.not('[type=checkbox]').not('[type=radio]')
-						.each(function(){
-								str = $(this).val() || "";
-							});
+					for ( var name in namearr ){
+						console.log( name, $(question).find('input,textarea').filter('[name='+ name +']') );
+						var arr = [];
+						var str = "";
+
+						$(question).find("input[type=radio]:checked,input[type=checkbox]:checked")
+							.filter('[name='+ name +']').each(function(){
+								arr.push( $(this).val() );
+						});
 						
-					updateMap[name] = str;
+						str = arr.join(", ");
 					
+						$(question).find('input[name], textarea[name]').filter('[name='+ name +']')
+							.not('[type=checkbox]').not('[type=radio]')
+							.each(function(){
+									str = $(this).val() || "";
+								});
+							
+						updateMap[name] = str;	
+						
+					}
 				});
 				
 				
@@ -424,8 +434,9 @@
     
     <Content type="html" view="home"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
-	</div>    
+		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span>
+	</div>
+	
     ]]></Content>
     <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
 	<div class='header'>
@@ -435,13 +446,13 @@
 			<li><span class="mentor_save" style="font-size:1.1em; cursor:pointer; color:#1E416C; text-decoration:underline; ">Save</span></li>
 			<li><a href="#home" class="nav" >Cancel</a></li>
 			</ul>
-		</div> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
-	</div>    
+		</div>
+	</div>
     ]]></Content>
     <Content type="html" view="profile, preview"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information</h1> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
-	</div>    
+		<h1>Mentorship Information</h1>
+	</div>
     ]]></Content>
     
     
@@ -451,10 +462,11 @@
 
 	<div id="hideshow"></div>
 	<!-- HideShow end -->
-	
-	<div class='updated'>
-		<br/>
-		Last Updated <span>September 22nd, 2010</span>
+	<div style="clear:both;margin:0.7em;">
+		<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
+	</div>
+	<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
+		Last Updated: <br/><span>September 22nd, 2010</span>
 	</div>
 	]]></Content>
 
@@ -487,8 +499,6 @@
     <div class='debug params'></div>
     <!-- <div class='viewnav'></div> -->
     <div id='Profile' class="clearbox">
-
-		
 		
 		<div class='clearbox'>
 		
@@ -574,8 +584,11 @@
     <div id='Profile'>
 
 		<div class='clearbox'>
-		<div class='updated'>
-			Last Updated <span>September 22nd, 2010</span>
+		<div style="clear:both;margin:0.7em;">
+			<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
+		</div>
+		<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
+			Last Updated: <br/><span>September 22nd, 2010</span>
 		</div>
 		
 		<div class='answer'>
@@ -696,9 +709,11 @@
 	<div class='debug params'></div>
 	<!-- <div class='viewnav'></div> -->
     <div id='AddEdit' class="clearbox">
-	<div class='updated'>
-		<br/>
-		Last Updated <span>September 22nd, 2010</span>
+    <div style="clear:both;margin:0.7em;">
+		<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
+	</div>
+	<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
+		Last Updated: <br/><span>September 22nd, 2010</span>
 	</div>
 	
 	<div class='question'>
@@ -728,9 +743,10 @@
 	<div class=' section'>
 	<h3>Availability to Mentor Faculty <span class='moreless'>( more... )</span> </h3>
 	<div class="roundbox lgrey moreless-section" >
-	 <div class='updated'>
+	<!--<div class='updated'>
 		Last Updated <span>September 22nd, 2010</span>
 	</div>
+	-->
 	
 	<div class='infonote'>
 	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
@@ -793,9 +809,9 @@
 	<h3>Availability to Mentor Students <span class='moreless'>( more... )</span></h3>
 	
 	<div class="roundbox lgrey moreless-section">
-	 <div class='updated'>
+	 <!--<div class='updated'>
 		Last Updated <span>September 22nd, 2010</span>
-	</div>
+	</div>-->
 	
 	<div class='infonote'>
 	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  

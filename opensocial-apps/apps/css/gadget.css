@@ -73,7 +73,7 @@ ul { list-style-type:none; }
 .notes { font-size:.8em; }
 .notes li { border:1px solid #aaa; padding:.2em; padding-left:1em; padding-right:1em;}
 
-.updated { float:right; font-size:.8em; font-weight:normal;}
+.updated { float:right; font-size:.8em; font-weight:normal; display:none; }
 
 .infonote { display:none;
 			position:absolute; z-index:30; right:20px; left:33em;

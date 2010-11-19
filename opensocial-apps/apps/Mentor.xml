@@ -211,10 +211,18 @@
 				 'appId':'@app', 
 				 'fields':['lastUpdate'] } )
 				.execute(function(result){
+					//console.log('displayLastUpdated', result);
 					result = os.osapi.getOwnerFromResult( result );
 					var d = new Date(parseInt(result['lastUpdate']));
+					console.log( 'displayLastUpdated', result['lastUpdate'] );
 					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
-					$('.updated span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+					if( typeof(result['lastUpdate']) !== 'undefined' ){ 
+						$('.updated').show()
+							.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+					}else{
+						$('.updated').hide();
+					}
+					gadgets.window.adjustHeight();
 				});
 		});}); // jquery.ready os.ready
 	};

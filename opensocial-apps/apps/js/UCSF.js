@@ -107,21 +107,29 @@ UCSF.UI.MoreLess = function(){
 			
 		$('.moreless').toggle(
 				function(){
-					$(this).text('( less... )')
-						.parents('.section')
-						.children('.roundbox')
-						.slideDown('fast', function(){ 
-								gadgets.window.adjustHeight();
-								});
+					$(this).trigger('show');
 				},
 				function(){
-					$(this).text('( more... )')
-						.parents('.section')
-						.children('.roundbox')
-						.slideUp('fast', function(){
-							gadgets.window.adjustHeight();
-							});
+					$(this).trigger('hide');
 				});
+		
+		$('.moreless').bind('show', function(){
+			$(this).text('( less... )')
+				.parents('.section')
+				.children('.roundbox')
+				.slideDown('fast', function(){ 
+						gadgets.window.adjustHeight();
+						});
+		});
+		
+		$('.moreless').bind('hide', function(){
+			$(this).text('( more... )')
+				.parents('.section')
+				.children('.roundbox')
+				.slideUp('fast', function(){
+					gadgets.window.adjustHeight();
+					});
+		});
 		
 	});/*document.ready*/
 };

@@ -318,7 +318,7 @@
 									if( content.length == 1 && content[0].length == 0){ return; }
 									if( p.length == 1 && p[0].length == 0){ return; }
 									$(this).show();
-									$(this).parents('.section').show();
+									$(this).parents('.section').show().find('.moreless').trigger('show');
 									gadgets.window.adjustHeight();
 								}
 							});
@@ -330,7 +330,7 @@
 									
 									$(this).text(appdata[keys[k]]);
 									$(this).show();
-									$(this).parents('.section').show();
+									$(this).parents('.section').show().find('.moreless').trigger('show');
 									gadgets.window.adjustHeight();
 								});
 						}
@@ -340,7 +340,7 @@
 								$(this).find('.answerresponse[type=textarea]')
 									.append('<p/>').append(appdata[keys[k]]);
 								$(this).show();
-								$(this).parents('.section').show();
+								$(this).parents('.section').show().find('.moreless').trigger('show');
 								gadgets.window.adjustHeight();
 							});
 						}
@@ -407,6 +407,7 @@
 								.each(function(){
 									//console.log('update checked attr', this);
 									$(this).attr('checked','checked');
+									$(this).parents('.section').find('.moreless').trigger('show');
 								});
 						}
 						
@@ -416,6 +417,7 @@
 								.each(function(){
 									//console.log('update text', vals);
 									$(this).val( vals.join(", "));
+									$(this).parents('.section').find('.moreless').trigger('show');
 								});
 								
 						gadgets.window.adjustHeight();

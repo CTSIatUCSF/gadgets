@@ -256,11 +256,14 @@
 					//this is a weird way to access the @owner without knowing the name.
 					//it's an associative array, length, pop, or index won't work
 					var appdata = {};
+					/*
 					for(var n in result){
 						appdata = result[n];  //for the viewer/ first record
 						console.log( n, result[n], result );
 						break;
 					}
+					*/
+					appdata = os.osapi.getOwnerFromResult(result);
 					
 					var k = 0;
 					var vals = [];
@@ -286,11 +289,26 @@
 								//console.log('each val', vals[v]);
 								
 								//TODO:if things change, it will break here.
-								answer.push( Questions[keys[k]].labels[vals[v]] );
+								var value = Questions[keys[k]].labels[vals[v]];
+								if( value.toLowerCase() == 'email' || value.toLowerCase() == 'phone'){
+									value += " ( see profile info ) ";
+								}
 								
+								//remove assistant from comma seperated list.
+								/*
+								if( value.toLowerCase() !== 'assistant'){
+									answer.push( value );
+								}
+								*/
+								//add everything
+								answer.push( value );
+								
+								//set up to show assistant
 								if( typeof(fr[keys[k]]) != 'undefined' && fr[keys[k]] == vals[v] ){
 									console.log( 'detail >>', fr, fr[keys[k]], vals[v]);
-									$('.detail[test='+ fr[keys[k]] +'][fr='+ keys[k] +']').show();								
+									$('.detail[test='+ fr[keys[k]] +'][fr='+ keys[k] +']').show()
+										.parents('.section').show()
+										.find('.moreless').trigger('show');								
 								}
 							}//for
 							comma = answer.join(", ");
@@ -527,6 +545,7 @@
 		<span class='detailtitle'>Contact for Mentoring:</span>
 		<span class='answerresponse' type='comma'></span>
 		<div class='detail' test="assistant" fr="facultyContactPref">
+			<span class='detailtitle'>Contact my Assistant:</span>
 			<span name="facultyAssistantName"></span>
 			<span name="facultyAssistantPhone"></span>
 			<span name="facultyAssistantEmail"></span>
@@ -558,6 +577,7 @@
 		<span class='detailtitle'>Contact for Mentoring:</span>
 		<span class='answerresponse' type='comma'></span>
 		<div class='detail' test="assistant" fr="studentContactPref">
+			<span class='detailtitle'>Contact my Assistant:</span>
 			<span name="studentAssistantName"></span>
 			<span name="studentAssistantPhone"></span>
 			<span name="studentAssistantEmail"></span>

@@ -4,7 +4,7 @@
             title="SlideShare-Personal"
             author="Justin Kruger"
             author_email="jdavid.net@gmail.com"
-            description="A Simple app to display your own slides from SlideShare.net" height="800">
+            description="A Simple app to display your own slides from SlideShare.net" height="600">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="flash" />
@@ -20,6 +20,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/ucsf.js" ></script>
     <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     <script type="text/javascript">
     
@@ -27,16 +28,6 @@
     UCSF.SlideShare	= UCSF.SlideShare || {};
     
     $(document).ready(function(){
-			/*
-			function fetchOwner(){
-				osapi.people.getOwner()
-					.execute(function(result){
-						console.log(result.id);
-				});
-			}
-			*/
-			
-			
 			
 			function updateAppData(map){
 				$.extend(true, map, {'lastUpdate': new Date().getTime()});
@@ -236,7 +227,7 @@
 					},
 					params);
     	}
-    	fetchSlides();
+    	//fetchSlides();
     	
     	function displayAppData(){
 			$(document).ready(function(){
@@ -312,7 +303,7 @@
 				});/*osapi.appdata.get*/
 			});/*document.ready*/
 		}
-		
+		/*
 		 $(document).ready(
     os.ready(function(){
     	 var url = "http://static.slidesharecdn.com/swf/ssplayer2.swf";
@@ -326,6 +317,7 @@
     	 
     	 console.log('url', url );
     	 
+    	 //may have crossdoamin issues
     	 gadgets.flash.embedFlash(url, "similarSlides", {
     	 		type:"application/x-shockwave-flash",
       			swf_version: 6,
@@ -344,7 +336,7 @@
     	 });
     	 
     	 console.log('url', url );
-    	 
+    	 //may have crossdoamin issues
     	 gadgets.flash.embedFlash(url, "sidebar", {
     	 		type:"application/x-shockwave-flash",
       			swf_version: 6,
@@ -358,128 +350,283 @@
     	
     	}));
 		
-		
+		*/
 		
     </script>]]></Content>
+    <Content type="html" view="home, canvas, update, canvas.owner"><![CDATA[<!--HTML-->
+	<!-- HideShow -->
+	<!-- a control that is visible on some views, but not all. -->
+
+	<div id="hideshow"></div>
+	<!-- HideShow end -->
+    ]]></Content>
+    
     <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
     <script type="text/javascript">
-    	displayAppData();
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				preview(username);
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});
+	    			preview(username);
+	    		});
+	    	});
+	    	
+	    	$('.close').click(function(){
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "home" );
+	    		});
+	    	});
+	    	
+	    });
+	    
+	    function preview(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    			console.log("preview");
+    			
+    			var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
+    			
+    			 
+    			gadgets.flash.embedFlash(url, "preview", {
+   	 					'type':"application/x-shockwave-flash",
+   	 					'flashvars':"feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads",
+     						'swf_version': 6,
+     						'allowscriptaccess':"always", 
+   						'allowfullscreen':"true", 
+     						'width': 575,
+     						'height': 410
+   				});
+   				
+   				$('#preview').html(
+   				'<div style="width:577px;">' +
+		    		'<object style="margin:0px" width="575" height="410">' +
+		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
+		    		'<param name="allowFullScreen" value="true"/>' +
+		    		'<param name="allowScriptAccess" value="always"/>' +
+		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
+		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
+		    				' type="application/x-shockwave-flash"' + 
+		    				' allowscriptaccess="always"' + 
+		    				' allowfullscreen="true"' + 
+		    				' width="575" ' +
+		    				' height="410">' +
+		    				'</embed>' +
+		    		'</object>' +
+		    	'</div>'
+   				
+   				);
+   				
+   				gadgets.window.adjustHeight();
+   				
+   				console.log( $('#preview'));
+    			
+    		});
+	    }
     </script>
-    <div class='debug params'></div>
-	<div class='viewnav'></div>
+    <!-- <div class='debug params'></div> -->
+	<!-- <div class='viewnav'></div> -->
 	
-	<a href="http://jdavid.net/" >Justin Kruger</a>
+	<div class='header'>
+		<h1>Presentations from SlideShare</h1> <span class="close" style="text-decoration:underline;cursor:pointer;color:#44F;">return to home</span>
+	</div>
 	
-	<div id="settings">
-    <div class='question'>
-	<h5>Slideshare.net</h5>
-	<fieldset class='details'>
-		<ul>
-			<li class='namedetail'><label class='textlabel' >Username</label><input type="text" name="username"></li>
-		</ul>
-		</fieldset>
-	</div> <!-- .question -->
-    </div>]]></Content>
-    <Content type="html" view="home, profile, canvas, preview, update"><![CDATA[<!--HTML-->
-    <script type="text/javascript">	
-    
-    </script>
-    
-   <!--
-    <div style="width:577px;margin:auto;">
-    	<object style="margin:0px" width="575" height="410">
+	<div id="settings" style="clear:both;">
+		<p>This is a app that will show your <a href="http://slideshare.net/">SlideShare</a> presentations on your profile to others.</p>
+	    <div class='question'>
+		<fieldset class='details'>
+			<ul>
+				<li class='namedetail' style="width:35em;">
+					<label class='textlabel' >Username</label><input type="text" name="username" style="display:inline;width:20em;">
+					&nbsp;&nbsp;&nbsp;
+					<span class="save" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;">save / preview </span>
+				</li>
+			</ul>
+			</fieldset>
+		
+		</div> <!-- .question -->
+		
+    </div>
+    <div id="preview">
+    	<!--
+    	<div style="width:577px; text-align:left;">
+    		<object style="margin:0px" width="575" height="410">
     		<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>
     		<param name="allowFullScreen" value="true"/>
     		<param name="allowScriptAccess" value="always"/>
+    		<param name="flashVars" value="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads"/>
     		<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" 
-    				flashVars="feedurl=user/dgcohen23&widgettitle=%20Playlist%20%3A%20My%20Uploads" 
+    				flashVars="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads" 
     				type="application/x-shockwave-flash" 
     				allowscriptaccess="always" 
     				allowfullscreen="true" 
     				width="575" 
     				height="410">
-    		</embed>
-    	</object><br/>
-    	<div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;text-align:left;">
-	    	<a title="SlideShare" href="http://www.slideshare.net/?src=multiwidget">
-	    		<img src="http://static.slidesharecdn.com/swf/logo_embd.png" 
-	    			style="border:0px none;margin-bottom:-5px"
-	    			alt="SlideShare"/>
-	    	</a> | 
-	    	<a href="http://www.slideshare.net/widgets/playlist" title="Get your SlideShare Playlist">Get your SlideShare Playlist</a>
-	    </div>
+    				</embed>
+    		</object>
+    	</div>
+    	-->
     </div>
-    -->
-    <!--
-    <div >
-    	<object style="width:575px;height:410px;margin:auto;">
+    ]]></Content>
+    <Content type="html" view="home"><![CDATA[<!--HTML-->
+    
+    <div class='header'>
+		<h1>Presentations from SlideShare</h1> &nbsp;&nbsp; <span class="edit" style="text-decoration:underline;cursor:pointer;color:#44F;">edit</span>
+	</div>
+    
+    ]]></Content>
+    <Content type="html" view="profile"><![CDATA[<!--HTML-->
+    
+    <div class='header'>
+		<h1>Presentations from SlideShare</h1>
+	</div>
+    
+    ]]></Content>
+    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
+    
+    
+        <script type="text/javascript">
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				preview(username);
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});
+	    			preview(username);
+	    		});
+	    	});
+	    	
+	    	$('.edit').click(function(){
+	    	console.log('edit');
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "canvas" );
+	    		});
+	    	});
+	    	
+	    });
+	    
+	    function preview(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    			console.log("preview");
+    			
+    			var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
+    			
+    			 
+    			gadgets.flash.embedFlash(url, "preview", {
+   	 					'type':"application/x-shockwave-flash",
+   	 					'flashvars':"feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads",
+     						'swf_version': 6,
+     						'allowscriptaccess':"always", 
+   						'allowfullscreen':"true", 
+     						'width': 575,
+     						'height': 410
+   				});
+   				
+   				$('#preview').html(
+   				'<div style="width:577px;margin:auto;">' +
+		    		'<object style="margin:0px" width="575" height="410">' +
+		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
+		    		'<param name="allowFullScreen" value="true"/>' +
+		    		'<param name="allowScriptAccess" value="always"/>' +
+		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
+		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
+		    				' type="application/x-shockwave-flash"' + 
+		    				' allowscriptaccess="always"' + 
+		    				' allowfullscreen="true"' + 
+		    				' width="575" ' +
+		    				' height="410">' +
+		    				'</embed>' +
+		    		'</object>' +
+		    	'</div>'
+   				
+   				);
+   				
+   				gadgets.window.adjustHeight();
+   				
+   				console.log( $('#preview'));
+    			
+    		});
+	    }
+    </script>
+    
+    
+    <!-- <div class='debug params'></div> -->
+	<!-- <div class='viewnav'></div> -->
+	
+	<div id="settings" style="display:none;">
+		<p>This is a app that will show your <a href="http://slideshare.net/">SlideShare</a> presentations on your profile to others.</p>
+		<h2>Settings</h2>
+	    <div class='question'>
+		<fieldset class='details'>
+			<ul>
+				<li class='namedetail'><label class='textlabel' >Username</label><input type="text" name="username"></li>
+			</ul>
+			</fieldset>
+		
+		</div> <!-- .question -->
+		<div style="width:35em;text-align:right;">
+			<span class="close" style="text-decoration:underline;cursor:pointer;color:#44F;">return to profile</span>&nbsp;&nbsp;&nbsp;
+			<span class="save" style="text-decoration:underline;cursor:pointer;color:#44F;">save / preview </span>
+			
+		</div>
+    </div>
+    <div id="preview" style="clear:both;">
+    	<!--
+    	<div style="width:577px;margin:auto;">
+    		<object style="margin:0px" width="575" height="410">
     		<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>
     		<param name="allowFullScreen" value="true"/>
-    		<param name="allowScriptAccess" value="false"/>
+    		<param name="allowScriptAccess" value="always"/>
+    		<param name="flashVars" value="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads"/>
     		<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" 
-    				flashVars="feedurl=user/dgcohen23&widgettitle=Presentations" 
+    				flashVars="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads" 
     				type="application/x-shockwave-flash" 
-    				allowscriptaccess="false" 
+    				allowscriptaccess="always" 
     				allowfullscreen="true" 
-    				width="575"
+    				width="575" 
     				height="410">
-    		</embed>
-    	</object><br/>-->
-    	<!--
-    	<div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;text-align:left;">
-	    	<a title="SlideShare" href="http://www.slideshare.net/?src=multiwidget">
-	    		<img src="http://static.slidesharecdn.com/swf/logo_embd.png" 
-	    			style="border:0px none;margin-bottom:-5px"
-	    			alt="SlideShare"/>
-	    	</a> | 
-	    	<a href="http://www.slideshare.net/widgets/playlist" title="Get your SlideShare Playlist">Get your SlideShare Playlist</a>
-	    </div>
-	    
-    </div>-->
-    <!--
-    <div style="width:425px" id="__ss_5431909">
-    <strong style="display:block;margin:12px 0 4px">
-    <a href="http://www.slideshare.net/stevefaulkner/html5-accessibility-is-it-ready-yet" 
-    	title="HTML5 Accessibility - Is it ready yet?">
-    	HTML5 Accessibility - Is it ready yet?</a>
-    </strong>
-    <object id="__sse5431909" width="425" height="355">
-    	<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=html5-101013055552-phpapp01&stripped_title=html5-accessibility-is-it-ready-yet&userName=stevefaulkner" />
-    	<param name="allowFullScreen" value="true"/>
-    	<param name="allowScriptAccess" value="false"/>
-    	<embed name="__sse5431909" 
-    			src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=html5-101013055552-phpapp01&stripped_title=html5-accessibility-is-it-ready-yet&userName=stevefaulkner" 
-    			type="application/x-shockwave-flash" 
-    			allowscriptaccess="false" 
-    			allowfullscreen="true" 
-    			width="425" 
-    			height="355">
-    			</embed>
-    	</object>
-    	<div style="padding:5px 0 12px">
-    		View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/stevefaulkner">stevefaulkner</a>.
+    				</embed>
+    		</object>
     	</div>
+    	-->
     </div>
-    <div style='width:180;margin:auto'>
-    	<object 
-    		type='application/x-shockwave-flash' 
-    		data='http://static.slidesharecdn.com/swf/blogbarwidget_black.swf?sidebarfeed=user/jdavidnet' 
-    		width='180' height='725'>
-    		<param name='movie' value='http://static.slidesharecdn.com/swf/blogbarwidget_black.swf?sidebarfeed=user/jdavidnet' />
-    		<param name='allowScriptAccess' value='always'/>
-    		<embed type='application/x-shockwave-flash' 
-    				src='http://static.slidesharecdn.com/swf/blogbarwidget_black.swf?sidebarfeed=user/jdavidnet' 
-    				allowscriptaccess='always' 
-    				width='180' 
-    				height='725'>
-    		</embed>
-    	</object>
-    	<div style='font-size:11px;font-family:tahoma,arial;height:26px;width:180px;padding-top:2px;text-align:center;'>
-    		<a 	href='http://www.slideshare.net/widgets/blogbadge' 
-    			title='Get your Sidebar Widget' 
-    			style='border:0px none;margin-bottom:-5px' >
-    			Get your own Widget</a>
-    	</div>
-    </div>
-    -->]]></Content>
+    ]]></Content>
 </Module>

@@ -1,6 +1,10 @@
 window.UCSF 	= window.UCSF || {}; 
 UCSF.UI = UCSF.UI || {};
 
+
+/*
+//DEPRICATED
+
 UCSF.UI.applyMoreLess = function(){
 	$(document).ready(function(){
 		$('.moreless').toggle(
@@ -55,6 +59,7 @@ UCSF.UI.renderNav = function(){
 	});
 };
 UCSF.UI.renderNav();
+
 	
 UCSF.UI.renderParams = function(){
 	$(document).ready(function(){
@@ -78,6 +83,7 @@ UCSF.UI.renderParams = function(){
 	});
 };
 UCSF.UI.renderParams();
+
 
 UCSF.UI.applyQuestions = function(){
 	$(document).ready(function(){
@@ -131,3 +137,6 @@ UCSF.UI.applyQuestions = function(){
 	});//ready
 };//applyQuestions
 UCSF.UI.applyQuestions();
+
+
+*/

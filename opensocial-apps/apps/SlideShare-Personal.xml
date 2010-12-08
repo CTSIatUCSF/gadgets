@@ -23,7 +23,7 @@
     <script type="text/javascript" src="js/ucsf.js" ></script>
     <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     <script type="text/javascript">
-    
+    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     window.UCSF 	= window.UCSF || {};
     UCSF.SlideShare	= UCSF.SlideShare || {};
     

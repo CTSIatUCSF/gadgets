@@ -12,7 +12,7 @@
         <Require feature="settitle" />
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="default, all, canvas, canvas.owner, profile, home, preview, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, all, canvas, profile, profile.canvas, profile.left, home, home.canvas, preview"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     <base target="_blank"/>
     <!-- #includes -->
@@ -353,7 +353,7 @@
 		*/
 		
     </script>]]></Content>
-    <Content type="html" view="home, canvas, update, canvas.owner"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, home.canvas"><![CDATA[<!--HTML-->
 	<!-- HideShow -->
 	<!-- a control that is visible on some views, but not all. -->
 
@@ -361,7 +361,7 @@
 	<!-- HideShow end -->
     ]]></Content>
     
-    <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="home.canvas"><![CDATA[<!--HTML-->
     <script type="text/javascript">
     	$(document).ready(function(){os.ready(function(){
 	    	osapi.appdata.get({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
@@ -416,7 +416,8 @@
      						'height': 410
    				});
    				
-   				$('#preview').html(
+   				$('#preview').html('');
+   				$('#preview').append( $(
    				'<div style="width:577px;">' +
 		    		'<object style="margin:0px" width="575" height="410">' +
 		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
@@ -433,7 +434,7 @@
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'
-   				
+   				)
    				);
    				
    				gadgets.window.adjustHeight();
@@ -494,14 +495,14 @@
 	</div>
     
     ]]></Content>
-    <Content type="html" view="profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas, profile"><![CDATA[<!--HTML-->
     
     <div class='header'>
 		<h1>Presentations from SlideShare</h1>
 	</div>
     
     ]]></Content>
-    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, canvas, profile"><![CDATA[<!--HTML-->
     
     
         <script type="text/javascript">
@@ -534,7 +535,7 @@
 	    	$('.edit').click(function(){
 	    	console.log('edit');
 	    		os.ready(function(){
-	    			gadgets.views.requestNavigateTo( "canvas" );
+	    			gadgets.views.requestNavigateTo( "home.canvas" );
 	    		});
 	    	});
 	    	
@@ -559,7 +560,8 @@
      						'height': 410
    				});
    				
-   				$('#preview').html(
+   				$('#preview').html('');
+   				$('#preview').append( $(
    				'<div style="width:577px;margin:auto;">' +
 		    		'<object style="margin:0px" width="575" height="410">' +
 		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
@@ -576,7 +578,7 @@
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'
-   				
+   				)
    				);
    				
    				gadgets.window.adjustHeight();

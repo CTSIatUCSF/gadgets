@@ -13,7 +13,7 @@
             <Param name="exclude-urls">/.*/</Param>
         </Optional>
     </ModulePrefs>
-    <Content type="html" view="default, all, canvas, canvas.owner, canvas.t, profile, home, preview, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, all, canvas, profile, profile.canvas, home, home.canvas, preview"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
     
@@ -462,11 +462,11 @@
     
     <Content type="html" view="home"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#canvas.owner" class="nav" >Edit</a></span>
+		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#home.canvas" class="nav" >Edit</a></span>
 	</div>
 	
     ]]></Content>
-    <Content type="html" view="canvas, canvas.owner, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="home.canvas"><![CDATA[<!--HTML-->
 	<div class='header'>
 		<h1>Mentorship Information</h1>
 		<div class="navlist" >
@@ -477,7 +477,7 @@
 		</div>
 	</div>
     ]]></Content>
-    <Content type="html" view="profile, preview"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas, preview"><![CDATA[<!--HTML-->
 	<div class='header'>
 		<h1>Mentorship Information</h1>
 	</div>
@@ -498,7 +498,7 @@
 	</div>
 	]]></Content>
 
-    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, canvas"><![CDATA[<!--HTML-->
     <script type="text/javascript">
     	
     	UCSF.Mentor.displayAppSummary();
@@ -684,7 +684,7 @@
 		</div><!-- .clearbox -->
 	
 	</div>]]></Content>
-    <Content type="html" view="canvas.owner, canvas, update"><![CDATA[<!--HTML-->
+    <Content type="html" view="home.canvas"><![CDATA[<!--HTML-->
     <script type="text/javascript" >
     /**
      	any custom scripts for this view

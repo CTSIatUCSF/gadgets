@@ -17,7 +17,7 @@
     <base target="_blank"/>
     <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css?10" type="text/css" media="screen, projection">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/ucsf.js" ></script>
@@ -416,17 +416,24 @@
      						'height': 410
    				});
    				
-   				$('#preview').html('');
-   				$('#preview').append( $(
-   				'<div style="width:577px;">' +
-		    		'<object style="margin:0px" width="575" height="410">' +
+   				//$('#preview').html('');
+   				 
+   				$('#preview').html( 
+   				'<div style="width:577px;margin:auto;">' +
+		    		'<object style="margin:0px" width="575" height="410" ' +
+		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' +
+		    			' codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"' +
+		    			' id="slideshow"' +
+		    			'>' +
 		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
 		    		'<param name="allowFullScreen" value="true"/>' +
 		    		'<param name="allowScriptAccess" value="always"/>' +
 		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
 		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' name="slideshow" ' +
 		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
-		    				' type="application/x-shockwave-flash"' + 
+		    				' type="application/x-shockwave-flash"' +
+		    				' pluginspage="http://www.adobe.com/go/getflashplayer"' + 
 		    				' allowscriptaccess="always"' + 
 		    				' allowfullscreen="true"' + 
 		    				' width="575" ' +
@@ -434,8 +441,8 @@
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'
-   				)
-   				);
+		    	
+		    	);
    				
    				gadgets.window.adjustHeight();
    				
@@ -560,17 +567,24 @@
      						'height': 410
    				});
    				
-   				$('#preview').html('');
-   				$('#preview').append( $(
+   				//$('#preview').html('');
+   				 
+   				$('#preview').html( 
    				'<div style="width:577px;margin:auto;">' +
-		    		'<object style="margin:0px" width="575" height="410">' +
+		    		'<object style="margin:0px" width="575" height="410" ' +
+		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ' +
+		    			' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" ' +
+		    			' id="slideshow" ' +
+		    			'>' +
 		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
 		    		'<param name="allowFullScreen" value="true"/>' +
 		    		'<param name="allowScriptAccess" value="always"/>' +
 		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
 		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' name="slideshow" ' +
 		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
-		    				' type="application/x-shockwave-flash"' + 
+		    				' type="application/x-shockwave-flash"' +
+		    				' PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"' + 
 		    				' allowscriptaccess="always"' + 
 		    				' allowfullscreen="true"' + 
 		    				' width="575" ' +
@@ -578,7 +592,7 @@
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'
-   				)
+   				
    				);
    				
    				gadgets.window.adjustHeight();

@@ -20,7 +20,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
     <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/ucsf.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
     <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     <script type="text/javascript">
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
@@ -502,14 +502,14 @@
 	</div>
     
     ]]></Content>
-    <Content type="html" view="canvas, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas, profile, profile.canvas"><![CDATA[<!--HTML-->
     
     <div class='header'>
 		<h1>Presentations from SlideShare</h1>
 	</div>
     
     ]]></Content>
-    <Content type="html" view="home, canvas, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, canvas, profile, profile.canvas"><![CDATA[<!--HTML-->
     
     
         <script type="text/javascript">
@@ -570,8 +570,8 @@
    				//$('#preview').html('');
    				 
    				$('#preview').html( 
-   				'<div style="width:577px;margin:auto;">' +
-		    		'<object style="margin:0px" width="575" height="410" ' +
+   				'<div style="width:300px;margin:auto;">' +
+		    		'<object style="margin:0px" width="296" height="211" ' +
 		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ' +
 		    			' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" ' +
 		    			' id="slideshow" ' +
@@ -587,8 +587,8 @@
 		    				' PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"' + 
 		    				' allowscriptaccess="always"' + 
 		    				' allowfullscreen="true"' + 
-		    				' width="575" ' +
-		    				' height="410">' +
+		    				' width="296" ' +
+		    				' height="211">' +
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'

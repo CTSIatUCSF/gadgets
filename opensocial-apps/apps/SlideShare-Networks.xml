@@ -20,6 +20,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
     <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     <script type="text/javascript">
     

@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Mentor_nsj" 
+            author="Nels Johnson" 
+            author_email="jdavid.net@gmail.com" 
+            width="600"
+            height="800"
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="settitle" />
+        <Require feature="osapi" />
+        <Optional feature="content-rewrite">
+            <Param name="exclude-urls">/.*/</Param>
+        </Optional>
+    </ModulePrefs>
+    
+    <!-- <Content type="html" view="default, all, profile, home, preview"> -->
+    <Content type="html" view="default, home" preferred_width="700">
+ 
+    <!-- start of content with home view -->
+    <![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <!DOCTYPE html>
+    
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js"></script>
+    <script type="text/javascript">
+    
+    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
+    var Questions = {};
+    
+    window.UCSF = UCSF || {};
+    UCSF.Mentor = UCSF.Mentor || {};
+   
+    os.ready(function(){
+    	//TODO: update this if you change the HTML.
+    	//TODO: use this function createMentorDataMap(); // uncomment below.
+    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidemiology\":\"Epidemiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"lead\":\"Lead Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
+    	Questions = gadgets.json.parse(Questions);
+    	console.log( "questions", Questions );
+    });
+    
+    //INIT:
+    //Inits the UI
+    
+    UCSF.UI.MoreLess();
+    
+    //UCSF.UI.DebugNav();
+    //UCSF.UI.DebugParams();
+    
+    $(document).ready(function(){ os.ready(function(){
+    	$('a.nav').each( function(){
+    		$(this).attr('target','_self');
+    		$(this).click(function(){
+    			var view = $(this).attr('href');
+    			
+    			view = view.substr(view.lastIndexOf('#') + 1);
+    			try{
+					gadgets.views.requestNavigateTo( view );
+				}catch(e){
+					console.log(e);
+				}
+    		});
+    	});// a.nav
+    	
+    }); });
+    
+    UCSF.Mentor.addOnChangeHandlers = function(){
+    	$(document).ready(function(){ os.ready(function(){
+    	
+    		//private function to update appData based on an onChange Event
+    		function updateAppData(map){
+				$.extend(true, map, {'lastUpdate': new Date().getTime().toString() });
+				osapi.appdata.update(  
+					{	'userId': '@viewer', 
+						'appId':'@app', 
+						'data': map 
+					} )
+					.execute(function(result){
+						console.log(result, map);
+					});
+			}
+  			
+  			//find questions on the form
+			$('.question fieldset').each(function(){ 
+				//the current question
+				var question = $(this);
+					
+				$(this).find('input[type=radio]').change(function(){
+					var str = [];
+					$(question).find('input:checked').each(function(){
+						str.push($(this).val());
+					}); 
+					//console.log( this.name, this.value, str );
+					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+					//console.log(map);
+					updateAppData( map );				
+				});
+							
+				$(this).find('input[type=checkbox]').change(function(){
+					var str = [];
+					$(question).find('input:checked').each(function(){
+						str.push($(this).val());
+					}); 
+					str = str.join(", ");
+					//console.log( this.name, this.value, str );
+					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
+					//console.log(map);
+					updateAppData( map );
+				});
+			
+				$(this).find('input[name], textarea[name]')
+					.not('[type=checkbox]').not('[type=radio]')
+					.change(function(){
+						
+						var str = $(this).val() || "";
+						//console.log( $(this), str );
+						
+						var map = gadgets.json.parse( "{ \"" + $(this).attr('name') + "\" : \"" + str + "\" }" );
+						//console.log(map);
+						updateAppData( map );
+					
+					});
+			 
+			});// .question fieldset
+		});}); //jquery.ready //os.ready
+	};
+	
+	//UCSF.Mentor.addOnChangeHandlers();
+	
+	UCSF.Mentor.addSaveHandler = function(){
+		$(document).ready( function(){ os.ready( function(){
+			
+			function updateAppData(map){
+				$.extend(true, map, {"lastUpdate" : new Date().getTime().toString() });
+				osapi.appdata.update(  
+					{	'userId': '@viewer', 
+						'appId':'@app', 
+						'data': map 
+					} )
+					.execute(function(result){
+					
+						//TODO: if works navigate
+						gadgets.views.requestNavigateTo( "home" );
+						console.log(result, map);
+					});
+			}
+			
+			function createMentorDataMap(){
+
+				var updateMap = {};
+				
+				$('.question>fieldset').each( function(){
+									
+					var question = $(this);
+					//var name = "";
+					var namearr = [];
+					
+					$(question).find('input[name],textarea[name]').each(function(){
+						namearr[ $(this).attr('name') ] = $(this).attr('name');
+					});
+					
+					for ( var name in namearr ){
+						console.log( name, $(question).find('input,textarea').filter('[name='+ name +']') );
+						var arr = [];
+						var str = "";
+
+						$(question).find("input[type=radio]:checked,input[type=checkbox]:checked")
+							.filter('[name='+ name +']').each(function(){
+								arr.push( $(this).val() );
+						});
+						
+						str = arr.join(", ");
+					
+						$(question).find('input[name], textarea[name]').filter('[name='+ name +']')
+							.not('[type=checkbox]').not('[type=radio]')
+							.each(function(){
+									str = $(this).val() || "";
+								});
+							
+						updateMap[name] = str;	
+					}
+				});
+				
+				console.log( updateMap, gadgets.json.stringify(updateMap).replace( /\"/gi, "\\\"") );
+				
+				return updateMap;
+			}
+			
+			$('.mentor_save').click(function(){
+				updateAppData( createMentorDataMap() );
+			});
+			
+			
+		});}); //jquery.ready //os.ready
+	};
+	UCSF.Mentor.addSaveHandler();
+	
+	UCSF.Mentor.displayLastUpdated = function(){
+		$(document).ready(function(){ os.ready(function(){
+			osapi.appdata.get( {
+				'userId': '@owner',
+				 'appId':'@app', 
+				 'fields':['lastUpdate'] } )
+				.execute(function(result){
+					//console.log('displayLastUpdated', result);
+					result = os.osapi.getOwnerFromResult( result );
+					var d = new Date(parseInt(result['lastUpdate']));
+					console.log( 'displayLastUpdated', result['lastUpdate'] );
+					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
+					if( typeof(result['lastUpdate']) !== 'undefined' ){ 
+						$('.updated').show()
+							.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+					}else{
+						$('.updated').hide();
+					}
+					gadgets.window.adjustHeight();
+				});
+		});}); // jquery.ready os.ready
+	};
+	
+	UCSF.Mentor.displayLastUpdated();
+	
+	//on canvas.owner update
+	UCSF.Mentor.displayAppSummary = function(){
+		$(document).ready(function(){ os.ready(function(){
+		
+			var fields = {};
+			fields = Questions;
+			fields["lastUpdate"] ={name: "lastUpdate"}; //let's fetch this too.
+			
+			var keys = [];
+			/*
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			*/
+			
+			console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f].name);
+			}
+			console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log('"appdata response"');
+					console.log(result, keys);
+					
+					var fr = {};
+					$('.detail[fr][test]').each(function(){
+						console.log('detail for', $(this).attr('fr'));
+						fr[$(this).attr('fr')] = $(this).attr('test');
+						
+					});
+					
+					//this is a weird way to access the @owner without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					/*
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						console.log( n, result[n], result );
+						break;
+					}
+					*/
+					appdata = os.osapi.getOwnerFromResult(result);
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for radio and checkboxes
+						var type = Questions[keys[k]].type
+						console.log( 'type', type );
+						if( type == 'radio' || type == 'checkbox'){
+							var v = 0;
+							var answer = [];
+							var comma = "";
+							for(v = 0; v < vals.length; v++){
+								//console.log('each val', vals[v]);
+								
+								//TODO:if things change, it will break here.
+								var value = Questions[keys[k]].labels[vals[v]];
+								if( value.toLowerCase() == 'email' || value.toLowerCase() == 'phone'){
+									value += " ( see profile info ) ";
+								}
+								
+								//remove assistant from comma seperated list.
+								/*
+								if( value.toLowerCase() !== 'assistant'){
+									answer.push( value );
+								}
+								*/
+								//add everything
+								answer.push( value );
+								
+								//set up to show assistant
+								if( typeof(fr[keys[k]]) != 'undefined' && fr[keys[k]] == vals[v] ){
+									console.log( 'detail >>', fr, fr[keys[k]], vals[v]);
+									$('.detail[test='+ fr[keys[k]] +'][fr='+ keys[k] +']').show()
+										.parents('.section').show()
+										.find('.moreless').trigger('show');								
+								}
+							}//for
+							comma = answer.join(", ");
+							console.log( 'comma', comma );
+							
+							$('div.answer[name='+keys[k]+']').each(function(){
+								console.log('"answer"', keys[k]);
+								$(this).find('.answerresponse[type=comma]').text( comma );
+								$(this).find('.answerresponse[type=list]')
+									.each(function(){
+										var ul = $('<ul/>');
+										//console.log('.answerresponse answer.length', answer.length);
+										for(var a=0,al= answer.length; a < al; a++){
+											ul.append( $('<li/>').text( answer[a] ) );
+										}
+										if( ul.children().length ){
+											$(this).append(ul);
+										}
+								});
+								
+								console.log( '.answerresponse contents.length', $(this), $(this).contents().length );
+								var content = $(this).find('.answerresponse').contents();
+								var p = $(this).find('.answerresponse>p').contents();
+								if( content.length ){
+									if( content.length == 1 && content[0].length == 0){ return; }
+									if( p.length == 1 && p[0].length == 0){ return; }
+									$(this).show();
+									$(this).parents('.section').show().find('.moreless').trigger('show');
+									gadgets.window.adjustHeight();
+								}
+							});
+						}//if
+						
+						if( type == 'text' || type == 'email' || type == 'tel' ){
+							$('span[name='+ keys[k] +']').each(function(){
+									/*if(appdata[keys[k]].length < 1){ return this; }*/
+									
+									$(this).text(appdata[keys[k]]);
+									$(this).show();
+									$(this).parents('.section').show().find('.moreless').trigger('show');
+									gadgets.window.adjustHeight();
+								});
+						}
+						
+						if( type == 'textarea' ){
+							$('div.answer[name='+keys[k]+']').each(function(){
+								$(this).find('.answerresponse[type=textarea]')
+									.append('<p/>').append(appdata[keys[k]]);
+								$(this).show();
+								$(this).parents('.section').show().find('.moreless').trigger('show');
+								gadgets.window.adjustHeight();
+							});
+						}
+					}
+					
+				});//osapi.appdata.get
+			
+			});});  //jquery.ready //os.ready
+		};
+	
+	UCSF.Mentor.displayAppData = function(){
+		$(document).ready(function(){ os.ready(function(){
+			var fields = {};
+			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
+			
+			var keys = [];
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			//console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f]);
+			}
+			//console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log(result, keys);
+					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
+					
+					//this is a weird way to access the @viewer without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						//console.log( n, result[n], result );
+						break;
+					}
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							//console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for each value stored in the array let's check it on the form
+						var v = 0;
+						for(v = 0; v < vals.length; v++){
+							//console.log('each val', vals[v]);
+							
+							//this will work for radio and checkboxes, let's filter based on form name, and it's value attribute
+							$('[name='+ keys[k] +']')
+								.filter('input[type=radio], input[type=checkbox]')
+								.filter('[value='+ vals[v] +']')
+								.each(function(){
+									//console.log('update checked attr', this);
+									$(this).attr('checked','checked');
+									$(this).parents('.section').find('.moreless').trigger('show');
+								});
+						}
+						
+						$('[name='+ keys[k] +']')
+								.filter('input, textarea')
+								.not('[type=radio],[type=checkbox]')
+								.each(function(){
+									//console.log('update text', vals);
+									$(this).val( vals.join(", "));
+									$(this).parents('.section').find('.moreless').trigger('show');
+								});
+								
+						gadgets.window.adjustHeight();
+						
+					}
+					
+				}); /* osapi.appdata.get */
+				
+			});}); /* jquery.ready os.ready */
+		};
+		
+    </script>
+    
+    <!-- HideShow -->
+	<!-- a control that is visible on some views, but not all. -->
+	<div id="hideshow"></div>
+	<!-- HideShow end -->
+	
+	<br>
+	
+	<div style="font-family: Verdana, Arial; font-size:12px;">
+		Add details about your availability to mentor other UCSF faculty. 
+		Learn about the <a href="#">CTSI Mentor Development Program</a> 
+		and the <a href="#">UCSF Faculty Mentoring Program</a>
+	</div>
+	<br>
+	<div style="font-family: Verdana, Arial; font-size:12px;">
+		<a href="#">Save</a> | <a href="#">Cancel</a>
+	</div>
+	<br>
+	<div style="float:right; font-family: Verdana, Arial; font-size:12px;">
+		<b>Last updated:</b> January 24, 2011
+	</div>	
+	<br>
+	<div style="font-family: Verdana, Arial; font-size:12px;">		
+		<b>Available to Mentor Faculty as:</b><br>
+		<i>(check all that apply)</i> -- <a href="#">Review Mentor Role Definitions</a>
+		<table cellpadding="8" cellspacing="0">
+			<tr>
+				<td><input type="checkbox" name="lead_mentor" value="lead_mentor"> Lead Mentor</td>
+				<td><input type="checkbox" name="co_mentor" value="co_mentor"> Co-Mentor</td>
+				<td><input type="checkbox" name="research_mentor" value="research_mentor"> Research Mentor</td>
+				<td><input type="checkbox" name="career_mentor" value="career_mentor"> Career Mentor</td>
+			</tr>			
+		</table>
+		
+		<br>
+		
+		<b>Preferred Mentee Level:</b><br>
+		<i>(check all that apply)</i>
+		<table cellpadding="8" cellspacing="0">
+			<tr>
+				<td><input type="checkbox" name="junior_faculty" value="junior_faculty"> Junior Faculty</td>
+				<td><input type="checkbox" name="mid_level_faculty" value="mid_level_faculty"> Mid-level Faculty</td>
+				<td><input type="checkbox" name="senior_faculty" value="senior_faculty"> Senior Faculty</td>
+			</tr>			
+		</table>
+		
+		<br>
+		
+		<b>My Contact Preference:</b><br>
+		<table cellpadding="8" cellspacing="0">
+			<tr>
+				<td><input type="checkbox" name="email" value="email"> Email</td>
+				<td><input type="checkbox" name="phone" value="phone"> Phone</td>
+				<td><input type="checkbox" name="assistant" value="assistant"> Assistant<br></td>
+			</tr>			
+		</table>
+		
+		<br>
+		
+		Assistant Details<br>
+		<div style="width:420px; border:1px solid #000;">
+		<table cellpadding="8" cellspacing="0" border="0" width="400">
+			<tr>
+				<td colspan="2">
+					Name<br>
+					<input type="text" name="asst_name" value="" style="width:350px;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Email<br>
+					<input type="text" name="asst_email" value="" style="width:150px;">
+				</td>
+				<td>
+					Phone<br>
+					<input type="text" name="asst_phone" value="" style="width:150px;">
+				</td>				
+
+			</tr>			
+		</table>
+		</div>
+		
+		<br>
+		
+		Narrative to Potential Faculty Members:<br>
+		<textarea rows="5" cols="60">My research is focused on social science and epidemiological studies. I have completed the UCSF / CTSI mentor development program courses and am currently mentoring 2 junior faculty. 
+		</textarea>
+		
+	</div>
+
+	
+	<!-- end of content with home view -->
+	
+    ]]>
+    </Content>
+    
+    <!-- start of content with profile view -->
+    <Content type="html" view="profile" preferred_width="600">
+    
+    	<![CDATA[<!--HTML-->
+		<div>
+			<h3>Last updated: January 24, 2011</h3>
+		</div>
+		<div style="font-family: Verdana, Arial; font-size:12px;">
+		My research is focused on social science and epidemiological studies. 
+		I have completed the UCSF / CTSI mentor development program courses and am currently mentoring 2 junior faculty.
+		<br><br>
+		<b>Contact for mentoring:</b> Email (see above)
+		<br><br>
+		<b>Mentoring Opportunities Available: -- <a href="#">Review Mentor Role Definitions</a></b>
+		<ul style="margin-top:4px;">
+			<li>Lead Mentor</li>
+			<li>Research Mentor</li>
+		</ul>
+		<b>Mentoring Opportunities for:</b>
+		<ul style="margin-top:4px;">
+			<li>Junior Faculty</li>
+		</ul>
+		<br>
+		Learn about the <a href="#">CTSI Mentor Development Program</a> 
+		and the <a href="#">UCSF Faculty Mentoring Program</a>
+		<br><br>
+		</div>
+		
+		
+    ]]>
+    <!-- end of content with profile view -->
+    </Content>
+        
+</Module>

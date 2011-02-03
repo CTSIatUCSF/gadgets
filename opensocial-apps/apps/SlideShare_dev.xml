@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="SlideShare Beta"
+            author="Nels Johnson"
+            author_email="jdavid.net@gmail.com"
+            description="A Simple app to display your own slides from SlideShare.net">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="flash" />
+        <Require feature="dynamic-height" />
+        <Require feature="settitle" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    
+<!-- ==================== START HOME/EDIT VIEW ==================== -->    
+    
+    <Content type="html" view="default, home"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    <base target="_blank"/>
+    <!-- #includes -->
+    <link rel="stylesheet" href="css/gadget.css?10" type="text/css" media="screen, projection">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
+    <script type="text/javascript" src="js/similarSlideShare.js" ></script>
+    
+    <script type="text/javascript">
+    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
+    window.UCSF = window.UCSF || {};
+    UCSF.SlideShare	= UCSF.SlideShare || {};
+    
+    $(document).ready(function(){
+			
+			function updateAppData(map){
+				$.extend(true, map, {'lastUpdate': new Date().getTime()});
+				osapi.appdata.update(  {'userId': '@viewer', 'appId':'@app', 'data': map } )
+					.execute(function(result){
+						console.log(result, map);
+					});
+			}
+			
+			//console.log("a target fix");
+			$('a').not('[target]').attr("target","_tab");
+	});
+	
+	UCSF.SlideShare.api_key 	= "dPfswfX7";
+	UCSF.SlideShare.api_secret 	= "1wP2zfsv";
+	
+	UCSF.SlideShare.getTimeStamp = function(){ return Math.round(new Date().getTime()/1000).toString() ; };
+	UCSF.SlideShare.getHash = function(timestamp){
+		return Crypto.SHA1(	UCSF.SlideShare.api_secret + (timestamp||UCSF.SlideShare.getTimeStamp()), { asString: false });
+	};
+	
+	UCSF.SlideShare.signApiUrl = function( url, params ){ 
+		params.ts	= UCSF.SlideShare.getTimeStamp();
+		params.hash = UCSF.SlideShare.getHash( params.ts );
+		
+		var query = "?";
+		
+		for( name in params ){
+			query += name + '=' + params[name] + '&';
+		}
+		
+		//remove the & symbol from the end of the string
+		query = query.substring(0,query.length - 1);
+		
+		return url + query;
+	};
+	
+	UCSF.SlideShare.fetchUserSlides_gadgets = function( username, callback ){
+		//wrapper function to abstract from the actual function
+		
+		var params 		= {};
+		
+		var apiurl		= "http://www.slideshare.net/api/2/get_slideshows_by_user";
+		var apigeeurl 	= "http://slideshare.jdavid.apigee.com/api/2/get_slideshows_by_user";
+		
+		var url			= UCSF.SlideShare.signApiUrl( apiurl, 
+							{
+							"username_for":username 
+							} );
+		
+		var _callback 	= callback || function(response){ console.log(url, response, response.txt); };
+		
+		//specifies how to interpate the result, text is also availible 
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = "TEXT"; //gadgets.io.ContentType.DOM;  
+		
+		gadgets.io.makeRequest( url, _callback, params );
+		
+		return _callback;
+	
+	};
+	
+	UCSF.SlideShare.fetchUserSlides_osapi = function( username, callback ){
+		//wrapper function to abstract from the actual function
+		
+		var params 		= {};
+		
+		var apiurl		= "http://www.slideshare.net/api/2/get_slideshows_by_user";
+		var apigeeurl 	= "http://slideshare.jdavid.apigee.com/api/2/get_slideshows_by_user";
+		
+		var url			= UCSF.SlideShare.signApiUrl( apiurl, 
+							{
+							"username_for":username 
+							} );
+		
+		var _callback 	= callback || function(response){ console.log(url, response, response.txt); };
+		
+		//specifies how to interpate the result, text is also availible 
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = "TEXT"; //gadgets.io.ContentType.DOM;  
+		
+		try{
+    		//using osapi
+    		console.log( 'osapi.makerequest' );
+    		osapi.makeRequest( url ).execute( _callback );
+		}catch(e){
+				console.log(e);
+		}
+		
+		return _callback;
+	
+	};
+	
+	UCSF.SlideShare.fetchUserRSS = function( username, callback ){
+		return UCSF.SlideShare.fetchUserRSS_gadgets( username, callback );
+	};
+	
+	UCSF.SlideShare.fetchUsersRSS_pipes_gadgets = function( usernames, callback){
+		
+		var params 		= {};
+		var names 		= usernames.join(',');
+		
+		var apiurl		= "http://pipes.yahoo.com/jdavid/multiuser_slideshare_rss?_render=rss&usernames=" + names;
+		var apiurl2		= "http://pipes.yahoo.com/pipes/pipe.run?_id=514311a4c8b9b5f3c8d420214d894f14&_render=rss&usernames=" + names;
+		var apigeeurl 	= "http://slideshare.jdavid.apigee.com/jdavid/multiuser_slideshare_rss?_render=rss&usernames=" + names;
+		
+		var url 		= apigeeurl; 
+		var _callback 	= callback || function(response){ console.log(url, response, response.txt); };
+		
+		//specifies how to interpate the result, text is also availible 
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = "TEXT"; //gadgets.io.ContentType.DOM;  
+		
+		gadgets.io.makeRequest( url, _callback, params );
+		
+		return _callback;
+	};
+	
+	UCSF.SlideShare.fetchUserRSS_gadgets = function( username, callback){
+		var params 		= {};
+		var apiurl		= "http://slideshare.net/rss/user/" + username;
+		var apigeeurl 	= "";
+		
+		var url			= apiurl;
+		var _callback 	= callback || function(response){ console.log(url, response, response.txt); };
+
+		
+		//specifies how to interpate the result, text is also availible 
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = "TEXT"; //gadgets.io.ContentType.DOM;  
+		
+		gadgets.io.makeRequest( url, _callback, params );
+		
+		return _callback;
+	};
+	
+	//prototype
+	UCSF.SlideShare.fetchSlides_p = function( username, callback ){
+ 			var api_key = "dPfswfX7";
+ 			var ts 		=  Math.round(new Date().getTime()/1000) ;
+ 			var username_for = username || "dgcohen23";
+ 			var hash	= Crypto.SHA1("1wP2zfsv" + ts.toString(), { asString: false });
+ 			var api_url = "http://www.slideshare.net/api/2/get_slideshows_by_user"; //?username_for=JoanCunninghamDesign
+ 			
+ 			console.log( username_for, api_key, ts, hash );
+ 			/* //using jquery to make the request, crossdomain issues.
+ 			$.get(  api_url , 
+ 					{	'username_for' : username_for,
+ 						'api_key'	:api_key,
+ 						'ts'		:ts,
+ 						'hash'		:hash
+ 						},
+ 					function(data){
+ 						console.log(data);
+ 					}
+ 					);
+    		*/
+    		
+    		try{
+    		//using osapi
+    		console.log( 'osapi.makerequest' );
+    		osapi.makeRequest(
+    			api_url, 
+    				{	'username_for' : username_for,
+ 						'api_key'	:api_key,
+ 						'ts'		:ts,
+ 						'hash'		:hash
+ 						})
+ 					.execute(
+ 					function(result) {
+  						console.log(result);
+					}
+				);
+			}catch(e){
+				console.log(e);
+			}
+			
+			
+			console.log( 'makerequest' );
+			var url = api_url + "?" + $.param({"username_for": username_for, 
+												"api_key": api_key,
+												"ts":ts,
+												"hash":hash
+												});
+			var params = {}; 
+			params[gadgets.io.RequestParameters.CONTENT_TYPE] = "TEXT"; //gadgets.io.ContentType.DOM;  
+			gadgets.io.makeRequest(url,
+					function(response){
+						console.log(url, response, response.text);
+					},
+					params);
+			
+			//var api2 = "http://pipes.yahoo.com/jdavid/multiuser_slideshare_rss?";
+			var api2 = "http://pipes.yahoo.com/pipes/pipe.run?_id=514311a4c8b9b5f3c8d420214d894f14";
+			//var url2 = api2 + "usernames=" + "adrianco,jdavid,dgcohen23,cyberhap,anafxfz" + "&_render="+"rss";
+			var url2 = api2 + "&" + "usernames=" + "adrianco,jdavid,dgcohen23,cyberhap,anafxfz" + "&_render="+"rss";
+			
+			gadgets.io.makeRequest(url2,
+				function(response){
+						console.log(url2, response, response.text);
+					},
+					params);
+    	}
+    	//fetchSlides();
+    	
+    	function displayAppData(){
+			$(document).ready(function(){
+			var fields = {};
+			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
+			
+			var keys = [];
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			//console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f]);
+			}
+			//console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log(result, keys);
+					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
+					
+					//this is a weird way to access the @viewer without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						//console.log( n, result[n], result );
+						break;
+					}
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							//console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for each value stored in the array let's check it on the form
+						var v = 0;
+						for(v = 0; v < vals.length; v++){
+							//console.log('each val', vals[v]);
+							
+							//this will work for radio and checkboxes, let's filter based on form name, and it's value attribute
+							$('[name='+ keys[k] +']')
+								.filter('input[type=radio], input[type=checkbox]')
+								.filter('[value='+ vals[v] +']')
+								.each(function(){
+									//console.log('update checked attr', this);
+									$(this).attr('checked','checked');
+								});
+						}
+						
+						$('[name='+ keys[k] +']')
+								.filter('input, textarea')
+								.not('[type=radio],[type=checkbox]')
+								.each(function(){
+									//console.log('update text', vals);
+									$(this).val( vals.join(", "));
+								});
+								
+						gadgets.window.adjustHeight();
+						
+					}
+					
+					
+					
+				});/*osapi.appdata.get*/
+			});/*document.ready*/
+		}
+		/*
+		 $(document).ready(
+    	 os.ready(function(){
+    	 var url = "http://static.slidesharecdn.com/swf/ssplayer2.swf";
+    	 url += '?' + $.param({
+    	 	doc: "html5-101013055552-phpapp01",
+      		stripped_title: "html5-accessibility-is-it-ready-yet",
+      		userName: "stevefaulkner",
+      		allowscriptaccess:"always",
+      		allowfullscreen:"true"
+    	 });
+    	 
+    	 console.log('url', url );
+    	 
+    	 //may have crossdoamin issues
+    	 gadgets.flash.embedFlash(url, "similarSlides", {
+    	 		type:"application/x-shockwave-flash",
+      			swf_version: 6,
+      			allowscriptaccess:"always", 
+    			allowfullscreen:"true", 
+      			width: 425,
+      			height: 500
+    			});
+    			
+    			
+    	url = "http://static.slidesharecdn.com/swf/blogbarwidget_black.swf";
+    	 url += '?' + $.param({
+    	 	sidebarfeed:"user/stevefaulkner",
+      		allowscriptaccess:"always",
+      		allowfullscreen:"true"
+    	 });
+    	 
+    	 console.log('url', url );
+    	 //may have crossdoamin issues
+    	 gadgets.flash.embedFlash(url, "sidebar", {
+    	 		type:"application/x-shockwave-flash",
+      			swf_version: 6,
+      			allowscriptaccess:"always", 
+    			allowfullscreen:"true", 
+      			width: 425,
+      			height: 700
+    			});
+    			
+    	gadgets.window.adjustHeight();
+    	
+    	}));
+		
+		*/
+		
+    </script>]]></Content>
+    
+    <Content type="html" view="default, home"><![CDATA[<!--HTML-->
+    
+    <style>
+    
+    .slideshare_title {
+    	font-family: Verdana, Arial;
+    	font-size: 14px;
+    }
+
+    .slideshare_body {
+    	font-family: Verdana, Arial;
+    	font-size: 11px;
+    }    
+    
+    </style>
+    
+	<!-- HideShow -->
+	<div class="slideshare_body" id="hideshow"></div>
+	<!-- HideShow end -->
+
+    <script type="text/javascript">
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				preview(username);
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});
+	    			preview(username);
+	    		});
+	    	});
+	    	
+	    	$('.close').click(function(){
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "home" );
+	    		});
+	    	});
+	    	
+	    });
+	    
+	    function preview(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    			console.log("preview");
+    			
+    			var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
+    			
+    			 
+    			gadgets.flash.embedFlash(url, "preview", {
+   	 					'type':"application/x-shockwave-flash",
+   	 					'flashvars':"feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads",
+     						'swf_version': 6,
+     						'allowscriptaccess':"always", 
+   						'allowfullscreen':"true", 
+     						'width': 575,
+     						'height': 410
+   				});
+   				
+   				//$('#preview').html('');
+   				 
+   				$('#preview').html( 
+   				'<div style="width:577px;margin:auto;">' +
+		    		'<object style="margin:0px" width="575" height="410" ' +
+		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' +
+		    			' codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"' +
+		    			' id="slideshow"' +
+		    			'>' +
+		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
+		    		'<param name="allowFullScreen" value="true"/>' +
+		    		'<param name="allowScriptAccess" value="always"/>' +
+		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
+		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' name="slideshow" ' +
+		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
+		    				' type="application/x-shockwave-flash"' +
+		    				' pluginspage="http://www.adobe.com/go/getflashplayer"' + 
+		    				' allowscriptaccess="always"' + 
+		    				' allowfullscreen="true"' + 
+		    				' width="575" ' +
+		    				' height="410">' +
+		    				'</embed>' +
+		    		'</object>' +
+		    	'</div>'
+		    	
+		    	);
+   				
+   				gadgets.window.adjustHeight();
+   				
+   				console.log( $('#preview'));
+    			
+    		});
+	    }
+    </script>
+    <!-- <div class='debug params'></div> -->
+	<!-- <div class='viewnav'></div> -->
+	
+	<div class='header'>
+		<p class="slideshare_title"><b>SlideShare: Share your presentations via UCSF Profiles</b></p>
+			<!--<span class="close" style="text-decoration:underline;cursor:pointer;color:#44F;">return to home</span>-->
+	</div>
+	
+	<div id="settings" style="clear:both;">
+		<p class="slideshare_body">Enter your SlideShare Username below and click Save/Preview. Any public presentations that you've uploaded to SlideShare 
+		will be available to view from your UCSF Profile page. To remove this, simply delete your Username and click Save/Preview.
+		<br><br>
+		When you are ready to share your presentations with everyone, make sure to click Show, so that this section of your profile
+		is VISIBLE to the public.</p>
+	    <div class='question'>
+			<span class='slideshare_body' >SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
+			&nbsp;&nbsp;&nbsp;
+			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;">Save/Preview</span>
+		</div> 
+		<!-- .question -->
+		
+    </div>
+    <br>
+    <div id="preview">
+    	<!--
+    	<div style="width:577px; text-align:left;">
+    		<object style="margin:0px" width="575" height="410">
+    		<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>
+    		<param name="allowFullScreen" value="true"/>
+    		<param name="allowScriptAccess" value="always"/>
+    		<param name="flashVars" value="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads"/>
+    		<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" 
+    				flashVars="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads" 
+    				type="application/x-shockwave-flash" 
+    				allowscriptaccess="always" 
+    				allowfullscreen="true" 
+    				width="575" 
+    				height="410">
+    				</embed>
+    		</object>
+    	</div>
+    	-->
+    </div>
+    
+    <!--<div class='header'>
+		<h2>SlideShare Beta - Home View</h2>
+			&nbsp;&nbsp;<span class="edit" style="text-decoration:underline;cursor:pointer;color:#44F;">edit</span>
+	</div>-->
+    
+    ]]></Content>
+    
+<!-- ==================== END HOME/EDIT VIEW ==================== -->    
+    
+<!-- ==================== START PROFILE VIEW ==================== -->
+    
+    <Content type="html" view="default, profile"><![CDATA[<!--HTML-->
+    
+        <script type="text/javascript">
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				preview(username);
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});
+	    			preview(username);
+	    		});
+	    	});
+	    	
+	    	$('.edit').click(function(){
+	    	console.log('edit');
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "home.canvas" );
+	    		});
+	    	});
+	    	
+	    });
+	    
+	    function preview(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    			console.log("preview");
+    			
+    			var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
+    			
+    			 
+    			gadgets.flash.embedFlash(url, "preview", {
+   	 					'type':"application/x-shockwave-flash",
+   	 					'flashvars':"feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads",
+     						'swf_version': 6,
+     						'allowscriptaccess':"always", 
+   						'allowfullscreen':"true", 
+     						'width': 575,
+     						'height': 410
+   				});
+   				
+   				//$('#preview').html('');
+   				 
+   				$('#preview').html( 
+   				'<div style="width:300px;margin:auto;">' +
+		    		'<object style="margin:0px" width="296" height="211" ' +
+		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ' +
+		    			' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" ' +
+		    			' id="slideshow" ' +
+		    			'>' +
+		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
+		    		'<param name="allowFullScreen" value="true"/>' +
+		    		'<param name="allowScriptAccess" value="always"/>' +
+		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
+		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
+		    				' name="slideshow" ' +
+		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
+		    				' type="application/x-shockwave-flash"' +
+		    				' PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"' + 
+		    				' allowscriptaccess="always"' + 
+		    				' allowfullscreen="true"' + 
+		    				' width="296" ' +
+		    				' height="211">' +
+		    				'</embed>' +
+		    		'</object>' +
+		    	'</div>'
+   				
+   				);
+   				
+   				gadgets.window.adjustHeight();
+   				
+   				console.log( $('#preview'));
+    			
+    		});
+	    }
+    </script>
+    
+    
+    <!-- <div class='debug params'></div> -->
+	<!-- <div class='viewnav'></div> -->
+	
+	<div class='header'>
+		<h2>Profiles SlideShare Gadget - Profile Mode</h2>
+	</div>
+	
+	<div id="settings" style="display:none;">
+		<p>This is a app that will show your <a href="http://slideshare.net/">SlideShare</a> presentations on your profile to others.</p>
+		<h2>Settings</h2>
+	    <div class='question'>
+		<fieldset class='details'>
+			<ul>
+				<li class='namedetail'><label class='textlabel' >Username</label><input type="text" name="username"></li>
+			</ul>
+			</fieldset>
+		
+		</div> <!-- .question -->
+		<div style="width:35em;text-align:right;">
+			<span class="close" style="text-decoration:underline;cursor:pointer;color:#44F;">return to profile</span>&nbsp;&nbsp;&nbsp;
+			<span class="save" style="text-decoration:underline;cursor:pointer;color:#44F;">save / preview </span>
+			
+		</div>
+    </div>
+    <div id="preview" style="clear:both;">
+    	<!--
+    	<div style="width:577px;margin:auto;">
+    		<object style="margin:0px" width="575" height="410">
+    		<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>
+    		<param name="allowFullScreen" value="true"/>
+    		<param name="allowScriptAccess" value="always"/>
+    		<param name="flashVars" value="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads"/>
+    		<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" 
+    				flashVars="feedurl=user/jdavidnet&widgettitle=PlayList%20%3A%20My%20uploads" 
+    				type="application/x-shockwave-flash" 
+    				allowscriptaccess="always" 
+    				allowfullscreen="true" 
+    				width="575" 
+    				height="410">
+    				</embed>
+    		</object>
+    	</div>
+    	-->
+    </div>
+    ]]></Content>
+    
+<!-- ==================== END PROFILE VIEW ==================== -->    
+  
+</Module>

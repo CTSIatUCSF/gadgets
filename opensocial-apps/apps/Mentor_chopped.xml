@@ -3,9 +3,7 @@
     <ModulePrefs
             title="Mentor_nsj" 
             author="Nels Johnson" 
-            author_email="jdavid.net@gmail.com" 
-            width="600"
-            height="800"
+            author_email="jdavid.net@gmail.com">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="dynamic-height" />

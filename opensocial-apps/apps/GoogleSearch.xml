@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Full Text Search (beta) - powered by Google">
+            title="Full Text Search Results (beta) - powered by Google">
         <Require feature="pubsub" />
         <Require feature="dynamic-height" />
     </ModulePrefs>

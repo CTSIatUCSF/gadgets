@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Full Text Search Results (beta) - powered by Google">
+        <Require feature="pubsub" />
+        <Require feature="dynamic-height" />
+    </ModulePrefs>
+    <Content type="html"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <!DOCTYPE html>
+
+    <pre><div id="content"></div></pre>
+    <script>
+
+function getPersonId(link) {
+        var vars = link.split("?")[1].split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == 'Person') {
+                return pair[1];
+            }
+        }
+	  return '';
+};
+
+function navigateToPerson(personid) {
+	gadgets.pubsub.publish("profile", personid);
+};
+
+function hndlr(response) { 
+      var cnt = 0;
+      var channel = 'profile';
+      for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        // in production code, item.htmlTitle should have the HTML entities escaped.
+        if (item.link.indexOf('ProfileDetails.aspx') != -1) {
+	        document.getElementById("content").innerHTML += (cnt > 0 ? '<hr>' : '') + '<a href="#" onclick="navigateToPerson(' + 
+			getPersonId(item.link) + ');return false;">' + 
+			item.htmlTitle + '</a></p>' + item.htmlSnippet;
+		  cnt++;
+	  }
+      }
+      if (cnt) {
+	    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
+      }
+    };
+
+function handleResponse(obj) {
+  document.getElementById("content").innerHTML += obj.text;
+  gadgets.window.adjustHeight();
+};
+
+function makeRequest(url, postdata) {
+  var params = {};
+  postdata = gadgets.io.encodeValues(postdata);
+  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+  gadgets.io.makeRequest(url + "?" + postdata, handleResponse, params);
+};
+
+var data = {
+  start : "0",
+  num : "30",
+  q: gadgets.util.getUrlParameters()['keyword'],
+//  q: "cat",
+  client : "google-csbe",
+  output : "xml_no_dtd",
+  cx : "016654132415451954564:o_v7w23054u"
+};
+ 
+makeRequest("http://www.google.com/search", data);
+
+</script>
+]]>
+</Content>
+</Module>

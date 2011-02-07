@@ -33,12 +33,9 @@ function hndlr(response) {
       for (var i = 0; i < response.items.length; i++) {
         var item = response.items[i];
         // in production code, item.htmlTitle should have the HTML entities escaped.
-        if (item.link.indexOf('ProfileDetails.aspx') != -1) {
-	        document.getElementById("content").innerHTML += (cnt > 0 ? '<hr>' : '') + '<a href="#" onclick="navigateToPerson(' + 
-			getPersonId(item.link) + ');return false;">' + 
-			item.htmlTitle + '</a></p>' + item.htmlSnippet;
-		  cnt++;
-	  }
+        document.getElementById("content").innerHTML += (cnt > 0 ? '<hr>' : '') + '<a href="#" onclick="navigateToPerson(' + 
+		getPersonId(item.link) + ');return false;">' + item.htmlTitle + '</a></p>' + item.htmlSnippet;
+	  cnt++;
       }
       if (cnt) {
 	    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
@@ -60,7 +57,7 @@ function makeRequest(url, postdata) {
 
 var data = {
   key : "AIzaSyAcJMeD2sqbtJYZ1Udkxnvayqm0ICSDKpQ",
-  cx : "016654132415451954564:cypnu_zex4i",
+  cx : "016654132415451954564:o_v7w23054u",
   q: gadgets.util.getUrlParameters()['keyword'],
   callback: "hndlr"
 };

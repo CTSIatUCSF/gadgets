@@ -36,11 +36,17 @@ UCSF.UI.Hideshow = function(){
 					//the default should be to hide
 					$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
 					
+					//$('#hideshow .hideshow_message').text(
+						//visible ?
+							//'This section is VISIBLE to UCSF' :
+							//'This section is HIDDEN from UCSF' 
+							//);
+							
 					$('#hideshow .hideshow_message').text(
 						visible ?
-							'This section is VISIBLE to UCSF' :
-							'This section is HIDDEN from UCSF' 
-							);
+							'This section is VISIBLE to the public' :
+							'This section is HIDDEN from the public' 
+							);							
 					
 					if(visible){
 						$('#hideshow .hideshow_message').addClass('visible_message').removeClass('hidden_message');
@@ -64,7 +70,8 @@ UCSF.UI.Hideshow = function(){
 	    
 	    function showHideShow(){
 	    
-	    	if( confirm("Are you sure you would like to make this section visible to UCSF?")){
+	    	//if( confirm("Are you sure you would like to make this section visible to UCSF?")){
+	    	if( confirm("Are you sure you would like to make this section visible to the public?")){
 	    		updateHideShow('Y');
 	    	}else{
 	    		console.log( 'user canceled: showHideShow');

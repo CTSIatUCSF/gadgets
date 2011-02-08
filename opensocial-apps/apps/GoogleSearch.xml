@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Full Text Search Results (beta) - powered by Google">
+            title="Full Text Search Results - XML (beta) - powered by Google">
         <Require feature="pubsub" />
         <Require feature="dynamic-height" />
     </ModulePrefs>
@@ -9,7 +9,9 @@
     <!-- #includes -->
     <!DOCTYPE html>
 
-    <div id="content"></div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+
+    <pre><div id="content"></div></pre>
     <script>
 
 function getPersonId(link) {
@@ -27,25 +29,18 @@ function navigateToPerson(personid) {
 	gadgets.pubsub.publish("profile", personid);
 };
 
-function hndlr(response) { 
-      var cnt = 0;
-      var channel = 'profile';
-      for (var i = 0; i < response.items.length; i++) {
-        var item = response.items[i];
-        // in production code, item.htmlTitle should have the HTML entities escaped.
-        document.getElementById("content").innerHTML += (cnt > 0 ? '<hr>' : '') + '<a href="#" onclick="navigateToPerson(' + 
-		getPersonId(item.link) + ');return false;">' + item.htmlTitle + '</a></p>' + item.htmlSnippet;
-	  cnt++;
-      }
-      if (cnt) {
-	    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
-      }
-    };
-
 function handleResponse(obj) {
-//  eval(obj.data);
-  eval(obj.text);
-  gadgets.window.adjustHeight();
+  //document.getElementById("content").innerHTML += obj.text;
+  //gadgets.window.adjustHeight();
+  $(obj.text).find("R").each(function() {
+  	$("#content").append( ($(this).attr("N") != 1 ? '<hr>' : '') +  '<a href="#" onclick="navigateToPerson(' + 
+  		getPersonId($(this).find("U").text()) + ');return false;">' +  		
+  		$(this).find("T").text() + '</a></p>' + $(this).find("S").text());
+  });
+  var cnt = $(obj.text).find("RG").attr("SIZE");
+  if (cnt) {
+    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
+  }
 };
 
 function makeRequest(url, postdata) {
@@ -56,14 +51,19 @@ function makeRequest(url, postdata) {
 };
 
 var data = {
-  key : "AIzaSyAcJMeD2sqbtJYZ1Udkxnvayqm0ICSDKpQ",
-  cx : "016654132415451954564:o_v7w23054u",
+  start : "0",
+  num : "30",
   q: gadgets.util.getUrlParameters()['keyword'],
-  callback: "hndlr"
+//  q: "cat",
+  client : "google-csbe",
+  output : "xml_no_dtd",
+  cx : "016654132415451954564:o_v7w23054u"
 };
- 
-makeRequest("https://www.googleapis.com/customsearch/v1", data);
 
+$(document).ready(function(){  
+	makeRequest("http://www.google.com/search", data);
+ });
+ 
 </script>
 ]]>
 </Content>

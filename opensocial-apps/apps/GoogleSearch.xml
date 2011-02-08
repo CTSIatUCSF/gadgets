@@ -30,16 +30,20 @@ function navigateToPerson(personid) {
 };
 
 function handleResponse(obj) {
-  //document.getElementById("content").innerHTML += obj.text;
-  //gadgets.window.adjustHeight();
+  var ids = [];
+
   $(obj.text).find("R").each(function() {
-  	$("#content").append( ($(this).attr("N") != 1 ? '<hr>' : '') +  '<a href="#" onclick="navigateToPerson(' + 
-  		getPersonId($(this).find("U").text()) + ');return false;">' +  		
-  		$(this).find("T").text() + '</a></p>' + $(this).find("S").text());
+    var id = getPersonId($(this).find("U").text());
+    if ($.inArray(id, ids) == -1) {
+     	ids[ids.length] = id;
+	  	$("#content").append( ($(this).attr("N") != 1 ? '<hr>' : '') +  
+	  		'<a href="#" onclick="navigateToPerson(' + id + ');return false;">' +  		
+  			$(this).find("T").text() + '</a></p>' + $(this).find("S").text());
+  	}
   });
-  var cnt = $(obj.text).find("RG").attr("SIZE");
-  if (cnt) {
-    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
+
+  if (ids.length) {
+    gadgets.pubsub.publish("status", "GREEN:" + ids.length + " UCSF Profile Pages found");
   }
   gadgets.window.adjustHeight();
 };

@@ -41,6 +41,7 @@ function handleResponse(obj) {
   if (cnt) {
     gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
   }
+  gadgets.window.adjustHeight();
 };
 
 function makeRequest(url, postdata) {

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Full Text Search Results (beta) - powered by Google">
+        <Require feature="pubsub" />
+        <Require feature="dynamic-height" />
+    </ModulePrefs>
+    <Content type="html"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <!DOCTYPE html>
+
+    <div id="content"></div>
+    <script>
+
+function getPersonId(link) {
+        var vars = link.split("?")[1].split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == 'Person') {
+                return pair[1];
+            }
+        }
+	  return '';
+};
+
+function navigateToPerson(personid) {
+	gadgets.pubsub.publish("profile", personid);
+};
+
+function hndlr(response) { 
+      var cnt = 0;
+      var channel = 'profile';
+      for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        // in production code, item.htmlTitle should have the HTML entities escaped.
+        document.getElementById("content").innerHTML += (cnt > 0 ? '<hr>' : '') + '<a href="#" onclick="navigateToPerson(' + 
+		getPersonId(item.link) + ');return false;">' + item.htmlTitle + '</a></p>' + item.htmlSnippet;
+	  cnt++;
+      }
+      if (cnt) {
+	    gadgets.pubsub.publish("status", "GREEN:" + cnt + " UCSF Profile Pages found");
+      }
+    };
+
+function handleResponse(obj) {
+//  eval(obj.data);
+  eval(obj.text);
+  gadgets.window.adjustHeight();
+};
+
+function makeRequest(url, postdata) {
+  var params = {};
+  postdata = gadgets.io.encodeValues(postdata);
+  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+  gadgets.io.makeRequest(url + "?" + postdata, handleResponse, params);
+};
+
+var data = {
+  key : "AIzaSyAcJMeD2sqbtJYZ1Udkxnvayqm0ICSDKpQ",
+  cx : "016654132415451954564:o_v7w23054u",
+  q: gadgets.util.getUrlParameters()['keyword'],
+  callback: "hndlr"
+};
+ 
+makeRequest("https://www.googleapis.com/customsearch/v1", data);
+
+</script>
+]]>
+</Content>
+</Module>

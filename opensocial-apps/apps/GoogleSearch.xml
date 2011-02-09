@@ -45,6 +45,9 @@ function handleResponse(obj) {
   if (ids.length) {
     gadgets.pubsub.publish("status", "GREEN:" + ids.length + " UCSF Profile Pages found");
   }
+  else {
+    gadgets.pubsub.publish("status", "RED:" + "No UCSF Profile Pages found");
+  }
   gadgets.window.adjustHeight();
 };
 

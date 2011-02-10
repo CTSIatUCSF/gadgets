@@ -33,6 +33,14 @@ UCSF.UI.Hideshow = function(){
 					
 					var visible = ( (os.osapi.getViewerFromResult(response).VISIBLE || false ) === 'Y');
 					
+	    			// nj added 2-8-11
+	    			if(visible === true) {
+	    				gadgets.pubsub.publish("VISIBLE", "Y");
+	    			}
+	    			if(visible === false) {
+	    				gadgets.pubsub.publish("VISIBLE", "N");
+	    			}
+					
 					//the default should be to hide
 					$('#hideshow').attr('value', visible ? 'hidden' : 'visible' );
 					
@@ -93,7 +101,8 @@ UCSF.UI.Hideshow = function(){
 					getHideShow();
 				});
 	    	
-	    
+	    	// nj added 2-8-11
+	    	gadgets.pubsub.publish("VISIBLE", value.toString());
 	    };
 	    
 	    

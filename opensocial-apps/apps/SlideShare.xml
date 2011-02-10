@@ -11,6 +11,7 @@
         <Require feature="dynamic-height" />
         <Require feature="settitle" />
         <Require feature="osapi" />
+        <Require feature="pubsub" />
     </ModulePrefs>
     
 <!-- ==================== START COMBINED VIEWS ==================== -->    
@@ -379,7 +380,7 @@
     </style>
     
 	<!-- HideShow -->
-	<div id="hideshow"></div>
+	<div id="hideshow" title="Set the visibility of this gadget."></div>
 	<!-- HideShow end -->
 
     <script type="text/javascript">
@@ -414,6 +415,8 @@
 	    			gadgets.views.requestNavigateTo( "home" );
 	    		});
 	    	});
+	    	
+	    	$("[title]").tooltip();
 	    	
 	    });
 	    
@@ -464,19 +467,21 @@
 		    	);
    				
    				gadgets.window.adjustHeight();
-   				
    				console.log( $('#preview'));
-    			
     		});
 	    }
+	    
+		//function status_compact(sender, message) {
+  			//document.getElementById("compact_status").innerHTML =
+    			//"message : " + gadgets.util.escapeString(message + "") + "<br/>" +
+    			//"sender : " + gadgets.util.escapeString(sender);
+    			//gadgets.window.adjustHeight();
+		//};	    
+	    
     </script>
-    <!-- <div class='debug params'></div> -->
-	<!-- <div class='viewnav'></div> -->
-	<br>
-	<!--<div class='header'>-->
+	
 	<div style="margin:0px 10px 0px 10px;">
-		<p class="slideshare_title"><b>SlideShare: A great way to share presentations on UCSF Profiles</b></p>
-		<!--<span class="close" style="text-decoration:underline;cursor:pointer;color:#44F;">return to home</span>-->
+		<span class="slideshare_title"><b>SlideShare: A great way to share presentations on UCSF Profiles</b></span>
 	</div>
 	
 	<div id="settings" style="clear:both; margin:0px 10px 0px 10px;">
@@ -496,10 +501,10 @@
 	    <div class='question'>
 			<span class='slideshare_body'>SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
 			&nbsp;&nbsp;&nbsp;</span>
-			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;">Save/Preview</span>
+			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this Username then view their presentation.">Save/Preview</span>
 			<br><br>
 			<span class="slideshare_body">Don't have a SlideShare account yet? 
-			Go to <a href="http://www.slideshare.net" target="_blank" style="font-size:12px;text-decoration:none; cursor:pointer;color:#44F;">
+			Go to <a href="http://www.slideshare.net" target="_blank" style="font-size:12px;text-decoration:none; cursor:pointer;color:#44F;" title="Go to the SlideShare Web site">
 			SlideShare</a> now to create an account and upload presentations.</span>
 		</div> 
 		<!-- .question -->

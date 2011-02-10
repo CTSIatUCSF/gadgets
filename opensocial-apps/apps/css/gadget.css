@@ -117,9 +117,19 @@ ul { list-style-type:none; }
 .answerresponse ul { margin:.2em; }
 .answerresponse li { margin:.2em; margin-left:2em; list-style:disc;}
 
+/* old
 #hideshow { text-align:center; }
 #hideshow .hideshow_message	{ display:inline; font-weight:bold; }
 #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
 #hideshow .hidden_message 	{ color:#CC0000; }
 #hideshow .visible_message 	{ color:#4FAA4F; }
+#hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
+ old */
+
+/* new */
+#hideshow { text-align:center; }
+#hideshow .hideshow_message	{ display:inline; font-weight:bold; visibility:hidden; }
+#hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer; }
+#hideshow .hidden_message 	{ color:#CC0000; visibility:hidden; }
+#hideshow .visible_message 	{ color:#4FAA4F; visibility:hidden; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }

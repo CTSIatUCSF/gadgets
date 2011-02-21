@@ -67,7 +67,7 @@ UCSF.UI.Hideshow = function(){
 						$('#hideshow .show').removeClass('selected').unbind('click', showHideShow ).click( showHideShow );
 					}
 					
-					//gadgets.window.adjustHeight();
+					gadgets.window.adjustHeight();
 					
 				});
 	    }
@@ -134,7 +134,7 @@ UCSF.UI.MoreLess = function(){
 				.parents('.section')
 				.children('.roundbox')
 				.slideDown('fast', function(){ 
-						//gadgets.window.adjustHeight();
+						gadgets.window.adjustHeight();
 						});
 		});
 		
@@ -143,7 +143,7 @@ UCSF.UI.MoreLess = function(){
 				.parents('.section')
 				.children('.roundbox')
 				.slideUp('fast', function(){
-					//gadgets.window.adjustHeight();
+					gadgets.window.adjustHeight();
 					});
 		});
 		
@@ -186,7 +186,7 @@ UCSF.UI.DebugNav = function(){
 						gadgets.views.requestNavigateTo( $(this).text() );
 				});
 				
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		}
 		renderNav();
 
@@ -212,7 +212,7 @@ UCSF.UI.DebugParams = function(){
 				$('.params').append("<div style='font-weight:bold;font-size:1.1em;'>Params</div>");
 				$('.params').append(ul);
 				$('.params').wrap("<div class='roundbox'/>");
-				//gadgets.window.adjustHeight();
+				gadgets.window.adjustHeight();
 			}
 			
 		}

@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Full Text Search Results - XML (beta) - powered by Google">
+            title="Full Text Search Results (beta) - powered by Google">
         <Require feature="pubsub" />
         <Require feature="dynamic-height" />
     </ModulePrefs>
     <Content type="html"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
+    
+    <style>
 
+    .gadget_text {
+    	font-family: Verdana, Arial;
+    	font-size: 11px;
+    }
+    
+    .gadgets-gadget-chrome {
+    	margin-left: 8px;
+    }
+    
+    </style>
+    
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
 
-    <pre><div id="content"></div></pre>
+    <pre><div id="content" class="gadget_text"></div></pre>
     <script>
+    
+function parseXml(xml) {	
+	if (jQuery.browser.msie) {
+		var xmlDoc = new ActiveXObject("Microsoft.XMLDOM"); 
+		xmlDoc.loadXML(xml);
+		xml = xmlDoc;
+	}
+	
+	return xml;
+}    
 
 function getPersonId(link) {
         var vars = link.split("?")[1].split("&");
@@ -31,9 +54,15 @@ function navigateToPerson(personid) {
 
 function handleResponse(obj) {
   var ids = [];
-
-  $(obj.text).find("R").each(function() {
+  var theXML = obj.text;
+  
+  // IE hack
+  theXML = parseXml(theXML); 
+  
+  //$(obj.txt).find("R").each(function() {
+  $(theXML).find("R").each(function() {
     var id = getPersonId($(this).find("U").text());
+    
     if ($.inArray(id, ids) == -1) {
      	ids[ids.length] = id;
 	  	$("#content").append( ($(this).attr("N") != 1 ? '<hr>' : '') +  
@@ -42,8 +71,14 @@ function handleResponse(obj) {
   	}
   });
 
+
   if (ids.length) {
-    gadgets.pubsub.publish("status", "GREEN:" + ids.length + " UCSF Profile Pages found");
+  	if (ids.length == 20) {
+  		gadgets.pubsub.publish("status", "GREEN:" + "Top " + ids.length + " UCSF Profile Pages found");
+  	}
+  	else {
+  		gadgets.pubsub.publish("status", "GREEN:" + ids.length + " UCSF Profile Pages found");
+  	}
   }
   else {
     gadgets.pubsub.publish("status", "RED:" + "No UCSF Profile Pages found");

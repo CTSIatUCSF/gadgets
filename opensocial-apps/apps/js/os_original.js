@@ -91,7 +91,7 @@ os.osapi.getOwnerFromResult = function(result){
 
 
 os.ready( function(){
-	//gadgets.window.adjustHeight();
+	gadgets.window.adjustHeight();
 	
 	
 });

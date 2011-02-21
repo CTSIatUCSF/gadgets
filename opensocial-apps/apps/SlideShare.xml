@@ -8,7 +8,6 @@
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="flash" />
-        <Require feature="dynamic-height" />
         <Require feature="settitle" />
         <Require feature="osapi" />
         <Require feature="pubsub" />
@@ -25,7 +24,6 @@
     <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/UCSF.js" ></script>
-    <script type="text/javascript" src="js/similarSlideShare.js" ></script>
     
     <script type="text/javascript">
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
@@ -299,7 +297,7 @@
 									$(this).val( vals.join(", "));
 								});
 								
-						gadgets.window.adjustHeight();
+						//gadgets.window.Height();
 						
 					}
 					
@@ -349,10 +347,7 @@
     			allowfullscreen:"true", 
       			width: 425,
       			height: 700
-    			});
-    			
-    	gadgets.window.adjustHeight();
-    	
+    			});    	
     	}));
 		
 		*/
@@ -363,7 +358,7 @@
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
     
-    <Content type="html" view="default, home"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home" preferred_height="716"><![CDATA[<!--HTML-->
     
     <style>
     
@@ -380,7 +375,7 @@
     </style>
     
 	<!-- HideShow -->
-	<div id="hideshow" title="Set the visibility of this gadget."></div>
+	<div id="hideshow"></div>
 	<!-- HideShow end -->
 
     <script type="text/javascript">
@@ -415,9 +410,6 @@
 	    			gadgets.views.requestNavigateTo( "home" );
 	    		});
 	    	});
-	    	
-	    	$("[title]").tooltip();
-	    	
 	    });
 	    
 	    function preview(username){
@@ -465,23 +457,15 @@
 		    		'</object>' +
 		    	'</div>'
 		    	);
-   				
-   				gadgets.window.adjustHeight();
+		    	
    				console.log( $('#preview'));
     		});
 	    }
-	    
-		//function status_compact(sender, message) {
-  			//document.getElementById("compact_status").innerHTML =
-    			//"message : " + gadgets.util.escapeString(message + "") + "<br/>" +
-    			//"sender : " + gadgets.util.escapeString(sender);
-    			//gadgets.window.adjustHeight();
-		//};	    
-	    
+	    	    
     </script>
 	
 	<div style="margin:0px 10px 0px 10px;">
-		<span class="slideshare_title"><b>SlideShare: A great way to share presentations on UCSF Profiles</b></span>
+		<span class="slideshare_title"><b>SlideShare: A great way to share presentations</b></span>
 	</div>
 	
 	<div id="settings" style="clear:both; margin:0px 10px 0px 10px;">
@@ -492,16 +476,16 @@
 		<ol>
 			<li class="slideshare_body">Enter your SlideShare Username below and click Save/Preview. 
 			Any public presentations that you've uploaded to SlideShare will be shown in the preview below.</li>
-			<li class="slideshare_body">Make sure these presentations are the ones you want to share on your UCSF Profile.</li>
+			<li class="slideshare_body">Make sure these presentations are the ones you want to share on your profile.</li>
 			<li class="slideshare_body">Click the "Show" link (above, upper right) to make the presentations available to the public, 
-			right from within your UCSF Profile.</li>
+			right from within your profile.</li>
 			<li class="slideshare_body">To remove the presentations, delete your SlideShare Username and click Save/Preview.</li>
 		</ol>
 		</p>
 	    <div class='question'>
 			<span class='slideshare_body'>SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
 			&nbsp;&nbsp;&nbsp;</span>
-			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this Username then view their presentation.">Save/Preview</span>
+			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this Username and preview the presentations.">Save/Preview</span>
 			<br><br>
 			<span class="slideshare_body">Don't have a SlideShare account yet? 
 			Go to <a href="http://www.slideshare.net" target="_blank" style="font-size:12px;text-decoration:none; cursor:pointer;color:#44F;" title="Go to the SlideShare Web site">
@@ -529,16 +513,39 @@
     		</embed>
     		</object>
     	</div>
-    	-->
+    	-->  	
     </div>
-        
+    <br>
+    <div style="margin:0px 10px 0px 10px;">
+		<table><tr>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			Powered by CTSI at UCSF</a></td>
+		</tr></table>
+	</div>
+            
     ]]></Content>
     
 <!-- ==================== END HOME/EDIT VIEW ==================== -->    
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="500"><![CDATA[<!--HTML-->
+    
+    	<style>
+    
+    	.slideshare_title {
+    		font-family: Verdana, Arial;
+    		font-size: 14px;
+    	}
+
+    	.slideshare_body {
+    		font-family: Verdana, Arial;
+    		font-size: 11px;
+    	}    
+    
+    	</style>
     
         <script type="text/javascript">
     	$(document).ready(function(){os.ready(function(){
@@ -622,7 +629,6 @@
 		    	'</div>'
    				);
    				
-   				gadgets.window.adjustHeight();
    				console.log( $('#preview'));
     		});
 	    }
@@ -672,6 +678,16 @@
     	</div>
     	-->
     </div>
+    <br>
+    <div style="margin:0px 10px 0px 10px;">
+		<table><tr>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			Powered by CTSI at UCSF</a></td>
+		</tr></table>
+	</div>
+    
     ]]></Content>
     
 <!-- ==================== END PROFILE VIEW ==================== -->    

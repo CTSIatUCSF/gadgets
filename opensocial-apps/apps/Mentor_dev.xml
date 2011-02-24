@@ -6,8 +6,8 @@
             author_email="jdavid.net@gmail.com">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
-        <Require feature="pubsub" />
         <Require feature="dynamic-height" />
+        <Require feature="pubsub" />
         <Require feature="settitle" />
         <Require feature="osapi" />
         <Optional feature="content-rewrite">
@@ -151,6 +151,7 @@
 			}
 			
 			function createMentorDataMap(){
+
 				var updateMap = {};
 				
 				$('.question>fieldset').each( function(){

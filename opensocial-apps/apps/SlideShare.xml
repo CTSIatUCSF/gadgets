@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Featured Presentations"
+            title="Featured Presentations (beta)"
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
             description="A Simple app to display your own slides from SlideShare.net">
@@ -386,7 +386,9 @@
 	    				var viewer = os.osapi.getViewerFromResult(response);
 	    				var username = viewer.username;
 	    				$('input[name=username]').val(username);
-	    				preview(username);
+	    				if(username != "") {
+	    					preview(username);
+	    				}
 	    		});
     	});}); // jquery ready // opensocial ready
     	
@@ -400,8 +402,12 @@
 	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
 	    				.execute(function(response){
 	    					console.log(response);
-	    				});	
-	    			preview(username);
+	    				});
+	    				
+	    				$('#preview').html('');
+	    				if(username != "") {
+	    					preview(username);
+	    				}
 	    		});
 	    	});
 	    	
@@ -477,9 +483,9 @@
 			<li class="slideshare_body">Enter your SlideShare Username below and click Save/Preview. 
 			Any public presentations that you've uploaded to SlideShare will be shown in the preview below.</li>
 			<li class="slideshare_body">Make sure these presentations are the ones you want to share on your profile.</li>
-			<li class="slideshare_body">Click the "Show" link (above, upper right) to make the presentations available to the public, 
-			right from within your profile.</li>
-			<li class="slideshare_body">To remove the presentations, delete your SlideShare Username and click Save/Preview.</li>
+			<li class="slideshare_body">Click the "Show" link (above, upper right) to make the presentations publicly available within your profile.</li>
+			<li class="slideshare_body">To remove the presentations, delete your SlideShare Username and click Save/Preview. 
+			Make sure to "Hide" your presentations from the public if you delete your SlideShare Username.</li>
 		</ol>
 		</p>
 	    <div class='question'>
@@ -515,13 +521,13 @@
     	</div>
     	-->  	
     </div>
-    <br>
+    <br><br>
     <div style="margin:0px 10px 0px 10px;">
 		<table><tr>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
 			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
-			Powered by CTSI at UCSF</a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>
             
@@ -555,10 +561,11 @@
 	    				var viewer = os.osapi.getViewerFromResult(response);
 	    				var username = viewer.username;
 	    				$('input[name=username]').val(username);
-	    				preview_profile(username);
+	    				if(username != "") { // only render flash if there's a username
+	    					preview_profile(username);
+	    				}	    				
 	    		});
     	});}); // jquery ready // opensocial ready
-    	
     	
     	$(document).ready( function(){
 	    	$('.save').click(function(){
@@ -678,13 +685,13 @@
     	</div>
     	-->
     </div>
-    <br>
+    <br><br>
     <div style="margin:0px 10px 0px 10px;">
 		<table><tr>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
 			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
-			Powered by CTSI at UCSF</a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>
     

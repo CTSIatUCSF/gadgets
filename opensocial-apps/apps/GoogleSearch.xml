@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Full Text Search Results (beta) - powered by Google">
+            title="Full Text Search Results (beta) - Powered by Google">
         <Require feature="pubsub" />
         <Require feature="dynamic-height" />
     </ModulePrefs>
@@ -108,6 +108,31 @@ $(document).ready(function(){
  });
  
 </script>
+
+<style>
+	.slideshare_title {
+    	font-family: Verdana, Arial;
+    	font-size: 14px;
+    }
+
+    .slideshare_body {
+    	font-family: Verdana, Arial;
+    	font-size: 11px;
+    }    
+    
+</style>
+
+<div style="margin:0px 10px 0px 0px;">
+	<table>
+		<tr>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
+			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			Provided by CTSI at UCSF</a></td>
+		</tr>
+	</table>
+</div>
+
 ]]>
 </Content>
 </Module>

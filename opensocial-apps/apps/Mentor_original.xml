@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Mentor_nsj"
-            author="Nels Johnson"
+            title="Mentor"
+            author="Justin Kruger"
             author_email="jdavid.net@gmail.com" height="800">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
@@ -462,7 +462,7 @@
     
     <Content type="html" view="home"><![CDATA[<!--HTML-->
 	<div class='header'>
-		<h1>Mentorship Information X</h1>&nbsp;&nbsp;&nbsp;<span><a href="#home.canvas" class="nav" >Edit</a></span>
+		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#home.canvas" class="nav" >Edit</a></span>
 	</div>
 	
     ]]></Content>

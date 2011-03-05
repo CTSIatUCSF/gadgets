@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Mentor_nsj" 
+            title="Mentor" 
             author="Nels Johnson" 
             author_email="jdavid.net@gmail.com">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
+        <Require feature="pubsub" />
         <Require feature="settitle" />
         <Require feature="osapi" />
         <Optional feature="content-rewrite">

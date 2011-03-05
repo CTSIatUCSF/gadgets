@@ -9,6 +9,7 @@
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
+        <Require feature="pubsub" />
         <Require feature="settitle" />
         <Require feature="osapi" />
         <Optional feature="content-rewrite">

@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Mentor"
-            author="Justin Kruger"
-            author_email="jdavid.net@gmail.com" height="800">
+            title="Faculty Mentoring"
+            author="Nels Johnson"
+            author_email="downrecs@gmail.com" height="800">
         <Require feature="opensocial-0.9" />
-        <Require feature="views" />
+        <Require feature="views" />å
         <Require feature="dynamic-height" />
         <Require feature="settitle" />
         <Require feature="osapi" />
+        <Require feature="pubsub" />
         <Optional feature="content-rewrite">
             <Param name="exclude-urls">/.*/</Param>
         </Optional>
     </ModulePrefs>
-    <Content type="html" view="default, all, canvas, profile, profile.canvas, home, home.canvas, preview"><![CDATA[<!--HTML-->
-    <!-- #includes -->
+    
+<!-- ==================== START COMBINED VIEWS ==================== -->    
+    
+    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <link rel="stylesheet" href="css/cluetip.css" type="text/css" media="screen, projection" >
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/UCSF.js"></script>
+    <script type="text/javascript" src="js/cluetip.js"></script>
+    
     <script type="text/javascript">
+    
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     var Questions = {};
     
@@ -32,7 +39,7 @@
     os.ready(function(){
     	//TODO: update this if you change the HTML.
     	//TODO: use this function createMentorDataMap(); // uncomment below.
-    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidemiology\":\"Epidemiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"lead\":\"Lead Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
+    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidemiology\":\"Epidemiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"proj\":\"Project Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Lead Research / Scholarly Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email (see above)\",\"phone\":\"Phone (see above)\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
     	Questions = gadgets.json.parse(Questions);
     	console.log( "questions", Questions );
     });
@@ -45,6 +52,7 @@
     //UCSF.UI.DebugNav();
     //UCSF.UI.DebugParams();
     
+    /*
     $(document).ready(function(){ os.ready(function(){
     	$('a.nav').each( function(){
     		$(this).attr('target','_self');
@@ -61,7 +69,7 @@
     	});// a.nav
     	
     }); });
-    
+    */
     
     UCSF.Mentor.addOnChangeHandlers = function(){
     	$(document).ready(function(){ os.ready(function(){
@@ -83,8 +91,7 @@
 			$('.question fieldset').each(function(){ 
 				//the current question
 				var question = $(this);
-				
-				
+					
 				$(this).find('input[type=radio]').change(function(){
 					var str = [];
 					$(question).find('input:checked').each(function(){
@@ -95,8 +102,7 @@
 					//console.log(map);
 					updateAppData( map );				
 				});
-				
-				
+							
 				$(this).find('input[type=checkbox]').change(function(){
 					var str = [];
 					$(question).find('input:checked').each(function(){
@@ -128,7 +134,6 @@
 	
 	//UCSF.Mentor.addOnChangeHandlers();
 	
-	
 	UCSF.Mentor.addSaveHandler = function(){
 		$(document).ready( function(){ os.ready( function(){
 			
@@ -142,19 +147,16 @@
 					.execute(function(result){
 					
 						//TODO: if works navigate
-						gadgets.views.requestNavigateTo( "home" );
+						//gadgets.views.requestNavigateTo( "home" );
 						console.log(result, map);
 					});
 			}
 			
 			function createMentorDataMap(){
-			
-				
 				var updateMap = {};
 				
 				$('.question>fieldset').each( function(){
-					
-					
+									
 					var question = $(this);
 					//var name = "";
 					var namearr = [];
@@ -182,18 +184,13 @@
 								});
 							
 						updateMap[name] = str;	
-						
 					}
 				});
-				
-				
 				
 				console.log( updateMap, gadgets.json.stringify(updateMap).replace( /\"/gi, "\\\"") );
 				
 				return updateMap;
-				
 			}
-			
 			
 			$('.mentor_save').click(function(){
 				updateAppData( createMentorDataMap() );
@@ -226,6 +223,7 @@
 				});
 		});}); // jquery.ready os.ready
 	};
+	
 	UCSF.Mentor.displayLastUpdated();
 	
 	//on canvas.owner update
@@ -298,9 +296,9 @@
 								
 								//TODO:if things change, it will break here.
 								var value = Questions[keys[k]].labels[vals[v]];
-								if( value.toLowerCase() == 'email' || value.toLowerCase() == 'phone'){
-									value += " ( see profile info ) ";
-								}
+								// NJ if( value.toLowerCase() == 'email' || value.toLowerCase() == 'phone'){
+									// NJ value += " ( see profile info ) ";
+								// NJ }
 								
 								//remove assistant from comma seperated list.
 								/*
@@ -372,12 +370,10 @@
 						}
 					}
 					
-					
 				});//osapi.appdata.get
 			
 			});});  //jquery.ready //os.ready
 		};
-	
 	
 	UCSF.Mentor.displayAppData = function(){
 		$(document).ready(function(){ os.ready(function(){
@@ -450,245 +446,34 @@
 						
 					}
 					
-					
-					
 				}); /* osapi.appdata.get */
 				
 			});}); /* jquery.ready os.ready */
 		};
 		
     </script>
+    
     ]]></Content>
     
-    <Content type="html" view="home"><![CDATA[<!--HTML-->
-	<div class='header'>
-		<h1>Mentorship Information</h1>&nbsp;&nbsp;&nbsp;<span><a href="#home.canvas" class="nav" >Edit</a></span>
-	</div>
-	
-    ]]></Content>
-    <Content type="html" view="home.canvas"><![CDATA[<!--HTML-->
-	<div class='header'>
-		<h1>Mentorship Information</h1>
-		<div class="navlist" >
-			<ul>
-			<li><span class="mentor_save" style="font-size:1.1em; cursor:pointer; color:#1E416C; text-decoration:underline; ">Save</span></li>
-			<li><a href="#home" class="nav" >Cancel</a></li>
-			</ul>
-		</div>
-	</div>
-    ]]></Content>
-    <Content type="html" view="canvas, preview"><![CDATA[<!--HTML-->
-	<div class='header'>
-		<h1>Mentorship Information</h1>
-	</div>
-    ]]></Content>
-    
-    
-    <Content type="html" view="home"><![CDATA[<!--HTML-->
-	<!-- HideShow -->
-	<!-- a control that is visible on some views, but not all. -->
+<!-- ==================== END COMBINED VIEWS ==================== -->    
 
-	<div id="hideshow"></div>
-	<!-- HideShow end -->
-	<div style="clear:both;margin:0.7em;">
-		<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
-	</div>
-	<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
-		Last Updated: <br/><span>September 22nd, 2010</span>
-	</div>
-	]]></Content>
-
-    <Content type="html" view="home, canvas"><![CDATA[<!--HTML-->
-    <script type="text/javascript">
+<!-- ==================== START HOME/EDIT VIEW ==================== -->
+    
+    <Content type="html" view="default, home" preferred_height="716"><![CDATA[<!--HTML-->
+    
+    <style>
+    	.mentor_title {
+    		font-family: Verdana, Arial;
+    		font-size: 14px;
+    	}
+    	.mentor_body {
+    		font-family: Verdana, Arial;
+    		font-size: 12px;
+    	}    
+    </style>
     	
-    	UCSF.Mentor.displayAppSummary();
-    	
-    	var fields = [
-    		"lastUpdate", 
-    		"privacy", 
-    		"primaryResearch", 
-    		"interestArea", 
-    		"availableMentorFaculty", 
-    		"facultyMenteeLevel", 
-    		"facultyContactPref", 
-    		"facultyAssitiantName", 
-    		"facultyAssitiantEmail", 
-    		"facultyAssitiantPhone", 
-    		"facultyNarative", 
-    		"availableMentorStudents", 
-    		"studentMenteeLevel", 
-    		"studentContactPref", 
-    		"studentAssistantName", 
-    		"studentAssistantEmail", 
-    		"studentAssistantPhone", 
-    		"studentNarative"
-    		];
-    </script>
-    <div class='debug params'></div>
-    <!-- <div class='viewnav'></div> -->
-    <div id='Profile' class="clearbox">
-		
-		<div class='clearbox'>
-		
-		
-		<div class='answer' name="primaryResearch">
-		<span class='answertitle'>Primary type of Research:</span>
-		<span class='answerresponse' type="list"></span><!-- type=comma -->
-		</div>
-		
-		<div class='answer' name="interestArea">
-		<span class='answertitle'>Mentorship Areas of Interest:</span>
-		<span class='answerresponse' type="list"></span><!-- type=comma -->
-		</div><!-- .answer -->
-		
-		<div class='section' style="display:none;">
-		<h4>For Faculty <span class='moreless'>( more... )</span></h4>
-		<div class='roundbox lgrey moreless-section'>
-		
-		<div class='answer' name="facultyNarative">
-		<span class='answerresponse' type='textarea'></span>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="facultyContactPref">
-		<span class='detailtitle'>Contact for Mentoring:</span>
-		<span class='answerresponse' type='comma'></span>
-		<div class='detail' test="assistant" fr="facultyContactPref">
-			<span class='detailtitle'>Contact my Assistant:</span>
-			<span name="facultyAssistantName"></span>
-			<span name="facultyAssistantPhone"></span>
-			<span name="facultyAssistantEmail"></span>
-		</div>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="availableMentorFaculty">
-		<span class='detailtitle'>Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
-		<span class='answerresponse' type='list'></span>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="facultyMenteeLevel">
-		<span class='detailtitle'>Mentoring Opportunities for:</span>
-		<span class='answerresponse' type='list'></span>
-		</div><!-- .answer -->
-		
-		</div><!-- .roundbox .lgrey -->
-		</div><!-- .section -->
-		
-		<div class='section' style="display:none;">
-		<h4>For Students <span class='moreless'>( more... )</span></h4>
-		<div class='roundbox lgrey moreless-section'>
-		
-		<div class='answer' name="studentNarative">
-		<span class='answerresponse' type='textarea'></span>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="studentContactPref">
-		<span class='detailtitle'>Contact for Mentoring:</span>
-		<span class='answerresponse' type='comma'></span>
-		<div class='detail' test="assistant" fr="studentContactPref">
-			<span class='detailtitle'>Contact my Assistant:</span>
-			<span name="studentAssistantName"></span>
-			<span name="studentAssistantPhone"></span>
-			<span name="studentAssistantEmail"></span>
-		</div>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="availableMentorStudents">
-		<span class='detailtitle'>Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
-		<span class='answerresponse' type='list'></span>
-		</div><!-- .answer -->
-		
-		<div class='answer' name="studentMenteeLevel">
-		<span class='detailtitle'>Mentoring Opportunities for:</span>
-		<span class='answerresponse' type='list'></span>
-		</div><!-- .answer -->
-		
-		</div><!-- .roundbox .lgrey -->
-		</div><!-- .section -->
-		
-		</div><!-- .clearbox -->
-	
-	</div>]]></Content>
-    <Content type="html" view="preview"><![CDATA[<!--HTML-->
-    <div class='debug params'></div>
-    <!-- <div class='viewnav'></div> -->
-    <div id='Profile'>
-
-		<div class='clearbox'>
-		<div style="clear:both;margin:0.7em;">
-			<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
-		</div>
-		<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
-			Last Updated: <br/><span>September 22nd, 2010</span>
-		</div>
-		
-		<div class='answer'>
-		<span class='answertitle'>Primary type of Research:</span><span class='answerresponse'>Clinical</span>
-		</div>
-		
-		<div class='answer'>
-		<span class='answertitle'>Mentorship Areas of Interest:</span><span class='answerresponse'>Human, Health Services</span>
-		</div>
-		
-		<div class='section'>
-		<h4>For Faculty </h4>
-		<div class='roundbox lgrey'>
-		
-		<div class='answer'>
-		<span class='answerresponse'><p>
-		My research team is mostly involved in multi-center trials.  Most work would relate to secondary data analysis of databases presently available
-		</p></span>
-		</div><!-- .answer -->
-		
-		<div class='answer'>
-		<span class="detailtitle">Contact for Mentoring:</span>
-		<span class="answerresponse"><em>Email:</em> clay.johnston@ucsfmedctr.edu</span>
-		</div>
-		
-		<div class='answer'>
-		<span class="detailtitle">Mentoring Opportunities Available:</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp;  <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
-		<span class='answerresponse'>
-		<ul>
-			<li>Research Mentor</li>
-			<li>Career Mentor</li>
-		</ul>
-		</span>
-		</div><!-- .answer -->
-		
-		<div class='answer'>
-		<span class="detailtitle">Mentoring Opportunities for:</span> 
-		<span class='answerresponse'>
-		<ul>
-			<li>Junior Faculty</li>
-			<li>Mid-Level Faculty</li>
-		</ul>
-		</span>
-		</div><!-- .answer -->
-		
-		</div><!-- .roundbox .lgrey -->
-		</div><!-- .section -->
-		
-		<div class='section'>
-		<h4>For Students </h4>
-		<div class='roundbox lgrey'>
-		<div class='answer'>
-		
-		<span class='answerresponse'><p>
-		My research involves participant recruitment, retention, interviews, questionnaire completion by participants
-		</p></span>
-		</div><!-- .answer -->
-		
-		
-		</div><!-- .roundbox .lgrey -->
-		</div><!-- .section -->
-		
-		</div><!-- .clearbox -->
-	
-	</div>]]></Content>
-    <Content type="html" view="home.canvas"><![CDATA[<!--HTML-->
     <script type="text/javascript" >
-    /**
-     	any custom scripts for this view
-    */
+
     $(document).ready(function(){
     	function createMentorDataMap(){
 			//get question names
@@ -727,185 +512,229 @@
 			console.log( Questions, gadgets.json.stringify(Questions).replace(/\"/gi, "\\\"") );
 		}
 		
-		/*
-		use this function to create a new set of labels.
+		// create label array based on view markup
     	createMentorDataMap();
-    	*/
     	
+    	// retrieve last-saved data and map it to the fields in the data map
     	UCSF.Mentor.displayAppData();
+    	
+		$('a.tips').cluetip();
+		$('a.jt:eq(0)').cluetip({
+			//local: true;
+			//hideLocal: true,
+			//attribute: 'tip_body',
+  			cluetipClass: 'jtip', 
+  			arrows: true, 
+  			dropShadow: false,
+  			hoverIntent: false,
+  			sticky: true,
+  			mouseOutClose: true,
+  			closePosition: 'title',
+  			closeText: '<img src="cross.png" alt="close" />'
+		});
     });
 	
-	</script>
-	<div class='debug params'></div>
-	<!-- <div class='viewnav'></div> -->
-    <div id='AddEdit' class="clearbox">
-    <div style="clear:both;margin:0.7em;">
-		<a href="http://acpers.ucsf.edu/mentoring/" target="_blank">Learn about the Faculty Mentoring Program</a>
+	</script>    	
+    	
+    <script type="text/javascript">
+    	
+    	UCSF.Mentor.displayAppSummary();
+    	
+    	/*
+    	var fields = [
+    		"lastUpdate", 
+    		"privacy", 
+    		"primaryResearch", 
+    		"interestArea", 
+    		"availableMentorFaculty", 
+    		"facultyMenteeLevel", 
+    		"facultyContactPref", 
+    		"facultyAssitiantName", 
+    		"facultyAssitiantEmail", 
+    		"facultyAssitiantPhone", 
+    		"facultyNarative"
+    		];
+    	*/	
+    		
+    </script>
+    
+	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
+	
+    <div id='AddEdit' style="padding:15px 0px 0px 10px;">
+		Add details about your availability to mentor UCSF faculty. 
+		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
+		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI MDP Web page">CTSI Mentor Development Program</a>
+		<br /><br />
 	</div>
-	<div class='updated' style="display:block; float:none; clear:both; text-align:left;margin-left:1em;">
-		Last Updated: <br/><span>September 22nd, 2010</span>
+
+	<div class="mentor_body" style="cursor:pointer; color:#1E416C; padding:0px 0px 0px 10px;">
+		<span class="mentor_save">Save</span> | Cancel<br />
 	</div>
-	
-	<div class='question'>
-	<h4>Primary type of Research:</h4> <span>(select one)</span>
-	<fieldset><ul>
-	<li><input type="radio" name="primaryResearch" value="clinical"><label>Clinical</label></li>
-	<li><input type="radio" name="primaryResearch" value="laboratory"><label>Laboratory-based</label></li>
-	<li><input type="radio" name="primaryResearch" value="socialScience"><label>Social Science</label></li>
-	</ul></fieldset>
+		
+	<div class="updated mentor_body" style="display:block; text-align:left; padding-right:10px;">
+		Last Updated: <span></span>
 	</div>
+
+	<div class='question' style="padding:5px 0px 0px 0px;">
+		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
+		<fieldset>
+			<ul>
+				<li><input type="checkbox" name="availableMentorFaculty" value="career"><label>Career Mentor</label></li>
+				<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
+				<li><input type="checkbox" name="availableMentorFaculty" value="research"><label>Lead Research / Scholarly Mentor</label></li>
+				<li><input type="checkbox" name="availableMentorFaculty" value="proj"><label>Project Mentor</label></li>
+			</ul>
+		</fieldset>
+	</div>	
 	
 	<div class='question'>
-	<h4>Mentorship Areas of Interest:</h4> <span>(check all that apply)</span>
-	<fieldset><ul>
-	<li><input type="checkbox" name="interestArea" value="animal"><label>Animal</label></li>
-	<li><input type="checkbox" name="interestArea" value="cell"><label>Cell</label></li>
-	<li><input type="checkbox" name="interestArea" value="epidemiology"><label>Epidemiology</label></li>
-	<li><input type="checkbox" name="interestArea" value="globalHealth"><label>Global Health</label></li>
-	<li><input type="checkbox" name="interestArea" value="human"><label>Human</label></li>
-	<li><input type="checkbox" name="interestArea" value="healthServices"><label>Health Services</label></li>
-	<li><input type="checkbox" name="interestArea" value="publicHealthPolicy"><label>Public Health/ Policy</label></li>
-	<li><input type="checkbox" name="interestArea" value="socialBehavioral"><label>Social/ Behavioral</label></li>
-	<li><input type="checkbox" name="interestArea" value="healthProfessionEducation"><label>Health Professions Education</label></li>
-	</ul></fieldset>
-	</div>
-	
-	<div class=' section'>
-	<h3>Availability to Mentor Faculty <span class='moreless'>( more... )</span> </h3>
-	<div class="roundbox lgrey moreless-section" >
-	<!--<div class='updated'>
-		Last Updated <span>September 22nd, 2010</span>
-	</div>
-	-->
-	
-	<div class='infonote'>
-	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
-	</div>
-	
-	<div class='question'>
-	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
-	<fieldset><ul>
-	<li><input type="checkbox" name="availableMentorFaculty" value="lead"><label>Lead Mentor</label></li>
-	<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
-	<li><input type="checkbox" name="availableMentorFaculty" value="research"><label>Research Mentor</label></li>
-	<li><input type="checkbox" name="availableMentorFaculty" value="career"><label>Career Mentor</label></li>
-	</ul></fieldset>
-	</div> <!-- .question -->
-	
-	<div class='question'>
-	<h4>Preferred Mentee Level:</h4> <span>(check all that apply)</span>
-	<fieldset><ul>
-	<li><input type="checkbox" name="facultyMenteeLevel" value="junior"><label>Junior Faculty</label></li>
-	<li><input type="checkbox" name="facultyMenteeLevel" value="mid"><label>Mid-level Faculty</label></li>
-	<li><input type="checkbox" name="facultyMenteeLevel" value="senior"><label>Senior Faculty</label></li>
-	</ul></fieldset>
-	</div> <!-- .question -->
-	
-	<div class='question'>
-	<h4>My Contact Preference:</h4>
-	<fieldset><ul>
-		<li><input type="checkbox" name="facultyContactPref" value="email"><label>Email</label></li>
-		<li><input type="checkbox" name="facultyContactPref" value="phone"><label>Phone</label></li>
-		<li><input type="checkbox" name="facultyContactPref" value="assistant"><label>Assistant</label></li>
-	</ul></fieldset>
-	
-	<div class='question'>
-	<h5>Assistant Details</h5>
-	<fieldset class='details roundbox'>
-	<ul>
-	<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
-	<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
-	<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
-	</ul>
-	</fieldset>
-	</div> <!-- .question -->
-	
-	</div> <!-- .question -->
-	
-	
-	
-	<div class='question'>
-	<h4>Narrative to Potential Faculty Mentee:</h4>
-	<fieldset>
-	<textarea rows='4' cols='56' class='roundbox' name="facultyNarative"></textarea>
-	</fieldset>
-	</div> <!-- .question -->
-	
-	</div> <!-- .roundbox -->
-	</div> <!-- .question .section -->
-	
-	<div class=' section'>
-	
-	<h3>Availability to Mentor Students <span class='moreless'>( more... )</span></h3>
-	
-	<div class="roundbox lgrey moreless-section">
-	 <!--<div class='updated'>
-		Last Updated <span>September 22nd, 2010</span>
-	</div>-->
-	
-	<div class='infonote'>
-	this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote this is a lengthy infonote  
+		<h4>My Contact Preference:</h4>
+		<fieldset>
+			<ul>
+				<li><input type="checkbox" name="facultyContactPref" value="email"><label>Email</label></li>
+				<li><input type="checkbox" name="facultyContactPref" value="phone"><label>Phone</label></li>
+				<li><input type="checkbox" name="facultyContactPref" value="assistant"><label>Assistant</label></li>
+			</ul>
+		</fieldset>
 	</div>
 	
+	<div class='question' style="padding:0px 0px 0px 12px;">
+		<h5>Assistant Details</h5>
+		<fieldset class='details roundbox'>
+			<ul>
+				<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
+				<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
+				<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
+			</ul>
+		</fieldset>
+	</div>	
+	
 	<div class='question'>
-	<h4>Available to Mentor as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>
-	<fieldset><ul>
-	<li><input type="checkbox" name="availableMentorStudents" value="research"><label>Research Mentor</label></li>
-	<li><input type="checkbox" name="availableMentorStudents" value="career"><label>Career Mentor</label></li>
-	</ul></fieldset>
+		<span class="mentor_title">Mentoring Narrative</span>
+		<a class="jt" href="ajax6.htm" rel="ajax6.htm" title="Sample Narrative">x</a>
+		
+		<!--<a class="jt" href="tip_body" rel="tip_body" title="Sample Narrative">x</a>
+		<div id="tip_body">This is the tip body text</div>-->
+		
+		<fieldset>
+			<textarea rows='4' cols='56' class='roundbox' name="facultyNarative"></textarea>
+		</fieldset>
 	</div>
 	
-	<div class='question'>
-	<h4>Preferred Mentee Level:</h4> <span>(check all that apply)</span>
-	<fieldset><ul>
-	<li><input type="checkbox" name="studentMenteeLevel" value="professional"><label>Professional Student</label></li>
-	<li><input type="checkbox" name="studentMenteeLevel" value="graduate"><label>Graduate Student</label></li>
-	<li><input type="checkbox" name="studentMenteeLevel" value="resident"><label>Resident</label></li>
-	<li><input type="checkbox" name="studentMenteeLevel" value="post-doc"><label>Post-doc</label></li>
-	<li><input type="checkbox" name="studentMenteeLevel" value="fellow"><label>Fellow</label></li>
-	</ul></fieldset>
+	<div style="margin:0px 10px 0px 10px;">
+		<table>
+			<tr>
+				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
+				</td>
+				<td valign="middle">
+					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_body" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+    ]]></Content>
+    
+<!-- ==================== END HOME/EDIT VIEW ==================== -->    
+    
+<!-- ==================== START PROFILE VIEW ==================== -->
+    
+    <Content type="html" view="default, profile" preferred_height="600"><![CDATA[<!--HTML-->
+    
+    <style>
+    	.mentor_title {
+    		font-family: Verdana, Arial;
+    		font-size: 14px;
+    	}
+    	.mentor_body {
+    		font-family: Verdana, Arial;
+    		font-size: 11px;
+    	}    
+    </style>
+		
+    <script type="text/javascript">
+    	
+    	UCSF.Mentor.displayAppSummary();
+    	
+    	var fields = [
+    		"lastUpdate", 
+    		"privacy", 
+    		"primaryResearch", 
+    		"interestArea", 
+    		"availableMentorFaculty", 
+    		"facultyMenteeLevel", 
+    		"facultyContactPref", 
+    		"facultyAssitiantName", 
+    		"facultyAssitiantEmail", 
+    		"facultyAssitiantPhone", 
+    		"facultyNarative", 
+    		"availableMentorStudents", 
+    		"studentMenteeLevel", 
+    		"studentContactPref", 
+    		"studentAssistantName", 
+    		"studentAssistantEmail", 
+    		"studentAssistantPhone", 
+    		"studentNarative"
+    		];
+    </script>
+ 
+	<div class="updated mentor_body" style="display:block; text-align:left; padding:5px 10px; 0 0;">
+		Last Updated: <span></span>
+	</div>    
+    
+    <div id='Profile' class="clearbox">
+		<div class='clearbox'>
+			<div class='section' style="display:none;">
+			
+				<div class='answer' name="facultyNarative" style="padding:1px 0 10px 0;">
+					<span class='answerresponse' type='textarea'></span>
+				</div><!-- .answer -->
+				
+				<div class='answer' name="availableMentorFaculty">
+					<span class='detailtitle'>Available to Mentor as</span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>):
+					<span class='answerresponse' type='list'></span>
+				</div><!-- .answer -->
+		
+				<div class='answer' name="facultyContactPref" style="padding:5px 0 0 0;">
+					<span class='detailtitle'>Contact for Mentoring:</span>
+					<span class='answerresponse' type='list'></span>
+					
+					<div class='detail' test="assistant" fr="facultyContactPref" style="padding-left:28px;">
+						<!--<span class='detailtitle'>Contact my Assistant:</span><br />-->
+						Name:&nbsp;<span name="facultyAssistantName"></span><br />
+						Email:&nbsp;<span name="facultyAssistantEmail"></span><br />
+						Phone:&nbsp;<span name="facultyAssistantPhone"></span><br />
+					</div>
+					
+				</div><!-- .answer -->
+		
+			</div><!-- .roundbox .lgrey -->
+		</div><!-- .section -->	
+	</div>
+	<!-- .clearbox -->
+	
+    <div style="padding:0px 0px 0px 10px;"> 
+		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
+		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page">CTSI Mentor Development Program</a>
+		<br /><br />
 	</div>
 	
-	<div class='question'>
-	<h4>My Contact Preference:</h4>
-	<fieldset><ul>
-		<li><input type="checkbox" name="studentContactPref" value="email"><label>Email</label></li>
-		<li><input type="checkbox" name="studentContactPref" value="phone"><label>Phone</label></li>
-		<li><input type="checkbox" name="studentContactPref" value="assistant"><label>Assistant</label></li>
-	</ul></fieldset>
-	
-	<div class='question'>
-	<h5>Assistant Details</h5>
-	<fieldset class='details roundbox'>
-	<ul>
-	<li class='namedetail'><label class='textlabel' >Name</label><input type="text" name="studentAssistantName"></li>
-	<li class='emaildetail'><label class='textlabel' >Email</label><input type="email" name="studentAssistantEmail"></li>
-	<li class='phonedetail'><label class='textlabel' >Phone</label><input type="tel" name="studentAssistantPhone"></li>
-	</ul>
-	</fieldset>
-	</div> <!-- .question -->
-	
-	
+	<div style="margin:0px 10px 0px 10px;">
+		<table>
+			<tr>
+				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
+					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
+				</td>
+				<td valign="middle">
+					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_body" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
+				</td>
+			</tr>
+		</table>
 	</div>
-	
-	
-	
-	<div class='question'>
-	<h4>Narrative to Potential Student Mentees:</h4>
-	<fieldset>
-	<textarea rows='4' cols='56' class='roundbox' name="studentNarative"></textarea>
-	</fieldset>
-	</div> <!-- .question -->
-	
-	</div> <!-- .clearbox -->
-	</div> <!-- .question .section -->
-	<!--
-		<div style="font-size:1.1em; cursor:pointer; text-align:center; color:#1E416C;">
-			<ul><li><span class="mentor_save">save</span></li><ul>
-		</div>-->
-	</div><!-- .clearbox -->
-	
-	
-	
-</div>]]></Content>
+		
+    ]]></Content>
+    
+<!-- ==================== END PROFILE VIEW ==================== -->    
+  
 </Module>

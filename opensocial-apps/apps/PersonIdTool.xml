@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Pubsub Test">
+        <Require feature="pubsub" />
+    </ModulePrefs>
+    <Content type="html"><![CDATA[<!--HTML-->
+    <!-- #includes -->
+    <!DOCTYPE html>
+<div id="output">
+</div>
+<script type="text/javascript">
+function callback(sender, message) {
+  var data = gadgets.json.parse(message);
+  document.getElementById("output").innerHTML = data.data.personIds;
+};
+gadgets.pubsub.subscribe("JSONPersonIds", callback);
+</script>
+]]>
+</Content>
+</Module>

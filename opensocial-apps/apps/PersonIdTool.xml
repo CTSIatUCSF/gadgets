@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Person Id Collector">
+            title="Person Id Collector" height="800">
+        <Require feature="opensocial-0.9" />
         <Require feature="pubsub" />
+        <Require feature="osapi" />
     </ModulePrefs>
     <Content type="html"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
-<div id="output">
+<div id="personids">
+</div></p>
+<div id="people">
 </div>
 <script type="text/javascript">
 function callback(sender, message) {
   var data = gadgets.json.parse(message);
-  document.getElementById("output").innerHTML = data.data.personIds;
+  document.getElementById("personids").innerHTML = data.data.personIds;
+ 
+  // DEMO code. This shows how to take a list of personId's and get their information
+  // should execute at 'checkout time'	
+  // fields to grab, just as an example
+  var fields = [
+				opensocial.Person.Field.NAME,
+				opensocial.Person.Field.EMAILS,
+				'ImageEmail',
+				'imageemail',
+				'email',
+				opensocial.Person.Field.PROFILE_URL,
+				opensocial.Person.Field.THUMBNAIL_URL,
+				opensocial.Person.Field.ADDRESSES,
+				opensocial.Person.Field.PHONE_NUMBERS
+			];
+
+  // for now just test by grabbing the first 5 people in a batch
+  var batch = osapi.newBatch();
+  for (var i = 0; i < data.data.personIds.length && i < 5; i++) {
+      batch.add('person[' + i + ']', osapi.people.get(
+				{
+					'userId': data.data.personIds[i],
+					'groupId': '@self',
+					'fields': fields
+				}));
+  }
+  batch.execute(function(people){
+		document.getElementById("people").innerHTML += gadgets.json.stringify(people) + '<br>';
+  	});
 };
+
 gadgets.pubsub.subscribe("JSONPersonIds", callback);
 </script>
 ]]>

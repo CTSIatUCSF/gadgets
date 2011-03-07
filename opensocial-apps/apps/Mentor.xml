@@ -5,7 +5,7 @@
             author="Nels Johnson"
             author_email="downrecs@gmail.com" height="800">
         <Require feature="opensocial-0.9" />
-        <Require feature="views" />å
+        <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="settitle" />
         <Require feature="osapi" />

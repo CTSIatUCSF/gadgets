@@ -194,7 +194,12 @@
 			
 			$('.mentor_save').click(function(){
 				updateAppData( createMentorDataMap() );
+				alert("Your information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			});
+			
+			$('.mentor_edit').click(function(){
+				UCSF.Mentor.displayAppData();
+			});			
 			
 			
 		});}); //jquery.ready //os.ready
@@ -215,7 +220,8 @@
 					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
 					if( typeof(result['lastUpdate']) !== 'undefined' ){ 
 						$('.updated').show()
-							.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+							//.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
+							.find('span').text(  d.toDateString() );
 					}else{
 						$('.updated').hide();
 					}
@@ -353,6 +359,12 @@
 									/*if(appdata[keys[k]].length < 1){ return this; }*/
 									
 									$(this).text(appdata[keys[k]]);
+									
+									// nj addded 3-8-11
+									if (appdata[keys[k]] == "") {
+										$(this).text("Unavailable");
+									}
+									
 									$(this).show();
 									$(this).parents('.section').show().find('.moreless').trigger('show');
 									gadgets.window.adjustHeight();
@@ -467,9 +479,13 @@
     		font-size: 14px;
     	}
     	.mentor_body {
-    		font-family: Verdana, Arial;
+    		font-family: Arial;
     		font-size: 12px;
-    	}    
+    	}
+    	.mentor_credit {
+    		font-family: Arial;
+    		font-size: 10px;
+    	}      	
     </style>
     	
     <script type="text/javascript" >
@@ -517,20 +533,17 @@
     	
     	// retrieve last-saved data and map it to the fields in the data map
     	UCSF.Mentor.displayAppData();
-    	
-		$('a.tips').cluetip();
-		$('a.jt:eq(0)').cluetip({
-			//local: true;
-			//hideLocal: true,
-			//attribute: 'tip_body',
-  			cluetipClass: 'jtip', 
-  			arrows: true, 
-  			dropShadow: false,
-  			hoverIntent: false,
-  			sticky: true,
-  			mouseOutClose: true,
-  			closePosition: 'title',
-  			closeText: '<img src="cross.png" alt="close" />'
+
+		$('a.jt:eq(0)').cluetip(
+			{cluetipClass: 'jtip',
+			local: true, 
+			hideLocal: true, 
+			sticky: true,
+			mouseOutClose: true,
+			closePosition: 'title',
+			showTitle: true,
+			width: '400px',
+			height: '450px'
 		});
     });
 	
@@ -539,22 +552,6 @@
     <script type="text/javascript">
     	
     	UCSF.Mentor.displayAppSummary();
-    	
-    	/*
-    	var fields = [
-    		"lastUpdate", 
-    		"privacy", 
-    		"primaryResearch", 
-    		"interestArea", 
-    		"availableMentorFaculty", 
-    		"facultyMenteeLevel", 
-    		"facultyContactPref", 
-    		"facultyAssitiantName", 
-    		"facultyAssitiantEmail", 
-    		"facultyAssitiantPhone", 
-    		"facultyNarative"
-    		];
-    	*/	
     		
     </script>
     
@@ -562,20 +559,16 @@
 	
     <div id='AddEdit' style="padding:15px 0px 0px 10px;">
 		Add details about your availability to mentor UCSF faculty. 
-		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
+		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a><br />
 		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI MDP Web page">CTSI Mentor Development Program</a>
 		<br /><br />
 	</div>
-
-	<div class="mentor_body" style="cursor:pointer; color:#1E416C; padding:0px 0px 0px 10px;">
-		<span class="mentor_save">Save</span> | Cancel<br />
-	</div>
 		
-	<div class="updated mentor_body" style="display:block; text-align:left; padding-right:10px;">
-		Last Updated: <span></span>
+	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
+		Last Updated: <span style="font-size: 10px;"></span>
 	</div>
 
-	<div class='question' style="padding:5px 0px 0px 0px;">
+	<div class='question' style="padding: 0px;">
 		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
 		<fieldset>
 			<ul>
@@ -607,18 +600,29 @@
 				<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
 			</ul>
 		</fieldset>
-	</div>	
+	</div>
 	
 	<div class='question'>
-		<span class="mentor_title">Mentoring Narrative</span>
-		<a class="jt" href="ajax6.htm" rel="ajax6.htm" title="Sample Narrative">x</a>
-		
-		<!--<a class="jt" href="tip_body" rel="tip_body" title="Sample Narrative">x</a>
-		<div id="tip_body">This is the tip body text</div>-->
-		
+		<h4>Mentoring Narrative:&nbsp;<a class="jt" href="#" rel="div.localvisible" title="Examples of Mentoring Narratives"><img src="http://www.fakedoom.com/ctsi/hovertiptarget.png" border="0"></a></h4>
+		<div class="localvisible">
+		EXAMPLE 1:<br>
+		I am highly qualified to participate as a lead mentor or co-mentor at UCSF. My program of research is focused on health outcomes associated with disturbed sleep in various populations of healthy women and women with chronic illnesses like HIV/AIDS and cancer.  I have completed cross-sectional studies, longitudinal studies, and most recently, randomized clinical trials to improve sleep.  I have mentored doctoral students and postdoctoral fellows studying various patient populations, from the very young to very old.  During my tenure at UCSF, I have directly supervised over 30 doctoral students, mentored 14 postdoctoral trainees, and served as a lead mentor for 6 pre-tenured faculty. I have been the Director for a T32 Nurse Research Training Grant since 1996, and I have been honored with being voted mentor of the year by doctoral students on two occasions.  I play a significant role in the clinical and translational (CTSI) research mentoring and career development programs at UCSF.  I am the seminar leader for the first session in the CTSI Mentor Development program on “Rewards and Challenges of Mentoring” and I have co-mentored two KL2 scholars.  I have published over 50 peer-reviewed research articles with trainees as first-author, and serve as a consultant on two external K awards as well as three external R01 awards with former mentees.  Finally, I have served on many different NIH study section review panels, and I served as the Chair of an NIH study section (2008-2010), which allows me to be particularly effective in mentoring early career principal investigators who are writing their first NIH applications.
+ 		<br><br>
+		I can provide mentees a cubicle space with my research team, tangible resources such as access to large datasets for secondary analysis as needed, and intangible resources such as attending our formal research team meetings and our informal spontaneous group discussions as well as networking at national sleep research conferences.
+ 		<br /><br />
+		EXAMPLE 2:
+ 		<br />
+		In 1990, Dr. Brown founded and became director of the UCSF Women's Continence Center. The UCSF Women's Continence Center is a multidisciplinary practice that incorporates physicians from gynecology, urology, and colorectal surgery to provide expert, timely and innovative care. In 1993, while maintaining her faculty appointment, Dr. Brown began and completed a two-year fellowship in Clinical Research at UCSF. The fellowship supplied Dr. Brown with the tools needed to build a multidisciplinary group of basic and clinical investigators. This group conducts translational research on the female urethra, bladder, and pelvic floor and urinary incontinence in women. Dr. Brown is Director of the ORWH/NIDDK funded UCSF Specialized Center of Research (SCOR) on Lower Urinary Tract Function in Women.
+		</div>
 		<fieldset>
 			<textarea rows='4' cols='56' class='roundbox' name="facultyNarative"></textarea>
 		</fieldset>
+	</div>
+	
+	<div>
+		<center>
+			<input type="button" class="mentor_save" value="Save">&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel">
+		</center>
 	</div>
 	
 	<div style="margin:0px 10px 0px 10px;">
@@ -628,7 +632,7 @@
 					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
 				</td>
 				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_body" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
+					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_credit" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
 				</td>
 			</tr>
 		</table>
@@ -648,39 +652,23 @@
     		font-size: 14px;
     	}
     	.mentor_body {
-    		font-family: Verdana, Arial;
+    		font-family: Arial;
     		font-size: 11px;
-    	}    
+    	}
+    	.mentor_credit {
+    		font-family: Arial;
+    		font-size: 10px;
+    	}      	
     </style>
 		
     <script type="text/javascript">
     	
     	UCSF.Mentor.displayAppSummary();
     	
-    	var fields = [
-    		"lastUpdate", 
-    		"privacy", 
-    		"primaryResearch", 
-    		"interestArea", 
-    		"availableMentorFaculty", 
-    		"facultyMenteeLevel", 
-    		"facultyContactPref", 
-    		"facultyAssitiantName", 
-    		"facultyAssitiantEmail", 
-    		"facultyAssitiantPhone", 
-    		"facultyNarative", 
-    		"availableMentorStudents", 
-    		"studentMenteeLevel", 
-    		"studentContactPref", 
-    		"studentAssistantName", 
-    		"studentAssistantEmail", 
-    		"studentAssistantPhone", 
-    		"studentNarative"
-    		];
     </script>
  
-	<div class="updated mentor_body" style="display:block; text-align:left; padding:5px 10px; 0 0;">
-		Last Updated: <span></span>
+	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
+		Last Updated: <span style="font-size: 10px;"></span>
 	</div>    
     
     <div id='Profile' class="clearbox">
@@ -692,7 +680,7 @@
 				</div><!-- .answer -->
 				
 				<div class='answer' name="availableMentorFaculty">
-					<span class='detailtitle'>Available to Mentor as</span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank">Review Mentor Role Definitions</a>):
+					<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>):
 					<span class='answerresponse' type='list'></span>
 				</div><!-- .answer -->
 		
@@ -727,7 +715,7 @@
 					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
 				</td>
 				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_body" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
+					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_credit" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
 				</td>
 			</tr>
 		</table>

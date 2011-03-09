@@ -79,7 +79,7 @@ UCSF.UI.Hideshow = function(){
 	    function showHideShow(){
 	    
 	    	//if( confirm("Are you sure you would like to make this section visible to UCSF?")){
-	    	if( confirm("Are you sure you would like to make this section visible to the public?")){
+	    	if( confirm("Are you sure you would like to make this section visible on your profile?")){
 	    		updateHideShow('Y');
 	    	}else{
 	    		console.log( 'user canceled: showHideShow');

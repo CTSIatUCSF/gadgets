@@ -183,12 +183,14 @@
 									str = $(this).val() || "";
 								});
 							
-						updateMap[name] = str;	
+						updateMap[name] = str;
 					}
+					
+					updateMap["studentNarrative"] = "This is test chunk 1";
+					
 				});
 				
 				console.log( updateMap, gadgets.json.stringify(updateMap).replace( /\"/gi, "\\\"") );
-				
 				return updateMap;
 			}
 			
@@ -197,13 +199,14 @@
 				alert("Your information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			});
 			
-			$('.mentor_edit').click(function(){
+			$('.mentor_cancel').click(function(){
 				UCSF.Mentor.displayAppData();
 			});			
 			
 			
 		});}); //jquery.ready //os.ready
 	};
+	
 	UCSF.Mentor.addSaveHandler();
 	
 	UCSF.Mentor.displayLastUpdated = function(){
@@ -509,7 +512,6 @@
 				Questions[name].type = type;
 			});
 			
-			
 			//get label names for checkboxes and radio buttons.
 			$('.question fieldset li')
 				.has('input[name][value][type=radio],input[name][value][type=checkbox]')
@@ -616,12 +618,13 @@
 		</div>
 		<fieldset>
 			<textarea rows='4' cols='56' class='roundbox' name="facultyNarative"></textarea>
-		</fieldset>
+		</fieldset>		
 	</div>
 	
 	<div>
 		<center>
-			<input type="button" class="mentor_save" value="Save">&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel">
+			<input type="button" class="mentor_save" value="Save">&nbsp;&nbsp;&nbsp;
+			<input type="button" class="mentor_cancel" value="Cancel">
 		</center>
 	</div>
 	

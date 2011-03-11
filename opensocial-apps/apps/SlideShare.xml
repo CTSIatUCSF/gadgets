@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Featured Presentations (beta)"
+            title="Featured Presentations"
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
             description="A Simple app to display your own slides from SlideShare.net">

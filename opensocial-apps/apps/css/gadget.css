@@ -89,7 +89,7 @@ ul { list-style-type:none; }
 
 .question { margin:1em; }
 .question li>input { margin-left:1em; }
-.question li { display:inline-block; width:15em; }
+.question li { display:inline-block; width:16em; }
 .question ul { width:33em; margin-top:.5em;}
 
 .question .details { width:34em; padding:0.75em; margin:0.5em; margin-left:0px; }

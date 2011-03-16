@@ -370,7 +370,12 @@
     .slideshare_body {
     	font-family: Verdana, Arial;
     	font-size: 11px;
-    }    
+    }
+    
+    .slideshare_credit {
+    	font-family: Arial;
+    	font-size: 10px;
+    }         
     
     </style>
     
@@ -526,7 +531,7 @@
 		<table><tr>
 			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
 			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_credit" title="Go to the CTSI Web site">
 			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>
@@ -549,7 +554,12 @@
     	.slideshare_body {
     		font-family: Verdana, Arial;
     		font-size: 11px;
-    	}    
+    	}
+    	
+    	.slideshare_credit {
+    		font-family: Arial;
+    		font-size: 10px;
+    	}     	   
     
     	</style>
     
@@ -690,7 +700,7 @@
 		<table><tr>
 			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
 			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_credit" title="Go to the CTSI Web site">
 			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>

@@ -110,16 +110,22 @@ $(document).ready(function(){
 </script>
 
 <style>
-	.slideshare_title {
+
+	.google_search_title {
     	font-family: Verdana, Arial;
     	font-size: 14px;
     }
 
-    .slideshare_body {
+    .google_search_body {
     	font-family: Verdana, Arial;
     	font-size: 11px;
-    }    
+    }
     
+    .google_search_credit {
+    	font-family: Arial;
+    	font-size: 10px;
+    }         
+ 
 </style>
 
 <div style="margin:0px 10px 0px 0px;">
@@ -127,7 +133,7 @@ $(document).ready(function(){
 		<tr>
 			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
 			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
-			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="slideshare_body" title="Go to the CTSI Web site">
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="google_search_credit" title="Go to the CTSI Web site">
 			Provided by CTSI at UCSF</a></td>
 		</tr>
 	</table>

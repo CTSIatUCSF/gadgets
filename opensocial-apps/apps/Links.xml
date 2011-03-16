@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Links"
+            author="Nels Johnson"
+            author_email="njohnson@downrecs.com"
+            description="A gadget to share your favorite links">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="flash" />
+        <Require feature="settitle" />
+        <Require feature="osapi" />
+        <Require feature="pubsub" />
+    </ModulePrefs>
+    
+<!-- ==================== START COMBINED VIEWS ==================== -->    
+    
+    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    <base target="_blank"/>
+    <!-- #includes -->
+    <link rel="stylesheet" href="css/gadget.css?10" type="text/css" media="screen, projection">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
+    
+    <script type="text/javascript">
+    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
+    window.UCSF = window.UCSF || {};
+    
+    UCSF.Links	= UCSF.Links || {};
+    
+    $(document).ready(function(){
+			
+			function updateAppData(map){
+				$.extend(true, map, {'lastUpdate': new Date().getTime()});
+				osapi.appdata.update(  {'userId': '@viewer', 'appId':'@app', 'data': map } )
+					.execute(function(result){
+						console.log(result, map);
+					});
+			}
+			
+			//console.log("a target fix");
+			$('a').not('[target]').attr("target","_tab");
+	});
+	
+	UCSF.Links.api_key 	= "dPfswfX7";
+	UCSF.Links.api_secret 	= "1wP2zfsv";
+	
+	UCSF.Links.getTimeStamp = function(){ return Math.round(new Date().getTime()/1000).toString() ; };
+	UCSF.Links.getHash = function(timestamp){
+		return Crypto.SHA1(	UCSF.Links.api_secret + (timestamp||UCSF.Links.getTimeStamp()), { asString: false });
+	};
+			
+    	function displayAppData(){
+			$(document).ready(function(){
+			var fields = {};
+			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
+			
+			var keys = [];
+			$('input[name],textarea[name]').each(function(){
+				fields[$(this).attr('name')] = $(this).attr('name');
+			});
+			//console.log( fields, keys );
+			for(var f in fields){
+				keys.push(fields[f]);
+			}
+			//console.log( fields, keys );
+			
+			osapi.appdata.get(  {'userId': '@viewer', 'appId':'@app', 'fields':keys } )
+				.execute(function(result){
+					console.log(result, keys);
+					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
+					
+					//this is a weird way to access the @viewer without knowing the name.
+					//it's an associative array, length, pop, or index won't work
+					var appdata = {};
+					for(var n in result){
+						appdata = result[n];  //for the viewer/ first record
+						//console.log( n, result[n], result );
+						break;
+					}
+					
+					var k = 0;
+					var vals = [];
+					console.log(keys, keys.length, appdata);
+					for(k = 0; k < keys.length; k++){
+					
+						if( typeof(appdata[keys[k]]) === 'undefined'){
+							//console.log('appdata not availible', keys[k]);
+							continue;
+						}
+						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
+						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
+						
+						
+						//for each value stored in the array let's check it on the form
+						var v = 0;
+						for(v = 0; v < vals.length; v++){
+							//console.log('each val', vals[v]);
+							
+							//this will work for radio and checkboxes, let's filter based on form name, and it's value attribute
+							$('[name='+ keys[k] +']')
+								.filter('input[type=radio], input[type=checkbox]')
+								.filter('[value='+ vals[v] +']')
+								.each(function(){
+									//console.log('update checked attr', this);
+									$(this).attr('checked','checked');
+								});
+						}
+						
+						$('[name='+ keys[k] +']')
+								.filter('input, textarea')
+								.not('[type=radio],[type=checkbox]')
+								.each(function(){
+									//console.log('update text', vals);
+									$(this).val( vals.join(", "));
+								});
+								
+						//gadgets.window.Height();
+						
+					}
+					
+					
+					
+				});/*osapi.appdata.get*/
+			});/*document.ready*/
+		}
+
+		
+    </script>]]></Content>
+    
+<!-- ==================== END COMBINED VIEWS ==================== -->    
+
+<!-- ==================== START HOME/EDIT VIEW ==================== -->
+    
+    <Content type="html" view="default, home" preferred_height="716"><![CDATA[<!--HTML-->
+    
+    <style>
+    
+    .links_title {
+    	font-family: Arial;
+    	font-size: 14px;
+    }
+
+    .links_body {
+    	font-family: Arial;
+    	font-size: 11px;
+    }
+    
+    .links_credit {
+    	font-family: Arial;
+    	font-size: 10px;
+    }         
+    
+    </style>
+    
+	<!-- HideShow -->
+	<div id="hideshow"></div>
+	<!-- HideShow end -->
+
+    <script type="text/javascript">
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				if(username != "") {
+	    					preview(username);
+	    				}
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});
+	    				
+	    				$('#preview').html('');
+	    				if(username != "") {
+	    					preview(username);
+	    				}
+	    		});
+	    	});
+	    	
+	    	$('.close').click(function(){
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "home" );
+	    		});
+	    	});
+	    });
+	    
+	    function preview(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    
+    		});
+	    }
+	    	    
+    </script>
+	
+	<div style="margin:0px 10px 0px 10px;">
+		<span class="slideshare_title"><b>Manage links to other sites in your profile.</b></span>
+	</div>
+	
+	<div id="settings" style="clear:both; margin:0px 10px 0px 10px;">
+		<p class="slideshare_body">
+		Enter the link name, as you want it to appear in your profile, and its URL.<br>
+		Click 'Save' to save the link to your profile. Saved profile links are shown below,<br>
+		where you may also delete links you no longer want to include in your profile.
+		</p>
+		
+	    <div class='question'>
+	    	<table cellspacing="10" cellpadding="">
+	    		<tr>
+	    			<td><span class='links_body'>Link Name</span></td>
+	    			<td><span class='links_body'>Link URL</span></td>
+	    			<td></td>
+	    		</tr>
+	    		<tr>
+	    			<td><input type="text" name="link_name" style="display:inline;width:10em;"></td>
+	    			<td><input type="text" name="link_url" style="display:inline;width:20em;"></td>
+					<td><span class="save links_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this link name and URL.">Save</span></td>
+				</tr>
+			</table>	
+		</div> 
+		<!-- .question -->
+		
+    </div>
+    <br>
+
+    <br><br>
+    <div style="margin:0px 10px 0px 10px;">
+		<table><tr>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
+			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="links_credit" title="Go to the CTSI Web site">
+			Provided by CTSI at UCSF</a></td>
+		</tr></table>
+	</div>
+            
+    ]]></Content>
+    
+<!-- ==================== END HOME/EDIT VIEW ==================== -->    
+    
+<!-- ==================== START PROFILE VIEW ==================== -->
+    
+    <Content type="html" view="default, profile" preferred_height="500"><![CDATA[<!--HTML-->
+    
+    	<style>
+    
+    	.links_title {
+    		font-family: Arial;
+    		font-size: 14px;
+    	}
+
+    	.links_body {
+    		font-family: Arial;
+    		font-size: 11px;
+    	}
+    	
+    	.links_credit {
+    		font-family: Arial;
+    		font-size: 10px;
+    	}     	   
+    
+    	</style>
+    
+        <script type="text/javascript">
+    	$(document).ready(function(){os.ready(function(){
+	    	osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
+	    		.execute(function(response){
+	    				console.log(response);
+	    				var viewer = os.osapi.getViewerFromResult(response);
+	    				var username = viewer.username;
+	    				$('input[name=username]').val(username);
+	    				if(username != "") { // only render flash if there's a username
+	    					preview_profile(username);
+	    				}	    				
+	    		});
+    	});}); // jquery ready // opensocial ready
+    	
+    	$(document).ready( function(){
+	    	$('.save').click(function(){
+	    	console.log('save');
+	    		os.ready(function(){
+	    			console.log('save');
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    					console.log(response);
+	    				});	
+	    			preview(username);
+	    		});
+	    	});
+	    	
+	    	// NOTE - MUST HAVE THIS FOR AUTO LOAD OF DATA IN PROFILE MODE
+	    	$('.edit').click(function(){
+	    	console.log('edit');
+	    		os.ready(function(){
+	    			gadgets.views.requestNavigateTo( "profile" );
+	    		});
+	    	});
+	    	
+	    });
+	    
+	    function preview_profile(username){
+    		var user = username || "jdavidnet";
+    		
+    		os.ready(function(){
+    			console.log("preview");
+    			
+    		});
+	    }
+    </script>
+	
+	<div id="settings" style="display:none;">
+		<p>This is a app that will show links on your profile to others.</p>
+		<h2>Settings</h2>
+	    <div class='question'>
+			<fieldset class='details'>
+				<ul>
+				<li class='namedetail'><label class='textlabel' >Username</label><input type="text" name="username"></li>
+				</ul>
+			</fieldset>
+		</div> <!-- .question -->
+    </div>
+
+    <br><br>
+    <div style="margin:0px 10px 0px 10px;">
+		<table><tr>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
+			<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a></td>
+			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" class="links_credit" title="Go to the CTSI Web site">
+			Provided by CTSI at UCSF</a></td>
+		</tr></table>
+	</div>
+    
+    ]]></Content>
+    
+<!-- ==================== END PROFILE VIEW ==================== -->    
+  
+</Module>

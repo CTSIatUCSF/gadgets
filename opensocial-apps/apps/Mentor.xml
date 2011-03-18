@@ -196,7 +196,7 @@
 			
 			$('.mentor_save').click(function(){
 				updateAppData( createMentorDataMap() );
-				alert("Your information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+				alert("Your information is saved and should be available in Search Results within an hour. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			});
 			
 			$('.mentor_cancel').click(function(){
@@ -559,6 +559,8 @@
     
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
+	<h4 style="padding-left:10px;">Add Faculty Mentoring to Your Profile</h4>
+	
     <div id='AddEdit' style="padding:15px 0px 0px 10px;">
 		Add details about your availability to mentor UCSF faculty. 
 		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a><br />
@@ -596,26 +598,43 @@
 	<div class='question' style="padding:0px 0px 0px 12px;">
 		<h5>Assistant Details</h5>
 		<fieldset class='details roundbox'>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+					<label class='textlabel'>Name</label>
+					<input type="text" name="facultyAssistantName" style="width:420px;">
+					</td>
+				</tr>
+			</table>
+			<br>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></td>
+				</tr>				
+			</table>			
+			<!--
 			<ul>
 				<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
 				<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
 				<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
 			</ul>
+			-->
 		</fieldset>
 	</div>
 	
 	<div class='question'>
 		<h4>Mentoring Narrative:&nbsp;<a class="jt" href="#" rel="div.localvisible" title="Examples of Mentoring Narratives"><img src="http://www.fakedoom.com/ctsi/hovertiptarget.png" border="0"></a></h4>
 		<div class="localvisible">
-		EXAMPLE 1:<br>
+		EXAMPLE 1:<br />
+		Dr. Brown is willing to mentor faculty, fellows, residents and students interested in an academic research career.  Most often her mentees have had training in clinical research methods or will obtain training through the CTSI CTST.  For students, it is expected they will have dedicated time for research. Through email or meeting, if there is a “match” for research interest, time, and training, further discussions as to project, goals, and access to resources (space, databases, and  statistical support) will be discussed to provide a productive experience.
+		<br><br>
+		EXAMPLE 2:<br />
 		I am highly qualified to participate as a lead mentor or co-mentor at UCSF. My program of research is focused on health outcomes associated with disturbed sleep in various populations of healthy women and women with chronic illnesses like HIV/AIDS and cancer.  I have completed cross-sectional studies, longitudinal studies, and most recently, randomized clinical trials to improve sleep.  I have mentored doctoral students and postdoctoral fellows studying various patient populations, from the very young to very old.  During my tenure at UCSF, I have directly supervised over 30 doctoral students, mentored 14 postdoctoral trainees, and served as a lead mentor for 6 pre-tenured faculty. I have been the Director for a T32 Nurse Research Training Grant since 1996, and I have been honored with being voted mentor of the year by doctoral students on two occasions.  I play a significant role in the clinical and translational (CTSI) research mentoring and career development programs at UCSF.  I am the seminar leader for the first session in the CTSI Mentor Development program on “Rewards and Challenges of Mentoring” and I have co-mentored two KL2 scholars.  I have published over 50 peer-reviewed research articles with trainees as first-author, and serve as a consultant on two external K awards as well as three external R01 awards with former mentees.  Finally, I have served on many different NIH study section review panels, and I served as the Chair of an NIH study section (2008-2010), which allows me to be particularly effective in mentoring early career principal investigators who are writing their first NIH applications.
  		<br><br>
 		I can provide mentees a cubicle space with my research team, tangible resources such as access to large datasets for secondary analysis as needed, and intangible resources such as attending our formal research team meetings and our informal spontaneous group discussions as well as networking at national sleep research conferences.
- 		<br /><br />
-		EXAMPLE 2:
- 		<br />
-		In 1990, Dr. Brown founded and became director of the UCSF Women's Continence Center. The UCSF Women's Continence Center is a multidisciplinary practice that incorporates physicians from gynecology, urology, and colorectal surgery to provide expert, timely and innovative care. In 1993, while maintaining her faculty appointment, Dr. Brown began and completed a two-year fellowship in Clinical Research at UCSF. The fellowship supplied Dr. Brown with the tools needed to build a multidisciplinary group of basic and clinical investigators. This group conducts translational research on the female urethra, bladder, and pelvic floor and urinary incontinence in women. Dr. Brown is Director of the ORWH/NIDDK funded UCSF Specialized Center of Research (SCOR) on Lower Urinary Tract Function in Women.
-		</div>
+ 		</div>
 		<fieldset>
 			<textarea rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarative"></textarea>
 		</fieldset>		

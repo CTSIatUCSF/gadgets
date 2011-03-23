@@ -133,3 +133,7 @@ ul { list-style-type:none; }
 #hideshow .hidden_message 	{ color:#CC0000; visibility:hidden; }
 #hideshow .visible_message 	{ color:#4FAA4F; visibility:hidden; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
+
+.gadget_credits {
+    margin: 0px 10px;
+}    

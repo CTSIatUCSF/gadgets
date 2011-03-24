@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function callback(sender, message) {
   var data = gadgets.json.parse(message);
-  document.getElementById("personids").innerHTML = data.data.personIds;
+  document.getElementById("personids").innerHTML = data.personIds;
  
   // DEMO code. This shows how to take a list of personId's and get their information
   // should execute at 'checkout time'	
@@ -38,7 +38,7 @@ function callback(sender, message) {
   for (var i = 0; i < data.data.personIds.length && i < 5; i++) {
       batch.add('person[' + i + ']', osapi.people.get(
 				{
-					'userId': data.data.personIds[i],
+					'userId': data.personIds[i],
 					'groupId': '@self',
 					'fields': fields
 				}));

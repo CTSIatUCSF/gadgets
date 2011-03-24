@@ -35,7 +35,7 @@ function callback(sender, message) {
 
   // for now just test by grabbing the first 5 people in a batch
   var batch = osapi.newBatch();
-  for (var i = 0; i < data.data.personIds.length && i < 5; i++) {
+  for (var i = 0; i < data.personIds.length && i < 5; i++) {
       batch.add('person[' + i + ']', osapi.people.get(
 				{
 					'userId': data.personIds[i],

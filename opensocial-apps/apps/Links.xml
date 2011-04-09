@@ -45,6 +45,13 @@
     
     <script type="text/javascript">
 	
+	function imgErr(source){
+		source.style.visibility = "hidden";
+		source.onerror = "";
+		return true;
+	}
+
+	
 	function delete_array_item (array_index){
 		links = links.replace(links_array[array_index]+"|", "");
 		
@@ -178,7 +185,7 @@
 			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields': ['links']})
 				.execute(function(result){
         
-                    //alert("fetched appdata: " + JSON.stringify(result));
+                    // alert("fetched appdata: " + JSON.stringify(result));
 					
 					// trim fetched app data to pure delimited string
 					var fetched_appdata_string = JSON.stringify(result);
@@ -190,8 +197,18 @@
 					// convert delimited string to array
 					links_array = links.split("|");
 					
-					//sort the array alphbetically based on link name
-					links_array.sort();
+					// sort the array alphbetically based on link name
+					// case-sensitive sort 
+					// links_array.sort();
+					
+					// custom case-insensitive sort
+					links_array.sort(function(x,y){ 
+						var a = String(x).toUpperCase(); 
+						var b = String(y).toUpperCase(); 
+						if (a > b) {return 1;}
+						if (a < b) {return -1;} 
+						return 0; 
+					}); 
                     
                     // EDIT MODE - build table to hold retrieved app data
                     var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
@@ -203,7 +220,14 @@
 							link_item_array = link_item.split("^");
 							cell_name=link_item_array[0];
 							cell_url=link_item_array[1];
-							cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16'>";
+							
+							//special case for ctsi sites
+							if(link_item.indexOf("ctsi.ucsf.edu") == -1) {
+								cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
+							}
+							else {
+								cell_favicon="<img src='http://ctsi.ucsf.edu/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
+							}
                             
 							// build and add table row
 							links_table_data = links_table_data
@@ -227,14 +251,22 @@
 					}
 					
                     // VIEW MODE - build table to hold retrieved app data
-                    links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
                     
 					for(i = 0; i < links_array.length; i++){
 						link_item = links_array[i];
 						if(link_item.indexOf("^") != -1) {
 							link_item_array = link_item.split("^");
 							cell_name=link_item_array[0];
-							cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16'>";
+							cell_url=link_item_array[1];
+							
+							//special case for ctsi sites
+							if(link_item.indexOf("ctsi.ucsf.edu") == -1) {
+								cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
+							}
+							else {
+								cell_favicon="<img src='http://ctsi.ucsf.edu/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
+							}
                             
 							// build and add table row
 							links_table_data = links_table_data

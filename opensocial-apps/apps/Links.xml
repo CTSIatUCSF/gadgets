@@ -127,6 +127,12 @@
 					new_link_url = "http://" + new_link_url;
 				}
 				
+				// remove delimiter chars in case any were keyed in
+				new_link_name = new_link_name.replace("|", "");
+				new_link_name = new_link_name.replace("^", "");
+				new_link_url = new_link_url.replace("|", "");
+				new_link_url = new_link_url.replace("^", "");				
+				
 				// build link item
 				var link_data = new_link_name + "^" + new_link_url + "|";
 				

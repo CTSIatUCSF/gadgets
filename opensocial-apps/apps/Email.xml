@@ -1,234 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Email"
-            author="Justin Kruger"
-            author_email="jdavid.net@gmail.com"
-            description="A Tool to Gather Emails on a Page" height="600">
+		title="Email" height="800">
         <Require feature="opensocial-0.9" />
         <Require feature="pubsub" />
-        <Require feature="views" />
-        <Require feature="flash" />
-        <Require feature="dynamic-height" />
-        <Require feature="settitle" />
         <Require feature="osapi" />
-        <Require feature="pubsub" />
     </ModulePrefs>
-    <Content type="html" view="default, all, canvas, profile, profile.canvas, profile.left, home, home.canvas, preview"><![CDATA[<!--HTML-->
-    <!DOCTYPE html>
-    <base target="_blank"/>
+    <Content type="html"><![CDATA[<!--HTML-->
     <!-- #includes -->
-    <link rel="stylesheet" href="css/gadget.css?10" type="text/css" media="screen, projection">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-    <script type="text/javascript" src="js/2.0.0-crypto-sha1.js" ></script>
-    <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/ucsf.js" ></script>
-    <script type="text/javascript" src="js/similarSlideShare.js" ></script>
-    <script type="text/javascript">
-    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
-    if( typeof(gadgets.log) == "undefined" ){ gadgets.log = window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
-    window.UCSF 	= window.UCSF || {};
-    UCSF.Email	= UCSF.Email || {};
-    UCSF.pubsub	= UCSF.pubsub || {};
-    UCSF.pubsub._channels	= UCSF.pubsub._channels || {};
-    
-    UCSF.pubsub._debug = true;
-    
-    if( window.location.hostname.search( /ucsf\.edu/gi ) != -1 ){
-    	console.log( "UCSF.pubsub._debug = false" );
-    	UCSF.pubsub._debug = false;
-    }
-    
-    UCSF.pubsub.Channel = function(channelname){
-    	return UCSF.pubsub._initChannel(channelname);
-    }
-    
-    UCSF.pubsub._initChannel = function(channelname){
-    	return UCSF.pubsub._channels[channelname] = UCSF.pubsub._channels[channelname] || 
-    		{ 
-    			'name' :channelname, 
-    			'callstack':[],
-    			'publish':function(message){
-    				UCSF.pubsub._callStack( this.name, message);
-    				return this;
-    			},
-    			'subscribe':function(fn){
-    				UCSF.pubsub._pushFunc( this.name, fn);
-    				return this;
-    			}
-    		};
-    };
-    
-    UCSF.pubsub._pushFunc = function(channelname, fn){
-    	UCSF.pubsub.Channel(channelname).callstack.push(fn);	
-    };
-    
-    UCSF.pubsub._callStack = function(channelname, message){
-    	var stack = UCSF.pubsub.Channel(channelname).callstack;
-    	
-    	for(var i = 0, ii = stack.length; i < ii; i++){
-    		try{
-    			stack[i].call( UCSF.pubsub.Channel(channelname), "debug" ,message);
-    			}
-    		catch(e){
-    			console.error(channelname, e);
-    		}
-    	}
-    };
-    
-    UCSF.pubsub.publish = function( channelname, message ){
-    
-    	if(UCSF.pubsub._debug){
-    		UCSF.pubsub.Channel(channelname).publish(message);
-    		return;
-    	}
-    	//else
-    	os.ready(function(){
-    		try{
-    			gadgets.pubsub.publish( channelname, message );
-    		}
-    		catch(e){
-    			console.error(channelname, e);
-    		}
-    	});
-    };
-    
-    UCSF.pubsub.subscribe = function( channelname, callback){
-    	if(UCSF.pubsub._debug){
-    		UCSF.pubsub.Channel( channelname ).subscribe( callback );
-    		return;
-    	} 
-    	//else
-    	os.ready(function(){
-    		try{
-    			gadgets.pubsub.subscribe( channelname, callback );
-    		}
-    		catch(e){
-    			console.error(channelname, e);
-    		}
-    	});
-    };
-    
-    UCSF.pubsub.unsubscribe = function( channelname ){
-    	if(UCSF.pubsub._debug){
-    		return;
-    	}
-    	//else
-    	os.ready(function(){
-    		try{
-    			gadgets.pubsub.unsubscribe( channelname );
-    		}
-    		catch(e){
-    			console.error(channelname, e);
-    		}
-    	});
-    };
+    <!DOCTYPE html>
 	
-	$(document).ready(function(){ os.ready(function(){
-		$(".publish").click(function(){
-				
-				var message = "( message :: " + new Date().getTime() + ")" ;
-				//console.log( "publish :: " + "people" );
-				
-				UCSF.pubsub.publish("people", message );
-			});
-			
-		$(".publishfriends").click(function(){
-			// ['SimilarPersonList', 'CoAuthorList', 'NeighborList'];
-		
-			osapi.people.get(
-				{
-				'userId': '@owner', 
-				'groupId': 'NeighborList',
-				'fields':[
-					opensocial.Person.Field.NAME,
-					opensocial.Person.Field.EMAILS,
-					'ImageEmail',
-					'imageemail',
-					'email',
-					opensocial.Person.Field.PROFILE_URL,
-					opensocial.Person.Field.THUMBNAIL_URL,
-					opensocial.Person.Field.CURRENT_LOCATION,
-					opensocial.Person.Field.ADDRESSES,
-					opensocial.Person.Field.PHONE_NUMBERS,
-					opensocial.Person.Field.ABOUT_ME
-					]
-				}).execute( function( friends ){
-					console.log( friends.list );
-					var ids = [];
-					for( var p =0, pp = friends.list.length; p<pp; p++){
-						console.log( friends.list[p].emails, friends.list[p] );
-						ids.push ( friends.list[p].id );
-					}
-					osapi.people.get(
-						{
-						'userId': ids[0],
-						'groupId': '@self',
-						'fields':[
-								opensocial.Person.Field.NAME,
-								opensocial.Person.Field.EMAILS,
-								'ImageEmail',
-								'imageemail',
-								'email',
-								opensocial.Person.Field.PROFILE_URL,
-								opensocial.Person.Field.THUMBNAIL_URL,
-								opensocial.Person.Field.CURRENT_LOCATION,
-								opensocial.Person.Field.ADDRESSES,
-								opensocial.Person.Field.PHONE_NUMBERS,
-								opensocial.Person.Field.ABOUT_ME
-								]
-						}
-					).execute(function(people){
-						
-						console.log( people );
-					
-					
-					});
-					
-				UCSF.pubsub.publish("people", JSON.stringify( ids ) );
-			});	
-		});	
-			
-		$(".subscribe").click(function(){
-			//console.log("subscribe :: ");
-			UCSF.pubsub.subscribe("people",
-				function(sender, message){
-					console.log(sender, message);
-				});
-		});
-		
-		$(".url").click(function(){
-			console.log( window.location.hostname );
-		});
-		
-	});});
-	
-	
-	
-	
-	
-    </script>]]></Content>
-    <Content type="html" view="home, home.canvas"><![CDATA[<!--HTML-->
-    
-	<!-- HideShow -->
-	<!-- a control that is visible on some views, but not all. -->
+<div id="personids">
+</div></p>
+<div id="people">
+</div>
+<script type="text/javascript">
+function callback(sender, message) {
+  var data = gadgets.json.parse(message);
+  document.getElementById("personids").innerHTML = data.personIds;
+ 
+  // DEMO code. This shows how to take a list of personId's and get their information
+  // should execute at 'checkout time'	
+  // fields to grab, just as an example
+  var fields = [
+				opensocial.Person.Field.NAME,
+				opensocial.Person.Field.EMAILS,
+				'ImageEmail',
+				'imageemail',
+				'email',
+				opensocial.Person.Field.PROFILE_URL,
+				opensocial.Person.Field.THUMBNAIL_URL,
+				opensocial.Person.Field.ADDRESSES,
+				opensocial.Person.Field.PHONE_NUMBERS
+			];
 
-	<div id="hideshow"></div>
-	<!-- HideShow end -->]]></Content>
-    <Content type="html" view="canvas, home, home.canvas, profile, profile.left, toolbox"><![CDATA[<!--HTML-->
-    
-	<h1>email tool</h1>
-	<div id="menu">
-	<ul>
-		<li class="publish">publish</li>
-		<li class="subscribe">subscribe</li>
-		<li class="publishfriends">publish friends</li>
-		<li class="url">url</li>
-	</ul>
-	</div>
-	<h1>emails</h1>
-	<div id="emails">
-	
-	
-	</div>]]></Content>
+  // for now just test by grabbing the first 5 people in a batch
+  var batch = osapi.newBatch();
+  for (var i = 0; i < data.personIds.length && i < 5; i++) {
+      batch.add('person[' + i + ']', osapi.people.get(
+				{
+					'userId': data.personIds[i],
+					'groupId': '@self',
+					'fields': fields
+				}));
+  }
+  batch.execute(function(people){
+		document.getElementById("people").innerHTML += gadgets.json.stringify(people) + '<br>';
+  	});
+};
+
+gadgets.pubsub.subscribe("JSONPersonIds", callback);
+</script>
+]]>
+</Content>
 </Module>

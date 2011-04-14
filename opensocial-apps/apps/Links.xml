@@ -46,7 +46,8 @@
     <script type="text/javascript">
 	
 	function imgErr(source){
-		source.style.visibility = "hidden";
+		//source.style.visibility = "hidden";
+		source.src="http://www.fakedoom.com/ctsi/fav.jpg";
 		source.onerror = "";
 		return true;
 	}
@@ -64,7 +65,6 @@
 		
 		// clear links list
 		links="";
-		
 
 		// special dev routine to delete all links data		
 		// osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
@@ -219,21 +219,23 @@
                     // EDIT MODE - build table to hold retrieved app data
                     var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
 					var links_item_array;
+					var favicon_path_array;
                     
 					for(i = 0; i < links_array.length; i++){
 						link_item = links_array[i];
+						
+						// if link item is presentable
 						if(link_item.indexOf("^") != -1) {
 							link_item_array = link_item.split("^");
 							cell_name=link_item_array[0];
 							cell_url=link_item_array[1];
+							cell_url2=link_item_array[1];
 							
-							//special case for ctsi sites
-							if(link_item.indexOf("ctsi.ucsf.edu") == -1) {
-								cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
-							}
-							else {
-								cell_favicon="<img src='http://ctsi.ucsf.edu/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
-							}
+							favicon_path_array = cell_url.split("//");
+							cell_url2 = favicon_path_array[1];
+							favicon_path_array = cell_url2.split("/");
+							cell_url2 = favicon_path_array[0];
+							cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
                             
 							// build and add table row
 							links_table_data = links_table_data
@@ -241,7 +243,7 @@
 							+ "<td>" + cell_favicon + "</td>"
 							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
 							+ "<td>" + cell_url + "</td>"
-							+ "<td><input type='button' style='font-size:8px;' value='Delete' onClick='delete_array_item(" 
+							+ "<td><input type='button' class='link_save' value='Delete' onClick='delete_array_item(" 
 							+ i + ")'"
 							+ "></td>"
 							+ "</tr>";
@@ -265,15 +267,14 @@
 							link_item_array = link_item.split("^");
 							cell_name=link_item_array[0];
 							cell_url=link_item_array[1];
+							cell_url2=link_item_array[1];
 							
-							//special case for ctsi sites
-							if(link_item.indexOf("ctsi.ucsf.edu") == -1) {
-								cell_favicon="<img src='" + link_item_array[1] + "/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
-							}
-							else {
-								cell_favicon="<img src='http://ctsi.ucsf.edu/favicon.ico' width='16' height='16' onerror='imgErr(this)'>";
-							}
-                            
+							favicon_path_array = cell_url.split("//");
+							cell_url2 = favicon_path_array[1];
+							favicon_path_array = cell_url2.split("/");
+							cell_url2 = favicon_path_array[0];
+							cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+
 							// build and add table row
 							links_table_data = links_table_data
 							+ "<tr>"
@@ -324,16 +325,11 @@
 	</div>
 	-->
     
-    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Sites in your Profile</h3>
+    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Sites</h3>
 
     <div style="padding:5px 0px 0px 25px;">
-        Enter the link name, as you want it to appear on your profile, and its URL.<br />
-        For example, you might want to add a link to your department’s funding<br>
-        opportunities web site or to your research blog. Click ‘Save’ to save the link<br />
-        to your profile. Saved profile links are shown below, where you may also<br />
-        delete links you no longer want to include in your profile.
-        <br /><br />
-        Please enter the link URL with the http prefix. For example: http://www.google.com
+		Enter the link name, as you want it to appear on your profile, and its URL.<br />
+        Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
 	</div>
 	
 	<!-- display the new link input fields -->
@@ -341,13 +337,15 @@
 		<fieldset>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td><label class='textlabel'>Link Name</label><br />
-                    <input id="linkname" type="linkname" name="linkname" style="width:150px;"></td>
+					<td class="links_body>"><b>Link Name</b><br />
+					e.g. CTSI Consultation Services<br />
+                    <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><label class='textlabel'>Link URL</label><br />
-                    <input id="linkurl" type="linkurl" name="linkurl" style="width:250px;"></td>
+					<td class="links_body>"><b>Link URL</b> (not displayed in profile)<br />
+					e.g. www.ctsi.ucsf.edu/consult<br />
+                    <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://"></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td><br /><input type="button" class="link_save" value="Save"></td>
+                    <td><br /><br /><input type="button" class="link_save" value="Save"></td>
 				</tr>				
 			</table>			
 
@@ -357,7 +355,7 @@
     <h4 style="padding-left:10px; padding-top: 0px;">Your Current Links:</h4>
     
 	<!-- display the links -->
-    <div id="edit_links_table" style="padding:0px 0px 0px 25px;">
+    <div id="edit_links_table" style="padding:0px 0px 10px 25px;">
     </div>    
 	
 	<!-- display the footer data -->
@@ -397,13 +395,13 @@
 	</div>
 	-->
 	
-	<h4 style="padding-left:10px; padding-top: 0px;">Recommended Links:</h4>
+	<!--<h4 style="padding-left:10px; padding-top: 0px;">Recommended Links:</h4>-->
     
 	<!-- disply the links -->
-    <div id="view_links_table" style="padding:0px 0px 0px 20px;"></div>
+    <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
 	
 	<!-- display the footer data -->	
-	<div style="margin:0px 10px 0px 10px;">
+	<div style="margin:20px 10px 0px 10px;">
 		<table>
 			<tr>
 				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">

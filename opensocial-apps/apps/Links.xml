@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Links"
+            title="Websites"
             author="Nels Johnson"
             author_email="downrecs@gmail.com" 
             description="A gadget to share your favorite links">
@@ -325,10 +325,10 @@
 	</div>
 	-->
     
-    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Sites</h3>
+    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Websites</h3>
 
     <div style="padding:5px 0px 0px 25px;">
-		Enter the link name, as you want it to appear on your profile, and its URL.<br />
+		Enter the website name, as you want it to appear on your profile, and its URL.<br />
         Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
 	</div>
 	
@@ -337,11 +337,11 @@
 		<fieldset>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td class="links_body>"><b>Link Name</b><br />
+					<td class="links_body>"><b>Website Name</b><br />
 					e.g. CTSI Consultation Services<br />
                     <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td class="links_body>"><b>Link URL</b> (not displayed in profile)<br />
+					<td class="links_body>"><b>Website URL</b> (not displayed in profile)<br />
 					e.g. www.ctsi.ucsf.edu/consult<br />
                     <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://"></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -352,7 +352,7 @@
 		</fieldset>
 	</div>
     
-    <h4 style="padding-left:10px; padding-top: 0px;">Your Current Links:</h4>
+    <h4 style="padding-left:10px; padding-top: 0px;">Your Current Websites:</h4>
     
 	<!-- display the links -->
     <div id="edit_links_table" style="padding:0px 0px 10px 25px;">
@@ -395,7 +395,7 @@
 	</div>
 	-->
 	
-	<!--<h4 style="padding-left:10px; padding-top: 0px;">Recommended Links:</h4>-->
+	<!--<h4 style="padding-left:10px; padding-top: 0px;">Recommended Websites:</h4>-->
     
 	<!-- disply the links -->
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>

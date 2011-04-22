@@ -128,6 +128,7 @@ $(document).ready(function(){
  
 </style>
 
+<!--
 <div style="margin:0px 10px 0px 0px;">
 	<table>
 		<tr>
@@ -138,6 +139,7 @@ $(document).ready(function(){
 		</tr>
 	</table>
 </div>
+-->
 
 ]]>
 </Content>

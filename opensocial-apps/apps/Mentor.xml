@@ -647,6 +647,7 @@
 		</center>
 	</div>
 	
+	<!--
 	<div style="margin:0px 10px 0px 10px;">
 		<table>
 			<tr>
@@ -659,6 +660,7 @@
 			</tr>
 		</table>
 	</div>
+	-->
 
     ]]></Content>
     
@@ -730,6 +732,7 @@
 		<br /><br />
 	</div>
 	
+	<!--
 	<div class="gadget_credits">
 		<table>
 			<tr>
@@ -742,6 +745,7 @@
 			</tr>
 		</table>
 	</div>
+	-->
 		
     ]]></Content>
     

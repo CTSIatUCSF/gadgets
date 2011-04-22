@@ -527,6 +527,8 @@
     	-->  	
     </div>
     <br><br>
+	
+	<!--
     <div style="margin:0px 10px 0px 10px;">
 		<table><tr>
 			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
@@ -535,6 +537,7 @@
 			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>
+	-->
             
     ]]></Content>
     
@@ -696,6 +699,7 @@
     	-->
     </div>
     <br><br>
+	<!--
     <div class="gadget_credits">
 		<table><tr>
 			<td valign="middle"><a href="http://ctsi.ucsf.edu/about" target="_blank" title="Go to the CTSI Web site">
@@ -704,6 +708,7 @@
 			Provided by CTSI at UCSF</a></td>
 		</tr></table>
 	</div>
+	-->
     
     ]]></Content>
     

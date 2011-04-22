@@ -6,12 +6,12 @@
             author_email="downrecs@gmail.com" 
             description="A gadget to share your favorite links">
         <Require feature="opensocial-0.9" />
-        <Require feature="views" />
+        <Require feature="views" />ƒ
         <Require feature="dynamic-height" />
         <Require feature="settitle" />
         <Require feature="osapi" />
         <Require feature="pubsub" />
-        <Optional feature="content-rewrite">
+        <Optional feature="content-rewrite">ƒ
             <Param name="exclude-urls">/.*/</Param>
         </Optional>
     </ModulePrefs>
@@ -57,7 +57,7 @@
 		links = links.replace(links_array[array_index]+"|", "");
 		
 		//alert("ready to write app data with deleted link: " + links);		
-		osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} })	
+		osapi.appdata.update({'userId':'@viewer', 'appId':'@app', 'data':{'links':links} })	
 			.execute(function(result){
 				//console.log(result, map);
 			}
@@ -292,6 +292,8 @@
 						document.getElementById("view_links_table").innerHTML=links_table_data;
 					}
 					
+					document.getElementById("linkurl").value = "http://";
+					
                     gadgets.window.adjustHeight();                   
                     
 				}); /* osapi.appdata.get */
@@ -338,11 +340,11 @@
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td class="links_body>"><b>Website Name</b><br />
-					e.g. CTSI Consultation Services<br />
+					e.g. My Lab Site<br />
                     <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td class="links_body>"><b>Website URL</b> (not displayed in profile)<br />
-					e.g. www.ctsi.ucsf.edu/consult<br />
+					e.g. mylabsite.ucsf.edu<br />
                     <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://"></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td><br /><br /><input type="button" class="link_save" value="Save"></td>
@@ -359,6 +361,7 @@
     </div>    
 	
 	<!-- display the footer data -->
+	<!--
 	<div style="margin:20px 10px 0px 10px;">
 		<table>
 			<tr>
@@ -372,6 +375,7 @@
 			</tr>
 		</table>
 	</div>
+	-->
 
     ]]></Content>
     
@@ -400,7 +404,8 @@
 	<!-- disply the links -->
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
 	
-	<!-- display the footer data -->	
+	<!-- display the footer data -->
+	<!--	
 	<div style="margin:20px 10px 0px 10px;">
 		<table>
 			<tr>
@@ -414,6 +419,7 @@
 			</tr>
 		</table>
 	</div>
+	-->
 		
     ]]></Content>
     

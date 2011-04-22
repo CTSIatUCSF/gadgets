@@ -292,7 +292,9 @@
 						document.getElementById("view_links_table").innerHTML=links_table_data;
 					}
 					
-					document.getElementById("linkurl").value = "http://";
+					if(document.getElementById("linkurl")){
+						document.getElementById("linkurl").value = "http://";
+					}
 					
                     gadgets.window.adjustHeight();                   
                     

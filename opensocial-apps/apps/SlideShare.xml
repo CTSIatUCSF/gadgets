@@ -358,7 +358,7 @@
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
     
-    <Content type="html" view="default, home" preferred_height="716"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home" preferred_height="660"><![CDATA[<!--HTML-->
     
     <style>
     
@@ -545,7 +545,7 @@
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile" preferred_height="500"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="430"><![CDATA[<!--HTML-->
     
     	<style>
     
@@ -591,6 +591,8 @@
 	    					console.log(response);
 	    				});	
 	    			preview(username);
+					
+					gadgets.window.adjustHeight();
 	    		});
 	    	});
 	    	

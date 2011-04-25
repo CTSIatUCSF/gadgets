@@ -668,7 +668,7 @@
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile" preferred_height="600"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="350"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {
@@ -688,6 +688,7 @@
     <script type="text/javascript">
     	
     	UCSF.Mentor.displayAppSummary();
+		gadgets.window.adjustHeight();
     	
     </script>
  

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+		title="Profile List Tool" width="900">
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
+        <Require feature="osapi" />
+		<Require feature="dynamic-height" />
+    </ModulePrefs>
+	
+<!-- ==================== START COMBINED VIEWS ==================== -->   
+    
+    <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>	
+	
+	<style>
+    	.people_picker_title {
+    		font-family: Verdana, Arial;
+    		font-size: 14px;
+    	}
+    	.people_picker_title_orange {
+    		font-family: Verdana, Arial;
+    		font-size: 14px;
+			color: #FF9900;
+    	}		
+    	.people_picker_body {
+    		font-family: Arial;
+    		font-size: 12px;
+    	}
+    	.people_picker_credit {
+    		font-family: Arial;
+    		font-size: 10px;
+    	}
+    	.people_picker_table_cell {
+    		font-family: Arial;
+    		font-size: 12px;
+			padding: 0 20px 0 0;
+    	} 		   	
+    </style>
+
+	<script type="text/javascript">
+	
+	function show_people() {
+	
+		// test data
+		//var arrPersonIds = ["4570290","5113848","4872413","4591862","5542459","5222043"];
+		
+		gadgets.views.requestNavigateTo( "canvas" );
+		
+		osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['personIds']} )
+			.execute(function(result){
+		
+			alert("personIDs retrieved: " + JSON.stringify(result));
+			
+			// trim fetched app data to pure delimited string
+			var fetched_appdata_string = JSON.stringify(result);
+			var fetched_appdata_array = fetched_appdata_string.split("personIds\":\"");
+			fetched_appdata_string = fetched_appdata_array[1];
+			fetched_appdata_array = fetched_appdata_string.split("\"}}");
+			var strIDs = fetched_appdata_array[0];
+					
+			// convert delimited string to array
+			var arrPersonIds = strIDs.split(",");
+			
+			var batch = osapi.newBatch();
+
+			for (i in arrPersonIds) {
+				//alert(arrPersonIds[i]);
+				batch.add('person[' + i + ']', osapi.people.get(
+					{
+					//'userId': data.personIds[i],
+					'userId': arrPersonIds[i],
+					'groupId': '@self'
+					//'fields': fields
+					}
+				));
+			}
+  
+			batch.execute(function(people){
+		
+				// make a usable json object
+				var strPeople = gadgets.json.stringify(people);
+				strPeople = strPeople.replace( /\]/gi, "" );
+				strPeople = strPeople.replace( /\[/gi, "");
+				var oPeople = gadgets.json.parse(strPeople);
+		
+				var strTable="<table cellspacing='0' cellpadding='0' width='600'><tr>";
+			
+				// build the table header row
+				strTable=strTable + "<td align='left' valign='top' class='people_picker_table_cell'>"
+					+ "<u><b>Last&nbsp;Name</b></u></td>";
+				strTable=strTable + "<td align='left' valign='top' class='people_picker_table_cell'>"
+					+ "<u><b>First&nbsp;Name</b></u></td>";
+				strTable=strTable + "<td align='left' valign='top' class='people_picker_table_cell'>"
+					+ "<u><b>Email&nbsp;Address</b></u></td>";
+				strTable=strTable + "<td align='left' valign='top' class='people_picker_table_cell'>"
+					+ "<u><b>Department</b></u></td>";
+				strTable=strTable + "<td align='left' valign='top' class='people_picker_table_cell'>"
+					+ "<u><b>Faculty&nbsp;Rank</b></u></td>";
+				strTable=strTable + "</tr>";
+		
+				var table_row;
+		
+				// get the desired field data
+				for (i in oPeople) {
+					table_row="<tr>";
+					table_row += "<td align='left' valign='top' class='people_picker_table_cell'>" 
+						+ oPeople[i].name.familyName + "</td>";
+					table_row += "<td align='left' valign='top' class='people_picker_table_cell'>" 
+						+ oPeople[i].name.givenName + "</td>";
+					table_row += "<td align='left' valign='top' class='people_picker_table_cell'>" 
+						+ oPeople[i].emails.value + "</td>";
+					table_row += "<td align='left' valign='top' class='people_picker_table_cell'>" 
+						+ oPeople[i].organizations.field + "</td>";
+					table_row += "<td align='left' valign='top' class='people_picker_table_cell'>" 
+						+ "" + "</td>";
+					table_row += "</tr>";
+					strTable=strTable + table_row;
+					}
+		
+				strTable=strTable+"</table>";
+
+				// put the table in the people_picker div
+				document.getElementById("picked_people").innerHTML = strTable;
+		
+				gadgets.window.adjustHeight();
+			});	
+		
+		}); /* osapi.appdata.get */
+	
+	} /* show_people */
+	
+	function list_dedupe(list) {
+		var list_vals = new Array();
+		var new_list = new Array();
+		var hash = new Object();	
+		
+		list_vals = list.split(",");
+
+		for (var i = 0; i < list_vals.length; i++) {
+			if (hash[list_vals[i]] != 1)	{
+				new_list = new_list.concat(list_vals[i]);
+				hash[list_vals[i]] = 1;
+			}
+		}
+		return new_list
+	}
+	
+	</script>
+	]]>
+	</Content>
+	
+<!-- ==================== END COMBINED VIEWS ==================== -->    
+
+
+
+
+<!-- ==================== START SMALL VIEW ==================== -->	
+
+    <Content type="html" view="small"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+
+	<script type="text/javascript">	
+	function callback(sender, message) {
+	
+		// format of incoming id list (message):
+		// {"personIds":["4570290","5113848","4872413","4591862","5542459","5222043"],"message":"210 Profiles found"}
+		
+		// test data
+		// var arrPersonIds = "4570290,5113848,4872413,4591862,5542459,5222043";
+		message = {"personIds":["4570290","5113848","4872413","4591862","5542459","5222043"],"message":"210 Profiles found"};
+		
+		// parse the message data to get just the comma-seperated person IDs	
+		var arrPersonIds = message.personIds;
+		var strNewIDs = JSON.stringify(arrPersonIds);
+		strNewIDs = strNewIDs.replace( /\"/gi, "" );
+		strNewIDs = strNewIDs.replace( /\[/gi, "" );
+		strNewIDs = strNewIDs.replace( /\]/gi, "" );
+		
+		// get the existing person IDs
+		var appData = osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['personIds']} ).execute();
+		var fetched_appdata_string = JSON.stringify(appData);
+		var fetched_appdata_array = fetched_appdata_string.split("personIds\":\"");
+		fetched_appdata_string = fetched_appdata_array[1];
+		fetched_appdata_array = fetched_appdata_string.split("\"}}");
+		
+		// concatenate existing and incoming person IDs
+		var strPersonIds = fetched_appdata_array[0]; + "," + strNewIDs;
+		
+		alert("String to be deduped : " + strPersonIds);
+		
+		// dedupe the concatenated person IDs
+		strPersonIds = list_dedupe(strPersonIds);
+		
+		alert("personIDs to be stored: " + strPersonIds);
+		
+		// store the new person IDs
+		osapi.appdata.update( { 'userId':'@viewer', 'appId':'@app', 'data':{'personIds':strPersonIds} } )
+			.execute(function(result){
+				//console.log(result, map);
+			}
+		);
+	};
+	</script>	
+	
+	<input type="button" value="call back" onClick="callback();">
+	<input type="button" value="show people" onClick="show_people();">
+	
+	<script type="text/javascript">	
+		gadgets.pubsub.subscribe("JSONPersonIds", callback);
+	</script>
+
+
+	]]>
+	</Content>
+
+<!-- ==================== END SMALL VIEW ==================== -->
+
+
+
+
+<!-- ==================== START CANVAS VIEW ==================== -->
+
+    <Content type="html" view="canvas"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>	
+	
+	<div>
+		<p class="people_picker_title_orange">View Picked Person List<p>
+		<p class="people_picker_body">
+			&nbsp;&nbsp;&nbsp;
+			<a href="">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="">Delete list</a>&nbsp;&nbsp;&nbsp;
+		</p>
+	</div>
+	
+	<div id="picked_people"></div>
+	
+	]]>
+	</Content>	
+
+<!-- ==================== END CANVAS VIEW ==================== -->	
+	
+</Module>

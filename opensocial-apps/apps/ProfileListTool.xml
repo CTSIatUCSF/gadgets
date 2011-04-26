@@ -179,6 +179,9 @@
 		
 		// get the existing person IDs
 		var appData = osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['personIds']} ).execute();
+		
+		alert("appData = " + appData);
+		
 		var fetched_appdata_string = JSON.stringify(appData);
 		var fetched_appdata_array = fetched_appdata_string.split("personIds\":\"");
 		fetched_appdata_string = fetched_appdata_array[1];

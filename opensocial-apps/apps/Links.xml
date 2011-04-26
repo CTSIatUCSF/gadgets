@@ -16,14 +16,14 @@
         </Optional>
     </ModulePrefs>
     
-<!-- ==================== START COMBINED VIEWS ==================== -->    
+<!-- ==================== START COMBINED VIEWS ==================== -->
     
     <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <link rel="stylesheet" href="css/cluetip.css" type="text/css" media="screen, projection" >
-    
+
     <style>
     	.links_title {
     		font-family: Verdana, Arial;

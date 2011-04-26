@@ -6,14 +6,10 @@
             author_email="downrecs@gmail.com" 
             description="A gadget to share your favorite links">
         <Require feature="opensocial-0.9" />
-        <Require feature="views" />ƒ
+        <Require feature="views" />
         <Require feature="dynamic-height" />
-        <Require feature="settitle" />
         <Require feature="osapi" />
         <Require feature="pubsub" />
-        <Optional feature="content-rewrite">ƒ
-            <Param name="exclude-urls">/.*/</Param>
-        </Optional>
     </ModulePrefs>
     
 <!-- ==================== START COMBINED VIEWS ==================== -->

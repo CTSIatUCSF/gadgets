@@ -668,7 +668,7 @@
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile" preferred_height="350"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="200"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {

@@ -8,7 +8,6 @@
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="flash" />
-        <Require feature="settitle" />
         <Require feature="osapi" />
         <Require feature="pubsub" />
     </ModulePrefs>

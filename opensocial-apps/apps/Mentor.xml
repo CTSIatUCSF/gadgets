@@ -488,6 +488,15 @@
     		font-size: 10px;
     	}      	
     </style>
+	
+		<!--[if lt IE 8]>
+	<script type="text/javascript">
+		//alert("Internet Explorer 6 does not support this functionality. Please upgrade your browser.");
+	</script>
+	<center>
+	<span style="color:#FF0000;">Note: Internet Explorer 6 does not support this functionality. Please upgrade your browser.</span>
+	</center>
+	<![endif]-->
     	
     <script type="text/javascript" >
 
@@ -696,6 +705,15 @@
     		font-size: 10px;
     	}      	
     </style>
+	
+	<!--[if lt IE 8]>
+	<script type="text/javascript">
+		//alert("Internet Explorer 6 does not support this functionality. Please upgrade your browser.");
+	</script>
+	<center>
+	<span style="color:#FF0000;">Note: Internet Explorer 6 does not support this functionality. Please upgrade your browser.</span>
+	</center>
+	<![endif]-->
 		
     <script type="text/javascript">
     	

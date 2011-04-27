@@ -250,8 +250,13 @@
                     links_table_data = links_table_data + "</tr></table>";
                         
                     // put appdata table markup in designated div
+                    // and set height based on which view view this is
 					if (document.getElementById("edit_links_table")){
 						document.getElementById("edit_links_table").innerHTML=links_table_data;
+						edit_mode_height = 250 + ((links_array.length - 1) * 28) + 30;
+						//alert("number of links: " + links_array.length);
+						//alert("set height to: " + edit_mode_height);						
+						gadgets.window.adjustHeight(edit_mode_height);
 					}
 					
                     // VIEW MODE - build table to hold retrieved app data
@@ -286,13 +291,17 @@
                     // put appdata table markup in designated div
 					if(document.getElementById("view_links_table")){
 						document.getElementById("view_links_table").innerHTML=links_table_data;
+						view_mode_height = 12 + ((links_array.length - 1) * 28) + 24;
+						//alert("number of links: " + links_array.length);
+						//alert("set height to: " + view_mode_height);
+						gadgets.window.adjustHeight(view_mode_height);					
 					}
 					
 					if(document.getElementById("linkurl")){
 						document.getElementById("linkurl").value = "http://";
 					}
 					
-                    gadgets.window.adjustHeight();                   
+                    //gadgets.window.adjustHeight();                   
                     
 				}); /* osapi.appdata.get */
 				
@@ -328,7 +337,8 @@
     <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Websites</h3>
 
     <div style="padding:5px 0px 0px 25px;">
-		Enter the website name, as you want it to appear on your profile, and its URL.<br />
+    	Add up to five  websites to your profile. 
+		Enter the website name, as you want it to appear on your profile, and its URL. 
         Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
 	</div>
 	
@@ -339,13 +349,15 @@
 				<tr>
 					<td class="links_body>"><b>Website Name</b><br />
 					e.g. My Lab Site<br />
-                    <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"></td>
+                    <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"><br />
+                    (40 characters max)</td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td class="links_body>"><b>Website URL</b> (not displayed in profile)<br />
 					e.g. mylabsite.ucsf.edu<br />
                     <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://"></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td><br /><br /><input type="button" class="link_save" value="Save"></td>
+                    <td><br /><br /><input type="button" class="link_save" value="Save"><br>
+                    </td>
 				</tr>				
 			</table>			
 

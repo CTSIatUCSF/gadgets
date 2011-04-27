@@ -21,7 +21,6 @@
     <!DOCTYPE html>
     
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    <link rel="stylesheet" href="css/cluetip.css" type="text/css" media="screen, projection" >
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
@@ -534,18 +533,6 @@
     	
     	// retrieve last-saved data and map it to the fields in the data map
     	UCSF.Mentor.displayAppData();
-
-		$('a.jt:eq(0)').cluetip(
-			{cluetipClass: 'jtip',
-			local: true, 
-			hideLocal: true, 
-			sticky: true,
-			mouseOutClose: true,
-			closePosition: 'title',
-			showTitle: true,
-			width: '400px',
-			height: '450px'
-		});
     });
 	
 	</script>    	

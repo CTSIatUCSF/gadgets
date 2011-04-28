@@ -40,14 +40,9 @@
     <script type="text/javascript" src="js/UCSF.js"></script>
     
     <script type="text/javascript">
-	
-	function imgErr(source){
-		//source.style.visibility = "hidden";
-		source.src="http://www.fakedoom.com/ctsi/fav.jpg";
-		source.onerror = "";
-		return true;
-	}
-
+    
+    var g_max_links = 5;
+    var g_total_links;
 	
 	function delete_array_item (array_index){
 		links = links.replace(links_array[array_index]+"|", "");
@@ -98,12 +93,19 @@
 				// clear last-fetched data
 				links = "";
 				
-				//alert("ready to write app data: " + map);		
-				osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':map} })	
-                    .execute(function(result){
-						console.log(result, map);
-					}
-				);
+				//alert("ready to write app data: " + map);
+				
+				if (g_total_links < g_max_links) {
+					// if under max links, proceed
+					osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':map} })	
+                    	.execute(function(result){
+							console.log(result, map);
+						}
+					);
+					alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+				} else {
+					alert("You already have the maximum number of links.");
+				}
             }
 			
             $('.link_save').click(function(){
@@ -135,7 +137,7 @@
 				// write link item
                 updateAppData(link_data);
                 
-                alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+                // moved - alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
         
                 // refresh after update
                 UCSF.Links.displayAppData();
@@ -216,6 +218,11 @@
                     var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
 					var links_item_array;
 					var favicon_path_array;
+					
+					g_total_links = links_array.length - 1;
+					if (g_total_links < 0) {
+						g_total_links = 0;
+					}
                     
 					for(i = 0; i < links_array.length; i++){
 						link_item = links_array[i];

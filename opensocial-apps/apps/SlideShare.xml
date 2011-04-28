@@ -590,8 +590,6 @@
 	    					console.log(response);
 	    				});	
 	    			preview(username);
-					
-					gadgets.window.adjustHeight();
 	    		});
 	    	});
 	    	

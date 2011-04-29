@@ -38,6 +38,9 @@ function parseXml(xml) {
 }    
 
 function getPersonId(link) {
+        if (link.indexOf("?") == -1) {
+            return '';
+        }
         var vars = link.split("?")[1].split("&");
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");

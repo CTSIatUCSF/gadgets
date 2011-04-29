@@ -23,6 +23,20 @@
     <script type="text/javascript" src="js/UCSF.js"></script>
     
     <script type="text/javascript">
+	
+	g_chars_allowed=2000;
+	g_textarea_content="";
+	
+	function limit_chars(){
+		num_chars = document.getElementById("facultyNarative").value.length; 
+		if (num_chars > g_chars_allowed) {
+			alert("Your narrative exceeds the maximum number of characters.")
+			document.getElementById("facultyNarative").value = g_textarea_content;
+		}
+		else { 
+			g_textarea_content = document.getElementById("facultyNarative").value; 
+		}
+	}
     
     if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
     var Questions = {};
@@ -633,7 +647,8 @@
  		</div>
 		
 		<fieldset>
-			<textarea rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarative"></textarea>
+			<textarea id="facultyNarative" rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarative" onKeyDown="limit_chars()" onKeyUp="limit_chars()" onMouseout="limit_chars()"></textarea><br>
+			<span style="margin-left:12px;"> (2000 characters max)</span>
 		</fieldset>		
 	</div>
 

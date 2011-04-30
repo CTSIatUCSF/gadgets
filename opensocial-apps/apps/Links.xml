@@ -1,196 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Websites"
-            author="Nels Johnson"
-            author_email="downrecs@gmail.com" 
-            description="A gadget to share your favorite links">
-        <Require feature="opensocial-0.9" />
+        title="Websites">
         <Require feature="views" />
         <Require feature="dynamic-height" />
-        <Require feature="osapi" />
         <Require feature="pubsub" />
+        <Require feature="osapi" />
     </ModulePrefs>
+
+<!-- ==================== START COMBINED VIEWS ==================== -->    
     
-<!-- ==================== START COMBINED VIEWS ==================== -->
-    
-    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    <link rel="stylesheet" href="css/cluetip.css" type="text/css" media="screen, projection" >
-
-    <style>
-    	.links_title {
-    		font-family: Verdana, Arial;
-    		font-size: 14px;
-    	}
-    	.links_body {
-    		font-family: Arial;
-    		font-size: 12px;
-    	}
-    	.links_credit {
-    		font-family: Arial;
-    		font-size: 10px;
-    	}      	
-    </style>
-    
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/UCSF.js"></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
     
-    <script type="text/javascript">
-    
-    var g_max_links = 5;
-    var g_total_links;
+	<style>
+    	.links_title {font-family:Verdana, Arial; font-size: 14px;}
+    	.links_body {font-family:Arial; font-size: 12px; }
+    	.links_credit { font-family:Arial; font-size:10px; }      	
+    </style>
 	
-	function delete_array_item (array_index){
-		links = links.replace(links_array[array_index]+"|", "");
-		
-		//alert("ready to write app data with deleted link: " + links);		
-		osapi.appdata.update({'userId':'@viewer', 'appId':'@app', 'data':{'links':links} })	
-			.execute(function(result){
-				//console.log(result, map);
-			}
-		);
-		
-		// clear links list
-		links="";
+	<script type="text/javascript">
+	
+    	var g_max_links = 5;
+    	var g_total_links;
+    	var links = "";
+		var links_array = "";	
+	
+		function deleteArrayItem (array_index) {
+			links = links.replace(links_array[array_index]+"|", "");	
+			osapi.appdata.update({'userId':'@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
+			links="";
 
-		// special dev routine to delete all links data		
-		// osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
+			// special dev routine to delete all links data		
+			//osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
+			//alert("All app data deleted");
 		
-		UCSF.Links.displayAppData();
-	}
-
-    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
-    var Questions = {};
-    var links = "";
-	var links_array = "";
-    
-    window.UCSF = UCSF || {};
-    UCSF.Links = UCSF.Links || {};
-   
-    os.ready(function(){
-    });
-    
-    //INIT:
-    //Inits the UI
-    
-    UCSF.UI.MoreLess();
-    
-    //UCSF.UI.DebugNav();
-    //UCSF.UI.DebugParams();
+			displayLinksAppData();
+		}
 	
-	UCSF.Links.addSaveHandler = function(){
-		$(document).ready( function(){ os.ready( function(){
-			function updateAppData(map){
-                //$.extend(true, map, {"lastUpdate" : new Date().getTime().toString() });
-				
-				// append new data to last-fetched data
-				map = links + map;
-				
-				// clear last-fetched data
-				links = "";
-				
-				//alert("ready to write app data: " + map);
-				
-				if (g_total_links < g_max_links) {
-					// if under max links, proceed
-					osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':map} })	
-                    	.execute(function(result){
-							console.log(result, map);
-						}
-					);
-					alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
-				} else {
-					alert("You already have the maximum number of links.");
-				}
-            }
-			
-            $('.link_save').click(function(){
-                
-				// get link name and url from form
-                var new_link_name=document.getElementById("linkname").value;
-                var new_link_url=document.getElementById("linkurl").value;
-				
-				// check for empty input boxes
-				if(new_link_name=="" || new_link_url==""){
-					alert("Please provide both a Link Name and a URL");
-					return;
-				}
-				
-				// prepend http header if missing
-				if(new_link_url.indexOf("://") == -1){
-					new_link_url = "http://" + new_link_url;
-				}
-				
-				// remove delimiter chars in case any were keyed in
-				new_link_name = new_link_name.replace("|", "");
-				new_link_name = new_link_name.replace("^", "");
-				new_link_url = new_link_url.replace("|", "");
-				new_link_url = new_link_url.replace("^", "");				
-				
-				// build link item
-				var link_data = new_link_name + "^" + new_link_url + "|";
-				
-				// write link item
-                updateAppData(link_data);
-                
-                // moved - alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
-        
-                // refresh after update
-                UCSF.Links.displayAppData();
-				
-				// clean input fields
-				document.getElementById("linkname").value = "";
-                document.getElementById("linkurl").value = "";
-            });
-            
-		});}); //jquery.ready //os.ready
-	};
-	
-	UCSF.Links.addSaveHandler();
-	
-	UCSF.Links.displayLastUpdated = function(){
-		$(document).ready(function(){ os.ready(function(){
-			osapi.appdata.get( {
-				'userId': '@owner',
-				 'appId':'@app', 
-				 'fields':['lastUpdate'] } )
+		function displayLinksAppData() {
+			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['links'] } )
 				.execute(function(result){
-					//console.log('displayLastUpdated', result);
-					result = os.osapi.getOwnerFromResult( result );
-					var d = new Date(parseInt(result['lastUpdate']));
-					console.log( 'displayLastUpdated', result['lastUpdate'] );
-					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
-					if( typeof(result['lastUpdate']) !== 'undefined' ){ 
-						$('.updated').show()
-							//.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
-							.find('span').text(  d.toDateString() );
-					}else{
-						$('.updated').hide();
-					}
-					//gadgets.window.adjustHeight();
-				});
-		});}); // jquery.ready os.ready
-	};
-	
-	UCSF.Links.displayLastUpdated();
-	
-		
-	UCSF.Links.displayAppData = function(){
-		$(document).ready(function(){ os.ready(function(){
-			var fields = {};
-			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
-			
-			var keys = [];
-            
-			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields': ['links']})
-				.execute(function(result){
-        
-                    // alert("fetched appdata: " + JSON.stringify(result));
-					
+				
 					// trim fetched app data to pure delimited string
 					var fetched_appdata_string = JSON.stringify(result);
 					var fetched_appdata_array = fetched_appdata_string.split("links\":\"");
@@ -220,9 +77,7 @@
 					var favicon_path_array;
 					
 					g_total_links = links_array.length - 1;
-					if (g_total_links < 0) {
-						g_total_links = 0;
-					}
+					if (g_total_links < 0) {g_total_links = 0;}
                     
 					for(i = 0; i < links_array.length; i++){
 						link_item = links_array[i];
@@ -242,14 +97,11 @@
                             
 							// build and add table row
 							links_table_data = links_table_data
-							+ "<tr>"
-							+ "<td>" + cell_favicon + "</td>"
+							+ "<tr>" + "<td>" + cell_favicon + "</td>"
 							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
 							+ "<td>" + cell_url + "</td>"
-							+ "<td><input type='button' class='link_save' value='Delete' onClick='delete_array_item(" 
-							+ i + ")'"
-							+ "></td>"
-							+ "</tr>";
+							+ "<td><input type='button' class='link_save' value='Delete' onClick='deleteArrayItem(" 
+							+ i + ")'" + "></td>" + "</tr>";
 						}
 					}
                     
@@ -260,7 +112,7 @@
                     // and set height based on which view view this is
 					if (document.getElementById("edit_links_table")){
 						document.getElementById("edit_links_table").innerHTML=links_table_data;
-						edit_mode_height = 250 + ((links_array.length - 1) * 28) + 30;
+						edit_mode_height = 250 + ((links_array.length - 1) * 28) + 10;
 						//alert("number of links: " + links_array.length);
 						//alert("set height to: " + edit_mode_height);						
 						gadgets.window.adjustHeight(edit_mode_height);
@@ -306,41 +158,60 @@
 					
 					if(document.getElementById("linkurl")){
 						document.getElementById("linkurl").value = "http://";
-					}
-					
-                    //gadgets.window.adjustHeight();                   
-                    
-				}); /* osapi.appdata.get */
-				
-			});}); /* jquery.ready os.ready */
-		};
+					}					
+			}); /*osapi.appdata.get*/
+		}
 		
-    </script>
+		function saveLinksAppData() {
+	
+			if (g_total_links < g_max_links) {
+				
+				// get link name and url from form
+                var new_link_name=document.getElementById("linkname").value;
+                var new_link_url=document.getElementById("linkurl").value;
+				
+				// check for empty input boxes
+				if(new_link_name=="" || new_link_url==""){
+					alert("Please provide both a Link Name and a URL");
+					return;
+				}
+				
+				// prepend http header if missing
+				if(new_link_url.indexOf("://") == -1){new_link_url = "http://" + new_link_url;}
+				
+				// remove delimiter chars in case any were keyed in
+				new_link_name = new_link_name.replace("|", "");
+				new_link_name = new_link_name.replace("^", "");
+				new_link_url = new_link_url.replace("|", "");
+				new_link_url = new_link_url.replace("^", "");				
+				
+				// build link item, combine current list with new item, write and clear list
+				var link_data = new_link_name + "^" + new_link_url + "|";
+				links = links + link_data;
+                osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result) {});   
+                links = "";        
+                        
+                // refresh after update, clear input fields
+                displayLinksAppData();
+				document.getElementById("linkname").value = "";
+                document.getElementById("linkurl").value = "";
+				
+				alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+			} else {alert("You already have the maximum number of links.");}
+        }
+        		
+	</script>
     
     ]]></Content>
-    
-<!-- ==================== END COMBINED VIEWS ==================== -->    
-
+<!-- ==================== END COMBINED VIEWS ==================== -->   
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
-    
     <Content type="html" view="default, home" preferred_height="300"><![CDATA[<!--HTML-->
     	
-    <script type="text/javascript" >
-        $(document).ready(function(){
-            // retrieve last-saved data
-            UCSF.Links.displayAppData();
-        });
-	</script>    	
+    <script type="text/javascript">displayLinksAppData();</script>    	
     
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
-    
-	<!--
-    <div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
-		Last Updated: <span style="font-size: 10px;"></span>
-	</div>
-	-->
-    
+	
     <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Websites</h3>
 
     <div style="padding:5px 0px 0px 25px;">
@@ -351,95 +222,37 @@
 	
 	<!-- display the new link input fields -->
 	<div class='question' style="padding:0px 0px 5px 12px;">
-		<fieldset>
-			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td class="links_body" valign="top"><b>Website Name</b><br />
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="links_body" valign="top"><b>Website Name</b><br />
 					e.g. My Lab Site<br />
-                    <input id="linkname" type="linkname" name="linkname" style="width:150px; margin-top:4px;"><br />
-                    (40 characters max)</td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
+                    <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;"><br />
+                    (60 characters max)
+                </td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
 					e.g. mylabsite.ucsf.edu<br />
-                    <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://"></td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td><br /><br /><input type="button" class="link_save" value="Save"><br>
-                    </td>
-				</tr>				
-			</table>			
-
-		</fieldset>
+                    <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><br /><br /><input type="button" style="margin-bottom: 8px;" value="Save" onClick="saveLinksAppData();"></td>
+			</tr>				
+		</table>			
 	</div>
     
     <h4 style="padding-left:10px; padding-top: 0px;">Your Current Websites:</h4>
-    
-	<!-- display the links -->
-    <div id="edit_links_table" style="padding:0px 0px 10px 25px;">
-    </div>    
-	
-	<!-- display the footer data -->
-	<!--
-	<div style="margin:20px 10px 0px 10px;">
-		<table>
-			<tr>
-				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
-					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
-				</td>
-				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="links_credit" title="Go to the CTSI Web site">
-                    Powered by CTSI at UCSF</a>
-				</td>
-			</tr>
-		</table>
-	</div>
-	-->
-
+    <div id="edit_links_table" style="padding:0px 0px 10px 25px;"></div>
+            
     ]]></Content>
-    
 <!-- ==================== END HOME/EDIT VIEW ==================== -->    
-
-
+    
 <!-- ==================== START PROFILE VIEW ==================== -->
-    
     <Content type="html" view="default, profile" preferred_height="100"><![CDATA[<!--HTML-->
-		
-    <script type="text/javascript" >
-        $(document).ready(function(){
-            // retrieve last-saved data
-            UCSF.Links.displayAppData();
-        });
-	</script>
-	
-	<!--
-	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
-		Last Updated: <span style="font-size: 10px;"></span>
-	</div>
-	-->
-	
-	<!--<h4 style="padding-left:10px; padding-top: 0px;">Recommended Websites:</h4>-->
     
-	<!-- disply the links -->
+    <script type="text/javascript">displayLinksAppData();</script>
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
-	
-	<!-- display the footer data -->
-	<!--	
-	<div style="margin:20px 10px 0px 10px;">
-		<table>
-			<tr>
-				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
-					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
-				</td>
-				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="links_credit" title="Go to the CTSI Web site">
-                    Powered by CTSI at UCSF</a>
-				</td>
-			</tr>
-		</table>
-	</div>
-	-->
-		
-    ]]></Content>
     
-<!-- ==================== END PROFILE VIEW ==================== -->    
-  
+    ]]></Content>
+<!-- ==================== END PROFILE VIEW ==================== -->  
+
 </Module>

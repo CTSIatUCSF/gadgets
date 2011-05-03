@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Faculty Mentoring"
-            author="Nels Johnson"
-            author_email="downrecs@gmail.com" height="800">
+        title="Faculty Mentoring">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
-        <Require feature="osapi" />
         <Require feature="pubsub" />
+        <Require feature="osapi" />
     </ModulePrefs>
     
 <!-- ==================== START COMBINED VIEWS ==================== -->    
@@ -16,464 +14,287 @@
     <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
+    <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/UCSF.js"></script>
     
     <script type="text/javascript">
 	
-	g_chars_allowed=2000;
-	g_textarea_content="";
+		g_chars_allowed=2000;
+		g_textarea_content="";
 	
-	function limit_chars(){
-		num_chars = document.getElementById("facultyNarative").value.length; 
-		if (num_chars > g_chars_allowed) {
-			alert("Your narrative exceeds the maximum number of characters.")
-			document.getElementById("facultyNarative").value = g_textarea_content;
-		}
-		else { 
-			g_textarea_content = document.getElementById("facultyNarative").value; 
-		}
-	}
-    
-    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
-    var Questions = {};
-    
-    window.UCSF = UCSF || {};
-    UCSF.Mentor = UCSF.Mentor || {};
-   
-    os.ready(function(){
-    	//TODO: update this if you change the HTML.
-    	//TODO: use this function createMentorDataMap(); // uncomment below.
-    	Questions = "{\"primaryResearch\":{\"name\":\"primaryResearch\",\"type\":\"radio\",\"labels\":{\"clinical\":\"Clinical\",\"laboratory\":\"Laboratory-based\",\"socialScience\":\"Social Science\"}},\"interestArea\":{\"name\":\"interestArea\",\"type\":\"checkbox\",\"labels\":{\"animal\":\"Animal\",\"cell\":\"Cell\",\"epidemiology\":\"Epidemiology\",\"globalHealth\":\"Global Health\",\"human\":\"Human\",\"healthServices\":\"Health Services\",\"publicHealthPolicy\":\"Public Health/ Policy\",\"socialBehavioral\":\"Social/ Behavioral\",\"healthProfessionEducation\":\"Health Professions Education\"}},\"availableMentorFaculty\":{\"name\":\"availableMentorFaculty\",\"type\":\"checkbox\",\"labels\":{\"proj\":\"Project Mentor\",\"co\":\"Co-Mentor\",\"research\":\"Lead Research / Scholarly Mentor\",\"career\":\"Career Mentor\"}},\"facultyMenteeLevel\":{\"name\":\"facultyMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"junior\":\"Junior Faculty\",\"mid\":\"Mid-level Faculty\",\"senior\":\"Senior Faculty\"}},\"facultyContactPref\":{\"name\":\"facultyContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email (see above)\",\"phone\":\"Phone (see above)\",\"assistant\":\"Assistant\"}},\"facultyAssistantName\":{\"name\":\"facultyAssistantName\",\"type\":\"text\"},\"facultyAssistantEmail\":{\"name\":\"facultyAssistantEmail\",\"type\":\"email\"},\"facultyAssistantPhone\":{\"name\":\"facultyAssistantPhone\",\"type\":\"text\"},\"availableMentorStudents\":{\"name\":\"availableMentorStudents\",\"type\":\"checkbox\",\"labels\":{\"research\":\"Research Mentor\",\"career\":\"Career Mentor\"}},\"studentMenteeLevel\":{\"name\":\"studentMenteeLevel\",\"type\":\"checkbox\",\"labels\":{\"professional\":\"Professional Student\",\"graduate\":\"Graduate Student\",\"resident\":\"Resident\",\"post-doc\":\"Post-doc\",\"fellow\":\"Fellow\"}},\"studentContactPref\":{\"name\":\"studentContactPref\",\"type\":\"checkbox\",\"labels\":{\"email\":\"Email\",\"phone\":\"Phone\",\"assistant\":\"Assistant\"}},\"studentAssistantName\":{\"name\":\"studentAssistantName\",\"type\":\"text\"},\"studentAssistantEmail\":{\"name\":\"studentAssistantEmail\",\"type\":\"email\"},\"studentAssistantPhone\":{\"name\":\"studentAssistantPhone\",\"type\":\"text\"},\"facultyNarative\":{\"name\":\"facultyNarative\",\"type\":\"textarea\"},\"studentNarative\":{\"name\":\"studentNarative\",\"type\":\"textarea\"}}";
-    	Questions = gadgets.json.parse(Questions);
-    	console.log( "questions", Questions );
-    });
-    
-    //INIT:
-    //Inits the UI
-    
-    UCSF.UI.MoreLess();
-    
-    //UCSF.UI.DebugNav();
-    //UCSF.UI.DebugParams();
-    
-    /*
-    $(document).ready(function(){ os.ready(function(){
-    	$('a.nav').each( function(){
-    		$(this).attr('target','_self');
-    		$(this).click(function(){
-    			var view = $(this).attr('href');
-    			
-    			view = view.substr(view.lastIndexOf('#') + 1);
-    			try{
-					gadgets.views.requestNavigateTo( view );
-				}catch(e){
-					console.log(e);
-				}
-    		});
-    	});// a.nav
-    	
-    }); });
-    */
-    
-    UCSF.Mentor.addOnChangeHandlers = function(){
-    	$(document).ready(function(){ os.ready(function(){
-    	
-    		//private function to update appData based on an onChange Event
-    		function updateAppData(map){
-				$.extend(true, map, {'lastUpdate': new Date().getTime().toString() });
-				osapi.appdata.update(  
-					{	'userId': '@viewer', 
-						'appId':'@app', 
-						'data': map 
-					} )
-					.execute(function(result){
-						console.log(result, map);
-					});
+		function limit_chars(){
+			num_chars = document.getElementById("facultyNarrative").value.length; 
+			if (num_chars > g_chars_allowed) {
+				alert("Your narrative exceeds the maximum number of characters.");
+				document.getElementById("facultyNarrative").value = g_textarea_content;
 			}
-  			
-  			//find questions on the form
-			$('.question fieldset').each(function(){ 
-				//the current question
-				var question = $(this);
-					
-				$(this).find('input[type=radio]').change(function(){
-					var str = [];
-					$(question).find('input:checked').each(function(){
-						str.push($(this).val());
-					}); 
-					//console.log( this.name, this.value, str );
-					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
-					//console.log(map);
-					updateAppData( map );				
-				});
-							
-				$(this).find('input[type=checkbox]').change(function(){
-					var str = [];
-					$(question).find('input:checked').each(function(){
-						str.push($(this).val());
-					}); 
-					str = str.join(", ");
-					//console.log( this.name, this.value, str );
-					var map = gadgets.json.parse( "{ \"" + this.name + "\" : \"" + str + "\" }" );
-					//console.log(map);
-					updateAppData( map );
-				});
-			
-				$(this).find('input[name], textarea[name]')
-					.not('[type=checkbox]').not('[type=radio]')
-					.change(function(){
-						
-						var str = $(this).val() || "";
-						//console.log( $(this), str );
-						
-						var map = gadgets.json.parse( "{ \"" + $(this).attr('name') + "\" : \"" + str + "\" }" );
-						//console.log(map);
-						updateAppData( map );
-					
-					});
-			 
-			});// .question fieldset
-		});}); //jquery.ready //os.ready
-	};
-	
-	//UCSF.Mentor.addOnChangeHandlers();
-	
-	UCSF.Mentor.addSaveHandler = function(){
-		$(document).ready( function(){ os.ready( function(){
-			
-			function updateAppData(map){
-				$.extend(true, map, {"lastUpdate" : new Date().getTime().toString() });
-				osapi.appdata.update(  
-					{	'userId': '@viewer', 
-						'appId':'@app', 
-						'data': map 
-					} )
-					.execute(function(result){
-					
-						//TODO: if works navigate
-						//gadgets.views.requestNavigateTo( "home" );
-						console.log(result, map);
-					});
+			else { 
+				g_textarea_content = document.getElementById("facultyNarrative").value; 
 			}
-			
-			function createMentorDataMap(){
-				var updateMap = {};
+		}
+    
+		function displayMentorAppData() {
+		
+			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['mentor_data'] } ).execute(function(result) {
 				
-				$('.question>fieldset').each( function(){
-									
-					var question = $(this);
-					//var name = "";
-					var namearr = [];
+				// trim fetched app data to pure delimited string
+				var fetched_appdata_string = JSON.stringify(result);
+				var fetched_appdata_array = fetched_appdata_string.split("mentor_data\":\"");
+				fetched_appdata_string = fetched_appdata_array[1];
+				fetched_appdata_array = fetched_appdata_string.split("\"}}");
+				mentor_data = fetched_appdata_array[0];
 					
-					$(question).find('input[name],textarea[name]').each(function(){
-						namearr[ $(this).attr('name') ] = $(this).attr('name');
-					});
-					
-					for ( var name in namearr ){
-						console.log( name, $(question).find('input,textarea').filter('[name='+ name +']') );
-						var arr = [];
-						var str = "";
+				// convert delimited string to array
+				mentor_data_array = mentor_data.split("|"); 
+                    
+                // EDIT MODE
+				var mentor_data_item_array;
+					      
+				for(i = 0; i < mentor_data_array.length; i++){
+					mentor_data_item = mentor_data_array[i];
+						
+					// if mentor data item is presentable
+					if(mentor_data_item.indexOf("^") != -1) {
+						mentor_data_item_array = mentor_data_item.split("^");
+							
+						switch (mentor_data_item_array[0]) {
+							
+							case "edit_career_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_career_mentor"))
+									document.getElementById("edit_career_mentor").checked = true;
+								break;
+								
+							case "edit_co_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_co_mentor"))
+									document.getElementById("edit_co_mentor").checked = true;
+								break;
+								
+							case "edit_lead_research":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_lead_research"))
+									document.getElementById("edit_lead_research").checked = true;
+								break;
+								
+							case "edit_project_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_project_mentor"))
+									document.getElementById("edit_project_mentor").checked = true;
+								break;
+								
+							case "edit_email":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_email"))
+									document.getElementById("edit_email").checked = true;
+								break;								
+								
+							case "edit_phone":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_phone"))
+									document.getElementById("edit_phone").checked = true;
+								break;								
 
-						$(question).find("input[type=radio]:checked,input[type=checkbox]:checked")
-							.filter('[name='+ name +']').each(function(){
-								arr.push( $(this).val() );
-						});
+							case "edit_assistant":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("edit_assistant"))
+									document.getElementById("edit_assistant").checked = true;
+								break;
+
+							case "edit_assistant_name":
+								if (document.getElementById("edit_assistant_name"))
+									document.getElementById("edit_assistant_name").value = mentor_data_item_array[1];
+								break;
+								
+							case "edit_assistant_email":
+								if (document.getElementById("edit_assistant_email"))
+									document.getElementById("edit_assistant_email").value = mentor_data_item_array[1];
+								break;
+								
+							case "edit_assistant_phone":
+								if (document.getElementById("edit_assistant_phone"))
+									document.getElementById("edit_assistant_phone").value = mentor_data_item_array[1];
+								break;
+								
+							case "edit_narrative":
+								document.getElementById("facultyNarrative").value = mentor_data_item_array[1];
+								break;
+								
+							case "last_updated":
+									document.getElementById("last_updated").innerHTML = mentor_data_item_array[1];
+									
+						} //end switch
+					} // end if
+				} // end for
 						
-						str = arr.join(", ");
+                // VIEW MODE - build table to hold retrieved app data
 					
-						$(question).find('input[name], textarea[name]').filter('[name='+ name +']')
-							.not('[type=checkbox]').not('[type=radio]')
-							.each(function(){
-									str = $(this).val() || "";
-								});
+				var mentor_data_item_array;
+					      
+				for(i = 0; i < mentor_data_array.length; i++){
+					mentor_data_item = mentor_data_array[i];
+						
+					// if mentor data item is presentable
+					if(mentor_data_item.indexOf("^") != -1) {
+						mentor_data_item_array = mentor_data_item.split("^");
 							
-						updateMap[name] = str;
-					}
+						switch (mentor_data_item_array[0]) {
+							
+							case "edit_career_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
+									document.getElementById("mentor_as").style.display = "block";
+									document.getElementById("mentor_as_career_mentor").style.display = "block";
+								}
+								break;
+								
+							case "edit_co_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
+									document.getElementById("mentor_as").style.display = "block";
+									document.getElementById("mentor_as_co_mentor").style.display = "block";
+								}
+								break;
+								
+							case "edit_lead_research":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
+									document.getElementById("mentor_as").style.display = "block";
+									document.getElementById("mentor_as_lead_research").style.display = "block";
+								}
+								break;
+								
+							case "edit_project_mentor":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
+									document.getElementById("mentor_as").style.display = "block";
+									document.getElementById("mentor_as_project_mentor").style.display = "block";
+								}
+								break;
+								
+							case "edit_email":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
+									document.getElementById("mentor_contact").style.display = "block";
+									document.getElementById("mentor_contact_email").style.display = "block";
+								}
+								break;								
+								
+							case "edit_phone":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
+									document.getElementById("mentor_contact").style.display = "block";
+									document.getElementById("mentor_contact_phone").style.display = "block";
+								}
+								break;								
+
+							case "edit_assistant":
+								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
+									document.getElementById("mentor_contact").style.display = "block";
+									document.getElementById("mentor_contact_assistant").style.display = "block";
+								}
+								break;
+
+							case "edit_assistant_name":
+								if (mentor_data_item_array[1] != "" && document.getElementById("mentor_assistant")) {
+									document.getElementById("mentor_assistant").style.display = "block";
+									document.getElementById("mentor_assistant_name").style.display = "block";
+									document.getElementById("mentor_assistant_name").innerHTML += mentor_data_item_array[1];
+								}
+								break;
+								
+							case "edit_assistant_email":
+								if (mentor_data_item_array[1] != "" && document.getElementById("mentor_assistant")) {
+									document.getElementById("mentor_assistant").style.display = "block";
+									document.getElementById("mentor_assistant_email").style.display = "block";
+									document.getElementById("mentor_assistant_email").innerHTML += mentor_data_item_array[1];
+								}
+								break;
+								
+							case "edit_assistant_phone":
+								if (mentor_data_item_array[1] != "" && document.getElementById("mentor_assistant")) {
+									document.getElementById("mentor_assistant").style.display = "block";
+									document.getElementById("mentor_assistant_phone").style.display = "block";
+									document.getElementById("mentor_assistant_phone").innerHTML += mentor_data_item_array[1];
+								}
+								break;
+								
+							case "edit_narrative":
+								if (mentor_data_item_array[1] != "" && document.getElementById("facultyNarrative")) {
+									document.getElementById("facultyNarrative").style.display = "block";
+									document.getElementById("facultyNarrative").innerHTML = mentor_data_item_array[1];
+								}
+								break;
+								
+							case "last_updated":
+									document.getElementById("last_updated").innerHTML = mentor_data_item_array[1];
+									
+						} //end switch
+					} // end if
+				} // end for
 					
-					updateMap["studentNarrative"] = "This is test chunk 1";
-					
-				});
-				
-				console.log( updateMap, gadgets.json.stringify(updateMap).replace( /\"/gi, "\\\"") );
-				return updateMap;
-			}
+			}); /*osapi.appdata.get*/
 			
-			$('.mentor_save').click(function(){
-				updateAppData( createMentorDataMap() );
-				alert("Your information is saved and should be available in Search Results within an hour. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
-			});
-			
-			$('.mentor_cancel').click(function(){
-				UCSF.Mentor.displayAppData();
-			});			
-			
-			
-		});}); //jquery.ready //os.ready
-	};
-	
-	UCSF.Mentor.addSaveHandler();
-	
-	UCSF.Mentor.displayLastUpdated = function(){
-		$(document).ready(function(){ os.ready(function(){
-			osapi.appdata.get( {
-				'userId': '@owner',
-				 'appId':'@app', 
-				 'fields':['lastUpdate'] } )
-				.execute(function(result){
-					//console.log('displayLastUpdated', result);
-					result = os.osapi.getOwnerFromResult( result );
-					var d = new Date(parseInt(result['lastUpdate']));
-					console.log( 'displayLastUpdated', result['lastUpdate'] );
-					console.log( 'displayLastUpdated', result, new Date(parseInt(result['lastUpdate'])).toLocaleString() );
-					if( typeof(result['lastUpdate']) !== 'undefined' ){ 
-						$('.updated').show()
-							//.find('span').text(  d.toLocaleDateString() + " " + d.toLocaleTimeString() );
-							.find('span').text(  d.toDateString() );
-					}else{
-						$('.updated').hide();
-					}
-					gadgets.window.adjustHeight();
-				});
-		});}); // jquery.ready os.ready
-	};
-	
-	UCSF.Mentor.displayLastUpdated();
-	
-	//on canvas.owner update
-	UCSF.Mentor.displayAppSummary = function(){
-		$(document).ready(function(){ os.ready(function(){
+			gadgets.window.adjustHeight();
+		}
 		
-			var fields = {};
-			fields = Questions;
-			fields["lastUpdate"] ={name: "lastUpdate"}; //let's fetch this too.
-			
-			var keys = [];
-			/*
-			$('input[name],textarea[name]').each(function(){
-				fields[$(this).attr('name')] = $(this).attr('name');
-			});
-			*/
-			
-			console.log( fields, keys );
-			for(var f in fields){
-				keys.push(fields[f].name);
-			}
-			console.log( fields, keys );
-			
-			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
-				.execute(function(result){
-					console.log('"appdata response"');
-					console.log(result, keys);
-					
-					var fr = {};
-					$('.detail[fr][test]').each(function(){
-						console.log('detail for', $(this).attr('fr'));
-						fr[$(this).attr('fr')] = $(this).attr('test');
-						
-					});
-					
-					//this is a weird way to access the @owner without knowing the name.
-					//it's an associative array, length, pop, or index won't work
-					var appdata = {};
-					/*
-					for(var n in result){
-						appdata = result[n];  //for the viewer/ first record
-						console.log( n, result[n], result );
-						break;
-					}
-					*/
-					appdata = os.osapi.getOwnerFromResult(result);
-					
-					var k = 0;
-					var vals = [];
-					console.log(keys, keys.length, appdata);
-					for(k = 0; k < keys.length; k++){
-					
-						if( typeof(appdata[keys[k]]) === 'undefined'){
-							console.log('appdata not availible', keys[k]);
-							continue;
-						}
-						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
-						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
-						
-						
-						//for radio and checkboxes
-						var type = Questions[keys[k]].type
-						console.log( 'type', type );
-						if( type == 'radio' || type == 'checkbox'){
-							var v = 0;
-							var answer = [];
-							var comma = "";
-							for(v = 0; v < vals.length; v++){
-								//console.log('each val', vals[v]);
-								
-								//TODO:if things change, it will break here.
-								var value = Questions[keys[k]].labels[vals[v]];
-								// NJ if( value.toLowerCase() == 'email' || value.toLowerCase() == 'phone'){
-									// NJ value += " ( see profile info ) ";
-								// NJ }
-								
-								//remove assistant from comma seperated list.
-								/*
-								if( value.toLowerCase() !== 'assistant'){
-									answer.push( value );
-								}
-								*/
-								//add everything
-								answer.push( value );
-								
-								//set up to show assistant
-								if( typeof(fr[keys[k]]) != 'undefined' && fr[keys[k]] == vals[v] ){
-									console.log( 'detail >>', fr, fr[keys[k]], vals[v]);
-									$('.detail[test='+ fr[keys[k]] +'][fr='+ keys[k] +']').show()
-										.parents('.section').show()
-										.find('.moreless').trigger('show');								
-								}
-							}//for
-							comma = answer.join(", ");
-							console.log( 'comma', comma );
-							
-							$('div.answer[name='+keys[k]+']').each(function(){
-								console.log('"answer"', keys[k]);
-								$(this).find('.answerresponse[type=comma]').text( comma );
-								$(this).find('.answerresponse[type=list]')
-									.each(function(){
-										var ul = $('<ul/>');
-										//console.log('.answerresponse answer.length', answer.length);
-										for(var a=0,al= answer.length; a < al; a++){
-											ul.append( $('<li/>').text( answer[a] ) );
-										}
-										if( ul.children().length ){
-											$(this).append(ul);
-										}
-								});
-								
-								console.log( '.answerresponse contents.length', $(this), $(this).contents().length );
-								var content = $(this).find('.answerresponse').contents();
-								var p = $(this).find('.answerresponse>p').contents();
-								if( content.length ){
-									if( content.length == 1 && content[0].length == 0){ return; }
-									if( p.length == 1 && p[0].length == 0){ return; }
-									$(this).show();
-									$(this).parents('.section').show().find('.moreless').trigger('show');
-									gadgets.window.adjustHeight();
-								}
-							});
-						}//if
-						
-						if( type == 'text' || type == 'email' || type == 'tel' ){
-							$('span[name='+ keys[k] +']').each(function(){
-									/*if(appdata[keys[k]].length < 1){ return this; }*/
-									
-									$(this).text(appdata[keys[k]]);
-									
-									// nj addded 3-8-11
-									if (appdata[keys[k]] == "") {
-										$(this).text("Unavailable");
-									}
-									
-									$(this).show();
-									$(this).parents('.section').show().find('.moreless').trigger('show');
-									gadgets.window.adjustHeight();
-								});
-						}
-						
-						if( type == 'textarea' ){
-							$('div.answer[name='+keys[k]+']').each(function(){
-								$(this).find('.answerresponse[type=textarea]')
-									.append('<p/>').append(appdata[keys[k]]);
-								$(this).show();
-								$(this).parents('.section').show().find('.moreless').trigger('show');
-								gadgets.window.adjustHeight();
-							});
-						}
-					}
-					
-				});//osapi.appdata.get
-			
-			});});  //jquery.ready //os.ready
-		};
-	
-	UCSF.Mentor.displayAppData = function(){
-		$(document).ready(function(){ os.ready(function(){
-			var fields = {};
-			fields["lastUpdate"] = "lastUpdate"; //let's fetch this too.
-			
-			var keys = [];
-			$('input[name],textarea[name]').each(function(){
-				fields[$(this).attr('name')] = $(this).attr('name');
-			});
-			//console.log( fields, keys );
-			for(var f in fields){
-				keys.push(fields[f]);
-			}
-			//console.log( fields, keys );
-			
-			osapi.appdata.get(  {'userId': '@owner', 'appId':'@app', 'fields':keys } )
-				.execute(function(result){
-					console.log(result, keys);
-					console.log( gadgets.json.stringify(keys).replace( /\"/gi, "\\\"" ) );
-					
-					//this is a weird way to access the @viewer without knowing the name.
-					//it's an associative array, length, pop, or index won't work
-					var appdata = {};
-					for(var n in result){
-						appdata = result[n];  //for the viewer/ first record
-						//console.log( n, result[n], result );
-						break;
-					}
-					
-					var k = 0;
-					var vals = [];
-					console.log(keys, keys.length, appdata);
-					for(k = 0; k < keys.length; k++){
-					
-						if( typeof(appdata[keys[k]]) === 'undefined'){
-							//console.log('appdata not availible', keys[k]);
-							continue;
-						}
-						vals = (appdata[keys[k]]).split(", ") || new Array().push(appdata[keys[k]]) ;
-						//console.log( keys[k],  vals, appdata[keys[k]], appdata );
-						
-						
-						//for each value stored in the array let's check it on the form
-						var v = 0;
-						for(v = 0; v < vals.length; v++){
-							//console.log('each val', vals[v]);
-							
-							//this will work for radio and checkboxes, let's filter based on form name, and it's value attribute
-							$('[name='+ keys[k] +']')
-								.filter('input[type=radio], input[type=checkbox]')
-								.filter('[value='+ vals[v] +']')
-								.each(function(){
-									//console.log('update checked attr', this);
-									$(this).attr('checked','checked');
-									$(this).parents('.section').find('.moreless').trigger('show');
-								});
-						}
-						
-						$('[name='+ keys[k] +']')
-								.filter('input, textarea')
-								.not('[type=radio],[type=checkbox]')
-								.each(function(){
-									//console.log('update text', vals);
-									$(this).val( vals.join(", "));
-									$(this).parents('.section').find('.moreless').trigger('show');
-								});
-								
-						gadgets.window.adjustHeight();
-						
-					}
-					
-				}); /* osapi.appdata.get */
-				
-			});}); /* jquery.ready os.ready */
-		};
+		function saveMentorAppData() {
 		
+			var mentor_data;
+			var edit_career_mentor="F", edit_co_mentor="F", edit_lead_research="F", edit_project_mentor="F";
+			var edit_email="F", edit_phone="F", edit_assistant = "F";
+			
+			if (document.getElementById("edit_career_mentor").checked) {edit_career_mentor = "T";}
+			if (document.getElementById("edit_co_mentor").checked) {edit_co_mentor = "T";}
+			if (document.getElementById("edit_lead_research").checked) {edit_lead_research = "T";}
+			if (document.getElementById("edit_project_mentor").checked) {edit_project_mentor = "T";}
+			
+			if (document.getElementById("edit_email").checked) {edit_email = "T";}
+			if (document.getElementById("edit_phone").checked) {edit_phone = "T";}
+			if (document.getElementById("edit_assistant").checked) {edit_assistant = "T";}
+			
+			mentor_data = "edit_career_mentor" + "^" + edit_career_mentor + "|";
+			mentor_data = mentor_data + "edit_co_mentor" + "^" + edit_co_mentor + "|";
+			mentor_data = mentor_data + "edit_lead_research" + "^" + edit_lead_research + "|";				
+			mentor_data = mentor_data + "edit_project_mentor" + "^" + edit_project_mentor + "|";					
+			
+			mentor_data = mentor_data + "edit_email" + "^" + edit_email + "|";
+			mentor_data = mentor_data + "edit_phone" + "^" + edit_phone + "|";
+			mentor_data = mentor_data + "edit_assistant" + "^" + edit_assistant + "|";
+			
+			mentor_data = mentor_data + "edit_assistant_name" + "^" + document.getElementById("edit_assistant_name").value + "|";					
+			mentor_data = mentor_data + "edit_assistant_email" + "^" + document.getElementById("edit_assistant_email").value + "|";
+			mentor_data = mentor_data + "edit_assistant_phone" + "^" + document.getElementById("edit_assistant_phone").value + "|";										
+			
+			mentor_data = mentor_data + "edit_narrative" + "^" + document.getElementById("facultyNarrative").value + "|";
+			
+			var mentor_today = new Date();
+			
+			var weekday=new Array(7);
+			weekday[0]="Sunday";
+			weekday[1]="Monday";
+			weekday[2]="Tuesday";
+			weekday[3]="Wednesday";
+			weekday[4]="Thursday";
+			weekday[5]="Friday";
+			weekday[6]="Saturday";
+			
+			var month=new Array(12);
+			month[0]="January";
+			month[1]="February";
+			month[2]="March";
+			month[3]="April";
+			month[4]="May";
+			month[5]="June";
+			month[6]="July";
+			month[7]="August";
+			month[8]="September";
+			month[9]="October";
+			month[10]="November";
+			month[11]="December";			
+			
+			var mentor_day = weekday[mentor_today.getDay()]
+			var mentor_month = month[mentor_today.getMonth()]
+			var mentor_date = mentor_today.getDate();
+			var mentor_year = mentor_today.getFullYear();
+			var current_date = mentor_day + " " + mentor_month + " " + mentor_date + ", " + mentor_year;
+			mentor_data = mentor_data + "last_updated" + "^" + current_date + "|";			
+			
+            osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'mentor_data':mentor_data} }).execute(function(result) {});   
+            mentor_data = "";
+            alert("Your information is saved and should be available in Search Results within an hour. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+		}
+
     </script>
     
     ]]></Content>
@@ -482,7 +303,7 @@
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
     
-    <Content type="html" view="default, home" preferred_height="716"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home" preferred_height="700"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {
@@ -496,72 +317,13 @@
     	.mentor_credit {
     		font-family: Arial;
     		font-size: 10px;
-    	}      	
+    	}
+    	.mentor_list {
+    		font-family: Arial;
+    		font-size: 11px;
+    	}    	
     </style>
-	
-		<!--[if lt IE 8]>
-	<script type="text/javascript">
-		//alert("Internet Explorer 6 does not support this functionality. Please upgrade your browser.");
-	</script>
-	<center>
-	<span style="color:#FF0000;">Note: Internet Explorer 6 does not support this functionality. Please upgrade your browser.</span>
-	</center>
-	<![endif]-->
-    	
-    <script type="text/javascript" >
-
-    $(document).ready(function(){
-    	function createMentorDataMap(){
-			//get question names
-			$('.question fieldset li').find('input[name]').each(function(){
-				var name = $(this).attr('name');
-				var type = $(this).attr('type');
-				Questions[name] = Questions[name] || {};
-				Questions[name].name = name;
-				Questions[name].type = type;
-			});
-			
-			$('.question fieldset textarea[name]').each(function(){
-				var name = $(this).attr('name');
-				var type = 'textarea';
-				Questions[name] = Questions[name] || {};
-				Questions[name].name = name;
-				Questions[name].type = type;
-			});
-			
-			//get label names for checkboxes and radio buttons.
-			$('.question fieldset li')
-				.has('input[name][value][type=radio],input[name][value][type=checkbox]')
-				.each(function(){
-				
-				var name = $(this).find('input[name][value],textarea[name][value]').attr('name');
-				var value = $(this).find('input[name][value],textarea[name][value]').val();
-				var label = $(this).find('label').text();
-				
-				Questions[name] = Questions[name] || {};
-				Questions[name].labels = Questions[name].labels || {};
-				Questions[name].labels[value] = label;
-				
-			});
-		
-			console.log( Questions, gadgets.json.stringify(Questions).replace(/\"/gi, "\\\"") );
-		}
-		
-		// create label array based on view markup
-    	createMentorDataMap();
-    	
-    	// retrieve last-saved data and map it to the fields in the data map
-    	UCSF.Mentor.displayAppData();
-    });
-	
-	</script>    	
-    	
-    <script type="text/javascript">
-    	
-    	UCSF.Mentor.displayAppSummary();
-    		
-    </script>
-    
+    	    	
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
 	<h4 style="padding-left:10px;">Add Faculty Mentoring to Your Profile</h4>
@@ -574,58 +336,64 @@
 	</div>
 		
 	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
-		Last Updated: <span style="font-size: 10px;"></span>
+		Last Updated: <span id="last_updated" style="font-size: 10px;"></span>
 	</div>
 
-	<div class='question' style="padding: 0px;">
+	<div class='question' style="padding: 0px; width:500px;">
 		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
-		<fieldset>
-			<ul>
-				<li><input type="checkbox" name="availableMentorFaculty" value="career"><label>Career Mentor</label></li>
-				<li><input type="checkbox" name="availableMentorFaculty" value="co"><label>Co-Mentor</label></li>
-				<li><input type="checkbox" name="availableMentorFaculty" value="research"><label>Lead Research / Scholarly Mentor</label></li>
-				<li><input type="checkbox" name="availableMentorFaculty" value="proj"><label>Project Mentor</label></li>
-			</ul>
-		</fieldset>
+		<table cellspacing="0" cellpadding="15">
+			<tr>
+				<td valign="middle" width="220" class="mentor_list">
+				<input id="edit_career_mentor" type="checkbox">Career Mentor</td>
+				<td valign="middle" class="mentor_list">
+				<input id="edit_co_mentor" type="checkbox">Co-Mentor</td>
+			</tr>
+			<tr>
+				<td valign="middle" class="mentor_list">
+				<input id="edit_lead_research" type="checkbox">Lead Research / Scholarly Mentor&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td valign="middle" class="mentor_list">
+				<input id="edit_project_mentor" type="checkbox">Project Mentor</td>	
+			</tr>
+		</table>
 	</div>	
 	
 	<div class='question'>
 		<h4>My Contact Preference:</h4>
-		<fieldset>
-			<ul>
-				<li><input type="checkbox" name="facultyContactPref" value="email"><label>Email</label></li>
-				<li><input type="checkbox" name="facultyContactPref" value="phone"><label>Phone</label></li>
-				<li><input type="checkbox" name="facultyContactPref" value="assistant"><label>Assistant</label></li>
-			</ul>
-		</fieldset>
+		<table cellspacing="0" cellpadding="15">
+			<tr>
+				<td valign="middle" width="220" class="mentor_list">
+				<input id="edit_email" type="checkbox">Email</td>
+				<td valign="middle" class="mentor_list">
+				<input id="edit_phone" type="checkbox">Phone</td>
+			</tr>
+			<tr>
+				<td valign="middle" class="mentor_list">
+				<input id="edit_assistant" type="checkbox">Assistant</td>
+				<td></td>
+			</tr>
+		</table>
 	</div>
 	
-	<div class='question' style="padding:0px 0px 0px 12px;">
-		<h5>Assistant Details</h5>
+	<div class='question' style="padding:0px 0px 0px 10px;">
+		<span class="mentor_list"><b>Assistant Details</b></span><br>
 		<fieldset class='details roundbox'>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
 					<label class='textlabel'>Name</label>
-					<input type="text" name="facultyAssistantName" style="width:420px;">
+					<input id="edit_assistant_name" type="text" name="facultyAssistantName" style="width:420px;">
 					</td>
 				</tr>
 			</table>
 			<br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></td>
+					<td><label class='textlabel'>Email</label><input id="edit_assistant_email" type="email" name="facultyAssistantEmail"></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></td>
+					<td><label class='textlabel'>Phone</label><input id="edit_assistant_phone" type="tel" name="facultyAssistantPhone"></td>
 				</tr>				
 			</table>			
-			<!--
-			<ul>
-				<li class='namedetail'><label class='textlabel'>Name</label><input type="text" name="facultyAssistantName"></li>
-				<li class='emaildetail'><label class='textlabel'>Email</label><input type="email" name="facultyAssistantEmail"></li>
-				<li class='phonedetail'><label class='textlabel'>Phone</label><input type="tel" name="facultyAssistantPhone"></li>
-			</ul>
-			-->
+
 		</fieldset>
 	</div>
 	
@@ -647,52 +415,23 @@
  		</div>
 		
 		<fieldset>
-			<textarea id="facultyNarative" rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarative" onKeyDown="limit_chars()" onKeyUp="limit_chars()" onMouseout="limit_chars()"></textarea><br>
+			<textarea id="facultyNarrative" rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarrative" onKeyDown="limit_chars()" onKeyUp="limit_chars()" onMouseout="limit_chars()"></textarea>
 			<span style="margin-left:12px;"> (2000 characters max)</span>
 		</fieldset>		
 	</div>
-
-<!-- old, doesn't work in IE6 or IE7 - uses cluetip jqery plugin
-	<div class='question'>
-		<h4>Mentoring Narrative:&nbsp;<a class="jt" href="#" rel="div.localvisible" title="Examples of Mentoring Narratives"><img src="http://www.fakedoom.com/ctsi/hovertiptarget.png" border="0"></a></h4>
-		
-		<div class="localvisible">
-		EXAMPLE 1:<br />
-		Dr. Brown is willing to mentor faculty, fellows, residents and students interested in an academic research career.  Most often her mentees have had training in clinical research methods or will obtain training through the CTSI CTST.  For students, it is expected they will have dedicated time for research. Through email or meeting, if there is a “match” for research interest, time, and training, further discussions as to project, goals, and access to resources (space, databases, and  statistical support) will be discussed to provide a productive experience.
-		<br><br>
-		EXAMPLE 2:<br />
-		I am highly qualified to participate as a lead mentor or co-mentor at UCSF. My program of research is focused on health outcomes associated with disturbed sleep in various populations of healthy women and women with chronic illnesses like HIV/AIDS and cancer.  I have completed cross-sectional studies, longitudinal studies, and most recently, randomized clinical trials to improve sleep.  I have mentored doctoral students and postdoctoral fellows studying various patient populations, from the very young to very old.  During my tenure at UCSF, I have directly supervised over 30 doctoral students, mentored 14 postdoctoral trainees, and served as a lead mentor for 6 pre-tenured faculty. I have been the Director for a T32 Nurse Research Training Grant since 1996, and I have been honored with being voted mentor of the year by doctoral students on two occasions.  I play a significant role in the clinical and translational (CTSI) research mentoring and career development programs at UCSF.  I am the seminar leader for the first session in the CTSI Mentor Development program on “Rewards and Challenges of Mentoring” and I have co-mentored two KL2 scholars.  I have published over 50 peer-reviewed research articles with trainees as first-author, and serve as a consultant on two external K awards as well as three external R01 awards with former mentees.  Finally, I have served on many different NIH study section review panels, and I served as the Chair of an NIH study section (2008-2010), which allows me to be particularly effective in mentoring early career principal investigators who are writing their first NIH applications.
- 		<br><br>
-		I can provide mentees a cubicle space with my research team, tangible resources such as access to large datasets for secondary analysis as needed, and intangible resources such as attending our formal research team meetings and our informal spontaneous group discussions as well as networking at national sleep research conferences.
- 		</div>
-		
-		<fieldset>
-			<textarea rows='9' cols='56' class='roundbox' style="margin-left:12px;" name="facultyNarative"></textarea>
-		</fieldset>		
-	</div>
--->
 	
 	<div>
 		<center>
-			<input type="button" class="mentor_save" value="Save">&nbsp;&nbsp;&nbsp;
-			<input type="button" class="mentor_cancel" value="Cancel">
+			<input type="button" onClick="saveMentorAppData();" value="Save">&nbsp;&nbsp;&nbsp;
+			<input type="button"  value="Cancel">
 		</center>
 	</div>
 	
-	<!--
-	<div style="margin:0px 10px 0px 10px;">
-		<table>
-			<tr>
-				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
-					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
-				</td>
-				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_credit" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
-				</td>
-			</tr>
-		</table>
-	</div>
-	-->
+	<script type="text/javascript" >
+    	// retrieve last-saved data and map it to the fields in the markup
+    	displayMentorAppData();
+    	gadgets.window.adjustHeight();
+	</script>  
 
     ]]></Content>
     
@@ -700,7 +439,7 @@
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile" preferred_height="200"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="340"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {
@@ -716,78 +455,49 @@
     		font-size: 10px;
     	}      	
     </style>
-	
-	<!--[if lt IE 8]>
-	<script type="text/javascript">
-		//alert("Internet Explorer 6 does not support this functionality. Please upgrade your browser.");
-	</script>
-	<center>
-	<span style="color:#FF0000;">Note: Internet Explorer 6 does not support this functionality. Please upgrade your browser.</span>
-	</center>
-	<![endif]-->
-		
-    <script type="text/javascript">
-    	
-    	UCSF.Mentor.displayAppSummary();
-		gadgets.window.adjustHeight();
-    	
-    </script>
- 
-	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
-		Last Updated: <span style="font-size: 10px;"></span>
-	</div>    
-    
-    <div id='Profile' class="clearbox">
-		<div class='clearbox'>
-			<div class='section' style="display:none;">
 			
-				<div class='answer' name="facultyNarative" style="padding:1px 0 10px 0;">
-					<span class='answerresponse' type='textarea'></span>
-				</div><!-- .answer -->
-				
-				<div class='answer' name="availableMentorFaculty">
-					<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>):
-					<span class='answerresponse' type='list'></span>
-				</div><!-- .answer -->
-		
-				<div class='answer' name="facultyContactPref" style="padding:5px 0 0 0;">
-					<span class='detailtitle'>Contact for Mentoring:</span>
-					<span class='answerresponse' type='list'></span>
-					
-					<div class='detail' test="assistant" fr="facultyContactPref" style="padding-left:28px;">
-						<!--<span class='detailtitle'>Contact my Assistant:</span><br />-->
-						Name:&nbsp;<span name="facultyAssistantName"></span><br />
-						Email:&nbsp;<span name="facultyAssistantEmail"></span><br />
-						Phone:&nbsp;<span name="facultyAssistantPhone"></span><br />
-					</div>
-					
-				</div><!-- .answer -->
-		
-			</div><!-- .roundbox .lgrey -->
-		</div><!-- .section -->	
+ 
+	<div class="updated" style="display:block; text-align:left; padding: 5px 10px 10px 0; font-size: 10px;">
+		Last Updated: <span id="last_updated" style="font-size: 10px;"></span>
 	</div>
-	<!-- .clearbox -->
-	
-    <div style="padding:0px 0px 0px 10px;"> 
+	<br>
+    <div>
+		<p id="facultyNarrative" style="margin-left:20px; font-family:Arial; font-size:12px; display:none;"></p>
+	</div>
+				
+	<div id="mentor_as" style="display:none; margin-left:20px;">
+		<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>):
+			<span id="mentor_as_career_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Career Mentor</span>
+			<span id="mentor_as_co_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Co-Mentor</span>
+			<span id="mentor_as_lead_research" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Lead Research / Scholarly Mentor</span>
+			<span id="mentor_as_project_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Project Mentor</span>
+	</div>
+		
+	<div id="mentor_contact" style="padding:10px 0 0 0; display:none; margin-left: 20px;">
+		<span class='detailtitle'>Contact for Mentoring:</span>
+		<ul style="width:400px;">
+			<li id="mentor_contact_email" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Email (see above)</li>
+			<li id="mentor_contact_phone" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Phone (see above)</li>
+			<li id="mentor_contact_assistant" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Assistant</li>		
+		</ul>
+	</div>
+					
+	<div id="mentor_assistant" style="padding:5px 0 0 0; display:none; margin-left: 45px;">
+		<span id="mentor_assistant_name" style="display:none; padding-botom:3px;">Name:&nbsp;</span>
+		<span id="mentor_assistant_email" style="display:none; padding-botom:3px;">Email:&nbsp;</span>
+		<span id="mentor_assistant_phone" style="display:none; padding-botom:3px;">Phone:&nbsp;</span>
+	</div>
+
+    <div style="padding:10px 0px 0px 20px;"> 
 		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
 		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page">CTSI Mentor Development Program</a>
 		<br /><br />
 	</div>
 	
-	<!--
-	<div class="gadget_credits">
-		<table>
-			<tr>
-				<td valign="middle"><a href="http://ctsi.ucsf.edu" target="_blank" title="Go to the CTSI Web site">
-					<img src="http://www.fakedoom.com/ctsi/ctsi_logo_small.jpg" border="0"></a>
-				</td>
-				<td valign="middle">
-					<a href="http://ctsi.ucsf.edu" target="_blank" class="mentor_credit" title="Go to the CTSI Web site">Powered by CTSI at UCSF</a>
-				</td>
-			</tr>
-		</table>
-	</div>
-	-->
+    <script type="text/javascript">
+    	displayMentorAppData();
+    	gadgets.window.adjustHeight();
+    </script>	
 		
     ]]></Content>
     

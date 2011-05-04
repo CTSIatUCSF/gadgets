@@ -16,8 +16,7 @@
    */
   function postActivity(text) {  
     var params = {};  
-    var epoch = new Date().getTime();
-    osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': text, 'postedTime': epoch}}).execute(function(result){
+    osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': text, 'postedTime': new Date().getTime()}}).execute(function(result){
 	    div.innerHTML = "Activity title is: " + text;		
 		});
   };        

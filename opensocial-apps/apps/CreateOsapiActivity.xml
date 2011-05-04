@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="Activities - v0.8" >
+    <Require feature="opensocial-0.8"/>
+    <Require feature="osapi"/>
+  </ModulePrefs> 
+  <Content type="html">
+  <![CDATA[ 
+  <div id="content_div"></div>
+  <script type="text/javascript">
+
+  var div = document.getElementById('content_div');
+
+  /**
+   * Create the new activity and send it to the server.
+   */
+  function postActivity(text) {  
+    var params = {};  
+    var epoch = new Date().getTime();
+    osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': text, 'postedTime': epoch}}).execute(function(result){
+	    div.innerHTML = "Activity title is: " + text;		
+		});
+  };        
+  
+  /**
+  * Server calls this function to indicate whether the activity post succeeded or failed.
+  */
+  function callback(status) {
+    if (status.hadError())
+    {
+      alert("Error creating activity.");
+    }
+    else 
+    {
+      alert("Activity successfully created.");
+    }
+  };
+  
+  /**
+   * Start the process of posting an activity.
+   */
+  function startActivity() {
+    postActivity("This is an OSAPI sample activity");
+  };
+
+  //Call startActivity as soon as the gadget finishes loading.
+    gadgets.util.registerOnLoadHandler(startActivity);
+  </script>
+  ]]> 
+  </Content>
+</Module>

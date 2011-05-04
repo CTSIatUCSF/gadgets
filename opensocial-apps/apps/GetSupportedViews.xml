@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="getSupportedViews"
+               author="api.kurrik@google.com">
+    <Require feature="views"></Require>
+    <Require feature="dynamic-height"></Require>
+  </ModulePrefs>
+  <Content type="html" view="home">
+    <![CDATA[
+      <h1>Home view</h1>
+    ]]>
+  </Content>
+  <Content type="html" view="canvas.owner">
+    <![CDATA[
+      <h1>Canvas.Owner view</h1>
+    ]]>
+  </Content>
+  <Content type="html" view="profile">
+    <![CDATA[
+      <h1>Profile view</h1>
+    ]]>
+  </Content>
+  <Content type="html" view="canvas">
+    <![CDATA[
+      <h1>Canvas view</h1>
+    ]]>
+  </Content>
+  <Content type="html" view="home, canvas.owner, profile, canvas">
+    <![CDATA[
+      <button onclick="gadgets.views.requestNavigateTo('home');">Click to go to the home view</button></p>
+      <button onclick="gadgets.views.requestNavigateTo('canvas');">Click to go to the canvas view</button></p>
+      <button onclick="gadgets.views.requestNavigateTo('canvas.owner');">Click to go to the canvas.owner view</button></p>
+      <button onclick="gadgets.views.requestNavigateTo('profile');">Click to go to the profile view</button></p>
+      <button onclick="gadgets.window.adjustHeight(100);">Get small.</button></p>
+      <button onclick="gadgets.window.adjustHeight(800);">Get big</button></p>
+      <h2>Available views</h2>
+      <div id="view-output"></div>
+      <script type="text/javascript">
+        var views = gadgets.views.getSupportedViews();
+        var dom = document.getElementById("view-output");
+        for (var view in views) {
+          if (views.hasOwnProperty(view)) {
+            dom.innerHTML += "<div>" + view + "</div>";
+          }
+        }
+        gadgets.log(views);
+      </script>
+    ]]>
+  </Content>
+</Module>

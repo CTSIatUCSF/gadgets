@@ -36,11 +36,6 @@
 			links = links.replace(links_array[array_index]+"|", "");	
 			osapi.appdata.update({'userId':'@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
 			links="";
-
-			// special dev routine to delete all links data		
-			//osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
-			//alert("All app data deleted");
-		
 			displayLinksAppData();
 		}
 	
@@ -163,12 +158,20 @@
 		}
 		
 		function saveLinksAppData() {
-	
+
+			// get link name and url from form
+               var new_link_name=document.getElementById("linkname").value;
+               var new_link_url=document.getElementById("linkurl").value;
+
+			// special dev routine to delete all links data			
+			if (new_link_name == "killmylinks" && new_link_url == "") {
+				links = "";
+				osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
+				alert("All app data deleted");
+				return;
+			}
+
 			if (g_total_links < g_max_links) {
-				
-				// get link name and url from form
-                var new_link_name=document.getElementById("linkname").value;
-                var new_link_url=document.getElementById("linkurl").value;
 				
 				// check for empty input boxes
 				if(new_link_name=="" || new_link_url==""){
@@ -178,6 +181,11 @@
 				
 				// prepend http header if missing
 				if(new_link_url.indexOf("://") == -1){new_link_url = "http://" + new_link_url;}
+				
+				
+				
+
+				
 				
 				// remove delimiter chars in case any were keyed in
 				new_link_name = new_link_name.replace("|", "");

@@ -22,8 +22,8 @@
     
     <script type="text/javascript">
 	
-		g_chars_allowed=2000;
-		g_textarea_content="";
+		var g_chars_allowed=2000;
+		var g_textarea_content="";
 	
 		function limit_chars(){
 			num_chars = document.getElementById("facultyNarrative").value.length; 
@@ -125,21 +125,25 @@
 						
                 // VIEW MODE - build table to hold retrieved app data
 					
-				var mentor_data_item_array;
-					      
+				var view_window_height=80;
+				var mentor_as = "hidden";
+				var mentor_contact = "hidden";
+										  					      
 				for(i = 0; i < mentor_data_array.length; i++){
 					mentor_data_item = mentor_data_array[i];
 						
 					// if mentor data item is presentable
 					if(mentor_data_item.indexOf("^") != -1) {
 						mentor_data_item_array = mentor_data_item.split("^");
-							
+					
 						switch (mentor_data_item_array[0]) {
 							
-							case "edit_career_mentor":
+							case "edit_career_mentor": //NOTE -- keep "mentor_as" div around (see why below)
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
 									document.getElementById("mentor_as").style.display = "block";
 									document.getElementById("mentor_as_career_mentor").style.display = "block";
+									view_window_height += 20;
+									mentor_as = "visible";
 								}
 								break;
 								
@@ -147,6 +151,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
 									document.getElementById("mentor_as").style.display = "block";
 									document.getElementById("mentor_as_co_mentor").style.display = "block";
+									view_window_height += 20;
+									mentor_as = "visible";
 								}
 								break;
 								
@@ -154,6 +160,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
 									document.getElementById("mentor_as").style.display = "block";
 									document.getElementById("mentor_as_lead_research").style.display = "block";
+									view_window_height += 20;
+									mentor_as = "visible";
 								}
 								break;
 								
@@ -161,6 +169,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_as")) {
 									document.getElementById("mentor_as").style.display = "block";
 									document.getElementById("mentor_as_project_mentor").style.display = "block";
+									view_window_height += 20;
+									mentor_as = "visible";
 								}
 								break;
 								
@@ -168,6 +178,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
 									document.getElementById("mentor_contact").style.display = "block";
 									document.getElementById("mentor_contact_email").style.display = "block";
+									view_window_height += 20;
+									mentor_contact = "visible";
 								}
 								break;								
 								
@@ -175,6 +187,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
 									document.getElementById("mentor_contact").style.display = "block";
 									document.getElementById("mentor_contact_phone").style.display = "block";
+									view_window_height += 20;
+									mentor_contact = "visible";
 								}
 								break;								
 
@@ -182,6 +196,8 @@
 								if (mentor_data_item_array[1] == "T" && document.getElementById("mentor_contact")) {
 									document.getElementById("mentor_contact").style.display = "block";
 									document.getElementById("mentor_contact_assistant").style.display = "block";
+									view_window_height += 20;
+									mentor_contact = "visible";
 								}
 								break;
 
@@ -190,6 +206,7 @@
 									document.getElementById("mentor_assistant").style.display = "block";
 									document.getElementById("mentor_assistant_name").style.display = "block";
 									document.getElementById("mentor_assistant_name").innerHTML += mentor_data_item_array[1];
+									view_window_height += 20;
 								}
 								break;
 								
@@ -198,6 +215,7 @@
 									document.getElementById("mentor_assistant").style.display = "block";
 									document.getElementById("mentor_assistant_email").style.display = "block";
 									document.getElementById("mentor_assistant_email").innerHTML += mentor_data_item_array[1];
+									view_window_height += 20;
 								}
 								break;
 								
@@ -206,26 +224,48 @@
 									document.getElementById("mentor_assistant").style.display = "block";
 									document.getElementById("mentor_assistant_phone").style.display = "block";
 									document.getElementById("mentor_assistant_phone").innerHTML += mentor_data_item_array[1];
+									view_window_height += 20;
 								}
 								break;
 								
 							case "edit_narrative":
 								if (mentor_data_item_array[1] != "" && document.getElementById("facultyNarrative")) {
 									document.getElementById("facultyNarrative").style.display = "block";
-									document.getElementById("facultyNarrative").innerHTML = mentor_data_item_array[1];
+									var p_chars = mentor_data_item_array[1];
+									
+									// remove delimiter chars in case any were keyed in
+									p_chars = p_chars.replace("|", "");
+									p_chars = p_chars.replace("^", "");
+									
+									// count the characters	and calculate number of rows								
+									p_num_chars = p_chars.length;									
+									document.getElementById("facultyNarrative").innerHTML = p_chars;
+									p_lines = Math.round(p_num_chars / 100);
+									if (p_lines < 1) {p_lines = 1}
+									view_window_height += (p_lines * 20);
+																		
+									// note works in FF but not IE:
+									// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
 								}
 								break;
 								
 							case "last_updated":
-									document.getElementById("last_updated").innerHTML = mentor_data_item_array[1];
+								document.getElementById("last_updated").innerHTML = mentor_data_item_array[1];
 									
 						} //end switch
+
 					} // end if
 				} // end for
+				
+				if (mentor_as == "visible") {view_window_height += 20};
+				if (mentor_contact == "visible") {view_window_height += 20};
+				
+				// adjust the window height - only do this here if in profile VIEW (not in EDIT)
+				if (document.getElementById("mentor_as")) { 
+					gadgets.window.adjustHeight(view_window_height);
+				}
 					
 			}); /*osapi.appdata.get*/
-			
-			gadgets.window.adjustHeight();
 		}
 		
 		function saveMentorAppData() {
@@ -303,7 +343,7 @@
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
     
-    <Content type="html" view="default, home" preferred_height="700"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {
@@ -430,7 +470,7 @@
 	<script type="text/javascript" >
     	// retrieve last-saved data and map it to the fields in the markup
     	displayMentorAppData();
-    	gadgets.window.adjustHeight();
+    	gadgets.window.adjustHeight(680);
 	</script>  
 
     ]]></Content>
@@ -439,7 +479,7 @@
     
 <!-- ==================== START PROFILE VIEW ==================== -->
     
-    <Content type="html" view="default, profile" preferred_height="340"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile"><![CDATA[<!--HTML-->
     
     <style>
     	.mentor_title {
@@ -482,10 +522,10 @@
 		</ul>
 	</div>
 					
-	<div id="mentor_assistant" style="padding:5px 0 0 0; display:none; margin-left: 45px;">
-		<span id="mentor_assistant_name" style="display:none; padding-botom:3px;">Name:&nbsp;</span>
-		<span id="mentor_assistant_email" style="display:none; padding-botom:3px;">Email:&nbsp;</span>
-		<span id="mentor_assistant_phone" style="display:none; padding-botom:3px;">Phone:&nbsp;</span>
+	<div id="mentor_assistant" style="padding:5px 0 0 0; display:none; margin-left: 55px;">
+		<div id="mentor_assistant_name" style="display:none; height:20px;">Name:&nbsp;</div>
+		<div id="mentor_assistant_email" style="display:none; height:20px;">Email:&nbsp;</div>
+		<div id="mentor_assistant_phone" style="display:none; height:20px;">Phone:&nbsp;</div>
 	</div>
 
     <div style="padding:10px 0px 0px 20px;"> 
@@ -495,8 +535,9 @@
 	</div>
 	
     <script type="text/javascript">
+	
     	displayMentorAppData();
-    	gadgets.window.adjustHeight();
+
     </script>	
 		
     ]]></Content>

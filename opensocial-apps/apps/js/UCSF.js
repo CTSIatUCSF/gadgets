@@ -105,7 +105,7 @@ UCSF.UI.Hideshow = function(){
 	    	osapi.activities.create(
 		    		{ 	'userId': '@viewer',
 						'appId':'@app',
-						'activity': {'title': (value == 'Y' ? 'Added gadget' : 'Removed gadget'), 'postedTime': new Date().getTime()} }
+						'activity': {'title': (value == 'Y' ? 'Added gadget' : 'Removed gadget'), 'postedTime': new Date().getTime() }
 					}).execute(function(response){});
 		    	
 	    	// nj added 2-8-11

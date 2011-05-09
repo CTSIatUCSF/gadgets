@@ -2,6 +2,7 @@
 <Module>
     <ModulePrefs
         title="Websites">
+		<Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="pubsub" />
@@ -10,7 +11,8 @@
 
 <!-- ==================== START COMBINED VIEWS ==================== -->    
     
-    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, profile">
+	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
 	<!-- #includes -->
@@ -28,76 +30,86 @@
 	<script type="text/javascript">
 	
     	var g_max_links = 5;
-    	var g_total_links;
-    	var links = "";
-		var links_array = "";	
-	
+		var g_oLinks; // declare it like this to make json work
+		
+		// ========================================
+		function sort_by (field, reverse, primer) {
+			reverse = (reverse) ? -1 : 1;
+			return function(a,b) {
+				a = a[field];
+				b = b[field];
+				if (typeof(primer) != 'undefined') {
+					a = primer(a);
+					b = primer(b);
+				}
+				if (a<b) return reverse * -1;
+				if (a>b) return reverse * 1;
+				return 0;
+			}
+		}
+		// ========================================
+		
+		
+		// ========================================
 		function deleteArrayItem (array_index) {
-			links = links.replace(links_array[array_index]+"|", "");	
-			osapi.appdata.update({'userId':'@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
-			links="";
+			g_oLinks.splice(array_index,1);
+			
+			var links = "[";
+				
+			// add links from spliced links object
+			for (i = 0; i < g_oLinks.length; i ++) {
+				links += "{\"link_name\":\"" + g_oLinks[i].link_name + "\",\"link_url\":\"" + g_oLinks[i].link_url + "\"}";
+				if (i < (g_oLinks.length - 1)) {links += ","}
+			}
+			
+			links += "]";
+				
+			// write links data to gadget database
+			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : links} }).execute(function(result) {});
+			
 			displayLinksAppData();
 		}
+		// ========================================
 	
+	
+		// ========================================
 		function displayLinksAppData() {
-			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['links'] } )
-				.execute(function(result){
+			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
 				
-					// trim fetched app data to pure delimited string
-					var fetched_appdata_string = JSON.stringify(result);
-					var fetched_appdata_array = fetched_appdata_string.split("links\":\"");
-					fetched_appdata_string = fetched_appdata_array[1];
-					fetched_appdata_array = fetched_appdata_string.split("\"}}");
-					links = links + fetched_appdata_array[0];
-					
-					// convert delimited string to array
-					links_array = links.split("|");
-					
-					// sort the array alphbetically based on link name
-					// case-sensitive sort 
-					// links_array.sort();
-					
-					// custom case-insensitive sort
-					links_array.sort(function(x,y){ 
-						var a = String(x).toUpperCase(); 
-						var b = String(y).toUpperCase(); 
-						if (a > b) {return 1;}
-						if (a < b) {return -1;} 
-						return 0; 
-					}); 
-                    
+				// get incoming link data (in json string format)
+				var viewer = os.osapi.getViewerFromResult(result);
+	
+				// convert to json object format
+				g_oLinks = gadgets.json.parse(viewer.links);
+				
+				// if links data exists
+				if (g_oLinks) {
+										
+					// sort object by link name, case-insensitive, A-Z
+					g_oLinks.sort(sort_by('link_name', false, function(a){return a.toUpperCase()}));
+
                     // EDIT MODE - build table to hold retrieved app data
                     var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
-					var links_item_array;
 					var favicon_path_array;
-					
-					g_total_links = links_array.length - 1;
-					if (g_total_links < 0) {g_total_links = 0;}
                     
-					for(i = 0; i < links_array.length; i++){
-						link_item = links_array[i];
-						
-						// if link item is presentable
-						if(link_item.indexOf("^") != -1) {
-							link_item_array = link_item.split("^");
-							cell_name=link_item_array[0];
-							cell_url=link_item_array[1];
-							cell_url2=link_item_array[1];
+					for (i in g_oLinks) {
+						cell_name = g_oLinks[i].link_name;
+						cell_url = g_oLinks[i].link_url;
+						cell_url2 = g_oLinks[i].link_url;
 							
-							favicon_path_array = cell_url.split("//");
-							cell_url2 = favicon_path_array[1];
-							favicon_path_array = cell_url2.split("/");
-							cell_url2 = favicon_path_array[0];
-							cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						favicon_path_array = cell_url.split("//");
+						cell_url2 = favicon_path_array[1];
+						favicon_path_array = cell_url2.split("/");
+						cell_url2 = favicon_path_array[0];
+						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
                             
-							// build and add table row
-							links_table_data = links_table_data
-							+ "<tr>" + "<td>" + cell_favicon + "</td>"
-							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
-							+ "<td>" + cell_url + "</td>"
-							+ "<td><input type='button' class='link_save' value='Delete' onClick='deleteArrayItem(" 
-							+ i + ")'" + "></td>" + "</tr>";
-						}
+						// build and add table row
+						links_table_data = links_table_data
+						+ "<tr>" + "<td>" + cell_favicon + "</td>"
+						+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
+						+ "<td>" + cell_url + "</td>"
+						+ "<td><input type='button' class='link_save' value='Delete' onClick='deleteArrayItem(" 
+						+ i + ")'" + "></td>" + "</tr>";
 					}
                     
                     // close the table
@@ -107,36 +119,28 @@
                     // and set height based on which view view this is
 					if (document.getElementById("edit_links_table")){
 						document.getElementById("edit_links_table").innerHTML=links_table_data;
-						edit_mode_height = 250 + ((links_array.length - 1) * 28) + 10;
-						//alert("number of links: " + links_array.length);
-						//alert("set height to: " + edit_mode_height);						
+						edit_mode_height = 250 + ((g_oLinks.length - 1) * 28) + 10;					
 						gadgets.window.adjustHeight(edit_mode_height);
 					}
 					
                     // VIEW MODE - build table to hold retrieved app data
 					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
                     
-					for(i = 0; i < links_array.length; i++){
-						link_item = links_array[i];
-						if(link_item.indexOf("^") != -1) {
-							link_item_array = link_item.split("^");
-							cell_name=link_item_array[0];
-							cell_url=link_item_array[1];
-							cell_url2=link_item_array[1];
+					for (i in g_oLinks) {
+						cell_name = g_oLinks[i].link_name;
+						cell_url = g_oLinks[i].link_url;
+						cell_url2 = g_oLinks[i].link_url;
 							
-							favicon_path_array = cell_url.split("//");
-							cell_url2 = favicon_path_array[1];
-							favicon_path_array = cell_url2.split("/");
-							cell_url2 = favicon_path_array[0];
-							cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						favicon_path_array = cell_url.split("//");
+						cell_url2 = favicon_path_array[1];
+						favicon_path_array = cell_url2.split("/");
+						cell_url2 = favicon_path_array[0];
+						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
 
-							// build and add table row
-							links_table_data = links_table_data
-							+ "<tr>"
-							+ "<td>" + cell_favicon + "</td>"
-							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
-							+ "</tr>";
-						}
+						// build and add table row
+						links_table_data = links_table_data
+						+ "<tr>" + "<td>" + cell_favicon + "</td>"
+						+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
 					}
                     
                     // close the table
@@ -145,18 +149,20 @@
                     // put appdata table markup in designated div
 					if(document.getElementById("view_links_table")){
 						document.getElementById("view_links_table").innerHTML=links_table_data;
-						view_mode_height = 12 + ((links_array.length - 1) * 28) + 24;
-						//alert("number of links: " + links_array.length);
-						//alert("set height to: " + view_mode_height);
+						view_mode_height = 12 + ((g_oLinks.length - 1) * 28) + 34;
 						gadgets.window.adjustHeight(view_mode_height);					
 					}
 					
 					if(document.getElementById("linkurl")){
 						document.getElementById("linkurl").value = "http://";
-					}					
-			}); /*osapi.appdata.get*/
+					}
+				} /* end if link data exists */
+			}); /* end osapi.appdata.get */
 		}
+		// ========================================
 		
+		
+		// ========================================
 		function saveLinksAppData() {
 
 			// get link name and url from form
@@ -168,10 +174,11 @@
 				links = "";
 				osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
 				alert("All app data deleted");
+				displayLinksAppData();
 				return;
 			}
 
-			if (g_total_links < g_max_links) {
+			if (g_oLinks.length < g_max_links || !g_oLinks) {
 				
 				// check for empty input boxes
 				if(new_link_name=="" || new_link_url==""){
@@ -181,25 +188,30 @@
 				
 				// prepend http header if missing
 				if(new_link_url.indexOf("://") == -1){new_link_url = "http://" + new_link_url;}
+								
+				var links = "[";
 				
+				// add links from last fetch
+				for (i in g_oLinks) {
+					links += "{\"link_name\":\"" + g_oLinks[i].link_name + "\",\"link_url\":\"" + g_oLinks[i].link_url + "\"},";
+				}
 				
+				// add new link
+				links += "{\"link_name\":\"" + new_link_name + "\",\"link_url\":\"" + new_link_url + "\"}" + "]";
 				
-
+				// ************************************************************
+				// json data model - works with osapi.appdata.update using 'data': {'links' : links}
+				//var links = "[" 
+					//+ "{\"link_name\" : \"twitter\", \"link_url\":\"http://www.twitter.com\"},"
+					//+ "{\"link_name\":\"amazon\", \"link_url\":\"http://www.amazon.com\"},"
+					//+ "{\"link_name\":\"groupon\", \"link_url\":\"http://www.groupon.com\"}"
+					//+ "]";
+				// ************************************************************
 				
+				// write links data to gadget database
+				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : links} }).execute(function(result) {});
 				
-				// remove delimiter chars in case any were keyed in
-				new_link_name = new_link_name.replace("|", "");
-				new_link_name = new_link_name.replace("^", "");
-				new_link_url = new_link_url.replace("|", "");
-				new_link_url = new_link_url.replace("^", "");				
-				
-				// build link item, combine current list with new item, write and clear list
-				var link_data = new_link_name + "^" + new_link_url + "|";
-				links = links + link_data;
-                osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result) {});   
-                links = "";        
-                        
-                // refresh after update, clear input fields
+                // refresh after update, clear input fields - don't need to reset g_oLinks as displayLinksAppData does this
                 displayLinksAppData();
 				document.getElementById("linkname").value = "";
                 document.getElementById("linkurl").value = "";
@@ -207,6 +219,7 @@
 				alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			} else {alert("You already have the maximum number of links.");}
         }
+		// ========================================
         		
 	</script>
     
@@ -214,7 +227,8 @@
 <!-- ==================== END COMBINED VIEWS ==================== -->   
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
-    <Content type="html" view="default, home" preferred_height="300"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home" preferred_height="300">
+	<![CDATA[<!--HTML-->
     	
     <script type="text/javascript">displayLinksAppData();</script>    	
     
@@ -254,8 +268,10 @@
     ]]></Content>
 <!-- ==================== END HOME/EDIT VIEW ==================== -->    
     
+	
 <!-- ==================== START PROFILE VIEW ==================== -->
-    <Content type="html" view="default, profile" preferred_height="100"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, profile" preferred_height="100">
+	<![CDATA[<!--HTML-->
     
     <script type="text/javascript">displayLinksAppData();</script>
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>

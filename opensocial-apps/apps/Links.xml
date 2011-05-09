@@ -55,18 +55,8 @@
 		function deleteArrayItem (array_index) {
 			g_oLinks.splice(array_index,1);
 			
-			var links = "[";
-				
-			// add links from spliced links object
-			for (i = 0; i < g_oLinks.length; i ++) {
-				links += "{\"link_name\":\"" + g_oLinks[i].link_name + "\",\"link_url\":\"" + g_oLinks[i].link_url + "\"}";
-				if (i < (g_oLinks.length - 1)) {links += ","}
-			}
-			
-			links += "]";
-				
 			// write links data to gadget database
-			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : links} }).execute(function(result) {});
+			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 			
 			displayLinksAppData();
 		}
@@ -189,28 +179,14 @@
 				
 				// prepend http header if missing
 				if(new_link_url.indexOf("://") == -1){new_link_url = "http://" + new_link_url;}
-								
-				var links = "[";
-				
-				// add links from last fetch
-				for (i in g_oLinks) {
-					links += "{\"link_name\":\"" + g_oLinks[i].link_name + "\",\"link_url\":\"" + g_oLinks[i].link_url + "\"},";
-				}
-				
-				// add new link
-				links += "{\"link_name\":\"" + new_link_name + "\",\"link_url\":\"" + new_link_url + "\"}" + "]";
-				
-				// ************************************************************
-				// json data model - works with osapi.appdata.update using 'data': {'links' : links}
-				//var links = "[" 
-					//+ "{\"link_name\" : \"twitter\", \"link_url\":\"http://www.twitter.com\"},"
-					//+ "{\"link_name\":\"amazon\", \"link_url\":\"http://www.amazon.com\"},"
-					//+ "{\"link_name\":\"groupon\", \"link_url\":\"http://www.groupon.com\"}"
-					//+ "]";
-				// ************************************************************
-				
+
+				var newLinkNdx = g_oLinks.length;
+				g_oLinks[newLinkNdx] = {};							
+				g_oLinks[newLinkNdx].link_name = new_link_name;							
+				g_oLinks[newLinkNdx].link_url = new_link_url;							
+
 				// write links data to gadget database
-				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : links} }).execute(function(result) {});
+				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 				
                 // refresh after update, clear input fields - don't need to reset g_oLinks as displayLinksAppData does this
                 displayLinksAppData();

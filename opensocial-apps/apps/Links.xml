@@ -22,9 +22,10 @@
     <script type="text/javascript" src="js/UCSF.js" ></script>
     
 	<style>
-    	.links_title {font-family:Verdana, Arial; font-size: 14px;}
-    	.links_body {font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }      	
+    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
+    	.links_body { font-family:Arial; font-size: 12px; }
+    	.links_credit { font-family:Arial; font-size:10px; }
+		.links_save_button { height:20px; font-size:11px; } 	
     </style>
 	
 	<script type="text/javascript">
@@ -108,7 +109,7 @@
 						+ "<tr>" + "<td>" + cell_favicon + "</td>"
 						+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
 						+ "<td>" + cell_url + "</td>"
-						+ "<td><input type='button' class='link_save' value='Delete' onClick='deleteArrayItem(" 
+						+ "<td><input type='button' class='links_save_button' value='Delete' onClick='deleteArrayItem(" 
 						+ i + ")'" + "></td>" + "</tr>";
 					}
                     
@@ -149,7 +150,7 @@
                     // put appdata table markup in designated div
 					if(document.getElementById("view_links_table")){
 						document.getElementById("view_links_table").innerHTML=links_table_data;
-						view_mode_height = 12 + ((g_oLinks.length - 1) * 28) + 34;
+						view_mode_height = 12 + ((g_oLinks.length - 1) * 30) + 34;
 						gadgets.window.adjustHeight(view_mode_height);					
 					}
 					

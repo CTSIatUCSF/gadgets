@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs
-        title="Faculty Mentoring">
-        <Require feature="opensocial-0.9" />
-        <Require feature="views" />
-        <Require feature="dynamic-height" />
-        <Require feature="pubsub" />
-        <Require feature="osapi" />
-    </ModulePrefs>
-    
-<!-- ==================== START COMBINED VIEWS ==================== -->    
-    
-    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
+	<ModulePrefs title="Faculty Mentoring">
+		<Require feature="opensocial-0.9" />
+		<Require feature="views" />
+		<Require feature="dynamic-height" />
+		<Require feature="pubsub" />
+		<Require feature="osapi" />
+	</ModulePrefs>
+
+	<!-- ==================== START COMBINED VIEWS ==================== -->
+
+	<Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
     <!-- #includes -->
@@ -271,13 +270,13 @@
     </script>
     
     ]]></Content>
-    
-<!-- ==================== END COMBINED VIEWS ==================== -->    
+
+	<!-- ==================== END COMBINED VIEWS ==================== -->
 
 
-<!-- ==================== START HOME/EDIT VIEW ==================== -->
-    
-    <Content type="html" view="default, home"><![CDATA[<!--HTML-->
+	<!-- ==================== START HOME/EDIT VIEW ==================== -->
+
+	<Content type="html" view="default, home"><![CDATA[<!--HTML-->
     	    	
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
@@ -392,13 +391,13 @@
 	</script>  
 
     ]]></Content>
-    
-<!-- ==================== END HOME/EDIT VIEW ==================== -->    
-    
-	
-<!-- ==================== START PROFILE VIEW ==================== -->
-    
-    <Content type="html" view="default, profile"><![CDATA[<!--HTML-->
+
+	<!-- ==================== END HOME/EDIT VIEW ==================== -->
+
+
+	<!-- ==================== START PROFILE VIEW ==================== -->
+
+	<Content type="html" view="default, profile"><![CDATA[<!--HTML-->
     
 	<div class="updated" style="display:block; text-align:left; padding: 5px 10px 10px 0; font-size: 10px;">
 		Last Updated: <span id="last_updated" style="font-size: 10px;"></span>
@@ -444,7 +443,7 @@
     </script>	
 		
     ]]></Content>
-    
-<!-- ==================== END PROFILE VIEW ==================== -->    
-  
+
+	<!-- ==================== END PROFILE VIEW ==================== -->
+
 </Module>

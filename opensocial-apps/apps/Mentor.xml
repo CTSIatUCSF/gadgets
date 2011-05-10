@@ -69,39 +69,34 @@
 				// if mentor data exists
 				if (g_mentor_data) {			
                     
-					// EDIT MODE
-					for (i in g_mentor_data) {
+					if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("edit_career_mentor") )
+						document.getElementById("edit_career_mentor").checked = true;
+					if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("edit_co_mentor") )
+						document.getElementById("edit_co_mentor").checked = true;						
+					if (g_mentor_data.edit_lead_research == "T" && document.getElementById("edit_lead_research") )
+						document.getElementById("edit_lead_research").checked = true;						
+					if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("edit_project_mentor") )
+						document.getElementById("edit_project_mentor").checked = true;	
 						
-						if (g_mentor_data[i].edit_career_mentor == "T" && document.getElementById("edit_career_mentor") )
-							document.getElementById("edit_career_mentor").checked = true;
-						if (g_mentor_data[i].edit_co_mentor == "T" && document.getElementById("edit_co_mentor") )
-							document.getElementById("edit_co_mentor").checked = true;						
-						if (g_mentor_data[i].edit_lead_research == "T" && document.getElementById("edit_lead_research") )
-							document.getElementById("edit_lead_research").checked = true;						
-						if (g_mentor_data[i].edit_project_mentor == "T" && document.getElementById("edit_project_mentor") )
-							document.getElementById("edit_project_mentor").checked = true;	
-							
-						if (g_mentor_data[i].edit_email == "T" && document.getElementById("edit_email"))
-							document.getElementById("edit_email").checked = true;
-						if (g_mentor_data[i].edit_phone == "T" && document.getElementById("edit_phone"))
-							document.getElementById("edit_phone").checked = true;
-						if (g_mentor_data[i].edit_assistant == "T" && document.getElementById("edit_assistant"))
-							document.getElementById("edit_assistant").checked = true;								
+					if (g_mentor_data.edit_email == "T" && document.getElementById("edit_email"))
+						document.getElementById("edit_email").checked = true;
+					if (g_mentor_data.edit_phone == "T" && document.getElementById("edit_phone"))
+						document.getElementById("edit_phone").checked = true;
+					if (g_mentor_data.edit_assistant == "T" && document.getElementById("edit_assistant"))
+						document.getElementById("edit_assistant").checked = true;								
 
-						if (g_mentor_data[i].edit_assistant_name && document.getElementById("edit_assistant_name") ) 
-							document.getElementById("edit_assistant_name").value = g_mentor_data[i].edit_assistant_name;
-						if (g_mentor_data[i].edit_assistant_email && document.getElementById("edit_assistant_email") )
-							document.getElementById("edit_assistant_email").value = g_mentor_data[i].edit_assistant_email;
-						if (g_mentor_data[i].edit_assistant_phone && document.getElementById("edit_assistant_phone") )
-							document.getElementById("edit_assistant_phone").value = g_mentor_data[i].edit_assistant_phone;
-							
-						if (g_mentor_data[i].edit_narrative)
-							document.getElementById("facultyNarrative").value = g_mentor_data[i].edit_narrative;
-															
-						if (g_mentor_data[i].last_updated)
-							document.getElementById("last_updated").innerHTML = g_mentor_data[i].last_updated;
+					if (g_mentor_data.edit_assistant_name && document.getElementById("edit_assistant_name") ) 
+						document.getElementById("edit_assistant_name").value = g_mentor_data.edit_assistant_name;
+					if (g_mentor_data.edit_assistant_email && document.getElementById("edit_assistant_email") )
+						document.getElementById("edit_assistant_email").value = g_mentor_data.edit_assistant_email;
+					if (g_mentor_data.edit_assistant_phone && document.getElementById("edit_assistant_phone") )
+						document.getElementById("edit_assistant_phone").value = g_mentor_data.edit_assistant_phone;
+						
+					if (g_mentor_data.edit_narrative)
+						document.getElementById("facultyNarrative").value = g_mentor_data.edit_narrative;
 														
-					} // end for
+					if (g_mentor_data.last_updated)
+						document.getElementById("last_updated").innerHTML = g_mentor_data.last_updated;
 						
 					// VIEW MODE - build table to hold retrieved app data
 					
@@ -111,49 +106,49 @@
 										  					      
 					for (i in g_mentor_data) {
 							
-						if (g_mentor_data[i].edit_career_mentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
+						if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
 							document.getElementById("mentor_as").style.display = "block";
 							document.getElementById("mentor_as_career_mentor").style.display = "block";
 							view_window_height += 20;
 							mentor_as = "visible";
 						}
 								
-						if (g_mentor_data[i].edit_co_mentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
+						if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
 							document.getElementById("mentor_as").style.display = "block";
 							document.getElementById("mentor_as_co_mentor").style.display = "block";
 							view_window_height += 20;
 							mentor_as = "visible";
 						}
 								
-						if (g_mentor_data[i].edit_lead_research == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
+						if (g_mentor_data.edit_lead_research == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
 							document.getElementById("mentor_as").style.display = "block";
 							document.getElementById("mentor_as_lead_research").style.display = "block";
 							view_window_height += 20;
 							mentor_as = "visible";
 						}
 								
-						if (g_mentor_data[i].edit_project_mentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
+						if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
 							document.getElementById("mentor_as").style.display = "block";
 							document.getElementById("mentor_as_project_mentor").style.display = "block";
 							view_window_height += 20;
 							mentor_as = "visible";
 						}
 								
-						if (g_mentor_data[i].edit_email == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
+						if (g_mentor_data.edit_email == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
 							document.getElementById("mentor_contact").style.display = "block";
 							document.getElementById("mentor_contact_email").style.display = "block";
 							view_window_height += 20;
 							mentor_contact = "visible";
 						}
 																
-						if (g_mentor_data[i].edit_phone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
+						if (g_mentor_data.edit_phone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
 							document.getElementById("mentor_contact").style.display = "block";
 							document.getElementById("mentor_contact_phone").style.display = "block";
 							view_window_height += 20;
 							mentor_contact = "visible";
 						}
 							
-						if (g_mentor_data[i].edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
+						if (g_mentor_data.edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
 							document.getElementById("mentor_contact").style.display = "block";
 							document.getElementById("mentor_contact_assistant").style.display = "block";
 							document.getElementById("mentor_assistant").style.display = "block";
@@ -161,27 +156,27 @@
 							mentor_contact = "visible";
 						}
 
-						if (g_mentor_data[i].edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
+						if (g_mentor_data.edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
 							document.getElementById("mentor_assistant_name").style.display = "block";
-							document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data[i].edit_assistant_name;
+							document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data.edit_assistant_name;
 							view_window_height += 20;
 						}
 								
-						if (g_mentor_data[i].edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
+						if (g_mentor_data.edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
 							document.getElementById("mentor_assistant_email").style.display = "block";
-							document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data[i].edit_assistant_email;
+							document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data.edit_assistant_email;
 							view_window_height += 20;
 						}
 								
-						if (g_mentor_data[i].edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
+						if (g_mentor_data.edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
 							document.getElementById("mentor_assistant_phone").style.display = "block";
-							document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data[i].edit_assistant_phone;
+							document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data.edit_assistant_phone;
 							view_window_height += 20;
 						}
 						
-						if (g_mentor_data[i].edit_narrative) {
+						if (g_mentor_data.edit_narrative) {
 							document.getElementById("facultyNarrative").style.display = "block";
-							var p_chars = g_mentor_data[i].edit_narrative;
+							var p_chars = g_mentor_data.edit_narrative;
 									
 							// count the characters	and calculate number of rows								
 							p_num_chars = p_chars.length;									
@@ -194,8 +189,8 @@
 							// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
 						}
 								
-						if (g_mentor_data[i].last_updated)
-							document.getElementById("last_updated").innerHTML = g_mentor_data[i].last_updated;
+						if (g_mentor_data.last_updated)
+							document.getElementById("last_updated").innerHTML = g_mentor_data.last_updated;
 		
 					} // end for
 				} // end if
@@ -256,22 +251,21 @@
 			var mentor_year = mentor_today.getFullYear();
 			var current_date = mentor_day + " " + mentor_month + " " + mentor_date + ", " + mentor_year;			
 			
-			var mentor_data = "[" 
-				+ "{\"edit_career_mentor\":\"" + edit_career_mentor + "\"},"
-				+ "{\"edit_co_mentor\":\"" + edit_co_mentor + "\"},"
-				+ "{\"edit_lead_research\":\"" + edit_lead_research + "\"},"
-				+ "{\"edit_project_mentor\":\"" + edit_project_mentor + "\"},"
-				+ "{\"edit_email\":\"" + edit_email + "\"},"
-				+ "{\"edit_phone\":\"" + edit_phone + "\"},"
-				+ "{\"edit_assistant\":\"" + edit_assistant + "\"},"
-				+ "{\"edit_assistant_name\":\"" + document.getElementById("edit_assistant_name").value + "\"},"
-				+ "{\"edit_assistant_email\":\"" + document.getElementById("edit_assistant_email").value + "\"},"
-				+ "{\"edit_assistant_phone\":\"" + document.getElementById("edit_assistant_phone").value + "\"},"
-				+ "{\"edit_narrative\":\"" + document.getElementById("facultyNarrative").value + "\"},"					
-				+ "{\"last_updated\":\"" + current_date + "\"}"	
-				+ "]";
+			var mentor_data = {};
+			mentor_data.edit_career_mentor = edit_career_mentor;
+			mentor_data.edit_co_mentor = edit_co_mentor;
+			mentor_data.edit_lead_research = edit_lead_research;
+			mentor_data.edit_project_mentor = edit_project_mentor;
+			mentor_data.edit_email = edit_email;
+			mentor_data.edit_phone = edit_phone;
+			mentor_data.edit_assistant = edit_assistant;
+			mentor_data.edit_assistant_name = document.getElementById("edit_assistant_name").value;
+			mentor_data.edit_assistant_email = document.getElementById("edit_assistant_email").value;
+			mentor_data.edit_assistant_phone = document.getElementById("edit_assistant_phone").value;
+			mentor_data.edit_narrative = document.getElementById("facultyNarrative").value;
+			mentor_data.last_updated = current_date;
 			
-            osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'mentor_data':mentor_data} }).execute(function(result) {});   
+            osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'mentor_data':gadgets.json.stringify(mentor_data)} }).execute(function(result) {});   
             mentor_data = "";
             alert("Your information is saved and should be available in Search Results within an hour. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 		}

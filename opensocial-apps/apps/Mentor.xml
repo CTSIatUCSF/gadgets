@@ -156,26 +156,24 @@
 						if (g_mentor_data[i].edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
 							document.getElementById("mentor_contact").style.display = "block";
 							document.getElementById("mentor_contact_assistant").style.display = "block";
+							document.getElementById("mentor_assistant").style.display = "block";
 							view_window_height += 20;
 							mentor_contact = "visible";
 						}
 
 						if (g_mentor_data[i].edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
-							document.getElementById("mentor_assistant").style.display = "block";
 							document.getElementById("mentor_assistant_name").style.display = "block";
 							document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data[i].edit_assistant_name;
 							view_window_height += 20;
 						}
 								
 						if (g_mentor_data[i].edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
-							document.getElementById("mentor_assistant").style.display = "block";
 							document.getElementById("mentor_assistant_email").style.display = "block";
 							document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data[i].edit_assistant_email;
 							view_window_height += 20;
 						}
 								
 						if (g_mentor_data[i].edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
-							document.getElementById("mentor_assistant").style.display = "block";
 							document.getElementById("mentor_assistant_phone").style.display = "block";
 							document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data[i].edit_assistant_phone;
 							view_window_height += 20;
@@ -284,6 +282,7 @@
     
 <!-- ==================== END COMBINED VIEWS ==================== -->    
 
+
 <!-- ==================== START HOME/EDIT VIEW ==================== -->
     
     <Content type="html" view="default, home"><![CDATA[<!--HTML-->
@@ -382,14 +381,15 @@
 		
 		<fieldset>
 			<textarea id="facultyNarrative" rows='9' cols='72' class='roundbox' style="margin-left:12px;" name="facultyNarrative" onKeyDown="limit_chars()" onKeyUp="limit_chars()" onMouseout="limit_chars()"></textarea>
-			<span style="margin-left:12px;"> (2000 characters max)</span>
+			<span style="margin-left:12px;">(2000 characters max)</span>
 		</fieldset>		
 	</div>
 	
 	<div>
 		<center>
-			<input type="button" onClick="saveMentorAppData();" value="Save">&nbsp;&nbsp;&nbsp;
-			<input type="button"  value="Cancel">
+			<input type="button" onClick="saveMentorAppData();" value="Save">
+			&nbsp;&nbsp;&nbsp;
+			<input type="button" onClick="displayMentorAppData()" value="Cancel">
 		</center>
 	</div>
 	

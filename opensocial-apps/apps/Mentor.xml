@@ -104,95 +104,93 @@
 					var mentor_as = "hidden";
 					var mentor_contact = "hidden";
 										  					      
-					for (i in g_mentor_data) {
-							
-						if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
-							document.getElementById("mentor_as").style.display = "block";
-							document.getElementById("mentor_as_career_mentor").style.display = "block";
-							view_window_height += 20;
-							mentor_as = "visible";
-						}
+											
+					if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
+						document.getElementById("mentor_as").style.display = "block";
+						document.getElementById("mentor_as_career_mentor").style.display = "block";
+						view_window_height += 20;
+						mentor_as = "visible";
+					}
 								
-						if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
-							document.getElementById("mentor_as").style.display = "block";
-							document.getElementById("mentor_as_co_mentor").style.display = "block";
-							view_window_height += 20;
-							mentor_as = "visible";
-						}
+					if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
+						document.getElementById("mentor_as").style.display = "block";
+						document.getElementById("mentor_as_co_mentor").style.display = "block";
+						view_window_height += 20;
+						mentor_as = "visible";
+					}
 								
-						if (g_mentor_data.edit_lead_research == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
-							document.getElementById("mentor_as").style.display = "block";
-							document.getElementById("mentor_as_lead_research").style.display = "block";
-							view_window_height += 20;
-							mentor_as = "visible";
-						}
+					if (g_mentor_data.edit_lead_research == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
+						document.getElementById("mentor_as").style.display = "block";
+						document.getElementById("mentor_as_lead_research").style.display = "block";
+						view_window_height += 20;
+						mentor_as = "visible";
+					}
 								
-						if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
-							document.getElementById("mentor_as").style.display = "block";
-							document.getElementById("mentor_as_project_mentor").style.display = "block";
-							view_window_height += 20;
-							mentor_as = "visible";
-						}
+					if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
+						document.getElementById("mentor_as").style.display = "block";
+						document.getElementById("mentor_as_project_mentor").style.display = "block";
+						view_window_height += 20;
+						mentor_as = "visible";
+					}
 								
-						if (g_mentor_data.edit_email == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
-							document.getElementById("mentor_contact").style.display = "block";
-							document.getElementById("mentor_contact_email").style.display = "block";
-							view_window_height += 20;
-							mentor_contact = "visible";
-						}
+					if (g_mentor_data.edit_email == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
+						document.getElementById("mentor_contact").style.display = "block";
+						document.getElementById("mentor_contact_email").style.display = "block";
+						view_window_height += 20;
+						mentor_contact = "visible";
+					}
 																
-						if (g_mentor_data.edit_phone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
-							document.getElementById("mentor_contact").style.display = "block";
-							document.getElementById("mentor_contact_phone").style.display = "block";
-							view_window_height += 20;
-							mentor_contact = "visible";
-						}
+					if (g_mentor_data.edit_phone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
+						document.getElementById("mentor_contact").style.display = "block";
+						document.getElementById("mentor_contact_phone").style.display = "block";
+						view_window_height += 20;
+						mentor_contact = "visible";
+					}
 							
-						if (g_mentor_data.edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
-							document.getElementById("mentor_contact").style.display = "block";
-							document.getElementById("mentor_contact_assistant").style.display = "block";
-							document.getElementById("mentor_assistant").style.display = "block";
-							view_window_height += 20;
-							mentor_contact = "visible";
-						}
+					if (g_mentor_data.edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
+						document.getElementById("mentor_contact").style.display = "block";
+						document.getElementById("mentor_contact_assistant").style.display = "block";
+						document.getElementById("mentor_assistant").style.display = "block";
+						view_window_height += 20;
+						mentor_contact = "visible";
+					}
 
-						if (g_mentor_data.edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
-							document.getElementById("mentor_assistant_name").style.display = "block";
-							document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data.edit_assistant_name;
-							view_window_height += 20;
-						}
+					if (g_mentor_data.edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
+						document.getElementById("mentor_assistant_name").style.display = "block";
+						document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data.edit_assistant_name;
+						view_window_height += 20;
+					}
 								
-						if (g_mentor_data.edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
-							document.getElementById("mentor_assistant_email").style.display = "block";
-							document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data.edit_assistant_email;
-							view_window_height += 20;
-						}
+					if (g_mentor_data.edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
+						document.getElementById("mentor_assistant_email").style.display = "block";
+						document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data.edit_assistant_email;
+						view_window_height += 20;
+					}
 								
-						if (g_mentor_data.edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
-							document.getElementById("mentor_assistant_phone").style.display = "block";
-							document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data.edit_assistant_phone;
-							view_window_height += 20;
-						}
+					if (g_mentor_data.edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
+						document.getElementById("mentor_assistant_phone").style.display = "block";
+						document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data.edit_assistant_phone;
+						view_window_height += 20;
+					}
 						
-						if (g_mentor_data.edit_narrative) {
+					if (g_mentor_data.edit_narrative) {
 							document.getElementById("facultyNarrative").style.display = "block";
 							var p_chars = g_mentor_data.edit_narrative;
 									
-							// count the characters	and calculate number of rows								
-							p_num_chars = p_chars.length;									
-							document.getElementById("facultyNarrative").innerHTML = p_chars;
-							p_lines = Math.round(p_num_chars / 100);
-							if (p_lines < 1) {p_lines = 1}
-							view_window_height += (p_lines * 14);
+						// count the characters	and calculate number of rows								
+						p_num_chars = p_chars.length;									
+						document.getElementById("facultyNarrative").innerHTML = p_chars;
+						p_lines = Math.round(p_num_chars / 100);
+						if (p_lines < 1) {p_lines = 1}
+						view_window_height += (p_lines * 15);
 																		
-							// note works in FF but not IE:
-							// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
-						}
+						// note works in FF but not IE:
+						// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
+					}
 								
-						if (g_mentor_data.last_updated)
+					if (g_mentor_data.last_updated)
 							document.getElementById("last_updated").innerHTML = g_mentor_data.last_updated;
 		
-					} // end for
 				} // end if
 				
 				if (mentor_as == "visible") {view_window_height += 20};

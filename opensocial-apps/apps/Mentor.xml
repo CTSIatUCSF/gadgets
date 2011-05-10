@@ -42,7 +42,6 @@
 	
 		var g_chars_allowed=2000;
 		var g_textarea_content="";
-		var g_mentor_data; // declare it like this to make json work
 	
 		function limit_chars(){
 			num_chars = document.getElementById("facultyNarrative").value.length; 
@@ -57,140 +56,137 @@
     
 		function displayMentorAppData() {
 		
-			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': ['mentor_data'] } ).execute(function(result) {
+			var fields = ["careerMentor", "coMentor", "leadResearch", "projectMentor",
+							"contactEmail", "contactPhone", "contactAssistant", 
+							"assistantName", "assistantEmail", "assistantPhone", 
+							"narrative", "lastUpdate"];
+		
+			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields': fields } ).execute(function(result) {
 			
-				// get incoming mentor data (in json string format)
+				// get incoming mentor data 
 				var viewer = os.osapi.getViewerFromResult(result);
 	
-				// convert to json object format
-				g_mentor_data = gadgets.json.parse(viewer.mentor_data);
-				
-				// if mentor data exists
-				if (g_mentor_data) {			
-                    
-					if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("edit_career_mentor") )
-						document.getElementById("edit_career_mentor").checked = true;
-					if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("edit_co_mentor") )
-						document.getElementById("edit_co_mentor").checked = true;						
-					if (g_mentor_data.edit_lead_research == "T" && document.getElementById("edit_lead_research") )
-						document.getElementById("edit_lead_research").checked = true;						
-					if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("edit_project_mentor") )
-						document.getElementById("edit_project_mentor").checked = true;	
-						
-					if (g_mentor_data.edit_email == "T" && document.getElementById("edit_email"))
-						document.getElementById("edit_email").checked = true;
-					if (g_mentor_data.edit_phone == "T" && document.getElementById("edit_phone"))
-						document.getElementById("edit_phone").checked = true;
-					if (g_mentor_data.edit_assistant == "T" && document.getElementById("edit_assistant"))
-						document.getElementById("edit_assistant").checked = true;								
-
-					if (g_mentor_data.edit_assistant_name && document.getElementById("edit_assistant_name") ) 
-						document.getElementById("edit_assistant_name").value = g_mentor_data.edit_assistant_name;
-					if (g_mentor_data.edit_assistant_email && document.getElementById("edit_assistant_email") )
-						document.getElementById("edit_assistant_email").value = g_mentor_data.edit_assistant_email;
-					if (g_mentor_data.edit_assistant_phone && document.getElementById("edit_assistant_phone") )
-						document.getElementById("edit_assistant_phone").value = g_mentor_data.edit_assistant_phone;
-						
-					if (g_mentor_data.edit_narrative)
-						document.getElementById("facultyNarrative").value = g_mentor_data.edit_narrative;
-														
-					if (g_mentor_data.last_updated)
-						document.getElementById("last_updated").innerHTML = g_mentor_data.last_updated;
-						
-					// VIEW MODE - build table to hold retrieved app data
+				if (viewer.careerMentor == "T" && document.getElementById("edit_career_mentor") )
+					document.getElementById("edit_career_mentor").checked = true;
+				if (viewer.coMentor == "T" && document.getElementById("edit_co_mentor") )
+					document.getElementById("edit_co_mentor").checked = true;						
+				if (viewer.leadResearch == "T" && document.getElementById("edit_lead_research") )
+					document.getElementById("edit_lead_research").checked = true;						
+				if (viewer.projectMentor == "T" && document.getElementById("edit_project_mentor") )
+					document.getElementById("edit_project_mentor").checked = true;	
 					
-					var view_window_height=80;
-					var mentor_as = "hidden";
-					var mentor_contact = "hidden";
-										  					      
-											
-					if (g_mentor_data.edit_career_mentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
-						document.getElementById("mentor_as").style.display = "block";
-						document.getElementById("mentor_as_career_mentor").style.display = "block";
-						view_window_height += 20;
-						mentor_as = "visible";
-					}
-								
-					if (g_mentor_data.edit_co_mentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
-						document.getElementById("mentor_as").style.display = "block";
-						document.getElementById("mentor_as_co_mentor").style.display = "block";
-						view_window_height += 20;
-						mentor_as = "visible";
-					}
-								
-					if (g_mentor_data.edit_lead_research == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
-						document.getElementById("mentor_as").style.display = "block";
-						document.getElementById("mentor_as_lead_research").style.display = "block";
-						view_window_height += 20;
-						mentor_as = "visible";
-					}
-								
-					if (g_mentor_data.edit_project_mentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
-						document.getElementById("mentor_as").style.display = "block";
-						document.getElementById("mentor_as_project_mentor").style.display = "block";
-						view_window_height += 20;
-						mentor_as = "visible";
-					}
-								
-					if (g_mentor_data.edit_email == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
-						document.getElementById("mentor_contact").style.display = "block";
-						document.getElementById("mentor_contact_email").style.display = "block";
-						view_window_height += 20;
-						mentor_contact = "visible";
-					}
-																
-					if (g_mentor_data.edit_phone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
-						document.getElementById("mentor_contact").style.display = "block";
-						document.getElementById("mentor_contact_phone").style.display = "block";
-						view_window_height += 20;
-						mentor_contact = "visible";
-					}
-							
-					if (g_mentor_data.edit_assistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
-						document.getElementById("mentor_contact").style.display = "block";
-						document.getElementById("mentor_contact_assistant").style.display = "block";
-						document.getElementById("mentor_assistant").style.display = "block";
-						view_window_height += 20;
-						mentor_contact = "visible";
-					}
+				if (viewer.contactEmail == "T" && document.getElementById("edit_email"))
+					document.getElementById("edit_email").checked = true;
+				if (viewer.contactPhone == "T" && document.getElementById("edit_phone"))
+					document.getElementById("edit_phone").checked = true;
+				if (viewer.contactAssistant == "T" && document.getElementById("edit_assistant"))
+					document.getElementById("edit_assistant").checked = true;								
 
-					if (g_mentor_data.edit_assistant_name && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
-						document.getElementById("mentor_assistant_name").style.display = "block";
-						document.getElementById("mentor_assistant_name").innerHTML += g_mentor_data.edit_assistant_name;
-						view_window_height += 20;
-					}
-								
-					if (g_mentor_data.edit_assistant_email && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
-						document.getElementById("mentor_assistant_email").style.display = "block";
-						document.getElementById("mentor_assistant_email").innerHTML += g_mentor_data.edit_assistant_email;
-						view_window_height += 20;
-					}
-								
-					if (g_mentor_data.edit_assistant_phone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
-						document.getElementById("mentor_assistant_phone").style.display = "block";
-						document.getElementById("mentor_assistant_phone").innerHTML += g_mentor_data.edit_assistant_phone;
-						view_window_height += 20;
-					}
+				if (viewer.assistantName && document.getElementById("edit_assistant_name") ) 
+					document.getElementById("edit_assistant_name").value = viewer.assistantName;
+				if (viewer.assistantEmail && document.getElementById("edit_assistant_email") )
+					document.getElementById("edit_assistant_email").value = viewer.assistantEmail;
+				if (viewer.assistantPhone && document.getElementById("edit_assistant_phone") )
+					document.getElementById("edit_assistant_phone").value = viewer.assistantPhone;
+					
+				if (viewer.narrative)
+					document.getElementById("facultyNarrative").value = viewer.narrative;
+													
+				if (viewer.lastUpdate)
+					document.getElementById("last_updated").innerHTML = viewer.lastUpdate;
+					
+				// VIEW MODE - build table to hold retrieved app data
+				
+				var view_window_height=80;
+				var mentor_as = "hidden";
+				var mentor_contact = "hidden";
+									  					      
+										
+				if (viewer.careerMentor == "T" && document.getElementById("mentor_as_career_mentor") && document.getElementById("mentor_as") ) {
+					document.getElementById("mentor_as").style.display = "block";
+					document.getElementById("mentor_as_career_mentor").style.display = "block";
+					view_window_height += 20;
+					mentor_as = "visible";
+				}
+							
+				if (viewer.coMentor == "T" && document.getElementById("mentor_as_co_mentor") && document.getElementById("mentor_as") ) {
+					document.getElementById("mentor_as").style.display = "block";
+					document.getElementById("mentor_as_co_mentor").style.display = "block";
+					view_window_height += 20;
+					mentor_as = "visible";
+				}
+							
+				if (viewer.leadResearch == "T" && document.getElementById("mentor_as_lead_research") && document.getElementById("mentor_as") ) {
+					document.getElementById("mentor_as").style.display = "block";
+					document.getElementById("mentor_as_lead_research").style.display = "block";
+					view_window_height += 20;
+					mentor_as = "visible";
+				}
+							
+				if (viewer.projectMentor == "T" && document.getElementById("mentor_as_project_mentor") && document.getElementById("mentor_as") ) {								
+					document.getElementById("mentor_as").style.display = "block";
+					document.getElementById("mentor_as_project_mentor").style.display = "block";
+					view_window_height += 20;
+					mentor_as = "visible";
+				}
+							
+				if (viewer.contactEmail == "T" && document.getElementById("mentor_contact_email") && document.getElementById("mentor_contact") ) {		
+					document.getElementById("mentor_contact").style.display = "block";
+					document.getElementById("mentor_contact_email").style.display = "block";
+					view_window_height += 20;
+					mentor_contact = "visible";
+				}
+															
+				if (viewer.contactPhone == "T" && document.getElementById("mentor_contact_phone") && document.getElementById("mentor_contact") ) {
+					document.getElementById("mentor_contact").style.display = "block";
+					document.getElementById("mentor_contact_phone").style.display = "block";
+					view_window_height += 20;
+					mentor_contact = "visible";
+				}
 						
-					if (g_mentor_data.edit_narrative) {
-							document.getElementById("facultyNarrative").style.display = "block";
-							var p_chars = g_mentor_data.edit_narrative;
-									
-						// count the characters	and calculate number of rows								
-						p_num_chars = p_chars.length;									
-						document.getElementById("facultyNarrative").innerHTML = p_chars;
-						p_lines = Math.round(p_num_chars / 100);
-						if (p_lines < 1) {p_lines = 1}
-						view_window_height += (p_lines * 15);
-																		
-						// note works in FF but not IE:
-						// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
-					}
+				if (viewer.contactAssistant == "T" && document.getElementById("mentor_contact_assistant") && document.getElementById("mentor_contact") ) {
+					document.getElementById("mentor_contact").style.display = "block";
+					document.getElementById("mentor_contact_assistant").style.display = "block";
+					document.getElementById("mentor_assistant").style.display = "block";
+					view_window_height += 20;
+					mentor_contact = "visible";
+				}
+
+				if (viewer.assistantName && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_name") ) {
+					document.getElementById("mentor_assistant_name").style.display = "block";
+					document.getElementById("mentor_assistant_name").innerHTML += viewer.assistantName;
+					view_window_height += 20;
+				}
+							
+				if (viewer.assistantEmail && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_email") ) {
+					document.getElementById("mentor_assistant_email").style.display = "block";
+					document.getElementById("mentor_assistant_email").innerHTML += viewer.assistantEmail;
+					view_window_height += 20;
+				}
+							
+				if (viewer.assistantPhone && document.getElementById("mentor_assistant") && document.getElementById("mentor_assistant_phone") ) {
+					document.getElementById("mentor_assistant_phone").style.display = "block";
+					document.getElementById("mentor_assistant_phone").innerHTML += viewer.assistantPhone;
+					view_window_height += 20;
+				}
+					
+				if (viewer.narrative) {
+						document.getElementById("facultyNarrative").style.display = "block";
+						var p_chars = viewer.narrative;
 								
-					if (g_mentor_data.last_updated)
-							document.getElementById("last_updated").innerHTML = g_mentor_data.last_updated;
-		
-				} // end if
+					// count the characters	and calculate number of rows								
+					p_num_chars = p_chars.length;									
+					document.getElementById("facultyNarrative").innerHTML = p_chars;
+					p_lines = Math.round(p_num_chars / 100);
+					if (p_lines < 1) {p_lines = 1}
+					view_window_height += (p_lines * 15);
+																	
+					// note works in FF but not IE:
+					// view_window_height += document.getElementById('facultyNarrative').offsetHeight;
+				}
+							
+				if (viewer.lastUpdated)
+						document.getElementById("last_updated").innerHTML = viewer.lastUpdated;
 				
 				if (mentor_as == "visible") {view_window_height += 20};
 				if (mentor_contact == "visible") {view_window_height += 20};
@@ -205,19 +201,6 @@
 		
 		function saveMentorAppData() {
 		
-			var mentor_data;
-			var edit_career_mentor="F", edit_co_mentor="F", edit_lead_research="F", edit_project_mentor="F";
-			var edit_email="F", edit_phone="F", edit_assistant = "F";
-			
-			if (document.getElementById("edit_career_mentor").checked) {edit_career_mentor = "T";}
-			if (document.getElementById("edit_co_mentor").checked) {edit_co_mentor = "T";}
-			if (document.getElementById("edit_lead_research").checked) {edit_lead_research = "T";}
-			if (document.getElementById("edit_project_mentor").checked) {edit_project_mentor = "T";}
-			
-			if (document.getElementById("edit_email").checked) {edit_email = "T";}
-			if (document.getElementById("edit_phone").checked) {edit_phone = "T";}
-			if (document.getElementById("edit_assistant").checked) {edit_assistant = "T";}
-			
 			var mentor_today = new Date();
 			var weekday=new Array(7);
 			weekday[0]="Sunday";
@@ -248,22 +231,28 @@
 			var mentor_year = mentor_today.getFullYear();
 			var current_date = mentor_day + " " + mentor_month + " " + mentor_date + ", " + mentor_year;			
 			
-			var mentor_data = {};
-			mentor_data.edit_career_mentor = edit_career_mentor;
-			mentor_data.edit_co_mentor = edit_co_mentor;
-			mentor_data.edit_lead_research = edit_lead_research;
-			mentor_data.edit_project_mentor = edit_project_mentor;
-			mentor_data.edit_email = edit_email;
-			mentor_data.edit_phone = edit_phone;
-			mentor_data.edit_assistant = edit_assistant;
-			mentor_data.edit_assistant_name = document.getElementById("edit_assistant_name").value;
-			mentor_data.edit_assistant_email = document.getElementById("edit_assistant_email").value;
-			mentor_data.edit_assistant_phone = document.getElementById("edit_assistant_phone").value;
-			mentor_data.edit_narrative = document.getElementById("facultyNarrative").value;
-			mentor_data.last_updated = current_date;
+			// pack the data into an Object (md for mentor data) 
+			// with property names that match the values in the "fields" array 
+			// used by osapi.appdate.get in displayMentorAppData							
+			var md = {};
 			
-            osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'mentor_data':gadgets.json.stringify(mentor_data)} }).execute(function(result) {});   
-            mentor_data = "";
+			md.careerMentor = document.getElementById("edit_career_mentor").checked ? "T" : "F";
+			md.coMentor = document.getElementById("edit_co_mentor").checked ? "T" : "F";
+			md.leadResearch = document.getElementById("edit_lead_research").checked ? "T" : "F";
+			md.projectMentor = document.getElementById("edit_project_mentor").checked ? "T" : "F";
+			
+			md.contactEmail = document.getElementById("edit_email").checked ? "T" : "F";
+			md.contactPhone = document.getElementById("edit_phone").checked ? "T" : "F";
+			md.contactAssistant = document.getElementById("edit_assistant").checked ? "T" : "F";
+			
+			md.assistantName = document.getElementById("edit_assistant_name").value;
+			md.assistantEmail = document.getElementById("edit_assistant_email").value;
+			md.assistantPhone = document.getElementById("edit_assistant_phone").value;
+			md.narrative = document.getElementById("facultyNarrative").value;
+			md.lastUpdate = current_date;
+			
+            osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':md }).execute(function(result) {});   
+
             alert("Your information is saved and should be available in Search Results within an hour. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 		}
 

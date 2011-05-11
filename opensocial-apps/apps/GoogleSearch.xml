@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs
-            title="Full Text Search Results (beta) - Powered by Google">
-        <Require feature="pubsub" />
-        <Require feature="dynamic-height" />
-    </ModulePrefs>
-    <Content type="html"><![CDATA[<!--HTML-->
+	<ModulePrefs title="Full Text Search Results (beta) - Powered by Google">
+		<Require feature="pubsub" />
+		<Require feature="dynamic-height" />
+	</ModulePrefs>
+	<Content type="html"><![CDATA[<!--HTML-->
     <!-- #includes -->
     <!DOCTYPE html>
     
@@ -145,5 +144,5 @@ $(document).ready(function(){
 -->
 
 ]]>
-</Content>
+	</Content>
 </Module>

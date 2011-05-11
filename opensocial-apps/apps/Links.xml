@@ -57,104 +57,107 @@
 			// write links data to gadget database
 			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 			
-			displayLinksAppData("cache");
+			displayLinksAppData();
 		}
 		// ========================================
+		
+		
+		// ========================================
+		function loadAndDisplayLinksAppData() {
+			osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
+				
+			// get incoming link data (in json string format)
+			var viewer = os.osapi.getViewerFromResult(result);
+	
+			// convert to json object format
+			g_oLinks = gadgets.json.parse(viewer.links) || [];
+			
+			// build and display the table containing the links
+			displayLinksAppData();
+				
+			}); /* end osapi.appdata.get */			
+		}
+		// ========================================		
 	
 	
 		// ========================================
-		function displayLinksAppData(mode) {
-		
-			if (mode == "fresh") {
-				osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
+		function displayLinksAppData() {
 				
-				// get incoming link data (in json string format)
-				var viewer = os.osapi.getViewerFromResult(result);
-	
-				// convert to json object format
-				g_oLinks = gadgets.json.parse(viewer.links) || [];
-				
-				}); /* end osapi.appdata.get */	
-				
-			} else {
-				
-				// if links data exists
-				if (g_oLinks) {
+			// if links data exists
+			if (g_oLinks) {
 										
-					// sort object by link name, case-insensitive, A-Z
-					g_oLinks.sort(sort_by('link_name', false, function(a){return a.toUpperCase()}));
+				// sort object by link name, case-insensitive, A-Z
+				g_oLinks.sort(sort_by('link_name', false, function(a){return a.toUpperCase()}));
 
-                    // EDIT MODE - build table to hold retrieved app data
-                    var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
-					var favicon_path_array;
+                // EDIT MODE - build table to hold retrieved app data
+                var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+				var favicon_path_array;
                     
-					for (i in g_oLinks) {
-						cell_name = g_oLinks[i].link_name;
-						cell_url = g_oLinks[i].link_url;
-						cell_url2 = g_oLinks[i].link_url;
+				for (i in g_oLinks) {
+					cell_name = g_oLinks[i].link_name;
+					cell_url = g_oLinks[i].link_url;
+					cell_url2 = g_oLinks[i].link_url;
 							
-						favicon_path_array = cell_url.split("//");
-						cell_url2 = favicon_path_array[1];
-						favicon_path_array = cell_url2.split("/");
-						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+					favicon_path_array = cell_url.split("//");
+					cell_url2 = favicon_path_array[1];
+					favicon_path_array = cell_url2.split("/");
+					cell_url2 = favicon_path_array[0];
+					cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
                             
-						// build and add table row
-						links_table_data = links_table_data
-						+ "<tr>" + "<td>" + cell_favicon + "</td>"
-						+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
-						+ "<td>" + cell_url + "</td>"
-						+ "<td><input type='button' class='links_save_button' value='Delete' onClick='deleteArrayItem(" 
-						+ i + ")'" + "></td>" + "</tr>";
-					}
+					// build and add table row
+					links_table_data = links_table_data
+					+ "<tr>" + "<td>" + cell_favicon + "</td>"
+					+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
+					+ "<td>" + cell_url + "</td>"
+					+ "<td><input type='button' class='links_save_button' value='Delete' onClick='deleteArrayItem(" 
+					+ i + ")'" + "></td>" + "</tr>";
+				}
                     
-                    // close the table
-                    links_table_data = links_table_data + "</tr></table>";
+                // close the table
+                links_table_data = links_table_data + "</tr></table>";
                         
-                    // put appdata table markup in designated div
-                    // and set height based on which view view this is
-					if (document.getElementById("edit_links_table")){
-						document.getElementById("edit_links_table").innerHTML=links_table_data;
-						edit_mode_height = 250 + ((g_oLinks.length - 1) * 28) + 10;					
-						gadgets.window.adjustHeight(edit_mode_height);
-					}
+                // put appdata table markup in designated div
+                // and set height based on which view view this is
+				if (document.getElementById("edit_links_table")){
+					document.getElementById("edit_links_table").innerHTML=links_table_data;
+					edit_mode_height = 250 + ((g_oLinks.length - 1) * 28) + 10;					
+					gadgets.window.adjustHeight(edit_mode_height);
+				}
 					
-                    // VIEW MODE - build table to hold retrieved app data
-					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+                // VIEW MODE - build table to hold retrieved app data
+				links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
                     
-					for (i in g_oLinks) {
-						cell_name = g_oLinks[i].link_name;
-						cell_url = g_oLinks[i].link_url;
-						cell_url2 = g_oLinks[i].link_url;
+				for (i in g_oLinks) {
+					cell_name = g_oLinks[i].link_name;
+					cell_url = g_oLinks[i].link_url;
+					cell_url2 = g_oLinks[i].link_url;
 							
-						favicon_path_array = cell_url.split("//");
-						cell_url2 = favicon_path_array[1];
-						favicon_path_array = cell_url2.split("/");
-						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+					favicon_path_array = cell_url.split("//");
+					cell_url2 = favicon_path_array[1];
+					favicon_path_array = cell_url2.split("/");
+					cell_url2 = favicon_path_array[0];
+					cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
 
-						// build and add table row
-						links_table_data = links_table_data
-						+ "<tr>" + "<td>" + cell_favicon + "</td>"
-						+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
-					}
+					// build and add table row
+					links_table_data = links_table_data
+					+ "<tr>" + "<td>" + cell_favicon + "</td>"
+					+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
+				}
                     
-                    // close the table
-                    links_table_data = links_table_data + "</tr></table>";
+                // close the table
+                links_table_data = links_table_data + "</tr></table>";
                         
-                    // put appdata table markup in designated div
-					if(document.getElementById("view_links_table")){
-						document.getElementById("view_links_table").innerHTML=links_table_data;
-						view_mode_height = 12 + ((g_oLinks.length - 1) * 30) + 34;
-						gadgets.window.adjustHeight(view_mode_height);					
-					}
+                // put appdata table markup in designated div
+				if(document.getElementById("view_links_table")){
+					document.getElementById("view_links_table").innerHTML=links_table_data;
+					view_mode_height = 12 + ((g_oLinks.length - 1) * 30) + 34;
+					gadgets.window.adjustHeight(view_mode_height);					
+				}
 					
-					if(document.getElementById("linkurl")){
-						document.getElementById("linkurl").value = "http://";
-					}
-				} /* end if link data exists */
-			}
-			
+				if(document.getElementById("linkurl")){
+					document.getElementById("linkurl").value = "http://";
+				}
+			} /* end if link data exists */
 		}
 		// ========================================
 		
@@ -171,7 +174,7 @@
 				links = "";
 				osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
 				alert("All app data deleted");
-				displayLinksAppData("fresh");
+				loadAndDisplayLinksAppData();
 				return;
 			}
 
@@ -195,7 +198,7 @@
 				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 				
                 // refresh after update, clear input fields - don't need to reset g_oLinks as displayLinksAppData does this
-                displayLinksAppData("cache");
+                displayLinksAppData();
 				document.getElementById("linkname").value = "";
                 document.getElementById("linkurl").value = "";
 				
@@ -213,7 +216,7 @@
 	<Content type="html" view="default, home" preferred_height="300">
 	<![CDATA[<!--HTML-->
     	
-    <script type="text/javascript">displayLinksAppData("fresh");</script>    	
+    <script type="text/javascript">loadAndDisplayLinksAppData();</script>    	
     
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
@@ -256,7 +259,7 @@
 	<Content type="html" view="default, profile" preferred_height="100">
 	<![CDATA[<!--HTML-->
     
-    <script type="text/javascript">displayLinksAppData("fresh");</script>
+    <script type="text/javascript">loadAndDisplayLinksAppData();</script>
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
     
     ]]></Content>

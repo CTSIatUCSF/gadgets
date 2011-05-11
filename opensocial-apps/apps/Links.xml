@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs
-        title="Websites">
+	<ModulePrefs title="Websites">
 		<Require feature="opensocial-0.9" />
-        <Require feature="views" />
-        <Require feature="dynamic-height" />
-        <Require feature="pubsub" />
-        <Require feature="osapi" />
-    </ModulePrefs>
+		<Require feature="views" />
+		<Require feature="dynamic-height" />
+		<Require feature="pubsub" />
+		<Require feature="osapi" />
+	</ModulePrefs>
 
-<!-- ==================== START COMBINED VIEWS ==================== -->    
-    
-    <Content type="html" view="home, profile">
+	<!-- ==================== START COMBINED VIEWS ==================== -->
+
+	<Content type="html" view="home, profile">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -201,10 +200,10 @@
 	</script>
     
     ]]></Content>
-<!-- ==================== END COMBINED VIEWS ==================== -->   
+	<!-- ==================== END COMBINED VIEWS ==================== -->
 
-<!-- ==================== START HOME/EDIT VIEW ==================== -->
-    <Content type="html" view="default, home" preferred_height="300">
+	<!-- ==================== START HOME/EDIT VIEW ==================== -->
+	<Content type="html" view="default, home" preferred_height="300">
 	<![CDATA[<!--HTML-->
     	
     <script type="text/javascript">displayLinksAppData();</script>    	
@@ -243,17 +242,17 @@
     <div id="edit_links_table" style="padding:0px 0px 10px 25px;"></div>
             
     ]]></Content>
-<!-- ==================== END HOME/EDIT VIEW ==================== -->    
-    
-	
-<!-- ==================== START PROFILE VIEW ==================== -->
-    <Content type="html" view="default, profile" preferred_height="100">
+	<!-- ==================== END HOME/EDIT VIEW ==================== -->
+
+
+	<!-- ==================== START PROFILE VIEW ==================== -->
+	<Content type="html" view="default, profile" preferred_height="100">
 	<![CDATA[<!--HTML-->
     
     <script type="text/javascript">displayLinksAppData();</script>
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
     
     ]]></Content>
-<!-- ==================== END PROFILE VIEW ==================== -->  
+	<!-- ==================== END PROFILE VIEW ==================== -->
 
 </Module>

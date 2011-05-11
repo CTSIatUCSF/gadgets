@@ -57,20 +57,26 @@
 			// write links data to gadget database
 			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 			
-			displayLinksAppData();
+			displayLinksAppData("cache");
 		}
 		// ========================================
 	
 	
 		// ========================================
-		function displayLinksAppData() {
-			osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
+		function displayLinksAppData(mode) {
+		
+			if (mode == "fresh") {
+				osapi.appdata.get( {'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
 				
 				// get incoming link data (in json string format)
 				var viewer = os.osapi.getViewerFromResult(result);
 	
 				// convert to json object format
 				g_oLinks = gadgets.json.parse(viewer.links) || [];
+				
+				}); /* end osapi.appdata.get */	
+				
+			} else {
 				
 				// if links data exists
 				if (g_oLinks) {
@@ -147,7 +153,8 @@
 						document.getElementById("linkurl").value = "http://";
 					}
 				} /* end if link data exists */
-			}); /* end osapi.appdata.get */
+			}
+			
 		}
 		// ========================================
 		
@@ -164,7 +171,7 @@
 				links = "";
 				osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':{'links':links} }).execute(function(result){});
 				alert("All app data deleted");
-				displayLinksAppData();
+				displayLinksAppData("fresh");
 				return;
 			}
 
@@ -188,7 +195,7 @@
 				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {});
 				
                 // refresh after update, clear input fields - don't need to reset g_oLinks as displayLinksAppData does this
-                displayLinksAppData();
+                displayLinksAppData("cache");
 				document.getElementById("linkname").value = "";
                 document.getElementById("linkurl").value = "";
 				
@@ -206,7 +213,7 @@
 	<Content type="html" view="default, home" preferred_height="300">
 	<![CDATA[<!--HTML-->
     	
-    <script type="text/javascript">displayLinksAppData();</script>    	
+    <script type="text/javascript">displayLinksAppData("fresh");</script>    	
     
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
@@ -249,7 +256,7 @@
 	<Content type="html" view="default, profile" preferred_height="100">
 	<![CDATA[<!--HTML-->
     
-    <script type="text/javascript">displayLinksAppData();</script>
+    <script type="text/javascript">displayLinksAppData("fresh");</script>
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>
     
     ]]></Content>

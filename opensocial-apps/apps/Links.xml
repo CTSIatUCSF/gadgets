@@ -71,7 +71,7 @@
 				var viewer = os.osapi.getViewerFromResult(result);
 	
 				// convert to json object format
-				g_oLinks = gadgets.json.parse(viewer.links);
+				g_oLinks = gadgets.json.parse(viewer.links) || [];
 				
 				// if links data exists
 				if (g_oLinks) {

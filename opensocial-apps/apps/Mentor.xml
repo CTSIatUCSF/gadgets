@@ -343,7 +343,7 @@
 	</div>
 	
 	<div class='question'>
-		<h4>Mentoring Narrative:&nbsp;<img src="http://www.fakedoom.com/ctsi/hovertiptarget.png" border="0" onmouseover="document.getElementById('sample').style.display='block';"></h4>
+		<h4>Mentoring Narrative:&nbsp;<img src="http://www.fakedoom.com/ctsi/hovertiptarget.png" border="0" onClick="document.getElementById('sample').style.display='block';"></h4>
 		
 		<div id="sample" style="display:none; border:1px solid #383838; padding:10px 10px 10px 10px; margin:10px; height:160px;">
 		

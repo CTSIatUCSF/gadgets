@@ -388,7 +388,7 @@
 	<div>
 		<p class="tool_title_orange" style="margin-left:20px;">
 		Selected Profiles<p>
-		<p class="tool_body" style="margin-left:20px;">
+		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
 			<a href="javascript:copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="javascript:deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;

@@ -50,8 +50,7 @@
 			+ "<li>Find the profiles you want to add to your list.</li>"
 			+ "<li>Click the Add link to add the curretly-displayed profile(s) to your list.</li>"
 			+ "<li>Click the View link to see your list.</li></ul>"
-			+ "From the List View you can export certain data from the profiles to a text file " 
-			+ "for your online use.");
+			+ "From the List View you can export certain data from the profiles or delete the list to start over.");
 		pop.document.write("<br><br><center>" 
 			+ "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
 			+ "</center>");
@@ -126,6 +125,7 @@
 		document.getElementById("canvas_email_list_textarea").value = "";
 		document.getElementById("canvas_full_list_textarea").value = "";
 		document.getElementById("canvas_profile_list").innerHTML = "";
+		document.getElementById("number_selected").innerHTML = "Select Profiles";
 		
 		alert("List deleted");
 	}	
@@ -274,13 +274,13 @@
 				
 				// add to the email export text area
 				if (people[i].emails[0].value) {
-					document.getElementById("canvas_email_list_textarea").value += people[i].emails[0].value + ",";
+					document.getElementById("canvas_email_list_textarea").value += people[i].emails[0].value + ";";
 				}
 				
 				// add to the full export text area
-				document.getElementById("canvas_full_list_textarea").value += people[i].name.familyName + ",";
-				document.getElementById("canvas_full_list_textarea").value += people[i].name.givenName + ",";
-				document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ",";
+				document.getElementById("canvas_full_list_textarea").value += people[i].name.familyName + ";";
+				document.getElementById("canvas_full_list_textarea").value += people[i].name.givenName + ";";
+				document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ";";
 				document.getElementById("canvas_full_list_textarea").value += people[i].organizations[0].field + "\r\n";
 					
 				j++;

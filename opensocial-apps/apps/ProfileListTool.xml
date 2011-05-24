@@ -247,6 +247,8 @@
 			// initialize the export divs
 			document.getElementById("canvas_email_list_textarea").value = "";
 			document.getElementById("canvas_full_list_textarea").value = "";
+			
+			var j = 0;
 				
 			for (i in people) {
 			
@@ -281,6 +283,8 @@
 				document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ",";
 				document.getElementById("canvas_full_list_textarea").value += people[i].organizations[0].field + "\r\n";
 					
+				j++;
+				
 				// update the UI
 				//document.getElementById("progress").innerHTML = "Getting details for person " + i + " of " + people.length;
 			}
@@ -291,6 +295,7 @@
 			
 			// dispay the table in canvas view
 			document.getElementById("canvas_profile_list").innerHTML = strTable;
+			document.getElementById("number_selected").innerHTML = "Selected Profiles (" + j + ")";
 		});
 		
 	} /* end viewProfileList */
@@ -347,6 +352,8 @@
 	
 	<script type="text/javascript">
 		getToolState();
+		
+		// reset to On height (75) if status is On in getToolState
 		gadgets.window.adjustHeight(30);	
 	</script>
 	
@@ -389,7 +396,7 @@
 
     <!-- top menu links -->
 	<div>
-		<p class="tool_title_orange" style="margin-left:20px;">
+		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
 		Selected Profiles<p>
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
 			<a href="javascript:copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 

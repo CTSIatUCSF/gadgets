@@ -409,11 +409,11 @@
 	</div>
 	
 	<!-- holds the visible profile details list -->
-	<div id="canvas_profile_list" style="display:none; margin-left:20px; height:500px; overflow:auto;"></div>
+	<div id="canvas_profile_list" style="display:none; margin-left:20px; height:520px; overflow:auto;"></div>
 	
 	<script type="text/javascript">
 		// update UI
-		gadgets.window.adjustHeight(520);
+		gadgets.window.adjustHeight(550);
 		getProfileList("canvas");
 		document.getElementById("canvas_profile_list").style.display="block";		
 	</script>

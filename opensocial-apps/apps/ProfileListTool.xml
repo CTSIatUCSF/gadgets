@@ -64,11 +64,13 @@
 		if (obj.value ==  "On") {
 			document.getElementById(obj.id).value = "Off";
 			g_tool_state = "off";
+			gadgets.window.adjustHeight(30);
 			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'off'} }).execute(function(result) {});
 			document.getElementById("actions").style.display="none";
 		} else {
 			document.getElementById(obj.id).value = "On";
 			g_tool_state = "on";
+			gadgets.window.adjustHeight(75);
 			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'on'} }).execute(function(result) {});
 			gadgets.pubsub.subscribe("JSONPersonIds", callback);			
 		}
@@ -87,13 +89,11 @@
 			// update ui and pubsub
 			if (g_tool_state == "on") 
 				{document.getElementById("state_button").value = "On";
-				gadgets.window.adjustHeight(100);
 				gadgets.pubsub.subscribe("JSONPersonIds", callback);
 			} 
 			else {
 				document.getElementById("state_button").value = "Off";
 				document.getElementById("actions").style.display="none";
-				gadgets.window.adjustHeight(50);
 			}
 				
 		}); /* end osapi.appdata.get */	
@@ -196,6 +196,8 @@
 				} else {
 					document.getElementById("list_profiles").innerHTML = "View list (0) Profile(s)";
 				}
+				
+				gadgets.window.adjustHeight(75);
 			}
 			
 			if (mode == "canvas") {
@@ -345,6 +347,7 @@
 	
 	<script type="text/javascript">
 		getToolState();
+		gadgets.window.adjustHeight(30);	
 	</script>
 	
 	]]>
@@ -403,7 +406,7 @@
 	
 	<script type="text/javascript">
 		// update UI
-		gadgets.window.adjustHeight(700);
+		gadgets.window.adjustHeight(520);
 		getProfileList("canvas");
 		document.getElementById("canvas_profile_list").style.display="block";		
 	</script>

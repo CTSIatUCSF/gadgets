@@ -189,7 +189,7 @@
 				if (g_arrNewIDs.length > 0) {
 					document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";				
 				} else {
-					document.getElementById("add_profiles").innerHTML = "Add 0 new Profile(s)";
+					document.getElementById("add_profiles").innerHTML = "0 new Profile(s)";
 				}
 				if (g_arrOldIDs.length > 0) { 
 					document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrOldIDs.length + ") Profile(s)</a>";
@@ -341,7 +341,7 @@
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
 			<td><span class="tool_table_cell_small" id="add_profiles">
-			Add 0 new Profile(s)</span></td>
+			0 new Profile(s)</span></td>
 		</tr>
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
@@ -404,8 +404,8 @@
 			<a href="javascript:deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
 		</p>
 		
-		<p id="progress" style="margin-left:20px;">Please wait while data is downloaded...</p>
-		
+		<p id="progress" style="margin-left:20px;">
+		Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</p>
 	</div>
 	
 	<!-- holds the visible profile details list -->

@@ -87,11 +87,13 @@
 			// update ui and pubsub
 			if (g_tool_state == "on") 
 				{document.getElementById("state_button").value = "On";
+				gadgets.window.adjustHeight(100);
 				gadgets.pubsub.subscribe("JSONPersonIds", callback);
 			} 
 			else {
 				document.getElementById("state_button").value = "Off";
 				document.getElementById("actions").style.display="none";
+				gadgets.window.adjustHeight(50);
 			}
 				
 		}); /* end osapi.appdata.get */	
@@ -157,7 +159,7 @@
 
 			// display the action item table and update it
 			document.getElementById("actions").style.display="block";
-			document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";
+			//document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";
 		}
 	}
 	// ==============================================================	
@@ -171,11 +173,29 @@
 			var viewer = os.osapi.getViewerFromResult(result);
 	
 			// convert to json object format
-			g_arrOldIDs = gadgets.json.parse(viewer.pIDs) || [];
+			g_arrOldIDs = gadgets.json.parse(viewer.pIDs) || [];			
+			
+			// see if any incoming IDs are present in existing ID list
+			for (i = 0; i < g_arrNewIDs.length; i++) {
+				for (j = 0; j < g_arrOldIDs.length; j++) {
+					if (g_arrOldIDs[j] == g_arrNewIDs[i]) {
+						g_arrNewIDs.splice(i, 1);
+					}
+				}
+			}
 			
 			if (mode == "small") {
 				// update the UI
-				document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrOldIDs.length + ") Profile(s)</a>";
+				if (g_arrNewIDs.length > 0) {
+					document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";				
+				} else {
+					document.getElementById("add_profiles").innerHTML = "Add 0 new Profile(s)";
+				}
+				if (g_arrOldIDs.length > 0) { 
+					document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrOldIDs.length + ") Profile(s)</a>";
+				} else {
+					document.getElementById("list_profiles").innerHTML = "View list (0) Profile(s)";
+				}
 			}
 			
 			if (mode == "canvas") {
@@ -259,14 +279,16 @@
 				document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ",";
 				document.getElementById("canvas_full_list_textarea").value += people[i].organizations[0].field + "\r\n";
 					
+				// update the UI
+				//document.getElementById("progress").innerHTML = "Getting details for person " + i + " of " + people.length;
 			}
-		
+			
+			document.getElementById("progress").style.display="none";
+				
 			strTable=strTable + "</table>";
 			
 			// dispay the table in canvas view
 			document.getElementById("canvas_profile_list").innerHTML = strTable;
-
-			gadgets.window.adjustHeight(700);
 		});
 		
 	} /* end viewProfileList */
@@ -278,14 +300,14 @@
 		document.getElementById("canvas_email_list").style.display = "block";
 		document.getElementById("canvas_email_list_text").style.display = "block";
 	}
-	
 	// ==============================================================		
 		
 	function copyFullDivToClipboard() {
 		
 		document.getElementById("canvas_full_list").style.display = "block";
 		document.getElementById("canvas_full_list_text").style.display = "block";
-	}	
+	}
+	// ==============================================================			
 	
 	</script>
 	]]>
@@ -312,7 +334,7 @@
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
 			<td><span class="tool_table_cell_small" id="add_profiles">
-			Add 0 new Profiles</span></td>
+			Add 0 new Profile(s)</span></td>
 		</tr>
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
@@ -336,10 +358,11 @@
     <Content type="html" view="canvas"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-	<div id="canvas_email_list" style="display:none; background:#FFF; width:664px; height:36px; margin-left: 5px;">
-	Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.<br>
-	Place your cursor anywhere in the list, right-click Select All, then Copy.
-	<span style="float:right; padding: 0px 5px 10px 0px"><input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';"></button></span>
+	<div id="canvas_email_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
+	Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
+	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
+	<span style="float:right; padding: 0px 5px 5px 0px;">
+	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';"></button></span>
 	</div>
 	
 	<!-- holds the email address list to be copied to the clipboard -->
@@ -348,33 +371,41 @@
 	</textarea>
 	</div>
 	
-	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:44px; margin-left: 5px;">
-	Copy and paste the profile data below into an Excel spreadsheet or external text editor.<br>
-	Place your cursor anywhere in the list, right-click Select All, then Copy.
-	<span style="float:right; padding: 0px 5px 10px 0px"><input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';"></button></span>
+	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left: 12px;">
+	Copy and paste the profile data below into an Excel spreadsheet or external text editor.
+	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
+	<span style="float:right; padding: 0px 5px 5px 0px;">
+	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';"></button></span>
 	</div>
 	
 	<!-- holds the full profile list to be copied to the clipboard -->
 	<div id="canvas_full_list_text" style="display:none; width:658px; height:160px; color:#000; margin:0px 5px 0px 5px;">
 	<textarea id="canvas_full_list_textarea" rows="9" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
 	</textarea>
-	</div>   	
-    
+	</div>
+
     <!-- top menu links -->
 	<div>
-		<p class="tool_title_orange" style="margin-left:20px;">View Picked Person List<p>
+		<p class="tool_title_orange" style="margin-left:20px;">
+		Selected Profiles<p>
 		<p class="tool_body" style="margin-left:20px;">
 			<a href="javascript:copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="javascript:deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
 		</p>
+		
+		<p id="progress" style="margin-left:20px;">Please wait while data is downloaded...</p>
+		
 	</div>
 	
 	<!-- holds the visible profile details list -->
-	<div id="canvas_profile_list" style="margin-left:20px; height:500px; overflow:auto;"></div>
+	<div id="canvas_profile_list" style="display:none; margin-left:20px; height:500px; overflow:auto;"></div>
 	
 	<script type="text/javascript">
+		// update UI
+		gadgets.window.adjustHeight(700);
 		getProfileList("canvas");
+		document.getElementById("canvas_profile_list").style.display="block";		
 	</script>
 	
 	]]>

@@ -405,7 +405,8 @@
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">
-		Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</p>
+		<br><br>
+		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
 	</div>
 	
 	<!-- holds the visible profile details list -->

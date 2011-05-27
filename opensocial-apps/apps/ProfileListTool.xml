@@ -15,9 +15,7 @@
     
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/UCSF.js" ></script> 
 	
 	<style>
     	.tool_title {font-family:Verdana,Arial; font-size:14px;}

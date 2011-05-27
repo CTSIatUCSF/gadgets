@@ -23,9 +23,10 @@
     </script-->
     
     <!-- #includes -->
-    <link rel="stylesheet" href="css/gadget.css?10" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
     
     <!-- Styles -->
     <style>
@@ -36,7 +37,7 @@
     
     <script type="text/javascript">
 	    <!-- Init console -->
-	    if(console == null ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
+	    if(typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
 	    
 	    // ========================================
 	    function getUserNameAndPreview(userId){
@@ -97,6 +98,7 @@
 	    		$('#settings').html(innerDiv);
 	    		
 	    		$('#secondHeader').show();
+	    		$('#hideshow').show();
 	    		
 	    		getUserNameAndPreview('@viewer');
 	    	}
@@ -107,6 +109,10 @@
     	// ========================================
     	
 	</script>
+	    	
+	<!-- HideShow -->
+	<div id="hideshow" style="display:none;"></div>
+	<!-- HideShow end -->
 	    	
 	<div id="secondHeader" style="display:none; margin:0px 10px 0px 10px;">
 		<span class="slideshare_title"><b>SlideShare: A great way to share presentations</b></span>

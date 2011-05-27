@@ -13,7 +13,7 @@
   </ModulePrefs>
   
 <!-- ==================== START COMBINED VIEWS ==================== -->
-<Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
+<Content type="html" view="default, home, profile" preferred_height="430"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     <base target="_blank"/>
     
@@ -36,7 +36,7 @@
     
     <script type="text/javascript">
 	    <!-- Init console -->
-	    if( typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
+	    if(console == null ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
 	    
 	    // ========================================
 	    function getUserNameAndPreview(userId){
@@ -46,7 +46,7 @@
 		    		var viewer = os.osapi.getViewerFromResult(response);
 		    		var username = viewer.username;
 		    		$('input[name=username]').val(username);
-		    		if(typeof(username) !== 'undefined' && username != null && username != "") { // only render flash if there's a username
+		    		if(username != null && username != "") { // only render flash if there's a username
 		    			preview(username);
 		    		}	    				
 		    });
@@ -107,10 +107,7 @@
     	// ========================================
     	
 	</script>
-	    
-	<div class='header'>
-	</div>
-	
+	    	
 	<div id="secondHeader" style="display:none; margin:0px 10px 0px 10px;">
 		<span class="slideshare_title"><b>SlideShare: A great way to share presentations</b></span>
 	</div>
@@ -143,7 +140,7 @@
 	    				});
 	    				
 	    				$('#preview').html('');
-	    				if(typeof(username) !== 'undefined' && username != null && username != "") {
+	    				if(username != null && username != "") {
 	    					preview(username);
 	    				}
 	    		});

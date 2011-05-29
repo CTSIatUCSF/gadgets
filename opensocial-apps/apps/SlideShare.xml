@@ -90,7 +90,7 @@
 	    // ========================================
 	    
 	     // ========================================
-    	$(document).ready(function(){os.ready(function(){
+    	$(document).ready(function(){
 	    	var viewName=gadgets.views.getCurrentView().getName();
 	    	
 	    	if(viewName=='home'){
@@ -105,7 +105,7 @@
 	    	else{
 	    		getUserNameAndPreview('@owner');
 	    	}
-    	});}); // jquery ready // opensocial ready
+    	}); // jquery ready 
     	// ========================================
     	
 	</script>
@@ -130,32 +130,21 @@
 
 <!-- ==================== START HOME/EDIT VIEW ==================== -->    
 <Content type="html" view="home" preferred_height="660"><![CDATA[<!--HTML-->
-
     <script type="text/javascript">
-    	
     	// ========================================
     	$(document).ready( function(){
 	    	$('.save').click(function(){
-	    	console.log('save');
-	    		os.ready(function(){
-	    			console.log('save');
-	    			var username = $('input[name=username]').val();
-	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
-	    				.execute(function(response){
-	    					console.log(response);
-	    				});
-	    				
-	    				$('#preview').html('');
-	    				if(username != null && username != "") {
-	    					preview(username);
-	    				}
-	    		});
-	    	});
-	    	
-	    	$('.close').click(function(){
-	    		os.ready(function(){
-	    			gadgets.views.requestNavigateTo( "home" );
-	    		});
+    			console.log('save');
+    			var username = $('input[name=username]').val();
+    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+    				.execute(function(response){
+    					console.log(response);
+    				});
+    				
+    				$('#preview').html('');
+    				if(username != null && username != "") {
+    					preview(username);
+    				}
 	    	});
 	    });
 	    // ========================================

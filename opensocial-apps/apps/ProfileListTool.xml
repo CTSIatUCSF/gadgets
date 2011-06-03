@@ -38,17 +38,17 @@
 	
 	function showHelp() {
 	
-		var pop = window.open('Profile List Tool Help','','top=200,left=200,width=450,height=260,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
+		var pop = window.open('Profile List Tool Help','','top=200,left=200,width=450,height=275,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
 		pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
 		pop.document.write("The Profile List Tool lets you put together a list of profiles "
-			+ "based on criteria you choose such as search results, research topics/keywords "
-			+ "and/or networks. You can then export certain data from the chosen profiles "
-			+ "such as names, departments, phone numbers and titles.<br>"
+			+ "then export data from the list. To build the list, you can add one profile at a time, "
+			+ "add a set of search results, or add a set of co-authors. You can then export "
+			+ "certain data from the chosen profiles such as email addresses, names and departments."
 			+ "<ul><li>Click the On/Off toggle to turn the Profile List Tool on or off.</li>"
 			+ "<li>Find the profiles you want to add to your list.</li>"
-			+ "<li>Click the Add link to add the curretly-displayed profile(s) to your list.</li>"
+			+ "<li>Click the Add link to add the currently-displayed profile(s) to your list. Only profiles that have not already been added will be counted and eligible for adding.</li>"
 			+ "<li>Click the View link to see your list.</li></ul>"
-			+ "From the List View you can export certain data from the profiles or delete the list to start over.");
+			+ "From the List View you can export data from the profiles or delete the list to start over.");
 		pop.document.write("<br><br><center>" 
 			+ "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
 			+ "</center>");
@@ -304,6 +304,9 @@
 		
 		document.getElementById("canvas_email_list").style.display = "block";
 		document.getElementById("canvas_email_list_text").style.display = "block";
+		document.getElementById("canvas_full_list").style.display = "none";
+		document.getElementById("canvas_full_list_text").style.display = "none";
+		document.getElementById("canvas_profile_list").style.display = "none";	
 	}
 	// ==============================================================		
 		
@@ -311,7 +314,10 @@
 		
 		document.getElementById("canvas_full_list").style.display = "block";
 		document.getElementById("canvas_full_list_text").style.display = "block";
-	}
+		document.getElementById("canvas_email_list").style.display = "none";
+		document.getElementById("canvas_email_list_text").style.display = "none";
+		document.getElementById("canvas_profile_list").style.display = "none";
+	}	
 	// ==============================================================			
 	
 	</script>
@@ -366,32 +372,6 @@
     <Content type="html" view="canvas"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-	<div id="canvas_email_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
-	Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
-	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
-	<span style="float:right; padding: 0px 5px 5px 0px;">
-	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';"></button></span>
-	</div>
-	
-	<!-- holds the email address list to be copied to the clipboard -->
-	<div id="canvas_email_list_text" style="display:none; width:658px; height:150px; color:#000; margin:0px 5px 0px 5px;">
-	<textarea id="canvas_email_list_textarea" rows="9" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
-	</textarea>
-	</div>
-	
-	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left: 12px;">
-	Copy and paste the profile data below into an Excel spreadsheet or external text editor.
-	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
-	<span style="float:right; padding: 0px 5px 5px 0px;">
-	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';"></button></span>
-	</div>
-	
-	<!-- holds the full profile list to be copied to the clipboard -->
-	<div id="canvas_full_list_text" style="display:none; width:658px; height:160px; color:#000; margin:0px 5px 0px 5px;">
-	<textarea id="canvas_full_list_textarea" rows="9" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
-	</textarea>
-	</div>
-
     <!-- top menu links -->
 	<div>
 		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
@@ -406,6 +386,32 @@
 		<br><br>
 		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
 	</div>
+	
+	<div id="canvas_email_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
+	Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
+	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
+	<span style="float:right; padding: 0px 5px 5px 0px;">
+	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button></span>
+	</div>
+	
+	<!-- holds the email address list to be copied to the clipboard -->
+	<div id="canvas_email_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
+	<textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+	</textarea>
+	</div>
+	
+	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left: 12px;">
+	Copy and paste the profile data below into an Excel spreadsheet or external text editor.
+	<!--Place your cursor anywhere in the list, right-click Select All, then Copy.-->
+	<span style="float:right; padding: 0px 5px 5px 0px;">
+	<input type="button" style="height:22px; font-size:10;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button></span>
+	</div>
+	
+	<!-- holds the full profile list to be copied to the clipboard -->
+	<div id="canvas_full_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
+	<textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+	</textarea>
+	</div>	
 	
 	<!-- holds the visible profile details list -->
 	<div id="canvas_profile_list" style="display:none; margin-left:20px; height:520px; overflow:auto;"></div>

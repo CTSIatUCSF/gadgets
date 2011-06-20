@@ -33,6 +33,7 @@
 	var g_arrNewIDs = [];
 	var g_arrOldIDs = [];
 	var g_arrDeDupedIDs = [];
+	var g_arrUnChunked = [];
 
 	// ==============================================================
 	
@@ -62,14 +63,25 @@
 			document.getElementById(obj.id).value = "Off";
 			g_tool_state = "off";
 			gadgets.window.adjustHeight(30);
-			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'off'} }).execute(function(result) {});
-			document.getElementById("actions").style.display="none";
+			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'off'} }).execute(function(result) {
+				if (result.error) { 
+					alert("Error " + result.error.code + " updating application data: " + result.error.message);
+				} else {
+					document.getElementById("actions").style.display="none";
+				}
+			});
+			
 		} else {
 			document.getElementById(obj.id).value = "On";
 			g_tool_state = "on";
 			gadgets.window.adjustHeight(75);
-			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'on'} }).execute(function(result) {});
-			gadgets.pubsub.subscribe("JSONPersonIds", callback);			
+			osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'on_off':'on'} }).execute(function(result) {
+				if (result.error) { 
+					alert("Error " + result.error.code + " updating application data: " + result.error.message);
+				} else {
+					gadgets.pubsub.subscribe("JSONPersonIds", callback);
+				}
+			});						
 		}
 	}
 	// ==============================================================
@@ -95,47 +107,100 @@
 				
 		}); /* end osapi.appdata.get */	
 	}
-	// ==============================================================	
+	// ==============================================================
+	
+	function updateUI () {
+		document.getElementById("add_profiles").innerHTML = g_arrDeDupedIDs.length + " Profile(s) added";
+		document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrDeDupedIDs.length + " Profiles)</a>";
+	}
+	// ==============================================================		
 	
 	function addProfilesToList() {
 	
+		alert("in add profiles to list");
+						
 		// merge the incoming and existing person ID arrays
+		// existing array already populated
 		var arrMergedIDs = g_arrOldIDs.concat(g_arrNewIDs);
 		
 		// dedupe the merged person ID array - cache it globally
 		g_arrDeDupedIDs = dedupeArray(arrMergedIDs);	
-	
-		// store the merged deduped person IDs
-		osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'pIDs': gadgets.json.stringify(g_arrDeDupedIDs)} }).execute(function(result) {});
-	
-		// update the UI
-		document.getElementById("add_profiles").innerHTML = "Profile(s) added";
-		document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrDeDupedIDs.length + " Profiles)</a>";
+			
+		// make a global copy for chunking (destructive)
+		var g_arrUnChunked = dedupeArray(arrMergedIDs);
+		
+		// depending on view, display fetched list on canvas or write DeDuped list to DB
+		if (document.getElementById("canvas_profile_list")) {
+		
+alert("in canvas view");		
+			displayProfileList();
+		} else {
+alert("in small view");		
+			saveDataInChunks(g_arrUnChunked, updateUI);
+		}
 	}
-	
-	// ==============================================================	
-	
-	function deleteList() {
-		
-		// empty the stored list
-		osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': {'pIDs': ""} }).execute(function(result) {});
-		
-		document.getElementById("canvas_email_list_textarea").value = "";
-		document.getElementById("canvas_full_list_textarea").value = "";
-		document.getElementById("canvas_profile_list").innerHTML = "";
-		document.getElementById("number_selected").innerHTML = "Select Profiles";
-		
-		alert("List deleted");
-	}	
-	
 	// ==============================================================
+	
+	// first argument is an array of data, 
+    // second argument is the callback function to execute after updating the data
+     
+    function saveDataInChunks(arrUnChunked, callback) {                  
+	    // chunk up the copy into 400-element batches
+	    var chunkedDataObject = {}; // a map of data, keyed by pIds + chunk num
+	    
+	    var chunkNum = 0;
+	    while(arrUnChunked.length) {
+	        var chunkName = 'pIDs' + chunkNum++;
+	        chunkedDataObject[chunkName] = gadgets.json.stringify(arrUnChunked.splice(0, 400)); // chunked data as string as required by osapi.udpate call
+	    }
+	    chunkedDataObject["num_chunks"] = "" + chunkNum; // number of chunks as string as required by osapi.udpate call
+	    
+	    // at this point we should have a nice chunkedDataObject that we can convert to JSON and store as
+	    // appdata in one call		
+		
+	    osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': gadgets.json.stringify(chunkedDataObject)}).execute(callback);
+    }
+	// ==============================================================
+	
+    function deleteList() {
+
+		// get the number of chunks
+		osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['num_chunks']} )
+			.execute(function(result){
+				
+			var viewer = os.osapi.getViewerFromResult(result);
+
+			var num_chunks = viewer.num_chunks;	
+				
+			// build the fields to read the chunks
+			var fields = [];
+			for (var i = 0; i < num_chunks; i++) {
+				fields[i] = 'pIDs' + i;
+			}
+			osapi.appdata.delete({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
+				.execute(function(result){
+				if (result.error) { 
+					alert("Error " + result.error.code + " deleting application data: " + result.error.message);
+				} else {
+					document.getElementById("canvas_email_list_textarea").value = "";
+					document.getElementById("canvas_full_list_textarea").value = "";
+					document.getElementById("canvas_profile_list").innerHTML = "";
+					document.getElementById("number_selected").innerHTML = "Select Profiles";
+				alert("List deleted");
+				}				
+			}); /* end osapi.appdata.get INNER */
+			
+		}); /* end osapi.appdata.get OUTER */
+		
+    }    
+	// ==============================================================	
 	
 	function dedupeArray(arrHasDupes) {
 	
 		var arrDeDuped = [];
 		label:for(var i = 0; i < arrHasDupes.length;i++ ) {  
-			for(var j=0; j<arrDeDuped.length;j++ ) {
-				if(arrDeDuped[j] == arrHasDupes[i]) 
+			for(var j = 0; j < arrDeDuped.length;j++ ) {
+				if (arrDeDuped[j] == arrHasDupes[i]) 
 				continue label;
 			}
 			arrDeDuped[arrDeDuped.length] = arrHasDupes[i];
@@ -151,61 +216,59 @@
 			// extract the array of incoming person IDs
 			var arrNewIDs = gadgets.json.parse(message);
 			g_arrNewIDs = arrNewIDs.personIds;
-			
-			// fetch the existing person IDs
-			getProfileList("small");
 
 			// display the action item table and update it
 			document.getElementById("actions").style.display="block";
-			//document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";
+
+			if (g_arrNewIDs.length > 0) {
+				document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:readDataInChunks();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";				
+			} else {
+				document.getElementById("add_profiles").innerHTML = "0 new Profile(s)";
+			}
+			
+			if (g_arrOldIDs.length > 0) { 
+				document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrOldIDs.length + ") Profile(s)</a>";
+			} else {
+				document.getElementById("list_profiles").innerHTML = "View list (0) Profile(s)";
+			}
+				
+			gadgets.window.adjustHeight(75);
 		}
 	}
-	// ==============================================================	
+	// ==============================================================
 	
-	function getProfileList(mode) {
-	
-		// fetch the latest person IDs
-		osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['pIDs']} ).execute(function(result){
+    function readDataInChunks() {
+
+		// get the number of chunks
+		osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['num_chunks']} )
+			.execute(function(result){
 				
-			// get incoming ID data (in json string format)
 			var viewer = os.osapi.getViewerFromResult(result);
-	
-			// convert to json object format
-			g_arrOldIDs = gadgets.json.parse(viewer.pIDs) || [];			
-			
-			// see if any incoming IDs are present in existing ID list
-			for (i = 0; i < g_arrNewIDs.length; i++) {
-				for (j = 0; j < g_arrOldIDs.length; j++) {
-					if (g_arrOldIDs[j] == g_arrNewIDs[i]) {
-						g_arrNewIDs.splice(i, 1);
+
+			var num_chunks = viewer.num_chunks;	
+				
+			// build the fields to read the chunks
+			var fields = [];
+			for (var i = 0; i < num_chunks; i++) {
+				fields[i] = 'pIDs' + i;
+			}
+			osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
+				.execute(function(result){
+				
+				var viewer = os.osapi.getViewerFromResult(result);
+				for (var i = 0; i < fields.length; i++) {
+					var chunk = gadgets.json.parse(viewer[fields[i]]);
+					for (var j = 0; j < chunk.length; j++) {
+						g_arrOldIDs[i*400 + j] = chunk[j];
 					}
 				}
-			}
+			}); /* end osapi.appdata.get INNER */
 			
-			if (mode == "small") {
-				// update the UI
-				if (g_arrNewIDs.length > 0) {
-					document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addProfilesToList();'>Add " + g_arrNewIDs.length + " new Profile(s)</a>";				
-				} else {
-					document.getElementById("add_profiles").innerHTML = "0 new Profile(s)";
-				}
-				if (g_arrOldIDs.length > 0) { 
-					document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + g_arrOldIDs.length + ") Profile(s)</a>";
-				} else {
-					document.getElementById("list_profiles").innerHTML = "View list (0) Profile(s)";
-				}
-				
-				gadgets.window.adjustHeight(75);
-			}
-			
-			if (mode == "canvas") {
-				// build and display the table containing the ID details
-				displayProfileList();
-			}
-				
-		}); /* end osapi.appdata.get */	
-	}
-	// ==============================================================		
+		}); /* end osapi.appdata.get OUTER */
+		
+		addProfilesToList();
+    }
+	// ==============================================================	
 		
 	function displayProfileList() {		
 		
@@ -419,7 +482,7 @@
 	<script type="text/javascript">
 		// update UI
 		gadgets.window.adjustHeight(600);
-		getProfileList("canvas");
+		readDataInChunks();		
 		document.getElementById("canvas_profile_list").style.display="block";		
 	</script>
 	

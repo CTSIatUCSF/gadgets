@@ -392,7 +392,9 @@
 	</table>
 	
 	<script type="text/javascript">
-		showToolState();
+		$(document).ready(function(){  
+			showToolState();
+		 });		
 	</script>
 	
 	]]>

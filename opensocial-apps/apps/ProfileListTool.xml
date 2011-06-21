@@ -81,6 +81,8 @@
 
 			// update ui and pubsub
 			if (state == "On") {
+				document.getElementById("add_profiles").innerHTML = "Searching for new profiles...";
+				document.getElementById("list_profiles").innerHTML = "Loading profiles...";
 				readData(function(){gadgets.pubsub.subscribe("JSONPersonIds", readPubSubIDsAndUpdateActions)});
 				gadgets.window.adjustHeight(75);
 			} 

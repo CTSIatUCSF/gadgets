@@ -99,8 +99,6 @@
 	// ==============================================================		
 	
 	function addProfilesToList() {
-	
-		alert("in add profiles to list");
 						
 		// merge the incoming and existing person ID arrays
 		// existing array already populated

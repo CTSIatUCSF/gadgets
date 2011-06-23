@@ -152,8 +152,12 @@
 			}
 			// also delete the num_chunks field
 			fields[num_chunks] = 'num_chunks';
-			osapi.appdata.delete({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
-				.execute(function(result){
+			
+			// for some reason osapi.appdata.delete kills IE so we are using this older method
+			// for now
+			var req = opensocial.newDataRequest();
+			req.add(req.newRemovePersonAppDataRequest(fields));
+			req.send(function(result) {
 				if (result.error) { 
 					alert("Error " + result.error.code + " deleting application data: " + result.error.message);
 				} else {
@@ -161,11 +165,23 @@
 					document.getElementById("canvas_full_list_textarea").value = "";
 					document.getElementById("canvas_profile_list").innerHTML = "";
 					document.getElementById("number_selected").innerHTML = "Select Profiles";
-				alert("List deleted");
 				}				
-			}); /* end osapi.appdata.get INNER */
+			});
 			
-		}); /* end osapi.appdata.get OUTER */
+			//osapi.appdata.delete({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
+			//	.execute(function(result){
+			//	if (result.error) { 
+			//		alert("Error " + result.error.code + " deleting application data: " + result.error.message);
+			//	} else {
+			//		document.getElementById("canvas_email_list_textarea").value = "";
+			//		document.getElementById("canvas_full_list_textarea").value = "";
+			//		document.getElementById("canvas_profile_list").innerHTML = "";
+			//		document.getElementById("number_selected").innerHTML = "Select Profiles";
+			//	alert("List deleted");
+			//	}				
+			//}); /* end osapi.appdata.delete */
+			
+		}); /* end osapi.appdata.get */
 		
     }    
 	// ==============================================================	
@@ -389,7 +405,7 @@
 	</table>
 	
 	<script type="text/javascript">
-		showToolState();
+		gadgets.util.registerOnLoadHandler(showToolState);
 	</script>
 	
 	]]>
@@ -448,10 +464,14 @@
 	<div id="canvas_profile_list" style="display:none; margin-left:20px; height:520px; overflow:auto;"></div>
 	
 	<script type="text/javascript">
-		// update UI
-		gadgets.window.adjustHeight(600);
-		readData(displayProfileList);		
-		document.getElementById("canvas_profile_list").style.display="block";		
+		function init() {
+			// update UI
+			gadgets.window.adjustHeight(600);
+			readData(displayProfileList);		
+			document.getElementById("canvas_profile_list").style.display="block";		
+		}
+		
+		gadgets.util.registerOnLoadHandler(init);
 	</script>
 	
 	]]>

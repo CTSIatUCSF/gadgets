@@ -153,11 +153,10 @@
 			// also delete the num_chunks field
 			fields[num_chunks] = 'num_chunks';
 			
-			// for some reason osapi.appdata.delete kills IE so we are using this older method
-			// for now
-			var req = opensocial.newDataRequest();
-			req.add(req.newRemovePersonAppDataRequest(fields));
-			req.send(function(result) {
+			// see http://docs.jivesoftware.com/apireferences/javascriptapi/osapi.appdata.html
+			// to understand why we call delete this odd way
+			osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
+				.execute(function(result){
 				if (result.error) { 
 					alert("Error " + result.error.code + " deleting application data: " + result.error.message);
 				} else {
@@ -166,20 +165,7 @@
 					document.getElementById("canvas_profile_list").innerHTML = "";
 					document.getElementById("number_selected").innerHTML = "Select Profiles";
 				}				
-			});
-			
-			//osapi.appdata.delete({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
-			//	.execute(function(result){
-			//	if (result.error) { 
-			//		alert("Error " + result.error.code + " deleting application data: " + result.error.message);
-			//	} else {
-			//		document.getElementById("canvas_email_list_textarea").value = "";
-			//		document.getElementById("canvas_full_list_textarea").value = "";
-			//		document.getElementById("canvas_profile_list").innerHTML = "";
-			//		document.getElementById("number_selected").innerHTML = "Select Profiles";
-			//	alert("List deleted");
-			//	}				
-			//}); /* end osapi.appdata.delete */
+			}); /* end osapi.appdata.delete */
 			
 		}); /* end osapi.appdata.get */
 		

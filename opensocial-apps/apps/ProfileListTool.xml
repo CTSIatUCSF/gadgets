@@ -95,7 +95,6 @@
 				
 		}); /* end osapi.appdata.get */	
 	}
-
 	// ==============================================================		
 	
 	function addProfilesToList() {
@@ -168,7 +167,6 @@
 			}); /* end osapi.appdata.delete */
 			
 		}); /* end osapi.appdata.get */
-		
     }    
 	// ==============================================================	
 	
@@ -186,7 +184,6 @@
 	}
 	// ==============================================================	
 
-	
 	function readPubSubIDsAndUpdateActions(sender, message) {						
 		// extract the array of incoming person IDs
 		g_arrPubSubIDs =  gadgets.json.parse(message).personIds;

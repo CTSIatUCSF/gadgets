@@ -107,8 +107,8 @@
 		var arrUnChunked = dedupeArray(arrMergedIDs);		
 
 		saveData(arrUnChunked, function() {
-			document.getElementById("add_profiles").innerHTML = (arrMergedIDs.length - g_arrOldIDs.length) + " Profile(s) added";
-			document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + arrMergedIDs.length + " Profiles)</a>";
+			document.getElementById("add_profiles").innerHTML = (arrUnChunked.length - g_arrOldIDs.length) + " Profile(s) added";
+			document.getElementById("list_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>View list (" + arrUnChunked.length + " Profiles)</a>";
 		});
 	}
 	// ==============================================================

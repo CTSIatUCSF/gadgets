@@ -107,7 +107,7 @@
 		var arrUnChunked = dedupeArray(arrMergedIDs);		
 
 		var delta = arrUnChunked.length - g_arrOldIDs.length;
-		var total = arrUnChunked.lentgh;
+		var total = arrUnChunked.length;
 
 		saveData(arrUnChunked, function() {
 			document.getElementById("add_profiles").innerHTML = delta + " Profile(s) added";

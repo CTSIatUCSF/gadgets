@@ -417,6 +417,8 @@
 		
 		<p id="progress" style="margin-left:20px;">
 		<br><br>
+		<img src="images/waiting.gif">
+		<br><br>
 		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
 	</div>
 	

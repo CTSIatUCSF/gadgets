@@ -48,7 +48,7 @@ namespace ChatterServiceTest
         #region Additional test attributes
             string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
             string _username = "alexnv@oneorg.ucsf.edu.ctsi";
-            string _password = "user0000";
+            string _password = "";
             string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
 
             string _employeeId = "111111111";

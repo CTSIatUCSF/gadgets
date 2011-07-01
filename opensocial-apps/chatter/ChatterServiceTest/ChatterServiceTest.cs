@@ -48,7 +48,7 @@ namespace ChatterServiceTest
         #region Additional test attributes
             string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
             string _username = "alexnv@oneorg.ucsf.edu.ctsi";
-            string _password = "";
+            string _password = "user0000";
             string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
 
             string _employeeId = "111111111";
@@ -96,12 +96,41 @@ namespace ChatterServiceTest
         }
 
         [TestMethod]
+        public void TesGetUserIdByEmptyEmployeeId()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            try {
+                string id = service.GetUserId("");
+                Assert.Fail("GetUserId method should throw and exception Employee ID is empty string");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Employee Id is required", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TesGetUserIWithNullEmployeeId()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            try
+            {
+                string id = service.GetUserId(null);
+                Assert.Fail("GetUserId method should throw and exception Employee ID is null");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Employee Id is required", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void TestCreateActivity()
         {
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
 
-            service.CreateActivity(_userId, "Test Activity from unit test", DateTime.Now);
+            service.CreateActivity(_userId, "Test Activity from ChatterServiceTest.TestCreateActivity", DateTime.Now);
         }
     }
 }

@@ -38,18 +38,32 @@ namespace ChatterService
             var message = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}title");
 
             var postedTimeStr = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}postedTime"); ;
-            long postedTimeLong = 0;
-            long.TryParse(postedTimeStr, out postedTimeLong);
+            DateTime postedTime = ConvertUnixEpochTime(postedTimeStr);
 
             var userId = service.GetUserId(employId.Value);
-            service.CreateActivity(userId, message, new DateTime(postedTimeLong));
+            service.CreateActivity(userId, message, postedTime);
         }
 
-        private static string GetElementValue(XElement element, string name)
+        public static string GetElementValue(XElement element, string name)
         {
-            if (string.IsNullOrEmpty(name) || element == null || element.Element(name) == null)
-                return string.Empty;
-            return element.Element(name).Value;
+            XElement elem = element.Element(name);
+            if (elem == null)
+            {
+                throw new Exception("Element " + name + " was not found");
+            }
+            return elem.Value;
+        }
+
+        public static DateTime ConvertUnixEpochTime(string milliseconds)
+        {
+            try {
+                double ml = Double.Parse(milliseconds);
+                DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                return dt.ToLocalTime().AddMilliseconds(ml);
+            }
+            catch(Exception ex) {
+                throw new Exception("Incorrect time format:" + milliseconds, ex);
+            }
         }
 
     }

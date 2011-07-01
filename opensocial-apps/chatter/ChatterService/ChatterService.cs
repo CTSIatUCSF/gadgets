@@ -84,13 +84,21 @@ namespace ChatterService
 
         public string GetUserId(string employeeId)
         {
+            if (string.IsNullOrEmpty(employeeId))
+            {
+                throw new Exception("Employee Id is required");
+            }
+
             QueryResult qr = _service.query
                 ("SELECT Id " +
                  "FROM User WHERE ucsf_id__c = '" + employeeId + "' " +
                  "ORDER BY Id DESC, ID DESC LIMIT 15");
-
+            if (qr.records == null)
+            {
+                throw new Exception("Cannot find user with employeeId=" + employeeId);
+            }
             var user = qr.records.FirstOrDefault();
-            return user != null ? user.Id : string.Empty;
+            return user.Id;
         }
     }
 }

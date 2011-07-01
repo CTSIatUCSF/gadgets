@@ -15,7 +15,7 @@ namespace ChatterService
         private SalesforceService _service;
         public string Url { get; set; }
 
-        public ChatterService(string url = TEST_SERVICE_URL)
+        public ChatterService(string url)
         {
             Url = url;
         }

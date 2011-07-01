@@ -101,7 +101,7 @@ namespace ChatterServiceTest
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
 
-//            service.CreateActivity(_userId, "Test Activity from unit test", DateTime.Now);
+            service.CreateActivity(_userId, "Test Activity from unit test", DateTime.Now);
         }
     }
 }

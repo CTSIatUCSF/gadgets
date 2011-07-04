@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Featured Presentations"
+    <ModulePrefs
+            title="Featured Presentations"
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
             description="A Simple app to display your own slides from SlideShare.net">
-    <Require feature="opensocial-0.9" />
-    <Require feature="flash" />
-    <Require feature="pubsub" />
-    <Require feature="views" />
-    <Require feature="osapi" />
-    <!-- Require feature="dynamic-height"/-->
-  </ModulePrefs>
-  
-<!-- ==================== START COMBINED VIEWS ==================== -->
-<Content type="html" view="default, home, profile" preferred_height="430"><![CDATA[<!--HTML-->
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
+        <Require feature="views" />
+        <Require feature="flash" />
+        <!--Require feature="dynamic-height" /-->
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile" preferred_height="430"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     <base target="_blank"/>
     
@@ -36,14 +35,11 @@
     </style>
     
     <script type="text/javascript">
-	    <!-- Init console -->
-	    if(typeof(console) == "undefined" ){ window.console = { "log" :function(){}, "warning" :function(){}, "error" :function(){} }; }
 	    
 	    // ========================================
 	    function getUserNameAndPreview(userId){
 			osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['username']})
 		    	.execute(function(response){
-		    		console.log(response);
 		    		var viewer = os.osapi.getViewerFromResult(response);
 		    		var username = viewer.username;
 		    		$('input[name=username]').val(username);
@@ -56,8 +52,6 @@
     
 	    // ========================================
 		function preview(username){
-    		console.log("preview");
-
     		var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
     			
  			$('#preview').html(
@@ -83,14 +77,12 @@
 		    				'</embed>' +
 		    		'</object>' +
 		    	'</div>'
-	 		);
-   				
-   			console.log( $('#preview'));
+	 		);   				
 	    }
 	    // ========================================
 	    
 	     // ========================================
-    	$(document).ready(function(){
+   		gadgets.util.registerOnLoadHandler(function(){
 	    	var viewName=gadgets.views.getCurrentView().getName();
 	    	
 	    	if(viewName=='home'){
@@ -101,11 +93,23 @@
 	    		$('#hideshow').show();
 	    		
 	    		getUserNameAndPreview('@viewer');
+
+		    	$('span.save').click(function(){
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    				});
+	    				
+	    				$('#preview').html('');
+	    				if(username != null && username != "") {
+	    					preview(username);
+	    				}
+		    	}); //click
 	    	}
 	    	else{
 	    		getUserNameAndPreview('@owner');
 	    	}
-    	}); // jquery ready 
+    	}); // registerOnLoadHandler    	
     	// ========================================
     	
 	</script>
@@ -123,33 +127,8 @@
     <br>
     <div id="preview">
     </div>
-    <br><br>
-    
-    ]]></Content>
-<!-- ==================== END COMBINED VIEWS ==================== -->  
-
-<!-- ==================== START HOME/EDIT VIEW ==================== -->    
-<Content type="html" view="home" preferred_height="660"><![CDATA[<!--HTML-->
-    <script type="text/javascript">
-    	// ========================================
-    	$(document).ready( function(){
-	    	$('.save').click(function(){
-    			console.log('save');
-    			var username = $('input[name=username]').val();
-    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
-    				.execute(function(response){
-    					console.log(response);
-    				});
-    				
-    				$('#preview').html('');
-    				if(username != null && username != "") {
-    					preview(username);
-    				}
-	    	});
-	    });
-	    // ========================================
-    </script>
-	
+    <br><br>]]></Content>
+    <Content type="html" view="home" preferred_height="660"><![CDATA[<!--HTML-->	
 	<div id="inner_home_settings" style="display:none;">
 		<p class="slideshare_body">
 		If you already have a SlideShare account and have uploaded presentations, simply follow these steps:<br>
@@ -164,8 +143,8 @@
 			Make sure to "Hide" your presentations from the public if you delete your SlideShare Username.</li>
 		</ol>
 		</p>
-	    <div class='question'>
-			<span class='slideshare_body'>SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
+	    <div class="question">
+			<span class="slideshare_body">SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
 			&nbsp;&nbsp;&nbsp;</span>
 			<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this Username and preview the presentations.">Save/Preview</span>
 			<br><br>
@@ -173,8 +152,5 @@
 			Go to <a href="http://www.slideshare.net" target="_blank" style="font-size:12px;text-decoration:none; cursor:pointer;color:#44F;" title="Go to the SlideShare Web site">
 			SlideShare</a> now to create an account and upload presentations.</span>
 		</div>
-	</div>
-	        
-    ]]></Content>
-<!-- ==================== END HOME/EDIT VIEW ==================== -->   
+	</div>]]></Content>
 </Module>

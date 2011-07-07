@@ -33,6 +33,16 @@
 	var g_arrOldIDs = [];
 
 	// ==============================================================
+
+	function gadgetEventTrack(action, label, value) {
+	
+		var message = {'action' : action};
+		if (label) {message.label = label;}
+		if (value) {message.value = value;}
+		
+		gadgets.pubsub.publish("analytics", message);
+	}	
+	// ==============================================================
 	
 	function showHelp() {
 	
@@ -372,20 +382,20 @@
 		<!--<tr><td colspan="3" class="tool_title"><b>My Tools</b></td></tr>-->
 		<tr>
 			<td class="tool_body">Profile&nbsp;List&nbsp;Tool</td>
-			<td><input id="state_button" type='button' class='tool_toggle_button' value='On' onClick='toggleToolState(this)'></td>
-			<td><img src="images/hovertiptarget.png" border="0" onClick="showHelp()"></td>
+			<td><input id="state_button" type='button' class='tool_toggle_button' value='On' onClick="gadgetEventTrack('click', 'on-off button');toggleToolState(this);"></td>
+			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
 		</tr>
 	</table>
 
 	<table id="actions" style="display:none;" cellspacing="2" cellpadding="0">
 		<tr>
-			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
-			<td><span class="tool_table_cell_small" id="add_profiles">
+			<td class="tool_table_cell_small">&nbsp;&gt;&gt;&nbsp;</td>
+			<td><span class="tool_table_cell_small" id="add_profiles" onClick="gadgetEventTrack('click', 'add profiles')">
 			0 new Profile(s)</span></td>
 		</tr>
 		<tr>
-			<td class="tool_table_cell_small">&nbsp;>>&nbsp;</td>
-			<td><span class="tool_table_cell_small" id="list_profiles">
+			<td class="tool_table_cell_small">&nbsp;&gt;&gt;&nbsp;</td>
+			<td><span class="tool_table_cell_small" id="list_profiles" onClick="gadgetEventTrack('click', 'list profiles')">
 			View list (0 Profiles)</span></td>
 		</tr>
 	</table>
@@ -410,9 +420,9 @@
 		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
 		Selected Profiles<p>
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-			<a href="javascript:copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-			<a href="javascript:copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="javascript:deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('click', 'export email addresses');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="javascript:gadgetEventTrack('click', 'export all data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('click', 'delete list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">

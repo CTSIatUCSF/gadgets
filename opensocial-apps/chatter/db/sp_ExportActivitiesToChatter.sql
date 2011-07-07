@@ -5,8 +5,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ExportActivitiesToChattrer]') AND type in (N'P', N'PC')) BEGIN
-	DROP PROCEDURE [dbo].[sp_ExportActivitiesToChattrer]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ExportActivitiesToChatter]') AND type in (N'P', N'PC')) BEGIN
+	DROP PROCEDURE [dbo].[sp_ExportActivitiesToChatter]
 END
 GO
 
@@ -15,7 +15,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_ExportActivitiesToChattrer] 
+CREATE PROCEDURE [dbo].[sp_ExportActivitiesToChatter] 
 	@url nvarchar(256),
 	@username nvarchar(50),
 	@password nvarchar(50),

@@ -153,7 +153,7 @@
 						// build and add table row
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
-							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
+							+ "<td onClick=\"gadgetEventTrack('click', 'external link')\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
 					}
                     
                 	// close the table
@@ -211,7 +211,17 @@
 				alert("You already have the maximum number of links.");
 			}
         }
-		// ========================================
+	// ==============================================================
+
+	function gadgetEventTrack(action, label, value) {
+	
+		var message = {'action' : action};
+		if (label) {message.label = label;}
+		if (value) {message.value = value;}
+		
+		gadgets.pubsub.publish("analytics", message);
+	}	
+	// ==============================================================
         		
 	</script>
     

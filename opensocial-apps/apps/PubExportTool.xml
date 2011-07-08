@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Publications Export Tool">
+		<Require feature="opensocial-0.9" />
+		<Require feature="views" />
+		<Require feature="dynamic-height" />
+		<Require feature="pubsub" />
+		<Require feature="osapi" />
+	</ModulePrefs>
+
+	<!-- ==================== START COMBINED VIEWS ==================== -->
+
+	<Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <script type="text/javascript" src="js/os.js" ></script>
+	
+	<style>
+    	.tool_title {font-family:Verdana,Arial; font-size:14px;}
+    	.tool_title_orange {font-family:Verdana,Arial; font-size:14px; color:#FF9900;}
+    	.tool_body {font-family:Arial; font-size:12px;}
+    	.tool_credit {font-family:Arial; font-size:10px;}
+    	.tool_table_cell {font-family:Arial; font-size:12px; padding:0 20px 0 0;}
+    	.tool_table_cell_small {font-family:Arial; font-size:11px;}
+    	.tool_toggle_button {height:18px; font-size:9px; font-weight:bold;}  		   	
+    </style>
+
+	<script type="text/javascript">
+	
+	var g_arrPubMedIDs = [];
+
+	// ==============================================================
+
+	function gadgetEventTrack(action, label, value) {
+	
+		var message = {'action' : action};
+		if (label) {message.label = label;}
+		if (value) {message.value = value;}
+		
+		gadgets.pubsub.publish("analytics", message);
+	}	
+	// ==============================================================
+	
+	function showHelp() {
+	
+		var pop = window.open('Profile List Tool Help','','top=200,left=200,width=450,height=275,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
+		pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
+		pop.document.write("The Profile List Tool lets you put together a list of profiles "
+			+ "then export data from the list. To build the list, you can add one profile at a time, "
+			+ "add a set of search results, or add a set of co-authors. You can then export "
+			+ "certain data from the chosen profiles such as email addresses, names and departments."
+			+ "<ul><li>Click the On/Off toggle to turn the Profile List Tool on or off.</li>"
+			+ "<li>Find the profiles you want to add to your list.</li>"
+			+ "<li>Click the Add link to add the currently-displayed profile(s) to your list. Only profiles that have not already been added will be counted and eligible for adding.</li>"
+			+ "<li>Click the View link to see your list.</li></ul>"
+			+ "From the List View you can export data from the profiles or delete the list to start over.");
+		pop.document.write("<br><br><center>" 
+			+ "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
+			+ "</center>");
+		pop.document.write("</body></html>");
+	}
+	// ==============================================================
+	
+	function initTool() {
+	
+		gadgets.window.adjustHeight(40);
+		gadgets.pubsub.subscribe("JSONPubMedIds", processPubMedIDs);
+	}
+	// ==============================================================		
+	
+	function processPubMedIDs(sender, message) {						
+		// extract the array of incoming person IDs
+		g_arrPubMedIDs =  gadgets.json.parse(message).personIds;
+	}
+	// ==============================================================
+			
+	function displayPubList() {
+		
+		// set up the batch task
+		//var fields = [
+					//opensocial.Person.Field.Name, 
+					//opensocial.Person.Field.Emails,
+					//'ImageEmail',
+					//'imageemail',
+					//'email'
+					//];
+  		//var batch = osapi.newBatch();
+  		
+  		//for (i in g_arrOldIDs) {
+      		//batch.add('person[' + i + ']', osapi.people.get(
+				//{
+					//'userId': g_arrOldIDs[i],
+					//'groupId': '@self',
+					//'fields': fields
+				//}));
+  		//}		
+  
+  		// execute the batch task
+		//batch.execute(function(people) {
+			//var strTable="<table cellspacing='0' cellpadding='0' width='600'><tr>";
+			
+			// build the table header row
+			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Last&nbsp;Name</b></u></td>";
+			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>First&nbsp;Name</b></u></td>";
+			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Email&nbsp;Address</b></u></td>";
+			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Department</b></u></td>";
+			//   //strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Faculty&nbsp;Rank</b></u></td>";
+			//strTable=strTable + "</tr>";
+		
+			//var table_row;
+			
+			// initialize the export divs
+			//document.getElementById("canvas_email_list_textarea").value = "";
+			//document.getElementById("canvas_full_list_textarea").value = "";
+			
+			//var j = 0;
+				
+			//for (i in people) {		
+			
+				//table_row="<tr>";
+				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.familyName + "</td>";
+				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.givenName + "</td>";
+				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].emails[0].value + "</td>";
+				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].organizations[0].field + "</td>";
+				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + "" + "</td>";
+				//table_row += "</tr>";
+				
+				//strTable=strTable + table_row;
+				
+				// add to the email export text area
+				//if (people[i].emails[0].value) {
+					//document.getElementById("canvas_email_list_textarea").value += people[i].emails[0].value + ";";
+				//}
+				
+				// add to the full export text area
+				//document.getElementById("canvas_full_list_textarea").value += people[i].name.familyName + ";";
+				//document.getElementById("canvas_full_list_textarea").value += people[i].name.givenName + ";";
+				//document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ";";
+				//document.getElementById("canvas_full_list_textarea").value += people[i].organizations[0].field + "\r\n";
+					
+				//j++;
+				
+				// update the UI
+				//document.getElementById("progress").innerHTML = "Getting details for person " + i + " of " + people.length;
+			//}
+			
+			//document.getElementById("progress").style.display="none";
+				
+			//strTable=strTable + "</table>";
+			
+			// dispay the table in canvas view
+			//document.getElementById("canvas_bubs_list").innerHTML = strTable;
+			//document.getElementById("number_selected").innerHTML = "Selected Profiles (" + j + ")";
+		});
+		
+	} /* end viewPubList */
+	
+	// ==============================================================		
+		
+	function copyTitleAndIdDivToClipboard() {
+		
+		document.getElementById("canvas_title_and_id_list").style.display = "block";
+		document.getElementById("canvas_title_and_id_list_text").style.display = "block";
+		document.getElementById("canvas_full_list").style.display = "none";
+		document.getElementById("canvas_full_list_text").style.display = "none";
+		document.getElementById("canvas_pubs_list").style.display = "none";	
+	}
+	// ==============================================================		
+		
+	function copyFullDivToClipboard() {
+		
+		document.getElementById("canvas_full_list").style.display = "block";
+		document.getElementById("canvas_full_list_text").style.display = "block";
+		document.getElementById("canvas_title_and_id_list").style.display = "none";
+		document.getElementById("canvas_title_and_id_list_text").style.display = "none";
+		document.getElementById("canvas_pubs_list").style.display = "none";
+	}	
+	// ==============================================================			
+	
+	</script>
+	]]>
+	</Content>
+
+	<!-- ==================== END COMBINED VIEWS ==================== -->
+
+
+	<!-- ==================== START SMALL VIEW ==================== -->
+
+	<Content type="html" view="small"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+		
+	<table cellspacing="6" cellpadding="5">
+		<tr>
+			<td class="tool_body">Publications&nbsp;Export&nbsp;</td>
+			<td><input id="export_button" type='button' class='tool_toggle_button' value='Export' onClick="gadgetEventTrack('click', 'export button');gadgets.views.requestNavigateTo(\"canvas\");"></td>
+			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		gadgets.util.registerOnLoadHandler(initTool);
+	</script>
+	
+	]]>
+	</Content>
+
+	<!-- ==================== END SMALL VIEW ==================== -->
+
+
+	<!-- ==================== START CANVAS VIEW ==================== -->
+
+	<Content type="html" view="canvas"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+    <!-- top menu links -->
+	<div>
+		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
+		Selected Publications<p>
+		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
+			<a href="javascript:gadgetEventTrack('click', 'export email addresses');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="javascript:gadgetEventTrack('click', 'export all data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('click', 'delete list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
+		</p>
+		
+		<p id="progress" style="margin-left:20px;">
+		<br><br>
+		<img src="images/waiting.gif">
+		<br><br>
+		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
+	</div>
+	
+	<div id="canvas_title_and_id_list_text" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
+	Copy and paste the titles and PubMed IDs below into an Excel spreadsheet or email client "To" field.
+	<input type="button" style="height:22px; font-size:10; margin-left:40px;" value="Close" onClick="document.getElementById('canvas_title_and_id_list_text').style.display='none';document.getElementById('canvas_title_and_id_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
+	</div>
+	
+	<!-- holds the title and ID list to be copied to the clipboard -->
+	<div id="canvas_title_and_id_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
+	<textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+	</textarea>
+	</div>
+	
+	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left: 12px;">
+	Copy and paste the profile data below into an Excel spreadsheet or external text editor.
+	<input type="button" style="height:22px; font-size:10; margin-left:84px;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
+	</div>
+	
+	<!-- holds the full pubs list to be copied to the clipboard -->
+	<div id="canvas_full_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
+	<textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+	</textarea>
+	</div>	
+	
+	<!-- holds the visible pub details list -->
+	<div id="canvas_pubs_list" style="display:none; margin-left:20px; height:525px; overflow:auto;"></div>
+	
+	<script type="text/javascript">
+		function init() {
+			// update UI
+			gadgets.window.adjustHeight(600);
+			//readData(displayPubList);		
+			document.getElementById("canvas_pubs_list").style.display="block";		
+		}
+		
+		gadgets.util.registerOnLoadHandler(init);
+	</script>
+	
+	]]>
+	</Content>
+
+	<!-- ==================== END CANVAS VIEW ==================== -->
+
+</Module>

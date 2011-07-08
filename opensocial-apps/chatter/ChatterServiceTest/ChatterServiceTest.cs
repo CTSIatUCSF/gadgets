@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using ChatterService;
+using ChatterService.Model;
 
 namespace ChatterServiceTest
 {
@@ -47,7 +48,7 @@ namespace ChatterServiceTest
 
         #region Additional test attributes
             string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
-            string _username = "alexnv@oneorg.ucsf.edu.ctsi";
+            string _username = "";
             string _password = "";
             string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
 
@@ -130,7 +131,37 @@ namespace ChatterServiceTest
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
 
-            service.CreateActivity(_userId, "Test Activity from ChatterServiceTest.TestCreateActivity", DateTime.Now);
+            DateTime dt = new DateTime(2011, 7, 6, 10, 11, 12);
+            service.CreateActivity(_userId, "Test Activity from ChatterServiceTest.TestCreateActivity:" + dt, dt);
         }
+
+        [TestMethod]
+        public void TestCreateActivityUsingApex()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+
+            DateTime dt = new DateTime(2011, 7, 6, 10, 11, 12);
+            service.CreateActivityUsingApex(_userId, "Test Activity from ChatterServiceTest.TestCreateActivityUsingApex:" + dt, dt);
+        }
+
+        [TestMethod]
+        public void TestGetActivitiesByUser()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+            List<Activity> list = service.GetActivities(_userId);
+            Assert.AreEqual(10, list.Count);
+        }
+
+        [TestMethod]
+        public void TestGetActivities()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+            List<Activity> list = service.GetActivities();
+            Assert.AreEqual(100, list.Count);
+        }
+
     }
 }

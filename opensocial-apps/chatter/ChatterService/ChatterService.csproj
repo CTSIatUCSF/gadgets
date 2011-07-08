@@ -36,8 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -55,10 +59,15 @@
     <Compile Include="ChatterSqlProcedures.cs" />
     <Compile Include="IChatterService.cs" />
     <Compile Include="Model\Activity.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Salesforce\SalesforceApex.cs" />
     <Compile Include="Salesforce\SalesforceService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Salesforce\SalesforceApex.wsdl" />
+    <None Include="Salesforce\SalesforceService.wsdl" />
     <None Include="sign.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

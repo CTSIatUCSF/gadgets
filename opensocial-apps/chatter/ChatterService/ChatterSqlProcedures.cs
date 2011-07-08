@@ -41,7 +41,7 @@ namespace ChatterService
             DateTime postedTime = ConvertUnixEpochTime(postedTimeStr);
 
             var userId = service.GetUserId(employId.Value);
-            service.CreateActivity(userId, message, postedTime);
+            service.CreateActivityUsingApex(userId, message, postedTime);
         }
 
         public static string GetElementValue(XElement element, string name)

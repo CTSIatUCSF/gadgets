@@ -1,0 +1,40 @@
+﻿SELECT Id, Type, CreatedDate, CreatedById, Parentid, Parent.Type
+FROM UserProfileFeed WITH UserId = '005J0000000Q74wIAC'
+ORDER BY CreatedDate DESC, ID DESC LIMIT 100
+
+Select u.UCSF_ID__c, u.Id From User u 
+WHERE id in ('005J0000000Q74wIAC', '005J0000000Q74wIAC')
+
+Select u.UCSF_ID__c, u.Id From User u 
+WHERE UCSF_ID__c in ('9021091290921')
+
+
+Select u.Type, u.CreatedDate, u.SystemModstamp, FeedPost.Body, u.ParentId, u.IsDeleted, u.Id, u.FeedPostId, u.CreatedById From 
+UserFeed u
+where type = 'TextPost' and UserId = '005A0000001Tk09IAC'
+order by u.CreatedDate DESC
+
+SELECT Id, Type, FeedPost.Body, CreatedDate, CreatedById, Parentid, Parent.Type, 
+Parent.UserName, Parent.FirstName,  Parent.LastName, Parent.Title, Parent.Name,
+(SELECT ID, FieldName, OldValue, NewValue FROM FeedTrackedChanges ORDER BY ID DESC)
+FROM UserProfileFeed WITH UserId = '005A0000001Tk09IAC'
+ORDER BY CreatedDate DESC, ID DESC LIMIT 1000
+
+
+Select u.Type,  u.ParentId, u.IsDeleted, u.Id, u.FeedPostId, u.CreatedDate, u.CreatedById, FeedPost.Body,
+(SELECT ID, FieldName, OldValue, NewValue FROM FeedTrackedChanges ORDER BY ID DESC)
+From UserFeed u
+Where u.Type='TextPost' and u.IsDeleted = false 
+
+Select p.Type, p.SystemModstamp, p.ParentId, p.IsDeleted, p.Id, p.FeedPostId, p.CreatedDate, p.CreatedById,
+FeedPost.Body,
+(SELECT ID, FieldName, OldValue, NewValue FROM FeedTrackedChanges ORDER BY ID DESC) 
+From Publication__Feed p
+
+
+FeedPost post = new FeedPost();
+post.ParentId = '005J0000000Q74wIAC';
+post.Body = 'Enter post text here';
+post.CreatedById = '005J0000000Q74wIAC';
+post.CreatedDate = Datetime.newInstanceGmt(2011, 7, 8, 3, 11, 12);
+insert post;

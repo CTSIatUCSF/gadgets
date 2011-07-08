@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
+    <Content Include="soql.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatterService\ChatterService.csproj">

@@ -2,34 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace ChatterService.Model
 {
+    [DataContract]
+    public enum ActivityType
+    {
+        TrackedChanges,
+        UserStatus,
+        TextPost,
+        ContentPost
+    }
+
+    [DataContract]
     public class Activity
     {
         /// <summary>
         /// Generated unique ID
         /// </summary>
-        public string ActivityId { get; set; }
+        [DataMember]
+        public string Id { get; set; }
 
         /// <summary>
         /// Who created the activity
         /// </summary>
-        public int UserId { get; set; }
+        [DataMember]
+        public string CreatedById { get; set; }
 
-        /// <summary>
-        /// ID of the gadget that created the Activity.  NULL for non-gadget created activities (such as those created by DB batch jobs)
-        /// </summary>
-        public int? AppId { get; set; }
+        [DataMember]
+        public Entity Parent { get; set; }
 
         /// <summary>
         /// Simple TimeStamp 
         /// </summary>
-        public TimeSpan CreatedDT { get; set; }
+        [DataMember]
+        public DateTime? CreatedDT { get; set; }
 
-        /// <summary>
-        /// XML blob
-        /// </summary>
+        [DataMember]
         public string Message { get; set; }
+
+        [DataMember]
+        public ActivityType Type { get; set; }
     }
 }

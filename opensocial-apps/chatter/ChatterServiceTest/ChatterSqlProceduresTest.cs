@@ -16,7 +16,7 @@ namespace ChatterServiceTest
     public class ChatterSqlProceduresTest
     {
         string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
-        string _username = "alexnv@oneorg.ucsf.edu.ctsi";
+        string _username = "";
         string _password = "";
         string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
 

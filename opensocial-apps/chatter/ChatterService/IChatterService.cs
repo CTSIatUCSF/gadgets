@@ -24,12 +24,20 @@ namespace ChatterService
     /// <param name="message"></param>
     /// <param name="timestamp"></param>
     void CreateActivity(string userId, string message, DateTime timestamp);
-
+    void CreateActivityUsingApex(string userId, string message, DateTime timestamp);
+        
     /// <summary>
     /// Return all activities.
     /// </summary>
     /// <returns>Collection of activity models.</returns>
+    List<Activity> GetActivities();
+
+    /// <summary>
+    /// Return all activities for a user.
+    /// </summary>
+    /// <returns>Collection of activity models.</returns>
     List<Activity> GetActivities(string userId);
+
 
     /// <summary>
     /// Return correct UserId which corresponds for CustomObject ucsf_id__c.

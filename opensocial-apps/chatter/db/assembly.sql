@@ -5,6 +5,18 @@ GO
 RECONFIGURE
 GO
 
+CREATE ASSEMBLY [SMdiagnostics]
+AUTHORIZATION dbo
+FROM 'C:\WINDOWS\Microsoft.NET\Framework\v3.0\Windows Communication Foundation\SMdiagnostics.dll'
+WITH PERMISSION_SET = UNSAFE
+GO
+
+CREATE ASSEMBLY [System.Runtime.Serialization]
+AUTHORIZATION dbo
+FROM 'C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\System.Runtime.Serialization.dll'
+WITH PERMISSION_SET = UNSAFE
+GO
+
 CREATE ASSEMBLY ChatterService
 AUTHORIZATION dbo
 FROM 'C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\ChatterService.dll'

@@ -101,13 +101,6 @@ UCSF.UI.Hideshow = function(){
 					getHideShow();
 				});
 	    	
-	    	// added by Eric Meeks. Add to the activity stream
-	    	osapi.activities.create(
-		    		{ 	'userId': '@viewer',
-						'appId':'@app',
-						'activity': {'title': (value == 'Y' ? 'Added gadget' : 'Removed gadget'), 'postedTime': new Date().getTime() }
-					}).execute(function(response){});
-		    	
 	    	// nj added 2-8-11
 	    	gadgets.pubsub.publish("VISIBLE", value.toString());
 	    };

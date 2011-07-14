@@ -99,10 +99,8 @@ UCSF.UI.Hideshow = function(){
 				}).execute(function(response){
 					console.log( '#hideshow .update', os.osapi.getViewerFromResult(response), response );
 					getHideShow();
+					gadgets.pubsub.publish("added", value);
 				});
-	    	
-	    	// nj added 2-8-11
-	    	gadgets.pubsub.publish("VISIBLE", value.toString());
 	    };
 	    
 	    

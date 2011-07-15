@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="Publications Export Tool">
+	<ModulePrefs title="Publications Export">
 		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
@@ -16,7 +16,8 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="js/os.js" ></script>
-	
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    
 	<style>
     	.tool_title {font-family:Verdana,Arial; font-size:14px;}
     	.tool_title_orange {font-family:Verdana,Arial; font-size:14px; color:#FF9900;}
@@ -24,12 +25,15 @@
     	.tool_credit {font-family:Arial; font-size:10px;}
     	.tool_table_cell {font-family:Arial; font-size:12px; padding:0 20px 0 0;}
     	.tool_table_cell_small {font-family:Arial; font-size:11px;}
-    	.tool_toggle_button {height:18px; font-size:9px; font-weight:bold;}  		   	
+    	.tool_toggle_button {height:26px; width:70px; font-size:12px; font-weight:bold;}  		   	
     </style>
 
 	<script type="text/javascript">
 	
-	var g_arrPubMedIDs = [];
+	//g_arrPubMedIDs = ["11110823","10516321","8929434"];
+	var g_arrPubMedIDs = ["11110823"];
+	var g_table_rows = "";
+	var g_all_data_export = "";
 
 	// ==============================================================
 
@@ -45,9 +49,9 @@
 	
 	function showHelp() {
 	
-		var pop = window.open('Profile List Tool Help','','top=200,left=200,width=450,height=275,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
+		var pop = window.open('Publications Export Help','','top=200,left=200,width=450,height=275,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
 		pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-		pop.document.write("The Profile List Tool lets you put together a list of profiles "
+		pop.document.write("The Publications Export Tool lets you put together a list of profiles "
 			+ "then export data from the list. To build the list, you can add one profile at a time, "
 			+ "add a set of search results, or add a set of co-authors. You can then export "
 			+ "certain data from the chosen profiles such as email addresses, names and departments."
@@ -64,105 +68,121 @@
 	// ==============================================================
 	
 	function initTool() {
-	
+		gadgets.pubsub.subscribe("JSONPubMedIds",processPubMedIDs);
 		gadgets.window.adjustHeight(40);
-		gadgets.pubsub.subscribe("JSONPubMedIds", processPubMedIDs);
 	}
 	// ==============================================================		
 	
-	function processPubMedIDs(sender, message) {						
+	function processPubMedIDs(sender, message) {
+	
 		// extract the array of incoming person IDs
-		g_arrPubMedIDs =  gadgets.json.parse(message).personIds;
+		// g_arrPubMedIDs = gadgets.json.parse(message).PubMedIds;
 	}
 	// ==============================================================
-			
+	
+	function buildPubList() {
+	
+		var table_title;
+		var table_authors;
+		var table_pubdate;
+		var table_pmid;
+		var table_row;
+		var all_data_export;
+		var last_names = [];
+		var initials = [];
+		
+		g_table_rows = "";
+		g_all_data_export = "";
+				
+		//var i = 0;		
+		//while (i < g_arrPubMedIDs.length) {
+			//table_authors = "";
+			//table_row = "";
+			//last_names = [];
+			//initials = [];
+		
+  			$.ajax({
+    			type: "GET",
+    			url: "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=" + g_arrPubMedIDs[0],
+    			dataType: "xml",
+    			success: function(xml){
+    				table_authors = "";
+        			$(xml).find("MedlineCitation").each(function(){
+            			table_title = $(this).find("ArticleTitle").text();
+            			table_pubdate = $(this).find("PubDate").text();
+            		
+            			$(xml).find("LastName").each(function(){
+            				last_names.push($(this).text());
+            			});
+            		
+            			$(xml).find("Initials").each(function(){
+            				initials.push($(this).text());
+            			});
+            		
+            			for (i in last_names) {
+            				table_authors += last_names[i] + " ";
+            				table_authors += initials[i] + ". ";
+            			}
+            		        		
+            			table_pmid = g_arrPubMedIDs[0];
+            		
+            			table_row = "<td width='75%' align='left' valign='top' class='tool_table_cell'>" 
+							+ table_title + " " + table_authors + table_pubdate + "</td>";
+						table_row += "<td width='25%; align='left' valign='top' class='tool_table_cell'>" 
+							+ table_pmid + "</td>";
+						g_table_rows += table_row;
+						
+						all_data_export = table_title + " " + table_authors + table_pubdate;
+						g_all_data_export += all_data_export;	
+						
+						//if (i == g_arrPubMedIDs.length) {
+							displayPubList();
+						//}
+						//i++;		
+            		});
+        		}
+  			});
+  		//} /* end while loop */
+	}
+	// ==============================================================	
+	
 	function displayPubList() {
 		
-		// set up the batch task
-		//var fields = [
-					//opensocial.Person.Field.Name, 
-					//opensocial.Person.Field.Emails,
-					//'ImageEmail',
-					//'imageemail',
-					//'email'
-					//];
-  		//var batch = osapi.newBatch();
-  		
-  		//for (i in g_arrOldIDs) {
-      		//batch.add('person[' + i + ']', osapi.people.get(
-				//{
-					//'userId': g_arrOldIDs[i],
-					//'groupId': '@self',
-					//'fields': fields
-				//}));
-  		//}		
-  
-  		// execute the batch task
-		//batch.execute(function(people) {
-			//var strTable="<table cellspacing='0' cellpadding='0' width='600'><tr>";
-			
-			// build the table header row
-			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Last&nbsp;Name</b></u></td>";
-			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>First&nbsp;Name</b></u></td>";
-			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Email&nbsp;Address</b></u></td>";
-			//strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Department</b></u></td>";
-			//   //strTable=strTable + "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Faculty&nbsp;Rank</b></u></td>";
-			//strTable=strTable + "</tr>";
+		//http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=11110823
 		
-			//var table_row;
+		var strTable="<table cellspacing='0' cellpadding='0' width='600'>";
 			
-			// initialize the export divs
-			//document.getElementById("canvas_email_list_textarea").value = "";
-			//document.getElementById("canvas_full_list_textarea").value = "";
+		//build the table header row
+		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u><br /><br /></td>";
+		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>PubMed&nbsp;ID</b></u><br /><br /></td>";
+		strTable=strTable + "</tr>";
 			
-			//var j = 0;
+		// initialize the export divs
+		document.getElementById("canvas_id_list_textarea").value = "";
+		document.getElementById("canvas_full_list_textarea").value = "";
+
+		strTable = strTable + g_table_rows;
+		strTable=strTable + "</table>";
+						
+		// add to the id export text area
+		document.getElementById("canvas_id_list_textarea").value = g_arrPubMedIDs[0];
 				
-			//for (i in people) {		
-			
-				//table_row="<tr>";
-				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.familyName + "</td>";
-				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.givenName + "</td>";
-				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].emails[0].value + "</td>";
-				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].organizations[0].field + "</td>";
-				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + "" + "</td>";
-				//table_row += "</tr>";
+		// add to the full export text area
+		document.getElementById("canvas_full_list_textarea").value = g_all_data_export;
+		
+		document.getElementById("progress").style.display="none";
 				
-				//strTable=strTable + table_row;
-				
-				// add to the email export text area
-				//if (people[i].emails[0].value) {
-					//document.getElementById("canvas_email_list_textarea").value += people[i].emails[0].value + ";";
-				//}
-				
-				// add to the full export text area
-				//document.getElementById("canvas_full_list_textarea").value += people[i].name.familyName + ";";
-				//document.getElementById("canvas_full_list_textarea").value += people[i].name.givenName + ";";
-				//document.getElementById("canvas_full_list_textarea").value += people[i].emails[0].value + ";";
-				//document.getElementById("canvas_full_list_textarea").value += people[i].organizations[0].field + "\r\n";
-					
-				//j++;
-				
-				// update the UI
-				//document.getElementById("progress").innerHTML = "Getting details for person " + i + " of " + people.length;
-			//}
-			
-			//document.getElementById("progress").style.display="none";
-				
-			//strTable=strTable + "</table>";
-			
-			// dispay the table in canvas view
-			//document.getElementById("canvas_bubs_list").innerHTML = strTable;
-			//document.getElementById("number_selected").innerHTML = "Selected Profiles (" + j + ")";
-		});
+		// dispay the table in canvas view
+		document.getElementById("canvas_pubs_list").innerHTML = strTable;
 		
 	} /* end viewPubList */
 	
 	// ==============================================================		
 		
-	function copyTitleAndIdDivToClipboard() {
+	function copyIdDivToClipboard() {
 		
-		document.getElementById("canvas_title_and_id_list").style.display = "block";
-		document.getElementById("canvas_title_and_id_list_text").style.display = "block";
+		document.getElementById("canvas_id_list").style.display = "block";
+		document.getElementById("canvas_id_list_text").style.display = "block";
 		document.getElementById("canvas_full_list").style.display = "none";
 		document.getElementById("canvas_full_list_text").style.display = "none";
 		document.getElementById("canvas_pubs_list").style.display = "none";	
@@ -173,8 +193,8 @@
 		
 		document.getElementById("canvas_full_list").style.display = "block";
 		document.getElementById("canvas_full_list_text").style.display = "block";
-		document.getElementById("canvas_title_and_id_list").style.display = "none";
-		document.getElementById("canvas_title_and_id_list_text").style.display = "none";
+		document.getElementById("canvas_id_list").style.display = "none";
+		document.getElementById("canvas_id_list_text").style.display = "none";
 		document.getElementById("canvas_pubs_list").style.display = "none";
 	}	
 	// ==============================================================			
@@ -190,14 +210,15 @@
 
 	<Content type="html" view="small"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
-		
-	<table cellspacing="6" cellpadding="5">
+
+	<div style="float:right; margin:10px 4px 0 0">
+	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<td class="tool_body">Publications&nbsp;Export&nbsp;</td>
-			<td><input id="export_button" type='button' class='tool_toggle_button' value='Export' onClick="gadgetEventTrack('click', 'export button');gadgets.views.requestNavigateTo(\"canvas\");"></td>
+			<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('click', 'export button');gadgets.views.requestNavigateTo('canvas');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
 		</tr>
 	</table>
+	</div>
 
 	<script type="text/javascript">
 		gadgets.util.registerOnLoadHandler(initTool);
@@ -219,31 +240,32 @@
 		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
 		Selected Publications<p>
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-			<a href="javascript:gadgetEventTrack('click', 'export email addresses');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-			<a href="javascript:gadgetEventTrack('click', 'export all data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="javascript:gadgetEventTrack('click', 'delete list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('click', 'export pubmed ids');copyFullDivToClipboard();">Export all data</a>
+			&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="javascript:gadgetEventTrack('click', 'export all pubmed data');copyIdDivToClipboard();">Export IDs</a>
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">
 		<br><br>
 		<img src="images/waiting.gif">
 		<br><br>
-		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
+		<b>Processing data. This may take a minute or two, based on the size of your selected PubMed ID list.</b>
+		</p>
 	</div>
 	
-	<div id="canvas_title_and_id_list_text" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
-	Copy and paste the titles and PubMed IDs below into an Excel spreadsheet or email client "To" field.
-	<input type="button" style="height:22px; font-size:10; margin-left:40px;" value="Close" onClick="document.getElementById('canvas_title_and_id_list_text').style.display='none';document.getElementById('canvas_title_and_id_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
+	<div id="canvas_id_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
+	Copy and paste the information below into a .txt file or another program.
+	<input type="button" style="height:22px; font-size:10; margin-left:84px;" value="Close" onClick="document.getElementById('canvas_id_list').style.display='none';document.getElementById('canvas_id_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
 	</div>
 	
 	<!-- holds the title and ID list to be copied to the clipboard -->
-	<div id="canvas_title_and_id_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-	<textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+	<div id="canvas_id_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
+	<textarea id="canvas_id_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
 	</textarea>
 	</div>
 	
 	<div id="canvas_full_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left: 12px;">
-	Copy and paste the profile data below into an Excel spreadsheet or external text editor.
+	Copy and paste the information below into a .txt file or another program.
 	<input type="button" style="height:22px; font-size:10; margin-left:84px;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
 	</div>
 	
@@ -254,17 +276,18 @@
 	</div>	
 	
 	<!-- holds the visible pub details list -->
-	<div id="canvas_pubs_list" style="display:none; margin-left:20px; height:525px; overflow:auto;"></div>
+	<div id="canvas_pubs_list" style="display:block; margin:20px 0px 0px 20px; height:525px; overflow:auto;"></div>
 	
 	<script type="text/javascript">
 		function init() {
-			// update UI
 			gadgets.window.adjustHeight(600);
-			//readData(displayPubList);		
-			document.getElementById("canvas_pubs_list").style.display="block";		
+			buildPubList();
+			document.getElementById("canvas_pubs_list").style.display="block";
 		}
 		
-		gadgets.util.registerOnLoadHandler(init);
+		init();
+		
+		//gadgets.util.registerOnLoadHandler(init);
 	</script>
 	
 	]]>

@@ -153,7 +153,7 @@
 						// build and add table row
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
-							+ "<td onClick=\"gadgetEventTrack('click', 'external link')\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
+							+ "<td onClick=\"gadgetEventTrack('click', cell_name)\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
 					}
                     
                 	// close the table

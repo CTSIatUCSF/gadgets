@@ -9,7 +9,7 @@
         <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="flash" />
-        <!-- Require feature="dynamic-height" /-->
+        <!-- Require feature="dynamic-height" / -->
         <Require feature="osapi" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
@@ -36,6 +36,13 @@
     </style>
     
     <script type="text/javascript">
+	    
+	    function gadgetEventTrack(action, label, value) {
+    		var message = {'action' : action};
+    		if (label) {message.label = label;}
+    		if (value) {message.value = value;}
+    		gadgets.pubsub.publish("analytics", message);
+		}
 	    
 	    // ========================================
 	    function getUserNameAndPreview(userId){
@@ -79,7 +86,12 @@
 		    		'</object>' +
 		    	'<div class="ss-link">Having trouble seeing this? <a href="http://www.slideshare.net/'+ username + '" target="_top">Click here.</a><div/>' +
 		    	'</div>'
-	 		);   				
+	 		);   	
+	 		
+	    	$('div.ss-link a').click(function(){
+	    		gadgetEventTrack('click', 'Go to Slideshare website');
+	    		return true;
+	    	}); //click	 					
 	    }
 	    // ========================================
 	    
@@ -105,12 +117,13 @@
 	    				$('#preview').html('');
 	    				if(username != null && username != "") {
 	    					preview(username);
+	    					gadgetEventTrack('click', 'Select a different slideshare account');	    					
 	    				}
 		    	}); //click
 	    	}
 	    	else{
 	    		getUserNameAndPreview('@owner');
-	    	}
+	    	}	    	
     	}); // registerOnLoadHandler    	
     	// ========================================
     	

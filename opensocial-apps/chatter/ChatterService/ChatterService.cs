@@ -40,7 +40,7 @@ namespace ChatterService
             }
         }
 
-        public void CreateActivity(string userId, string message, DateTime timestamp)
+        public void CreateActivity(string userId, string code, string message, DateTime timestamp)
         {
             if (_service == null)
                 throw new Exception("Service is null. You need to login first!");
@@ -53,6 +53,7 @@ namespace ChatterService
                 ParentId = userId,
                 CreatedById = userId,
                 Type = "TextPost",
+                Title = code,
                 Body = message,
                 CreatedDate = timestamp,
                 LastModifiedDate = timestamp,
@@ -64,7 +65,7 @@ namespace ChatterService
 //            var result = _service.upsert("Id", new Salesforce.sObject[] { news });
         }
 
-        public void CreateActivityUsingApex(string userId, string message, DateTime timestamp)
+        public void CreateActivityUsingApex(string userId, string code, string message, DateTime timestamp)
         {
             if (_service == null)
                 throw new Exception("Service is null. You need to login first!");
@@ -83,6 +84,7 @@ namespace ChatterService
             DateTime utc = timestamp.ToUniversalTime();
             String apex = "FeedItem post = new FeedItem(); \n" +
                     " post.ParentId = '" + userId  + "'; \n" +
+                    " post.Title = '" + code + "'; \n" +
                     " post.Body = '" + message + "'; \n" +
                     " post.CreatedById = '" + userId + "'; \n" +
                     " post.CreatedDate = Datetime.newInstanceGmt(" + utc.Year + "," + utc.Month + "," + utc.Day + "," + utc.Hour + "," + utc.Minute + "," + utc.Second + "); \n" +

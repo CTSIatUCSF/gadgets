@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.SqlServer.Server;
+using System.Configuration;
 
 namespace ChatterServiceTest
 {
@@ -16,9 +17,9 @@ namespace ChatterServiceTest
     public class ChatterSqlProceduresTest
     {
         string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
-        string _username = "";
-        string _password = "";
-        string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
+        string _username = ConfigurationSettings.AppSettings["username"];
+        string _password = ConfigurationSettings.AppSettings["password"];
+        string _token = ConfigurationSettings.AppSettings["token"];
 
         string _employeeId = "111111111";
 
@@ -26,7 +27,19 @@ namespace ChatterServiceTest
         public void TestCreateActivity()
         {
             string xml =
-                "<activity xmlns=\"http://ns.opensocial.org/2008/opensocial\"><postedTime>-2147483648</postedTime><title>Test Activity created by ChatterSqlProceduresTest.TestCreateActivity</title></activity>";
+                "<activity xmlns=\"http://ns.opensocial.org/2008/opensocial\"><postedTime>1310597396000</postedTime><title>Edited their narrative</title><body>Test Activity created by ChatterSqlProceduresTest.TestCreateActivity</body></activity>";
+            var xmlReader = XmlTextReader.Create(new System.IO.StringReader(xml));
+
+            SqlXml messageBlob = new SqlXml(xmlReader);
+
+            ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob);
+        }
+
+        [TestMethod]
+        public void TestCreateActivityWithMissingBody()
+        {
+            string xml =
+                "<activity xmlns=\"http://ns.opensocial.org/2008/opensocial\"><postedTime>1310597396000</postedTime><title>Edited their narrative</title></activity>";
             var xmlReader = XmlTextReader.Create(new System.IO.StringReader(xml));
 
             SqlXml messageBlob = new SqlXml(xmlReader);
@@ -38,7 +51,7 @@ namespace ChatterServiceTest
         public void TestCreateActivityWithMissingMessageElement()
         {
             string xml =
-                "<activity xmlns=\"http://ns.opensocial.org/2008/opensocial\"><postedTime>1304533194580</postedTime><title2>This is Profiles test activity from ChatterSqlProceduresTest</title2></activity>";
+                "<activity xmlns=\"http://ns.opensocial.org/2008/opensocial\"><postedTime>1304533194580</postedTime><body>This is Profiles test activity from ChatterSqlProceduresTest</body></activity>";
             var xmlReader = XmlTextReader.Create(new System.IO.StringReader(xml));
 
             SqlXml messageBlob = new SqlXml(xmlReader);

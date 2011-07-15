@@ -38,3 +38,10 @@ post.Body = 'Enter post text here';
 post.CreatedById = '005J0000000Q74wIAC';
 post.CreatedDate = Datetime.newInstanceGmt(2011, 7, 8, 3, 11, 12);
 insert post;
+
+FeedPost post = new FeedPost();
+post.ParentId = '005J0000000Q74wIAC';
+post.Title = 'Profile was viewed';
+post.Body = 'Profile was viewed';
+post.CreatedById = '005J0000000Q74wIAC';
+insert post;

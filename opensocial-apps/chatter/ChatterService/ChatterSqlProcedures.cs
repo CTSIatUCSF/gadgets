@@ -35,13 +35,15 @@ namespace ChatterService
             
             var element = XElement.Parse(messageBlob.Value);
             
-            var message = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}title");
+            var code = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}title");
+            var body = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}body", code);
 
+            
             var postedTimeStr = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}postedTime"); ;
             DateTime postedTime = ConvertUnixEpochTime(postedTimeStr);
 
             var userId = service.GetUserId(employId.Value);
-            service.CreateActivityUsingApex(userId, message, postedTime);
+            service.CreateActivityUsingApex(userId, code, body, postedTime);
         }
 
         public static string GetElementValue(XElement element, string name)
@@ -52,6 +54,16 @@ namespace ChatterService
                 throw new Exception("Element " + name + " was not found");
             }
             return elem.Value;
+        }
+
+        public static string GetElementValue(XElement element, string name, string defaultValue)
+        {
+            XElement elem = element.Element(name);
+            if (elem == null)
+            {
+                return defaultValue;
+            }
+            return string.IsNullOrEmpty(elem.Value) ? defaultValue : elem.Value;
         }
 
         public static DateTime ConvertUnixEpochTime(string milliseconds)

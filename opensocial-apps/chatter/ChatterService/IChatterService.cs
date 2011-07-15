@@ -23,8 +23,8 @@ namespace ChatterService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="timestamp"></param>
-    void CreateActivity(string userId, string message, DateTime timestamp);
-    void CreateActivityUsingApex(string userId, string message, DateTime timestamp);
+    void CreateActivity(string userId, string code, string message, DateTime timestamp);
+    void CreateActivityUsingApex(string userId, string code, string message, DateTime timestamp);
         
     /// <summary>
     /// Return all activities.

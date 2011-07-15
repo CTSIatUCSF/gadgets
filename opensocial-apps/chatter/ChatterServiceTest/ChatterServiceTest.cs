@@ -8,6 +8,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using ChatterService;
 using ChatterService.Model;
+using System.Configuration;
 
 namespace ChatterServiceTest
 {
@@ -48,9 +49,9 @@ namespace ChatterServiceTest
 
         #region Additional test attributes
             string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
-            string _username = "";
-            string _password = "";
-            string _token = "MQzWKEZxvtNXrHM0X8hcHbzPI";
+            string _username = ConfigurationSettings.AppSettings["username"];
+            string _password = ConfigurationSettings.AppSettings["password"];
+            string _token = ConfigurationSettings.AppSettings["token"];
 
             string _employeeId = "111111111";
             string _userId = "005J0000000Q74wIAC";
@@ -132,7 +133,7 @@ namespace ChatterServiceTest
             service.Login(_username, _password, _token);
 
             DateTime dt = new DateTime(2011, 7, 6, 10, 11, 12);
-            service.CreateActivity(_userId, "Test Activity from ChatterServiceTest.TestCreateActivity:" + dt, dt);
+            service.CreateActivity(_userId, "Edited their narrative", "Test Activity from ChatterServiceTest.TestCreateActivity:" + dt, dt);
         }
 
         [TestMethod]
@@ -142,7 +143,7 @@ namespace ChatterServiceTest
             service.Login(_username, _password, _token);
 
             DateTime dt = new DateTime(2011, 7, 6, 10, 11, 12);
-            service.CreateActivityUsingApex(_userId, "Test Activity from ChatterServiceTest.TestCreateActivityUsingApex:" + dt, dt);
+            service.CreateActivityUsingApex(_userId, "Edited their narrative", "Test Activity from ChatterServiceTest.TestCreateActivityUsingApex:" + dt, dt);
         }
 
         [TestMethod]

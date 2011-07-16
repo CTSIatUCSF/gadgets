@@ -84,8 +84,8 @@ namespace ChatterService
             DateTime utc = timestamp.ToUniversalTime();
             String apex = "FeedItem post = new FeedItem(); \n" +
                     " post.ParentId = '" + userId  + "'; \n" +
-                    " post.Title = '" + code + "'; \n" +
-                    " post.Body = '" + message + "'; \n" +
+                    " post.Title = '" + EncodeString(code) + "'; \n" +
+                    " post.Body = '" + EncodeString(message) + "'; \n" +
                     " post.CreatedById = '" + userId + "'; \n" +
                     " post.CreatedDate = Datetime.newInstanceGmt(" + utc.Year + "," + utc.Month + "," + utc.Day + "," + utc.Hour + "," + utc.Minute + "," + utc.Second + "); \n" +
                     " insert post;";
@@ -95,6 +95,11 @@ namespace ChatterService
             {
                 throw new Exception("Cannot create FeedItem:" + result.exceptionMessage + "\n" + result.exceptionStackTrace);
             }
+        }
+
+        protected String EncodeString(string str)
+        {
+            return str.Replace("'", "\\'");
         }
 
         public List<Activity> GetActivities(string userId)

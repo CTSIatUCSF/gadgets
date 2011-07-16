@@ -142,8 +142,8 @@ namespace ChatterServiceTest
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
 
-            DateTime dt = new DateTime(2011, 7, 6, 10, 11, 12);
-            service.CreateActivityUsingApex(_userId, "Edited their narrative", "Test Activity from ChatterServiceTest.TestCreateActivityUsingApex:" + dt, dt);
+            DateTime dt = DateTime.Now;
+            service.CreateActivityUsingApex(_userId, "Edited their narrative", "Test Activity from 'ChatterServiceTest.TestCreateActivityUsingApex':" + dt, dt);
         }
 
         [TestMethod]

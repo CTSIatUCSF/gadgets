@@ -35,7 +35,13 @@
     	.mentor_list {
     		font-family: Arial;
     		font-size: 11px;
-    	}    	
+    	}
+    	.mentor_message {
+    		font-family: Arial;
+    		font-size: 14px;
+    		font-weight: normal;
+    	}      	
+    		
     </style>
 	
     <script type="text/javascript">
@@ -364,7 +370,8 @@
 	</div>
 	
 	<div class='question'>
-		<h4>Mentoring Narrative:&nbsp;<img src="images/hovertiptarget.png" border="0" onClick="document.getElementById('sample').style.display='block';"></h4>
+		<h4>Mentoring Narrative:&nbsp;<img src="images/hovertiptarget.png" border="0" onClick="document.getElementById('sample').style.display='block';">
+		<span class="mentor_message">&nbsp;&nbsp;Be sure to <b>SAVE</b> your wok below.</span></h4>
 		
 		<div id="sample" style="display:none; border:1px solid #383838; padding:10px 10px 10px 10px; margin:10px; height:160px;">
 		

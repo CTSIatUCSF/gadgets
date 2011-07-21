@@ -19,22 +19,19 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     
 	<style>
-    	.tool_title {font-family:Verdana,Arial; font-size:14px;}
-    	.tool_title_orange {font-family:Verdana,Arial; font-size:14px; color:#FF9900;}
-    	.tool_body {font-family:Arial; font-size:12px;}
-    	.tool_credit {font-family:Arial; font-size:10px;}
-    	.tool_table_cell {font-family:Arial; font-size:12px; padding:0 20px 0 0;}
-    	.tool_table_cell_small {font-family:Arial; font-size:11px;}
-    	.tool_toggle_button {height:26px; width:70px; font-size:12px; font-weight:bold;}  		   	
+    	.tool_title { font-family:Verdana, Arial; font-size:14px;}
+    	.tool_title_orange { font-family:Verdana, Arial; font-size:14px; color:#FF9900; }
+    	.tool_body { font-family:Arial; font-size:12px;}
+    	.tool_credit { font-family:Arial; font-size:10px;}
+    	.tool_table_cell { font-family:Arial; font-size:12px; padding:0px 20px 10px 0px; }
+    	.tool_table_cell_small { font-family:Arial; font-size:11px;}
+    	.tool_toggle_button { height:26px; width:70px; font-size:12px; font-weight:bold; }  		   	
     </style>
 
 	<script type="text/javascript">
 	
-	//g_arrPubMedIDs = ["11110823","10516321","8929434"];
-	var g_arrPubMedIDs = ["11110823"];
-	var g_table_rows = "";
-	var g_all_data_export = "";
-
+	var g_arrOldIDs = [];
+	
 	// ==============================================================
 
 	function gadgetEventTrack(action, label, value) {
@@ -67,49 +64,82 @@
 	}
 	// ==============================================================
 	
-	function initTool() {
-		gadgets.pubsub.subscribe("JSONPubMedIds",processPubMedIDs);
-		gadgets.window.adjustHeight(40);
-	}
-	// ==============================================================		
+	function saveData(sender, message) {
 	
-	function processPubMedIDs(sender, message) {
+		// test data
+		//var arrUnChunked = ["10516321","8929434","8738377"];
+		//var arrUnChunked = ["10516321","8929434"];
 	
-		// extract the array of incoming person IDs
-		// g_arrPubMedIDs = gadgets.json.parse(message).PubMedIds;
+		// convert incoming pubsub IMIDs to an array
+		var arrUnChunked = gadgets.json.parse(message).pubmedIds;
+
+		
+		// initialize object
+	    var chunkedDataObject = {}; // a map of data, keyed by pIds + chunk num
+	    
+	    var chunkNum = 0;
+	    while(arrUnChunked.length) {
+	        var chunkName = 'pIDs' + chunkNum++;
+	        chunkedDataObject[chunkName] = gadgets.json.stringify(arrUnChunked.splice(0, 400)); // chunked data as string as required by osapi.udpate call
+	    }
+	    chunkedDataObject["num_chunks"] = "" + chunkNum; // number of chunks as string as required by osapi.udpate call
+	    
+	    // at this point we should have a nice chunkedDataObject that we can convert to JSON and store as
+	    // appdata in one call		
+		
+	    osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data': gadgets.json.stringify(chunkedDataObject)}).execute(gadgets.views.requestNavigateTo('canvas'));
 	}
 	// ==============================================================
 	
+	    function readData(callback) {
+
+		// get the number of chunks
+		osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['num_chunks']} )
+			.execute(function(result){
+				
+			var viewer = os.osapi.getViewerFromResult(result);
+			var num_chunks = viewer.num_chunks;	
+				
+			// build the fields to read the chunks
+			var fields = [];
+			for (var i = 0; i < num_chunks; i++) {
+				fields[i] = 'pIDs' + i;
+			}
+			osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields': fields} )
+				.execute(function(result){
+				
+				g_arrOldIDs = [];
+				var viewer = os.osapi.getViewerFromResult(result);
+				for (var i = 0; i < fields.length; i++) {
+					var chunk = gadgets.json.parse(viewer[fields[i]]);
+					g_arrOldIDs = g_arrOldIDs.concat(chunk);
+				}
+				// now that all the data is loaded, execute the callback
+				callback();	
+			}); /* end osapi.appdata.get INNER */
+		}); /* end osapi.appdata.get OUTER */
+    }
+	// ==============================================================	
+	
 	function buildPubList() {
 	
-		var table_title;
-		var table_authors;
-		var table_pubdate;
-		var table_pmid;
-		var table_row;
-		var all_data_export;
-		var last_names = [];
-		var initials = [];
+		// test data
+		// var g_arrOldIDs = ["10516321","8929434","8738377"];		
 		
-		g_table_rows = "";
-		g_all_data_export = "";
-				
-		//var i = 0;		
-		//while (i < g_arrPubMedIDs.length) {
-			//table_authors = "";
-			//table_row = "";
-			//last_names = [];
-			//initials = [];
-		
+		for (idNum in g_arrOldIDs) {
+
   			$.ajax({
     			type: "GET",
-    			url: "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=" + g_arrPubMedIDs[0],
+    			url: "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=" + g_arrOldIDs[idNum],
     			dataType: "xml",
     			success: function(xml){
     				table_authors = "";
+    				last_names = [];
+					initials = [];
         			$(xml).find("MedlineCitation").each(function(){
             			table_title = $(this).find("ArticleTitle").text();
             			table_pubdate = $(this).find("PubDate").text();
+            			table_pmid = $(this).find("PMID").text();
             		
             			$(xml).find("LastName").each(function(){
             				last_names.push($(this).text());
@@ -124,58 +154,67 @@
             				table_authors += initials[i] + ". ";
             			}
             		        		
-            			table_pmid = g_arrPubMedIDs[0];
-            		
-            			table_row = "<td width='75%' align='left' valign='top' class='tool_table_cell'>" 
-							+ table_title + " " + table_authors + table_pubdate + "</td>";
-						table_row += "<td width='25%; align='left' valign='top' class='tool_table_cell'>" 
-							+ table_pmid + "</td>";
-						g_table_rows += table_row;
+            			table_title = table_title + " " + table_authors + table_pubdate;
+            			
+            			hash_title = "#title" + table_pmid;
+            			hash_pmid = "#pmid" + table_pmid;			
+            			$(hash_title).html(table_title);
+						$(hash_pmid).html(table_pmid);
 						
-						all_data_export = table_title + " " + table_authors + table_pubdate;
-						g_all_data_export += all_data_export;	
+						// add to the id export text area
+						document.getElementById("canvas_id_list_textarea").value += table_pmid + ",";
 						
-						//if (i == g_arrPubMedIDs.length) {
-							displayPubList();
-						//}
-						//i++;		
-            		});
-        		}
-  			});
-  		//} /* end while loop */
+						// add to the full export text area
+						document.getElementById("canvas_full_list_textarea").value += table_title + "\n" + "\n";
+												
+            		}); /* end find call */
+        		} /* end success function */
+  			}); /* end ajax call */
+  		} /* end for loop */
 	}
 	// ==============================================================	
 	
-	function displayPubList() {
+	function buildPubListTable() {
 		
+		//sample PMID request
 		//http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=11110823
 		
+		// test data
+		// var g_arrOldIDs = ["10516321","8929434","8738377"];
+		
+		// start the table
 		var strTable="<table cellspacing='0' cellpadding='0' width='600'>";
 			
-		//build the table header row
-		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u><br /><br /></td>";
-		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>PubMed&nbsp;ID</b></u><br /><br /></td>";
+		// build the table header row
+		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u></td>";
+		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>PubMed&nbsp;ID</b></u></td>";
 		strTable=strTable + "</tr>";
 			
 		// initialize the export divs
 		document.getElementById("canvas_id_list_textarea").value = "";
 		document.getElementById("canvas_full_list_textarea").value = "";
+			
+		// build the data rows
+		for (j in g_arrOldIDs) {
+			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'><div id='title" + g_arrOldIDs[j] + "'>No Title data available</div></td>";
+			strTable = strTable + "<td align='left' valign='top' class='tool_table_cell'><div id='pmid" + g_arrOldIDs[j] + "'></div></td></tr>";
+		}
 
-		strTable = strTable + g_table_rows;
-		strTable=strTable + "</table>";
+		// end the table
+		strTable = strTable + "</table>";
 						
-		// add to the id export text area
-		document.getElementById("canvas_id_list_textarea").value = g_arrPubMedIDs[0];
-				
 		// add to the full export text area
-		document.getElementById("canvas_full_list_textarea").value = g_all_data_export;
+		//document.getElementById("canvas_full_list_textarea").value = g_all_data_export;
 		
 		document.getElementById("progress").style.display="none";
 				
 		// dispay the table in canvas view
 		document.getElementById("canvas_pubs_list").innerHTML = strTable;
 		
-	} /* end viewPubList */
+		// fetch the PMID data and populate the table
+		buildPubList();
+		
+	} /* end buildPubListTable */
 	
 	// ==============================================================		
 		
@@ -214,14 +253,17 @@
 	<div style="float:right; margin:10px 4px 0 0">
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('click', 'export button');gadgets.views.requestNavigateTo('canvas');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('click', 'export button');gadgets.pubsub.subscribe('JSONPubMedIds', saveData);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<!--<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('click', 'export button');saveData();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>-->
 			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
 		</tr>
 	</table>
 	</div>
 
 	<script type="text/javascript">
-		gadgets.util.registerOnLoadHandler(initTool);
+	
+		gadgets.util.registerOnLoadHandler(gadgets.window.adjustHeight(40));
+		
 	</script>
 	
 	]]>
@@ -279,15 +321,15 @@
 	<div id="canvas_pubs_list" style="display:block; margin:20px 0px 0px 20px; height:525px; overflow:auto;"></div>
 	
 	<script type="text/javascript">
+	
 		function init() {
 			gadgets.window.adjustHeight(600);
-			buildPubList();
+			readData(buildPubListTable);
 			document.getElementById("canvas_pubs_list").style.display="block";
 		}
 		
-		init();
+		gadgets.util.registerOnLoadHandler(init);
 		
-		//gadgets.util.registerOnLoadHandler(init);
 	</script>
 	
 	]]>

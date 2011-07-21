@@ -89,7 +89,7 @@
 	 		);   	
 	 		
 	    	$('div.ss-link a').click(function(){
-	    		gadgetEventTrack('click', 'Go to Slideshare website');
+	    		gadgetEventTrack('go_to_slideshare', 'http://www.slideshare.net/' + username);
 	    		return true;
 	    	}); //click	 					
 	    }
@@ -117,7 +117,6 @@
 	    				$('#preview').html('');
 	    				if(username != null && username != "") {
 	    					preview(username);
-	    					gadgetEventTrack('click', 'Select a different slideshare account');	    					
 	    				}
 		    	}); //click
 	    	}

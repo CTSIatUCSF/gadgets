@@ -431,7 +431,7 @@
 	</div>
 				
 	<div id="mentor_as" style="display:none; margin-left:20px;">
-		<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page" onClick="gadgetEventTrack('click', 'Review Mentor Role Definitions'); return true">Review Mentor Role Definitions</a>):
+		<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page" onClick="gadgetEventTrack('view_mentor_roles', 'http://ctsi.ucsf.edu/training/mdp-seminar1-definitions'); return true">Review Mentor Role Definitions</a>):
 			<span id="mentor_as_career_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Career Mentor</span>
 			<span id="mentor_as_co_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Co-Mentor</span>
 			<span id="mentor_as_lead_research" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Lead Research / Scholarly Mentor</span>
@@ -454,8 +454,8 @@
 	</div>
 
     <div style="padding:10px 0px 0px 20px;"> 
-		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website" onClick="gadgetEventTrack('click', 'Faculty Mentoring Program'); return true">Faculty Mentoring Program</a> 
-		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page" onClick="gadgetEventTrack('click', 'CTSI Mentoring Development Program'); return true">CTSI Mentor Development Program</a>
+		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website" onClick="gadgetEventTrack('go_to_program', 'http://acpers.ucsf.edu/mentoring/'); return true">Faculty Mentoring Program</a> 
+		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page" onClick="gadgetEventTrack('go_to_development', 'http://ctsi.ucsf.edu/training/mdp-announcement'); return true">CTSI Mentor Development Program</a>
 		<br /><br />
 	</div>
 	

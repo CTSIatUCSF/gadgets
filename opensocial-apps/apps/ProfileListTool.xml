@@ -382,20 +382,20 @@
 		<!--<tr><td colspan="3" class="tool_title"><b>My Tools</b></td></tr>-->
 		<tr>
 			<td class="tool_body">Profile&nbsp;List&nbsp;Tool</td>
-			<td><input id="state_button" type='button' class='tool_toggle_button' value='On' onClick="gadgetEventTrack('click', 'on-off button');toggleToolState(this);"></td>
-			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
+			<td><input id="state_button" type='button' class='tool_toggle_button' value='On' onClick="gadgetEventTrack('on_off');toggleToolState(this);"></td>
+			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
 		</tr>
 	</table>
 
 	<table id="actions" style="display:none;" cellspacing="2" cellpadding="0">
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;&gt;&gt;&nbsp;</td>
-			<td><span class="tool_table_cell_small" id="add_profiles" onClick="gadgetEventTrack('click', 'add profiles')">
+			<td><span class="tool_table_cell_small" id="add_profiles" onClick="gadgetEventTrack('add_profiles')">
 			0 new Profile(s)</span></td>
 		</tr>
 		<tr>
 			<td class="tool_table_cell_small">&nbsp;&gt;&gt;&nbsp;</td>
-			<td><span class="tool_table_cell_small" id="list_profiles" onClick="gadgetEventTrack('click', 'list profiles')">
+			<td><span class="tool_table_cell_small" id="list_profiles" onClick="gadgetEventTrack('list_profiles')">
 			View list (0 Profiles)</span></td>
 		</tr>
 	</table>
@@ -420,9 +420,9 @@
 		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
 		Selected Profiles<p>
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-			<a href="javascript:gadgetEventTrack('click', 'export email addresses');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-			<a href="javascript:gadgetEventTrack('click', 'export all data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="javascript:gadgetEventTrack('click', 'delete list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">

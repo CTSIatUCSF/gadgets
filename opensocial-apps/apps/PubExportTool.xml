@@ -45,18 +45,19 @@
 	// ==============================================================
 	
 	function showHelp() {
-	
+		/*
 		var pop = window.open('Publications Export Help','','top=200,left=200,width=450,height=275,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
 		pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
 		pop.document.write("The Publications Export tool lets you export data about the publications from a profile."
 			+ "<ul><li>Find a profile for which you want to capture the publications.</li>"
 			+ "<li>Click the <b>Export</b> button to export data about all the publications.</li>"
-			+ "<li>Profiles takes you to the export pane, where you can select what to export: either \"All Data\" for Title, Publication in which the paper was published, Published date, and PubMedID or just PubMed ID.</li>"
-			+ "<li>If you decide not to export the data, click the \"Back\" link or back button in your browser to return to the profile.</li></ul>";
+			+ "<li>Profiles takes you to the export pane, where you can select what to export: either All Data for Title, Publication in which the paper was published, Published date, and PubMedID or just PubMed ID.</li>"
+			+ "<li>If you decide not to export the data, click the Back link or back button in your browser to return to the profile.</li></ul>";
 		pop.document.write("<br><br><center>" 
 			+ "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
 			+ "</center>");
 		pop.document.write("</body></html>");
+		*/
 	}
 	// ==============================================================
 	

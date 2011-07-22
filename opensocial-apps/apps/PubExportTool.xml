@@ -193,7 +193,7 @@
 		document.getElementById("canvas_full_list_textarea").value = "";		
 		
 		// hide the progress guide
-		document.getElementById("progress").style.display="none";
+		// document.getElementById("progress").style.display="none";
 				
 		// dispay the table in canvas view
 		document.getElementById("canvas_pubs_list").innerHTML = strTable;
@@ -272,13 +272,14 @@
 			&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:gadgetEventTrack('click', 'export all pubmed data');copyIdDivToClipboard();">Export IDs</a>
 		</p>
-		
+		<!--
 		<p id="progress" style="margin-left:20px;">
 		<br><br>
 		<img src="images/waiting.gif">
 		<br><br>
 		<b>Processing data. This may take a minute or two, based on the size of your selected PubMed ID list.</b>
 		</p>
+		-->
 	</div>
 	
 	<div id="canvas_id_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">

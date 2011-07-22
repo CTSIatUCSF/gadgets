@@ -37,6 +37,17 @@
     
     <script type="text/javascript">
 	    
+	    function gotoSlideshare() {    		
+	        var action = 'go_to_slideshare';
+	        var href = $('div.ss-link a').attr('href');
+    		gadgets.pubsub.subscribe("analytics", function(sender, message){
+    			if(message.action = action) {
+    				window.top.location.href = href;
+    			}
+    		});
+    		gadgetEventTrack(action, href);
+	    }
+	    
 	    function gadgetEventTrack(action, label, value) {
     		var message = {'action' : action};
     		if (label) {message.label = label;}
@@ -88,9 +99,9 @@
 		    	'</div>'
 	 		);   	
 	 		
-	    	$('div.ss-link a').click(function(){
-	    		gadgetEventTrack('go_to_slideshare', 'http://www.slideshare.net/' + username);
-	    		return true;
+	    	$('div.ss-link a').click(function(event){
+	    	    event.preventDefault();
+	    		gotoSlideshare();	    		
 	    	}); //click	 					
 	    }
 	    // ========================================

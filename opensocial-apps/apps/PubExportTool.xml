@@ -137,8 +137,8 @@
             			table_pmid = $(this).find("PMID").text();
             			
             			// match the div name in the target data display table
- 						var pmid_first_seven = table_pmid;
-						pmid_first_seven = pmid_first_seven.substring(0,6);       			
+ 						var pmid_first_eight = table_pmid;
+						pmid_first_eight = pmid_first_eight.substring(0,7);       			
             			
             			$(xml).find("LastName").each(function(){
             				last_names.push($(this).text());
@@ -155,13 +155,13 @@
             		        		
             			table_title = table_title + " " + table_authors + table_pubdate;
             			
-            			hash_title = "#title" + pmid_first_seven;
-            			hash_pmid = "#pmid" + pmid_first_seven;			
+            			hash_title = "#title" + pmid_first_eight;
+            			hash_pmid = "#pmid" + pmid_first_eight;			
             			$(hash_title).html(table_title);
-						$(hash_pmid).html(pmid_first_seven);
+						$(hash_pmid).html(pmid_first_eight);
 						
 						// add to the id export text area
-						document.getElementById("canvas_id_list_textarea").value += pmid_first_seven + ",";
+						document.getElementById("canvas_id_list_textarea").value += pmid_first_eight + ",";
 						
 						// add to the full export text area
 						document.getElementById("canvas_full_list_textarea").value += table_title + "\n\n";
@@ -187,11 +187,11 @@
 		for (j in g_arrOldIDs) {
 		
 			// some PMIDs returned in the XML stream are very long
-			var pmid_first_seven = g_arrOldIDs[j] + "";
-			pmid_first_seven = pmid_first_seven.substring(0,6);
+			var pmid_first_eight = g_arrOldIDs[j] + "";
+			pmid_first_eight = pmid_first_eight.substring(0,7);
 		
-			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'><div id='title" + pmid_first_seven + "'>No Title data available</div></td>";
-			strTable = strTable + "<td align='left' valign='top' class='tool_table_cell'><div id='pmid" + pmid_first_seven + "'></div></td></tr>";
+			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'><div id='title" + pmid_first_eight + "'>No Title data available</div></td>";
+			strTable = strTable + "<td align='left' valign='top' class='tool_table_cell'><div id='pmid" + pmid_first_eight + "'></div></td></tr>";
 		}
 
 		// end the table

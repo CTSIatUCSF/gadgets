@@ -305,11 +305,20 @@
 		<br /><br />
 	</div>
 		
-	<div class="updated" style="display:block; text-align:left; padding-right:10px; font-size: 10px;">
-		Last Updated: <span id="last_updated" style="font-size: 10px;"></span>
+		
+	<div>
+		<div style="float:left;">
+			<span class="mentor_message">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Be sure to <b>SAVE</b> your work below.</span>
+		</div>
+		
+		<div class="updated" style="float:right; display:block; text-align:left; padding-right:10px; font-size: 10px;">
+			Last Updated: <span id="last_updated" style="font-size: 10px;"></span>
+		</div>
 	</div>
 
 	<div class='question' style="padding: 0px; width:500px;">
+		<br>
 		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
 		<table cellspacing="0" cellpadding="15">
 			<tr>

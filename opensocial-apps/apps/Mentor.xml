@@ -296,9 +296,9 @@
     	    	
 	<div id="hideshow" style="padding:5px 10px 0px 0px;"></div>
 	
-	<h4 style="padding-left:10px;">Add Faculty Mentoring to Your Profile</h4>
+	<h4 style="padding-left:12px;">Add Faculty Mentoring to Your Profile</h4>
 	
-    <div id='AddEdit' style="padding:15px 0px 0px 10px;">
+    <div id='AddEdit' style="padding:15px 0px 0px 12px;">
 		Add details about your availability to mentor UCSF faculty. 
 		Learn about the <a href="http://acpers.ucsf.edu/mentoring" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
 		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI MDP Web page">CTSI&nbsp;Mentor&nbsp;Development&nbsp;Program</a>
@@ -308,7 +308,7 @@
 		
 	<div>
 		<div style="float:left;">
-			<span class="mentor_message">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="mentor_message">&nbsp;&nbsp;&nbsp;
 			Be sure to <b>SAVE</b> your work below.</span>
 		</div>
 		
@@ -419,7 +419,7 @@
 	<script type="text/javascript" >
     	// retrieve last-saved data and map it to the fields in the markup
     	displayMentorAppData();
-    	gadgets.window.adjustHeight(680);
+    	gadgets.window.adjustHeight(700);
 	</script>  
 
     ]]></Content>

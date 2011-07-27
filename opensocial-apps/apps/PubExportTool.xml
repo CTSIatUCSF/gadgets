@@ -249,8 +249,8 @@
 	<div style="float:right; margin:10px 4px 0 0">
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('click', 'export button');gadgets.pubsub.subscribe('JSONPubMedIds', saveData);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('click', 'helpbutton');showHelp()"></td>
+			<td><input id="export_button" type="button" class="tool_toggle_button" value="Export" onClick="gadgetEventTrack('view_list');gadgets.pubsub.subscribe('JSONPubMedIds', saveData);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
 		</tr>
 	</table>
 	</div>
@@ -277,9 +277,9 @@
 		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
 		Selected Publications<p>
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-			<a href="javascript:gadgetEventTrack('click', 'export pubmed ids');copyFullDivToClipboard();">Export all data</a>
+			<a href="javascript:gadgetEventTrack('export_pub_ids');copyFullDivToClipboard();">Export all data</a>
 			&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-			<a href="javascript:gadgetEventTrack('click', 'export all pubmed data');copyIdDivToClipboard();">Export IDs</a>
+			<a href="javascript:gadgetEventTrack('export_all_data');copyIdDivToClipboard();">Export IDs</a>
 		</p>
 		<!--
 		<p id="progress" style="margin-left:20px;">

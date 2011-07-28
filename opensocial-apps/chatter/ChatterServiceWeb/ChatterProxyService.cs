@@ -19,8 +19,8 @@ namespace ChatterService.Web
     public interface IChatterProxyService
     {
         [OperationContract]
-        [WebGet(UriTemplate = "/activities", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        Activity[] GetActivities();
+        [WebGet(UriTemplate = "/activities?count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        Activity[] GetActivities(int count);
 
         [OperationContract]
         [WebGet(UriTemplate = "/user/{userId}/activities", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
@@ -46,13 +46,13 @@ namespace ChatterService.Web
             token = ConfigurationSettings.AppSettings["SalesForceToken"];
         }
 
-        public Activity[] GetActivities()
+        public Activity[] GetActivities(int count)
         {
             ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
 
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
-            Activity[] list = service.GetActivities().ToArray();
+            Activity[] list = service.GetActivities(count).ToArray();
             JavaScriptSerializer js = new JavaScriptSerializer();
             string strJSON = js.Serialize(list);
             return list;

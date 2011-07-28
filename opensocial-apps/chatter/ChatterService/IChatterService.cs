@@ -30,7 +30,7 @@ namespace ChatterService
     /// Return all activities.
     /// </summary>
     /// <returns>Collection of activity models.</returns>
-    List<Activity> GetActivities();
+    List<Activity> GetActivities(int count);
 
     /// <summary>
     /// Return all activities for a user.

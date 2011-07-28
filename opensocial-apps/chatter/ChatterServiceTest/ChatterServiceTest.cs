@@ -160,7 +160,7 @@ namespace ChatterServiceTest
         {
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
-            List<Activity> list = service.GetActivities();
+            List<Activity> list = service.GetActivities(100);
             Assert.AreEqual(100, list.Count);
         }
 

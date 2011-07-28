@@ -127,17 +127,16 @@ namespace ChatterService
             return feeds;
         }
 
-        public List<Activity> GetActivities()
+        public List<Activity> GetActivities(int count)
         {
             var feeds = new List<Activity>();
-
             Salesforce.QueryResult qr = _service.query
                    ("Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body," +
                     "       Parent.Name, Parent.FirstName, Parent.LastName, Parent.UCSF_ID__c, " +  
                     " (SELECT ID, FieldName, OldValue, NewValue FROM FeedTrackedChanges ORDER BY ID DESC) " +
                     " From UserFeed u " +
-                    " Where Type='TextPost' and u.IsDeleted = false" +
-                    " ORDER BY CreatedDate DESC, ID DESC LIMIT 100");
+                    " Where (Type='TextPost' or Type='UserStatus') and u.IsDeleted = false" +
+                    " ORDER BY CreatedDate DESC, ID DESC LIMIT " + count);
 
             feeds.AddRange(from Salesforce.UserFeed record in qr.records
                            select new Activity

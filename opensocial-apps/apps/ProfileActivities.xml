@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Profile Activities"
+            author="Alexei Vassiliev"
+            author_email="alexnv@sbcglobal.net">
+        <Require feature="opensocial-0.9" />
+        <Require feature="dynamic-height" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    
+    <Content type="html" view="small, canvas, default"><![CDATA[
+    <!--HTML-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    ]]></Content>
+    
+    <Content type="html" view="small" preferred_height="350"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+	<script type="text/javascript">
+		var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc/activities?count=3"
+	
+		gadgets.util.registerOnLoadHandler(function(){
+			$.ajax({
+				type: "GET",
+				url: chatterProxyURL,
+				data: "{}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(msg) {
+					var items = [];
+					$.each(msg, function(i, item) {
+					    var actHtml = buildActivityHtml(item);
+    					items.push(actHtml);
+  					});
+  					$('div.activities').html(items.join(''));
+				},           
+				error: function(jqXHR, textStatus, errorThrown) { alert(errorThrown); }
+			});         
+		});
+		
+		function buildActivityHtml(item) {
+			return '<div class="divider">' +
+				   '</div>' +
+    			   '<div class="act">' +
+    			   '	<div class="act-img"><img src="http://www.ulitochka.com/tmp/default_img.png"/></div>' +
+    			   '	<div class="act-body">' +
+    			   '		<div class="act-user"><a href="">'+ item.Parent.Name +'</a></div>' +
+    			   '		<div class="act-msg">'+ item.Message +'</div>' +
+    			   '	</div>' +
+    			   '</div>';
+		}
+	</script>
+    
+    <!-- Styles -->
+    <style type="text/css">
+		body {
+			margin: 0px;
+		}    	
+    	div.act-left-view,
+    	div.act-left-view table {
+    		font-size: 12px;
+    	}    	
+    	div.act-left-view {
+			margin: 0px;
+    	}
+
+    	div.stats {
+    		padding-top:15px;    		
+    		padding-bottom:15px;
+    		margin-left:5px;
+    		margin-right:5px;
+    	}    	
+    	
+    	td.stat-val {
+    		text-align: right;
+    		padding-right: 5px;
+    	}    	
+
+    	div.activities {
+    		overflow-y:auto;
+    		height: 250px;    		    		
+    	}
+    	    	
+    	div.divider {
+    	}
+    	
+    	div.act {
+    		margin-left:5px;
+			clear: both;    		
+    	}
+    	div.act-img {
+    		display:inline-block;
+    		width: 45px;
+    		float:left; 		
+    	}    	
+    	div.act-body {
+    		display:inline;
+    	}    	
+    	div.act-user{
+    	}    	
+
+    	div.act-msg, div.act-user{
+    		margin-left:50px;
+    	}    	
+
+    	div.divider{
+    		border-top: solid 1px #CCC;
+    		margin-top: 10px;
+    		margin-bottom: 10px;
+    		margin-left:20px;
+    		margin-right:20px;
+    	}    	
+    	    	
+    	div.more-act{
+    		margin-top: 15px;
+    		width:100%;
+    		text-align: right;
+    		padding-bottom: 5px;    		 
+    	}
+    	div.more-act a {
+    		margin-right:5px;
+    	}    	
+    </style>
+        
+    <div class="act-left-view">
+    	<div class="stats">
+    		<table cellspacing="0" cellpadding="0">
+    			<tr><td class="stat-val">4107</td><td class="stat-name">Total Profiles</td></tr>
+    			<tr><td class="stat-val">85,699</td><td class="stat-name">Total Publications</td></tr>
+    		</table>
+    	</div>
+    	<div class="activities">
+    		Loading...
+    	</div>
+    	<div class="more-act">
+    		<a href="">More Activity</a>
+    	</div>
+    </div>
+
+    ]]></Content>
+    <Content type="html" view="canvas"><![CDATA[<!--HTML-->
+	    <!DOCTYPE html>
+	    <p>Activity Gadget - canvas view</p>	
+	]]></Content>
+    <Content type="html" view="home"><![CDATA[<!--HTML-->
+	    <!DOCTYPE html>
+	    <p>Activity Gadget - home view</p>	
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(gadgets.window.adjustHeight(325));
+		</script>
+	]]></Content>
+    <Content type="html" view="profile"><![CDATA[<!--HTML-->
+	    <!DOCTYPE html>
+	    <p>Activity Gadget - profile view</p>	
+	]]></Content>
+</Module>

@@ -8,7 +8,7 @@
 		$(document).ready(function() {          
 			$.ajax({
 				type: "GET",
-				url: "/ChatterProxyService.svc/activities",
+				url: "/ChatterProxyService.svc/activities?count=50",
 				data: "{}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",

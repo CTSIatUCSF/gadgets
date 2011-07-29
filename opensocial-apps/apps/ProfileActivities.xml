@@ -5,22 +5,53 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
         <Require feature="opensocial-0.9" />
+        <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
     </ModulePrefs>
-    
-    <Content type="html" view="small, canvas, default"><![CDATA[
-    <!--HTML-->
+    <Content type="html" view="small, canvas, default"><![CDATA[<!--HTML-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-    ]]></Content>
-    
+    <script type="text/javascript" src="js/os.js" ></script>]]></Content>
     <Content type="html" view="small" preferred_height="350"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
 	<script type="text/javascript">
-		var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc/activities?count=3"
+		var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc/activities?count=3"; //QA
+		//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc/activities?count=3";
+		var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
+		//var statsURL = "hhttp://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
+		
+	    //TODO: upload the image and change the url 
+		var defaultImage = 'http://www.ulitochka.com/tmp/default_img.png';
 	
-		gadgets.util.registerOnLoadHandler(function(){
+		$(document).ready(function(){
+			loadActivities();
+		    loadStats();
+		    $('div.more-act a').click(function(event) {
+		        event.preventDefault();
+		    	gadgets.views.requestNavigateTo('canvas');	
+		    });		    		   
+		});
+
+		function loadStats() {
+			$.ajax({
+				type: "GET",
+				url: statsURL,
+				data: "{}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(msg) {
+				    var stats = jQuery.parseJSON(msg);
+  					$('div.stats td.profs').html(msg.profiles);
+  					$('div.stats td.pubs').html(msg.publications);
+				},           
+				error: function(jqXHR, textStatus, errorThrown) {
+					$('div.stats').html(textStatus + ", " + errorThrown);
+				}
+			});         
+		}
+		
+		function loadActivities() {
 			$.ajax({
 				type: "GET",
 				url: chatterProxyURL,
@@ -34,18 +65,34 @@
     					items.push(actHtml);
   					});
   					$('div.activities').html(items.join(''));
+  					
+  					$('div.act-img img').error(function() {
+  						$(this).attr('src', defaultImage)
+					});
 				},           
 				error: function(jqXHR, textStatus, errorThrown) { alert(errorThrown); }
 			});         
-		});
+		}
 		
 		function buildActivityHtml(item) {
+		    var loc = window.top.location;
+    		var path = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+			var profileUrl = path + 'ProfileDetails.aspx?Person=' + item.Parent.PersonId;
+		
+			var imgUrl = '';
+			if(item.Parent.PersonId) {
+				imgUrl = path + 'Thumbnail.ashx?id=' + item.Parent.PersonId;
+			}
+			else {
+				imgUrl = defaultImage;
+			}
+			
 			return '<div class="divider">' +
 				   '</div>' +
     			   '<div class="act">' +
-    			   '	<div class="act-img"><img src="http://www.ulitochka.com/tmp/default_img.png"/></div>' +
+    			   '	<div class="act-img"><img src="'+ imgUrl +'"/></div>' +
     			   '	<div class="act-body">' +
-    			   '		<div class="act-user"><a href="">'+ item.Parent.Name +'</a></div>' +
+    			   '		<div class="act-user"><a href="'+profileUrl+'" target="_top">'+ item.Parent.Name +'</a></div>' +
     			   '		<div class="act-msg">'+ item.Message +'</div>' +
     			   '	</div>' +
     			   '</div>';
@@ -62,7 +109,8 @@
     		font-size: 12px;
     	}    	
     	div.act-left-view {
-			margin: 0px;
+			margin-right: -5px;
+			width: 152px;			
     	}
 
     	div.stats {
@@ -86,14 +134,21 @@
     	}
     	
     	div.act {
-    		margin-left:5px;
+    		margin-left:0px;
 			clear: both;    		
     	}
     	div.act-img {
     		display:inline-block;
     		width: 45px;
+    		height: 45px;
     		float:left; 		
     	}    	
+    	
+    	div.act-img img {
+			width:100%;
+			height:100%;
+    	}
+    	
     	div.act-body {
     		display:inline;
     	}    	
@@ -102,6 +157,8 @@
 
     	div.act-msg, div.act-user{
     		margin-left:50px;
+    		white-space:pre-wrap;
+    		word-wrap:break-word;
     	}    	
 
     	div.divider{
@@ -126,8 +183,8 @@
     <div class="act-left-view">
     	<div class="stats">
     		<table cellspacing="0" cellpadding="0">
-    			<tr><td class="stat-val">4107</td><td class="stat-name">Total Profiles</td></tr>
-    			<tr><td class="stat-val">85,699</td><td class="stat-name">Total Publications</td></tr>
+    			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
+    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>
     	<div class="activities">
@@ -136,22 +193,17 @@
     	<div class="more-act">
     		<a href="">More Activity</a>
     	</div>
-    </div>
-
-    ]]></Content>
+    </div>]]></Content>
     <Content type="html" view="canvas"><![CDATA[<!--HTML-->
 	    <!DOCTYPE html>
-	    <p>Activity Gadget - canvas view</p>	
-	]]></Content>
+	    <p>Activity Gadget - canvas view</p>]]></Content>
     <Content type="html" view="home"><![CDATA[<!--HTML-->
 	    <!DOCTYPE html>
 	    <p>Activity Gadget - home view</p>	
 		<script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(gadgets.window.adjustHeight(325));
-		</script>
-	]]></Content>
+		</script>]]></Content>
     <Content type="html" view="profile"><![CDATA[<!--HTML-->
 	    <!DOCTYPE html>
-	    <p>Activity Gadget - profile view</p>	
-	]]></Content>
+	    <p>Activity Gadget - profile view</p>]]></Content>
 </Module>

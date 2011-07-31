@@ -164,5 +164,39 @@ namespace ChatterServiceTest
             Assert.AreEqual(100, list.Count);
         }
 
+        [TestMethod]
+        public void TestCreateReseachProfile()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+            service.CreateResearchProfile(_employeeId);
+        }
+
+        [TestMethod]
+        public void TestCreateProfileActivity()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+
+            DateTime dt = new DateTime(2011, 7, 29, 14, 11, 12);
+                service.CreateProfileActivity(_employeeId, "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
+        }
+
+        [TestMethod]
+        public void TestGetPersonId()
+        {
+            int id = ChatterService.ChatterService.GetPersonId("025693078");
+            Assert.AreEqual(5138614, id);
+        }
+
+        [TestMethod]
+        public void TestGetProfileActivities()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+            List<Activity> list = service.GetProfileActivities(1);
+            Assert.AreEqual(1, list.Count);
+        }
+
     }
 }

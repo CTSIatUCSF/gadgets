@@ -17,5 +17,8 @@ namespace ChatterService.Model
 
         [DataMember]
         public string EmployeeId { get; set; }
+
+        [DataMember]
+        public int PersonId { get; set; }
     }
 }

@@ -52,7 +52,7 @@ namespace ChatterService.Web
 
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
-            Activity[] list = service.GetActivities(count).ToArray();
+            Activity[] list = service.GetProfileActivities(count).ToArray();
             JavaScriptSerializer js = new JavaScriptSerializer();
             string strJSON = js.Serialize(list);
             return list;

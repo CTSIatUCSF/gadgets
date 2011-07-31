@@ -45,3 +45,15 @@ post.Title = 'Profile was viewed';
 post.Body = 'Profile was viewed';
 post.CreatedById = '005J0000000Q74wIAC';
 insert post;
+
+Select r.User__r.UCSF_ID__c, r.User__r.Name, r.User__r.FirstName, r.User__r.LastName, 
+       r.User__r.Username, r.User__c, 
+       r.Research_Profile_Name__c, r.Name, r.Owner.Name 
+From Research_Profile__c r
+
+Research_Profile__c rp = new Research_Profile__c();
+rp.Name = 'Test Research Profile';
+rp.OwnerId = '005A0000001X3NbIAK';
+rp.User__c = '005J0000000Q74wIAC';
+rp.User__c = '005A0000001X3NbIAK';
+insert rp;

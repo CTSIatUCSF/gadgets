@@ -7,9 +7,6 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.SqlServer.Server;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Net;
 
 namespace ChatterService
 {
@@ -20,30 +17,29 @@ namespace ChatterService
         {
         }
 
-        private static bool customXertificateValidation(object sender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
-        {
-            return true;
-        }
 
         [SqlProcedure]
-        public static void CreateActivity(SqlString url, SqlString username, SqlString password, SqlString token, SqlString employId, SqlXml messageBlob)
+        public static void CreateActivity(SqlString url, SqlString username, SqlString password, SqlString token, SqlString employeeId, SqlXml messageBlob)
         {
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
-
             IChatterService service = new ChatterService(url.Value);
+            service.AllowUntrustedConnection();
             service.Login(username.Value, password.Value, token.Value);
-            
-            var element = XElement.Parse(messageBlob.Value);
-            
+
+            CreateProfileActivity(service, employeeId.Value, messageBlob.Value);
+        }
+
+        protected static void CreateProfileActivity(IChatterService service, string employeeId, string xml)
+        {
+            var element = XElement.Parse(xml);
+
             var code = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}title");
             var body = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}body", code);
 
-            
+
             var postedTimeStr = GetElementValue(element, "{http://ns.opensocial.org/2008/opensocial}postedTime"); ;
             DateTime postedTime = ConvertUnixEpochTime(postedTimeStr);
 
-            var userId = service.GetUserId(employId.Value);
-            service.CreateActivityUsingApex(userId, code, body, postedTime);
+            service.CreateProfileActivity(employeeId, code, body, postedTime);
         }
 
         public static string GetElementValue(XElement element, string name)

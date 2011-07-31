@@ -83,7 +83,7 @@ namespace ChatterServiceTest
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("Cannot find user with employeeId=1221212", ex.Message);
+                Assert.AreEqual("Object not found, Salesforce.User, keys:1221212", ex.Message);
             }
         }
 

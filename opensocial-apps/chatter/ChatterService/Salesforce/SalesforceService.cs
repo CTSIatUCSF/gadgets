@@ -4036,14 +4036,18 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(WebLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vote))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(User_Sync__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User_Sync__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(User_Sync_Batch_Control__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User_Sync_Batch_Control__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserProfileFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserPreference))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserFeed))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskPriority))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StaticResource))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SolutionTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SolutionStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SolutionHistory))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SolutionFeed))]
@@ -4054,17 +4058,28 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SelfServiceUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Scontrol))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Version_33_0_3__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Version_33_0_3__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Text_Ad__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Text_Ad__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Search_Phrase__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Search_Phrase__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Keyword__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Keyword__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Google_Campaign__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Google_Campaign__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Ad_Group__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SFGA__Ad_Group__Tag))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Research_Profile__Tag))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Research_Profile__Feed))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ReportTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ReportFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Report))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(QueueSobject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Publication__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Publication__Feed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Research_Profile__c))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Profile_Activity__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Profile_Activity__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Product2Feed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProcessInstanceWorkitem))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProcessInstanceStep))]
@@ -4075,6 +4090,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Partner))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Organization))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OrgWideEmailAddress))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityStage))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityPartner))]
@@ -4086,26 +4102,31 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityContactRole))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpportunityCompetitor))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpenActivity))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NoteTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NoteAndAttachment))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Note))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NewsFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MailmergeTemplate))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LoginHistory))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeadTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeadStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeadShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeadHistory))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeadFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(IdeasSiteSetup__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IdeasSiteSetup__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(IdeaComment))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Idea))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Holiday))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GroupMember))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Group))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ForecastShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FiscalYearSettings))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FeedTrackedChange))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FeedLike))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FeedItem))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FeedComment))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EventAttendee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Event))]
@@ -4116,14 +4137,18 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmailServicesFunction))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmailServicesAddress))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Domain_Alias__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Domain_Alias__Tag))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DocumentTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DocumentAttachmentMap))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Document))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DashboardTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DashboardFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DashboardComponentFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DashboardComponent))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Folder))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Dashboard))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CronTrigger))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContractTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContractStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContractHistory))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContractFeed))]
@@ -4134,6 +4159,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContentDocumentFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContentVersion))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContentDocument))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContactTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContactShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContactHistory))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContactFeed))]
@@ -4145,6 +4171,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CollaborationGroup))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Publication__c))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Co_Author__c))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Co_Author__Tag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CategoryNode))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CategoryData))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseTeamTemplateRecord))]
@@ -4152,6 +4179,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseTeamTemplate))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseTeamRole))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseTeamMember))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Solution))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseSolution))]
@@ -4161,6 +4189,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseContactRole))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CaseComment))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Case))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CampaignTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CampaignShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CampaignMemberStatus))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Lead))]
@@ -4173,6 +4202,7 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Attachment))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AsyncApexJob))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AssignmentRule))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AssetTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AssetFeed))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Product2))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Asset))]
@@ -4185,6 +4215,8 @@ namespace Salesforce {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ApexClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AdditionalNumber))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ActivityHistory))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TagDefinition))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccountTag))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AccountShare))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Pricebook2))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Campaign))]
@@ -6972,6 +7004,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         private QueryResult tasksField;
         
         private string titleField;
@@ -8020,6 +8054,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -8224,6 +8269,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -8959,6 +9006,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -9548,6 +9606,10 @@ namespace Salesforce {
         private System.Nullable<bool> permissionsSolutionImportField;
         
         private bool permissionsSolutionImportFieldSpecified;
+        
+        private System.Nullable<bool> permissionsTagManagerField;
+        
+        private bool permissionsTagManagerFieldSpecified;
         
         private System.Nullable<bool> permissionsTransferAnyCaseField;
         
@@ -10959,6 +11021,28 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> PermissionsTagManager {
+            get {
+                return this.permissionsTagManagerField;
+            }
+            set {
+                this.permissionsTagManagerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PermissionsTagManagerSpecified {
+            get {
+                return this.permissionsTagManagerFieldSpecified;
+            }
+            set {
+                this.permissionsTagManagerFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public System.Nullable<bool> PermissionsTransferAnyCase {
             get {
                 return this.permissionsTransferAnyCaseField;
@@ -12072,6 +12156,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         private string title__cField;
         
         private string type__cField;
@@ -12795,6 +12881,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Title__c {
             get {
                 return this.title__cField;
@@ -12999,6 +13096,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult user_Sync__rField;
         
@@ -13246,12 +13345,466 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult User_Sync__r {
             get {
                 return this.user_Sync__rField;
             }
             set {
                 this.user_Sync__rField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class User_Sync__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User_Sync__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User_Sync__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class TagDefinition : sObject {
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class User_Sync_Batch_Control__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User_Sync_Batch_Control__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User_Sync_Batch_Control__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -14186,6 +14739,973 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class TaskTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Task itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Task Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Task : sObject {
+        
+        private Account accountField;
+        
+        private string accountIdField;
+        
+        private System.Nullable<System.DateTime> activityDateField;
+        
+        private bool activityDateFieldSpecified;
+        
+        private QueryResult attachmentsField;
+        
+        private string callDispositionField;
+        
+        private System.Nullable<int> callDurationInSecondsField;
+        
+        private bool callDurationInSecondsFieldSpecified;
+        
+        private string callObjectField;
+        
+        private string callTypeField;
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private string descriptionField;
+        
+        private QueryResult feedSubscriptionsForEntityField;
+        
+        private QueryResult feedsField;
+        
+        private System.Nullable<bool> isArchivedField;
+        
+        private bool isArchivedFieldSpecified;
+        
+        private System.Nullable<bool> isClosedField;
+        
+        private bool isClosedFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<bool> isRecurrenceField;
+        
+        private bool isRecurrenceFieldSpecified;
+        
+        private System.Nullable<bool> isReminderSetField;
+        
+        private bool isReminderSetFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private Name ownerField;
+        
+        private string ownerIdField;
+        
+        private string priorityField;
+        
+        private string recurrenceActivityIdField;
+        
+        private System.Nullable<int> recurrenceDayOfMonthField;
+        
+        private bool recurrenceDayOfMonthFieldSpecified;
+        
+        private System.Nullable<int> recurrenceDayOfWeekMaskField;
+        
+        private bool recurrenceDayOfWeekMaskFieldSpecified;
+        
+        private System.Nullable<System.DateTime> recurrenceEndDateOnlyField;
+        
+        private bool recurrenceEndDateOnlyFieldSpecified;
+        
+        private string recurrenceInstanceField;
+        
+        private System.Nullable<int> recurrenceIntervalField;
+        
+        private bool recurrenceIntervalFieldSpecified;
+        
+        private string recurrenceMonthOfYearField;
+        
+        private System.Nullable<System.DateTime> recurrenceStartDateOnlyField;
+        
+        private bool recurrenceStartDateOnlyFieldSpecified;
+        
+        private string recurrenceTimeZoneSidKeyField;
+        
+        private string recurrenceTypeField;
+        
+        private QueryResult recurringTasksField;
+        
+        private System.Nullable<System.DateTime> reminderDateTimeField;
+        
+        private bool reminderDateTimeFieldSpecified;
+        
+        private string statusField;
+        
+        private string subjectField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
+        
+        private Name whatField;
+        
+        private string whatIdField;
+        
+        private Name whoField;
+        
+        private string whoIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Account Account {
+            get {
+                return this.accountField;
+            }
+            set {
+                this.accountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string AccountId {
+            get {
+                return this.accountIdField;
+            }
+            set {
+                this.accountIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
+        public System.Nullable<System.DateTime> ActivityDate {
+            get {
+                return this.activityDateField;
+            }
+            set {
+                this.activityDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ActivityDateSpecified {
+            get {
+                return this.activityDateFieldSpecified;
+            }
+            set {
+                this.activityDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Attachments {
+            get {
+                return this.attachmentsField;
+            }
+            set {
+                this.attachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CallDisposition {
+            get {
+                return this.callDispositionField;
+            }
+            set {
+                this.callDispositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CallDurationInSeconds {
+            get {
+                return this.callDurationInSecondsField;
+            }
+            set {
+                this.callDurationInSecondsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CallDurationInSecondsSpecified {
+            get {
+                return this.callDurationInSecondsFieldSpecified;
+            }
+            set {
+                this.callDurationInSecondsFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CallObject {
+            get {
+                return this.callObjectField;
+            }
+            set {
+                this.callObjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CallType {
+            get {
+                return this.callTypeField;
+            }
+            set {
+                this.callTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedSubscriptionsForEntity {
+            get {
+                return this.feedSubscriptionsForEntityField;
+            }
+            set {
+                this.feedSubscriptionsForEntityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Feeds {
+            get {
+                return this.feedsField;
+            }
+            set {
+                this.feedsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsArchived {
+            get {
+                return this.isArchivedField;
+            }
+            set {
+                this.isArchivedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsArchivedSpecified {
+            get {
+                return this.isArchivedFieldSpecified;
+            }
+            set {
+                this.isArchivedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsClosed {
+            get {
+                return this.isClosedField;
+            }
+            set {
+                this.isClosedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsClosedSpecified {
+            get {
+                return this.isClosedFieldSpecified;
+            }
+            set {
+                this.isClosedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsRecurrence {
+            get {
+                return this.isRecurrenceField;
+            }
+            set {
+                this.isRecurrenceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsRecurrenceSpecified {
+            get {
+                return this.isRecurrenceFieldSpecified;
+            }
+            set {
+                this.isRecurrenceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsReminderSet {
+            get {
+                return this.isReminderSetField;
+            }
+            set {
+                this.isReminderSetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsReminderSetSpecified {
+            get {
+                return this.isReminderSetFieldSpecified;
+            }
+            set {
+                this.isReminderSetFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string OwnerId {
+            get {
+                return this.ownerIdField;
+            }
+            set {
+                this.ownerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Priority {
+            get {
+                return this.priorityField;
+            }
+            set {
+                this.priorityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RecurrenceActivityId {
+            get {
+                return this.recurrenceActivityIdField;
+            }
+            set {
+                this.recurrenceActivityIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> RecurrenceDayOfMonth {
+            get {
+                return this.recurrenceDayOfMonthField;
+            }
+            set {
+                this.recurrenceDayOfMonthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RecurrenceDayOfMonthSpecified {
+            get {
+                return this.recurrenceDayOfMonthFieldSpecified;
+            }
+            set {
+                this.recurrenceDayOfMonthFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> RecurrenceDayOfWeekMask {
+            get {
+                return this.recurrenceDayOfWeekMaskField;
+            }
+            set {
+                this.recurrenceDayOfWeekMaskField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RecurrenceDayOfWeekMaskSpecified {
+            get {
+                return this.recurrenceDayOfWeekMaskFieldSpecified;
+            }
+            set {
+                this.recurrenceDayOfWeekMaskFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
+        public System.Nullable<System.DateTime> RecurrenceEndDateOnly {
+            get {
+                return this.recurrenceEndDateOnlyField;
+            }
+            set {
+                this.recurrenceEndDateOnlyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RecurrenceEndDateOnlySpecified {
+            get {
+                return this.recurrenceEndDateOnlyFieldSpecified;
+            }
+            set {
+                this.recurrenceEndDateOnlyFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RecurrenceInstance {
+            get {
+                return this.recurrenceInstanceField;
+            }
+            set {
+                this.recurrenceInstanceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> RecurrenceInterval {
+            get {
+                return this.recurrenceIntervalField;
+            }
+            set {
+                this.recurrenceIntervalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RecurrenceIntervalSpecified {
+            get {
+                return this.recurrenceIntervalFieldSpecified;
+            }
+            set {
+                this.recurrenceIntervalFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RecurrenceMonthOfYear {
+            get {
+                return this.recurrenceMonthOfYearField;
+            }
+            set {
+                this.recurrenceMonthOfYearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
+        public System.Nullable<System.DateTime> RecurrenceStartDateOnly {
+            get {
+                return this.recurrenceStartDateOnlyField;
+            }
+            set {
+                this.recurrenceStartDateOnlyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RecurrenceStartDateOnlySpecified {
+            get {
+                return this.recurrenceStartDateOnlyFieldSpecified;
+            }
+            set {
+                this.recurrenceStartDateOnlyFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RecurrenceTimeZoneSidKey {
+            get {
+                return this.recurrenceTimeZoneSidKeyField;
+            }
+            set {
+                this.recurrenceTimeZoneSidKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RecurrenceType {
+            get {
+                return this.recurrenceTypeField;
+            }
+            set {
+                this.recurrenceTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult RecurringTasks {
+            get {
+                return this.recurringTasksField;
+            }
+            set {
+                this.recurringTasksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> ReminderDateTime {
+            get {
+                return this.reminderDateTimeField;
+            }
+            set {
+                this.reminderDateTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ReminderDateTimeSpecified {
+            get {
+                return this.reminderDateTimeFieldSpecified;
+            }
+            set {
+                this.reminderDateTimeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Subject {
+            get {
+                return this.subjectField;
+            }
+            set {
+                this.subjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name What {
+            get {
+                return this.whatField;
+            }
+            set {
+                this.whatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string WhatId {
+            get {
+                return this.whatIdField;
+            }
+            set {
+                this.whatIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name Who {
+            get {
+                return this.whoField;
+            }
+            set {
+                this.whoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string WhoId {
+            get {
+                return this.whoIdField;
+            }
+            set {
+                this.whoIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class TaskStatus : sObject {
         
         private User createdByField;
@@ -15071,795 +16591,6 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Task : sObject {
-        
-        private Account accountField;
-        
-        private string accountIdField;
-        
-        private System.Nullable<System.DateTime> activityDateField;
-        
-        private bool activityDateFieldSpecified;
-        
-        private QueryResult attachmentsField;
-        
-        private string callDispositionField;
-        
-        private System.Nullable<int> callDurationInSecondsField;
-        
-        private bool callDurationInSecondsFieldSpecified;
-        
-        private string callObjectField;
-        
-        private string callTypeField;
-        
-        private User createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private string descriptionField;
-        
-        private QueryResult feedSubscriptionsForEntityField;
-        
-        private QueryResult feedsField;
-        
-        private System.Nullable<bool> isArchivedField;
-        
-        private bool isArchivedFieldSpecified;
-        
-        private System.Nullable<bool> isClosedField;
-        
-        private bool isClosedFieldSpecified;
-        
-        private System.Nullable<bool> isDeletedField;
-        
-        private bool isDeletedFieldSpecified;
-        
-        private System.Nullable<bool> isRecurrenceField;
-        
-        private bool isRecurrenceFieldSpecified;
-        
-        private System.Nullable<bool> isReminderSetField;
-        
-        private bool isReminderSetFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private Name ownerField;
-        
-        private string ownerIdField;
-        
-        private string priorityField;
-        
-        private string recurrenceActivityIdField;
-        
-        private System.Nullable<int> recurrenceDayOfMonthField;
-        
-        private bool recurrenceDayOfMonthFieldSpecified;
-        
-        private System.Nullable<int> recurrenceDayOfWeekMaskField;
-        
-        private bool recurrenceDayOfWeekMaskFieldSpecified;
-        
-        private System.Nullable<System.DateTime> recurrenceEndDateOnlyField;
-        
-        private bool recurrenceEndDateOnlyFieldSpecified;
-        
-        private string recurrenceInstanceField;
-        
-        private System.Nullable<int> recurrenceIntervalField;
-        
-        private bool recurrenceIntervalFieldSpecified;
-        
-        private string recurrenceMonthOfYearField;
-        
-        private System.Nullable<System.DateTime> recurrenceStartDateOnlyField;
-        
-        private bool recurrenceStartDateOnlyFieldSpecified;
-        
-        private string recurrenceTimeZoneSidKeyField;
-        
-        private string recurrenceTypeField;
-        
-        private QueryResult recurringTasksField;
-        
-        private System.Nullable<System.DateTime> reminderDateTimeField;
-        
-        private bool reminderDateTimeFieldSpecified;
-        
-        private string statusField;
-        
-        private string subjectField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        private Name whatField;
-        
-        private string whatIdField;
-        
-        private Name whoField;
-        
-        private string whoIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Account Account {
-            get {
-                return this.accountField;
-            }
-            set {
-                this.accountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string AccountId {
-            get {
-                return this.accountIdField;
-            }
-            set {
-                this.accountIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
-        public System.Nullable<System.DateTime> ActivityDate {
-            get {
-                return this.activityDateField;
-            }
-            set {
-                this.activityDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ActivityDateSpecified {
-            get {
-                return this.activityDateFieldSpecified;
-            }
-            set {
-                this.activityDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Attachments {
-            get {
-                return this.attachmentsField;
-            }
-            set {
-                this.attachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CallDisposition {
-            get {
-                return this.callDispositionField;
-            }
-            set {
-                this.callDispositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> CallDurationInSeconds {
-            get {
-                return this.callDurationInSecondsField;
-            }
-            set {
-                this.callDurationInSecondsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CallDurationInSecondsSpecified {
-            get {
-                return this.callDurationInSecondsFieldSpecified;
-            }
-            set {
-                this.callDurationInSecondsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CallObject {
-            get {
-                return this.callObjectField;
-            }
-            set {
-                this.callObjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CallType {
-            get {
-                return this.callTypeField;
-            }
-            set {
-                this.callTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedSubscriptionsForEntity {
-            get {
-                return this.feedSubscriptionsForEntityField;
-            }
-            set {
-                this.feedSubscriptionsForEntityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Feeds {
-            get {
-                return this.feedsField;
-            }
-            set {
-                this.feedsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsArchived {
-            get {
-                return this.isArchivedField;
-            }
-            set {
-                this.isArchivedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsArchivedSpecified {
-            get {
-                return this.isArchivedFieldSpecified;
-            }
-            set {
-                this.isArchivedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsClosed {
-            get {
-                return this.isClosedField;
-            }
-            set {
-                this.isClosedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsClosedSpecified {
-            get {
-                return this.isClosedFieldSpecified;
-            }
-            set {
-                this.isClosedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDeletedSpecified {
-            get {
-                return this.isDeletedFieldSpecified;
-            }
-            set {
-                this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsRecurrence {
-            get {
-                return this.isRecurrenceField;
-            }
-            set {
-                this.isRecurrenceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsRecurrenceSpecified {
-            get {
-                return this.isRecurrenceFieldSpecified;
-            }
-            set {
-                this.isRecurrenceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsReminderSet {
-            get {
-                return this.isReminderSetField;
-            }
-            set {
-                this.isReminderSetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsReminderSetSpecified {
-            get {
-                return this.isReminderSetFieldSpecified;
-            }
-            set {
-                this.isReminderSetFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name Owner {
-            get {
-                return this.ownerField;
-            }
-            set {
-                this.ownerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string OwnerId {
-            get {
-                return this.ownerIdField;
-            }
-            set {
-                this.ownerIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Priority {
-            get {
-                return this.priorityField;
-            }
-            set {
-                this.priorityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RecurrenceActivityId {
-            get {
-                return this.recurrenceActivityIdField;
-            }
-            set {
-                this.recurrenceActivityIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> RecurrenceDayOfMonth {
-            get {
-                return this.recurrenceDayOfMonthField;
-            }
-            set {
-                this.recurrenceDayOfMonthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurrenceDayOfMonthSpecified {
-            get {
-                return this.recurrenceDayOfMonthFieldSpecified;
-            }
-            set {
-                this.recurrenceDayOfMonthFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> RecurrenceDayOfWeekMask {
-            get {
-                return this.recurrenceDayOfWeekMaskField;
-            }
-            set {
-                this.recurrenceDayOfWeekMaskField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurrenceDayOfWeekMaskSpecified {
-            get {
-                return this.recurrenceDayOfWeekMaskFieldSpecified;
-            }
-            set {
-                this.recurrenceDayOfWeekMaskFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
-        public System.Nullable<System.DateTime> RecurrenceEndDateOnly {
-            get {
-                return this.recurrenceEndDateOnlyField;
-            }
-            set {
-                this.recurrenceEndDateOnlyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurrenceEndDateOnlySpecified {
-            get {
-                return this.recurrenceEndDateOnlyFieldSpecified;
-            }
-            set {
-                this.recurrenceEndDateOnlyFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RecurrenceInstance {
-            get {
-                return this.recurrenceInstanceField;
-            }
-            set {
-                this.recurrenceInstanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> RecurrenceInterval {
-            get {
-                return this.recurrenceIntervalField;
-            }
-            set {
-                this.recurrenceIntervalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurrenceIntervalSpecified {
-            get {
-                return this.recurrenceIntervalFieldSpecified;
-            }
-            set {
-                this.recurrenceIntervalFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RecurrenceMonthOfYear {
-            get {
-                return this.recurrenceMonthOfYearField;
-            }
-            set {
-                this.recurrenceMonthOfYearField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
-        public System.Nullable<System.DateTime> RecurrenceStartDateOnly {
-            get {
-                return this.recurrenceStartDateOnlyField;
-            }
-            set {
-                this.recurrenceStartDateOnlyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurrenceStartDateOnlySpecified {
-            get {
-                return this.recurrenceStartDateOnlyFieldSpecified;
-            }
-            set {
-                this.recurrenceStartDateOnlyFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RecurrenceTimeZoneSidKey {
-            get {
-                return this.recurrenceTimeZoneSidKeyField;
-            }
-            set {
-                this.recurrenceTimeZoneSidKeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RecurrenceType {
-            get {
-                return this.recurrenceTypeField;
-            }
-            set {
-                this.recurrenceTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult RecurringTasks {
-            get {
-                return this.recurringTasksField;
-            }
-            set {
-                this.recurringTasksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> ReminderDateTime {
-            get {
-                return this.reminderDateTimeField;
-            }
-            set {
-                this.reminderDateTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ReminderDateTimeSpecified {
-            get {
-                return this.reminderDateTimeFieldSpecified;
-            }
-            set {
-                this.reminderDateTimeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Subject {
-            get {
-                return this.subjectField;
-            }
-            set {
-                this.subjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name What {
-            get {
-                return this.whatField;
-            }
-            set {
-                this.whatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string WhatId {
-            get {
-                return this.whatIdField;
-            }
-            set {
-                this.whatIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name Who {
-            get {
-                return this.whoField;
-            }
-            set {
-                this.whoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string WhoId {
-            get {
-                return this.whoIdField;
-            }
-            set {
-                this.whoIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class StaticResource : sObject {
         
         private byte[] bodyField;
@@ -16103,281 +16834,31 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class SolutionStatus : sObject {
-        
-        private User createdByField;
-        
-        private string createdByIdField;
+    public partial class SolutionTag : sObject {
         
         private System.Nullable<System.DateTime> createdDateField;
         
         private bool createdDateFieldSpecified;
-        
-        private System.Nullable<bool> isDefaultField;
-        
-        private bool isDefaultFieldSpecified;
-        
-        private System.Nullable<bool> isReviewedField;
-        
-        private bool isReviewedFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private string masterLabelField;
-        
-        private System.Nullable<int> sortOrderField;
-        
-        private bool sortOrderFieldSpecified;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDefault {
-            get {
-                return this.isDefaultField;
-            }
-            set {
-                this.isDefaultField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDefaultSpecified {
-            get {
-                return this.isDefaultFieldSpecified;
-            }
-            set {
-                this.isDefaultFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsReviewed {
-            get {
-                return this.isReviewedField;
-            }
-            set {
-                this.isReviewedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsReviewedSpecified {
-            get {
-                return this.isReviewedFieldSpecified;
-            }
-            set {
-                this.isReviewedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string MasterLabel {
-            get {
-                return this.masterLabelField;
-            }
-            set {
-                this.masterLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> SortOrder {
-            get {
-                return this.sortOrderField;
-            }
-            set {
-                this.sortOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SortOrderSpecified {
-            get {
-                return this.sortOrderFieldSpecified;
-            }
-            set {
-                this.sortOrderFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class SolutionHistory : sObject {
-        
-        private Name createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private string fieldField;
         
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
         
-        private object newValueField;
+        private Solution itemField;
         
-        private object oldValueField;
+        private string itemIdField;
         
-        private Solution solutionField;
+        private string nameField;
         
-        private string solutionIdField;
+        private System.Nullable<System.DateTime> systemModstampField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
+        private bool systemModstampFieldSpecified;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -16398,17 +16879,6 @@ namespace Salesforce {
             }
             set {
                 this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Field {
-            get {
-                return this.fieldField;
-            }
-            set {
-                this.fieldField = value;
             }
         }
         
@@ -16436,45 +16906,89 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public object NewValue {
+        public Solution Item {
             get {
-                return this.newValueField;
+                return this.itemField;
             }
             set {
-                this.newValueField = value;
+                this.itemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public object OldValue {
+        public string ItemId {
             get {
-                return this.oldValueField;
+                return this.itemIdField;
             }
             set {
-                this.oldValueField = value;
+                this.itemIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Solution Solution {
+        public string Name {
             get {
-                return this.solutionField;
+                return this.nameField;
             }
             set {
-                this.solutionField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SolutionId {
+        public System.Nullable<System.DateTime> SystemModstamp {
             get {
-                return this.solutionIdField;
+                return this.systemModstampField;
             }
             set {
-                this.solutionIdField = value;
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -16558,6 +17072,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -16965,6 +17481,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -17004,6 +17531,388 @@ namespace Salesforce {
             }
             set {
                 this.votesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SolutionStatus : sObject {
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDefaultField;
+        
+        private bool isDefaultFieldSpecified;
+        
+        private System.Nullable<bool> isReviewedField;
+        
+        private bool isReviewedFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string masterLabelField;
+        
+        private System.Nullable<int> sortOrderField;
+        
+        private bool sortOrderFieldSpecified;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDefault {
+            get {
+                return this.isDefaultField;
+            }
+            set {
+                this.isDefaultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDefaultSpecified {
+            get {
+                return this.isDefaultFieldSpecified;
+            }
+            set {
+                this.isDefaultFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsReviewed {
+            get {
+                return this.isReviewedField;
+            }
+            set {
+                this.isReviewedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsReviewedSpecified {
+            get {
+                return this.isReviewedFieldSpecified;
+            }
+            set {
+                this.isReviewedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string MasterLabel {
+            get {
+                return this.masterLabelField;
+            }
+            set {
+                this.masterLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> SortOrder {
+            get {
+                return this.sortOrderField;
+            }
+            set {
+                this.sortOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SortOrderSpecified {
+            get {
+                return this.sortOrderFieldSpecified;
+            }
+            set {
+                this.sortOrderFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SolutionHistory : sObject {
+        
+        private Name createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private string fieldField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private object newValueField;
+        
+        private object oldValueField;
+        
+        private Solution solutionField;
+        
+        private string solutionIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Field {
+            get {
+                return this.fieldField;
+            }
+            set {
+                this.fieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object NewValue {
+            get {
+                return this.newValueField;
+            }
+            set {
+                this.newValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object OldValue {
+            get {
+                return this.oldValueField;
+            }
+            set {
+                this.oldValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Solution Solution {
+            get {
+                return this.solutionField;
+            }
+            set {
+                this.solutionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string SolutionId {
+            get {
+                return this.solutionIdField;
+            }
+            set {
+                this.solutionIdField = value;
             }
         }
     }
@@ -19383,6 +20292,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Attachments {
@@ -19613,6 +20524,182 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Version_33_0_3__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Version_33_0_3__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Version_33_0_3__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -19682,6 +20769,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -20012,6 +21101,17 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -20177,6 +21277,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -21044,6 +22146,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -21217,6 +22330,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -21961,6 +23076,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -22129,6 +23255,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -22906,6 +24034,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -23202,6 +24341,171 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Text_Ad__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Text_Ad__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Text_Ad__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class SFGA__Search_Phrase__c : sObject {
         
         private QueryResult attachmentsField;
@@ -23255,6 +24559,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -23541,6 +24847,182 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Search_Phrase__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Search_Phrase__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Search_Phrase__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -23602,6 +25084,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -23888,6 +25372,182 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Keyword__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Keyword__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Keyword__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -23951,6 +25611,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -24248,6 +25910,182 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Google_Campaign__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Google_Campaign__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Google_Campaign__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -24309,6 +26147,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -24593,6 +26433,1592 @@ namespace Salesforce {
             }
             set {
                 this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class SFGA__Ad_Group__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private SFGA__Ad_Group__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public SFGA__Ad_Group__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Research_Profile__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Research_Profile__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Research_Profile__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Research_Profile__c : sObject {
+        
+        private QueryResult attachmentsField;
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult feedSubscriptionsForEntityField;
+        
+        private QueryResult feedsField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string nameField;
+        
+        private QueryResult notesField;
+        
+        private QueryResult notesAndAttachmentsField;
+        
+        private Name ownerField;
+        
+        private string ownerIdField;
+        
+        private QueryResult processInstancesField;
+        
+        private QueryResult processStepsField;
+        
+        private QueryResult profile_Activities__rField;
+        
+        private string research_Profile_Name__cField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
+        
+        private string user__cField;
+        
+        private User user__rField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Attachments {
+            get {
+                return this.attachmentsField;
+            }
+            set {
+                this.attachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedSubscriptionsForEntity {
+            get {
+                return this.feedSubscriptionsForEntityField;
+            }
+            set {
+                this.feedSubscriptionsForEntityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Feeds {
+            get {
+                return this.feedsField;
+            }
+            set {
+                this.feedsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult NotesAndAttachments {
+            get {
+                return this.notesAndAttachmentsField;
+            }
+            set {
+                this.notesAndAttachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string OwnerId {
+            get {
+                return this.ownerIdField;
+            }
+            set {
+                this.ownerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult ProcessInstances {
+            get {
+                return this.processInstancesField;
+            }
+            set {
+                this.processInstancesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult ProcessSteps {
+            get {
+                return this.processStepsField;
+            }
+            set {
+                this.processStepsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Profile_Activities__r {
+            get {
+                return this.profile_Activities__rField;
+            }
+            set {
+                this.profile_Activities__rField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Research_Profile_Name__c {
+            get {
+                return this.research_Profile_Name__cField;
+            }
+            set {
+                this.research_Profile_Name__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string User__c {
+            get {
+                return this.user__cField;
+            }
+            set {
+                this.user__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User User__r {
+            get {
+                return this.user__rField;
+            }
+            set {
+                this.user__rField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Research_Profile__Feed : sObject {
+        
+        private string bodyField;
+        
+        private System.Nullable<int> commentCountField;
+        
+        private bool commentCountFieldSpecified;
+        
+        private byte[] contentDataField;
+        
+        private string contentDescriptionField;
+        
+        private string contentFileNameField;
+        
+        private System.Nullable<int> contentSizeField;
+        
+        private bool contentSizeFieldSpecified;
+        
+        private string contentTypeField;
+        
+        private Name createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult feedCommentsField;
+        
+        private QueryResult feedLikesField;
+        
+        private QueryResult feedTrackedChangesField;
+        
+        private Name insertedByField;
+        
+        private string insertedByIdField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private System.Nullable<int> likeCountField;
+        
+        private bool likeCountFieldSpecified;
+        
+        private string linkUrlField;
+        
+        private Research_Profile__c parentField;
+        
+        private string parentIdField;
+        
+        private string relatedRecordIdField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private string titleField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Body {
+            get {
+                return this.bodyField;
+            }
+            set {
+                this.bodyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CommentCount {
+            get {
+                return this.commentCountField;
+            }
+            set {
+                this.commentCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CommentCountSpecified {
+            get {
+                return this.commentCountFieldSpecified;
+            }
+            set {
+                this.commentCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] ContentData {
+            get {
+                return this.contentDataField;
+            }
+            set {
+                this.contentDataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentDescription {
+            get {
+                return this.contentDescriptionField;
+            }
+            set {
+                this.contentDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentFileName {
+            get {
+                return this.contentFileNameField;
+            }
+            set {
+                this.contentFileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> ContentSize {
+            get {
+                return this.contentSizeField;
+            }
+            set {
+                this.contentSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContentSizeSpecified {
+            get {
+                return this.contentSizeFieldSpecified;
+            }
+            set {
+                this.contentSizeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedComments {
+            get {
+                return this.feedCommentsField;
+            }
+            set {
+                this.feedCommentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedLikes {
+            get {
+                return this.feedLikesField;
+            }
+            set {
+                this.feedLikesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedTrackedChanges {
+            get {
+                return this.feedTrackedChangesField;
+            }
+            set {
+                this.feedTrackedChangesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name InsertedBy {
+            get {
+                return this.insertedByField;
+            }
+            set {
+                this.insertedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string InsertedById {
+            get {
+                return this.insertedByIdField;
+            }
+            set {
+                this.insertedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> LikeCount {
+            get {
+                return this.likeCountField;
+            }
+            set {
+                this.likeCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LikeCountSpecified {
+            get {
+                return this.likeCountFieldSpecified;
+            }
+            set {
+                this.likeCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LinkUrl {
+            get {
+                return this.linkUrlField;
+            }
+            set {
+                this.linkUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Research_Profile__c Parent {
+            get {
+                return this.parentField;
+            }
+            set {
+                this.parentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RelatedRecordId {
+            get {
+                return this.relatedRecordIdField;
+            }
+            set {
+                this.relatedRecordIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class ReportTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Report itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Report Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Report : sObject {
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private string descriptionField;
+        
+        private string developerNameField;
+        
+        private QueryResult feedSubscriptionsForEntityField;
+        
+        private QueryResult feedsField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private System.Nullable<System.DateTime> lastRunDateField;
+        
+        private bool lastRunDateFieldSpecified;
+        
+        private string nameField;
+        
+        private string namespacePrefixField;
+        
+        private string ownerIdField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string DeveloperName {
+            get {
+                return this.developerNameField;
+            }
+            set {
+                this.developerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedSubscriptionsForEntity {
+            get {
+                return this.feedSubscriptionsForEntityField;
+            }
+            set {
+                this.feedSubscriptionsForEntityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Feeds {
+            get {
+                return this.feedsField;
+            }
+            set {
+                this.feedsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastRunDate {
+            get {
+                return this.lastRunDateField;
+            }
+            set {
+                this.lastRunDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastRunDateSpecified {
+            get {
+                return this.lastRunDateFieldSpecified;
+            }
+            set {
+                this.lastRunDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NamespacePrefix {
+            get {
+                return this.namespacePrefixField;
+            }
+            set {
+                this.namespacePrefixField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string OwnerId {
+            get {
+                return this.ownerIdField;
+            }
+            set {
+                this.ownerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
             }
         }
     }
@@ -25028,288 +28454,6 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Report : sObject {
-        
-        private User createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private string descriptionField;
-        
-        private string developerNameField;
-        
-        private QueryResult feedSubscriptionsForEntityField;
-        
-        private QueryResult feedsField;
-        
-        private System.Nullable<bool> isDeletedField;
-        
-        private bool isDeletedFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private System.Nullable<System.DateTime> lastRunDateField;
-        
-        private bool lastRunDateFieldSpecified;
-        
-        private string nameField;
-        
-        private string namespacePrefixField;
-        
-        private string ownerIdField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DeveloperName {
-            get {
-                return this.developerNameField;
-            }
-            set {
-                this.developerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedSubscriptionsForEntity {
-            get {
-                return this.feedSubscriptionsForEntityField;
-            }
-            set {
-                this.feedSubscriptionsForEntityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Feeds {
-            get {
-                return this.feedsField;
-            }
-            set {
-                this.feedsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDeletedSpecified {
-            get {
-                return this.isDeletedFieldSpecified;
-            }
-            set {
-                this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastRunDate {
-            get {
-                return this.lastRunDateField;
-            }
-            set {
-                this.lastRunDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastRunDateSpecified {
-            get {
-                return this.lastRunDateFieldSpecified;
-            }
-            set {
-                this.lastRunDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string NamespacePrefix {
-            get {
-                return this.namespacePrefixField;
-            }
-            set {
-                this.namespacePrefixField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string OwnerId {
-            get {
-                return this.ownerIdField;
-            }
-            set {
-                this.ownerIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class QueueSobject : sObject {
         
         private User createdByField;
@@ -25708,6 +28852,713 @@ namespace Salesforce {
             }
             set {
                 this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Publication__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Publication__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Publication__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Publication__c : sObject {
+        
+        private string abstract__cField;
+        
+        private QueryResult activityHistoriesField;
+        
+        private QueryResult attachmentsField;
+        
+        private QueryResult author__rField;
+        
+        private string contact__cField;
+        
+        private Contact contact__rField;
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult eventsField;
+        
+        private QueryResult feedSubscriptionsForEntityField;
+        
+        private QueryResult feedsField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<System.DateTime> lastActivityDateField;
+        
+        private bool lastActivityDateFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string nameField;
+        
+        private QueryResult notesField;
+        
+        private QueryResult notesAndAttachmentsField;
+        
+        private QueryResult openActivitiesField;
+        
+        private Name ownerField;
+        
+        private string ownerIdField;
+        
+        private QueryResult processInstancesField;
+        
+        private QueryResult processStepsField;
+        
+        private string pub_Med_ID__cField;
+        
+        private System.Nullable<bool> publication_Synchronized__cField;
+        
+        private bool publication_Synchronized__cFieldSpecified;
+        
+        private string publication_Title__cField;
+        
+        private string publication_Url__cField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
+        
+        private QueryResult tasksField;
+        
+        private string uCSF_Profile_Id__cField;
+        
+        private string user__cField;
+        
+        private User user__rField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Abstract__c {
+            get {
+                return this.abstract__cField;
+            }
+            set {
+                this.abstract__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult ActivityHistories {
+            get {
+                return this.activityHistoriesField;
+            }
+            set {
+                this.activityHistoriesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Attachments {
+            get {
+                return this.attachmentsField;
+            }
+            set {
+                this.attachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Author__r {
+            get {
+                return this.author__rField;
+            }
+            set {
+                this.author__rField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Contact__c {
+            get {
+                return this.contact__cField;
+            }
+            set {
+                this.contact__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Contact Contact__r {
+            get {
+                return this.contact__rField;
+            }
+            set {
+                this.contact__rField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Events {
+            get {
+                return this.eventsField;
+            }
+            set {
+                this.eventsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedSubscriptionsForEntity {
+            get {
+                return this.feedSubscriptionsForEntityField;
+            }
+            set {
+                this.feedSubscriptionsForEntityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Feeds {
+            get {
+                return this.feedsField;
+            }
+            set {
+                this.feedsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
+        public System.Nullable<System.DateTime> LastActivityDate {
+            get {
+                return this.lastActivityDateField;
+            }
+            set {
+                this.lastActivityDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastActivityDateSpecified {
+            get {
+                return this.lastActivityDateFieldSpecified;
+            }
+            set {
+                this.lastActivityDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult NotesAndAttachments {
+            get {
+                return this.notesAndAttachmentsField;
+            }
+            set {
+                this.notesAndAttachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult OpenActivities {
+            get {
+                return this.openActivitiesField;
+            }
+            set {
+                this.openActivitiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string OwnerId {
+            get {
+                return this.ownerIdField;
+            }
+            set {
+                this.ownerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult ProcessInstances {
+            get {
+                return this.processInstancesField;
+            }
+            set {
+                this.processInstancesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult ProcessSteps {
+            get {
+                return this.processStepsField;
+            }
+            set {
+                this.processStepsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Pub_Med_ID__c {
+            get {
+                return this.pub_Med_ID__cField;
+            }
+            set {
+                this.pub_Med_ID__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> Publication_Synchronized__c {
+            get {
+                return this.publication_Synchronized__cField;
+            }
+            set {
+                this.publication_Synchronized__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Publication_Synchronized__cSpecified {
+            get {
+                return this.publication_Synchronized__cFieldSpecified;
+            }
+            set {
+                this.publication_Synchronized__cFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Publication_Title__c {
+            get {
+                return this.publication_Title__cField;
+            }
+            set {
+                this.publication_Title__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Publication_Url__c {
+            get {
+                return this.publication_Url__cField;
+            }
+            set {
+                this.publication_Url__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tasks {
+            get {
+                return this.tasksField;
+            }
+            set {
+                this.tasksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string UCSF_Profile_Id__c {
+            get {
+                return this.uCSF_Profile_Id__cField;
+            }
+            set {
+                this.uCSF_Profile_Id__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string User__c {
+            get {
+                return this.user__cField;
+            }
+            set {
+                this.user__cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User User__r {
+            get {
+                return this.user__rField;
+            }
+            set {
+                this.user__rField = value;
             }
         }
     }
@@ -26143,856 +29994,6 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Publication__c : sObject {
-        
-        private string abstract__cField;
-        
-        private QueryResult activityHistoriesField;
-        
-        private QueryResult attachmentsField;
-        
-        private QueryResult author__rField;
-        
-        private string contact__cField;
-        
-        private Contact contact__rField;
-        
-        private User createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private QueryResult eventsField;
-        
-        private QueryResult feedSubscriptionsForEntityField;
-        
-        private QueryResult feedsField;
-        
-        private System.Nullable<bool> isDeletedField;
-        
-        private bool isDeletedFieldSpecified;
-        
-        private System.Nullable<System.DateTime> lastActivityDateField;
-        
-        private bool lastActivityDateFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private string nameField;
-        
-        private QueryResult notesField;
-        
-        private QueryResult notesAndAttachmentsField;
-        
-        private QueryResult openActivitiesField;
-        
-        private Name ownerField;
-        
-        private string ownerIdField;
-        
-        private QueryResult processInstancesField;
-        
-        private QueryResult processStepsField;
-        
-        private string pub_Med_ID__cField;
-        
-        private System.Nullable<bool> publication_Synchronized__cField;
-        
-        private bool publication_Synchronized__cFieldSpecified;
-        
-        private string publication_Title__cField;
-        
-        private string publication_Url__cField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        private QueryResult tasksField;
-        
-        private string uCSF_Profile_Id__cField;
-        
-        private string user__cField;
-        
-        private User user__rField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Abstract__c {
-            get {
-                return this.abstract__cField;
-            }
-            set {
-                this.abstract__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult ActivityHistories {
-            get {
-                return this.activityHistoriesField;
-            }
-            set {
-                this.activityHistoriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Attachments {
-            get {
-                return this.attachmentsField;
-            }
-            set {
-                this.attachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Author__r {
-            get {
-                return this.author__rField;
-            }
-            set {
-                this.author__rField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Contact__c {
-            get {
-                return this.contact__cField;
-            }
-            set {
-                this.contact__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Contact Contact__r {
-            get {
-                return this.contact__rField;
-            }
-            set {
-                this.contact__rField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Events {
-            get {
-                return this.eventsField;
-            }
-            set {
-                this.eventsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedSubscriptionsForEntity {
-            get {
-                return this.feedSubscriptionsForEntityField;
-            }
-            set {
-                this.feedSubscriptionsForEntityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Feeds {
-            get {
-                return this.feedsField;
-            }
-            set {
-                this.feedsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDeletedSpecified {
-            get {
-                return this.isDeletedFieldSpecified;
-            }
-            set {
-                this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", IsNullable=true)]
-        public System.Nullable<System.DateTime> LastActivityDate {
-            get {
-                return this.lastActivityDateField;
-            }
-            set {
-                this.lastActivityDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastActivityDateSpecified {
-            get {
-                return this.lastActivityDateFieldSpecified;
-            }
-            set {
-                this.lastActivityDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult NotesAndAttachments {
-            get {
-                return this.notesAndAttachmentsField;
-            }
-            set {
-                this.notesAndAttachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult OpenActivities {
-            get {
-                return this.openActivitiesField;
-            }
-            set {
-                this.openActivitiesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name Owner {
-            get {
-                return this.ownerField;
-            }
-            set {
-                this.ownerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string OwnerId {
-            get {
-                return this.ownerIdField;
-            }
-            set {
-                this.ownerIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult ProcessInstances {
-            get {
-                return this.processInstancesField;
-            }
-            set {
-                this.processInstancesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult ProcessSteps {
-            get {
-                return this.processStepsField;
-            }
-            set {
-                this.processStepsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Pub_Med_ID__c {
-            get {
-                return this.pub_Med_ID__cField;
-            }
-            set {
-                this.pub_Med_ID__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> Publication_Synchronized__c {
-            get {
-                return this.publication_Synchronized__cField;
-            }
-            set {
-                this.publication_Synchronized__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Publication_Synchronized__cSpecified {
-            get {
-                return this.publication_Synchronized__cFieldSpecified;
-            }
-            set {
-                this.publication_Synchronized__cFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Publication_Title__c {
-            get {
-                return this.publication_Title__cField;
-            }
-            set {
-                this.publication_Title__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Publication_Url__c {
-            get {
-                return this.publication_Url__cField;
-            }
-            set {
-                this.publication_Url__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Tasks {
-            get {
-                return this.tasksField;
-            }
-            set {
-                this.tasksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string UCSF_Profile_Id__c {
-            get {
-                return this.uCSF_Profile_Id__cField;
-            }
-            set {
-                this.uCSF_Profile_Id__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string User__c {
-            get {
-                return this.user__cField;
-            }
-            set {
-                this.user__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User User__r {
-            get {
-                return this.user__rField;
-            }
-            set {
-                this.user__rField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Research_Profile__c : sObject {
-        
-        private QueryResult attachmentsField;
-        
-        private User createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private QueryResult feedSubscriptionsForEntityField;
-        
-        private System.Nullable<bool> isDeletedField;
-        
-        private bool isDeletedFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private string nameField;
-        
-        private QueryResult notesField;
-        
-        private QueryResult notesAndAttachmentsField;
-        
-        private Name ownerField;
-        
-        private string ownerIdField;
-        
-        private QueryResult processInstancesField;
-        
-        private QueryResult processStepsField;
-        
-        private QueryResult profile_Activities__rField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        private string user__cField;
-        
-        private User user__rField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Attachments {
-            get {
-                return this.attachmentsField;
-            }
-            set {
-                this.attachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedSubscriptionsForEntity {
-            get {
-                return this.feedSubscriptionsForEntityField;
-            }
-            set {
-                this.feedSubscriptionsForEntityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDeletedSpecified {
-            get {
-                return this.isDeletedFieldSpecified;
-            }
-            set {
-                this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult NotesAndAttachments {
-            get {
-                return this.notesAndAttachmentsField;
-            }
-            set {
-                this.notesAndAttachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name Owner {
-            get {
-                return this.ownerField;
-            }
-            set {
-                this.ownerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string OwnerId {
-            get {
-                return this.ownerIdField;
-            }
-            set {
-                this.ownerIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult ProcessInstances {
-            get {
-                return this.processInstancesField;
-            }
-            set {
-                this.processInstancesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult ProcessSteps {
-            get {
-                return this.processStepsField;
-            }
-            set {
-                this.processStepsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Profile_Activities__r {
-            get {
-                return this.profile_Activities__rField;
-            }
-            set {
-                this.profile_Activities__rField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string User__c {
-            get {
-                return this.user__cField;
-            }
-            set {
-                this.user__cField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User User__r {
-            get {
-                return this.user__rField;
-            }
-            set {
-                this.user__rField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class Profile_Activity__c : sObject {
         
         private QueryResult attachmentsField;
@@ -27038,6 +30039,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private string update__cField;
         
@@ -27285,12 +30288,188 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Update__c {
             get {
                 return this.update__cField;
             }
             set {
                 this.update__cField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Profile_Activity__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Profile_Activity__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Profile_Activity__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -30893,6 +34072,171 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class OpportunityTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Opportunity itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Opportunity Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class OpportunityStage : sObject {
         
         private User createdByField;
@@ -34281,7 +37625,174 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class NoteAndAttachment : sObject {
+    public partial class NoteTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Note itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Note Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Note : sObject {
+        
+        private string bodyField;
         
         private User createdByField;
         
@@ -34294,10 +37805,6 @@ namespace Salesforce {
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
-        
-        private System.Nullable<bool> isNoteField;
-        
-        private bool isNoteFieldSpecified;
         
         private System.Nullable<bool> isPrivateField;
         
@@ -34323,7 +37830,20 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         private string titleField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Body {
+            get {
+                return this.bodyField;
+            }
+            set {
+                this.bodyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -34388,28 +37908,6 @@ namespace Salesforce {
             }
             set {
                 this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsNote {
-            get {
-                return this.isNoteField;
-            }
-            set {
-                this.isNoteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsNoteSpecified {
-            get {
-                return this.isNoteFieldSpecified;
-            }
-            set {
-                this.isNoteFieldSpecified = value;
             }
         }
         
@@ -34547,6 +38045,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Title {
             get {
                 return this.titleField;
@@ -34563,9 +38072,7 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Note : sObject {
-        
-        private string bodyField;
+    public partial class NoteAndAttachment : sObject {
         
         private User createdByField;
         
@@ -34578,6 +38085,10 @@ namespace Salesforce {
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<bool> isNoteField;
+        
+        private bool isNoteFieldSpecified;
         
         private System.Nullable<bool> isPrivateField;
         
@@ -34604,17 +38115,6 @@ namespace Salesforce {
         private bool systemModstampFieldSpecified;
         
         private string titleField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Body {
-            get {
-                return this.bodyField;
-            }
-            set {
-                this.bodyField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -34679,6 +38179,28 @@ namespace Salesforce {
             }
             set {
                 this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsNote {
+            get {
+                return this.isNoteField;
+            }
+            set {
+                this.isNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsNoteSpecified {
+            get {
+                return this.isNoteFieldSpecified;
+            }
+            set {
+                this.isNoteFieldSpecified = value;
             }
         }
         
@@ -35694,6 +39216,171 @@ namespace Salesforce {
             }
             set {
                 this.userIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class LeadTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Lead itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Lead Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -36801,6 +40488,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string AboutBannerImageUrl__c {
@@ -37546,6 +41235,182 @@ namespace Salesforce {
             }
             set {
                 this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class IdeasSiteSetup__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private IdeasSiteSetup__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public IdeasSiteSetup__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -39031,6 +42896,145 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class ForecastShare : sObject {
+        
+        private string accessLevelField;
+        
+        private System.Nullable<bool> canSubmitField;
+        
+        private bool canSubmitFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string rowCauseField;
+        
+        private string userOrGroupIdField;
+        
+        private string userRoleIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string AccessLevel {
+            get {
+                return this.accessLevelField;
+            }
+            set {
+                this.accessLevelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> CanSubmit {
+            get {
+                return this.canSubmitField;
+            }
+            set {
+                this.canSubmitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CanSubmitSpecified {
+            get {
+                return this.canSubmitFieldSpecified;
+            }
+            set {
+                this.canSubmitFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RowCause {
+            get {
+                return this.rowCauseField;
+            }
+            set {
+                this.rowCauseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string UserOrGroupId {
+            get {
+                return this.userOrGroupIdField;
+            }
+            set {
+                this.userOrGroupIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string UserRoleId {
+            get {
+                return this.userRoleIdField;
+            }
+            set {
+                this.userRoleIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class FeedTrackedChange : sObject {
         
         private string feedItemIdField;
@@ -39795,192 +43799,31 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class EventFeed : sObject {
-        
-        private string bodyField;
-        
-        private System.Nullable<int> commentCountField;
-        
-        private bool commentCountFieldSpecified;
-        
-        private byte[] contentDataField;
-        
-        private string contentDescriptionField;
-        
-        private string contentFileNameField;
-        
-        private System.Nullable<int> contentSizeField;
-        
-        private bool contentSizeFieldSpecified;
-        
-        private string contentTypeField;
-        
-        private Name createdByField;
-        
-        private string createdByIdField;
+    public partial class EventTag : sObject {
         
         private System.Nullable<System.DateTime> createdDateField;
         
         private bool createdDateFieldSpecified;
         
-        private QueryResult feedCommentsField;
-        
-        private QueryResult feedLikesField;
-        
-        private QueryResult feedTrackedChangesField;
-        
-        private Name insertedByField;
-        
-        private string insertedByIdField;
-        
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
         
-        private System.Nullable<System.DateTime> lastModifiedDateField;
+        private Event itemField;
         
-        private bool lastModifiedDateFieldSpecified;
+        private string itemIdField;
         
-        private System.Nullable<int> likeCountField;
-        
-        private bool likeCountFieldSpecified;
-        
-        private string linkUrlField;
-        
-        private Event parentField;
-        
-        private string parentIdField;
-        
-        private string relatedRecordIdField;
+        private string nameField;
         
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
         
-        private string titleField;
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
         
         private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Body {
-            get {
-                return this.bodyField;
-            }
-            set {
-                this.bodyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> CommentCount {
-            get {
-                return this.commentCountField;
-            }
-            set {
-                this.commentCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CommentCountSpecified {
-            get {
-                return this.commentCountFieldSpecified;
-            }
-            set {
-                this.commentCountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
-        public byte[] ContentData {
-            get {
-                return this.contentDataField;
-            }
-            set {
-                this.contentDataField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentDescription {
-            get {
-                return this.contentDescriptionField;
-            }
-            set {
-                this.contentDescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentFileName {
-            get {
-                return this.contentFileNameField;
-            }
-            set {
-                this.contentFileNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ContentSize {
-            get {
-                return this.contentSizeField;
-            }
-            set {
-                this.contentSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ContentSizeSpecified {
-            get {
-                return this.contentSizeFieldSpecified;
-            }
-            set {
-                this.contentSizeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentType {
-            get {
-                return this.contentTypeField;
-            }
-            set {
-                this.contentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -40001,61 +43844,6 @@ namespace Salesforce {
             }
             set {
                 this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedComments {
-            get {
-                return this.feedCommentsField;
-            }
-            set {
-                this.feedCommentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedLikes {
-            get {
-                return this.feedLikesField;
-            }
-            set {
-                this.feedLikesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedTrackedChanges {
-            get {
-                return this.feedTrackedChangesField;
-            }
-            set {
-                this.feedTrackedChangesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name InsertedBy {
-            get {
-                return this.insertedByField;
-            }
-            set {
-                this.insertedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string InsertedById {
-            get {
-                return this.insertedByIdField;
-            }
-            set {
-                this.insertedByIdField = value;
             }
         }
         
@@ -40083,89 +43871,34 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
+        public Event Item {
             get {
-                return this.lastModifiedDateField;
+                return this.itemField;
             }
             set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
+                this.itemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> LikeCount {
+        public string ItemId {
             get {
-                return this.likeCountField;
+                return this.itemIdField;
             }
             set {
-                this.likeCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LikeCountSpecified {
-            get {
-                return this.likeCountFieldSpecified;
-            }
-            set {
-                this.likeCountFieldSpecified = value;
+                this.itemIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LinkUrl {
+        public string Name {
             get {
-                return this.linkUrlField;
+                return this.nameField;
             }
             set {
-                this.linkUrlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Event Parent {
-            get {
-                return this.parentField;
-            }
-            set {
-                this.parentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ParentId {
-            get {
-                return this.parentIdField;
-            }
-            set {
-                this.parentIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RelatedRecordId {
-            get {
-                return this.relatedRecordIdField;
-            }
-            set {
-                this.relatedRecordIdField = value;
+                this.nameField = value;
             }
         }
         
@@ -40193,12 +43926,23 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Title {
+        public TagDefinition TagDefinition {
             get {
-                return this.titleField;
+                return this.tagDefinitionField;
             }
             set {
-                this.titleField = value;
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
             }
         }
         
@@ -40355,6 +44099,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private Name whatField;
         
@@ -41103,6 +44849,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public Name What {
             get {
                 return this.whatField;
@@ -41142,6 +44899,431 @@ namespace Salesforce {
             }
             set {
                 this.whoIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class EventFeed : sObject {
+        
+        private string bodyField;
+        
+        private System.Nullable<int> commentCountField;
+        
+        private bool commentCountFieldSpecified;
+        
+        private byte[] contentDataField;
+        
+        private string contentDescriptionField;
+        
+        private string contentFileNameField;
+        
+        private System.Nullable<int> contentSizeField;
+        
+        private bool contentSizeFieldSpecified;
+        
+        private string contentTypeField;
+        
+        private Name createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult feedCommentsField;
+        
+        private QueryResult feedLikesField;
+        
+        private QueryResult feedTrackedChangesField;
+        
+        private Name insertedByField;
+        
+        private string insertedByIdField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private System.Nullable<int> likeCountField;
+        
+        private bool likeCountFieldSpecified;
+        
+        private string linkUrlField;
+        
+        private Event parentField;
+        
+        private string parentIdField;
+        
+        private string relatedRecordIdField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private string titleField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Body {
+            get {
+                return this.bodyField;
+            }
+            set {
+                this.bodyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CommentCount {
+            get {
+                return this.commentCountField;
+            }
+            set {
+                this.commentCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CommentCountSpecified {
+            get {
+                return this.commentCountFieldSpecified;
+            }
+            set {
+                this.commentCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] ContentData {
+            get {
+                return this.contentDataField;
+            }
+            set {
+                this.contentDataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentDescription {
+            get {
+                return this.contentDescriptionField;
+            }
+            set {
+                this.contentDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentFileName {
+            get {
+                return this.contentFileNameField;
+            }
+            set {
+                this.contentFileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> ContentSize {
+            get {
+                return this.contentSizeField;
+            }
+            set {
+                this.contentSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContentSizeSpecified {
+            get {
+                return this.contentSizeFieldSpecified;
+            }
+            set {
+                this.contentSizeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedComments {
+            get {
+                return this.feedCommentsField;
+            }
+            set {
+                this.feedCommentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedLikes {
+            get {
+                return this.feedLikesField;
+            }
+            set {
+                this.feedLikesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedTrackedChanges {
+            get {
+                return this.feedTrackedChangesField;
+            }
+            set {
+                this.feedTrackedChangesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name InsertedBy {
+            get {
+                return this.insertedByField;
+            }
+            set {
+                this.insertedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string InsertedById {
+            get {
+                return this.insertedByIdField;
+            }
+            set {
+                this.insertedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> LikeCount {
+            get {
+                return this.likeCountField;
+            }
+            set {
+                this.likeCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LikeCountSpecified {
+            get {
+                return this.likeCountFieldSpecified;
+            }
+            set {
+                this.likeCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LinkUrl {
+            get {
+                return this.linkUrlField;
+            }
+            set {
+                this.linkUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Event Parent {
+            get {
+                return this.parentField;
+            }
+            set {
+                this.parentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RelatedRecordId {
+            get {
+                return this.relatedRecordIdField;
+            }
+            set {
+                this.relatedRecordIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -43237,6 +47419,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Attachments {
@@ -43478,6 +47662,17 @@ namespace Salesforce {
                 this.systemModstampFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -43486,45 +47681,31 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class DocumentAttachmentMap : sObject {
-        
-        private User createdByField;
-        
-        private string createdByIdField;
+    public partial class Domain_Alias__Tag : sObject {
         
         private System.Nullable<System.DateTime> createdDateField;
         
         private bool createdDateFieldSpecified;
         
-        private string documentIdField;
+        private System.Nullable<bool> isDeletedField;
         
-        private System.Nullable<int> documentSequenceField;
+        private bool isDeletedFieldSpecified;
         
-        private bool documentSequenceFieldSpecified;
+        private Domain_Alias__c itemField;
         
-        private string parentIdField;
+        private string itemIdField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
+        private string nameField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -43550,45 +47731,276 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DocumentId {
+        public System.Nullable<bool> IsDeleted {
             get {
-                return this.documentIdField;
+                return this.isDeletedField;
             }
             set {
-                this.documentIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> DocumentSequence {
-            get {
-                return this.documentSequenceField;
-            }
-            set {
-                this.documentSequenceField = value;
+                this.isDeletedField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DocumentSequenceSpecified {
+        public bool IsDeletedSpecified {
             get {
-                return this.documentSequenceFieldSpecified;
+                return this.isDeletedFieldSpecified;
             }
             set {
-                this.documentSequenceFieldSpecified = value;
+                this.isDeletedFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ParentId {
+        public Domain_Alias__c Item {
             get {
-                return this.parentIdField;
+                return this.itemField;
             }
             set {
-                this.parentIdField = value;
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class DocumentTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Document itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Document Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -43662,6 +48074,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private string typeField;
         
@@ -44010,6 +48424,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Type {
             get {
                 return this.typeField;
@@ -44027,6 +48452,800 @@ namespace Salesforce {
             }
             set {
                 this.urlField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class DocumentAttachmentMap : sObject {
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private string documentIdField;
+        
+        private System.Nullable<int> documentSequenceField;
+        
+        private bool documentSequenceFieldSpecified;
+        
+        private string parentIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string DocumentId {
+            get {
+                return this.documentIdField;
+            }
+            set {
+                this.documentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> DocumentSequence {
+            get {
+                return this.documentSequenceField;
+            }
+            set {
+                this.documentSequenceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DocumentSequenceSpecified {
+            get {
+                return this.documentSequenceFieldSpecified;
+            }
+            set {
+                this.documentSequenceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class DashboardTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Dashboard itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Dashboard Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Dashboard : sObject {
+        
+        private string backgroundDirectionField;
+        
+        private System.Nullable<int> backgroundEndField;
+        
+        private bool backgroundEndFieldSpecified;
+        
+        private System.Nullable<int> backgroundStartField;
+        
+        private bool backgroundStartFieldSpecified;
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult dashboardComponentsField;
+        
+        private string descriptionField;
+        
+        private string developerNameField;
+        
+        private QueryResult feedSubscriptionsForEntityField;
+        
+        private QueryResult feedsField;
+        
+        private Folder folderField;
+        
+        private string folderIdField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string leftSizeField;
+        
+        private string middleSizeField;
+        
+        private string namespacePrefixField;
+        
+        private string rightSizeField;
+        
+        private User runningUserField;
+        
+        private string runningUserIdField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
+        
+        private System.Nullable<int> textColorField;
+        
+        private bool textColorFieldSpecified;
+        
+        private string titleField;
+        
+        private System.Nullable<int> titleColorField;
+        
+        private bool titleColorFieldSpecified;
+        
+        private System.Nullable<int> titleSizeField;
+        
+        private bool titleSizeFieldSpecified;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string BackgroundDirection {
+            get {
+                return this.backgroundDirectionField;
+            }
+            set {
+                this.backgroundDirectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> BackgroundEnd {
+            get {
+                return this.backgroundEndField;
+            }
+            set {
+                this.backgroundEndField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BackgroundEndSpecified {
+            get {
+                return this.backgroundEndFieldSpecified;
+            }
+            set {
+                this.backgroundEndFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> BackgroundStart {
+            get {
+                return this.backgroundStartField;
+            }
+            set {
+                this.backgroundStartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BackgroundStartSpecified {
+            get {
+                return this.backgroundStartFieldSpecified;
+            }
+            set {
+                this.backgroundStartFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult DashboardComponents {
+            get {
+                return this.dashboardComponentsField;
+            }
+            set {
+                this.dashboardComponentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string DeveloperName {
+            get {
+                return this.developerNameField;
+            }
+            set {
+                this.developerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedSubscriptionsForEntity {
+            get {
+                return this.feedSubscriptionsForEntityField;
+            }
+            set {
+                this.feedSubscriptionsForEntityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Feeds {
+            get {
+                return this.feedsField;
+            }
+            set {
+                this.feedsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Folder Folder {
+            get {
+                return this.folderField;
+            }
+            set {
+                this.folderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FolderId {
+            get {
+                return this.folderIdField;
+            }
+            set {
+                this.folderIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LeftSize {
+            get {
+                return this.leftSizeField;
+            }
+            set {
+                this.leftSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string MiddleSize {
+            get {
+                return this.middleSizeField;
+            }
+            set {
+                this.middleSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NamespacePrefix {
+            get {
+                return this.namespacePrefixField;
+            }
+            set {
+                this.namespacePrefixField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RightSize {
+            get {
+                return this.rightSizeField;
+            }
+            set {
+                this.rightSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User RunningUser {
+            get {
+                return this.runningUserField;
+            }
+            set {
+                this.runningUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RunningUserId {
+            get {
+                return this.runningUserIdField;
+            }
+            set {
+                this.runningUserIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> TextColor {
+            get {
+                return this.textColorField;
+            }
+            set {
+                this.textColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TextColorSpecified {
+            get {
+                return this.textColorFieldSpecified;
+            }
+            set {
+                this.textColorFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> TitleColor {
+            get {
+                return this.titleColorField;
+            }
+            set {
+                this.titleColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TitleColorSpecified {
+            get {
+                return this.titleColorFieldSpecified;
+            }
+            set {
+                this.titleColorFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> TitleSize {
+            get {
+                return this.titleSizeField;
+            }
+            set {
+                this.titleSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TitleSizeSpecified {
+            get {
+                return this.titleSizeFieldSpecified;
+            }
+            set {
+                this.titleSizeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -44441,509 +49660,6 @@ namespace Salesforce {
             }
             set {
                 this.titleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class Dashboard : sObject {
-        
-        private string backgroundDirectionField;
-        
-        private System.Nullable<int> backgroundEndField;
-        
-        private bool backgroundEndFieldSpecified;
-        
-        private System.Nullable<int> backgroundStartField;
-        
-        private bool backgroundStartFieldSpecified;
-        
-        private User createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private QueryResult dashboardComponentsField;
-        
-        private string descriptionField;
-        
-        private string developerNameField;
-        
-        private QueryResult feedSubscriptionsForEntityField;
-        
-        private QueryResult feedsField;
-        
-        private Folder folderField;
-        
-        private string folderIdField;
-        
-        private System.Nullable<bool> isDeletedField;
-        
-        private bool isDeletedFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private string leftSizeField;
-        
-        private string middleSizeField;
-        
-        private string namespacePrefixField;
-        
-        private string rightSizeField;
-        
-        private User runningUserField;
-        
-        private string runningUserIdField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        private System.Nullable<int> textColorField;
-        
-        private bool textColorFieldSpecified;
-        
-        private string titleField;
-        
-        private System.Nullable<int> titleColorField;
-        
-        private bool titleColorFieldSpecified;
-        
-        private System.Nullable<int> titleSizeField;
-        
-        private bool titleSizeFieldSpecified;
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string BackgroundDirection {
-            get {
-                return this.backgroundDirectionField;
-            }
-            set {
-                this.backgroundDirectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> BackgroundEnd {
-            get {
-                return this.backgroundEndField;
-            }
-            set {
-                this.backgroundEndField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BackgroundEndSpecified {
-            get {
-                return this.backgroundEndFieldSpecified;
-            }
-            set {
-                this.backgroundEndFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> BackgroundStart {
-            get {
-                return this.backgroundStartField;
-            }
-            set {
-                this.backgroundStartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BackgroundStartSpecified {
-            get {
-                return this.backgroundStartFieldSpecified;
-            }
-            set {
-                this.backgroundStartFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult DashboardComponents {
-            get {
-                return this.dashboardComponentsField;
-            }
-            set {
-                this.dashboardComponentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DeveloperName {
-            get {
-                return this.developerNameField;
-            }
-            set {
-                this.developerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedSubscriptionsForEntity {
-            get {
-                return this.feedSubscriptionsForEntityField;
-            }
-            set {
-                this.feedSubscriptionsForEntityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult Feeds {
-            get {
-                return this.feedsField;
-            }
-            set {
-                this.feedsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Folder Folder {
-            get {
-                return this.folderField;
-            }
-            set {
-                this.folderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string FolderId {
-            get {
-                return this.folderIdField;
-            }
-            set {
-                this.folderIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDeletedSpecified {
-            get {
-                return this.isDeletedFieldSpecified;
-            }
-            set {
-                this.isDeletedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LeftSize {
-            get {
-                return this.leftSizeField;
-            }
-            set {
-                this.leftSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string MiddleSize {
-            get {
-                return this.middleSizeField;
-            }
-            set {
-                this.middleSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string NamespacePrefix {
-            get {
-                return this.namespacePrefixField;
-            }
-            set {
-                this.namespacePrefixField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RightSize {
-            get {
-                return this.rightSizeField;
-            }
-            set {
-                this.rightSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User RunningUser {
-            get {
-                return this.runningUserField;
-            }
-            set {
-                this.runningUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RunningUserId {
-            get {
-                return this.runningUserIdField;
-            }
-            set {
-                this.runningUserIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> TextColor {
-            get {
-                return this.textColorField;
-            }
-            set {
-                this.textColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TextColorSpecified {
-            get {
-                return this.textColorFieldSpecified;
-            }
-            set {
-                this.textColorFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Title {
-            get {
-                return this.titleField;
-            }
-            set {
-                this.titleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> TitleColor {
-            get {
-                return this.titleColorField;
-            }
-            set {
-                this.titleColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TitleColorSpecified {
-            get {
-                return this.titleColorFieldSpecified;
-            }
-            set {
-                this.titleColorFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> TitleSize {
-            get {
-                return this.titleSizeField;
-            }
-            set {
-                this.titleSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TitleSizeSpecified {
-            get {
-                return this.titleSizeFieldSpecified;
-            }
-            set {
-                this.titleSizeFieldSpecified = value;
             }
         }
         
@@ -45733,290 +50449,31 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class ContractStatus : sObject {
-        
-        private User createdByField;
-        
-        private string createdByIdField;
+    public partial class ContractTag : sObject {
         
         private System.Nullable<System.DateTime> createdDateField;
         
         private bool createdDateFieldSpecified;
-        
-        private System.Nullable<bool> isDefaultField;
-        
-        private bool isDefaultFieldSpecified;
-        
-        private User lastModifiedByField;
-        
-        private string lastModifiedByIdField;
-        
-        private System.Nullable<System.DateTime> lastModifiedDateField;
-        
-        private bool lastModifiedDateFieldSpecified;
-        
-        private string masterLabelField;
-        
-        private System.Nullable<int> sortOrderField;
-        
-        private bool sortOrderFieldSpecified;
-        
-        private string statusCodeField;
-        
-        private System.Nullable<System.DateTime> systemModstampField;
-        
-        private bool systemModstampFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreatedDateSpecified {
-            get {
-                return this.createdDateFieldSpecified;
-            }
-            set {
-                this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsDefault {
-            get {
-                return this.isDefaultField;
-            }
-            set {
-                this.isDefaultField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDefaultSpecified {
-            get {
-                return this.isDefaultFieldSpecified;
-            }
-            set {
-                this.isDefaultFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public User LastModifiedBy {
-            get {
-                return this.lastModifiedByField;
-            }
-            set {
-                this.lastModifiedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastModifiedById {
-            get {
-                return this.lastModifiedByIdField;
-            }
-            set {
-                this.lastModifiedByIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
-            get {
-                return this.lastModifiedDateField;
-            }
-            set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string MasterLabel {
-            get {
-                return this.masterLabelField;
-            }
-            set {
-                this.masterLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> SortOrder {
-            get {
-                return this.sortOrderField;
-            }
-            set {
-                this.sortOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SortOrderSpecified {
-            get {
-                return this.sortOrderFieldSpecified;
-            }
-            set {
-                this.sortOrderFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string StatusCode {
-            get {
-                return this.statusCodeField;
-            }
-            set {
-                this.statusCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> SystemModstamp {
-            get {
-                return this.systemModstampField;
-            }
-            set {
-                this.systemModstampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SystemModstampSpecified {
-            get {
-                return this.systemModstampFieldSpecified;
-            }
-            set {
-                this.systemModstampFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class ContractHistory : sObject {
-        
-        private Contract contractField;
-        
-        private string contractIdField;
-        
-        private Name createdByField;
-        
-        private string createdByIdField;
-        
-        private System.Nullable<System.DateTime> createdDateField;
-        
-        private bool createdDateFieldSpecified;
-        
-        private string fieldField;
         
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
         
-        private object newValueField;
+        private Contract itemField;
         
-        private object oldValueField;
+        private string itemIdField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Contract Contract {
-            get {
-                return this.contractField;
-            }
-            set {
-                this.contractField = value;
-            }
-        }
+        private string nameField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContractId {
-            get {
-                return this.contractIdField;
-            }
-            set {
-                this.contractIdField = value;
-            }
-        }
+        private System.Nullable<System.DateTime> systemModstampField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
+        private bool systemModstampFieldSpecified;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -46037,17 +50494,6 @@ namespace Salesforce {
             }
             set {
                 this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Field {
-            get {
-                return this.fieldField;
-            }
-            set {
-                this.fieldField = value;
             }
         }
         
@@ -46075,23 +50521,89 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public object NewValue {
+        public Contract Item {
             get {
-                return this.newValueField;
+                return this.itemField;
             }
             set {
-                this.newValueField = value;
+                this.itemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public object OldValue {
+        public string ItemId {
             get {
-                return this.oldValueField;
+                return this.itemIdField;
             }
             set {
-                this.oldValueField = value;
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -46239,6 +50751,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -46992,12 +51506,392 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
             }
             set {
                 this.tasksField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class ContractStatus : sObject {
+        
+        private User createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDefaultField;
+        
+        private bool isDefaultFieldSpecified;
+        
+        private User lastModifiedByField;
+        
+        private string lastModifiedByIdField;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private string masterLabelField;
+        
+        private System.Nullable<int> sortOrderField;
+        
+        private bool sortOrderFieldSpecified;
+        
+        private string statusCodeField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDefault {
+            get {
+                return this.isDefaultField;
+            }
+            set {
+                this.isDefaultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDefaultSpecified {
+            get {
+                return this.isDefaultFieldSpecified;
+            }
+            set {
+                this.isDefaultFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public User LastModifiedBy {
+            get {
+                return this.lastModifiedByField;
+            }
+            set {
+                this.lastModifiedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LastModifiedById {
+            get {
+                return this.lastModifiedByIdField;
+            }
+            set {
+                this.lastModifiedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string MasterLabel {
+            get {
+                return this.masterLabelField;
+            }
+            set {
+                this.masterLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> SortOrder {
+            get {
+                return this.sortOrderField;
+            }
+            set {
+                this.sortOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SortOrderSpecified {
+            get {
+                return this.sortOrderFieldSpecified;
+            }
+            set {
+                this.sortOrderFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string StatusCode {
+            get {
+                return this.statusCodeField;
+            }
+            set {
+                this.statusCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class ContractHistory : sObject {
+        
+        private Contract contractField;
+        
+        private string contractIdField;
+        
+        private Name createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private string fieldField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private object newValueField;
+        
+        private object oldValueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Contract Contract {
+            get {
+                return this.contractField;
+            }
+            set {
+                this.contractField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContractId {
+            get {
+                return this.contractIdField;
+            }
+            set {
+                this.contractIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Field {
+            get {
+                return this.fieldField;
+            }
+            set {
+                this.fieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object NewValue {
+            get {
+                return this.newValueField;
+            }
+            set {
+                this.newValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object OldValue {
+            get {
+                return this.oldValueField;
+            }
+            set {
+                this.oldValueField = value;
             }
         }
     }
@@ -49433,6 +54327,171 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class ContactTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Contact itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Contact Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
     public partial class ContactShare : sObject {
         
         private Contact contactField;
@@ -51654,6 +56713,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Attachments {
@@ -51948,6 +57009,182 @@ namespace Salesforce {
             }
             set {
                 this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class Co_Author__Tag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Co_Author__c itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Co_Author__c Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -52593,6 +57830,8 @@ namespace Salesforce {
         
         private bool systemModstampFieldSpecified;
         
+        private QueryResult tagsField;
+        
         private QueryResult tasksField;
         
         private QueryResult teamMembersField;
@@ -53214,6 +58453,17 @@ namespace Salesforce {
             }
             set {
                 this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
             }
         }
         
@@ -53996,6 +59246,171 @@ namespace Salesforce {
             }
             set {
                 this.teamTemplateMemberIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class CaseTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Case itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Case Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -55580,6 +60995,171 @@ namespace Salesforce {
             }
             set {
                 this.systemModstampFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class CampaignTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Campaign itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Campaign Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -59078,192 +64658,31 @@ namespace Salesforce {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
-    public partial class AssetFeed : sObject {
-        
-        private string bodyField;
-        
-        private System.Nullable<int> commentCountField;
-        
-        private bool commentCountFieldSpecified;
-        
-        private byte[] contentDataField;
-        
-        private string contentDescriptionField;
-        
-        private string contentFileNameField;
-        
-        private System.Nullable<int> contentSizeField;
-        
-        private bool contentSizeFieldSpecified;
-        
-        private string contentTypeField;
-        
-        private Name createdByField;
-        
-        private string createdByIdField;
+    public partial class AssetTag : sObject {
         
         private System.Nullable<System.DateTime> createdDateField;
         
         private bool createdDateFieldSpecified;
         
-        private QueryResult feedCommentsField;
-        
-        private QueryResult feedLikesField;
-        
-        private QueryResult feedTrackedChangesField;
-        
-        private Name insertedByField;
-        
-        private string insertedByIdField;
-        
         private System.Nullable<bool> isDeletedField;
         
         private bool isDeletedFieldSpecified;
         
-        private System.Nullable<System.DateTime> lastModifiedDateField;
+        private Asset itemField;
         
-        private bool lastModifiedDateFieldSpecified;
+        private string itemIdField;
         
-        private System.Nullable<int> likeCountField;
-        
-        private bool likeCountFieldSpecified;
-        
-        private string linkUrlField;
-        
-        private Asset parentField;
-        
-        private string parentIdField;
-        
-        private string relatedRecordIdField;
+        private string nameField;
         
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
         
-        private string titleField;
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
         
         private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Body {
-            get {
-                return this.bodyField;
-            }
-            set {
-                this.bodyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> CommentCount {
-            get {
-                return this.commentCountField;
-            }
-            set {
-                this.commentCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CommentCountSpecified {
-            get {
-                return this.commentCountFieldSpecified;
-            }
-            set {
-                this.commentCountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
-        public byte[] ContentData {
-            get {
-                return this.contentDataField;
-            }
-            set {
-                this.contentDataField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentDescription {
-            get {
-                return this.contentDescriptionField;
-            }
-            set {
-                this.contentDescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentFileName {
-            get {
-                return this.contentFileNameField;
-            }
-            set {
-                this.contentFileNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ContentSize {
-            get {
-                return this.contentSizeField;
-            }
-            set {
-                this.contentSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ContentSizeSpecified {
-            get {
-                return this.contentSizeFieldSpecified;
-            }
-            set {
-                this.contentSizeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ContentType {
-            get {
-                return this.contentTypeField;
-            }
-            set {
-                this.contentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string CreatedById {
-            get {
-                return this.createdByIdField;
-            }
-            set {
-                this.createdByIdField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -59284,61 +64703,6 @@ namespace Salesforce {
             }
             set {
                 this.createdDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedComments {
-            get {
-                return this.feedCommentsField;
-            }
-            set {
-                this.feedCommentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedLikes {
-            get {
-                return this.feedLikesField;
-            }
-            set {
-                this.feedLikesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public QueryResult FeedTrackedChanges {
-            get {
-                return this.feedTrackedChangesField;
-            }
-            set {
-                this.feedTrackedChangesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Name InsertedBy {
-            get {
-                return this.insertedByField;
-            }
-            set {
-                this.insertedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string InsertedById {
-            get {
-                return this.insertedByIdField;
-            }
-            set {
-                this.insertedByIdField = value;
             }
         }
         
@@ -59366,89 +64730,34 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> LastModifiedDate {
+        public Asset Item {
             get {
-                return this.lastModifiedDateField;
+                return this.itemField;
             }
             set {
-                this.lastModifiedDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastModifiedDateSpecified {
-            get {
-                return this.lastModifiedDateFieldSpecified;
-            }
-            set {
-                this.lastModifiedDateFieldSpecified = value;
+                this.itemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> LikeCount {
+        public string ItemId {
             get {
-                return this.likeCountField;
+                return this.itemIdField;
             }
             set {
-                this.likeCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LikeCountSpecified {
-            get {
-                return this.likeCountFieldSpecified;
-            }
-            set {
-                this.likeCountFieldSpecified = value;
+                this.itemIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LinkUrl {
+        public string Name {
             get {
-                return this.linkUrlField;
+                return this.nameField;
             }
             set {
-                this.linkUrlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Asset Parent {
-            get {
-                return this.parentField;
-            }
-            set {
-                this.parentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ParentId {
-            get {
-                return this.parentIdField;
-            }
-            set {
-                this.parentIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string RelatedRecordId {
-            get {
-                return this.relatedRecordIdField;
-            }
-            set {
-                this.relatedRecordIdField = value;
+                this.nameField = value;
             }
         }
         
@@ -59476,12 +64785,23 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Title {
+        public TagDefinition TagDefinition {
             get {
-                return this.titleField;
+                return this.tagDefinitionField;
             }
             set {
-                this.titleField = value;
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
             }
         }
         
@@ -59590,6 +64910,8 @@ namespace Salesforce {
         private System.Nullable<System.DateTime> systemModstampField;
         
         private bool systemModstampFieldSpecified;
+        
+        private QueryResult tagsField;
         
         private QueryResult tasksField;
         
@@ -60072,6 +65394,17 @@ namespace Salesforce {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult Tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public QueryResult Tasks {
             get {
                 return this.tasksField;
@@ -60100,6 +65433,431 @@ namespace Salesforce {
             }
             set {
                 this.usageEndDateFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class AssetFeed : sObject {
+        
+        private string bodyField;
+        
+        private System.Nullable<int> commentCountField;
+        
+        private bool commentCountFieldSpecified;
+        
+        private byte[] contentDataField;
+        
+        private string contentDescriptionField;
+        
+        private string contentFileNameField;
+        
+        private System.Nullable<int> contentSizeField;
+        
+        private bool contentSizeFieldSpecified;
+        
+        private string contentTypeField;
+        
+        private Name createdByField;
+        
+        private string createdByIdField;
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private QueryResult feedCommentsField;
+        
+        private QueryResult feedLikesField;
+        
+        private QueryResult feedTrackedChangesField;
+        
+        private Name insertedByField;
+        
+        private string insertedByIdField;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private System.Nullable<System.DateTime> lastModifiedDateField;
+        
+        private bool lastModifiedDateFieldSpecified;
+        
+        private System.Nullable<int> likeCountField;
+        
+        private bool likeCountFieldSpecified;
+        
+        private string linkUrlField;
+        
+        private Asset parentField;
+        
+        private string parentIdField;
+        
+        private string relatedRecordIdField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private string titleField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Body {
+            get {
+                return this.bodyField;
+            }
+            set {
+                this.bodyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CommentCount {
+            get {
+                return this.commentCountField;
+            }
+            set {
+                this.commentCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CommentCountSpecified {
+            get {
+                return this.commentCountFieldSpecified;
+            }
+            set {
+                this.commentCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] ContentData {
+            get {
+                return this.contentDataField;
+            }
+            set {
+                this.contentDataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentDescription {
+            get {
+                return this.contentDescriptionField;
+            }
+            set {
+                this.contentDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentFileName {
+            get {
+                return this.contentFileNameField;
+            }
+            set {
+                this.contentFileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> ContentSize {
+            get {
+                return this.contentSizeField;
+            }
+            set {
+                this.contentSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContentSizeSpecified {
+            get {
+                return this.contentSizeFieldSpecified;
+            }
+            set {
+                this.contentSizeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CreatedById {
+            get {
+                return this.createdByIdField;
+            }
+            set {
+                this.createdByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedComments {
+            get {
+                return this.feedCommentsField;
+            }
+            set {
+                this.feedCommentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedLikes {
+            get {
+                return this.feedLikesField;
+            }
+            set {
+                this.feedLikesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public QueryResult FeedTrackedChanges {
+            get {
+                return this.feedTrackedChangesField;
+            }
+            set {
+                this.feedTrackedChangesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Name InsertedBy {
+            get {
+                return this.insertedByField;
+            }
+            set {
+                this.insertedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string InsertedById {
+            get {
+                return this.insertedByIdField;
+            }
+            set {
+                this.insertedByIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> LastModifiedDate {
+            get {
+                return this.lastModifiedDateField;
+            }
+            set {
+                this.lastModifiedDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastModifiedDateSpecified {
+            get {
+                return this.lastModifiedDateFieldSpecified;
+            }
+            set {
+                this.lastModifiedDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> LikeCount {
+            get {
+                return this.likeCountField;
+            }
+            set {
+                this.likeCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LikeCountSpecified {
+            get {
+                return this.likeCountFieldSpecified;
+            }
+            set {
+                this.likeCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LinkUrl {
+            get {
+                return this.linkUrlField;
+            }
+            set {
+                this.linkUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Asset Parent {
+            get {
+                return this.parentField;
+            }
+            set {
+                this.parentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string RelatedRecordId {
+            get {
+                return this.relatedRecordIdField;
+            }
+            set {
+                this.relatedRecordIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }
@@ -62425,6 +68183,171 @@ namespace Salesforce {
             }
             set {
                 this.whoIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sobject.enterprise.soap.sforce.com")]
+    public partial class AccountTag : sObject {
+        
+        private System.Nullable<System.DateTime> createdDateField;
+        
+        private bool createdDateFieldSpecified;
+        
+        private System.Nullable<bool> isDeletedField;
+        
+        private bool isDeletedFieldSpecified;
+        
+        private Account itemField;
+        
+        private string itemIdField;
+        
+        private string nameField;
+        
+        private System.Nullable<System.DateTime> systemModstampField;
+        
+        private bool systemModstampFieldSpecified;
+        
+        private TagDefinition tagDefinitionField;
+        
+        private string tagDefinitionIdField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CreatedDateSpecified {
+            get {
+                return this.createdDateFieldSpecified;
+            }
+            set {
+                this.createdDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> IsDeleted {
+            get {
+                return this.isDeletedField;
+            }
+            set {
+                this.isDeletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDeletedSpecified {
+            get {
+                return this.isDeletedFieldSpecified;
+            }
+            set {
+                this.isDeletedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Account Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SystemModstamp {
+            get {
+                return this.systemModstampField;
+            }
+            set {
+                this.systemModstampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SystemModstampSpecified {
+            get {
+                return this.systemModstampFieldSpecified;
+            }
+            set {
+                this.systemModstampFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public TagDefinition TagDefinition {
+            get {
+                return this.tagDefinitionField;
+            }
+            set {
+                this.tagDefinitionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TagDefinitionId {
+            get {
+                return this.tagDefinitionIdField;
+            }
+            set {
+                this.tagDefinitionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }

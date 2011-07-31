@@ -23,8 +23,14 @@ namespace ChatterDataLoader
 
         static void Main(string[] args)
         {
-            Program program = new Program();
-            program.Run();
+            try
+            {
+                Program program = new Program();
+                program.Run();
+            }
+            catch(Exception ex) {
+                Console.Out.WriteLine(ex);
+            }
         }
 
         void Run()

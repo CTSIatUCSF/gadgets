@@ -48,7 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthoringTests.txt" />
     <Content Include="soql.txt" />
   </ItemGroup>
   <ItemGroup>

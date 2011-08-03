@@ -22,7 +22,7 @@
 		//var statsURL = "hhttp://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
 		
 	    //TODO: upload the image and change the url 
-		var defaultImage = 'http://www.ulitochka.com/tmp/default_img.png';
+		var defaultImage = 'images/default_img.png';
 	
 		$(document).ready(function(){
 			loadActivities();

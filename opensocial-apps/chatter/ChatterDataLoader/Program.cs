@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.IO;
 
 namespace ChatterDataLoader
 {
@@ -43,12 +44,26 @@ namespace ChatterDataLoader
 
             List<user> rs =(from p in dc.GetTable<user>() where (p.InternalUserName != null && p.PersonID != null) select p).ToList<user>();
 
+            StreamWriter errors = new StreamWriter("errors.csv", false);
+            errors.WriteLine("Name, Person Id, Employee Id, Error");
+
+            StreamWriter processed = new StreamWriter("processed.csv", false);
+            processed.WriteLine("Name, Person Id, Employee Id");
+
             int count = 0;
             try
             {
                 foreach (user u in rs)
                 {
-                    service.CreateResearchProfile(u.InternalUserName);
+                    try
+                    {
+                        service.CreateResearchProfile(u.InternalUserName);
+                        processed.WriteLine(u.FirstName + " " + u.LastName + "," + u.PersonID + "," + u.InternalUserName);
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.WriteLine(u.FirstName + " " + u.LastName + "," + u.PersonID + "," + u.InternalUserName + ",\"" + ex.Message + "\"");
+                    }
                     count++;
                     if (count % 100 == 0)
                     {
@@ -58,6 +73,8 @@ namespace ChatterDataLoader
             }
             finally
             {
+                processed.Close();
+                errors.Close();
                 Console.Out.WriteLine("Processed " + count + " Research Profiles");
             }
         }

@@ -61,14 +61,14 @@ BEGIN
 			select @errorMsg = ERROR_MESSAGE()
 			RAISERROR (@errorMsg, 10, 1)
 			
-			IF @attempts > 10 BEGIN
+			IF @attempts > 0 BEGIN
 				UPDATE shindig_activity SET chatterFlag = 'F', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityId = @activityId
 			END	
 			ELSE BEGIN
 				UPDATE shindig_activity SET chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityId = @activityId
 			END
 						 
-			IF @errorCount > 10 BEGIN
+			IF @errorCount > 100 BEGIN
 				RAISERROR ('Too many errors', 11,1)
 				CLOSE activityCursor
 				DEALLOCATE activityCursor

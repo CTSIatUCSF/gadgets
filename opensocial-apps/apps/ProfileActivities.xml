@@ -19,7 +19,7 @@
 		var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
 		//var statsURL = "hhttp://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
 			     
-		var defaultImage = 'images/default_img.png';
+		var defaultImage = '/apps/images/default_img.png';
 		//var defaultImage = 'http://www.ulitochka.com/tmp/default_img.png';
 	
 		function loadStats() {

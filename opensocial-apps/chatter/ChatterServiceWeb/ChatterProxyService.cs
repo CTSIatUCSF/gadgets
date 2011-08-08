@@ -53,8 +53,9 @@ namespace ChatterService.Web
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
             Activity[] list = service.GetProfileActivities(count).ToArray();
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            string strJSON = js.Serialize(list);
+//            JavaScriptSerializer js = new JavaScriptSerializer();
+//            string strJSON = js.Serialize(list);
+
             return list;
         }
 
@@ -73,7 +74,6 @@ namespace ChatterService.Web
         {
             return true;
         }
-
     }
 
    

@@ -10,7 +10,10 @@ namespace ChatterService.Model
     [KnownType(typeof(User))]
     public class Entity
     {
-        [DataMember]
+        internal Entity()
+        {
+        }
+
         public string Id { get; set; }
 
         [DataMember]

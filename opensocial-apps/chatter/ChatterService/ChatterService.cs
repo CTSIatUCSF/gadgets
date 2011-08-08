@@ -287,7 +287,7 @@ namespace ChatterService
             Salesforce.QueryResult qr = _service.query(string.Format(query, pk));
             if (qr.records == null)
             {
-                throw new Exception(string.Format("Object not found, {0}, keys:{1}", typeof(T).FullName, pk.First()));
+                throw new Exception(string.Format("Object not found, {0}, keys:{1}", typeof(T).FullName, pk.Select(it => it.ToString()).Aggregate((s1, s2) => s1 + "," + s2)));
             }
             var profile = qr.records.FirstOrDefault();
             return (T)profile;

@@ -6,16 +6,19 @@ using System.Runtime.Serialization;
 
 namespace ChatterService.Model
 {
-    [DataContract(IsReference = false)]
-    class User : Entity
+    [DataContract(IsReference = false,
+                  Namespace="",
+                  Name="u")]
+    public class User : Entity
     {
-        [DataMember]
+        internal User()
+        {
+        }
+
         public string FirstName { get; set; }
 
-        [DataMember]
         public string LastName { get; set; }
 
-        [DataMember]
         public string EmployeeId { get; set; }
 
         [DataMember]

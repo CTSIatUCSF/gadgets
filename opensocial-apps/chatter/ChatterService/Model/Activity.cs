@@ -18,31 +18,44 @@ namespace ChatterService.Model
     [DataContract]
     public class Activity
     {
+        internal Activity()
+        {
+        }
+
         /// <summary>
         /// Generated unique ID
         /// </summary>
-        [DataMember]
         public string Id { get; set; }
 
         /// <summary>
         /// Who created the activity
         /// </summary>
-        [DataMember]
         public string CreatedById { get; set; }
 
-        [DataMember]
         public Entity Parent { get; set; }
 
         /// <summary>
         /// Simple TimeStamp 
         /// </summary>
-        [DataMember]
         public DateTime? CreatedDT { get; set; }
 
-        [DataMember]
+        [DataMember(Name="m")]
         public string Message { get; set; }
 
-        [DataMember]
         public ActivityType Type { get; set; }
+
+        [DataMember(Name="n")]
+        public string ParentName
+        {
+            get { return Parent.Name; }
+            set {}
+        }
+        [DataMember(Name = "id")]
+        public int ParentId
+        {
+            get { return Parent.GetType() == typeof(User) ? ((User)Parent).PersonId : 0; }
+            set { }
+        }
+
     }
 }

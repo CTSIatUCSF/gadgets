@@ -56,6 +56,7 @@
   					$('div.activities').html(items.join(''));
   					
   					$('div.act-img img').error(function() {
+  						$(this).unbind('error');
   						$(this).attr('src', defaultImage)
 					});
 				},           
@@ -66,11 +67,11 @@
 		function buildActivityHtml(item) {
 		    var loc = window.top.location;
     		var path = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-			var profileUrl = path + 'ProfileDetails.aspx?Person=' + item.Parent.PersonId;
+			var profileUrl = path + 'ProfileDetails.aspx?Person=' + item.id;
 		
 			var imgUrl = '';
-			if(item.Parent.PersonId) {
-				imgUrl = path + 'Thumbnail.ashx?id=' + item.Parent.PersonId;
+			if(item.id) {
+				imgUrl = path + 'Thumbnail.ashx?id=' + item.id;
 			}
 			else {
 				imgUrl = defaultImage;
@@ -81,8 +82,8 @@
     			   '<div class="act">' +
     			   '	<div class="act-img"><img src="'+ imgUrl +'"/></div>' +
     			   '	<div class="act-body">' +
-    			   '		<div class="act-user"><a href="'+profileUrl+'" target="_top">'+ item.Parent.Name +'</a></div>' +
-    			   '		<div class="act-msg">'+ item.Message +'</div>' +
+    			   '		<div class="act-user"><a href="'+profileUrl+'" target="_top">'+ item.n +'</a></div>' +
+    			   '		<div class="act-msg">'+ item.m +'</div>' +
     			   '	</div>' +
     			   '</div>';
 		}
@@ -100,7 +101,7 @@
 		        event.preventDefault();
 		    	gadgets.views.requestNavigateTo('canvas');	
 		    });		    		   
-		});
+		});			
 	</script>    
     
     <!-- Styles -->
@@ -134,9 +135,6 @@
     		height: 250px;    		    		
     	}
     	    	
-    	div.divider {
-    	}
-    	
     	div.act {
     		margin-left:0px;
 			clear: both;    		
@@ -171,6 +169,9 @@
     		margin-bottom: 10px;
     		margin-left:20px;
     		margin-right:20px;
+    		clear:both;
+    		height:1px;
+    		overflow:hidden;
     	}    	
     	    	
     	div.more-act{
@@ -200,11 +201,52 @@
     </div>]]></Content>
     <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<script type="text/javascript">	
+    <!--script type="text/javascript" src="http://do-web.com/js/jpaging/jquery.jpaging.0.2.js" ></script-->
+	<script type="text/javascript">
+	    var activities;
+	    gadgets.window.adjustHeight(500);	
 		$(document).ready(function(){
-			loadActivities(1000);
+			loadActivities(500);	            		
 		    loadStats();
 		});
+		
+		function getActivities(count) {
+			$.ajax({
+				type: "GET",
+				url: chatterProxyURL + count,
+				data: "{}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(msg) {
+				    activities = msg;
+				    renderPage(0, 5);
+/*				    
+					$("#paging").jpaging({
+                    	all_items_num: activities.length,
+                    	callback: renderPage,
+                    	items_on_page: 4,
+                		pages_step: 5
+            		});
+*/            		
+				},           
+				error: function(jqXHR, textStatus, errorThrown) { alert(errorThrown); }
+			});         
+		}
+		
+		function renderPage(start_index, end_index){
+		    var items = [];
+		    for(var i=start_index;i<=end_index && i< activities.length;i++) {
+			    var actHtml = buildActivityHtml(activities[i]);
+				items.push(actHtml);
+			}	
+			$('div.activities').html(items.join(''));
+					
+			$('div.act-img img').error(function() {
+				$(this).unbind('error');
+				$(this).attr('src', defaultImage)
+			});
+		}
+		
 	</script>    
     <style type="text/css">        
     	div.act-left-view,
@@ -224,13 +266,13 @@
 
     	div.activities {
     		overflow-y:auto;
-    		height: 500px;    		    		
+    		height: 440px;    		    		
     	}
     	    	
     	div.act {
     		margin-left:5px;
 			clear: both;  
-			min-height: 45px;  		
+			min-height: 45px;			  	
     	}
     	div.act-img {
     		display:inline-block;
@@ -266,6 +308,9 @@
     		margin-bottom: 10px;
     		margin-left:0px;
     		margin-right:0px;
+    		clear:both;
+    		height:1px;
+    		overflow:hidden;
     	}    	
     	    	
     	div.more-act{
@@ -286,6 +331,7 @@
     			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>
+		<div id="paging"></div>
     	<div class="activities">
     		Loading...
     	</div>

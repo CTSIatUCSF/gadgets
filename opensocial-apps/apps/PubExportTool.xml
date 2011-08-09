@@ -51,7 +51,7 @@
 		pop.document.write("The Publications Export tool lets you export data about the publications from a profile."
 			+ "<ul><li>Find a profile for which you want to capture the publications.</li>"
 			+ "<li>Click the <b>Export</b> button to export data about all the publications.</li>"
-			+ "<li>Profiles takes you to the export pane, where you can select what to export: either All Data for Title, Publication in which the paper was published, Published date, and PubMed ID or just PubMed ID.</li>"
+			+ "<li>Profiles takes you to the export pane, where you can select what data to export.</li>"
 			+ "<li>If you decide not to export the data, click the Back link or back button in your browser to return to the profile.</li></ul>");
 		pop.document.write("<br><br><center>" 
 			+ "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
@@ -132,6 +132,7 @@
     				last_names = [];
 					initials = [];
         			$(xml).find("MedlineCitation").each(function(){
+        				iso = $(this).find("ISOAbbreviation").text();
             			table_title = $(this).find("ArticleTitle").text();
             			table_pubdate = $(this).find("PubDate").text();
             			table_pmid = $(this).find("PMID").text();
@@ -154,6 +155,7 @@
             			}
             		        		
             			table_title = table_title + " " + table_authors + table_pubdate;
+            			export_all_string = table_title + " " + table_authors + iso + " " + table_pubdate; 
             			
             			hash_title = "#title" + pmid_first_eight;
             			hash_pmid = "#pmid" + pmid_first_eight;			
@@ -164,7 +166,7 @@
 						document.getElementById("canvas_id_list_textarea").value += pmid_first_eight + ",";
 						
 						// add to the full export text area
-						document.getElementById("canvas_full_list_textarea").value += table_title + "\n\n";
+						document.getElementById("canvas_full_list_textarea").value += export_all_string + "\n\n";
 												
             		}); /* end find call */
         		} /* end success function */

@@ -125,7 +125,7 @@
 
   			$.ajax({
     			type: "GET",
-    			url: "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=" + g_arrOldIDs[idNum],
+    			url: "http://profiles.ucsf.edu/CustomAPI/v1/PubXML.aspx?PMID=" + g_arrOldIDs[idNum],
     			dataType: "xml",
     			success: function(xml){
     				table_authors = "";

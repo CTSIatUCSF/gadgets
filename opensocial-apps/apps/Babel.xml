@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="Babel" height="400">
+    <Require feature="babel"/>
+    <Require feature="osapi"/>    
+    <Require feature="dynamic-height"/>    
+  </ModulePrefs> 
+  <Content type="html">
+  <![CDATA[ 
+  <form>
+  RDF: <input type="text" id="rdfurl" name="rdfurl" size="80"
+		value="http://connects.catalyst.harvard.edu/profiles/profile/person/32213/viewas/rdf">
+  <p>
+  <a href="javascript: submitform()">Submit</a>&nbsp;<a href="javascript: goback()">Back</a>
+  </form>
+  </p>
+  <div id="content_div"></div>
+  <script type="text/javascript">
+
+  var priorurl = [];
+  var ndx = 0;
+  priorurl[ndx++] = "http://vivo.ufl.edu/individual/n25562/n25562.rdf";
+  priorurl[ndx++] = "http://connects.catalyst.harvard.edu/profiles/profile/person/32213/viewas/rdf";
+
+  function submitform() {
+	var rdfurl = document.getElementById('rdfurl');
+	if (ndx == 0 || priorurl[ndx] != rdfurl.value) {
+        priorurl[ndx++] = rdfurl.value; 
+      }
+	gadgets.babel.translate(rdfurl.value, showResults);
+  }
+
+  function goback() {
+      if (ndx > 0 && priorurl[ndx - 1] == document.getElementById('rdfurl').value) {
+	   ndx--;
+      }
+	if (ndx > 0) {
+	   ndx--
+      }
+  	document.getElementById('rdfurl').value = priorurl[ndx];
+  }
+
+
+  /**
+   * Create the new activity and send it to the server.
+   */
+  
+  function getData() {
+	osapi.people.getOwner().execute(function(result) {
+		if (result.urls) {
+		  for (var i = 0; i < result.urls.length; i++) {
+			if (result.urls[i].type == "RDF") {
+				document.getElementById('rdfurl').value = result.urls[i].value;
+				submitform();
+			}
+		  }
+            }
+		var div = document.getElementById('content_div');
+		div.innerHTML = result.data;
+	});
+
+	//gadgets.babel.translate('http://connects.catalyst.harvard.edu/profiles/profile/author/C6F4E065-4423-4FCC-813D-1DB3177FE61C/viewas/rdf', showResults);
+  };
+
+  function showResults(result) {
+      var div = document.getElementById('content_div');
+	div.innerText = result.text
+	if (result.errors.length > 0) {
+      	div.innerHTML = result.errors[0] + "</p>" + result.text;
+	}
+	else if (result.data.items.length == 1) {
+		div.innerHTML = getHtml(result.data.items[0], 0);
+      }
+      else {
+		div.innerHTML = getHtml(result.data.items, 0);
+      }
+	gadgets.window.adjustHeight();
+  };
+
+  function getHtml(o, level) {
+	var retval = "";
+	if (typeof o == "object") {
+	  if (level != 0) {
+		retval = "<br/>";
+        }
+	  for (var i = 0; i < level; i++) {
+	    retval += "&nbsp;&nbsp;";
+ 	  }
+	  for (var key in o) {
+		if (typeof key != "number") {
+		   retval += "<b>" + key + "</b>:";
+		}
+		retval += getHtml(o[key], level + 1) + "<br/>";
+        }
+	}
+      else {
+        if (typeof o == "string" && isProbablyRDF(o)) {
+	   retval = "<div style=\"color:blue\" onclick=\"document.getElementById('rdfurl').value='" + makeRDFUrl(o) + "';\">" + makeRDFUrl(o) + "</div>";		
+        }
+	  else {
+	   retval += o;
+        }
+	} 
+	return retval;
+  };
+
+  function isProbablyRDF(str) {
+    return str.indexOf("http://") === 0 && str.indexOf("/profile/") != -1;
+  }
+
+  function makeRDFUrl(str) {
+    return str + "/" + str.split("/profile/")[1] + ".rdf";
+  }
+  //Call getData as soon as the gadget finishes loading.
+    gadgets.util.registerOnLoadHandler(getData);
+  </script>
+  ]]> 
+  </Content>
+</Module>

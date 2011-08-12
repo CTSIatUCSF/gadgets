@@ -27,7 +27,7 @@
 	if (ndx == 0 || priorurl[ndx] != rdfurl.value) {
         priorurl[ndx++] = rdfurl.value; 
       }
-	gadgets.babel.translate(rdfurl.value, showResults);
+	babel.translate(rdfurl.value, showResults);
   }
 
   function goback() {
@@ -46,20 +46,25 @@
    */
   
   function getData() {
-	osapi.people.getOwner().execute(function(result) {
-		if (result.urls) {
-		  for (var i = 0; i < result.urls.length; i++) {
-			if (result.urls[i].type == "RDF") {
-				document.getElementById('rdfurl').value = result.urls[i].value;
-				submitform();
-			}
-		  }
-            }
-		var div = document.getElementById('content_div');
-		div.innerHTML = result.data;
+      babel.people.getOwner(function(result) {
+		var rdfurl = makeRDFUrl(result.data.items[0].uri);
+		document.getElementById('rdfurl').value = rdfurl ;
+		submitform();
 	});
+//	osapi.people.getOwner().execute(function(result) {
+//		if (result.urls) {
+//		  for (var i = 0; i < result.urls.length; i++) {
+//			if (result.urls[i].type == "RDF") {
+//				document.getElementById('rdfurl').value = result.urls[i].value;
+//				submitform();
+//			}
+//		  }
+//            }
+//		var div = document.getElementById('content_div');
+//		div.innerHTML = result.data;
+//	});
 
-	//gadgets.babel.translate('http://connects.catalyst.harvard.edu/profiles/profile/author/C6F4E065-4423-4FCC-813D-1DB3177FE61C/viewas/rdf', showResults);
+	//babel.translate('http://connects.catalyst.harvard.edu/profiles/profile/author/C6F4E065-4423-4FCC-813D-1DB3177FE61C/viewas/rdf', showResults);
   };
 
   function showResults(result) {

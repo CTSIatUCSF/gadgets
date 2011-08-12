@@ -82,13 +82,21 @@
 				imgUrl = defaultImage;
 			}
 			
+			var msg = item.m;
+			var idx = msg.search(/PMID=[0-9]+/i); 
+			if( idx != -1) {
+			    var fr = msg.match(/PMID=[0-9]+/i);
+				var pmid = fr[0].split('=')[1];
+				msg = msg.substr(0,idx) + '<a href="http://www.ncbi.nlm.nih.gov/pubmed/' + pmid + '">'+ fr[0] +'</a>' + msg.substr(idx + fr[0].length);
+			}
+			
 			return '<div class="divider">' +
 				   '</div>' +
     			   '<div class="act">' +
     			   '	<div class="act-img"><img src="'+ imgUrl +'"/></div>' +
     			   '	<div class="act-body">' +
     			   '		<div class="act-user"><a href="'+profileUrl+'" target="_top">'+ item.n +'</a></div>' +
-    			   '		<div class="act-msg">'+ item.m +'</div>' +
+    			   '		<div class="act-msg">'+ msg +'</div>' +
     			   '	</div>' +
     			   '</div>';
 		}

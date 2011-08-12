@@ -154,35 +154,7 @@ namespace ChatterService
         {
             var feeds = new List<Activity>();
             Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_ALL_USER_ACTIVITIES, count));
-
             feeds.AddRange(from Salesforce.UserFeed record in qr.records
-                           select new Activity
-                           {
-                               Id = record.Id,
-                               Message = record.Body,
-                               CreatedDT = record.CreatedDate,
-                               CreatedById = record.CreatedById,
-                               Type = ActivityType.TextPost,
-                               Parent = new User 
-                               {
-                                   Id = record.ParentId,
-                                   Name = record.Parent.Name,
-                                   FirstName = record.Parent.FirstName,
-                                   LastName = record.Parent.LastName,
-                                   EmployeeId = record.Parent.UCSF_ID__c,
-                                   PersonId = GetPersonId(record.Parent.UCSF_ID__c)
-                               }
- 
-                           });
-
-            return feeds;
-        }
-
-        public List<Activity> GetProfileActivities(int count) {
-            var feeds = new List<Activity>();
-            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, count));
-
-            feeds.AddRange(from Salesforce.Research_Profile__Feed record in qr.records
                            select new Activity
                            {
                                Id = record.Id,
@@ -193,15 +165,78 @@ namespace ChatterService
                                Parent = new User
                                {
                                    Id = record.ParentId,
-                                   Name = record.Parent.User__r.Name,
-                                   FirstName = record.Parent.User__r.FirstName,
-                                   LastName = record.Parent.User__r.LastName,
-                                   PersonId = GetPersonId(record.Parent.User__r.UCSF_ID__c)
+                                   Name = record.Parent.Name,
+                                   FirstName = record.Parent.FirstName,
+                                   LastName = record.Parent.LastName,
+                                   EmployeeId = record.Parent.UCSF_ID__c,
+                                   PersonId = GetPersonId(record.Parent.UCSF_ID__c)
                                }
 
                            });
 
             return feeds;
+        }
+
+        public List<Activity> GetProfileActivities(int count) {
+            var feeds = new SortedDictionary<int, Activity>();
+            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000));
+
+            Dictionary<int, HashSet<string>> items = new Dictionary<int, HashSet<string>>();
+
+            Random random = new Random();
+            bool done = false;
+            while (!done)
+            {
+                for (int i = 0; i < qr.records.Length && feeds.Count < count; i++)
+                {
+                    Salesforce.Research_Profile__Feed record = (Salesforce.Research_Profile__Feed)qr.records[i];
+                    int personId = GetPersonId(record.Parent.User__r.UCSF_ID__c);
+                    HashSet<string> userPosts;
+                    if (!items.TryGetValue(personId, out userPosts))
+                    {
+                        userPosts = new HashSet<string>();
+                        items.Add(personId, userPosts);
+                    }
+
+                    
+                    if(!userPosts.Contains(record.Body)) {
+                        Activity act = new Activity
+                        {
+                            Id = record.Id,
+                            Message = record.Body,
+                            CreatedDT = record.CreatedDate,
+                            CreatedById = record.CreatedById,
+                            Type = ActivityType.TextPost,
+                            Parent = new User
+                            {
+                                Id = record.ParentId,
+                                Name = record.Parent.User__r.Name,
+                                FirstName = record.Parent.User__r.FirstName,
+                                LastName = record.Parent.User__r.LastName,
+                                PersonId = personId
+                            }
+                        };
+
+                        userPosts.Add(act.Message);
+                        int key = random.Next(1000);
+                        while (feeds.ContainsKey(key))
+                        {
+                            key = random.Next(1000);
+                        }
+                        feeds.Add(key, act);
+                    }
+
+                }
+                if (qr.done || feeds.Count >= count)
+                {
+                    done = true;
+                }
+                else
+                {
+                    qr = _service.queryMore(qr.queryLocator);
+                }
+            }
+            return feeds.Values.ToList();
         }
 
         protected void CreateResearchProfileInternal(string employeeId)

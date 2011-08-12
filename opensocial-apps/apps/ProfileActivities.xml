@@ -27,6 +27,7 @@
 				type: "GET",
 				url: statsURL,
 				data: "{}",
+				cache: false,
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(msg) {
@@ -40,11 +41,12 @@
 			});         
 		}
 		
-		function loadActivities(count) {
+		function loadActivities(count, callback) {
 			$.ajax({
 				type: "GET",
 				url: chatterProxyURL + count,
 				data: "{}",
+				cache: false,
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(msg) {
@@ -59,6 +61,9 @@
   						$(this).unbind('error');
   						$(this).attr('src', defaultImage)
 					});
+					if(callback != null) {
+						callback();
+					}
 				},           
 				error: function(jqXHR, textStatus, errorThrown) { alert(errorThrown); }
 			});         
@@ -94,8 +99,18 @@
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     
 	<script type="text/javascript">	
+	    gadgets.window.adjustHeight(350);	
 		$(document).ready(function(){
-			loadActivities(3);
+			loadActivities(3, function(){
+				var height = 0;
+				$('div.act').each(function(){
+					height += $(this).height();
+				});
+				if(height < 184) {
+					$('div.activities').height(height + 66);
+				    gadgets.window.adjustHeight($('act-left-view').height());	
+				}
+			});	            		
 		    loadStats();
 		    $('div.more-act a').click(function(event) {
 		        event.preventDefault();
@@ -138,6 +153,7 @@
     	div.act {
     		margin-left:0px;
 			clear: both;    		
+			min-height: 45px;			  	
     	}
     	div.act-img {
     		display:inline-block;
@@ -204,49 +220,10 @@
     <!--script type="text/javascript" src="http://do-web.com/js/jpaging/jquery.jpaging.0.2.js" ></script-->
 	<script type="text/javascript">
 	    var activities;
-	    gadgets.window.adjustHeight(500);	
 		$(document).ready(function(){
 			loadActivities(500);	            		
 		    loadStats();
-		});
-		
-		function getActivities(count) {
-			$.ajax({
-				type: "GET",
-				url: chatterProxyURL + count,
-				data: "{}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function(msg) {
-				    activities = msg;
-				    renderPage(0, 5);
-/*				    
-					$("#paging").jpaging({
-                    	all_items_num: activities.length,
-                    	callback: renderPage,
-                    	items_on_page: 4,
-                		pages_step: 5
-            		});
-*/            		
-				},           
-				error: function(jqXHR, textStatus, errorThrown) { alert(errorThrown); }
-			});         
-		}
-		
-		function renderPage(start_index, end_index){
-		    var items = [];
-		    for(var i=start_index;i<=end_index && i< activities.length;i++) {
-			    var actHtml = buildActivityHtml(activities[i]);
-				items.push(actHtml);
-			}	
-			$('div.activities').html(items.join(''));
-					
-			$('div.act-img img').error(function() {
-				$(this).unbind('error');
-				$(this).attr('src', defaultImage)
-			});
-		}
-		
+		});		
 	</script>    
     <style type="text/css">        
     	div.act-left-view,

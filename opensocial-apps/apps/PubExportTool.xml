@@ -293,9 +293,12 @@
 		-->
 	</div>
 	
-	<div id="canvas_id_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
+	<div id="canvas_id_list" style="display:none; background:#FFF; width:664px; height:44px; margin-left:12px;">
 	Copy and paste the information below into a .txt file or another program.
 	<input type="button" style="height:22px; font-size:10; margin-left:84px;" value="Close" onClick="document.getElementById('canvas_id_list').style.display='none';document.getElementById('canvas_id_list_text').style.display='none';document.getElementById('canvas_pubs_list').style.display='block';"></button>
+	<br />
+	<a href="http://www.ncbi.nlm.nih.gov/sites/pmctopmid/" target="_blank">Convert copied PMIDs to PMCIDs</a>
+	<br />
 	</div>
 	
 	<!-- holds the title and ID list to be copied to the clipboard -->

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Publications Export">
+		<Require feature="opensocial-0.9" />
+		<Require feature="dynamic-height" />
+		<Require feature="pubsub" />
+		<Require feature="osapi" />
+		<Require feature="babel" />
+	</ModulePrefs>
+
+	<!-- ==================== START DEFAULT VIEW ==================== -->
+
+	<Content type="html"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+    
+    <!-- top menu links -->
+	<div>
+		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
+		DIRECT Match<p>
+		
+		<p id="progress" style="margin-left:20px;">
+		<br><br>
+		<img src="images/waiting.gif">
+		<br><br>
+		<b>Processing data. This may take a minute or two.</b>
+		</p>
+	</div>
+	
+	<!-- holds the visible match list -->
+	<div id="match_list" style="display:block; margin:20px 0px 0px 20px; height:525px; overflow:auto;"></div>
+
+	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    
+	<style>
+    	.tool_title { font-family:Verdana, Arial; font-size:14px;}
+    	.tool_title_orange { font-family:Verdana, Arial; font-size:14px; color:#FF9900; }
+    	.tool_body { font-family:Arial; font-size:12px;}
+    	.tool_credit { font-family:Arial; font-size:10px;}
+    	.tool_table_cell { font-family:Arial; font-size:12px; padding:0px 20px 10px 0px; }
+    	.tool_table_cell_small { font-family:Arial; font-size:11px;}
+    	.tool_toggle_button { height:26px; width:70px; font-size:12px; font-weight:bold; }  		   	
+    </style>
+
+	<script type="text/javascript">
+	
+	var directURLs = [ 
+		{"site": "UCSF", "URL": "http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&SearchPhrase="}
+		];
+	var query = "cow";
+	
+	// ==============================================================
+	
+    function readData(callback) {
+		query = "cow";
+		callback();
+    }
+	// ==============================================================	
+	
+	function buildPubList() {
+	
+		// test data
+		// var directURLs = ["10516321","8929434","8738377"];		
+		
+		for (idNum in directURLs) {
+
+  			$.ajax({
+    			type: "GET",
+    			url: "directURLs[idNum].URL + query,
+    			dataType: "xml",
+    			success: function(xml){
+    				var count = $(xml).find("count").text();
+            			hash_title = "#title" + table_pmid;
+            			hash_pmid = "#pmid" + table_pmid;			
+            		$("#count_" + idNum).html(count);
+        		} /* end success function */
+  			}); /* end ajax call */
+  		} /* end for loop */
+	}
+	// ==============================================================	
+	
+	function buildResultsTable() {
+		
+		//sample PMID request
+		//http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=11110823
+		
+		// test data
+		// var directURLs = ["10516321","8929434","8738377"];
+		
+		// start the table
+		var strTable="<table cellspacing='0' cellpadding='0' width='600'>";
+			
+		// build the table header row
+		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u></td>";
+		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>PubMed&nbsp;ID</b></u></td>";
+		strTable=strTable + "</tr>";
+			
+		// build the data rows
+		for (j in directURLs) {
+			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'>" + directURLs[j].site + "</td>";
+			strTable = strTable + "<td align='left' valign='top' class='tool_table_cell'><div id='count_" + j + "'></div></td></tr>";
+		}
+
+		// end the table
+		strTable = strTable + "</table>";
+						
+		// add to the full export text area
+		//document.getElementById("canvas_full_list_textarea").value = g_all_data_export;
+		
+		document.getElementById("progress").style.display="none";
+				
+		// dispay the table in canvas view
+		document.getElementById("match_list").innerHTML = strTable;
+		
+		// fetch the PMID data and populate the table
+		buildPubList();
+		
+	} /* end buildResultsTable */
+	
+	// ==============================================================		
+		
+	function init() {
+		gadgets.window.adjustHeight(600);
+		readData(buildResultsTable);
+		document.getElementById("match_list").style.display="block";
+	}
+	
+	gadgets.util.registerOnLoadHandler(init);
+		
+	</script>
+	]]>
+	</Content>
+
+	<!-- ==================== END DEFAULT VIEW ==================== -->
+
+</Module>

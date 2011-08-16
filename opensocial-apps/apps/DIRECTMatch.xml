@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="Publications Export">
+	<ModulePrefs title="DIRECT Match">
 		<Require feature="opensocial-0.9" />
 		<Require feature="dynamic-height" />
 		<Require feature="pubsub" />
@@ -62,22 +62,13 @@
 	
 	function buildPubList() {
 	
-		// test data
-		// var directURLs = ["10516321","8929434","8738377"];		
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 		
 		for (idNum in directURLs) {
-
-  			$.ajax({
-    			type: "GET",
-    			url: "directURLs[idNum].URL + query,
-    			dataType: "xml",
-    			success: function(xml){
-    				var count = $(xml).find("count").text();
-            			hash_title = "#title" + table_pmid;
-            			hash_pmid = "#pmid" + table_pmid;			
-            		$("#count_" + idNum).html(count);
-        		} /* end success function */
-  			}); /* end ajax call */
+			gadgets.io.makeRequest(directURLs[idNum].URL + query, function(xml) {
+				$("#count_" + idNum).html($(xml.text).find("count").text());
+			}, params);
   		} /* end for loop */
 	}
 	// ==============================================================	
@@ -94,8 +85,8 @@
 		var strTable="<table cellspacing='0' cellpadding='0' width='600'>";
 			
 		// build the table header row
-		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u></td>";
-		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>PubMed&nbsp;ID</b></u></td>";
+		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Site</b></u></td>";
+		strTable=strTable + "<td width='25%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Count</b></u></td>";
 		strTable=strTable + "</tr>";
 			
 		// build the data rows

@@ -15,17 +15,12 @@
     
     
     <!-- top menu links -->
-	<div>
-		<p id="number_selected" class="tool_title_orange" style="margin-left:20px;">
-		DIRECT Match<p>
-		
-		<p id="progress" style="margin-left:20px;">
-		<br><br>
-		<img src="images/waiting.gif">
-		<br><br>
-		<b>Processing data. This may take a minute or two.</b>
-		</p>
-	</div>
+	<form>
+  		RDF: <input type="text" id="rdfurl" name="rdfurl" size="80"
+		value="http://connects.catalyst.harvard.edu/profiles/profile/person/32213/viewas/rdf">
+  		<p>
+  		<a href="javascript: submitform()">Submit</a>&nbsp;<a href="javascript: goback()">Back</a>
+  	</form>
 	
 	<!-- holds the visible match list -->
 	<div id="match_list" style="display:block; margin:20px 0px 0px 20px; height:525px; overflow:auto;"></div>
@@ -48,19 +43,34 @@
 	<script type="text/javascript">
 	
 	var directURLs = [ 
-		{"site": "UCSF", "URL": "http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&SearchPhrase="}
+		{"site": "UCSF", "URL": "http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&"}
 		];
+      var personJSON = {};
 	var query = "cow";
 	
 	// ==============================================================
 	
-    function readData(callback) {
-		query = "cow";
-		callback();
-    }
+      function readData(callback) {
+		
+      	babel.people.getOwner(function(result) {
+			if (result.data.items[0].hasResearchArea) {
+				for (var i = 0; i < result.data.items[0].hasResearchArea.length && i < 1; i++) {
+					var rdfurl = makeRDFUrl(result.data.items[0].hasResearchArea[i]);	
+					babel.translate(rdfurl, function(ir){
+						query = gadgets.io.encodeValues( {"SearchPhrase" : ir.data.items[0].label });
+						callback();
+					});				
+				}
+			}
+		});
+      }
 	// ==============================================================	
+
+  	function makeRDFUrl(str) {
+   		return str + "/" + str.split("/profile/")[1] + ".rdf";
+  	}
 	
-	function buildPubList() {
+	function buildList() {
 	
 		var params = {};
 		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -98,16 +108,13 @@
 		// end the table
 		strTable = strTable + "</table>";
 						
-		// add to the full export text area
-		//document.getElementById("canvas_full_list_textarea").value = g_all_data_export;
-		
-		document.getElementById("progress").style.display="none";
+
 				
 		// dispay the table in canvas view
 		document.getElementById("match_list").innerHTML = strTable;
 		
 		// fetch the PMID data and populate the table
-		buildPubList();
+		buildList();
 		
 	} /* end buildResultsTable */
 	

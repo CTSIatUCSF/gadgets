@@ -56,6 +56,5 @@ namespace ChatterService.Model
             get { return Parent.GetType() == typeof(User) ? ((User)Parent).PersonId : 0; }
             set { }
         }
-
     }
 }

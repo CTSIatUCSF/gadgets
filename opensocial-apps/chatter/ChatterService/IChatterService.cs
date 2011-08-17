@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ChatterService.Model;
-
+using System.Web.Caching;
 
 namespace ChatterService
 {
@@ -33,6 +33,7 @@ namespace ChatterService
         /// <returns>Collection of activity models.</returns>
         List<Activity> GetActivities(int count);
         List<Activity> GetProfileActivities(int count);
+        Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval);
 
         /// <summary>
         /// Return all activities for a user.

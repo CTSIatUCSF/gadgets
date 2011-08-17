@@ -5,7 +5,9 @@ using System.Text;
 using ChatterService.Model;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Web.Caching;
 using System.Net;
+using System.Data;
 
 namespace ChatterService
 {
@@ -237,6 +239,78 @@ namespace ChatterService
                 }
             }
             return feeds.Values.ToList();
+        }
+
+        public Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval)
+        {
+            lock (this)
+            {
+                Activities activities = cache["ProfileActivities"] as Activities;
+                if (activities == null || activities.RequestedCount < count)
+                {
+                    activities = new Activities(count, QueryActivitiesFromSF(count));
+                    cache.Insert("ProfileActivities", activities, null, DateTime.Now.AddSeconds(cacheInterval), Cache.NoSlidingExpiration);
+                }
+                return activities.GetRandomList(count);
+            }
+        }
+
+        //return activities from SF grouped by body
+        protected List<Activity> QueryActivitiesFromSF(int count)
+        {            
+            List<Activity> activities = new List<Activity>();
+            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000));
+
+            Dictionary<int, HashSet<string>> items = new Dictionary<int, HashSet<string>>();
+            bool done = false;
+            while (!done)
+            {
+                for (int i = 0; i < qr.records.Length && activities.Count < count; i++)
+                {
+                    Salesforce.Research_Profile__Feed record = (Salesforce.Research_Profile__Feed)qr.records[i];
+                    int personId = GetPersonId(record.Parent.User__r.UCSF_ID__c);
+                    HashSet<string> userActivities;
+                    if (!items.TryGetValue(personId, out userActivities))
+                    {
+                        userActivities = new HashSet<string>();
+                        items.Add(personId, userActivities);
+                    }
+
+
+                    if (!userActivities.Contains(record.Body))
+                    {
+                        Activity act = new Activity
+                        {
+                            Id = record.Id,
+                            Message = record.Body,
+                            CreatedDT = record.CreatedDate,
+                            CreatedById = record.CreatedById,
+                            Type = ActivityType.TextPost,
+                            Parent = new User
+                            {
+                                Id = record.ParentId,
+                                Name = record.Parent.User__r.Name,
+                                FirstName = record.Parent.User__r.FirstName,
+                                LastName = record.Parent.User__r.LastName,
+                                PersonId = personId
+                            }
+                        };
+
+                        userActivities.Add(act.Message);
+                        activities.Add(act);
+                    }
+
+                }
+                if (qr.done || activities.Count >= count)
+                {
+                    done = true;
+                }
+                else
+                {
+                    qr = _service.queryMore(qr.queryLocator);
+                }
+            }
+            return activities;
         }
 
         protected void CreateResearchProfileInternal(string employeeId)

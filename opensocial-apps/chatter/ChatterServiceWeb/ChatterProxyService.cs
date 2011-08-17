@@ -33,10 +33,11 @@ namespace ChatterService.Web
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ChatterProxyService : IChatterProxyService
     {
-        string url;
-        string userName;
-        string password;
-        string token;
+        readonly string url;
+        readonly string userName;
+        readonly string password;
+        readonly string token;
+        readonly int cacheInterval;
 
         public ChatterProxyService()
         {
@@ -44,6 +45,7 @@ namespace ChatterService.Web
             userName = ConfigurationSettings.AppSettings["SalesForceUserName"];
             password = ConfigurationSettings.AppSettings["SalesForcePassword"];
             token = ConfigurationSettings.AppSettings["SalesForceToken"];
+            cacheInterval = Int32.Parse(ConfigurationSettings.AppSettings["CacheInterval"]);
         }
 
         public Activity[] GetActivities(int count)
@@ -52,10 +54,7 @@ namespace ChatterService.Web
 
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
-            Activity[] list = service.GetProfileActivities(count).ToArray();
-//            JavaScriptSerializer js = new JavaScriptSerializer();
-//            string strJSON = js.Serialize(list);
-
+            Activity[] list = service.GetProfileActivities(count, HttpRuntime.Cache, cacheInterval);
             return list;
         }
 

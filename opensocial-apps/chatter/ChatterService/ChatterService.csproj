@@ -58,6 +58,7 @@
     <Compile Include="ChatterService.cs" />
     <Compile Include="ChatterSqlProcedures.cs" />
     <Compile Include="IChatterService.cs" />
+    <Compile Include="Model\Activities.cs" />
     <Compile Include="Queries.cs" />
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\Entity.cs" />

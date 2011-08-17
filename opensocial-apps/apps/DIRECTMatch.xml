@@ -16,8 +16,9 @@
     
     <!-- top menu links -->
 	<form>
-  		RDF: <input type="text" id="rdfurl" name="rdfurl" size="80"
-		value="http://connects.catalyst.harvard.edu/profiles/profile/person/32213/viewas/rdf">
+  		RDF: <input type="text" id="rdfurl" name="rdfurl" size="80">
+  		<p>
+  		<div id="query"></div>
   		<p>
   		<a href="javascript: submitform()">Submit</a>&nbsp;<a href="javascript: goback()">Back</a>
   	</form>
@@ -42,48 +43,116 @@
 
 	<script type="text/javascript">
 	
+  var priorurl = [];
+  var ndx = 0;
+  priorurl[ndx++] = "http://vivo.ufl.edu/individual/n25562/n25562.rdf";
+  priorurl[ndx++] = "http://connects.catalyst.harvard.edu/profiles/profile/person/32213/viewas/rdf";
+
+  function submitform() {
+	var rdfurl = document.getElementById('rdfurl');
+	if (ndx == 0 || priorurl[ndx] != rdfurl.value) {
+        priorurl[ndx++] = rdfurl.value; 
+      }
+	babel.translate(rdfurl.value, processData);
+  }
+
+  function goback() {
+      if (ndx > 0 && priorurl[ndx - 1] == document.getElementById('rdfurl').value) {
+	   ndx--;
+      }
+	if (ndx > 0) {
+	   ndx--
+      }
+  	document.getElementById('rdfurl').value = priorurl[ndx];
+  }
+
 	var directURLs = [ 
-		{"site": "UCSF", "URL": "http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&"}
+		{"site": "Cornell University", "URL": "http://vivoexperts.ctsi.ufl.edu/cu_fs.php?school=1&return=xml&querytext="},
+		{"site": "Harvard University", "URL": "http://connects.catalyst.harvard.edu/profiles/DirectService.asp?Request=IncomingCount&SearchPhrase="},
+		{"site": "Health Sciences South Carolina", "URL": "http://profiles.healthsciencessc.org/DirectService.aspx?Request=IncomingCount&SearchPhrase="},
+		{"site": "Indiana CTSI", "URL": "http://www.indianactsi.org/memberSearch?queryString="},
+		{"site": "Ponce School of Medicine", "URL": "http://vivoexperts.ctsi.ufl.edu/psm_fs.php?return=xml&querytext="},
+		{"site": "Stanford University School of Medicine", "URL": "http://med.stanford.edu/profiles/frdActionServlet?choiceId=federatedAggregateQuery&searchterms="},
+		{"site": "The Scripps Research Institute", "URL": "http://vivoexperts.ctsi.ufl.edu/scripps_fs.php?return=xml&querytext="},
+		{"site": "University of California, San Francisco", "URL": "http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&SearchPhrase="},
+		{"site": "University of Florida", "URL": "http://vivoexperts.ctsi.ufl.edu/uf_fs.php?return=xml&querytext="},
+		{"site": "University of Iowa", "URL": "http://www.icts.uiowa.edu/Loki/federation/aggregateQuery.jsp?query="},
+		{"site": "University of Michigan", "URL": "http://www.experts.scival.com/umichigan/federation/aggregateQuery.asp?query="},
+		{"site": "University of Minnesota", "URL": "http://profiles.ahc.umn.edu/DirectService.aspx?Request=IncomingCount&SearchPhrase="},
+		{"site": "Washington University in St. Louis", "URL": "http://vivoexperts.ctsi.ufl.edu/wustl_fs.php?return=xml&querytext="},
+		{"site": "Weill Cornell Medical College", "URL": "http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=xml&querytext="},
+		{"site": "Albert Einstein College of Medicine", "URL": "http://www.experts.scival.com/einstein/federation/aggregateQuery.asp?query="},
+		{"site": "John Hopkins University", "URL": "http://www.experts.scival.com/jhu/federation/aggregateQuery.asp?query="},
+		{"site": "Medical College of Georgia", "URL": "http://www.experts.scival.com/mcg/federation/aggregateQuery.asp?query="},
+		{"site": "MEHARRY Medical College", "URL": "http://www.experts.scival.com/mmc/federation/aggregateQuery.asp?query="},
+		{"site": "Memorial Sloan-Kettering Cancer Center", "URL": "http://www.experts.scival.com/mskcc/federation/aggregateQuery.asp?query="},
+		{"site": "Michigan Alliance for Clinical and Translational Science", "URL": "http://www.experts.scival.com/wayne/federation/aggregateQuery.asp?query="},
+		{"site": "Northwestern University Feinberg School of Medicine", "URL": "http://latticegrid.feinberg.northwestern.edu/direct_search/"},
+		{"site": "Oregon Health &  Science University", "URL": "http://www.experts.scival.com/ohsuv3/federation/aggregateQuery.asp?query="},
+		{"site": "The University of Alabama at Birmingham", "URL": "http://www.experts.scival.com/uab/federation/aggregateQuery.asp?query="},
+		{"site": "UCDAVIS Health System", "URL": "http://www.experts.scival.com/ucdavis/federation/aggregateQuery.asp?query="},
+		{"site": "University of Maryland", "URL": "http://www.experts.scival.com/maryland/federation/aggregateQuery.asp?query="},
+		{"site": "University of Miami", "URL": "http://www.experts.scival.com/miami/federation/aggregateQuery.asp?query="},
+		{"site": "UT Health Science Center", "URL": "http://www.experts.scival.com/uthscsa/federation/aggregateQuery.asp?query="},
+		{"site": "University of Illnois", "URL": "http://www.experts.scival.com/uic/federation/aggregateQuery.asp?query="}
 		];
       var personJSON = {};
-	var query = "cow";
 	
 	// ==============================================================
 	
-      function readData(callback) {
+      function processData(result) {
 		
-      	babel.people.getOwner(function(result) {
-			if (result.data.items[0].hasResearchArea) {
-				for (var i = 0; i < result.data.items[0].hasResearchArea.length && i < 1; i++) {
-					var rdfurl = makeRDFUrl(result.data.items[0].hasResearchArea[i]);	
-					babel.translate(rdfurl, function(ir){
-						query = gadgets.io.encodeValues( {"SearchPhrase" : ir.data.items[0].label });
-						callback();
-					});				
+		if (result.data.items[0].hasResearchArea) {
+			var rdfurl = [];
+			for (var i = 0; i < result.data.items[0].hasResearchArea.length && i < 5; i++) {
+				rdfurl[i] = makeRDFUrl(result.data.items[0].hasResearchArea[i]);	
+			}
+			babel.translate(rdfurl, function(ir){
+				var searchPhrase = "";
+				for (var i = 0; i < ir.data.items.length; i++) {
+					searchPhrase += ir.data.items[i].label + " ";
+				}
+				buildResultsTable( searchPhrase );
+			});				
+		}
+		else {
+			for (var i = 0; i < result.data.items.length; i++) {
+				if (result.data.items[i].freetextKeyword) {
+					buildResultsTable( result.data.items[i].freetextKeyword );
 				}
 			}
-		});
+		}
       }
 	// ==============================================================	
+
+	
 
   	function makeRDFUrl(str) {
    		return str + "/" + str.split("/profile/")[1] + ".rdf";
   	}
 	
-	function buildList() {
+	function buildList(query) {
 	
 		var params = {};
 		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 		
-		for (idNum in directURLs) {
-			gadgets.io.makeRequest(directURLs[idNum].URL + query, function(xml) {
-				$("#count_" + idNum).html($(xml.text).find("count").text());
-			}, params);
+		for (var i = 0; i < directURLs.length; i++) {
+			gadgets.io.makeRequest(directURLs[i].URL + encodeURIComponent(query), getFunctionToShowCountForSite(i), params);
   		} /* end for loop */
+	}
+
+	function getFunctionToShowCountForSite(i) {
+		return function(xml) {
+			$("#site_" + i).html("<a href='" + $(xml.text).find("search-results-URL").text() + 
+				"' target='_blank'>" + directURLs[i].site + "</a>");
+			$("#count_" + i).html($(xml.text).find("count").text());
+		};
 	}
 	// ==============================================================	
 	
-	function buildResultsTable() {
+	function buildResultsTable(query) {
+		query = query.replace(/;/g, '').replace(/,/g, '');
+		document.getElementById('query').innerHTML = "Query: " + query;
 		
 		//sample PMID request
 		//http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/PubXML.aspx?PMID=11110823
@@ -92,7 +161,7 @@
 		// var directURLs = ["10516321","8929434","8738377"];
 		
 		// start the table
-		var strTable="<table cellspacing='0' cellpadding='0' width='600'>";
+		var strTable="<table cellspacing='0' cellpadding='0' width='550'>";
 			
 		// build the table header row
 		strTable=strTable + "<td width='75%' align='left' valign='top' class='tool_table_cell'>" + "<u><b>Site</b></u></td>";
@@ -101,7 +170,7 @@
 			
 		// build the data rows
 		for (j in directURLs) {
-			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'>" + directURLs[j].site + "</td>";
+			strTable = strTable + "<tr><td align='left' valign='top' class='tool_table_cell'><div id='site_" + j + "'>" + directURLs[j].site + "</div></td>";
 			strTable = strTable + "<td align='left' valign='top' class='tool_table_cell'><div id='count_" + j + "'></div></td></tr>";
 		}
 
@@ -114,15 +183,19 @@
 		document.getElementById("match_list").innerHTML = strTable;
 		
 		// fetch the PMID data and populate the table
-		buildList();
+		buildList(query);
 		
 	} /* end buildResultsTable */
 	
 	// ==============================================================		
 		
 	function init() {
-		gadgets.window.adjustHeight(600);
-		readData(buildResultsTable);
+		gadgets.window.adjustHeight();
+		babel.people.getOwner( function(result) {
+			var rdfurl = makeRDFUrl(result.data.items[0].uri);
+			document.getElementById('rdfurl').value = rdfurl ;
+			processData(result);
+		});
 		document.getElementById("match_list").style.display="block";
 	}
 	

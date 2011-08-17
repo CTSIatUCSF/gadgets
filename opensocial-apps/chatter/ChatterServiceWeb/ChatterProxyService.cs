@@ -38,6 +38,7 @@ namespace ChatterService.Web
         readonly string password;
         readonly string token;
         readonly int cacheInterval;
+        static bool initialized = false;
 
         public ChatterProxyService()
         {
@@ -46,12 +47,11 @@ namespace ChatterService.Web
             password = ConfigurationSettings.AppSettings["SalesForcePassword"];
             token = ConfigurationSettings.AppSettings["SalesForceToken"];
             cacheInterval = Int32.Parse(ConfigurationSettings.AppSettings["CacheInterval"]);
+            Init();
         }
 
         public Activity[] GetActivities(int count)
         {
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
-
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
             Activity[] list = service.GetProfileActivities(count, HttpRuntime.Cache, cacheInterval);
@@ -60,8 +60,6 @@ namespace ChatterService.Web
 
         public Activity[] GetUserActivities(string userId)
         {
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
-
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
 
@@ -72,6 +70,17 @@ namespace ChatterService.Web
         private static bool customXertificateValidation(object sender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
         {
             return true;
+        }
+
+        private void Init()
+        {
+            lock(this) {
+                if (!initialized)
+                {
+                    ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
+                    initialized = true;
+                }
+            }
         }
     }
 

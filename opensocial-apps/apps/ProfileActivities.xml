@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Profile Activities"
+            title="Activities"
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
         <Require feature="opensocial-0.9" />

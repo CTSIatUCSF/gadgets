@@ -87,7 +87,7 @@
 			if( idx != -1) {
 			    var fr = msg.match(/PMID=[0-9]+/i);
 				var pmid = fr[0].split('=')[1];
-				msg = msg.substr(0,idx) + '<a href="http://www.ncbi.nlm.nih.gov/pubmed/' + pmid + '">'+ fr[0] +'</a>' + msg.substr(idx + fr[0].length);
+				msg = msg.substr(0,idx) + '<a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/' + pmid + '">'+ fr[0] +'</a>' + msg.substr(idx + fr[0].length);
 			}
 			
 			return '<div class="divider">' +
@@ -225,7 +225,6 @@
     </div>]]></Content>
     <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <!--script type="text/javascript" src="http://do-web.com/js/jpaging/jquery.jpaging.0.2.js" ></script-->
 	<script type="text/javascript">
 	    var activities;
 		$(document).ready(function(){
@@ -316,7 +315,6 @@
     			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>
-		<div id="paging"></div>
     	<div class="activities">
     		Loading...
     	</div>

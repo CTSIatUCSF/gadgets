@@ -330,7 +330,15 @@ namespace ChatterService
                 User__c = user.Id
 
             };
-            var result = _service.create(new Salesforce.sObject[] { profile });
+            Salesforce.SaveResult[] results = _service.create(new Salesforce.sObject[] { profile });
+            foreach (Salesforce.SaveResult result in results)
+            {
+                if (!result.success)
+                {
+                    throw new Exception("Cannot create ResearchProfile for employee id=" + employeeId + ", with error:\n" + result.errors.Select(it => it.statusCode + ":" + it.message).Aggregate((s1, s2) => s1 + "\n" + s2));
+                }
+            }
+
         }
 
         public void CreateResearchProfile(string employeeId)

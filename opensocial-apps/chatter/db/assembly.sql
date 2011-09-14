@@ -17,6 +17,11 @@ FROM 'C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\System.Runt
 WITH PERMISSION_SET = UNSAFE
 GO
 
+CREATE ASSEMBLY SystemWeb 
+FROM 'C:\WINDOWS\MICROSOFT.NET\FRAMEWORK64\V2.0.50727\SYSTEM.WEB.DLL' 
+WITH PERMISSION_SET = UNSAFE
+GO
+
 CREATE ASSEMBLY ChatterService
 AUTHORIZATION dbo
 FROM 'C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\ChatterService.dll'

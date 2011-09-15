@@ -17,6 +17,7 @@ namespace ChatterService
         public const string TEST_SERVICE_URL = "https://login.ucsf--ctsi.cs10.my.salesforce.com/services/Soap/c/22.0";
 
         private Salesforce.SforceService _service;
+        private String _userId;
         public string Url { get; set; }
 
         public ChatterService(string url)
@@ -34,6 +35,7 @@ namespace ChatterService
             {
                 result = _service.login(username, password + token);
 
+                _userId = result.userId;
                 _service.Url = result.serverUrl;
                 _service.SessionHeaderValue = new Salesforce.SessionHeader();
                 _service.SessionHeaderValue.sessionId = result.sessionId;
@@ -326,7 +328,7 @@ namespace ChatterService
             Salesforce.Research_Profile__c profile = new Salesforce.Research_Profile__c
             {
                 Name = user.FirstName + " " + user.LastName,
-                OwnerId = user.Id,
+                OwnerId = _userId,
                 User__c = user.Id
 
             };

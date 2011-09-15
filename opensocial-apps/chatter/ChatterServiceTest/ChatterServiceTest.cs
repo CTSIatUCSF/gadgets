@@ -179,7 +179,7 @@ namespace ChatterServiceTest
             service.Login(_username, _password, _token);
 
             DateTime dt = new DateTime(2011, 7, 29, 14, 11, 12);
-                service.CreateProfileActivity(_employeeId, "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
+            service.CreateProfileActivity(_employeeId, "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
         }
 
         [TestMethod]

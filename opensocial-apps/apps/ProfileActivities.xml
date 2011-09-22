@@ -16,8 +16,8 @@
 	<script type="text/javascript">
 		var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc/activities?count="; //QA
 		//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc/activities?count=";
-		var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
-		//var statsURL = "hhttp://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
+		//var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
+		var statsURL = "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
 			     
 		var defaultImage = '/apps/images/default_img.png';
 		//var defaultImage = 'http://www.ulitochka.com/tmp/default_img.png';
@@ -46,6 +46,7 @@
 		function loadStats() {
 		  sendRequest(true, statsURL, function(obj) {
 				$('div.stats td.profs').html(obj.profiles);
+				$('div.stats td.edits').html(obj.edited);
   				$('div.stats td.pubs').html(obj.publications);
   		  	}, function(obj) {
   				$('div.stats').html("Server " + obj.rc + " error: " + obj.errors);
@@ -82,7 +83,7 @@
 		
 			var imgUrl = '';
 			if(item.id) {
-				imgUrl = path + 'Thumbnail.ashx?id=' + item.id;
+				imgUrl = path + 'Thumbnail.ashx?id=' + item.id + '&ShowSilhouette=True';
 			}
 			else {
 				imgUrl = defaultImage;
@@ -219,6 +220,7 @@
     	<div class="stats">
     		<table cellspacing="0" cellpadding="0">
     			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
+    			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
     			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>

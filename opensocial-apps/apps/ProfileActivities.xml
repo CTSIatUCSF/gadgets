@@ -83,7 +83,7 @@
 		
 			var imgUrl = '';
 			if(item.id) {
-				imgUrl = path + 'Thumbnail.ashx?id=' + item.id + '&ShowSilhouette=True';
+				imgUrl = path + 'Thumbnail.ashx?id=' + item.id + '&ShowSilhouetteAsDefault=True';
 			}
 			else {
 				imgUrl = defaultImage;

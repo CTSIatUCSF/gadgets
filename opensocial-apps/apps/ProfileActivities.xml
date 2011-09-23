@@ -320,6 +320,7 @@
     	<div class="stats">
     		<table cellspacing="0" cellpadding="0">
     			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
+    			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
     			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>

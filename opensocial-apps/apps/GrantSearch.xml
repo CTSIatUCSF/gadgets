@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="js/os.js" ></script>
 		<script type="text/javascript" src="js/UCSF.js" ></script>
 		<script type="text/javascript">
+			var profileUrl = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/JSONProfile.aspx?Person="; 
 			var globalPerson = {};
 
 			function sendRequest(url, success) {
@@ -28,29 +29,17 @@
 			  		  
 	  		  gadgets.io.makeRequest(url, success, params);
 			}			
+
+			function sendPostRequest(url, post_params, success) {
+			  var params = {};
+			  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(post_params);
+			  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+			  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+			  		  
+	  		  gadgets.io.makeRequest(url, success, params);
+			}			
 		
-			function initGadget() {
-				sendRequest("http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/JSONProfile.aspx?Person=4999751", function(obj) {
-					if(obj.data != null) {
-					    var keywords = obj.data.Profiles[0].Keywords;
-						if(keywords.length > 0) {
-							$("#txtSearchBox").val(keywords[0]);
-							grantSearch();
-							var strLink = "";
-							$.each(keywords, function(j,item){
-								strLink = '<a class="aKeywordSearch" href="">' + item + '</a>';
-								$("#pKeywordLinks").append(strLink + "&nbsp;|&nbsp;");
-							});
-							
-							$("a.aKeywordSearch").click(function(event) {
-								event.preventDefault();
-								$("#txtSearchBox").val($(this).html());
-								grantSearch();
-							});
-						}
-					}		  		  		
-   			    });				
-			
+			function initGadget() {			
 				globalPerson = opensocial.IdSpec.PersonId.OWNER;
 	            var req = opensocial.newDataRequest();
 	            req.add(req.newFetchPersonRequest(globalPerson),'owner');
@@ -61,7 +50,7 @@
 				$("#dResults").html("");
 				var strTerm = $("#txtSearchBox").val();
 				if (strTerm != ""){
-					$.get(
+				    sendPostRequest(
 						"http://tsi.wfubmc.edu/webservices/grantSearch/search.cfc",
 						{method:"searchGrants", 
 						 keywords:strTerm, 
@@ -69,19 +58,24 @@
 						 orderBy:"REL",
 						 maxRows:"20"
 						 },
-						function( data ){
-							var dataJSON = $.parseJSON(data);
-							if (dataJSON.resultCount == 0){
-								$.post(
+						function(obj){
+							var dataJSON = obj.data;							
+							if (dataJSON != null && dataJSON.resultCount == 0){
+								sendPostRequest(
 									"http://crudev.wfubmc.edu/grantSearch/search.cfc",
-									{getData: "wsdl&method=searchGrants&keywords=" + strTerm + "&searchType=&orderBy=REL&type=&maxRows=20"},
-									function( data ){
-										var dataJSON = $.parseJSON(data);
-										$("#dResults").html("<h2>" + dataJSON.resultCount + " Grant(s) found for \"" + dataJSON.searchTerm + "\"</h2>");
-										$("#dResults").append("<p class=\"pGrantSearchErr\">These results are the closest match to your search term.  Try other terms for better results.</p>");
-										var i = 0;
-										for (i=0;i<dataJSON.resultCount;i++){
-											$("#dResults").append("<p class=\"grantDetails\"><a class=\"grantLink\" href=\"" + dataJSON.results[i].grantLink + "\">" + dataJSON.results[i].grantTitle + "</a> - " + dataJSON.results[i].purpose + "<span class=\"grantInfo\">(Type: " + dataJSON.results[i].docType + ", Release Date: " + dataJSON.results[i].relDate + ", Expiration Date: " + dataJSON.results[i].expDate + ")</span></p>");
+									{method:"searchGrants",keywords:strTerm,orderBy:"REL",maxRows:"20"},
+									function(obj){				
+										var dataJSON = obj.data;
+										if(dataJSON != null) {
+											$("#dResults").html("<h2>" + dataJSON.resultCount + " Grant(s) found for \"" + dataJSON.searchTerm + "\"</h2>");
+											$("#dResults").append("<p class=\"pGrantSearchErr\">These results are the closest match to your search term.  Try other terms for better results.</p>");
+											var i = 0;
+											for (i=0;i<dataJSON.resultCount;i++){
+												$("#dResults").append("<p class=\"grantDetails\"><a class=\"grantLink\" href=\"" + dataJSON.results[i].grantLink + "\">" + dataJSON.results[i].grantTitle + "</a> - " + dataJSON.results[i].purpose + "<span class=\"grantInfo\">(Type: " + dataJSON.results[i].docType + ", Release Date: " + dataJSON.results[i].relDate + ", Expiration Date: " + dataJSON.results[i].expDate + ")</span></p>");
+											}
+										}
+										else if(obj.errors != null) {
+											$("#dResults").append(obj.errors);
 										}
 									}
 								);
@@ -107,34 +101,36 @@
 				
 				var owner = data.get('owner').getData();
 				var profileId = owner.getField(opensocial.Person.Field.ID);
-				alert(profileId);
-				
-				$.ajax({
-					type: "GET",
-					url: window.location.origin + "http://tsi.wfubmc.edu/keywordProxy.aspx",
-					data: {p: profileId},
-					contentType: "application/xml; charset=utf-8",
-					dataType: "xml",
-					success: function(keywordXML){
-						var keywordJson = $.xml2json(keywordXML);
-						if (keywordJson.Table != undefined){
-							var keywordCount = keywordJson.Table.length;
-							if (keywordCount != 0){
-								$("#txtSearchBox").val(keywordJson.Table[0].meshkeywords);
+				sendRequest(profileUrl + profileId, function(obj) {
+					if(obj.data != null) {
+					    var keywords = obj.data.Profiles[0].Keywords;
+						if(keywords.length > 0) {
+							$("#txtSearchBox").val(keywords[0]);
+							grantSearch();
+							var strLink = "";
+							$.each(keywords, function(j,item){
+								strLink = '<a class="aKeywordSearch" href="">' + item + '</a>';
+								$("#pKeywordLinks").append(strLink + "&nbsp;|&nbsp;");
+							});
+							
+							$("a.aKeywordSearch").click(function(event) {
+								event.preventDefault();
+								$("#txtSearchBox").val($(this).html());
 								grantSearch();
-								var strLink = "";
-								$.each(keywordJson.Table, function(j,item){
-									strLink = "<a class=\"aKeywordSearch\" onclick=\"$('#txtSearchBox').val('" + item.meshkeywords + "');grantSearch();\">" + item.meshkeywords + "</a>";
-									$("#pKeywordLinks").append(strLink + "&nbsp;|&nbsp;");
-								});
-							}
+							});
 						}
-					}
-				});	
-				
+					}		  		  		
+   			    });				
 			}
 			
 		</script>
+	    <!-- Styles -->
+    	<style type="text/css">
+    		div#dResults {
+    			height:330px;
+    			overflow-y:auto;
+    		}
+    	</style>
 		
 		<p>Open NIH grant opportunities are listed below, with the most recent postings at the top.  You can search for your keywords by clicking the links below or enter your own search terms.</p>
 		<p>

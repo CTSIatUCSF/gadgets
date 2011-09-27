@@ -62,7 +62,7 @@
 							var dataJSON = obj.data;							
 							if (dataJSON != null && dataJSON.resultCount == 0){
 								sendPostRequest(
-									"http://crudev.wfubmc.edu/grantSearch/search.cfc",
+									"http://tsi.wfubmc.edu/webservices/grantSearch/search.cfc",
 									{method:"searchGrants",keywords:strTerm,orderBy:"REL",maxRows:"20"},
 									function(obj){				
 										var dataJSON = obj.data;

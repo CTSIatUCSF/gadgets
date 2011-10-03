@@ -9,8 +9,8 @@
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="small, canvas, default"><![CDATA[<!--HTML-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <Content type="html" view="small, canvas, profile, default"><![CDATA[<!--HTML-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">
@@ -231,15 +231,9 @@
     		<a href="">More Activity</a>
     	</div>
     </div>]]></Content>
-    <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
+    
+    <Content type="html" view="canvas, profile" preferred_height="500"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<script type="text/javascript">
-	    var activities;
-		$(document).ready(function(){
-			loadActivities(500);	            		
-		    loadStats();
-		});		
-	</script>    
     <style type="text/css">        
     	div.act-left-view,
     	div.act-left-view table {
@@ -328,5 +322,75 @@
     		Loading...
     	</div>
     </div>	
+    ]]></Content>
+    
+    <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
+		<script type="text/javascript">
+		    var activities;
+			$(document).ready(function(){
+				loadActivities(500);	            		
+			    loadStats();
+			});		
+		</script>    
+    ]]></Content>
+    <Content type="html" view="profile" preferred_height="500"><![CDATA[<!--HTML-->
+		<script type="text/javascript">
+		    var activities;
+			$(document).ready(function(){
+				loadActivities(500);	            		
+			    loadStats();
+			});		
+		</script>    
+    ]]></Content>
+    
+    <Content type="html" view="home" preferred_height="350"><![CDATA[
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+    	<script type="text/javascript" src="js/UCSF.js" ></script>
+    	<script type="text/javascript">
+	   		gadgets.util.registerOnLoadHandler(function(){
+	   			loadViewMode();
+	   		
+			    $("input#save").click(function(){
+			    	var viewmode = $('input[name="activities-viewmode"]:checked').val();
+		    		alert(viewmode);
+			    	saveViewMode(viewmode);	
+			    }) 
+			    $("input#cancel").click(function(){
+			    	loadViewMode();
+			    }) 
+		    });
+		    
+		    function loadViewMode() {
+		    	var userId = '@viewer';
+				osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['activities_viewmode']})
+			    	.execute(function(response){
+			    		//var viewer = {'activities_viewmode1':'1'};
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var viewmode = viewer.activities_viewmode;
+			    		alert(viewmode);
+			    		if(viewmode == null) {
+			    			viewmode = 'all';
+			    			saveViewMode(viewmode);
+			    		}
+		    			$('input[name="activities-viewmode"]').filter("[value=" + viewmode + "]").attr('checked', true);
+			    });
+		    }
+		    
+		    function saveViewMode(viewmode) {
+	    		osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'activities_viewmode':viewmode} })
+    				.execute(function(response){
+   				});	    				
+		    }
+		    		    
+    	</script>
+    
+		<div id="inner_home_settings">
+			<input type="radio" name="activities-viewmode" value="all">Show chatter posts and UCSF Profiles activities</input>
+			<br/>
+			<input type="radio" name="activities-viewmode" value="profilesOnly">Only show UCSF Profiles activities</input>
+			<br/>
+			<input type="button" value="Save" id="save"/><input type="button" value="Cancel" id="cancel"/>
+		</div>
     ]]></Content>
 </Module>

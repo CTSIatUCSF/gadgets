@@ -387,7 +387,10 @@
 	   			loadViewMode();
 	   		
 			    $("input#save").click(function(){
-			    	var viewmode = $('input[name="activities-viewmode"]:checked').val();
+			        var viewmode = 'profilesOnly';
+			    	if ($('input[name="activities-viewmode"]').attr('checked')) {
+			    		viewmode = 'all';
+			    	}
 			    	saveViewMode(viewmode);	
 			    }) 
 			    $("input#cancel").click(function(){
@@ -401,7 +404,9 @@
 			    			viewmode = 'all';
 			    			saveViewMode(viewmode);
 			    		}
-		    			$('input[name="activities-viewmode"]').filter("[value=" + viewmode + "]").attr('checked', true);
+			    		if(viewmode == 'all') {
+		    				$('input[name="activities-viewmode"]').attr('checked', true);
+		    			}
 			    });
 		    }
 		    		    
@@ -427,6 +432,14 @@
 	    	input#cancel {
 	    		margin-left:10px;
 	    	}
+	    	input[type="checkbox"].mode {	    	
+	    		margin:0px;
+	    		margin-right:5px;
+	    	}
+	    	#inner_home_settings span,
+	    	#inner_home_settings div input {
+	    		vertical-align:middle;
+	    	}
 	    </style>        
     
 		<!-- HideShow -->
@@ -434,9 +447,9 @@
 		<!-- HideShow end -->
     
 		<div id="inner_home_settings">
-			<input type="radio" name="activities-viewmode" value="all">Show chatter posts and UCSF Profiles activities</input>
+			Profiles related activities are shown by default.<br/>				
 			<br/>
-			<input type="radio" name="activities-viewmode" value="profilesOnly">Only show UCSF Profiles activities</input>
+			<div><input class="mode" type="checkbox" name="activities-viewmode" value="all"></input><span>Include my chatter posts</span></div>
 			<br/>
 			<div class="buttons"><input type="button" value="Save" id="save"/><input type="button" value="Cancel" id="cancel"/></div>
 		</div>]]></Content>

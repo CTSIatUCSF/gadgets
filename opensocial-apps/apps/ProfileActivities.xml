@@ -5,6 +5,7 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
         <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
@@ -14,8 +15,8 @@
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">
-		var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc/activities?count="; //QA
-		//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc/activities?count=";
+		//var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
+		var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc";
 		//var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
 		var statsURL = "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
 			     
@@ -53,9 +54,17 @@
   		  	}
   		  );	
 		}
+
+		function loadUserActivities(userId, mode, count, callback) {
+			loadActivities(chatterProxyURL + "/user/" + userId + "/activities?count=" + count + "&mode=" + mode, callback);
+		}
+
+		function loadProfileActivities(count, callback) {
+			loadActivities(chatterProxyURL + "/activities?count=" + count, callback);
+		}
 		
-		function loadActivities(count, callback) {
-		  sendRequest(false, chatterProxyURL + count, function(msg) {
+		function loadActivities(url, callback) {
+		  sendRequest(false, url, function(msg) {
 				var items = [];
 				$.each(msg, function(i, item) {
 				    var actHtml = buildActivityHtml(item);
@@ -107,16 +116,14 @@
     			   '	</div>' +
     			   '</div>';
 		}
-	</script>
-    ]]></Content>
-        
+	</script>]]></Content>
     <Content type="html" view="small" preferred_height="350"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     
 	<script type="text/javascript">	
 	    gadgets.window.adjustHeight(350);	
 		$(document).ready(function(){
-			loadActivities(3, function(){
+			loadProfileActivities(3, function(){
 				var height = 0;
 				$('div.act').each(function(){
 					height += $(this).height();
@@ -309,51 +316,78 @@
     		margin-right:5px;
     	}    	
     </style>
-    
-    <div class="act-left-view">
-    	<div class="stats">
-    		<table cellspacing="0" cellpadding="0">
-    			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
-    			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
-    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
-    		</table>
-    	</div>
-    	<div class="activities">
-    		Loading...
-    	</div>
-    </div>	
-    ]]></Content>
-    
+	]]></Content>
+	
     <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    var activities;
 			$(document).ready(function(){
-				loadActivities(500);	            		
+				loadProfileActivities(500);	            		
 			    loadStats();
 			});		
-		</script>    
-    ]]></Content>
+		</script>
+	    <div class="act-left-view">
+	    	<div class="stats">
+	    		<table cellspacing="0" cellpadding="0">
+	    			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
+	    			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
+	    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
+	    		</table>
+	    	</div>
+	    	<div class="activities">
+	    		Loading...
+	    	</div>
+	    </div>		
+	]]></Content>
+		
+    <Content type="html" view="home" preferred_height="120"><![CDATA[
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+    	<script type="text/javascript" src="js/UCSF.js" ></script>
+	]]></Content>
+		
+    <Content type="html" view="profile, home" preferred_height="500"><![CDATA[<!--HTML-->
+		<script type="text/javascript">
+		    function getViewMode(callback) {
+		    	var userId = '@viewer';
+				osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['activities_viewmode']})
+			    	.execute(function(response){
+			    		//var viewer = {'activities_viewmode1':'1'};
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var viewmode = viewer.activities_viewmode;
+			    		callback(viewmode);
+			    	});
+		    }
+		</script>
+	]]></Content>
+    
     <Content type="html" view="profile" preferred_height="500"><![CDATA[<!--HTML-->
+		<script type="text/javascript" src="http://jquery-json.googlecode.com/files/jquery.json-2.3.js"></script>    
 		<script type="text/javascript">
 		    var activities;
 			$(document).ready(function(){
-				loadActivities(500);	            		
-			    loadStats();
+				osapi.people.getOwner({ fields: ['id', 'activities_viewmode'] }).execute(function(result) {
+					getViewMode(function(viewmode){			
+						loadUserActivities(result.id, viewmode, 500);
+					});	            		
+				});
 			});		
-		</script>    
-    ]]></Content>
-    
-    <Content type="html" view="home" preferred_height="350"><![CDATA[
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-	    <script type="text/javascript" src="js/os.js" ></script>
-    	<script type="text/javascript" src="js/UCSF.js" ></script>
+		</script>
+	    <div class="act-left-view">
+	    	<div class="activities">
+	    		Loading...
+	    	</div>
+	    </div>		
+	]]></Content>
+		
+    <Content type="html" view="home" preferred_height="120"><![CDATA[
     	<script type="text/javascript">
 	   		gadgets.util.registerOnLoadHandler(function(){
 	   			loadViewMode();
 	   		
 			    $("input#save").click(function(){
 			    	var viewmode = $('input[name="activities-viewmode"]:checked').val();
-		    		alert(viewmode);
 			    	saveViewMode(viewmode);	
 			    }) 
 			    $("input#cancel").click(function(){
@@ -362,13 +396,7 @@
 		    });
 		    
 		    function loadViewMode() {
-		    	var userId = '@viewer';
-				osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['activities_viewmode']})
-			    	.execute(function(response){
-			    		//var viewer = {'activities_viewmode1':'1'};
-			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var viewmode = viewer.activities_viewmode;
-			    		alert(viewmode);
+		    	getViewMode(function(viewmode){
 			    		if(viewmode == null) {
 			    			viewmode = 'all';
 			    			saveViewMode(viewmode);
@@ -376,7 +404,7 @@
 		    			$('input[name="activities-viewmode"]').filter("[value=" + viewmode + "]").attr('checked', true);
 			    });
 		    }
-		    
+		    		    
 		    function saveViewMode(viewmode) {
 	    		osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'activities_viewmode':viewmode} })
     				.execute(function(response){
@@ -384,13 +412,32 @@
 		    }
 		    		    
     	</script>
+	    <style type="text/css">
+	    	#inner_home_settings {
+	    	    margin-left:20px;
+	    		margin-top:10px;
+	    	}        
+	    	.buttons {
+	    		margin-top:10px;
+	    		text-align:center;
+	    	}
+	    	input#save {
+	    		margin-right:10px;
+	    	}
+	    	input#cancel {
+	    		margin-left:10px;
+	    	}
+	    </style>        
+    
+		<!-- HideShow -->
+		<div id="hideshow"></div>
+		<!-- HideShow end -->
     
 		<div id="inner_home_settings">
 			<input type="radio" name="activities-viewmode" value="all">Show chatter posts and UCSF Profiles activities</input>
 			<br/>
 			<input type="radio" name="activities-viewmode" value="profilesOnly">Only show UCSF Profiles activities</input>
 			<br/>
-			<input type="button" value="Save" id="save"/><input type="button" value="Cancel" id="cancel"/>
-		</div>
-    ]]></Content>
+			<div class="buttons"><input type="button" value="Save" id="save"/><input type="button" value="Cancel" id="cancel"/></div>
+		</div>]]></Content>
 </Module>

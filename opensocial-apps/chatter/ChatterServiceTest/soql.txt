@@ -57,3 +57,10 @@ rp.OwnerId = '005A0000001X3NbIAK';
 rp.User__c = '005J0000000Q74wIAC';
 rp.User__c = '005A0000001X3NbIAK';
 insert rp;
+
+
+Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, 
+            Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 
+            From Research_Profile__Feed u 
+            Where Type='TextPost' and u.IsDeleted = false  and CreatedById= '005J0000000Q74wIAC'
+            ORDER BY CreatedDate DESC, ID DESC LIMIT 100

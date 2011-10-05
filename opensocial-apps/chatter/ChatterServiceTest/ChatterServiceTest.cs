@@ -55,6 +55,7 @@ namespace ChatterServiceTest
 
             string _employeeId = "111111111";
             string _userId = "005J0000000Q74wIAC";
+            int _personId = 5138614;
         
 
         //
@@ -151,18 +152,10 @@ namespace ChatterServiceTest
         {
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
-            List<Activity> list = service.GetActivities(_userId);
+            List<Activity> list = service.GetUserActivities(_userId, 123, 10);
             Assert.AreEqual(10, list.Count);
         }
 
-        [TestMethod]
-        public void TestGetActivities()
-        {
-            IChatterService service = new ChatterService.ChatterService(_url);
-            service.Login(_username, _password, _token);
-            List<Activity> list = service.GetActivities(100);
-            Assert.AreEqual(100, list.Count);
-        }
 
         [TestMethod]
         public void TestCreateReseachProfile()
@@ -175,11 +168,15 @@ namespace ChatterServiceTest
         [TestMethod]
         public void TestCreateProfileActivity()
         {
-            IChatterService service = new ChatterService.ChatterService(_url);
-            service.Login(_username, _password, _token);
+            //IChatterService service = new ChatterService.ChatterService(_url);
+            //service.Login(_username, _password, _token);
+            IChatterService service = new ChatterService.ChatterService("https://test.salesforce.com/services/Soap/c/22.0");
+            service.Login("ctsiapi@oneorg.ucsf.edu.uatmain", "CTProf123", "ao56v6ERhH0XD1U4aan0QTST");
 
             DateTime dt = new DateTime(2011, 7, 29, 14, 11, 12);
-            service.CreateProfileActivity(_employeeId, "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
+            service.CreateProfileActivity("021125612", "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
+            //service.CreateProfileActivity(_employeeId, "Edited their narrative", "Test Activity from 'TestCreateReseachProfile':" + dt, dt);
+            
         }
 
         [TestMethod]
@@ -190,12 +187,21 @@ namespace ChatterServiceTest
         }
 
         [TestMethod]
-        public void TestGetProfileActivities()
+        public void TestCreateGroup()
         {
             IChatterService service = new ChatterService.ChatterService(_url);
             service.Login(_username, _password, _token);
-            List<Activity> list = service.GetProfileActivities(1);
-            Assert.AreEqual(1, list.Count);
+            service.CreateGroup("Test API Group", "This group was created by unit test", _employeeId);
+        }
+
+        [TestMethod]
+        public void TestUsersToGroup()
+        {
+            IChatterService service = new ChatterService.ChatterService(_url);
+            service.Login(_username, _password, _token);
+            string id = service.CreateGroup("Test API Group", "This group was created by unit test", _employeeId);
+
+            service.AddUsersToGroup(id, new string[]{"020524930", "025693078"});
         }
 
     }

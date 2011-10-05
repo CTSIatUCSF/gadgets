@@ -37,7 +37,7 @@ namespace ChatterService.Model
         /// <summary>
         /// Simple TimeStamp 
         /// </summary>
-        public DateTime? CreatedDT { get; set; }
+        public DateTime CreatedDT { get; set; }
 
         [DataMember(Name="m")]
         public string Message { get; set; }
@@ -57,4 +57,17 @@ namespace ChatterService.Model
             set { }
         }
     }
+
+    class ActivitiesComparer : IComparer<Activity>
+    {
+        #region IComparer<Activity> Members
+
+        public int Compare(Activity x, Activity y)
+        {
+            return DateTime.Compare(y.CreatedDT, x.CreatedDT);
+        }
+
+        #endregion
+    }
+
 }

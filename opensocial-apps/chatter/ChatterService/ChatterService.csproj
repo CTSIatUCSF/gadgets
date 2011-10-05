@@ -40,6 +40,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -58,7 +61,20 @@
     <Compile Include="ChatterService.cs" />
     <Compile Include="ChatterSqlProcedures.cs" />
     <Compile Include="IChatterService.cs" />
+    <Compile Include="IProfilesServices.cs" />
     <Compile Include="Model\Activities.cs" />
+    <Compile Include="Model\Group.cs" />
+    <Compile Include="Dao\Profiles.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Profiles.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilesServices.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Queries.cs" />
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\Entity.cs" />
@@ -68,9 +84,27 @@
     <Compile Include="Salesforce\SalesforceService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dao\Profiles.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Profiles.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Salesforce\SalesforceApex.wsdl" />
     <None Include="Salesforce\SalesforceService.wsdl" />
     <None Include="sign.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Dao\Profiles.dbml.layout">
+      <DependentUpon>Profiles.dbml</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

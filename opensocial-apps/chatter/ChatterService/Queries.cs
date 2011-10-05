@@ -23,8 +23,15 @@ namespace ChatterService
             Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body,
             Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 
             From Research_Profile__Feed u 
-            Where Type='TextPost' and u.IsDeleted = false
+            Where Type='TextPost' and u.IsDeleted = false 
             ORDER BY CreatedDate DESC, ID DESC LIMIT {0}";
+
+        public const string SOQL_GET_PROFILE_ACTIVITIES_BY_USER = @"
+            Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body,
+            Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 
+            From Research_Profile__Feed u 
+            Where Type='TextPost' and u.IsDeleted = false and Parent.User__r.id = '{0}'
+            ORDER BY CreatedDate DESC, ID DESC LIMIT {1}";
 
         public const string SOQL_GET_ALL_USER_ACTIVITIES = @"
             Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body,
@@ -35,8 +42,11 @@ namespace ChatterService
             ORDER BY CreatedDate DESC, ID DESC LIMIT {0}";
 
         public const string SOQL_GET_USER_ACTIVITIES = @"
-            SELECT Id, Type, CreatedDate, CreatedById, Body, ParentId 
-            FROM UserProfileFeed WITH UserId = '{0}'
-            ORDER BY CreatedDate DESC, ID DESC LIMIT 100";
+            SELECT Id, Type, CreatedDate, CreatedById, Body, ParentId,
+            Parent.Name, Parent.FirstName, Parent.LastName, Parent.Type 
+            FROM UserProfileFeed 
+            Where Type = 'UserStatus' and Parent.Type = 'User'
+            WITH UserId = '{0}'
+            ORDER BY CreatedDate DESC, ID DESC LIMIT {1}";
     }
 }

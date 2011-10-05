@@ -23,8 +23,8 @@ namespace ChatterService.Web
         Activity[] GetActivities(int count);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/user/{userId}/activities", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        Activity[] GetUserActivities(string userId);
+        [WebGet(UriTemplate = "/user/{personId}/activities?count={count}&mode={mode}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        Activity[] GetUserActivities(string personId, string mode, int count);
     }
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
@@ -58,13 +58,19 @@ namespace ChatterService.Web
             return list;
         }
 
-        public Activity[] GetUserActivities(string userId)
+        public Activity[] GetUserActivities(string userId, string mode, int count)
         {
+            IProfilesServices profiles = new ProfilesServices();
             IChatterService service = new ChatterService(url);
             service.Login(userName, password, token);
 
-            var ssUserId = service.GetUserId(userId);
-            return service.GetActivities(ssUserId).ToArray();
+            int personId = Int32.Parse(userId);
+            bool includeUserActivities = mode.Equals("all", StringComparison.InvariantCultureIgnoreCase);
+
+            string employeeId = profiles.GetEmployeeId(personId);
+            var ssUserId = service.GetUserId(employeeId);
+            Activity[] result = service.GetActivities(ssUserId, personId, includeUserActivities, count).ToArray();
+            return result;
         }
 
         private static bool customXertificateValidation(object sender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)

@@ -130,117 +130,78 @@ namespace ChatterService
             Salesforce.apex.ExecuteAnonymousResult result = service.executeAnonymous(apex);
             if (!result.success)
             {
-                throw new Exception("Cannot create FeedItem:" + result.exceptionMessage + "\n" + result.exceptionStackTrace);
+                throw new Exception("Cannot create FeedItem:" + result.compileProblem + "\n" + result.exceptionStackTrace);
             }
         }
 
-        public List<Activity> GetActivities(string userId)
+        public List<Activity> GetActivities(string userId, int personId, bool includeUserActivities, int count)
         {
-            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_USER_ACTIVITIES, userId));
+            List<Activity> result = GetProfileActivities(userId, count);
+            if (includeUserActivities)
+            {
+                List<Activity> userActivities = GetUserActivities(userId, personId, count);
+                result.AddRange(userActivities);
+                result.Sort(new ActivitiesComparer());
+            }
+
+            return result;
+        }
+
+        public List<Activity> GetUserActivities(string userId, int personId, int count)
+        {
+            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_USER_ACTIVITIES, userId, count));
             var feeds = new List<Activity>();
             if (qr.size <= 0)
             {
                 return feeds;
             }
+            
             feeds.AddRange(from Salesforce.UserProfileFeed record in qr.records
                            select new Activity
                            {
                                Id = record.Id,
                                Message = record.Body,
-                               CreatedDT = record.CreatedDate,
-                               CreatedById = record.CreatedById
-                           });
-
-            return feeds;
-        }
-
-        public List<Activity> GetActivities(int count)
-        {
-            var feeds = new List<Activity>();
-            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_ALL_USER_ACTIVITIES, count));
-            feeds.AddRange(from Salesforce.UserFeed record in qr.records
-                           select new Activity
-                           {
-                               Id = record.Id,
-                               Message = record.Body,
-                               CreatedDT = record.CreatedDate,
+                               CreatedDT = (DateTime)record.CreatedDate,
                                CreatedById = record.CreatedById,
-                               Type = ActivityType.TextPost,
                                Parent = new User
                                {
-                                   Id = record.ParentId,
-                                   Name = record.Parent.Name,
-                                   FirstName = record.Parent.FirstName,
-                                   LastName = record.Parent.LastName,
-                                   EmployeeId = record.Parent.UCSF_ID__c,
-                                   PersonId = GetPersonId(record.Parent.UCSF_ID__c)
+                                    Id = record.ParentId,
+                                    Name = record.Parent.Name1,
+                                    FirstName = record.Parent.FirstName,
+                                    LastName = record.Parent.LastName,
+                                    PersonId = personId
                                }
-
                            });
 
             return feeds;
         }
 
-        public List<Activity> GetProfileActivities(int count) {
-            var feeds = new SortedDictionary<int, Activity>();
-            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000));
-
-            Dictionary<int, HashSet<string>> items = new Dictionary<int, HashSet<string>>();
-
-            Random random = new Random();
-            bool done = false;
-            while (!done)
+        public List<Activity> GetProfileActivities(string userId, int count) {
+            var feeds = new List<Activity>();
+            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES_BY_USER, userId, count > 10000 ? 10000 : count));
+            if (qr.size <= 0)
             {
-                for (int i = 0; i < qr.records.Length && feeds.Count < count; i++)
-                {
-                    Salesforce.Research_Profile__Feed record = (Salesforce.Research_Profile__Feed)qr.records[i];
-                    int personId = GetPersonId(record.Parent.User__r.UCSF_ID__c);
-                    HashSet<string> userPosts;
-                    if (!items.TryGetValue(personId, out userPosts))
-                    {
-                        userPosts = new HashSet<string>();
-                        items.Add(personId, userPosts);
-                    }
-
-                    
-                    if(!userPosts.Contains(record.Body)) {
-                        Activity act = new Activity
-                        {
-                            Id = record.Id,
-                            Message = record.Body,
-                            CreatedDT = record.CreatedDate,
-                            CreatedById = record.CreatedById,
-                            Type = ActivityType.TextPost,
-                            Parent = new User
-                            {
-                                Id = record.ParentId,
-                                Name = record.Parent.User__r.Name,
-                                FirstName = record.Parent.User__r.FirstName,
-                                LastName = record.Parent.User__r.LastName,
-                                PersonId = personId
-                            }
-                        };
-
-                        userPosts.Add(act.Message);
-                        int key = random.Next(1000);
-                        while (feeds.ContainsKey(key))
-                        {
-                            key = random.Next(1000);
-                        }
-                        feeds.Add(key, act);
-                    }
-
-                }
-                if (qr.done || feeds.Count >= count)
-                {
-                    done = true;
-                }
-                else
-                {
-                    qr = _service.queryMore(qr.queryLocator);
-                }
+                return feeds;
             }
-            return feeds.Values.ToList();
+
+            feeds.AddRange(from Salesforce.Research_Profile__Feed record in qr.records
+               select new Activity
+               {
+                   Id = record.Id,
+                   Message = record.Body,
+                   CreatedDT = (DateTime)record.CreatedDate,
+                   CreatedById = record.CreatedById,
+                   Parent = new User
+                   {
+                        Id = record.ParentId,
+                        Name = record.Parent.User__r.Name,
+                        FirstName = record.Parent.User__r.FirstName,
+                        LastName = record.Parent.User__r.LastName,
+                        PersonId = GetPersonId(record.Parent.User__r.UCSF_ID__c)
+                    }
+            });
+
+            return feeds;
         }
 
         public Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval)
@@ -270,6 +231,12 @@ namespace ChatterService
                 for (int i = 0; i < qr.records.Length && activities.Count < count; i++)
                 {
                     Salesforce.Research_Profile__Feed record = (Salesforce.Research_Profile__Feed)qr.records[i];
+
+                    if (Filter(record))
+                    {
+                        continue;
+                    }
+
                     int personId = GetPersonId(record.Parent.User__r.UCSF_ID__c);
                     HashSet<string> userActivities;
                     if (!items.TryGetValue(personId, out userActivities))
@@ -285,7 +252,7 @@ namespace ChatterService
                         {
                             Id = record.Id,
                             Message = record.Body,
-                            CreatedDT = record.CreatedDate,
+                            CreatedDT = (DateTime)record.CreatedDate,
                             CreatedById = record.CreatedById,
                             Type = ActivityType.TextPost,
                             Parent = new User
@@ -313,6 +280,16 @@ namespace ChatterService
                 }
             }
             return activities;
+        }
+
+        private bool Filter(Salesforce.Research_Profile__Feed record)
+        {
+            if (String.IsNullOrEmpty(record.Title))
+            {
+                return false;
+            }
+
+            return record.Title.ToLower().Equals("profile was viewed");
         }
 
         protected void CreateResearchProfileInternal(string employeeId)
@@ -354,6 +331,63 @@ namespace ChatterService
             if (qr.records == null)
             {
                 CreateResearchProfileInternal(employeeId);
+            }
+        }
+
+        public string CreateGroup(String name, String descriptioon, string ownerEmployeeId)
+        {
+            if (_service == null)
+                throw new Exception("Service is null. You need to login first!");
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(ownerEmployeeId))
+                throw new Exception("Invalid argument!");
+
+            Salesforce.User user = GetUser(ownerEmployeeId);
+            Salesforce.CollaborationGroup grp = new Salesforce.CollaborationGroup()
+            {
+                    Name = name,
+                    Description = descriptioon,
+                    OwnerId = user.Id,
+                    CollaborationType = "Public"
+            };
+
+            Salesforce.SaveResult[] results = _service.create(new Salesforce.sObject[] { grp });
+            foreach (Salesforce.SaveResult result in results)
+            {
+                if (!result.success)
+                {
+                    throw new Exception("Cannot create Group for employee id=" + ownerEmployeeId + ", with error:\n" + result.errors.Select(it => it.statusCode + ":" + it.message).Aggregate((s1, s2) => s1 + "\n" + s2));
+                }
+            }
+            return results[0].id;
+        }
+
+        public void AddUsersToGroup(String groupId, string[] users)
+        {
+            if (_service == null)
+                throw new Exception("Service is null. You need to login first!");
+
+            if (string.IsNullOrEmpty(groupId) || users == null || users.Length == 0)
+                throw new Exception("Invalid argument!");
+
+            Salesforce.sObject[] objects = new Salesforce.sObject[users.Length];
+            for (int i = 0; i < users.Length;i++ )
+            {
+                Salesforce.User user = GetUser(users[i]);
+                objects[i] = new Salesforce.CollaborationGroupMember()
+                {
+                    CollaborationGroupId = groupId,
+                    MemberId = user.Id
+                };
+            }
+
+            Salesforce.SaveResult[] results = _service.create(objects);
+            foreach (Salesforce.SaveResult result in results)
+            {
+                if (!result.success)
+                {
+                    throw new Exception("Cannot create GroupMember for group id=" + groupId + ", with error:\n" + result.errors.Select(it => it.statusCode + ":" + it.message).Aggregate((s1, s2) => s1 + "\n" + s2));
+                }
             }
         }
 

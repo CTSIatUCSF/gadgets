@@ -7,6 +7,11 @@ using System.Web.Caching;
 
 namespace ChatterService
 {
+    public enum ActivitySource
+    {
+        UserFeed = 1,
+        ResearchPropfile = 2
+    }
 
     public interface IChatterService
     {
@@ -31,15 +36,15 @@ namespace ChatterService
         /// Return all activities.
         /// </summary>
         /// <returns>Collection of activity models.</returns>
-        List<Activity> GetActivities(int count);
-        List<Activity> GetProfileActivities(int count);
+        List<Activity> GetProfileActivities(string userId, int count);
         Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval);
 
         /// <summary>
         /// Return all activities for a user.
         /// </summary>
         /// <returns>Collection of activity models.</returns>
-        List<Activity> GetActivities(string userId);
+        List<Activity> GetActivities(string userId, int personID, bool includeUserActivities, int count);
+        List<Activity> GetUserActivities(string userId, int personId, int count);
 
 
         /// <summary>
@@ -57,5 +62,8 @@ namespace ChatterService
         void CreateResearchProfile(string employeeId);
 
         void AllowUntrustedConnection();
+
+        string CreateGroup(String name, String description, string ownerEmployeeId);
+        void AddUsersToGroup(String groupId, string[] users);
     }
 }

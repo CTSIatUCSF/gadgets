@@ -185,6 +185,7 @@ namespace ChatterService
             }
 
             feeds.AddRange(from Salesforce.Research_Profile__Feed record in qr.records
+                           where (record.Title != "profile was viewed")
                select new Activity
                {
                    Id = record.Id,
@@ -304,7 +305,7 @@ namespace ChatterService
 
             Salesforce.Research_Profile__c profile = new Salesforce.Research_Profile__c
             {
-                Name = user.FirstName + " " + user.LastName,
+                Name = user.FirstName + " " + user.LastName + " Research Profile",
                 OwnerId = _userId,
                 User__c = user.Id
 

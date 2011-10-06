@@ -357,7 +357,7 @@ namespace ChatterService
             {
                 if (!result.success)
                 {
-                    throw new Exception("Cannot create Group for employee id=" + ownerEmployeeId + ", with error:\n" + result.errors.Select(it => it.statusCode + ":" + it.message).Aggregate((s1, s2) => s1 + "\n" + s2));
+                    throw new Exception(result.errors.Select(it => it.statusCode + ":" + it.message).Aggregate((s1, s2) => s1 + "\n" + s2));
                 }
             }
             return results[0].id;

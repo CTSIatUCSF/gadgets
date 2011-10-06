@@ -12,9 +12,16 @@ using System.Security.Cryptography.X509Certificates;
 using System.Net;
 using System.Web.Script.Serialization;   
 using System.Web.Script.Services;
+using System.IO;
+using System.Collections.Specialized;
 
 namespace ChatterService.Web
 {
+    public class CreateResult {
+        public bool Success {get; set;}
+        public string ErrorMessage {get; set;}
+    }
+
     [ServiceContract(Name = "ChatterProxyService")]
     public interface IChatterProxyService
     {
@@ -25,6 +32,11 @@ namespace ChatterService.Web
         [OperationContract]
         [WebGet(UriTemplate = "/user/{personId}/activities?count={count}&mode={mode}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         Activity[] GetUserActivities(string personId, string mode, int count);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/group/new", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        CreateResult CreateGroup(Stream stream);
+
     }
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
@@ -71,6 +83,78 @@ namespace ChatterService.Web
             var ssUserId = service.GetUserId(employeeId);
             Activity[] result = service.GetActivities(ssUserId, personId, includeUserActivities, count).ToArray();
             return result;
+        }
+
+        public CreateResult CreateGroup(Stream stream)
+        {
+            NameValueCollection p = parseParameters(stream);
+
+            if (string.IsNullOrEmpty(p["name"]))
+            {
+                return new CreateResult() { Success = false, ErrorMessage = "Group name is required."};
+            }
+
+            if (string.IsNullOrEmpty(p["ownerId"]))
+            {
+                return new CreateResult() { Success = false, ErrorMessage = "OwnerId is required." };
+            }
+
+            try
+            {
+                int personId = Int32.Parse(p["ownerId"]);
+                string descr = p["description"];
+                if (string.IsNullOrEmpty(descr))
+                {
+                    descr = p["name"];
+                }
+
+                IProfilesServices profiles = new ProfilesServices();
+                string employeeId = profiles.GetEmployeeId(personId);
+
+                IChatterService service = new ChatterService(url);
+                service.Login(userName, password, token);
+                string groupId = service.CreateGroup(p["name"], descr, employeeId);
+
+                string users = p["users"];
+                if(!string.IsNullOrEmpty(users)) {
+                    string[] personList = users.Split(',');
+                    List<string> employeeList = new List<string>();
+                    foreach (string pId in personList)
+                    {
+                        try
+                        {
+                            string eId = profiles.GetEmployeeId(Int32.Parse(pId));
+                            employeeList.Add(eId);
+                        }
+                        catch (Exception ex)
+                        {
+                            //TODO: need to report it back to the server
+                        }
+                    }
+
+                    if (employeeList.Count > 0)
+                    {
+                        service.AddUsersToGroup(groupId, employeeList.ToArray<string>());
+                    }
+                }
+
+                return new CreateResult() { Success = true};
+            }
+            catch (Exception ex)
+            {
+                return new CreateResult() { Success = false, ErrorMessage = ex.Message};
+            }
+
+        }
+
+        private NameValueCollection parseParameters(Stream stream) {
+            string s = "";
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                s = sr.ReadToEnd();
+            }
+
+            return HttpUtility.ParseQueryString(s);
         }
 
         private static bool customXertificateValidation(object sender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)

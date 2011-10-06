@@ -20,7 +20,7 @@ namespace ChatterService
             ORDER BY u.Id DESC LIMIT 1";
 
         public const string SOQL_GET_PROFILE_ACTIVITIES = @"
-            Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body,
+            Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body, Title,
             Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 
             From Research_Profile__Feed u 
             Where Type='TextPost' and u.IsDeleted = false 

@@ -16,7 +16,8 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="js/os.js" ></script>
-	
+	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
+		
 	<style>
     	.tool_title {font-family:Verdana,Arial; font-size:14px;}
     	.tool_title_orange {font-family:Verdana,Arial; font-size:14px; color:#FF9900;}
@@ -306,7 +307,7 @@
 				"displayName":"Eric R. Meeks"}
 				END WORKING DATA FORMAT */
 			
-				table_row="<tr>";
+				table_row="<tr id="+people[i].id+">";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.familyName + "</td>";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.givenName + "</td>";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].emails[0].value + "</td>";
@@ -366,6 +367,80 @@
 	}	
 	// ==============================================================			
 	
+	var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
+	//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc";
+	
+	function createGroup(name, description, ownerId, users) {
+		var params = {
+			"name": name,
+			"description": description,
+			"ownerId": ownerId,
+			"users": users};
+			
+	    sendRequest(false, chatterProxyURL + "/group/new", params, function(data) {
+	    	if(data.Success) {
+				showMessage(name + " group was created.");
+				$("input#goup_name").val("");
+			}
+			else {
+				showMessage("Cannot create a group. " + data.ErrorMessage, true);
+			}
+	    },
+	    function(obj) {
+			showMessage("Server error " + obj.rc + " : " + obj.errors, true);
+	    });
+	}
+			
+	// ==============================================================			
+	function sendRequest(cache, url, post_params, success, error) {
+	  var params = {};			 
+	  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(post_params);
+	  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+	  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+	  if(cache == false) {
+	  	params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 0;
+	  }
+	  		  
+ 		  gadgets.io.makeRequest(url, function(obj) {
+ 		  	if(obj.data != null) {
+ 		  		success(obj.data);
+ 			}
+ 			else if(obj.errors != null) {  				
+ 		  		if(error) {
+ 		  			error(obj);
+ 		  		}
+ 			}
+ 		  } 
+ 		  , params);
+	}
+	
+	// ==============================================================				
+	function showMessage(msg, isError) {
+		$("div.message").html(msg);
+		if(isError == true) {
+			$("div.message").removeClass("info");	
+			$("div.message").addClass("error");
+		}
+		else {
+			$("div.message").removeClass("error");	
+			$("div.message").addClass("info");
+		}
+		$("div.message").removeClass("hidden");	
+	}
+	// ==============================================================			
+	function getUserList() {
+		var items = [];
+		$("div#canvas_profile_list tr").each( function(index, elem) {
+			var id = $(elem).attr("id");
+			if(id != null && id != "") {
+				items.push(id);
+			}
+		}); 
+		
+		return items.join(',');
+		//return "5047417,4627047,5316354,5474533,4621800,5496561"
+	}
+	// ==============================================================			
 	</script>
 	]]>
 	</Content>
@@ -414,6 +489,35 @@
 
 	<Content type="html" view="canvas"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
+   	<style type="text/css">
+   		div#create_group {
+   			margin-left: 20px;
+   			margin-top:10px;
+   			margin-bottom:10px;
+   			padding-top:10px;
+   			padding-bottom:10px;
+   			padding-left:10px;
+   			padding-right:10px;
+   			border:solid gray 1px;
+   			width:470px;
+   		}
+   		input#close {
+   			margin-left:110px;
+   		}
+   		div.message {
+   			margin-bottom:10px;
+   		}
+   		div.info {
+   			color:green;
+   		}
+   		div.error {
+   			color:red;
+   		}
+   		.hidden {
+   			display:none;
+   		}
+   		
+   	</style>
     
     <!-- top menu links -->
 	<div>
@@ -422,7 +526,8 @@
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
 			<a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
+			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="" id="create_group">Create Chatter Group</a>&nbsp;&nbsp;&nbsp;
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">
@@ -430,6 +535,13 @@
 		<img src="images/waiting.gif">
 		<br><br>
 		<b>Downloading data. This may take a minute or two, based on the size of your selected Profiles list.</b></p>
+	</div>
+	<div id="create_group" class="hidden">
+		<div class="message hidden">Group was created successfully</div>		
+		<span>Group Name:</span>
+		<input id="group_name" type="text"></input>
+		<input id="create" type="button" value="Create"></input>
+		<input id="close" type="button" value="Close"></input> 
 	</div>
 	
 	<div id="canvas_email_list" style="display:none; background:#FFF; width:664px; height:26px; margin-left:12px;">
@@ -462,7 +574,30 @@
 			// update UI
 			gadgets.window.adjustHeight(600);
 			readData(displayProfileList);		
-			document.getElementById("canvas_profile_list").style.display="block";		
+			document.getElementById("canvas_profile_list").style.display="block";
+			
+			$("a#create_group").click(function(event){
+			    event.preventDefault();
+				$("div.message").addClass("hidden");	
+				$("div#create_group").removeClass("hidden");
+			}); 
+			$("input#close").click(function(event){
+				$("div#create_group").addClass("hidden");
+			});
+			 
+			$("input#create").click(function(event){
+				$("div.message").addClass("hidden");	
+				var name = $("div#create_group input#group_name").val();
+				if(name == null || name == '') {
+					showMessage("Please enter a group name.", true);
+				}
+				else {				
+					osapi.people.getOwner({ fields: ['id'] }).execute(function(result) {
+						var users = getUserList();
+						createGroup(name, name, result.id, users);
+					});			
+				}
+			}); 
 		}
 		
 		gadgets.util.registerOnLoadHandler(init);

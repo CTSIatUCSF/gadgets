@@ -15,8 +15,8 @@
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">
-		//var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
-		var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc";
+		var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
+		//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc";
 		//var statsURL = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/Statistics.aspx";//QA
 		var statsURL = "http://dev-profiles.ucsf.edu/ucsf_100810/CustomAPI/v1/Statistics.aspx";//???
 			     
@@ -363,7 +363,6 @@
 	]]></Content>
     
     <Content type="html" view="profile" preferred_height="500"><![CDATA[<!--HTML-->
-		<script type="text/javascript" src="http://jquery-json.googlecode.com/files/jquery.json-2.3.js"></script>    
 		<script type="text/javascript">
 		    var activities;
 			$(document).ready(function(){

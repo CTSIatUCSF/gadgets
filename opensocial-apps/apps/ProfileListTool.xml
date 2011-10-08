@@ -592,7 +592,7 @@
 					showMessage("Please enter a group name.", true);
 				}
 				else {				
-					osapi.people.getOwner({ fields: ['id'] }).execute(function(result) {
+					osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
 						var users = getUserList();
 						createGroup(name, name, result.id, users);
 					});			

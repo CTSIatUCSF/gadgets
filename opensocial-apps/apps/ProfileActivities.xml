@@ -11,7 +11,7 @@
         <Require feature="osapi" />
     </ModulePrefs>
     <Content type="html" view="small, canvas, profile, default"><![CDATA[<!--HTML-->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">
@@ -22,6 +22,23 @@
 			     
 		var defaultImage = '/apps/images/default_img.png';
 		//var defaultImage = 'http://www.ulitochka.com/tmp/default_img.png';
+
+		function sendAjaxRequest(cache, url, success, error) {
+			$.ajax({
+				type: "GET",
+				url: url,
+				data: "{}",
+				cache: cache,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(msg) {
+				    success(msg);
+				},           
+				error: function(jqXHR, textStatus, errorThrown) {
+  		  			error({rc:textStatus, errors: errorThrown});
+				}
+			});         
+		}
 	
 		function sendRequest(cache, url, success, error) {
 		  var params = {};
@@ -45,7 +62,7 @@
 		}
 	
 		function loadStats() {
-		  sendRequest(true, statsURL, function(obj) {
+		  sendAjaxRequest(true, statsURL, function(obj) {
 				$('div.stats td.profs').html(obj.profiles);
 				$('div.stats td.edits').html(obj.edited);
   				$('div.stats td.pubs').html(obj.publications);
@@ -64,7 +81,7 @@
 		}
 		
 		function loadActivities(url, callback) {
-		  sendRequest(false, url, function(msg) {
+		  sendAjaxRequest(false, url, function(msg) {
 				var items = [];
 				$.each(msg, function(i, item) {
 				    var actHtml = buildActivityHtml(item);
@@ -239,7 +256,7 @@
     	</div>
     </div>]]></Content>
     
-    <Content type="html" view="canvas, profile" preferred_height="500"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas, profile" preferred_height="520"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <style type="text/css">        
     	div.act-left-view,
@@ -318,11 +335,11 @@
     </style>
 	]]></Content>
 	
-    <Content type="html" view="canvas" preferred_height="500"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas" preferred_height="520"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    var activities;
 			$(document).ready(function(){
-				loadProfileActivities(500);	            		
+				loadProfileActivities(520);	            		
 			    loadStats();
 			});		
 		</script>
@@ -342,12 +359,12 @@
 		
     <Content type="html" view="home" preferred_height="120"><![CDATA[
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
-    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
 	    <script type="text/javascript" src="js/os.js" ></script>
     	<script type="text/javascript" src="js/UCSF.js" ></script>
 	]]></Content>
 		
-    <Content type="html" view="profile, home" preferred_height="500"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile, home" preferred_height="450"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    function getViewMode(callback) {
 		    	var userId = '@viewer';
@@ -362,7 +379,7 @@
 		</script>
 	]]></Content>
     
-    <Content type="html" view="profile" preferred_height="500"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile" preferred_height="450"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    var activities;
 			$(document).ready(function(){
@@ -381,10 +398,9 @@
 	]]></Content>
 		
     <Content type="html" view="home" preferred_height="120"><![CDATA[
-    	<script type="text/javascript">
-	   		gadgets.util.registerOnLoadHandler(function(){
-	   			loadViewMode();
-	   		
+    	<script type="text/javascript">		   
+		    $(document).ready(function(){
+				loadViewMode();	   		
 			    $("input#save").click(function(){
 			        var viewmode = 'profilesOnly';
 			    	if ($('input[name="activities-viewmode"]').attr('checked')) {

@@ -367,7 +367,7 @@
     <Content type="html" view="profile, home" preferred_height="450"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    function getViewMode(callback) {
-		    	var userId = '@viewer';
+		    	var userId = '@owner';
 				osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['activities_viewmode']})
 			    	.execute(function(response){
 			    		//var viewer = {'activities_viewmode1':'1'};

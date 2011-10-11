@@ -382,7 +382,7 @@
     <Content type="html" view="profile" preferred_height="450"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    var activities;
-			$(document).ready(function(){
+			gadgets.util.registerOnLoadHandler(function(){
 				osapi.people.getOwner({ fields: ['id', 'activities_viewmode'] }).execute(function(result) {
 					getViewMode(function(viewmode){			
 						loadUserActivities(result.id, viewmode, 500);

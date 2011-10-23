@@ -39,6 +39,13 @@ namespace ChatterService.Model
         /// </summary>
         public DateTime CreatedDT { get; set; }
 
+        [DataMember(Name = "d")]
+        public string Date
+        {
+            get { return String.Format("{0:MMMM d, yyyy}", CreatedDT); }
+            set { }
+        }
+
         [DataMember(Name="m")]
         public string Message { get; set; }
 

@@ -185,7 +185,7 @@ namespace ChatterService
             }
 
             feeds.AddRange(from Salesforce.Research_Profile__Feed record in qr.records
-                           where (record.Title != "profile was viewed")
+                           where (record.Title != "profile was viewed" && record.Title != "gadget was viewed")
                select new Activity
                {
                    Id = record.Id,
@@ -215,17 +215,16 @@ namespace ChatterService
                     activities = new Activities(count, QueryActivitiesFromSF(count));
                     cache.Insert("ProfileActivities", activities, null, DateTime.Now.AddSeconds(cacheInterval), Cache.NoSlidingExpiration);
                 }
-                return activities.GetRandomList(count);
+                return activities.items.ToArray();
             }
         }
 
-        //return activities from SF grouped by body
+        //return activities from SF
         protected List<Activity> QueryActivitiesFromSF(int count)
         {            
             List<Activity> activities = new List<Activity>();
             Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000));
 
-            Dictionary<int, HashSet<string>> items = new Dictionary<int, HashSet<string>>();
             bool done = false;
             while (!done)
             {
@@ -239,37 +238,26 @@ namespace ChatterService
                     }
 
                     int personId = GetPersonId(record.Parent.User__r.UCSF_ID__c);
-                    HashSet<string> userActivities;
-                    if (!items.TryGetValue(personId, out userActivities))
-                    {
-                        userActivities = new HashSet<string>();
-                        items.Add(personId, userActivities);
-                    }
 
-
-                    if (!userActivities.Contains(record.Body))
+                    Activity act = new Activity
                     {
-                        Activity act = new Activity
+                        Id = record.Id,
+                        Message = record.Body,
+                        CreatedDT = (DateTime)record.CreatedDate,
+                        CreatedById = record.CreatedById,
+                        Type = ActivityType.TextPost,
+                        Parent = new User
                         {
-                            Id = record.Id,
-                            Message = record.Body,
-                            CreatedDT = (DateTime)record.CreatedDate,
-                            CreatedById = record.CreatedById,
-                            Type = ActivityType.TextPost,
-                            Parent = new User
-                            {
-                                Id = record.ParentId,
-                                Name = record.Parent.User__r.Name,
-                                FirstName = record.Parent.User__r.FirstName,
-                                LastName = record.Parent.User__r.LastName,
-                                PersonId = personId
-                            }
-                        };
+                            Id = record.ParentId,
+                            Name = record.Parent.User__r.Name,
+                            FirstName = record.Parent.User__r.FirstName,
+                            LastName = record.Parent.User__r.LastName,
+                            PersonId = personId
+                        }
+                    };
 
-                        userActivities.Add(act.Message);
-                        activities.Add(act);
-                    }
-
+                    activities.Add(act);
+ 
                 }
                 if (qr.done || activities.Count >= count)
                 {
@@ -290,7 +278,8 @@ namespace ChatterService
                 return false;
             }
 
-            return record.Title.ToLower().Equals("profile was viewed");
+            string title = record.Title.ToLower();
+            return title.Equals("profile was viewed") || title.Equals("gadget was viewed");
         }
 
         protected void CreateResearchProfileInternal(string employeeId)

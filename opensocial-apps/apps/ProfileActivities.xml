@@ -309,7 +309,7 @@
     	div.act-user {
     		margin-left:0px;
     		margin-right:5px;
-    		float:left;
+    		display:inline;
     	}    	
     	div.act-msg {
     		margin-left:5px;
@@ -337,6 +337,7 @@
     	}    	
     	.date {
     		color: #7D7D84;
+    		display:inline;
     	}    	
     </style>
 	]]></Content>

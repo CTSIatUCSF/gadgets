@@ -215,7 +215,7 @@ namespace ChatterService
                     activities = new Activities(count, QueryActivitiesFromSF(count));
                     cache.Insert("ProfileActivities", activities, null, DateTime.Now.AddSeconds(cacheInterval), Cache.NoSlidingExpiration);
                 }
-                return activities.items.ToArray();
+                return activities.items.Take(count).ToArray();
             }
         }
 

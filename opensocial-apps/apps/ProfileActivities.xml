@@ -5,14 +5,13 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
         <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
-        <Require feature="views" />
         <Require feature="dynamic-height" />
-        <Require feature="osapi" />
+        <Require feature="views" />
+        <Require feature="pubsub" />
+        <Require feature="osapi"/>
     </ModulePrefs>
     <Content type="html" view="small, canvas, profile, default"><![CDATA[<!--HTML-->
 	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
-    <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">
 		var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
@@ -129,6 +128,7 @@
     			   '	<div class="act-img"><img src="'+ imgUrl +'"/></div>' +
     			   '	<div class="act-body">' +
     			   '		<div class="act-user"><a href="'+profileUrl+'" target="_top">'+ item.n +'</a></div>' +
+    			   '        <div class="date">'+ item.d +'</div>' +
     			   '		<div class="act-msg">'+ msg +'</div>' +
     			   '	</div>' +
     			   '</div>';
@@ -198,7 +198,8 @@
     		display:inline-block;
     		width: 45px;
     		height: 45px;
-    		float:left; 		
+    		float:left; 	
+    		padding-right: 5px;	
     	}    	
     	
     	div.act-img img {
@@ -213,7 +214,6 @@
     	}    	
 
     	div.act-msg, div.act-user{
-    		margin-left:50px;
     		white-space:pre-wrap;
     		word-wrap:break-word;
     	}    	
@@ -238,6 +238,10 @@
     	div.more-act a {
     		margin-right:5px;
     	}    	
+    	.date {
+    		color: #7D7D84;
+    		font-size: 10px;
+    	}    	    	
     </style>
         
     <div class="act-left-view">
@@ -309,7 +313,6 @@
     	}    	
     	div.act-msg {
     		margin-left:5px;
-    		padding-left: 65px;
     	}
 
     	div.divider{
@@ -331,6 +334,9 @@
     	}
     	div.more-act a {
     		margin-right:5px;
+    	}    	
+    	.date {
+    		color: #7D7D84;
     	}    	
     </style>
 	]]></Content>
@@ -356,26 +362,26 @@
 	    	</div>
 	    </div>		
 	]]></Content>
-		
-    <Content type="html" view="home" preferred_height="120"><![CDATA[
-	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
-    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
-	    <script type="text/javascript" src="js/os.js" ></script>
-    	<script type="text/javascript" src="js/UCSF.js" ></script>
-	]]></Content>
-		
+				
     <Content type="html" view="profile, home" preferred_height="450"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    function getViewMode(callback) {
 		    	var userId = '@owner';
 				osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['activities_viewmode']})
 			    	.execute(function(response){
-			    		//var viewer = {'activities_viewmode1':'1'};
-			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var viewer = getFirstPerson(response);
 			    		var viewmode = viewer.activities_viewmode;
 			    		callback(viewmode);
 			    	});
 		    }
+			function getFirstPerson(result){
+				var person = {};
+				for( p in result){
+					person = result[p];
+					break;
+				}
+				return person;
+			};		    
 		</script>
 	]]></Content>
     
@@ -398,6 +404,10 @@
 	]]></Content>
 		
     <Content type="html" view="home" preferred_height="120"><![CDATA[
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+    	<script type="text/javascript" src="js/UCSF.js" ></script>
     	<script type="text/javascript">		   
 		    $(document).ready(function(){
 				loadViewMode();	   		

@@ -232,7 +232,7 @@ namespace ChatterService
                 {
                     Salesforce.Research_Profile__Feed record = (Salesforce.Research_Profile__Feed)qr.records[i];
 
-                    if (Filter(record))
+                    if (Filter(record, activities))
                     {
                         continue;
                     }
@@ -271,15 +271,33 @@ namespace ChatterService
             return activities;
         }
 
-        private bool Filter(Salesforce.Research_Profile__Feed record)
+        private bool Filter(Salesforce.Research_Profile__Feed record, List<Activity> activities)
         {
-            if (String.IsNullOrEmpty(record.Title))
+            if (!String.IsNullOrEmpty(record.Title))
             {
-                return false;
+                string title = record.Title.ToLower();
+                if (title.Equals("profile was viewed") || title.Equals("gadget was viewed"))
+                {
+                    return true;
+                }
             }
 
-            string title = record.Title.ToLower();
-            return title.Equals("profile was viewed") || title.Equals("gadget was viewed");
+
+            for (int i = activities.Count - 1; i >= 0; i--)
+            {
+                DateTime date = (DateTime)record.CreatedDate;
+                DateTime prevDate = activities[i].CreatedDT;
+                if (date.Day != prevDate.Day || date.Month != prevDate.Month || date.Year != prevDate.Year)
+                {
+                    return false;
+                }
+                if (record.ParentId == activities[i].Parent.Id && record.Body == activities[i].Message)
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         protected void CreateResearchProfileInternal(string employeeId)

@@ -4,7 +4,7 @@
             title="Featured Presentations"
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
-            description="A Simple app to display your own slides from SlideShare.net">
+            description="Featured Presentations">
         <Require feature="opensocial-0.9" />
         <Require feature="pubsub" />
         <Require feature="views" />

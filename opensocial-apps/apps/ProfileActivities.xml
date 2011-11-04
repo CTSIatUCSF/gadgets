@@ -115,11 +115,11 @@
 			}
 			
 			var msg = item.m;
-			var idx = msg.search(/PMID=[0-9]+/i); 
+			var idx = msg.search(/publication PMID=[0-9]+/i); 
 			if( idx != -1) {
-			    var fr = msg.match(/PMID=[0-9]+/i);
+			    var fr = msg.match(/publication PMID=[0-9]+/i);
 				var pmid = fr[0].split('=')[1];
-				msg = msg.substr(0,idx) + '<a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/' + pmid + '">'+ fr[0] +'</a>' + msg.substr(idx + fr[0].length);
+				msg = msg.substr(0,idx) + '<a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/' + pmid + '">publication</a>' + msg.substr(idx + fr[0].length);
 			}
 			
 			return '<div class="divider">' +

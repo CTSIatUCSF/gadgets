@@ -545,7 +545,9 @@
 			<a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<!--
 			<a href="" id="create_group">Create Chatter Group</a>&nbsp;&nbsp;&nbsp;
+			-->
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">

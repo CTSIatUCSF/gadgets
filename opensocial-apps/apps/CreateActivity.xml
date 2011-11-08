@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Activities - v0.8" >
-    <Require feature="opensocial-0.8"/>
-  </ModulePrefs> 
-  <Content type="html">
+	<ModulePrefs title="Activities - v0.8">
+		<Require feature="opensocial-0.8" />
+	</ModulePrefs>
+	<Content type="html">
   <![CDATA[ 
   <div id="content_div"></div>
   <script type="text/javascript">
@@ -46,6 +46,6 @@
   //Call startActivity as soon as the gadget finishes loading.
     gadgets.util.registerOnLoadHandler(startActivity);
   </script>
-  ]]> 
-  </Content>
+  ]]>
+	</Content>
 </Module>

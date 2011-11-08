@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Activities"
+            title="Live Updates"
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
         <Require feature="opensocial-0.9" />
@@ -247,9 +247,9 @@
     <div class="act-left-view">
     	<div class="stats">
     		<table cellspacing="0" cellpadding="0">
+    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
     			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
-    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
     		</table>
     	</div>
     	<div class="activities">
@@ -353,9 +353,9 @@
 	    <div class="act-left-view">
 	    	<div class="stats">
 	    		<table cellspacing="0" cellpadding="0">
+	    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
 	    			<tr><td class="stat-val profs">?</td><td class="stat-name">Total Profiles</td></tr>
 	    			<tr><td class="stat-val edits">?</td><td class="stat-name">Edited Profiles</td></tr>
-	    			<tr><td class="stat-val pubs">?</td><td class="stat-name">Total Publications</td></tr>
 	    		</table>
 	    	</div>
 	    	<div class="activities">

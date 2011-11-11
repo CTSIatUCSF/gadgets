@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.IO;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace ChatterService.Web
 {
@@ -50,7 +51,12 @@ namespace ChatterService.Web
         readonly string password;
         readonly string token;
         readonly int cacheInterval;
+        readonly int cacheCapacity;
         static bool initialized = false;
+        IChatterService _service = null; 
+        Timer activitiesFetcher;
+        List<Activity> latestList = new List<Activity>();
+        List<Activity> displayList = new List<Activity>();
 
         public ChatterProxyService()
         {
@@ -59,15 +65,47 @@ namespace ChatterService.Web
             password = ConfigurationSettings.AppSettings["SalesForcePassword"];
             token = ConfigurationSettings.AppSettings["SalesForceToken"];
             cacheInterval = Int32.Parse(ConfigurationSettings.AppSettings["CacheInterval"]);
+            cacheCapacity = Int32.Parse(ConfigurationSettings.AppSettings["cacheCapacity"]);
             Init();
         }
 
         public Activity[] GetActivities(int count)
         {
-            IChatterService service = new ChatterService(url);
-            service.Login(userName, password, token);
-            Activity[] list = service.GetProfileActivities(count, HttpRuntime.Cache, cacheInterval);
-            return list;
+            lock (latestList)
+            {
+                return latestList.Take(count).ToArray();
+            }
+        }
+
+        public void GetActivities(Object stateInfo)
+        {
+            // login if needed
+            lock (this)
+            {
+                try 
+                {
+                    if (_service == null)
+                    {
+                        _service = new ChatterService(url);
+                        _service.Login(userName, password, token);
+                    }
+                    Activity lastActivity = latestList.Count > 0 ? latestList[0] : null;
+                    List<Activity> newActivities = _service.GetProfileActivities(lastActivity, cacheCapacity);
+                    if (newActivities.Count > 0)
+                    {
+                        lock (latestList)
+                        {
+                            latestList.AddRange(newActivities);
+                            latestList.Sort(new ActivitiesComparer());
+                            latestList.RemoveRange(cacheCapacity, latestList.Count - cacheCapacity);
+                        }
+                    }
+                }
+                catch (Exception e) 
+                {
+                    _service = null;
+                }
+            }
         }
 
         public Activity[] GetUserActivities(string userId, string mode, int count)
@@ -168,6 +206,7 @@ namespace ChatterService.Web
                 if (!initialized)
                 {
                     ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(customXertificateValidation);
+                    activitiesFetcher = new Timer(GetActivities, null, 0, cacheInterval * 1000);
                     initialized = true;
                 }
             }

@@ -7,8 +7,8 @@ GO
 
 CREATE ASSEMBLY [SMdiagnostics]
 AUTHORIZATION dbo
-FROM 'C:\WINDOWS\Microsoft.NET\Framework\v3.0\Windows Communication Foundation\SMdiagnostics.dll'
-WITH PERMISSION_SET = UNSAFE
+FROM 'C:\WINDOWS\Microsoft.NET\Framework64\v3.0\Windows Communication Foundation\SMdiagnostics.dll'
+WITH PERMISSION_SET = UNSAFE	
 GO
 
 CREATE ASSEMBLY [System.Runtime.Serialization]

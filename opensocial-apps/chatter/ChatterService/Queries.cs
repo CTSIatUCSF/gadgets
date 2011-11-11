@@ -26,6 +26,13 @@ namespace ChatterService
             Where Type='TextPost' and u.IsDeleted = false 
             ORDER BY CreatedDate DESC, ID DESC LIMIT {0}";
 
+        public const string SOQL_GET_PROFILE_ACTIVITIES_AFTER = @"
+            Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body, Title,
+            Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 
+            From Research_Profile__Feed u 
+            Where Type='TextPost' and u.IsDeleted = false and u.CreatedDate > {0}Z 
+            ORDER BY CreatedDate DESC, ID DESC LIMIT {1}";
+
         public const string SOQL_GET_PROFILE_ACTIVITIES_BY_USER = @"
             Select u.Type,  u.ParentId, u.Id, u.CreatedDate, u.CreatedById, Body, Title,
             Parent.User__r.Name, Parent.User__r.FirstName, Parent.User__r.LastName, Parent.User__r.UCSF_ID__c 

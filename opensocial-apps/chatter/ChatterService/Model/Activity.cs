@@ -65,7 +65,7 @@ namespace ChatterService.Model
         }
     }
 
-    class ActivitiesComparer : IComparer<Activity>
+    public class ActivitiesComparer : IComparer<Activity>
     {
         #region IComparer<Activity> Members
 

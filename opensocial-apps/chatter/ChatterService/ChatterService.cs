@@ -205,25 +205,18 @@ namespace ChatterService
             return feeds;
         }
 
-        public Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval)
+        public List<Activity> GetProfileActivities(Activity lastActivity, int count)
         {
-            lock (this)
-            {
-                Activities activities = cache["ProfileActivities"] as Activities;
-                if (activities == null || activities.RequestedCount < count)
-                {
-                    activities = new Activities(count, QueryActivitiesFromSF(count));
-                    cache.Insert("ProfileActivities", activities, null, DateTime.Now.AddSeconds(cacheInterval), Cache.NoSlidingExpiration);
-                }
-                return activities.items.Take(count).ToArray();
-            }
+            Activities activities = new Activities(count, QueryActivitiesFromSF(lastActivity, count));
+            return activities.items;
         }
 
         //return activities from SF
-        protected List<Activity> QueryActivitiesFromSF(int count)
+        protected List<Activity> QueryActivitiesFromSF(Activity lastActivity, int count)
         {            
             List<Activity> activities = new List<Activity>();
-            Salesforce.QueryResult qr = _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000));
+            Salesforce.QueryResult qr = (lastActivity == null ? _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES, 10000)) :
+                                                         _service.query(string.Format(Queries.SOQL_GET_PROFILE_ACTIVITIES_AFTER, lastActivity.CreatedDT.ToUniversalTime().ToString("s"), 10000)));
 
             bool done = false;
             while (!done)

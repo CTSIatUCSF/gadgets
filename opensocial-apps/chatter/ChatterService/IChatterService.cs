@@ -37,7 +37,7 @@ namespace ChatterService
         /// </summary>
         /// <returns>Collection of activity models.</returns>
         List<Activity> GetProfileActivities(string userId, int count);
-        Activity[] GetProfileActivities(int count, Cache cache, int cacheInterval);
+        List<Activity> GetProfileActivities(Activity lastActivity, int count);
 
         /// <summary>
         /// Return all activities for a user.

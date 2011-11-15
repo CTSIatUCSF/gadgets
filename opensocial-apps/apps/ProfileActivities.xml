@@ -149,6 +149,10 @@
 					$('div.activities').height(height + 66);
 				    gadgets.window.adjustHeight($('act-left-view').height());	
 				}
+				else {
+					$('div.activities').height(height + 76);
+				    gadgets.window.adjustHeight($('act-left-view').height());	
+				}
 			});	            		
 		    loadStats();
 		    $('div.more-act a').click(function(event) {

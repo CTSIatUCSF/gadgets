@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.625" name="DataClasses1">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.875" name="DataClasses1">
   <DataContextMoniker Name="/UCSDDataContext" />
   <nestedChildShapes>
-    <classShape Id="89a80c24-2c7d-4eb0-ace5-df63d7d1b792" absoluteBounds="1.5, 2.625, 2, 5.8092268880208309">
+    <classShape Id="89a80c24-2c7d-4eb0-ace5-df63d7d1b792" absoluteBounds="1.5, 2.625, 2, 6.0015283203125005">
       <DataClassMoniker Name="/UCSDDataContext/Grant" />
       <nestedChildShapes>
-        <elementListCompartment Id="859830bb-5dc1-4717-a934-081d69e76a9e" absoluteBounds="1.5150000000000001, 3.0850000000000009, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="859830bb-5dc1-4717-a934-081d69e76a9e" absoluteBounds="1.5150000000000001, 3.0850000000000009, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="0f1213db-e364-40a2-8b97-f7ad370b36f0" absoluteBounds="6.625, 4.25, 2, 1.3862939453124998">
@@ -27,7 +27,7 @@
         <classShapeMoniker Id="dc19dd09-bf15-46bb-afd4-6dfa6c5055d6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.625 : 5.00564697265625); (6 : 5.00564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.625 : 5.00564697265625); (6 : 5.00564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/PrincipalInvestigator_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="0f1213db-e364-40a2-8b97-f7ad370b36f0" />

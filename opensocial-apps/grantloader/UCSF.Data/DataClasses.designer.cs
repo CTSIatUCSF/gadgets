@@ -154,6 +154,8 @@ namespace UCSF.Data
 		
 		private string _XML;
 		
+		private string _CoreProjectNumber;
+		
 		private EntitySet<GrantPrincipal> _GrantPrincipals;
 		
     #region Extensibility Method Definitions
@@ -212,6 +214,8 @@ namespace UCSF.Data
     partial void OnProjectEndChanged();
     partial void OnXMLChanging(string value);
     partial void OnXMLChanged();
+    partial void OnCoreProjectNumberChanging(string value);
+    partial void OnCoreProjectNumberChanged();
     #endregion
 		
 		public Grant()
@@ -220,7 +224,7 @@ namespace UCSF.Data
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Guid GrantId
 		{
 			get
@@ -240,7 +244,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int ApplicationId
 		{
 			get
@@ -260,7 +264,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activity", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activity", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Activity
 		{
 			get
@@ -280,7 +284,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdministeringIC", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdministeringIC", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string AdministeringIC
 		{
 			get
@@ -300,7 +304,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationType", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationType", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int ApplicationType
 		{
 			get
@@ -320,7 +324,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ARRAFunded", DbType="Bit")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ARRAFunded", DbType="Bit", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<bool> ARRAFunded
 		{
 			get
@@ -340,7 +344,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BudgetStart", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BudgetStart", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> BudgetStart
 		{
 			get
@@ -360,7 +364,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BudgetEnd", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BudgetEnd", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> BudgetEnd
 		{
 			get
@@ -380,7 +384,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FOANumber", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FOANumber", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string FOANumber
 		{
 			get
@@ -400,7 +404,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullProjectNum", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullProjectNum", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string FullProjectNum
 		{
 			get
@@ -420,7 +424,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FundingICS", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FundingICS", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string FundingICS
 		{
 			get
@@ -440,7 +444,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int FY
 		{
 			get
@@ -460,7 +464,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgCity", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgCity", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgCity
 		{
 			get
@@ -480,7 +484,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgCountry", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgCountry", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgCountry
 		{
 			get
@@ -500,7 +504,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDistrict", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDistrict", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgDistrict
 		{
 			get
@@ -520,7 +524,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDUNS", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDUNS", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int OrgDUNS
 		{
 			get
@@ -540,7 +544,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDept", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgDept", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgDept
 		{
 			get
@@ -560,7 +564,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgFIPS", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgFIPS", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgFIPS
 		{
 			get
@@ -580,7 +584,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgState", DbType="VarChar(2)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgState", DbType="VarChar(2)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgState
 		{
 			get
@@ -600,7 +604,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgZip", DbType="VarChar(9)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgZip", DbType="VarChar(9)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgZip
 		{
 			get
@@ -620,7 +624,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ICName", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ICName", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string ICName
 		{
 			get
@@ -640,7 +644,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgName", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrgName", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string OrgName
 		{
 			get
@@ -660,7 +664,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
 		public string ProjectTitle
 		{
 			get
@@ -680,7 +684,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectStart", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectStart", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> ProjectStart
 		{
 			get
@@ -700,7 +704,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectEnd", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectEnd", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> ProjectEnd
 		{
 			get
@@ -736,6 +740,26 @@ namespace UCSF.Data
 					this._XML = value;
 					this.SendPropertyChanged("XML");
 					this.OnXMLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CoreProjectNumber", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string CoreProjectNumber
+		{
+			get
+			{
+				return this._CoreProjectNumber;
+			}
+			set
+			{
+				if ((this._CoreProjectNumber != value))
+				{
+					this.OnCoreProjectNumberChanging(value);
+					this.SendPropertyChanging();
+					this._CoreProjectNumber = value;
+					this.SendPropertyChanged("CoreProjectNumber");
+					this.OnCoreProjectNumberChanged();
 				}
 			}
 		}
@@ -818,7 +842,7 @@ namespace UCSF.Data
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Guid PrincipalInvestigatorId
 		{
 			get
@@ -838,7 +862,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigator_Id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigator_Id", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public int PrincipalInvestigator_Id
 		{
 			get
@@ -858,7 +882,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Name
 		{
 			get
@@ -959,7 +983,7 @@ namespace UCSF.Data
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantPrincipalId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantPrincipalId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Guid GrantPrincipalId
 		{
 			get
@@ -979,7 +1003,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public System.Guid GrantId
 		{
 			get
@@ -1003,7 +1027,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public System.Guid PrincipalInvestigatorId
 		{
 			get

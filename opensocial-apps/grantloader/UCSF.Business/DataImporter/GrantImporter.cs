@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.IO;
 using System.Linq;
 using System.Transactions;
@@ -13,6 +14,7 @@ namespace UCSF.Business.DataImporter
 {
     public class GrantImporter
     {
+        private const string ORG_NAME = "ORG_NAME";
         public UCSDDataContext DataContext { get; private set; }
 
         private StreamWriter errorsStream;
@@ -33,16 +35,26 @@ namespace UCSF.Business.DataImporter
         public int ErrorsCount { get; private set; }
 
         public int TotalRecords{ get; private set; }
+        
+        public int TotalProcessed{ get; private set; }
 
-        public void ImportData(string uri)
+        private string orgName;
+        private bool checkOrgName;
+
+        public void ImportData(string uri, string orgName = null, string DUNSNumber = null)
         {
             if(!File.Exists(uri))
             {
                 return;
             }
 
+            this.orgName = orgName;
+            checkOrgName = !String.IsNullOrWhiteSpace(orgName);
+
             errorsStream = File.CreateText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "errors.txt"));
+            errorsStream.AutoFlush = true;
             successStream = File.CreateText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "processed.txt"));
+            successStream.AutoFlush = true;
 
             TransactionScope ts = new TransactionScope();
             using (XmlReader reader = XmlReader.Create(uri))
@@ -55,6 +67,7 @@ namespace UCSF.Business.DataImporter
                         Grant grant = new Grant { GrantId = Guid.NewGuid() };
 
                         XElement row = new XElement("row");
+                        bool needContinue = true;
                         try
                         {
                             while (reader.Read() && reader.NodeType != XmlNodeType.EndElement)
@@ -65,16 +78,27 @@ namespace UCSF.Business.DataImporter
                                     row.Add(node);
                                     if (!String.IsNullOrWhiteSpace(node.Value))
                                     {
-                                        UpdateGrant(grant, node);
+                                        needContinue = UpdateGrant(grant, node);
+                                        
+                                        if(!needContinue)
+                                            break;
                                     }
                                 }
                             }
+
+                            TotalProcessed++;
+
+                            if (!needContinue || (checkOrgName && !String.Equals(grant.OrgName, this.orgName, StringComparison.OrdinalIgnoreCase)))
+                                continue;
+
                             grant.XML = row.ToString();
 
+                            #region check if need to process the record
                             if (DataContext.Grants.Any(it => it.ApplicationId == grant.ApplicationId))
                             {
                                 continue;
                             }
+                            #endregion
                             ValidateGrant(grant);
                             DataContext.Grants.InsertOnSubmit(grant);
                             AddSuccessGrunt(grant);
@@ -82,6 +106,8 @@ namespace UCSF.Business.DataImporter
                             if (TotalRecords % 100 == 0)
                             {
                                 Submit(ts);
+
+                                DataContext = new UCSDDataContext();
 
                                 ts = new TransactionScope();
 
@@ -157,6 +183,7 @@ namespace UCSF.Business.DataImporter
             ValidateField(grant.ICName, 255);
             ValidateField(grant.OrgName, 255);
             ValidateField(grant.ProjectTitle, 255);
+            ValidateField(grant.CoreProjectNumber, 50);
         }
 
         private void ValidateField(string data, int length)
@@ -172,7 +199,7 @@ namespace UCSF.Business.DataImporter
         private void AddSuccessGrunt(Grant grant)
         {
             TotalRecords++;
-            successStream.WriteLine(String.Format("{0},{1}", ErrorsCount, grant.ApplicationId));
+            successStream.WriteLine(String.Format("{0},{1}", TotalRecords, grant.ApplicationId));
         }
 
         private void AddGrantError(Grant grant, Exception exception)
@@ -181,7 +208,7 @@ namespace UCSF.Business.DataImporter
             errorsStream.WriteLine(String.Format("{0},{1},{2}", ErrorsCount, grant.ApplicationId, exception.Message));
         }
 
-        private void UpdateGrant(Grant grant, XElement node)
+        private bool UpdateGrant(Grant grant, XElement node)
         {
             switch (node.Name.LocalName)
             {
@@ -242,8 +269,13 @@ namespace UCSF.Business.DataImporter
                 case "IC_NAME":
                     grant.ICName = node.Value.SafeTrim();
                     break;
-                case "ORG_NAME":
+                case ORG_NAME:
                     grant.OrgName = node.Value.SafeTrim();
+
+                    if (checkOrgName && !String.Equals(grant.OrgName, this.orgName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
                     break;
                 case "ORG_FIPS":
                     grant.OrgFIPS = node.Value.SafeTrim();
@@ -260,7 +292,12 @@ namespace UCSF.Business.DataImporter
                 case "PIS":
                     UpdateGrantInvestigators(grant, node);
                     break;
+                case "CORE_PROJECT_NUM":
+                    grant.CoreProjectNumber= node.Value.SafeTrim();
+                    break;
             }
+
+            return true;
         }
 
         private void UpdateGrantInvestigators(Grant grant, XElement node)

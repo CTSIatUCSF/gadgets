@@ -2,48 +2,49 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=UCSF;Integrated Security=True" SettingsObjectName="UCSF.Data.Properties.Settings" SettingsPropertyName="UCSFConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Grant]" Member="Grants">
     <Type Name="Grant">
-      <Column Name="GrantId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Activity" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="AdministeringIC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ARRAFunded" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="BudgetStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="BudgetEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FOANumber" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="FullProjectNum" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="FundingICS" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="FY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OrgCity" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgCountry" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgDistrict" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgDUNS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OrgDept" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgFIPS" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgState" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
-      <Column Name="OrgZip" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
-      <Column Name="ICName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="OrgName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="ProjectTitle" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="ProjectStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ProjectEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GrantId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Activity" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="AdministeringIC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ApplicationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ARRAFunded" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BudgetStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BudgetEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FOANumber" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FullProjectNum" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FundingICS" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="OrgCity" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgCountry" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgDistrict" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgDUNS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="OrgDept" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgFIPS" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgState" Type="System.String" DbType="VarChar(2)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgZip" Type="System.String" DbType="VarChar(9)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ICName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrgName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProjectStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProjectEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="XML" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CoreProjectNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Grant_GrantPrincipal" Member="GrantPrincipals" ThisKey="GrantId" OtherKey="GrantId" Type="GrantPrincipal" />
     </Type>
   </Table>
   <Table Name="dbo.PrincipalInvestigator" Member="PrincipalInvestigators">
     <Type Name="PrincipalInvestigator">
-      <Column Name="PrincipalInvestigatorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="PrincipalInvestigator_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PrincipalInvestigatorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PrincipalInvestigator_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="PrincipalInvestigator_GrantPrincipal" Member="GrantPrincipals" ThisKey="PrincipalInvestigatorId" OtherKey="PrincipalInvestigatorId" Type="GrantPrincipal" />
     </Type>
   </Table>
   <Table Name="dbo.GrantPrincipal" Member="GrantPrincipals">
     <Type Name="GrantPrincipal">
-      <Column Name="GrantPrincipalId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="GrantId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="PrincipalInvestigatorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="GrantPrincipalId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="GrantId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PrincipalInvestigatorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Grant_GrantPrincipal" Member="Grant" ThisKey="GrantId" OtherKey="GrantId" Type="Grant" IsForeignKey="true" />
       <Association Name="PrincipalInvestigator_GrantPrincipal" Member="PrincipalInvestigator" ThisKey="PrincipalInvestigatorId" OtherKey="PrincipalInvestigatorId" Type="PrincipalInvestigator" IsForeignKey="true" />
     </Type>

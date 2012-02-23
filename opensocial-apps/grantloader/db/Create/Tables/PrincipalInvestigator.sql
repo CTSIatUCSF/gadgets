@@ -4,6 +4,7 @@ CREATE TABLE [dbo].[PrincipalInvestigator](
 	[PrincipalInvestigatorId] [uniqueidentifier] NOT NULL,
 	[PrincipalInvestigator_Id] [int] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
+        [EmployeeId] nvarchar(50),
  CONSTRAINT [PK_PrincipalInvestigator] PRIMARY KEY CLUSTERED 
 (
 	[PrincipalInvestigatorId] ASC

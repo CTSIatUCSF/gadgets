@@ -310,7 +310,7 @@
 				table_row="<tr id="+people[i].id+">";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.familyName + "</td>";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].name.givenName + "</td>";
-				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].emails[0].value + "</td>";
+				table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + people[i].emails[0].value + "</td>";
 				table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[i].organizations[0].field + "</td>";
 				//table_row += "<td align='left' valign='top' class='tool_table_cell'>" + "" + "</td>";
 				table_row += "</tr>";
@@ -544,6 +544,7 @@
 		<p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
 			<a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
 			<a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="" id="compose-email">Compose email to list</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
 			<!--
 			|&nbsp;&nbsp;
@@ -618,7 +619,20 @@
 						createGroup(name, name, result.id, users);
 					});			
 				}
-			}); 
+			});
+			 
+			$("#compose-email").click(function(event){
+		        var emails = [];
+				$("td.email").each(function(index, elem) {
+					var email = $.trim($(elem).text());
+					if(email != '') {
+						emails.push(email);
+					}
+				});
+				if(emails.length > 0) {
+					$(this).attr("href", "mailto:" + emails.join(';'));
+				}
+			});
 		}
 		
 		gadgets.util.registerOnLoadHandler(init);

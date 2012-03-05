@@ -25,11 +25,6 @@ namespace UCSF.Business
             context = new UCSDDataContext();
         }
 
-        public void ImportGrantData(string uri)
-        {
-            new GrantImporter(context).ImportData(uri);
-        }
-
         public UCSDDataContext Context
         {
             get { return context; }

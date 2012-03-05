@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using CommandLine;
-using UCSF.Business;
 using UCSF.Business.DataImporter;
-using UCSF.Framework.Utils;
 using log4net;
 
 namespace UCSF.GrantLoader
@@ -20,8 +17,11 @@ namespace UCSF.GrantLoader
             [Option("n", "name", Required = false, HelpText = "Organization name to filter data")]
             public string OrgName = String.Empty;
 
-            /*[Option("d", "duns", Required = false, HelpText = "Organization DUNS Number to filter data")]
-            public string DUNSNumber = String.Empty;*/
+            [Option("b", "bcp", Required = false, HelpText = "Use bcp for csv data import")]
+            public bool UseBCP = false;
+
+            [Option("l", "bulk", Required = false, HelpText = "Use bulk insert for xml data import")]
+            public bool UseBULK = false;
 
             [ValueList(typeof(List<string>), MaximumElements = 1)]
             public IList<string> FileName;
@@ -29,9 +29,10 @@ namespace UCSF.GrantLoader
             [HelpOption(HelpText = "Dispaly this help screen.")]
             internal static void ShowUsage()
             {
-                log.Info("USAGE: UCSF.GrantLoader.exe <file_name> [-n Name]");
-                log.Info("[-n Name] optional Filter data by ORG_NAME attribute value.");
-                //log.Info("[-duns DUNS] optional Filter data by Organization DUNS number.");
+                log.Info("USAGE: UCSF.GrantLoader.exe <file_name> [-b] [-l] [-n Name]");
+                log.Info("[-n Name] optional Filter data by ORG_NAME attribute value. This param is ignored when doing bulk insert.");
+                log.Info("[-b] Use BCP tool for csv data import.");
+                log.Info("[-l] Use bulk insert for xml data import.");
             }
         }
 
@@ -50,9 +51,11 @@ namespace UCSF.GrantLoader
                     Options.ShowUsage();
                     Environment.Exit(1);
                 }
-                    
 
                 ExecTasks(options);
+#if DEBUG
+                Console.ReadKey();
+#endif
             }
             catch(Exception ex)
             {
@@ -82,15 +85,28 @@ namespace UCSF.GrantLoader
 
             log.InfoFormat("Import started for file {0}.", fileName);
             sw.Start();
-            GrantImporter gi = new GrantImporter();
-            gi.ImportData(fileName, options.OrgName, null);
-            log.InfoFormat("{0} Records imported. {1} Errors", gi.TotalRecords, gi.ErrorsCount);
+
+            if(options.UseBCP)
+            {
+                BCPImporter bi = new BCPImporter();
+                bi.Import(fileName);
+            }
+            else if(options.UseBULK)
+            {
+                BulkImporter bi = new BulkImporter();
+                bi.ImportData(fileName, options.OrgName, null);
+                log.InfoFormat("{0} Records imported. {1} Errors", bi.TotalRecords, bi.ErrorsCount);
+            }
+            else
+            {
+                GrantImporter gi = new GrantImporter();
+                gi.ImportData(fileName, options.OrgName, null);
+                log.InfoFormat("{0} Records imported. {1} Errors", gi.TotalRecords, gi.ErrorsCount);
+            }
             sw.Stop();
             log.InfoFormat("Total time: {0:0.#} seconds.", sw.Elapsed.TotalSeconds);
             log.Info("Done.");
             Environment.ExitCode = 0;
-//            Console.ReadKey();
-            
         }
     }
 }

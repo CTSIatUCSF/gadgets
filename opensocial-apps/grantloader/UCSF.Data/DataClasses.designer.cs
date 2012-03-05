@@ -30,15 +30,15 @@ namespace UCSF.Data
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertGrant(Grant instance);
-    partial void UpdateGrant(Grant instance);
-    partial void DeleteGrant(Grant instance);
     partial void InsertPrincipalInvestigator(PrincipalInvestigator instance);
     partial void UpdatePrincipalInvestigator(PrincipalInvestigator instance);
     partial void DeletePrincipalInvestigator(PrincipalInvestigator instance);
     partial void InsertGrantPrincipal(GrantPrincipal instance);
     partial void UpdateGrantPrincipal(GrantPrincipal instance);
     partial void DeleteGrantPrincipal(GrantPrincipal instance);
+    partial void InsertGrant(Grant instance);
+    partial void UpdateGrant(Grant instance);
+    partial void DeleteGrant(Grant instance);
     #endregion
 		
 		public UCSDDataContext() : 
@@ -71,14 +71,6 @@ namespace UCSF.Data
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Grant> Grants
-		{
-			get
-			{
-				return this.GetTable<Grant>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PrincipalInvestigator> PrincipalInvestigators
 		{
 			get
@@ -92,6 +84,344 @@ namespace UCSF.Data
 			get
 			{
 				return this.GetTable<GrantPrincipal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Grant> Grants
+		{
+			get
+			{
+				return this.GetTable<Grant>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PrincipalInvestigator")]
+	public partial class PrincipalInvestigator : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _PrincipalInvestigatorId;
+		
+		private int _PrincipalInvestigator_Id;
+		
+		private string _Name;
+		
+		private EntitySet<GrantPrincipal> _GrantPrincipals;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPrincipalInvestigatorIdChanging(System.Guid value);
+    partial void OnPrincipalInvestigatorIdChanged();
+    partial void OnPrincipalInvestigator_IdChanging(int value);
+    partial void OnPrincipalInvestigator_IdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public PrincipalInvestigator()
+		{
+			this._GrantPrincipals = new EntitySet<GrantPrincipal>(new Action<GrantPrincipal>(this.attach_GrantPrincipals), new Action<GrantPrincipal>(this.detach_GrantPrincipals));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Guid PrincipalInvestigatorId
+		{
+			get
+			{
+				return this._PrincipalInvestigatorId;
+			}
+			set
+			{
+				if ((this._PrincipalInvestigatorId != value))
+				{
+					this.OnPrincipalInvestigatorIdChanging(value);
+					this.SendPropertyChanging();
+					this._PrincipalInvestigatorId = value;
+					this.SendPropertyChanged("PrincipalInvestigatorId");
+					this.OnPrincipalInvestigatorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigator_Id", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public int PrincipalInvestigator_Id
+		{
+			get
+			{
+				return this._PrincipalInvestigator_Id;
+			}
+			set
+			{
+				if ((this._PrincipalInvestigator_Id != value))
+				{
+					this.OnPrincipalInvestigator_IdChanging(value);
+					this.SendPropertyChanging();
+					this._PrincipalInvestigator_Id = value;
+					this.SendPropertyChanged("PrincipalInvestigator_Id");
+					this.OnPrincipalInvestigator_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_GrantPrincipals", ThisKey="PrincipalInvestigatorId", OtherKey="PrincipalInvestigatorId")]
+		public EntitySet<GrantPrincipal> GrantPrincipals
+		{
+			get
+			{
+				return this._GrantPrincipals;
+			}
+			set
+			{
+				this._GrantPrincipals.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GrantPrincipals(GrantPrincipal entity)
+		{
+			this.SendPropertyChanging();
+			entity.PrincipalInvestigator = this;
+		}
+		
+		private void detach_GrantPrincipals(GrantPrincipal entity)
+		{
+			this.SendPropertyChanging();
+			entity.PrincipalInvestigator = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GrantPrincipal")]
+	public partial class GrantPrincipal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _GrantPrincipalId;
+		
+		private System.Guid _GrantId;
+		
+		private System.Guid _PrincipalInvestigatorId;
+		
+		private EntityRef<PrincipalInvestigator> _PrincipalInvestigator;
+		
+		private EntityRef<Grant> _Grant;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGrantPrincipalIdChanging(System.Guid value);
+    partial void OnGrantPrincipalIdChanged();
+    partial void OnGrantIdChanging(System.Guid value);
+    partial void OnGrantIdChanged();
+    partial void OnPrincipalInvestigatorIdChanging(System.Guid value);
+    partial void OnPrincipalInvestigatorIdChanged();
+    #endregion
+		
+		public GrantPrincipal()
+		{
+			this._PrincipalInvestigator = default(EntityRef<PrincipalInvestigator>);
+			this._Grant = default(EntityRef<Grant>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantPrincipalId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Guid GrantPrincipalId
+		{
+			get
+			{
+				return this._GrantPrincipalId;
+			}
+			set
+			{
+				if ((this._GrantPrincipalId != value))
+				{
+					this.OnGrantPrincipalIdChanging(value);
+					this.SendPropertyChanging();
+					this._GrantPrincipalId = value;
+					this.SendPropertyChanged("GrantPrincipalId");
+					this.OnGrantPrincipalIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.Guid GrantId
+		{
+			get
+			{
+				return this._GrantId;
+			}
+			set
+			{
+				if ((this._GrantId != value))
+				{
+					if (this._Grant.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGrantIdChanging(value);
+					this.SendPropertyChanging();
+					this._GrantId = value;
+					this.SendPropertyChanged("GrantId");
+					this.OnGrantIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.Guid PrincipalInvestigatorId
+		{
+			get
+			{
+				return this._PrincipalInvestigatorId;
+			}
+			set
+			{
+				if ((this._PrincipalInvestigatorId != value))
+				{
+					if (this._PrincipalInvestigator.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPrincipalInvestigatorIdChanging(value);
+					this.SendPropertyChanging();
+					this._PrincipalInvestigatorId = value;
+					this.SendPropertyChanged("PrincipalInvestigatorId");
+					this.OnPrincipalInvestigatorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_PrincipalInvestigator", ThisKey="PrincipalInvestigatorId", OtherKey="PrincipalInvestigatorId", IsForeignKey=true)]
+		public PrincipalInvestigator PrincipalInvestigator
+		{
+			get
+			{
+				return this._PrincipalInvestigator.Entity;
+			}
+			set
+			{
+				PrincipalInvestigator previousValue = this._PrincipalInvestigator.Entity;
+				if (((previousValue != value) 
+							|| (this._PrincipalInvestigator.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PrincipalInvestigator.Entity = null;
+						previousValue.GrantPrincipals.Remove(this);
+					}
+					this._PrincipalInvestigator.Entity = value;
+					if ((value != null))
+					{
+						value.GrantPrincipals.Add(this);
+						this._PrincipalInvestigatorId = value.PrincipalInvestigatorId;
+					}
+					else
+					{
+						this._PrincipalInvestigatorId = default(System.Guid);
+					}
+					this.SendPropertyChanged("PrincipalInvestigator");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grant_GrantPrincipal", Storage="_Grant", ThisKey="GrantId", OtherKey="GrantId", IsForeignKey=true)]
+		public Grant Grant
+		{
+			get
+			{
+				return this._Grant.Entity;
+			}
+			set
+			{
+				Grant previousValue = this._Grant.Entity;
+				if (((previousValue != value) 
+							|| (this._Grant.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Grant.Entity = null;
+						previousValue.GrantPrincipals.Remove(this);
+					}
+					this._Grant.Entity = value;
+					if ((value != null))
+					{
+						value.GrantPrincipals.Add(this);
+						this._GrantId = value.GrantId;
+					}
+					else
+					{
+						this._GrantId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Grant");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -152,9 +482,9 @@ namespace UCSF.Data
 		
 		private System.Nullable<System.DateTime> _ProjectEnd;
 		
-		private string _XML;
-		
 		private string _CoreProjectNumber;
+		
+		private string _XML;
 		
 		private EntitySet<GrantPrincipal> _GrantPrincipals;
 		
@@ -212,10 +542,10 @@ namespace UCSF.Data
     partial void OnProjectStartChanged();
     partial void OnProjectEndChanging(System.Nullable<System.DateTime> value);
     partial void OnProjectEndChanged();
-    partial void OnXMLChanging(string value);
-    partial void OnXMLChanged();
     partial void OnCoreProjectNumberChanging(string value);
     partial void OnCoreProjectNumberChanged();
+    partial void OnXMLChanging(string value);
+    partial void OnXMLChanged();
     #endregion
 		
 		public Grant()
@@ -424,7 +754,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FundingICS", DbType="VarChar(255)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FundingICS", DbType="VarChar(400)", UpdateCheck=UpdateCheck.Never)]
 		public string FundingICS
 		{
 			get
@@ -724,26 +1054,6 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XML", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string XML
-		{
-			get
-			{
-				return this._XML;
-			}
-			set
-			{
-				if ((this._XML != value))
-				{
-					this.OnXMLChanging(value);
-					this.SendPropertyChanging();
-					this._XML = value;
-					this.SendPropertyChanged("XML");
-					this.OnXMLChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CoreProjectNumber", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CoreProjectNumber
 		{
@@ -760,6 +1070,26 @@ namespace UCSF.Data
 					this._CoreProjectNumber = value;
 					this.SendPropertyChanged("CoreProjectNumber");
 					this.OnCoreProjectNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XML", DbType="VarChar(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public string XML
+		{
+			get
+			{
+				return this._XML;
+			}
+			set
+			{
+				if ((this._XML != value))
+				{
+					this.OnXMLChanging(value);
+					this.SendPropertyChanging();
+					this._XML = value;
+					this.SendPropertyChanged("XML");
+					this.OnXMLChanged();
 				}
 			}
 		}
@@ -807,336 +1137,6 @@ namespace UCSF.Data
 		{
 			this.SendPropertyChanging();
 			entity.Grant = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PrincipalInvestigator")]
-	public partial class PrincipalInvestigator : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _PrincipalInvestigatorId;
-		
-		private int _PrincipalInvestigator_Id;
-		
-		private string _Name;
-		
-		private EntitySet<GrantPrincipal> _GrantPrincipals;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPrincipalInvestigatorIdChanging(System.Guid value);
-    partial void OnPrincipalInvestigatorIdChanged();
-    partial void OnPrincipalInvestigator_IdChanging(int value);
-    partial void OnPrincipalInvestigator_IdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public PrincipalInvestigator()
-		{
-			this._GrantPrincipals = new EntitySet<GrantPrincipal>(new Action<GrantPrincipal>(this.attach_GrantPrincipals), new Action<GrantPrincipal>(this.detach_GrantPrincipals));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Guid PrincipalInvestigatorId
-		{
-			get
-			{
-				return this._PrincipalInvestigatorId;
-			}
-			set
-			{
-				if ((this._PrincipalInvestigatorId != value))
-				{
-					this.OnPrincipalInvestigatorIdChanging(value);
-					this.SendPropertyChanging();
-					this._PrincipalInvestigatorId = value;
-					this.SendPropertyChanged("PrincipalInvestigatorId");
-					this.OnPrincipalInvestigatorIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigator_Id", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int PrincipalInvestigator_Id
-		{
-			get
-			{
-				return this._PrincipalInvestigator_Id;
-			}
-			set
-			{
-				if ((this._PrincipalInvestigator_Id != value))
-				{
-					this.OnPrincipalInvestigator_IdChanging(value);
-					this.SendPropertyChanging();
-					this._PrincipalInvestigator_Id = value;
-					this.SendPropertyChanged("PrincipalInvestigator_Id");
-					this.OnPrincipalInvestigator_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_GrantPrincipals", ThisKey="PrincipalInvestigatorId", OtherKey="PrincipalInvestigatorId")]
-		public EntitySet<GrantPrincipal> GrantPrincipals
-		{
-			get
-			{
-				return this._GrantPrincipals;
-			}
-			set
-			{
-				this._GrantPrincipals.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GrantPrincipals(GrantPrincipal entity)
-		{
-			this.SendPropertyChanging();
-			entity.PrincipalInvestigator = this;
-		}
-		
-		private void detach_GrantPrincipals(GrantPrincipal entity)
-		{
-			this.SendPropertyChanging();
-			entity.PrincipalInvestigator = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GrantPrincipal")]
-	public partial class GrantPrincipal : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _GrantPrincipalId;
-		
-		private System.Guid _GrantId;
-		
-		private System.Guid _PrincipalInvestigatorId;
-		
-		private EntityRef<Grant> _Grant;
-		
-		private EntityRef<PrincipalInvestigator> _PrincipalInvestigator;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGrantPrincipalIdChanging(System.Guid value);
-    partial void OnGrantPrincipalIdChanged();
-    partial void OnGrantIdChanging(System.Guid value);
-    partial void OnGrantIdChanged();
-    partial void OnPrincipalInvestigatorIdChanging(System.Guid value);
-    partial void OnPrincipalInvestigatorIdChanged();
-    #endregion
-		
-		public GrantPrincipal()
-		{
-			this._Grant = default(EntityRef<Grant>);
-			this._PrincipalInvestigator = default(EntityRef<PrincipalInvestigator>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantPrincipalId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Guid GrantPrincipalId
-		{
-			get
-			{
-				return this._GrantPrincipalId;
-			}
-			set
-			{
-				if ((this._GrantPrincipalId != value))
-				{
-					this.OnGrantPrincipalIdChanging(value);
-					this.SendPropertyChanging();
-					this._GrantPrincipalId = value;
-					this.SendPropertyChanged("GrantPrincipalId");
-					this.OnGrantPrincipalIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrantId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public System.Guid GrantId
-		{
-			get
-			{
-				return this._GrantId;
-			}
-			set
-			{
-				if ((this._GrantId != value))
-				{
-					if (this._Grant.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGrantIdChanging(value);
-					this.SendPropertyChanging();
-					this._GrantId = value;
-					this.SendPropertyChanged("GrantId");
-					this.OnGrantIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigatorId", DbType="UniqueIdentifier NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public System.Guid PrincipalInvestigatorId
-		{
-			get
-			{
-				return this._PrincipalInvestigatorId;
-			}
-			set
-			{
-				if ((this._PrincipalInvestigatorId != value))
-				{
-					if (this._PrincipalInvestigator.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPrincipalInvestigatorIdChanging(value);
-					this.SendPropertyChanging();
-					this._PrincipalInvestigatorId = value;
-					this.SendPropertyChanged("PrincipalInvestigatorId");
-					this.OnPrincipalInvestigatorIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grant_GrantPrincipal", Storage="_Grant", ThisKey="GrantId", OtherKey="GrantId", IsForeignKey=true)]
-		public Grant Grant
-		{
-			get
-			{
-				return this._Grant.Entity;
-			}
-			set
-			{
-				Grant previousValue = this._Grant.Entity;
-				if (((previousValue != value) 
-							|| (this._Grant.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Grant.Entity = null;
-						previousValue.GrantPrincipals.Remove(this);
-					}
-					this._Grant.Entity = value;
-					if ((value != null))
-					{
-						value.GrantPrincipals.Add(this);
-						this._GrantId = value.GrantId;
-					}
-					else
-					{
-						this._GrantId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Grant");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_PrincipalInvestigator", ThisKey="PrincipalInvestigatorId", OtherKey="PrincipalInvestigatorId", IsForeignKey=true)]
-		public PrincipalInvestigator PrincipalInvestigator
-		{
-			get
-			{
-				return this._PrincipalInvestigator.Entity;
-			}
-			set
-			{
-				PrincipalInvestigator previousValue = this._PrincipalInvestigator.Entity;
-				if (((previousValue != value) 
-							|| (this._PrincipalInvestigator.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PrincipalInvestigator.Entity = null;
-						previousValue.GrantPrincipals.Remove(this);
-					}
-					this._PrincipalInvestigator.Entity = value;
-					if ((value != null))
-					{
-						value.GrantPrincipals.Add(this);
-						this._PrincipalInvestigatorId = value.PrincipalInvestigatorId;
-					}
-					else
-					{
-						this._PrincipalInvestigatorId = default(System.Guid);
-					}
-					this.SendPropertyChanged("PrincipalInvestigator");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

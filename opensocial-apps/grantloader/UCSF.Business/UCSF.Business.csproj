@@ -38,6 +38,7 @@
       <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Transactions" />
@@ -48,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataImporter\BCPImporter.cs" />
+    <Compile Include="DataImporter\BulkImporter.cs" />
     <Compile Include="DataImporter\GrantImporter.cs" />
+    <Compile Include="DataImporter\GrantImporterBase.cs" />
+    <Compile Include="DataImporter\TableExtensions.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

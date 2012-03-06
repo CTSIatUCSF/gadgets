@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="NIH Grants Awarded"
+            author="Alexei Vassiliev"
+            author_email="alexnv@sbcglobal.com"
+            description="NIH Grants Awarded">
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
+        <Require feature="views" />
+        <!-- Require feature="dynamic-height" / -->
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    <!--script type="text/javascript">
+    	gadgets.window.adjustHeight(700);
+    </script-->
+    
+    <!-- #includes -->
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/UCSF.js" ></script>
+    
+    <!-- Styles -->
+    <style type="text/css">
+    </style>
+    
+    <script type="text/javascript">
+	</script>
+	    		    	
+    ]]>
+    </Content>
+    <Content type="html" view="profile" preferred_height="200"><![CDATA[<!--HTML-->	
+		<!-- HideShow -->
+		<div id="hideshow" style="display:none;"></div>
+		<!-- HideShow end -->
+		Contact us
+	]]>
+	</Content>
+    <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
+		List of grants
+	]]>
+	</Content>
+</Module>

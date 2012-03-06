@@ -623,10 +623,21 @@
 			 
 			$("#compose-email").click(function(event){
 		        var emails = [];
-				$("td.email").each(function(index, elem) {
+		        var emailElem = $("td.email");
+		        if(emailElem.size() > 50) {
+		        	if(!confirm("Only the first 50 email addresses can be used. If your list has more, please use the Export function and paste them into email. Do you want to proceed?")) {
+		        		event.preventDefault();
+		        		return false;
+		        	}
+		        }	
+		        
+				emailElem.each(function(index, elem) {
 					var email = $.trim($(elem).text());
 					if(email != '') {
 						emails.push(email);
+					}
+					if(emails.length >= 50) {
+						return false;
 					}
 				});
 				if(emails.length > 0) {

@@ -50,6 +50,8 @@ namespace UCSF.Business.DataImporter
                 return;
             }
 
+            log.InfoFormat("Import started for file {0}.", uri);
+
             this.orgName = orgName;
             checkOrgName = !String.IsNullOrWhiteSpace(orgName);
 

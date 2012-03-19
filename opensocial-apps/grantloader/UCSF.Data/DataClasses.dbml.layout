@@ -27,12 +27,18 @@
         <elementListCompartment Id="d1acf49b-2b4e-446d-a25e-eea62b0ba5e6" absoluteBounds="0.89000000000000012, 3.21, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.875 : 5.06814697265625); (4 : 5.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.875 : 5.06814697265625); (4 : 5.06814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/UCSDDataContext/Grant/Grant_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="43df4659-c0b6-436d-9672-6ab00852bbe1" />
         <classShapeMoniker Id="dc19dd09-bf15-46bb-afd4-6dfa6c5055d6" />
       </nodes>
     </associationConnector>
+    <classShape Id="5ddee183-423c-4451-baf2-8a7f9995b5e7" absoluteBounds="3.75, 6.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/UCSDDataContext/GrantFile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="19fa13eb-15d5-43ab-83dd-b71e428728c8" absoluteBounds="3.7649999999999997, 6.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

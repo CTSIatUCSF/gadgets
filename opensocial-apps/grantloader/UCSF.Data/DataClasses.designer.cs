@@ -39,6 +39,9 @@ namespace UCSF.Data
     partial void InsertGrant(Grant instance);
     partial void UpdateGrant(Grant instance);
     partial void DeleteGrant(Grant instance);
+    partial void InsertGrantFile(GrantFile instance);
+    partial void UpdateGrantFile(GrantFile instance);
+    partial void DeleteGrantFile(GrantFile instance);
     #endregion
 		
 		public UCSDDataContext() : 
@@ -92,6 +95,14 @@ namespace UCSF.Data
 			get
 			{
 				return this.GetTable<Grant>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GrantFile> GrantFiles
+		{
+			get
+			{
+				return this.GetTable<GrantFile>();
 			}
 		}
 	}
@@ -1137,6 +1148,116 @@ namespace UCSF.Data
 		{
 			this.SendPropertyChanging();
 			entity.Grant = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GrantFile")]
+	public partial class GrantFile : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _FileId;
+		
+		private string _FileName;
+		
+		private bool _Processed;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFileIdChanging(System.Guid value);
+    partial void OnFileIdChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnProcessedChanging(bool value);
+    partial void OnProcessedChanged();
+    #endregion
+		
+		public GrantFile()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid FileId
+		{
+			get
+			{
+				return this._FileId;
+			}
+			set
+			{
+				if ((this._FileId != value))
+				{
+					this.OnFileIdChanging(value);
+					this.SendPropertyChanging();
+					this._FileId = value;
+					this.SendPropertyChanged("FileId");
+					this.OnFileIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this.OnFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._FileName = value;
+					this.SendPropertyChanged("FileName");
+					this.OnFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Processed", DbType="Bit NOT NULL")]
+		public bool Processed
+		{
+			get
+			{
+				return this._Processed;
+			}
+			set
+			{
+				if ((this._Processed != value))
+				{
+					this.OnProcessedChanging(value);
+					this.SendPropertyChanging();
+					this._Processed = value;
+					this.SendPropertyChanged("Processed");
+					this.OnProcessedChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

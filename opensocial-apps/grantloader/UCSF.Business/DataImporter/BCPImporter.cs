@@ -19,6 +19,7 @@ namespace UCSF.Business.DataImporter
 
         public void Import(string file)
          {
+             log.InfoFormat("Import started for file {0}.", file);
              if(ConfigurationManager.ConnectionStrings["UCSF.Data.Properties.Settings.UCSFConnectionString"].
                      ConnectionString != null)
              {

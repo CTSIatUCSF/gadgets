@@ -49,4 +49,11 @@
       <Association Name="Grant_GrantPrincipal" Member="GrantPrincipals" ThisKey="GrantId" OtherKey="GrantId" Type="GrantPrincipal" />
     </Type>
   </Table>
+  <Table Name="dbo.GrantFile" Member="GrantFiles">
+    <Type Name="GrantFile">
+      <Column Name="FileId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Processed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

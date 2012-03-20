@@ -4,7 +4,6 @@ insert into GrantFile([FileId], [FileName], [Processed]) values('13F1EFFC-9F82-4
 insert into GrantFile([FileId], [FileName], [Processed]) values('2E3BE066-30D9-45A4-9288-B6F81127DE0D','RePORTER_PRJ_X_FY1987.zip',1)
 insert into GrantFile([FileId], [FileName], [Processed]) values('6B9A16AE-DACF-4A8B-B9C9-9DF611358043','RePORTER_PRJ_X_FY1988.zip',1)
 insert into GrantFile([FileId], [FileName], [Processed]) values('9028FBE9-4E96-40C6-8A62-28D5A048B54C','RePORTER_PRJ_X_FY1989.zip',1)
-insert into GrantFile([FileId], [FileName], [Processed]) values('DC3440B6-E15E-4556-8A87-680B578E10F0','RePORTER_PRJ_X_FY1989.zip',1)
 insert into GrantFile([FileId], [FileName], [Processed]) values('2F2C3E3C-FAAA-4FDA-8A05-AED5997CDC60','RePORTER_PRJ_X_FY1990.zip',1)
 insert into GrantFile([FileId], [FileName], [Processed]) values('92906786-01C0-4F10-A395-B344DD818454','RePORTER_PRJ_X_FY1991.zip',1)
 insert into GrantFile([FileId], [FileName], [Processed]) values('0D590832-589B-4276-A369-C180CB80BFC6','RePORTER_PRJ_X_FY1992.zip',1)

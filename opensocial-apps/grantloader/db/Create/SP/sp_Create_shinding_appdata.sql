@@ -27,6 +27,7 @@ BEGIN
 	@sApplicationId nvarchar(255)
 	
 	set @currentPID = 0;
+	set @grantCount = 0;
 	
 	select @shindigAppId = appId from shindig_apps where name = 'Awarded Grants'
 	
@@ -43,7 +44,9 @@ BEGIN
 	
 	while @@fetch_status = 0 begin
 		if(@currentPID != @pid) begin
-			if  @currentPID != 0 begin
+			if  @currentPID != 0 and @grantCount > 0 begin
+				print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
+				
 				insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
 				values(@personID, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
 			end
@@ -61,9 +64,10 @@ BEGIN
 		EXEC xp_sprintf @json OUTPUT, '{"id":"%s", "t":"%s", "fpn":"%s", "fy":"%s", "aid":"%s"}', 
 			@GrantId, @title, @fullprojectnum, @sFY, @sApplicationId
 			
-		--print @json
 		select @cnt = count(*) from shindig_appdata where appId = @shindigAppId and userId = @personID and keyName = 'nih_n'
 		if(@cnt = 0) begin
+			print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName='+ 'nih_' + cast(@grantCount as varchar) + ', json='+ @json
+			
 			insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
 			values(@personID, @shindigAppId, 'nih_' + cast(@grantCount as varchar), @json, GetDate(), GetDate())
 			
@@ -73,7 +77,9 @@ BEGIN
 		fetch next from investigator into @title, @fullprojectnum, @FY, @ApplicationID, @pid, @personId
 	end
 
-	if  @grantCount != 0 begin
+	if  @grantCount > 0 begin
+		print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
+		
 		insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
 		values(@personID, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
 	end

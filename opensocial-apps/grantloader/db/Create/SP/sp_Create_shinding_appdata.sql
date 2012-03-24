@@ -11,6 +11,7 @@ BEGIN
 	
 	declare @pid int,
 	@personId int,
+	@currentPersonId int,
 	@title nvarchar(255),
 	@fullprojectnum nvarchar(255),
 	@FY int,
@@ -26,8 +27,9 @@ BEGIN
 	@sFY nvarchar(255), 
 	@sApplicationId nvarchar(255)
 	
-	set @currentPID = 0;
-	set @grantCount = 0;
+	set @currentPID = 0
+	set @currentPersonId = 0
+	set @grantCount = 0
 	
 	select @shindigAppId = appId from shindig_apps where name = 'Awarded Grants'
 	
@@ -45,13 +47,14 @@ BEGIN
 	while @@fetch_status = 0 begin
 		if(@currentPID != @pid) begin
 			if  @currentPID != 0 and @grantCount > 0 begin
-				print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
+				print 'Insert grant, userId=' + cast(@currentPersonId as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
 				
 				insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
-				values(@personID, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
+				values(@currentPersonId, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
 			end
 						
 			set @currentPID = @pid
+			set @currentPersonId = @personId
 			set @grantCount = 0
 		end
 		
@@ -66,7 +69,7 @@ BEGIN
 			
 		select @cnt = count(*) from shindig_appdata where appId = @shindigAppId and userId = @personID and keyName = 'nih_n'
 		if(@cnt = 0) begin
-			print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName='+ 'nih_' + cast(@grantCount as varchar) + ', json='+ @json
+			print 'Insert grant, userId=' + cast(@currentPersonId as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName='+ 'nih_' + cast(@grantCount as varchar) + ', json='+ @json
 			
 			insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
 			values(@personID, @shindigAppId, 'nih_' + cast(@grantCount as varchar), @json, GetDate(), GetDate())
@@ -78,10 +81,10 @@ BEGIN
 	end
 
 	if  @grantCount > 0 begin
-		print 'Insert grant, userId=' + cast(@personID as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
+		print 'Insert grant, userId=' + cast(@currentPersonId as varchar) + ', appId=' + cast(@shindigAppId as varchar) + ', keyName=nih_n' + ', val='+ cast(@grantCount as varchar)
 		
 		insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
-		values(@personID, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
+		values(@currentPersonId, @shindigAppId, 'nih_n', @grantCount, GetDate(), GetDate())
 	end
 	
 	close investigator

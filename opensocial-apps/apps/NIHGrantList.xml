@@ -8,7 +8,6 @@
         <Require feature="opensocial-0.9" />
         <Require feature="pubsub" />
         <Require feature="views" />
-        <!-- Require feature="dynamic-height" / -->
         <Require feature="osapi" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
@@ -21,16 +20,13 @@
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
-    <script type="text/javascript" src="js/UCSF.js" ></script>
     
     <!-- Styles -->
     <style type="text/css">
     </style>
     
     <script type="text/javascript">
-	</script>	
-    ]]>
-    </Content>
+	</script>]]></Content>
     <Content type="html" view="profile" preferred_height="200"><![CDATA[<!--HTML-->	
 	    <style type="text/css">
 	    	.nih-grants-profile {font-family: arial, helvetica, verdana, sans-serif; font-size: 12px;}
@@ -39,24 +35,21 @@
 	    	.nih-grants-profile table {border-collapse:collapse;width: 100%; margin-bottom: 0px;}
 	    	.nih-grants-profile td, .nih-grants-profile th {text-align: left; padding:2px;}
 	    	.nih-grants-profile th {font-size: 13px; font-weight: bold;}
-	    	.nih-grants-profile td.fy {width: 70px;}
-	    	.nih-grants-profile td.pn {width: 110px;}
-	    	.nih-grants-profile a {font-size: 13px;}
+	    	.nih-grants-profile td.fy {width: 70px; text-align:right;padding-right: 10px;}
+	    	.nih-grants-profile td.pn {width: 140px;}
+	    	.nih-grants-profile a {font-size: 12px;}
     	</style>
 	    <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function(){
 				updateOwnerDisplayName();
 				loadData();
-				$(".title").click(function() {
-					loadData();
-				});
 			});		
 			
 			function updateOwnerDisplayName() {
 				osapi.people.getOwner().execute(function(result) {
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
-					} else {					
+					} else {															
 						$(".user-name").html(result.displayName);
 					}				
 				});
@@ -66,45 +59,47 @@
 				osapi.appdata.get({'userId':'@owner', 'appId':'@app', 'fields':['nih_n']} ) .execute(function(result){
 					var person = os.osapi.getOwnerFromResult(result);
 					var count = person.nih_n;
-					var fields = [];
-					for (var i = 0; i < count; i++) {
-						fields.push('nih_' + i);
-					}
-					osapi.appdata.get({'userId':'@owner', 'appId':'@app', 'fields': fields} ).execute(function(result){
-						var person = os.osapi.getOwnerFromResult(result);
-						var grants = [];
-						for (var i = 0; i < fields.length; i++) {
-							var grantJson = person[fields[i]];
-							if(grantJson) {
-								var grant = gadgets.json.parse(grantJson);
-								if(grant) {
-									grants.push(grant);
+					if(count > 0) { 
+						var fields = [];
+						for (var i = 0; i < count; i++) {
+							fields.push('nih_' + i);
+						}
+						osapi.appdata.get({'userId':'@owner', 'appId':'@app', 'fields': fields} ).execute(function(result){
+							var person = os.osapi.getOwnerFromResult(result);
+							var grants = [];
+							for (var i = 0; i < fields.length; i++) {
+								var grantJson = person[fields[i]];
+								if(grantJson) {
+									var grant = gadgets.json.parse(grantJson);
+									if(grant) {
+										grants.push(grant);
+									}
 								}
 							}
-						}
-						if(grants.length > 0) {
-							grants.sort(function(a,b) {
-								return b.fy - a.fy; 
-							});	
-							var grantHtml = [];
-							for (var i = 0; i < grants.length; i++) {
-								var html = buildGrantHtml(grants[i]);
-								grantHtml.push(html);
+							if(grants.length > 0) {
+								grants.sort(function(a,b) {
+									return b.fy - a.fy; 
+								});	
+								var grantHtml = [];
+								for (var i = 0; i < grants.length; i++) {
+									var html = buildGrantHtml(grants[i]);
+									grantHtml.push(html);
+								}
+								$(".content table").append(grantHtml.join(''));
+								$(".content").show();
 							}
-							$(".content table").append(grantHtml.join(''));
-							$(".content").show();
-						}
-					});
+						});
+					}
 				});				
 	    	};
 	    	
 	    	function buildGrantHtml(grant) {
 	    		var url = 'http://projectreporter.nih.gov/project_info_description.cfm?aid=' + grant.aid;
 	    		var title = grant.t;
-	    		if(title.length > 30) {
-	    			title.title.substring(0, 30) + "...";
+	    		if(title.length > 40) {
+	    			title = title.substring(0, 40) + "...";
 	    		}
-	    		return '<tr><td><a target="_blank" href="' + url + '">' + grant.t+'</a></td><td class="pn">' + grant.fpn + '</td><td  class="fy">' + grant.fy +'</td></tr>'
+	    		return '<tr><td><a target="_blank" href="' + url + '">' + title+'</a></td><td class="pn">' + grant.fpn + '</td><td  class="fy">' + grant.fy +'</td></tr>'
 	    	}
 		</script>	
 		<div class="nih-grants-profile">
@@ -118,10 +113,9 @@
 				</tr>
 			</table>			
 			<div>
-		</div>
-	]]>
-	</Content>
+		</div>]]></Content>
     <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
+	    <script type="text/javascript" src="js/UCSF.js" ></script>
 	    <!-- Styles -->
 	    <style type="text/css">
 	    	.nih-grants-home {padding: 15px;}
@@ -132,8 +126,6 @@
 		<!-- HideShow end -->
 		<div class="nih-grants-home">   
 			This gadget retrieves NIH-funded grants for display on your profile. If you have questions about this information please 
-			<a href="mailto:admin@ucsf.edu?subject=UCSF Profiles NIH Grants Awarded Information Request" >contact us.</a>    		    	
-		</div>
-	]]>
-	</Content>
+			<a href="mailto:ctsi@ucsf.edu?subject=UCSF Profiles NIH Grants Awarded Information Request" >contact us.</a>    		    	
+		</div>]]></Content>
 </Module>

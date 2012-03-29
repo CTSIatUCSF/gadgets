@@ -26,6 +26,12 @@
     </style>
     
     <script type="text/javascript">
+	    function gadgetEventTrack(action, label, value) {
+    		var message = {'action' : action};
+    		if (label) {message.label = label;}
+    		if (value) {message.value = value;}
+    		gadgets.pubsub.publish("analytics", message);
+		}
 	</script>]]></Content>
     <Content type="html" view="profile" preferred_height="200"><![CDATA[<!--HTML-->	
 	    <style type="text/css">
@@ -87,6 +93,9 @@
 								}
 								$(".content table").append(grantHtml.join(''));
 								$(".content").show();
+								$(".content table a").click(function(){
+									gadgetEventTrack("go_go_grant");									
+								});
 							}
 						});
 					}
@@ -116,6 +125,13 @@
 		</div>]]></Content>
     <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript" src="js/UCSF.js" ></script>
+    	<script type="text/javascript">
+			$(document).ready(function () {
+				$(".nih-grants-home a").click(function(){
+					gadgetEventTrack("send_email");
+				});
+			});
+		</script>
 	    <!-- Styles -->
 	    <style type="text/css">
 	    	.nih-grants-home {padding: 15px;}

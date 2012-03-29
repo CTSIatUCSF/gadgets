@@ -94,7 +94,7 @@
 								$(".content table").append(grantHtml.join(''));
 								$(".content").show();
 								$(".content table a").click(function(){
-									gadgetEventTrack("go_go_grant");									
+									gadgetEventTrack("go_to_grant");									
 								});
 							}
 						});

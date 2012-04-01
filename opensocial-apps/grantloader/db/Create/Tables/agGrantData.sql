@@ -1,6 +1,6 @@
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GrantData]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[agGrantData]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[GrantData](
+CREATE TABLE [dbo].[agGrantData](
 	[APPLICATION_ID] [varchar](100) NULL,
 	[ACTIVITY] [varchar](10) NULL,
 	[ADMINISTERING_IC] [varchar](1000) NULL,
@@ -49,7 +49,7 @@ GO
 
 /****** Object:  Index [IX_RawData]    Script Date: 02/24/2012 18:22:52 ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[GrantData]') AND name = N'IX_RawData')
-CREATE NONCLUSTERED INDEX [IX_RawData] ON [dbo].[GrantData] 
+CREATE NONCLUSTERED INDEX [IX_RawData] ON [dbo].[agGrantData] 
 (
 	[APPLICATION_ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -58,7 +58,7 @@ GO
 
 /****** Object:  Index [IX_RawData_1]    Script Date: 02/24/2012 18:22:52 ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[GrantData]') AND name = N'IX_RawData_1')
-CREATE NONCLUSTERED INDEX [IX_RawData_1] ON [dbo].[GrantData] 
+CREATE NONCLUSTERED INDEX [IX_RawData_1] ON [dbo].[agGrantData] 
 (
 	[ORG_NAME] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]

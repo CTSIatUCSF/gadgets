@@ -31,14 +31,15 @@ BEGIN
 	set @currentPersonId = 0
 	set @grantCount = 0
 	
+	--set @shindigAppId =0
 	select @shindigAppId = appId from shindig_apps where name = 'Awarded Grants'
 	
 	declare investigator cursor FAST_FORWARD for 
 	select distinct G.ProjectTitle, G.FullProjectNum, G.FY, G.ApplicationId, PrincipalInvestigator_Id, p.PersonId
-	  FROM PrincipalInvestigator I
+	  FROM agPrincipalInvestigator I
 	  Join Person P on P.InternalUserName = I.EmployeeID
-	  Join GrantPrincipal GP on GP.PrincipalInvestigatorId = I.PrincipalInvestigatorId
-	  Join [Grant] G on G.GrantId = GP.GrantId
+	  Join agGrantPrincipal GP on GP.PrincipalInvestigatorPK = I.PrincipalInvestigatorPK
+	  Join [agGrant] G on G.GrantPK = GP.GrantPK
 	order by I.PrincipalInvestigator_Id
 	
 	open investigator
@@ -58,7 +59,7 @@ BEGIN
 			set @grantCount = 0
 		end
 		
-		select top 1 @GrantId = cast(GrantId as nvarchar(255)) from [Grant] where ApplicationID = @ApplicationId
+		select top 1 @GrantId = cast(GrantPK as nvarchar(255)) from [agGrant] where ApplicationID = @ApplicationId
 		
 		set @sApplicationId = cast(@ApplicationId as nvarchar(255));
 		set @sFY = cast(@FY as nvarchar(255));

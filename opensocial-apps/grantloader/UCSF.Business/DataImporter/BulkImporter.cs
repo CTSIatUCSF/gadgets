@@ -46,7 +46,10 @@ namespace UCSF.Business.DataImporter
             }
             catch(Exception ex)
             {
-                log.Debug(ex);
+                log.Error("Error during bulk insert");
+                log.Debug("Error during bulk insert", ex);
+
+                TotalProcessed = TotalProcessed - grants.Count;
             }
             finally
             {

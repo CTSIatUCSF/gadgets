@@ -36,7 +36,7 @@ namespace UCSF.Business.DataImporter
 
         public int TotalRecords{ get; private set; }
         
-        public int TotalProcessed{ get; private set; }
+        public int TotalProcessed{ get; protected set; }
 
         public int RecordsPerTransaction { get; protected set; }
 
@@ -68,7 +68,7 @@ namespace UCSF.Business.DataImporter
                 {
                     if (reader.NodeType == XmlNodeType.Element && reader.Name == "row")
                     {
-                        Grant grant = new Grant { GrantId = Guid.NewGuid() };
+                        Grant grant = new Grant { GrantPK = Guid.NewGuid() };
 
                         XElement row = new XElement("row");
                         bool needContinue = true;
@@ -287,6 +287,9 @@ namespace UCSF.Business.DataImporter
                 case "PIS":
                     UpdateGrantInvestigators(grant, node);
                     break;
+                case "TOTAL_COST":
+                    grant.TotalCost = Convert.ToInt32(node.Value);
+                    break;
                 case "CORE_PROJECT_NUM":
                     grant.CoreProjectNumber= node.Value.SafeTrim();
                     break;
@@ -314,16 +317,16 @@ namespace UCSF.Business.DataImporter
                     {
                         investigator = new PrincipalInvestigator
                                            {
-                                               PrincipalInvestigatorId = Guid.NewGuid(),
+                                               PrincipalInvestigatorPK = Guid.NewGuid(),
                                                Name = pi.Element("PI_NAME").Value.SafeTrim(),
                                                PrincipalInvestigator_Id = principalInvestigatorId
                                            };
 
-                        grant.GrantPrincipals.Add(new GrantPrincipal() { PrincipalInvestigator = investigator, GrantPrincipalId = Guid.NewGuid() });
+                        grant.GrantPrincipals.Add(new GrantPrincipal() { PrincipalInvestigator = investigator, GrantPrincipalPK = Guid.NewGuid() });
                     }
                     else
                     {
-                        grant.GrantPrincipals.Add(new GrantPrincipal() { PrincipalInvestigatorId = investigator.PrincipalInvestigatorId, GrantPrincipalId = Guid.NewGuid() });
+                        grant.GrantPrincipals.Add(new GrantPrincipal() { PrincipalInvestigatorPK = investigator.PrincipalInvestigatorPK, GrantPrincipalPK = Guid.NewGuid() });
                     }
                 }
             }

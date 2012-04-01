@@ -106,7 +106,7 @@ namespace UCSF.Business.Web
         private void AddFileToProcessed(string fileName)
         {
             //save file name to db
-            DataContext.GrantFiles.InsertOnSubmit(new GrantFile() { FileId = Guid.NewGuid(), FileName = fileName, Processed = true});
+            DataContext.GrantFiles.InsertOnSubmit(new GrantFile() { FilePK = Guid.NewGuid(), FileName = fileName, Processed = true});
             DataContext.SubmitChanges();
         }
 

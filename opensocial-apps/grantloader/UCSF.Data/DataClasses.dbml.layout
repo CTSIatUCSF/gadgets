@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9" name="DataClasses1">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.625" name="DataClasses1">
   <DataContextMoniker Name="/UCSDDataContext" />
   <nestedChildShapes>
-    <classShape Id="0f1213db-e364-40a2-8b97-f7ad370b36f0" absoluteBounds="6.625, 4.25, 2, 1.3862939453124998">
-      <DataClassMoniker Name="/UCSDDataContext/PrincipalInvestigator" />
-      <nestedChildShapes>
-        <elementListCompartment Id="03263935-470a-4ff4-9467-6e09cfe2f002" absoluteBounds="6.6400000000000006, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="dc19dd09-bf15-46bb-afd4-6dfa6c5055d6" absoluteBounds="4, 4.375, 2, 1.3862939453124998">
-      <DataClassMoniker Name="/UCSDDataContext/GrantPrincipal" />
-      <nestedChildShapes>
-        <elementListCompartment Id="bf55ffe0-f0ca-4ab3-9303-9493b34f9121" absoluteBounds="4.0150000000000006, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(6.625 : 5.00564697265625); (6 : 5.00564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/PrincipalInvestigator_GrantPrincipal" />
-      <nodes>
-        <classShapeMoniker Id="0f1213db-e364-40a2-8b97-f7ad370b36f0" />
-        <classShapeMoniker Id="dc19dd09-bf15-46bb-afd4-6dfa6c5055d6" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="43df4659-c0b6-436d-9672-6ab00852bbe1" absoluteBounds="0.875, 2.75, 2, 6.0015283203125">
+    <classShape Id="906b8322-987f-48a2-a65c-47da1fc3610e" absoluteBounds="7.125, 4.125, 2, 6.1938297526041666">
       <DataClassMoniker Name="/UCSDDataContext/Grant" />
       <nestedChildShapes>
-        <elementListCompartment Id="d1acf49b-2b4e-446d-a25e-eea62b0ba5e6" absoluteBounds="0.89000000000000012, 3.21, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a4c8911e-f099-4b89-8f9b-859605fcc9f2" absoluteBounds="7.14, 4.5850000000000009, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.875 : 5.06814697265625); (4 : 5.06814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/UCSDDataContext/Grant/Grant_GrantPrincipal" />
-      <nodes>
-        <classShapeMoniker Id="43df4659-c0b6-436d-9672-6ab00852bbe1" />
-        <classShapeMoniker Id="dc19dd09-bf15-46bb-afd4-6dfa6c5055d6" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="5ddee183-423c-4451-baf2-8a7f9995b5e7" absoluteBounds="3.75, 6.125, 2, 1.3862939453125">
+    <classShape Id="c6a2111b-62bb-4ccd-83a7-0e15f9e521db" absoluteBounds="4, 8.625, 2.375, 1.5785953776041664">
+      <DataClassMoniker Name="/UCSDDataContext/PrincipalInvestigator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="68375887-35b8-4202-a3ce-7bd93844dfb4" absoluteBounds="4.015, 9.085, 2.3449999999999998, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c3f718a0-7866-4758-931f-a49c0e0d807c" absoluteBounds="3.5, 3.75, 2, 1.3862939453125003">
       <DataClassMoniker Name="/UCSDDataContext/GrantFile" />
       <nestedChildShapes>
-        <elementListCompartment Id="19fa13eb-15d5-43ab-83dd-b71e428728c8" absoluteBounds="3.7649999999999997, 6.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="de61e053-50d5-4a87-b189-31c04ca3339e" absoluteBounds="3.5149999999999997, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="357edaba-a494-49fa-89f9-ae06e461169a" absoluteBounds="4, 6, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/UCSDDataContext/GrantPrincipal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e673354-a6db-4a04-936a-1691ad9e67e8" absoluteBounds="4.0150000000000006, 6.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.125 : 6.69314697265625); (6 : 6.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/UCSDDataContext/Grant/agGrant_agGrantPrincipal" />
+      <nodes>
+        <classShapeMoniker Id="906b8322-987f-48a2-a65c-47da1fc3610e" />
+        <classShapeMoniker Id="357edaba-a494-49fa-89f9-ae06e461169a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5 : 8.625); (5 : 7.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/agPrincipalInvestigator_agGrantPrincipal" />
+      <nodes>
+        <classShapeMoniker Id="c6a2111b-62bb-4ccd-83a7-0e15f9e521db" />
+        <classShapeMoniker Id="357edaba-a494-49fa-89f9-ae06e461169a" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

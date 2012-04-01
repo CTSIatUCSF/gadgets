@@ -80,7 +80,7 @@ namespace UCSF.GrantLoader
             {
                 BulkImporter bi = new BulkImporter();
                 bi.ImportData(fileName, options.OrgName, null);
-                log.InfoFormat("{0} Records imported. {1} Errors", bi.TotalRecords, bi.ErrorsCount);
+                log.InfoFormat("{0} Records imported. {1} Errors", bi.TotalProcessed, bi.ErrorsCount);
             }
             else if (options.CheckForUpdates)
             {

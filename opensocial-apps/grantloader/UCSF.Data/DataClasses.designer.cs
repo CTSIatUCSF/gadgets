@@ -799,7 +799,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="agGrant_agGrantPrincipal", Storage="_GrantPrincipals", ThisKey="GrantPK", OtherKey="GrantPK")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grant_GrantPrincipal", Storage="_GrantPrincipals", ThisKey="GrantPK", OtherKey="GrantPK")]
 		public EntitySet<GrantPrincipal> GrantPrincipals
 		{
 			get
@@ -867,8 +867,8 @@ namespace UCSF.Data
     partial void OnCreated();
     partial void OnPrincipalInvestigatorPKChanging(System.Guid value);
     partial void OnPrincipalInvestigatorPKChanged();
-    partial void OnPrincipalInvestigator_IdChanging(int value);
-    partial void OnPrincipalInvestigator_IdChanged();
+    partial void OnPrincipalInvestigatorIdChanging(int value);
+    partial void OnPrincipalInvestigatorIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
     partial void OnEmployeeIdChanging(string value);
@@ -902,7 +902,7 @@ namespace UCSF.Data
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalInvestigator_Id", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int PrincipalInvestigator_Id
+		public int PrincipalInvestigatorId
 		{
 			get
 			{
@@ -912,11 +912,11 @@ namespace UCSF.Data
 			{
 				if ((this._PrincipalInvestigator_Id != value))
 				{
-					this.OnPrincipalInvestigator_IdChanging(value);
+					this.OnPrincipalInvestigatorIdChanging(value);
 					this.SendPropertyChanging();
 					this._PrincipalInvestigator_Id = value;
-					this.SendPropertyChanged("PrincipalInvestigator_Id");
-					this.OnPrincipalInvestigator_IdChanged();
+					this.SendPropertyChanged("PrincipalInvestigatorId");
+					this.OnPrincipalInvestigatorIdChanged();
 				}
 			}
 		}
@@ -961,7 +961,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="agPrincipalInvestigator_agGrantPrincipal", Storage="_GrantPrincipals", ThisKey="PrincipalInvestigatorPK", OtherKey="PrincipalInvestigatorPK")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_GrantPrincipals", ThisKey="PrincipalInvestigatorPK", OtherKey="PrincipalInvestigatorPK")]
 		public EntitySet<GrantPrincipal> GrantPrincipals
 		{
 			get
@@ -1220,7 +1220,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="agGrant_agGrantPrincipal", Storage="_Grant", ThisKey="GrantPK", OtherKey="GrantPK", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grant_GrantPrincipal", Storage="_Grant", ThisKey="GrantPK", OtherKey="GrantPK", IsForeignKey=true)]
 		public Grant Grant
 		{
 			get
@@ -1254,7 +1254,7 @@ namespace UCSF.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="agPrincipalInvestigator_agGrantPrincipal", Storage="_PrincipalInvestigator", ThisKey="PrincipalInvestigatorPK", OtherKey="PrincipalInvestigatorPK", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PrincipalInvestigator_GrantPrincipal", Storage="_PrincipalInvestigator", ThisKey="PrincipalInvestigatorPK", OtherKey="PrincipalInvestigatorPK", IsForeignKey=true)]
 		public PrincipalInvestigator PrincipalInvestigator
 		{
 			get

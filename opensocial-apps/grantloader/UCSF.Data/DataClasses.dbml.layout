@@ -27,14 +27,14 @@
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(7.125 : 6.69314697265625); (6 : 6.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/UCSDDataContext/Grant/agGrant_agGrantPrincipal" />
+      <AssociationMoniker Name="/UCSDDataContext/Grant/Grant_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="906b8322-987f-48a2-a65c-47da1fc3610e" />
         <classShapeMoniker Id="357edaba-a494-49fa-89f9-ae06e461169a" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5 : 8.625); (5 : 7.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/agPrincipalInvestigator_agGrantPrincipal" />
+      <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/PrincipalInvestigator_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="c6a2111b-62bb-4ccd-83a7-0e15f9e521db" />
         <classShapeMoniker Id="357edaba-a494-49fa-89f9-ae06e461169a" />

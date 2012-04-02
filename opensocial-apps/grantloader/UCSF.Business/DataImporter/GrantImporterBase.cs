@@ -319,7 +319,7 @@ namespace UCSF.Business.DataImporter
                                            {
                                                PrincipalInvestigatorPK = Guid.NewGuid(),
                                                Name = pi.Element("PI_NAME").Value.SafeTrim(),
-                                               PrincipalInvestigator_Id = principalInvestigatorId
+                                               PrincipalInvestigatorId = principalInvestigatorId
                                            };
 
                         grant.GrantPrincipals.Add(new GrantPrincipal() { PrincipalInvestigator = investigator, GrantPrincipalPK = Guid.NewGuid() });

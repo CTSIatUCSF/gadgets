@@ -20,7 +20,11 @@ namespace UCSF.GrantLoader
         public bool CheckForUpdates = false;
 
         [ValueList(typeof(List<string>), MaximumElements = 1)]
+
+        #pragma warning disable 0649
+        //field is used via reflection from command parser
         public IList<string> FileName;
+        #pragma warning restore 0649
 
         [HelpOption(HelpText = "Dispaly this help screen.")]
         internal static void ShowUsage()

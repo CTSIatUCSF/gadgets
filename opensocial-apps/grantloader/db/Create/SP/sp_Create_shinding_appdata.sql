@@ -35,12 +35,12 @@ BEGIN
 	select @shindigAppId = appId from shindig_apps where name = 'Awarded Grants'
 	
 	declare investigator cursor FAST_FORWARD for 
-	select distinct G.ProjectTitle, G.FullProjectNum, G.FY, G.ApplicationId, PrincipalInvestigator_Id, p.PersonId
+	select distinct G.ProjectTitle, G.FullProjectNum, G.FY, G.ApplicationId, PrincipalInvestigatorId, p.PersonId
 	  FROM agPrincipalInvestigator I
 	  Join Person P on P.InternalUserName = I.EmployeeID
 	  Join agGrantPrincipal GP on GP.PrincipalInvestigatorPK = I.PrincipalInvestigatorPK
 	  Join [agGrant] G on G.GrantPK = GP.GrantPK
-	order by I.PrincipalInvestigator_Id
+	order by I.PrincipalInvestigatorId
 	
 	open investigator
 	fetch next from investigator into @title, @fullprojectnum, @FY, @ApplicationID, @pid, @personId

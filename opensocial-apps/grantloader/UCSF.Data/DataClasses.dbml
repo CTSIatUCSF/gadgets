@@ -30,16 +30,16 @@
       <Column Name="TotalCost" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="CoreProjectNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="XML" Type="System.String" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="agGrant_agGrantPrincipal" Member="GrantPrincipals" ThisKey="GrantPK" OtherKey="GrantPK" Type="GrantPrincipal" />
+      <Association Name="Grant_GrantPrincipal" Member="GrantPrincipals" ThisKey="GrantPK" OtherKey="GrantPK" Type="GrantPrincipal" />
     </Type>
   </Table>
   <Table Name="dbo.agPrincipalInvestigator" Member="PrincipalInvestigators">
     <Type Name="PrincipalInvestigator">
       <Column Name="PrincipalInvestigatorPK" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PrincipalInvestigator_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PrincipalInvestigatorId" Storage="_PrincipalInvestigator_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="EmployeeId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="agPrincipalInvestigator_agGrantPrincipal" Member="GrantPrincipals" ThisKey="PrincipalInvestigatorPK" OtherKey="PrincipalInvestigatorPK" Type="GrantPrincipal" />
+      <Association Name="PrincipalInvestigator_GrantPrincipal" Member="GrantPrincipals" ThisKey="PrincipalInvestigatorPK" OtherKey="PrincipalInvestigatorPK" Type="GrantPrincipal" />
     </Type>
   </Table>
   <Table Name="dbo.agGrantFile" Member="GrantFiles">
@@ -54,8 +54,8 @@
       <Column Name="GrantPrincipalPK" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="GrantPK" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="PrincipalInvestigatorPK" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="agGrant_agGrantPrincipal" Member="Grant" ThisKey="GrantPK" OtherKey="GrantPK" Type="Grant" IsForeignKey="true" />
-      <Association Name="agPrincipalInvestigator_agGrantPrincipal" Member="PrincipalInvestigator" ThisKey="PrincipalInvestigatorPK" OtherKey="PrincipalInvestigatorPK" Type="PrincipalInvestigator" IsForeignKey="true" />
+      <Association Name="Grant_GrantPrincipal" Member="Grant" ThisKey="GrantPK" OtherKey="GrantPK" Type="Grant" IsForeignKey="true" />
+      <Association Name="PrincipalInvestigator_GrantPrincipal" Member="PrincipalInvestigator" ThisKey="PrincipalInvestigatorPK" OtherKey="PrincipalInvestigatorPK" Type="PrincipalInvestigator" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

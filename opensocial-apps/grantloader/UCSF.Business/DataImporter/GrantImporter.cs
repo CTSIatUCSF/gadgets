@@ -46,8 +46,8 @@ namespace UCSF.Business.DataImporter
 
         protected override PrincipalInvestigator GetPrincipalInvestigator(int principalInvestigatorId)
         {
-            return DataContext.PrincipalInvestigators.FirstOrDefault(it => it.PrincipalInvestigator_Id == principalInvestigatorId) ??
-                   DataContext.GetChangeSet().Inserts.FirstOrDefault(it => it is PrincipalInvestigator && (it as PrincipalInvestigator).PrincipalInvestigator_Id == principalInvestigatorId) as PrincipalInvestigator;
+            return DataContext.PrincipalInvestigators.FirstOrDefault(it => it.PrincipalInvestigatorId == principalInvestigatorId) ??
+                   DataContext.GetChangeSet().Inserts.FirstOrDefault(it => it is PrincipalInvestigator && (it as PrincipalInvestigator).PrincipalInvestigatorId == principalInvestigatorId) as PrincipalInvestigator;
         }
     }
 }

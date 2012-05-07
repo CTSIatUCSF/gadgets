@@ -48,7 +48,7 @@ namespace UCSF.GrantLoader
         private static void ExecTasks(Options options)
         {
             string fileName = null;
-            if(!options.CheckForUpdates)
+            if(!options.CheckForUpdates && !options.Validate)
             {
                 if (options.FileName == null || options.FileName.Count == 0)
                 {
@@ -66,11 +66,9 @@ namespace UCSF.GrantLoader
                 }
             }
 
-
             Stopwatch sw = new Stopwatch();
 
             sw.Start();
-
             if(options.UseBCP)
             {
                 BCPImporter bi = new BCPImporter();
@@ -87,12 +85,23 @@ namespace UCSF.GrantLoader
                 WebDownloader d = new WebDownloader();
                 d.CheckForUpdates(options.OrgName);
             }
-            else
+            else if(!options.Validate)
             {
                 GrantImporter gi = new GrantImporter();
                 gi.ImportData(fileName, options.OrgName, null);
                 log.InfoFormat("{0} Records imported. {1} Errors", gi.TotalRecords, gi.ErrorsCount);
             }
+            if (options.Validate)
+            {
+                GrantOnlineValidator validator = new GrantOnlineValidator();
+                validator.ValidateGrants();
+                log.InfoFormat("Total {0} Record(s) validated. {1} invalid grant(s)", validator.TotalProcessed, validator.InvalidGrants);
+                if(validator.ErrorsCount > 0)
+                {
+                    log.InfoFormat("Total {0} Errors(s)", validator.ErrorsCount);
+                }
+            }
+
             sw.Stop();
             log.InfoFormat("Total time: {0:0.#} seconds.", sw.Elapsed.TotalSeconds);
             log.Info("Done.");

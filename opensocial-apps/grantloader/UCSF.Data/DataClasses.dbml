@@ -30,6 +30,7 @@
       <Column Name="TotalCost" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="CoreProjectNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="XML" Type="System.String" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsVerified" Storage="_IsVerfied" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Grant_GrantPrincipal" Member="GrantPrincipals" ThisKey="GrantPK" OtherKey="GrantPK" Type="GrantPrincipal" />
     </Type>
   </Table>

@@ -29,6 +29,7 @@ CREATE TABLE [dbo].[agGrant](
 	[TotalCost] [int] NULL,
 	[CoreProjectNumber] [varchar](50) NULL,
 	[XML] [xml] NULL,
+	[IsVerified] [bit] NULL,
  CONSTRAINT [PK_Grant] PRIMARY KEY CLUSTERED 
 (
 	[GrantPK] ASC
@@ -38,7 +39,7 @@ END
 GO
 
 
-/****** Object:  Index [IX_Grant]    Script Date: 02/21/2012 21:22:19 ******/
+/****** Object:  Index [IX_Grant]    Script Date: 05/04/2012 18:27:38 ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[agGrant]') AND name = N'IX_Grant')
 CREATE NONCLUSTERED INDEX [IX_Grant] ON [dbo].[agGrant] 
 (

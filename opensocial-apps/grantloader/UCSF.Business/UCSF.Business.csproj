@@ -59,6 +59,7 @@
     <Compile Include="DataImporter\BulkImporter.cs" />
     <Compile Include="DataImporter\GrantImporter.cs" />
     <Compile Include="DataImporter\GrantImporterBase.cs" />
+    <Compile Include="Web\GrantOnlineValidator.cs" />
     <Compile Include="DataImporter\TableExtensions.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

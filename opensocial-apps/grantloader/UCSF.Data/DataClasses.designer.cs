@@ -169,6 +169,8 @@ namespace UCSF.Data
 		
 		private string _XML;
 		
+		private System.Nullable<bool> _IsVerfied;
+		
 		private EntitySet<GrantPrincipal> _GrantPrincipals;
 		
     #region Extensibility Method Definitions
@@ -231,6 +233,8 @@ namespace UCSF.Data
     partial void OnCoreProjectNumberChanged();
     partial void OnXMLChanging(string value);
     partial void OnXMLChanged();
+    partial void OnIsVerifiedChanging(System.Nullable<bool> value);
+    partial void OnIsVerifiedChanged();
     #endregion
 		
 		public Grant()
@@ -795,6 +799,26 @@ namespace UCSF.Data
 					this._XML = value;
 					this.SendPropertyChanged("XML");
 					this.OnXMLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsVerfied", DbType="Bit")]
+		public System.Nullable<bool> IsVerified
+		{
+			get
+			{
+				return this._IsVerfied;
+			}
+			set
+			{
+				if ((this._IsVerfied != value))
+				{
+					this.OnIsVerifiedChanging(value);
+					this.SendPropertyChanging();
+					this._IsVerfied = value;
+					this.SendPropertyChanged("IsVerified");
+					this.OnIsVerifiedChanged();
 				}
 			}
 		}

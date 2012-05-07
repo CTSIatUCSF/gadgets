@@ -40,6 +40,7 @@ BEGIN
 	  Join Person P on P.InternalUserName = I.EmployeeID
 	  Join agGrantPrincipal GP on GP.PrincipalInvestigatorPK = I.PrincipalInvestigatorPK
 	  Join [agGrant] G on G.GrantPK = GP.GrantPK
+	where IsVerified = 1
 	order by I.PrincipalInvestigatorId
 	
 	open investigator

@@ -37,18 +37,33 @@
 	    <style type="text/css">
 	    	.nih-grants-profile {font-family: arial, helvetica, verdana, sans-serif; font-size: 12px;}
 	    	.nih-grants-profile .title {padding: 5px 5px 10px 5px;}
-	    	.nih-grants-profile .content {height:170px;overflow-y: auto; padding: 0px 0px 0px 0px; border-radius: 0px;line-height:1em;}
+	    	.nih-grants-profile .content {height:155px;overflow-y: auto; padding: 0px 0px 0px 0px; border-radius: 0px;line-height:1em;}
 	    	.nih-grants-profile table {border-collapse:collapse;width: 100%; margin-bottom: 0px;}
 	    	.nih-grants-profile td, .nih-grants-profile th {text-align: left; padding:2px;}
 	    	.nih-grants-profile th {font-size: 13px; font-weight: bold;}
 	    	.nih-grants-profile td.fy {width: 70px; text-align:right;padding-right: 10px;}
 	    	.nih-grants-profile td.pn {width: 140px;}
 	    	.nih-grants-profile a {font-size: 12px;}
+	    	.nih-grants-profile .help  {padding-top: 5px; float: right;cursor:pointer;}
+	    	.nih-grants-profile .info {padding: 5px 5px 10px 5px;font-size: 10px;line-height: 11px;}
+	    	.nih-grants-profile .info a {font-size: 10px;}
+	    	.clear {clear:both;}
     	</style>
 	    <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function(){
 				updateOwnerDisplayName();
 				loadData();
+				$(document).ready(function () {
+					$(".nih-grants-profile .help").click(function(){
+						var beforeH = $(".nih-grants-profile").height();
+						$(".nih-grants-profile .info").slideToggle(function() {
+							var ch = $(".nih-grants-profile .content").height();
+							var afterH = $(".nih-grants-profile").height();
+							$(".nih-grants-profile .content").height(ch - (afterH - beforeH));
+						});
+					});
+				});
+				
 			});		
 			
 			function updateOwnerDisplayName() {
@@ -112,7 +127,12 @@
 	    	}
 		</script>	
 		<div class="nih-grants-profile">
-			<div class="title"><span class="user-name"></span>&nbsp;was the Principal Investigator (PI) for the following NIH grants.</div>
+			<div class="help"><img src="images/Info.png"></img></div>
+			<div class="title"><span class="user-name"></span>&nbsp;was the Principal Investigator (PI) or Co-Principal Investigator (Co-PI) for the following NIH grants.</div>
+			<div class="clear"></div>
+			<div class="info" style="display:none">This data is sourced from NIH Reporter. UCSF Profiles receives investigator name (principal investigator or co-principle investigator), grant IDs, and employee IDs from UCSF Contracts and Grants.  Then grant IDs and names are matched to NIH Reporter information; and UCSF employee ID is matched to the appropriate profile. This matched data is presented here. Some matches are based on name only and may be less accurate if the names are common.
+If you believe any of this information is inaccurate, please <a href="mailto:ctsi@ucsf.edu?subject=Awarded Grant Information in UCSF Profiles">contact us.</a> 
+			</div>
 			<div class="content" style="display:none;">
 			<table>	
 				<tr>

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.625" name="DataClasses1">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.75" name="DataClasses1">
   <DataContextMoniker Name="/UCSDDataContext" />
   <nestedChildShapes>
-    <classShape Id="906b8322-987f-48a2-a65c-47da1fc3610e" absoluteBounds="7.125, 4.125, 2, 6.1938297526041666">
+    <classShape Id="906b8322-987f-48a2-a65c-47da1fc3610e" absoluteBounds="7.125, 4.125, 2, 6.3861311848958326">
       <DataClassMoniker Name="/UCSDDataContext/Grant" />
       <nestedChildShapes>
-        <elementListCompartment Id="a4c8911e-f099-4b89-8f9b-859605fcc9f2" absoluteBounds="7.14, 4.5850000000000009, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a4c8911e-f099-4b89-8f9b-859605fcc9f2" absoluteBounds="7.14, 4.5850000000000009, 1.9700000000000002, 5.826131184895833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="c6a2111b-62bb-4ccd-83a7-0e15f9e521db" absoluteBounds="4, 8.625, 2.375, 1.5785953776041664">
@@ -26,14 +26,14 @@
         <elementListCompartment Id="2e673354-a6db-4a04-936a-1691ad9e67e8" absoluteBounds="4.0150000000000006, 6.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.125 : 6.69314697265625); (6 : 6.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.125 : 6.69314697265625); (6 : 6.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/UCSDDataContext/Grant/Grant_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="906b8322-987f-48a2-a65c-47da1fc3610e" />
         <classShapeMoniker Id="357edaba-a494-49fa-89f9-ae06e461169a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5 : 8.625); (5 : 7.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5 : 8.625); (5 : 7.3862939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/UCSDDataContext/PrincipalInvestigator/PrincipalInvestigator_GrantPrincipal" />
       <nodes>
         <classShapeMoniker Id="c6a2111b-62bb-4ccd-83a7-0e15f9e521db" />

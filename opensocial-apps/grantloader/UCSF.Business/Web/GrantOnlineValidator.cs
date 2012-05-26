@@ -42,6 +42,7 @@ namespace UCSF.Business.Web
 
         public string ValidationUrl { get; private set; }
         public string ValidationPattern { get; private set; }
+        protected string RequiredKey { get; private set; }
 
         public void ValidateGrants()
         {
@@ -51,11 +52,22 @@ namespace UCSF.Business.Web
             var grants = ucsdDataContext.Grants.Where(g => g.IsVerified == null && g.GrantPrincipals.Any(
                         gp => gp.PrincipalInvestigator != null && gp.PrincipalInvestigator.EmployeeId != null));
 
-            int timeout = getTimeout();
+            string pause = ConfigurationManager.AppSettings["GrantValidation.Pause"];
+            int _pause = 10;
+            if (!String.IsNullOrWhiteSpace(pause))
+            {
+                _pause = Int32.Parse(pause);
+            }
+
             foreach (Grant grant in grants.ToList().Distinct(new GrantAppIdComparer()))
             {
                ValidateGrantOnline(grant);
-               Thread.Sleep(timeout*1000);
+               
+                if(_pause > 0)
+                {
+                    log.Info("Pause");
+                    Thread.Sleep(_pause * 1000);
+                }
             }
         }
 
@@ -63,15 +75,7 @@ namespace UCSF.Business.Web
         {
             ValidationUrl = ConfigurationManager.AppSettings["GrantValidation.Url"];
             ValidationPattern = ConfigurationManager.AppSettings["GrantValidation.Pattern"];
-        }
-
-        private int getTimeout() {
-            string timeout = ConfigurationManager.AppSettings["GrantValidation.Timeout"];
-            if (!String.IsNullOrWhiteSpace(timeout))
-            {
-                return Int32.Parse(timeout);
-            }
-            return 10;
+            RequiredKey = ConfigurationManager.AppSettings["GrantValidation.RequiredKey"];
         }
 
         private void ValidateGrantOnline(Grant grant)
@@ -82,12 +86,17 @@ namespace UCSF.Business.Web
             {
                 WebClientEx wc = new WebClientEx();
                 wc.Headers.Add(HttpRequestHeader.UserAgent, ConfigurationManager.AppSettings["GrantValidation.Header"]);
-                                
+
                 using (MemoryStream ms = new MemoryStream(wc.DownloadData(string.Format(ValidationUrl, grant.ApplicationId))))
                 {
                     ms.Seek(0, SeekOrigin.Begin);
                     StreamReader sb = new StreamReader(ms);
                     string doc = sb.ReadToEnd();
+
+                    if(doc.IndexOf(RequiredKey) <0)
+                    {
+                        throw new Exception("Server returned wrong response");
+                    }
 
                     grant.IsVerified = doc.IndexOf(ValidationPattern) < 0;
                     
@@ -102,7 +111,6 @@ namespace UCSF.Business.Web
                         Interlocked.Increment(ref invalidGrants);
                         log.InfoFormat("Grant ApplicationId {0} Is not valid", grant.ApplicationId);
                     }
-                    
                 }
             }
             catch(Exception ex)

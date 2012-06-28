@@ -130,8 +130,8 @@
 			<div class="help"><img src="images/Info.png"></img></div>
 			<div class="title"><span class="user-name"></span>&nbsp;was the Principal Investigator (PI) or Co-Principal Investigator (Co-PI) for the following NIH grants.</div>
 			<div class="clear"></div>
-			<div class="info" style="display:none">This data is sourced from NIH Reporter. UCSF Profiles receives investigator name (principal investigator or co-principle investigator), grant IDs, and employee IDs from UCSF Contracts and Grants.  Then grant IDs and names are matched to NIH Reporter information; and UCSF employee ID is matched to the appropriate profile. This matched data is presented here. Some matches are based on name only and may be less accurate if the names are common.
-If you believe any of this information is inaccurate, please <a href="mailto:ctsi@ucsf.edu?subject=Awarded Grant Information in UCSF Profiles">contact us.</a> 
+			<div class="info" style="display:none">This data is sourced from NIH Reporter. Some grant data shown may be less accurate if the principal investigator’s or co-principal investigator’s name is common. 
+			If you believe any of this information is inaccurate, please <a href="mailto:ctsi@ucsf.edu?subject=Awarded Grant Information in UCSF Profiles">contact us.</a> 
 			</div>
 			<div class="content" style="display:none;">
 			<table>	

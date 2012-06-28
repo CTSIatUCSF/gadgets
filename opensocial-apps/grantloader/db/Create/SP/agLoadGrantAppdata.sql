@@ -1,10 +1,10 @@
-/****** Object:  StoredProcedure [dbo].[sp_Create_shinding_appdata]    Script Date: 03/16/2012 19:14:00 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Create_shinding_appdata]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_Create_shinding_appdata]
+/****** Object:  StoredProcedure [dbo].[agLoadGrantAppdata]    Script Date: 03/16/2012 19:14:00 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[agLoadGrantAppdata]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[agLoadGrantAppdata]
 GO
 
 
-Create PROCEDURE [dbo].[sp_Create_shinding_appdata]
+Create PROCEDURE [dbo].[agLoadGrantAppdata]
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -33,6 +33,9 @@ BEGIN
 	
 	--set @shindigAppId =0
 	select @shindigAppId = appId from shindig_apps where name = 'Awarded Grants'
+	
+	-- remove old grant appdata
+	delete from shindig_appdata where appId = @shindigAppId and keyName != 'VISIBLE';
 	
 	declare investigator cursor FAST_FORWARD for 
 	select distinct G.ProjectTitle, G.FullProjectNum, G.FY, G.ApplicationId, PrincipalInvestigatorId, p.PersonId
@@ -91,4 +94,15 @@ BEGIN
 	
 	close investigator
 	deallocate investigator
+	
+	-- now add all new people with grants as VISIBLE
+	insert shindig_appdata (userId, appId, keyName, value, createdDT, updatedDT)
+		select distinct userId,  @shindigAppId, 'VISIBLE', 'Y', GetDate(), GetDate() from 
+		shindig_appdata where appId = @shindigAppId and keyName != 'VISIBLE';
+		
+	insert shindig_app_registry (appId, personId, createdDT) 
+		select @shindigAppId, userId, GetDate() from shindig_appdata
+		where appId = @shindigAppId and keyName = 'VISIBLE' and [value] = 'Y' and 
+		userId not in (select personId from shindig_app_registry where appId = @shindigAppId);
+	
 END

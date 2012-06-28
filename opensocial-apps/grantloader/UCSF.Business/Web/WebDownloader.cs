@@ -25,8 +25,8 @@ namespace UCSF.Business.Web
             DataContext = new UCSDDataContext();
             log = LogManager.GetLogger(GetType());
         }
-
-        public void CheckForUpdates(string orgName)
+        
+        public void CheckForUpdates(string orgName, bool useBulk)
         {
             string downloadsFolder = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), DOWNLOADS);
             if (!Directory.Exists(downloadsFolder))
@@ -76,12 +76,24 @@ namespace UCSF.Business.Web
 
                             try
                             {
-                                BulkImporter importer = new BulkImporter();
-                                importer.ImportData(Path.Combine(downloadsFolder, fName), orgName);
-                                log.InfoFormat("{0} Records imported. {1} Errors", importer.TotalRecords, importer.ErrorsCount);
-                                totalProcessed = totalProcessed + importer.TotalRecords;
-                                totalErrors = totalErrors + importer.ErrorsCount;
-                                addToProcessed = true;
+                                if (useBulk)
+                                {
+                                    BulkImporter importer = new BulkImporter();
+                                    importer.ImportData(Path.Combine(downloadsFolder, fName), orgName);
+                                    log.InfoFormat("{0} Records imported. {1} Errors", importer.TotalRecords, importer.ErrorsCount);
+                                    totalProcessed = totalProcessed + importer.TotalRecords;
+                                    totalErrors = totalErrors + importer.ErrorsCount;
+                                    addToProcessed = true;
+                                }
+                                else
+                                {
+                                    GrantImporter gi = new GrantImporter();
+                                    gi.ImportData(Path.Combine(downloadsFolder, fName), orgName, null);
+                                    log.InfoFormat("{0} Records imported. {1} Errors", gi.TotalRecords, gi.ErrorsCount);
+                                    totalProcessed = totalProcessed + gi.TotalRecords;
+                                    totalErrors = totalErrors + gi.ErrorsCount;
+                                    addToProcessed = true;
+                                }
                             }
                             catch(Exception ex)
                             {

@@ -16,7 +16,7 @@ namespace UCSF.Business.DataImporter
 
         public BulkImporter()
         {
-            RecordsPerTransaction = 1000;
+            RecordsPerTransaction = 100;
         }
 
         protected override void AddGrantToRecordset(Grant grant)

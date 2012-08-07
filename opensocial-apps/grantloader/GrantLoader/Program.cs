@@ -83,9 +83,14 @@ namespace UCSF.GrantLoader
             else if (options.CheckForUpdates)
             {
                 WebDownloader d = new WebDownloader();
-                d.CheckForUpdates(options.OrgName);
+                d.CheckForUpdates(options.OrgName, true);
             }
-            else if(!options.Validate)
+            else if (options.CheckForUpdatesNoBulk)
+            {
+                WebDownloader d = new WebDownloader();
+                d.CheckForUpdates(options.OrgName, false);
+            }
+            else if (!options.Validate)
             {
                 GrantImporter gi = new GrantImporter();
                 gi.ImportData(fileName, options.OrgName, null);

@@ -9,56 +9,145 @@
         <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="osapi" />
-        <Require feature="rdf" />         
+        <Require feature="dynamic-height" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
-    <!DOCTYPE html>
-    <!--script type="text/javascript">
-    	gadgets.window.adjustHeight(200);
-    </script-->
+	    <!DOCTYPE html>    
+	    <!-- #includes -->
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+		<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
     
-    <!-- #includes -->
-    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
-    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
-    <script type="text/javascript" src="js/os.js" ></script>
-    
-    <!-- Styles -->
-    <style type="text/css">
-    </style>
-    
-    <script type="text/javascript">
-	    function gadgetEventTrack(action, label, value) {
-    		var message = {'action' : action};
-    		if (label) {message.label = label;}
-    		if (value) {message.value = value;}
-    		gadgets.pubsub.publish("analytics", message);
-		}
-	</script>
-	]]></Content>
-    <Content type="html" view="profile" preferred_height="200"><![CDATA[<!--HTML-->	
-	    <style type="text/css">
-    	</style>
 	    <script type="text/javascript">
+	        var ucsf = ucsf || {};
+	        ucsf.twitter = {};
+		    ucsf.gadgetEventTrack=function(action, label, value) {
+	    		var message = {'action' : action};
+	    		if (label) {message.label = label;}
+	    		if (value) {message.value = value;}
+	    		gadgets.pubsub.publish("analytics", message);
+			};
+			
+			ucsf.twitter.getUsernam=function(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username']})
+			    	.execute(function(response){
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var username = viewer.twitter_username;
+			    		if(username != null && username != '' && callback) {
+			    			callback(username);
+			    		}
+			    	});
+			}
+			
+	        ucsf.twitter.preview=function(username) {
+	        	var options = {
+					version: 2,
+					type: 'profile',
+					rpp: 4,
+					interval: 30000,
+					width: 'auto',
+					height: 200,
+					theme: {
+						shell: {
+					    	background: '#333333',
+					    	color: '#ffffff'
+					   	},
+					    tweets: {
+					      background: '#000000',
+					      color: '#ffffff',
+					      links: '#4aed05'
+					    }
+					  },
+					  features: {
+					    scrollbar: true,
+					    loop: false,
+					    live: true,
+					    behavior: 'all'
+					}
+				};
+				if (ucsf.twitter.preview.instance) {
+					options.id = ucsf.twitter.preview.instance.widgetEl.id;
+				}	
+				ucsf.twitter.preview.instance = new TWTR.Widget(options);
+				ucsf.twitter.preview.instance.render();
+				if(username) {
+					ucsf.twitter.preview.instance.setUser(username).start();	
+				}				    			
+	        }		
+		</script>
+	]]></Content>
+    <Content type="html" view="profile" preferred_height="300"><![CDATA[<!--HTML-->	
+	    <script type="text/javascript">
+	        ucsf.twitter.profilePageInit = function() {
+	        	gadgets.window.adjustHeight(300);
+	        	ucsf.twitter.getUsernam(ucsf.twitter.preview);
+	        }
+    		gadgets.util.registerOnLoadHandler(ucsf.twitter.profilePageInit);    		
 		</script>	
-		<div>
-			Profile page
+		<div class="twitter-gadget">
+			<div class="content">
+				<script>
+					ucsf.twitter.preview();
+				</script>
+			</div>			
 		</div>
 	]]></Content>
-    <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
+    <Content type="html" view="home" preferred_height="350"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript" src="js/UCSF.js" ></script>
-    	<script type="text/javascript">
+    	<script type="text/javascript">	        
+	        $(document).ready(function () {
+		        $(".twitter-gadget .save").click(function() {
+		        	$(".twitter-gadget").block({ message: "Saving..." });
+	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'twitter_username':$('.twitter-gadget input').val()} }).execute(function(response){
+	    				$(".twitter-gadget").unblock();
+	    			});		        	
+		        });
+		        $(".twitter-gadget .preview").click(function() {
+		        	var username = $('.twitter-gadget input').val();
+		        	if(username != null && username != '') {
+		        		$('.twitter-gadget .content').show();
+			        	gadgets.window.adjustHeight(350);
+		        		ucsf.twitter.preview(username);
+		        	}
+		        	else {
+		        		$('.twitter-gadget .content').hide();
+			        	gadgets.window.adjustHeight(50);
+		        	}
+		        });
+	        });
+	        	        
+	        ucsf.twitter.homePageInit = function() {
+	           	ucsf.twitter.getUsernam(function(username) {
+	    			$('.twitter-gadget input').val(username);
+	        		$('.twitter-gadget .content').show();
+		        	gadgets.window.adjustHeight(350);
+	    			ucsf.twitter.preview(username);
+	           	});	        
+	        }
+    		gadgets.util.registerOnLoadHandler(ucsf.twitter.homePageInit);    		
 		</script>
 		
 	    <!-- Styles -->
-	    <style type="text/css">	    	
+	    <style type="text/css">	    
+	    	.twitter-gadget {margin-top: 10px;}	
+	    	.twitter-gadget input {width: 400px;}
+	    	.twitter-gadget .label {margin-right: 10px;font-weight: bold;}
+	    	.twitter-gadget .preview, .twitter-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
+	    	.twitter-gadget .content {margin-top: 10px;}	    	
 	    </style>
 	    
 		<!-- HideShow -->
 		<div id="hideshow"></div>
 		<!-- HideShow end -->
-		<div>  
-			Home page
+		<div class="twitter-gadget">  
+			<span class="label">Username:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
+			<div class="content" style="display:none">
+				<script>
+					ucsf.twitter.preview();
+				</script>
+			</div>
 		</div>
 	]]></Content>
 </Module>

@@ -30,7 +30,7 @@
 	    		gadgets.pubsub.publish("analytics", message);
 			};
 			
-			ucsf.twitter.getUsernam=function(callback) {
+			ucsf.twitter.getUsername=function(callback) {
 				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username']})
 			    	.execute(function(response){
 			    		var viewer = os.osapi.getViewerFromResult(response);
@@ -82,7 +82,7 @@
 	    <script type="text/javascript">
 	        ucsf.twitter.profilePageInit = function() {
 	        	gadgets.window.adjustHeight(300);
-	        	ucsf.twitter.getUsernam(ucsf.twitter.preview);
+	        	ucsf.twitter.getUsername(ucsf.twitter.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.twitter.profilePageInit);    		
 		</script>	
@@ -119,7 +119,7 @@
 	        });
 	        	        
 	        ucsf.twitter.homePageInit = function() {
-	           	ucsf.twitter.getUsernam(function(username) {
+	           	ucsf.twitter.getUsername(function(username) {
 	    			$('.twitter-gadget input').val(username);
 	        		$('.twitter-gadget .content').show();
 		        	gadgets.window.adjustHeight(350);

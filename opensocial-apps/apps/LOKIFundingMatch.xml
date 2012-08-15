@@ -101,7 +101,7 @@
 		</div>
 	]]></Content>
     <Content type="html" view="home" preferred_height="290"><![CDATA[<!--HTML-->	
-	    <script type="text/javascript" src="js/UCSF.js" ></script>
+	    <script type="text/javascript" src="js/ORNG.js" ></script>
     	<script type="text/javascript">
 			ucsf.loki.getDefaultKeywords = function() {
 		    	//getting owner RDF 

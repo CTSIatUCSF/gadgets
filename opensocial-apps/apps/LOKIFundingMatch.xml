@@ -105,21 +105,29 @@
     	<script type="text/javascript">
 			ucsf.loki.getDefaultKeywords = function() {
 		    	//getting owner RDF 
+	  		  	$(".loki-gadget").block({ message: "Loading, please wait..." });
 		    	osapi.rdf.getOwner().execute(function(rdf) {
 		    		if(rdf.hasResearchArea) {
-						for (var i = 0; i < rdf.hasResearchArea.length; i++) {
+						var batch = osapi.newBatch()
+						var cnt = rdf.hasResearchArea.length;
+						for (var i = 0; i < cnt; i++) {
 							var rdfurl = rdf.hasResearchArea[i];
-							osapi.rdf.getRDF(rdfurl).execute(function(termRdf){
-								if(termRdf.label) {
-								 var elem = $('.loki-gadget textarea');
-								 var val = elem.val();
-								 if(val != '') {
-								 	val += ', ';
-								 } 
-								 elem.val(val + termRdf.label);
-								}
-							});	
+							batch.add("r_" + i, osapi.rdf.getRDF(rdfurl));
 						}
+						batch.execute(function(result){
+							$(".loki-gadget").unblock();
+						 	var val = '';
+							for (var i = 0; i < cnt; i++) {
+								var label = result['r_' + i].label 
+								if(label) {
+								 	if(val != '') {
+								 		val += ', ';
+								 	}
+								 	val += label;  
+								}
+							}
+							$('.loki-gadget textarea').val(val);
+						});
 		    		}			    		
 			    });			    	 
 			};
@@ -132,6 +140,7 @@
 	    			});		        	
 		        });
 		        $(".loki-gadget .preview").click(function() {
+		        	ucsf.loki.getDefaultKeywords();
 		        	ucsf.loki.loadContent($('.loki-gadget textarea').val());
 		        });
 	        });

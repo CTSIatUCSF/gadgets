@@ -19,16 +19,20 @@ namespace ChatterService
 
 
         [SqlProcedure]
-        public static void CreateActivity(SqlString url, SqlString username, SqlString password, SqlString token, SqlString employeeId, SqlXml messageBlob)
+        public static void CreateActivity(SqlString url, SqlString username, SqlString password, SqlString token, SqlString employeeId, SqlXml messageBlob, SqlInt32 pmid, SqlString title, SqlString body)
         {
-            IChatterService service = new ChatterService(url.Value);
+            IChatterSoapService service = new ChatterSoapService(url.Value);
             service.AllowUntrustedConnection();
             service.Login(username.Value, password.Value, token.Value);
 
             CreateProfileActivity(service, employeeId.Value, messageBlob.Value);
+            if (!pmid.IsNull)
+            {
+                CreateExternalMessage(service, employeeId.Value, pmid.Value, title.Value, body.Value);
+            }
         }
 
-        protected static void CreateProfileActivity(IChatterService service, string employeeId, string xml)
+        protected static void CreateProfileActivity(IChatterSoapService service, string employeeId, string xml)
         {
             var element = XElement.Parse(xml);
 
@@ -72,6 +76,11 @@ namespace ChatterService
             catch(Exception ex) {
                 throw new Exception("Incorrect time format:" + milliseconds, ex);
             }
+        }
+
+        protected static void CreateExternalMessage(IChatterSoapService service, string employeeId, int pmid, string title, string body)
+        {
+            service.CreateExternalMessage("http://www.ncbi.nlm.nih.gov/pubmed/" + pmid, title, body, employeeId);
         }
 
     }

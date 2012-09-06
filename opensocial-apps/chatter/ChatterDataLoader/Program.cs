@@ -16,7 +16,7 @@ namespace ChatterDataLoader
 
         Program()
         {
-            _url = ChatterService.ChatterService.TEST_SERVICE_URL;
+            _url = ConfigurationSettings.AppSettings["services_url"];
             _username = ConfigurationSettings.AppSettings["username"];
             _password = ConfigurationSettings.AppSettings["password"];
             _token = ConfigurationSettings.AppSettings["token"];
@@ -36,7 +36,7 @@ namespace ChatterDataLoader
 
         void Run()
         {
-            ChatterService.IChatterService service = new ChatterService.ChatterService(_url);
+            ChatterService.IChatterSoapService service = new ChatterService.ChatterSoapService(_url);
             service.AllowUntrustedConnection();
             service.Login(_username, _password, _token);
 

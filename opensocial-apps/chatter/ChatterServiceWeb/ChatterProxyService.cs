@@ -38,6 +38,17 @@ namespace ChatterService.Web
         [WebInvoke(UriTemplate = "/group/new", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         CreateResult CreateGroup(Stream stream);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "/user/{viewerId}/isfollowing/{ownerId}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        Boolean IsUserFollowing(string viewerId, string ownerId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/follow/{viewerId}/{ownerId}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        Boolean Follow(string viewerId, string ownerId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/unfollow/{viewerId}/{ownerId}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        Boolean Unfollow(string viewerId, string ownerId);
     }
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
@@ -50,10 +61,13 @@ namespace ChatterService.Web
         readonly string userName;
         readonly string password;
         readonly string token;
+        readonly string clientId;
+        readonly string grantType;
+        readonly string clientSecret;
         readonly int cacheInterval;
         readonly int cacheCapacity;
         static bool initialized = false;
-        IChatterService _service = null; 
+        IChatterSoapService _service = null; 
         Timer activitiesFetcher;
         List<Activity> latestList = new List<Activity>();
         List<Activity> displayList = new List<Activity>();
@@ -64,6 +78,9 @@ namespace ChatterService.Web
             userName = ConfigurationSettings.AppSettings["SalesForceUserName"];
             password = ConfigurationSettings.AppSettings["SalesForcePassword"];
             token = ConfigurationSettings.AppSettings["SalesForceToken"];
+            clientId = ConfigurationSettings.AppSettings["SalesForceClientId"];
+            grantType = ConfigurationSettings.AppSettings["SalesForceGrantType"];
+            clientSecret = ConfigurationSettings.AppSettings["SalesForceClientSecret"];
             cacheInterval = Int32.Parse(ConfigurationSettings.AppSettings["CacheInterval"]);
             cacheCapacity = Int32.Parse(ConfigurationSettings.AppSettings["cacheCapacity"]);
             Init();
@@ -86,7 +103,7 @@ namespace ChatterService.Web
                 {
                     if (_service == null)
                     {
-                        _service = new ChatterService(url);
+                        _service = new ChatterSoapService(url);
                         _service.Login(userName, password, token);
                     }
                     Activity lastActivity = latestList.Count > 0 ? latestList[0] : null;
@@ -111,7 +128,7 @@ namespace ChatterService.Web
         public Activity[] GetUserActivities(string userId, string mode, int count)
         {
             IProfilesServices profiles = new ProfilesServices();
-            IChatterService service = new ChatterService(url);
+            IChatterSoapService service = new ChatterSoapService(url);
             service.Login(userName, password, token);
 
             int personId = Int32.Parse(userId);
@@ -149,7 +166,7 @@ namespace ChatterService.Web
                 IProfilesServices profiles = new ProfilesServices();
                 string employeeId = profiles.GetEmployeeId(personId);
 
-                IChatterService service = new ChatterService(url);
+                IChatterSoapService service = new ChatterSoapService(url);
                 service.Login(userName, password, token);
                 string groupId = service.CreateGroup(p["name"], descr, employeeId);
 
@@ -211,6 +228,65 @@ namespace ChatterService.Web
                 }
             }
         }
+
+        #region REST
+        public Boolean IsUserFollowing(string viewerId, string ownerId)
+        {
+            IProfilesServices profiles = new ProfilesServices();
+            IChatterSoapService soap = new ChatterSoapService(url);
+            soap.Login(userName, password, token);
+
+            var ssOwnerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(ownerId)));
+            var ssViewerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(viewerId)));
+
+            ChatterRestService rest = new ChatterRestService(url);
+            rest.Login(clientId, grantType, clientSecret, userName, password);
+            ChatterResponse cresp = rest.GetFollowers(ssOwnerId);
+
+            if (cresp.followers != null)
+            {
+                foreach (ChatterSubscription csub in cresp.followers)
+                {
+                    if (csub.subscriber != null && ssViewerId.Equals(csub.subscriber.id))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public Boolean Follow(string viewerId, string ownerId)
+        {
+            IProfilesServices profiles = new ProfilesServices();
+            IChatterSoapService soap = new ChatterSoapService(url);
+            soap.Login(userName, password, token);
+
+            var ssOwnerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(ownerId)));
+            var ssViewerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(viewerId)));
+
+            ChatterRestService rest = new ChatterRestService(url);
+            rest.Login(clientId, grantType, clientSecret, userName, password);
+            ChatterResponse cresp = rest.Follow(ssViewerId, ssOwnerId);
+            return true;
+        }
+
+        public Boolean Unfollow(string viewerId, string ownerId)
+        {
+            IProfilesServices profiles = new ProfilesServices();
+            IChatterSoapService soap = new ChatterSoapService(url);
+            soap.Login(userName, password, token);
+
+            var ssOwnerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(ownerId)));
+            var ssViewerId = soap.GetUserId(profiles.GetEmployeeId(Int32.Parse(viewerId)));
+
+            ChatterRestService rest = new ChatterRestService(url);
+            rest.Login(clientId, grantType, clientSecret, userName, password);
+            ChatterResponse cresp = rest.Unfollow(ssViewerId, ssOwnerId);
+            return true;
+        }
+        #endregion
     }
 
    

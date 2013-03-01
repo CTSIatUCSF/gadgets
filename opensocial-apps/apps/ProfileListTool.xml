@@ -367,7 +367,7 @@
 	}	
 	// ==============================================================			
 	
-	var chatterProxyURL = "http://dev-profiles.ucsf.edu/activities/ChatterProxyService.svc"; //QA
+	var chatterProxyURL = "http://dev-profiles.ucsf.edu/chatter/ChatterProxyService.svc"; //QA
 	//var chatterProxyURL = "http://localhost:1732/ChatterProxyService.svc";
 	
 	function createGroup(name, description, ownerId, users) {
@@ -546,10 +546,8 @@
 			<a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="" id="compose-email">Compose email to list</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="javascript:gadgetEventTrack('delete_list');deleteList();">Delete list</a>&nbsp;&nbsp;&nbsp;
-			<!--
 			|&nbsp;&nbsp;
 			<a href="" id="create_group">Create Chatter Group</a>&nbsp;&nbsp;&nbsp;
-			-->
 		</p>
 		
 		<p id="progress" style="margin-left:20px;">

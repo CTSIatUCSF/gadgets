@@ -30,7 +30,10 @@ BEGIN
 	declare @userId int
 	declare @createdDT datetime
 	declare @activity xml
-	declare @emploeeyId nvarchar(50)
+	declare @employeeId nvarchar(50)
+	declare @PMID int
+	declare @title nvarchar(255)
+	declare @body nvarchar(255)
 	declare @attempts int
 	declare @errorCount int
 	declare @errorMsg nvarchar(max)
@@ -38,22 +41,23 @@ BEGIN
 	set @errorCount = 0
 	
 	DECLARE activityCursor CURSOR FAST_FORWARD FOR 
-	SELECT TOP 100 a.activityId, a.userId, a.createdDT, a.activity, a.chatterAttempts ,u.InternalUserName as emploeeyId
-	FROM [shindig_activity] a INNER JOIN [dbo].[user] u ON a.[userId] = u.[UserID]
-	WHERE chatterFlag is null
+	SELECT TOP 100 a.activityId, a.userId, a.createdDT, a.activity, a.chatterAttempts ,u.InternalUserName as employeeId, p.PMID, p.ArticleTitle, left(cast(p.AbstractText as varchar(max)), 255) as body
+	FROM ([shindig_activity] a INNER JOIN [dbo].[user] u ON a.[userId] = u.[UserID]) left outer join pm_pubs_general p on 
+		(a.xtraId1Type = 'PMID' and p.PMID = cast(a.xtraId1Value as int))
+	WHERE a.chatterFlag is null
 	ORDER BY userId
 
 	OPEN activityCursor
 
 	FETCH NEXT FROM activityCursor 
-	INTO @activityId, @userId, @createdDT, @activity, @attempts, @emploeeyId
+	INTO @activityId, @userId, @createdDT, @activity, @attempts, @employeeId, @PMID, @title, @body
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
 		BEGIN TRY
 			set @attempts = ISNULL(@attempts, 0) + 1
 			
-			exec dbo.usp_CreateChatterActivity @url, @username, @password, @token, @emploeeyId, @activity
+			exec dbo.usp_CreateChatterActivity @url, @username, @password, @token, @employeeId, @activity, @PMID, @title, @body
 			UPDATE shindig_activity SET chatterFlag = 'S', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityId = @activityId
 		END TRY
 		BEGIN CATCH
@@ -77,7 +81,7 @@ BEGIN
 		END CATCH
 		
 		FETCH NEXT FROM activityCursor 
-		INTO @activityId, @userId, @createdDT, @activity, @attempts, @emploeeyId
+		INTO @activityId, @userId, @createdDT, @activity, @attempts, @employeeId, @PMID, @title, @body
 	END
 	
 	CLOSE activityCursor

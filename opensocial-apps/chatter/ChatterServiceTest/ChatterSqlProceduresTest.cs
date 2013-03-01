@@ -16,10 +16,13 @@ namespace ChatterServiceTest
     [TestClass]
     public class ChatterSqlProceduresTest
     {
-        string _url = ChatterService.ChatterService.TEST_SERVICE_URL;
+        string _url = ConfigurationSettings.AppSettings["services_url"]; 
         string _username = ConfigurationSettings.AppSettings["username"];
         string _password = ConfigurationSettings.AppSettings["password"];
         string _token = ConfigurationSettings.AppSettings["token"];
+        int _pmid = 1234;
+        string _title = "Book Title";
+        string _body = "Book Body";
 
         string _employeeId = "111111111";
 
@@ -32,7 +35,7 @@ namespace ChatterServiceTest
 
             SqlXml messageBlob = new SqlXml(xmlReader);
 
-            ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob);
+            ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob, _pmid, _title, _body);
         }
 
         [TestMethod]
@@ -44,7 +47,7 @@ namespace ChatterServiceTest
 
             SqlXml messageBlob = new SqlXml(xmlReader);
 
-            ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob);
+            ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob, _pmid, _title, _body);
         }
 
         [TestMethod]
@@ -58,7 +61,7 @@ namespace ChatterServiceTest
 
             try
             {
-                ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob);
+                ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, _employeeId, messageBlob, _pmid, _title, _body);
                 Assert.Fail("CreateActivity method should throw and exception if xml is incorrect");
             }
             catch (Exception ex)
@@ -78,7 +81,7 @@ namespace ChatterServiceTest
 
             try
             {
-                ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, "1221212", messageBlob);
+                ChatterSqlProcedures.CreateActivity(_url, _username, _password, _token, "1221212", messageBlob, _pmid, _title, _body);
                 Assert.Fail("CreateActivity method should throw and exception if user is not found by employee id");
             }
             catch (Exception ex)

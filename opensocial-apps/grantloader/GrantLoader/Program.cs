@@ -48,7 +48,7 @@ namespace UCSF.GrantLoader
         private static void ExecTasks(Options options)
         {
             string fileName = null;
-            if(!options.CheckForUpdates && !options.Validate)
+            if (!options.CheckForUpdates && !options.Validate && !options.CheckForUpdatesNoBulk)
             {
                 if (options.FileName == null || options.FileName.Count == 0)
                 {

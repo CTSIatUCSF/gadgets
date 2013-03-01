@@ -1,6 +1,6 @@
 ALTER DATABASE Profiles SET TRUSTWORTHY ON
 
-sp_configure 'clr enable', 1
+exec sp_configure 'clr enable', 1
 GO
 RECONFIGURE
 GO
@@ -41,7 +41,10 @@ CREATE PROCEDURE usp_CreateChatterActivity
 @password nvarchar(50),
 @token nvarchar(100),
 @userId nvarchar(50),
-@message xml
+@message xml,
+@PMID int,
+@title nvarchar(255),
+@body nvarchar(255)
 AS EXTERNAL NAME ChatterService.[ChatterService.ChatterSqlProcedures].CreateActivity
 GO
 

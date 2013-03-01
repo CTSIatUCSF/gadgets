@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Featured Videos"
+            author="Alexei Vassiliev"
+            author_email="alexnv@sbcglobal.com"
+            description="Featured Videos">
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile" preferred_height="460">
+    <![CDATA[<!--HTML-->
+	    <!DOCTYPE html>    
+	    <!-- #includes -->
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/os.js" ></script>
+    
+	    <script type="text/javascript">
+	        var ucsf = ucsf || {};
+	        ucsf.youtube = {};
+		    ucsf.gadgetEventTrack=function(action, label, value) {
+	    		var message = {'action' : action};
+	    		if (label) {message.label = label;}
+	    		if (value) {message.value = value;}
+	    		gadgets.pubsub.publish("analytics", message);
+			};						
+		</script>
+	]]>
+	</Content>
+    <Content type="html" view="profile" preferred_height="300">
+    <![CDATA[<!--HTML-->	
+	    <script type="text/javascript">
+		</script>	
+		<div class="twitter-gadget">
+			<div class="content">
+				Profile page
+			</div>			
+		</div>
+	]]>
+	</Content>
+    <Content type="html" view="home" preferred_height="350">
+    <![CDATA[<!--HTML-->	
+	    <script type="text/javascript" src="js/ORNG.js" ></script>
+    	<script type="text/javascript">	        
+		</script>
+		
+	    <!-- Styles -->
+	    <style type="text/css">	    
+	    </style>
+	    
+		<!-- HideShow -->
+		<div id="hideshow"></div>
+		<!-- HideShow end -->
+		<div class="twitter-gadget">  
+			<div class="content" style="display:none">
+				Profile page
+			</div>
+		</div>
+	]]>
+	</Content>
+</Module>

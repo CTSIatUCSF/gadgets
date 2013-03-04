@@ -19,8 +19,10 @@
 	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" id="ucsf-yt-player"></script>
+	    <!--script type="text/javascript" src="https://www.youtube.com/player_api?enablejsapi=1&version=3" ></script-->
     
-	    <script type="text/javascript">
+	    <script type="text/javascript" id="ucsf-yt-script">
 	        var ucsf = ucsf || {};
 	        ucsf.youtube = {};
 		    ucsf.gadgetEventTrack=function(action, label, value) {
@@ -28,17 +30,56 @@
 	    		if (label) {message.label = label;}
 	    		if (value) {message.value = value;}
 	    		gadgets.pubsub.publish("analytics", message);
-			};						
+			};			
+			ucsf.youtube.getVidioId=function(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['youtube_vidioid']})
+			    	.execute(function(response){
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var vidioId = viewer.youtube_vidioid;
+			    		if(vidioId != null && vidioId != '' && callback) {
+			    			callback(vidioId);
+			    		}
+			    	});
+			};
+			ucsf.youtube.preview=function(vidioId) {
+				ucsf.youtube.vidioId = vidioId;
+				$('#ucsf-yt-player').attr('src', '//www.youtube.com/iframe_api');
+			};
+			
+			ucsf.youtube.onPlayerReady = function(event) {
+				ucsf.youtube.player = event.target;
+			}
+			function onYouTubeIframeAPIReady() {
+		    	new YT.Player('ytplayer', {
+			      height: '390',
+			      width: '640',			      
+			      videoId: ucsf.youtube.vidioId,
+			      playerVars: { 'autoplay': 1, 'enablejsapi': 1, 'version':3},
+			      events: {
+		            'onReady': ucsf.youtube.onPlayerReady
+          		  }
+			    });
+			}						
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="300">
+    <Content type="html" view="profile" preferred_height="400">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
-		</script>	
-		<div class="twitter-gadget">
+	        ucsf.youtube.profilePageInit = function() {
+	        	gadgets.window.adjustHeight(400);
+	        	ucsf.youtube.getVidioId(ucsf.youtube.preview);
+	        }
+    		gadgets.util.registerOnLoadHandler(ucsf.youtube.profilePageInit);    		
+		</script>
+	    <!-- Styles -->
+	    <style type="text/css">	    
+	    	.youtube-gadget .content {text-align: center;}	    	    		
+	    </style>
+			
+		<div class="youtube-gadget">
 			<div class="content">
-				Profile page
+				<div id="ytplayer"></div>
 			</div>			
 		</div>
 	]]>
@@ -47,18 +88,55 @@
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript" src="js/ORNG.js" ></script>
     	<script type="text/javascript">	        
+	        $(document).ready(function () {
+		        $(".youtube-gadget .save").click(function() {
+		        	$(".youtube-gadget").block({ message: "Saving..." });
+	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'youtube_vidioid':$('.youtube-gadget input').val()} }).execute(function(response){
+	    				$(".youtube-gadget").unblock();
+	    			});		        	
+		        });
+		        $(".youtube-gadget .preview").click(function() {
+		        	var vidioId = $('.youtube-gadget input').val();
+		        	if(vidioId != null && vidioId != '') {
+		        		$('.youtube-gadget .content').show();
+			        	gadgets.window.adjustHeight(450);
+		        		ucsf.youtube.preview(vidioId);
+		        	}
+		        	else {
+		        		$('.youtube-gadget .content').hide();
+			        	gadgets.window.adjustHeight(50);
+		        	}
+		        });
+	        });
+	        ucsf.youtube.homePageInit = function() {
+	           	ucsf.youtube.getVidioId(function(vidioId) {
+	    			$('.youtube-gadget input').val(vidioId);
+	        		$('.youtube-gadget .content').show();
+		        	gadgets.window.adjustHeight(450);
+	    			ucsf.youtube.preview(vidioId);
+	           	});	        
+	        }
+    		gadgets.util.registerOnLoadHandler(ucsf.youtube.homePageInit);    		
 		</script>
 		
 	    <!-- Styles -->
 	    <style type="text/css">	    
+	    	.youtube-gadget {margin-top: 10px;}	
+	    	.youtube-gadget input {width: 400px;}
+	    	.youtube-gadget .label {margin-right: 10px;font-weight: bold;}
+	    	.youtube-gadget .preview, .youtube-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
+	    	.youtube-gadget .content {margin-top: 10px;}	    
+	    	.youtube-gadget .content {text-align: center;}	    	    		
 	    </style>
 	    
 		<!-- HideShow -->
 		<div id="hideshow"></div>
 		<!-- HideShow end -->
-		<div class="twitter-gadget">  
+		<div class="youtube-gadget">
+			<span class="label">Vidio Id:</span><input type="text"></input>
+			<span class="preview">Preview</span><span class="save">Save</span>		  
 			<div class="content" style="display:none">
-				Profile page
+				<div id="ytplayer"></div>
 			</div>
 		</div>
 	]]>

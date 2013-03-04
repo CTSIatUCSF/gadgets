@@ -11,7 +11,7 @@
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="460">
+    <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
     <![CDATA[<!--HTML-->
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
@@ -63,7 +63,7 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="400">
+    <Content type="html" view="profile" preferred_height="400" preferred_width="700">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {
@@ -84,7 +84,7 @@
 		</div>
 	]]>
 	</Content>
-    <Content type="html" view="home" preferred_height="350">
+    <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript" src="js/ORNG.js" ></script>
     	<script type="text/javascript">	        

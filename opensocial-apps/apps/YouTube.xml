@@ -31,18 +31,22 @@
 	    		if (value) {message.value = value;}
 	    		gadgets.pubsub.publish("analytics", message);
 			};			
-			ucsf.youtube.getVidioId=function(callback) {
-				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['youtube_vidioid']})
+			ucsf.youtube.getUserVidios=function(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['vidios']})
 			    	.execute(function(response){
 			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var vidioId = viewer.youtube_vidioid;
-			    		if(vidioId != null && vidioId != '' && callback) {
-			    			callback(vidioId);
+			    		var vidios = viewer.vidios;
+			    		if(vidios != null && vidios.length > 0 && callback) {
+			    			callback(jQuery.parseJSON(vidios));
 			    		}
 			    	});
 			};
-			ucsf.youtube.preview=function(vidioId) {
-				ucsf.youtube.vidioId = vidioId;
+			ucsf.youtube.preview=function(vidios) {
+				ucsf.youtube.vidioId = vidios[0].id;
+				ucsf.youtube.vidios = [];
+				for(var i=1;i<vidios.length;i++) {
+					ucsf.youtube.vidios.push(vidios[i].id);	
+				}				
 				$('#ucsf-yt-player').attr('src', '//www.youtube.com/iframe_api');
 			};
 			
@@ -53,8 +57,10 @@
 		    	new YT.Player('ytplayer', {
 			      height: '390',
 			      width: '640',			      
-			      videoId: ucsf.youtube.vidioId,
-			      playerVars: { 'autoplay': 1, 'enablejsapi': 1, 'version':3},
+			      videoId: ucsf.youtube.vidioId,			      
+			      playerVars: { 'autoplay': 0, 'enablejsapi': 1, 'version':3, showinfo:1, 
+			      	playlist: ucsf.youtube.vidios.join(','), 
+			      },
 			      events: {
 		            'onReady': ucsf.youtube.onPlayerReady
           		  }
@@ -68,7 +74,7 @@
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {
 	        	gadgets.window.adjustHeight(400);
-	        	ucsf.youtube.getVidioId(ucsf.youtube.preview);
+	        	ucsf.youtube.getUserVidios(ucsf.youtube.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.youtube.profilePageInit);    		
 		</script>
@@ -89,12 +95,6 @@
 	    <script type="text/javascript" src="js/ORNG.js" ></script>
     	<script type="text/javascript">	        
 	        $(document).ready(function () {
-		        $(".youtube-gadget .save").click(function() {
-		        	$(".youtube-gadget").block({ message: "Saving..." });
-	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'youtube_vidioid':$('.youtube-gadget input').val()} }).execute(function(response){
-	    				$(".youtube-gadget").unblock();
-	    			});		        	
-		        });
 		        $(".youtube-gadget .preview").click(function() {
 		        	var vidioId = $('.youtube-gadget input').val();
 		        	if(vidioId != null && vidioId != '') {
@@ -107,13 +107,113 @@
 			        	gadgets.window.adjustHeight(50);
 		        	}
 		        });
+		        $(".youtube-gadget #add-vidio").click(function() {
+		        	$(".youtube-gadget").block({ message: "Saving..." });
+		        	
+		        	var linkName = $('.youtube-gadget #linkname').val();
+		        	var linkUrl = $('.youtube-gadget #linkurl').val();
+		        	
+		        	ucsf.youtube.getVideoIdFromUrl(linkUrl, function(videoId){
+			        	if(!videoId) {
+		    				$(".youtube-gadget").unblock();
+			        		alert("Please enter a valid video URL.");		        		
+			        	}
+			        	else {
+				        	ucsf.youtube.addVidio(linkName, linkUrl, videoId);
+				        	
+			    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'vidios':ucsf.youtube.getCurrentVidios()} }).execute(function(response){
+			    				$(".youtube-gadget").unblock();
+			    			});		        						
+			        	}
+		        	});
+		        });		        
+		        $(".youtube-gadget .delete-video").live('click', function() {
+		        	$(".youtube-gadget").block({ message: "Saving..." });
+		        	$(this).parent().parent().remove();
+	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'vidios':ucsf.youtube.getCurrentVidios()} }).execute(function(response){
+	    				$(".youtube-gadget").unblock();
+	    			});		        						
+		        });		        
 	        });
+	        
+	        ucsf.youtube.getCurrentVidios = function(){
+	        	var videos = [];
+	        	$(".youtube-gadget .vidios table tr").each(function(index, elem) {
+		        	var linkName = $('.v-name', elem).text();
+		        	var linkUrl = $('.v-url', elem).text();
+		        	var videoId = $('.v-url', elem).attr("id");
+	        		
+	        		videos.push({name: linkName, id:videoId, url:linkUrl});
+	        	});
+	        	return JSON.stringify(videos);
+	        }
+	        
+	        ucsf.youtube.addVidio = function(linkName, linkUrl, videoId) {
+	        	var html = '<tr>' +  
+					'<td><img src="http://www.google.com/s2/favicons?domain=ctsi.ucsf.edu" height="16" width="16"/></td>' + 
+					'<td class="v-name"><a href="'+ linkUrl +'" target="_blank">'+ linkName +'</a></td>' + 
+					'<td class="v-url" id="'+ videoId + '">'+linkUrl+'</td>' + 
+					'<td><input type="button" class="delete-video" value="Delete"/></td>' + 
+					'</tr>';
+				$(".youtube-gadget .vidios table").append(html);
+		    }
+		    
+	        ucsf.youtube.getVideoIdFromUrl = function(videoUrl, callback) {
+	        	var video_id = ucsf.youtube.getVideoIdFromYouTubeUrl(videoUrl);
+	        	if(video_id) {
+ 					callback(video_id);
+				}
+				else {
+					var res = videoUrl.match(/http[s]?:\/\/www\.uctv\.tv\/shows\/.*/i);
+					if(res) {
+						ucsf.youtube.sendRequest(videoUrl, function(data) {
+							var youtubeUrl = $("#movie-player object param[name='movie']", data).attr('value');
+							video_id = ucsf.youtube.getVideoIdFromYouTubeUrl(youtubeUrl);
+							callback(video_id);
+						}, function(obj) {
+							callback();
+						});
+					}
+					else {
+						callback();
+					}
+				}						
+	        }
+	        	        
+			ucsf.youtube.sendRequest = function(url, success, error) {
+			  var params = {};
+			  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+			  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+			  		  
+	  		  gadgets.io.makeRequest(url, function(obj) {
+	  		  	if(obj.data != null) {
+	  		  		success(obj.data);
+	  			}
+	  			else if(obj.errors != null) {  				
+	  		  		if(error) {
+	  		  			error(obj);
+	  		  		}
+	  			}
+	  		  } 
+	  		  , params);
+			}
+	        
+	        ucsf.youtube.getVideoIdFromYouTubeUrl = function(videoUrl) {
+	        	var video_id;
+	        	var exp = /http[s]?:\/\/(?:[^\.]+\.)*(?:youtube\.com\/(?:v\/|watch\?(?:.*?\&)?v=|embed\/)|youtu.be\/)([\w\-\_]+)/i
+	        	var res = videoUrl.match(exp);
+	        	if(res) {
+ 					video_id = res[1];
+				}	        	
+				return video_id;
+	        };
+	        
 	        ucsf.youtube.homePageInit = function() {
-	           	ucsf.youtube.getVidioId(function(vidioId) {
-	    			$('.youtube-gadget input').val(vidioId);
-	        		$('.youtube-gadget .content').show();
-		        	gadgets.window.adjustHeight(450);
-	    			ucsf.youtube.preview(vidioId);
+	        	gadgets.window.adjustHeight(450);
+	           	ucsf.youtube.getUserVidios(function(vidios) {
+	           		for(var i=0;i<vidios.length;i++) {
+	           			ucsf.youtube.addVidio(vidios[i].name, vidios[i].url, vidios[i].id);
+	           		}
 	           	});	        
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.youtube.homePageInit);    		
@@ -122,7 +222,6 @@
 	    <!-- Styles -->
 	    <style type="text/css">	    
 	    	.youtube-gadget {margin-top: 10px;}	
-	    	.youtube-gadget input {width: 400px;}
 	    	.youtube-gadget .label {margin-right: 10px;font-weight: bold;}
 	    	.youtube-gadget .preview, .youtube-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
 	    	.youtube-gadget .content {margin-top: 10px;}	    
@@ -133,8 +232,43 @@
 		<div id="hideshow"></div>
 		<!-- HideShow end -->
 		<div class="youtube-gadget">
-			<span class="label">Vidio Id:</span><input type="text"></input>
-			<span class="preview">Preview</span><span class="save">Save</span>		  
+			<h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Videos</h3>
+			<div style="padding:5px 0px 0px 25px;">
+	    		Add up to five video links that will show in your profile. Enter the video name, as you want it to appear on your profile, and its URL. Some examples might be a lecture or an interview with the media.
+			</div>
+			<div class="question" style="padding:0px 0px 5px 12px;">
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="links_body" valign="top">						
+							<div><b>Video Name</b></div>
+							<div>e.g. My Interview with Stephen Colbert</div>
+		                </td>
+						<td class="links_body" valign="top" colspan="2">
+							<div><b>Video URL</b> (not displayed in profile)</div>
+							<div>This may be  YouTube or UCTV URL e.g. http://www.uctv.tv/shows/15777</div>
+		                </td>
+					</tr>				
+					<tr>
+						<td class="links_body" style="width: 300px;">
+		                    <input id="linkname" style="width:280px; margin-top:4px;" type="text"><br>
+		                </td>
+						<td class="links_body" style="width: 270px;">
+		                    <input id="linkurl" style="width:250px; margin-top:4px;" type="text" value="http://">
+		                </td>
+		                <td>
+		                	<input id="add-vidio" type="button" value="Save">
+		                </td>
+					</tr>				
+					<tr>
+						<td class="links_body" colspan="3">(60 characters max)</td>
+					</tr>				
+				</table>			
+			</div>
+			<h4 style="padding-left:10px; padding-top: 0px;">Your Current Videos:</h4>
+			<div class="vidios">
+				<table cellspacing="10" cellpadding="0" border="0">
+				</table>
+			</div>
 			<div class="content" style="display:none">
 				<div id="ytplayer"></div>
 			</div>

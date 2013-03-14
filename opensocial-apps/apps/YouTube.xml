@@ -60,8 +60,8 @@
 			}
 			function onYouTubeIframeAPIReady() {
 		    	new YT.Player('ytplayer', {
-			      height: '390',
-			      width: '640',			      
+			      height: '410',
+			      width: '575',			      
 			      videoId: ucsf.youtube.videoId,			      
 			      playerVars: { 'autoplay': 0, 'enablejsapi': 1, 'version':3, showinfo:1, 
 			      	playlist: ucsf.youtube.videos.join(','), 
@@ -75,7 +75,7 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="400" preferred_width="700">
+    <Content type="html" view="profile" preferred_height="400">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {

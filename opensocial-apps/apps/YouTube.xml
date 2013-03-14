@@ -122,9 +122,10 @@
 				        	ucsf.youtube.addVideo(linkName, linkUrl, videoId);
 				        	
 			    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'videos':ucsf.youtube.getCurrentVideos()} }).execute(function(response){
+			    				$(".youtube-gadget").unblock();
 				    	    	$('.youtube-gadget #linkname').val('');
 					        	$('.youtube-gadget #linkurl').val('http://');
-			    				$(".youtube-gadget").unblock();
+			    				alert("Your video link information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			    			});		        						
 			        	}
 		        	});

@@ -55,7 +55,6 @@
 			}
 			ucsf.youtube.onStateChange = function(event) {
 				if(event.data == YT.PlayerState.PLAYING) {
-					alert('play');
 					ucsf.gadgetEventTrack('go_to_video');
 				};
 			}

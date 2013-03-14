@@ -53,6 +53,12 @@
 			ucsf.youtube.onPlayerReady = function(event) {
 				ucsf.youtube.player = event.target;
 			}
+			ucsf.youtube.onStateChange = function(event) {
+				if(event.data == YT.PlayerState.PLAYING) {
+					alert('play');
+					ucsf.gadgetEventTrack('go_to_video');
+				};
+			}
 			function onYouTubeIframeAPIReady() {
 		    	new YT.Player('ytplayer', {
 			      height: '390',
@@ -62,7 +68,8 @@
 			      	playlist: ucsf.youtube.videos.join(','), 
 			      },
 			      events: {
-		            'onReady': ucsf.youtube.onPlayerReady
+		            'onReady': ucsf.youtube.onPlayerReady,
+		            'onStateChange': ucsf.youtube.onStateChange
           		  }
 			    });
 			}						
@@ -107,6 +114,11 @@
 			        	gadgets.window.adjustHeight(50);
 		        	}
 		        });
+		        $(".youtube-gadget .v-name a").live("click", function() {
+		        	ucsf.gadgetEventTrack('go_to_video');
+		        	return true;
+		        });
+		        
 		        $(".youtube-gadget #add-video").click(function() {
 		        	$(".youtube-gadget").block({ message: "Saving..." });
 		        	

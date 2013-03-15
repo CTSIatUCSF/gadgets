@@ -75,11 +75,11 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="400">
+    <Content type="html" view="profile" preferred_height="420">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {
-	        	gadgets.window.adjustHeight(400);
+	        	gadgets.window.adjustHeight(420);
 	        	ucsf.youtube.getUserVideos(ucsf.youtube.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.youtube.profilePageInit);    		

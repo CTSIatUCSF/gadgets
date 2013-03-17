@@ -75,7 +75,7 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="420">
+    <Content type="html" view="profile" preferred_height="420" preferred_width="670">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {

@@ -60,8 +60,8 @@
 			}
 			function onYouTubeIframeAPIReady() {
 		    	new YT.Player('ytplayer', {
-			      height: '410',
-			      width: '575',			      
+			      height: '250',
+			      width: '350',			      
 			      videoId: ucsf.youtube.videoId,			      
 			      playerVars: { 'autoplay': 0, 'enablejsapi': 1, 'version':3, showinfo:1, 
 			      	playlist: ucsf.youtube.videos.join(','), 
@@ -75,11 +75,11 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="420" preferred_width="670">
+    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.youtube.profilePageInit = function() {
-	        	gadgets.window.adjustHeight(420);
+	        	gadgets.window.adjustHeight(260);
 	        	ucsf.youtube.getUserVideos(ucsf.youtube.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.youtube.profilePageInit);    		

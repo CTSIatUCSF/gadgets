@@ -251,47 +251,46 @@
 	    	.youtube-gadget {margin-top: 10px;}	
 	    	.youtube-gadget .label {margin-right: 10px;font-weight: bold;}
 	    	.youtube-gadget .preview, .youtube-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
-	    	.youtube-gadget .content {margin-top: 10px;}	    
-	    	.youtube-gadget .content {text-align: center;}	    	    		
+	    	.youtube-gadget .content {margin-top: 10px;text-align: center;}	    
+	    	.youtube-gadget .links_body{width: 295px;}	    	    		
+	    	.youtube-gadget #linkname, .youtube-gadget #linkurl {width: 260px;margin-top:4px;}
+	    	.youtube-gadget #add-video {width: 53px;}
+	    	.youtube-gadget h3, .youtube-gadget h4	{padding-left:10px; padding-top: 0px;}
+	    	.youtube-gadget .descr{padding:5px 0px 0px 25px;}    	    		
+	    	.youtube-gadget .question{padding:0px 0px 5px 12px;}    	    		
 	    </style>
 	    
-		<!-- HideShow -->
-		<div id="hideshow"></div>
-		<!-- HideShow end -->
 		<div class="youtube-gadget">
-			<h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Videos</h3>
-			<div style="padding:5px 0px 0px 25px;">
-	    		Add up to five video links that will show in your profile. Enter the video name, as you want it to appear on your profile, and its URL. Some examples might be a lecture or an interview with the media.
+			<h3>Manage Links to Videos</h3>
+			<div class="descr">
+	    		Add video links that will show in your profile. Videos must be hosted on YouTube or UCTV. Enter the video name, as you want it to appear on your profile, and its URL. Some examples might be a lecture or an interview with the media.
 			</div>
 			<div class="question" style="padding:0px 0px 5px 12px;">
 				<table cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="links_body" valign="top">						
 							<div><b>Video Name</b></div>
-							<div>e.g. My Interview with Stephen Colbert</div>
+							<div style="width:260px;">60 characters max. e.g. My Interview with Stephen Colbert</div>
 		                </td>
 						<td class="links_body" valign="top" colspan="2">
 							<div><b>Video URL</b> (not displayed in profile)</div>
-							<div>This may be  YouTube or UCTV URL e.g. http://www.uctv.tv/shows/15777</div>
+							<div>This must be a YouTube or UCTV URL e.g. http://www.uctv.tv/shows/15777</div>
 		                </td>
 					</tr>				
 					<tr>
-						<td class="links_body" style="width: 300px;">
-		                    <input id="linkname" style="width:280px; margin-top:4px;" type="text"><br>
+						<td class="links_body">
+		                    <input id="linkname" type="text"><br>
 		                </td>
-						<td class="links_body" style="width: 270px;">
-		                    <input id="linkurl" style="width:250px; margin-top:4px;" type="text" value="http://">
+						<td class="links_body">
+		                    <input id="linkurl" type="text" value="http://">
 		                </td>
 		                <td>
 		                	<input id="add-video" type="button" value="Save">
 		                </td>
 					</tr>				
-					<tr>
-						<td class="links_body" colspan="3">(60 characters max)</td>
-					</tr>				
 				</table>			
 			</div>
-			<h4 style="padding-left:10px; padding-top: 0px;">Your Current Videos:</h4>
+			<h4>Your Current Videos:</h4>
 			<div class="videos">
 				<table cellspacing="10" cellpadding="0" border="0">
 				</table>

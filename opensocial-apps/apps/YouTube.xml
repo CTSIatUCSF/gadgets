@@ -98,7 +98,6 @@
 	</Content>
     <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->	
-	    <script type="text/javascript" src="js/ORNG.js" ></script>
     	<script type="text/javascript">	        
 	        $(document).ready(function () {
 		        $(".youtube-gadget .preview").click(function() {
@@ -146,6 +145,7 @@
 		        	$(this).parent().parent().remove();
 	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'videos':ucsf.youtube.getCurrentVideos()} }).execute(function(response){
 	    				$(".youtube-gadget").unblock();
+		           		ucsf.youtube.adjustHeight();
 	    			});		        						
 		        });		        
 	        });
@@ -170,6 +170,7 @@
 					'<td><input type="button" class="delete-video" value="Delete"/></td>' + 
 					'</tr>';
 				$(".youtube-gadget .videos table").append(html);
+           		ucsf.youtube.adjustHeight();
 		    }
 		    
 	        ucsf.youtube.getVideoIdFromUrl = function(videoUrl, callback) {
@@ -236,12 +237,16 @@
 	        };
 	        
 	        ucsf.youtube.homePageInit = function() {
-	        	gadgets.window.adjustHeight(450);
+	        	gadgets.window.adjustHeight(180);
 	           	ucsf.youtube.getUserVideos(function(videos) {
 	           		for(var i=0;i<videos.length;i++) {
 	           			ucsf.youtube.addVideo(videos[i].name, videos[i].url, videos[i].id);
 	           		}
+	           		ucsf.youtube.adjustHeight();
 	           	});	        
+	        }
+	        ucsf.youtube.adjustHeight = function() {
+           		gadgets.window.adjustHeight($(".videos").height() + 200);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.youtube.homePageInit);    		
 		</script>
@@ -257,7 +262,8 @@
 	    	.youtube-gadget #add-video {width: 53px;}
 	    	.youtube-gadget h3, .youtube-gadget h4	{padding-left:10px; padding-top: 0px;}
 	    	.youtube-gadget .descr{padding:5px 0px 0px 25px;}    	    		
-	    	.youtube-gadget .question{padding:0px 0px 5px 12px;}    	    		
+	    	.youtube-gadget .question{padding:0px 0px 5px 12px;}
+	    	.youtube-gadget .warn{color:red;}    	    		
 	    </style>
 	    
 		<div class="youtube-gadget">
@@ -274,7 +280,7 @@
 		                </td>
 						<td class="links_body" valign="top" colspan="2">
 							<div><b>Video URL</b> (not displayed in profile)</div>
-							<div>This must be a YouTube or UCTV URL e.g. http://www.uctv.tv/shows/15777</div>
+							<div><span class="warn">This must be a YouTube or UCTV link</span><br/> e.g. http://www.uctv.tv/shows/15777</div>
 		                </td>
 					</tr>				
 					<tr>

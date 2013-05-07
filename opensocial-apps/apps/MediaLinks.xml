@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="Websites"
+	<ModulePrefs title="In The News"
 				 description="Websites" scrolling="true">
 		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
@@ -10,7 +10,7 @@
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
-
+Fedit_
 	<Content type="html" view="home, profile">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
@@ -100,7 +100,7 @@
 				// sort object by link name, case-insensitive, A-Z
 				g_oLinks.sort(sort_by('link_name', false, function(a){return a.toUpperCase()}));
 				
-				if (document.getElementById("edit_links_table")){
+				if (document.getElementById("edit_mlinks_table")){
 				
                 	// EDIT MODE - build table to hold retrieved app data
                 	var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
@@ -131,11 +131,11 @@
                         
                 	// put appdata table markup in designated div
                 	// and set height based on which view view this is
-					document.getElementById("edit_links_table").innerHTML=links_table_data;
-					gadgets.window.adjustHeight($("#edit_links_table").height() + 190);					
+					document.getElementById("edit_mlinks_table").innerHTML=links_table_data;
+					gadgets.window.adjustHeight($("#edit_mlinks_table").height() + 230);					
 				}
 				
-				if(document.getElementById("view_links_table")){				
+				if(document.getElementById("view_mlinks_table")){				
 					
                 	// VIEW MODE - build table to hold retrieved app data
 					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
@@ -155,18 +155,14 @@
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
 							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
-					}                    
-                			// close the table
-                			links_table_data = links_table_data + "</tr></table>";
+					}
+                    
+                	// close the table
+                	links_table_data = links_table_data + "</tr></table>";
                         
-                			// put appdata table markup in designated div
-					document.getElementById("view_links_table").innerHTML=links_table_data;
-					if (g_oLinks.length > 0) {
-						gadgets.window.adjustHeight($("#view_links_table").height() + 10);					
-					}
-					else {
-						gadgets.pubsub.publish("hide");
-					}
+                	// put appdata table markup in designated div
+					document.getElementById("view_mlinks_table").innerHTML=links_table_data;
+					gadgets.window.adjustHeight($("#view_mlinks_table").height() + 10);					
 				}
 			} /* end if link data exists */
 		}
@@ -207,7 +203,7 @@
                 		displayData();
 						document.getElementById("linkname").value = "";
                 		document.getElementById("linkurl").value = "http://";
-						alert("Your links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+						alert("Your media links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 					}
 				});
 				
@@ -236,36 +232,39 @@
 	<Content type="html" view="default, home" preferred_height="300" preferred_width="700">
 	<![CDATA[<!--HTML-->
     	
-    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Websites</h3>
+    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to news stories about your work</h3>
 
     <div style="padding:5px 0px 0px 25px;">
-    	Add up to five  websites to your profile. 
-		Enter the website name, as you want it to appear on your profile, and its URL. 
-        Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
+    	Add links to news stories, blogs or other media that feature your research. 
+    	Links can be hosted on any external site that is open to the public. 
+    	Enter the title or headline as you want it to appear on your UCSF Profiles page, and the related URL. 
+    	Add a date of publication if applicable. Some examples would be a story in the SF Chronicle or on UCSF.edu. 
+    	Once you’ve added a story, remember to click "Save" below.
+    	<br /><br />
 	</div>
 	
 	<!-- display the new link input fields -->
 	<div class='question' style="padding:0px 0px 5px 12px;">
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<td class="links_body" valign="top"><b>Website Name</b><br />
-					e.g. My Lab Site<br />
-                    <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;"><br />
-                    (60 characters max)
+				<td class="links_body" valign="top"><b>News Story Headline</b><br />
+					e.g. 'Rain Man'-like Brains Mapped with Network Analysis<br />
+					(80 characters max)<br />
+                    <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;">                    
                 </td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
-					e.g. mylabsite.ucsf.edu<br />
+				<td class="links_body" valign="top"><b>News Story URL (not displayed in profile)</b><br />
+					e.g. http://www.ucsf.edu/RainManBrains15777<br /><br />
                     <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td><br /><br /><input type="button" style="margin-bottom: 8px;" value="Save" onClick="saveData();"></td>
+                <td><br /><br /><br /><input type="button" style="margin-bottom: 8px;" value="Save" onClick="saveData();"></td>
 			</tr>				
 		</table>			
 	</div>
     
-    <h4 style="padding-left:10px; padding-top: 0px;">Your Current Websites:</h4>
-    <div id="edit_links_table" style="padding:0px 0px 10px 25px;"></div>
+    <h4 style="padding-left:10px; padding-top: 0px;">Your Current Stories:</h4>
+    <div id="edit_mlinks_table" style="padding:0px 0px 10px 25px;"></div>
             
     <script type="text/javascript">
     	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));
@@ -279,7 +278,7 @@
 	<Content type="html" view="default, profile" preferred_height="100" preferred_width="670">
 	<![CDATA[<!--HTML-->
    
-    <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>     
+    <div id="view_mlinks_table" style="padding:0px 0px 10px 20px;"></div>     
    
 	<script type="text/javascript">
     	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));

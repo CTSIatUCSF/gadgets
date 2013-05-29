@@ -10,21 +10,24 @@
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
-Fedit_
+
 	<Content type="html" view="home, profile">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
 	<!-- #includes -->
-	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<style>
     	.links_title { font-family:Verdana, Arial; font-size: 14px; }
     	.links_body { font-family:Arial; font-size: 12px; }
     	.links_credit { font-family:Arial; font-size:10px; }
-	.links_save_button { height:20px; font-size:11px; } 
+		.links_save_button { height:20px; font-size:11px; }
+		.link_date {text-align: right;width: 100px;} 
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
     </style>
@@ -51,10 +54,15 @@ Fedit_
 			}
 		}
 		// ========================================
+		function sort_by_date (a, b) {
+			if(!a || !a.link_date) return 1;
+			if(!b || !b.link_date) return -1;
+			
+			return Date.parse(b.link_date) - Date.parse(a.link_date);
+		}
 		
 		
-		// ========================================
-		
+		// ========================================		
 		function deleteArrayItem (array_index) {
 			g_oLinks.splice(array_index,1);
 			
@@ -67,12 +75,9 @@ Fedit_
 			
 			// show links w/o deleted item even if data write fails - array already spliced
 			displayData();
-		}
-		// ========================================
+		}		
 		
-		
-		// ========================================
-		
+		// ========================================		
 		function readData(callback) {
 			osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
 				
@@ -98,7 +103,7 @@ Fedit_
 			if (g_oLinks) {
 										
 				// sort object by link name, case-insensitive, A-Z
-				g_oLinks.sort(sort_by('link_name', false, function(a){return a.toUpperCase()}));
+				g_oLinks.sort(sort_by_date);
 				
 				if (document.getElementById("edit_mlinks_table")){
 				
@@ -110,6 +115,7 @@ Fedit_
 						cell_name = g_oLinks[i].link_name;
 						cell_url = g_oLinks[i].link_url;
 						cell_url2 = g_oLinks[i].link_url;
+						cell_date = g_oLinks[i].link_date || '';
 							
 						favicon_path_array = cell_url.split("//");
 						cell_url2 = favicon_path_array[1];
@@ -122,6 +128,7 @@ Fedit_
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
 							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
 							+ "<td>" + cell_url + "</td>"
+							+ "<td>" + cell_date + "</td>"
 							+ "<td><input type='button' class='links_save_button' value='Delete' onClick='deleteArrayItem(" 
 							+ i + ")'" + "></td>" + "</tr>";
 					}
@@ -132,18 +139,19 @@ Fedit_
                 	// put appdata table markup in designated div
                 	// and set height based on which view view this is
 					document.getElementById("edit_mlinks_table").innerHTML=links_table_data;
-					gadgets.window.adjustHeight($("#edit_mlinks_table").height() + 230);					
+					gadgets.window.adjustHeight($("#edit_mlinks_table").height() + 300);					
 				}
 				
 				if(document.getElementById("view_mlinks_table")){				
 					
                 	// VIEW MODE - build table to hold retrieved app data
-					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+					links_table_data = '<table cellspacing="10" cellpadding="0" border="0" style="width: 100%;"><tr>';
                     
 					for (i in g_oLinks) {
 						cell_name = g_oLinks[i].link_name;
 						cell_url = g_oLinks[i].link_url;
 						cell_url2 = g_oLinks[i].link_url;
+						cell_date = g_oLinks[i].link_date?cell_date = $.datepicker.formatDate('MM d, yy', new Date(g_oLinks[i].link_date)):'';
 							
 						favicon_path_array = cell_url.split("//");
 						cell_url2 = favicon_path_array[1];
@@ -154,7 +162,9 @@ Fedit_
 						// build and add table row
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
-							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" + "</tr>";
+							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" 
+							+ '<td class="link_date">' + cell_date + "</td>"
+							+ "</tr>";
 					}
                     
                 	// close the table
@@ -191,7 +201,8 @@ Fedit_
 				var newLinkNdx = g_oLinks.length;
 				g_oLinks[newLinkNdx] = {};							
 				g_oLinks[newLinkNdx].link_name = new_link_name;							
-				g_oLinks[newLinkNdx].link_url = new_link_url;							
+				g_oLinks[newLinkNdx].link_url = new_link_url;
+				g_oLinks[newLinkNdx].link_date = $("#datepicker").val();							
 
 				// write links data to gadget database
 				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {
@@ -201,8 +212,9 @@ Fedit_
 
                 		// refresh after update, clear input fields - don't need to reset g_oLinks as displayData does this
                 		displayData();
-						document.getElementById("linkname").value = "";
-                		document.getElementById("linkurl").value = "http://";
+                		$("#linkname").val("")
+                		$("#linkurl").val("http://")
+                		$("#datepicker").val("")
 						alert("Your media links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 					}
 				});
@@ -230,8 +242,7 @@ Fedit_
 
 	<!-- ==================== START HOME/EDIT VIEW ==================== -->
 	<Content type="html" view="default, home" preferred_height="300" preferred_width="700">
-	<![CDATA[<!--HTML-->
-    	
+	<![CDATA[<!--HTML-->	
     <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to news stories about your work</h3>
 
     <div style="padding:5px 0px 0px 25px;">
@@ -244,30 +255,44 @@ Fedit_
 	</div>
 	
 	<!-- display the new link input fields -->
-	<div class='question' style="padding:0px 0px 5px 12px;">
-		<table cellpadding="0" cellspacing="0">
+	<div class='question' style="padding:0px 0px 5px 12px;margin-bottom: 0px;margin-right: 0px;">
+		<table cellpadding="0" cellspacing="0" style="width: 100%;">
 			<tr>
-				<td class="links_body" valign="top"><b>News Story Headline</b><br />
-					e.g. 'Rain Man'-like Brains Mapped with Network Analysis<br />
-					(80 characters max)<br />
-                    <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;">                    
+				<td class="links_body">
+					<div><b>News Story Headline</div>
+					<div style="margin-right:10px;width: 300px;">e.g. 'Rain Man'-like Brains Mapped with Network Analysis</div>
+					<div>(80 characters max)</div>
                 </td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td class="links_body" valign="top"><b>News Story URL (not displayed in profile)</b><br />
-					e.g. http://www.ucsf.edu/RainManBrains15777<br /><br />
-                    <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
+				<td class="links_body">
+					<div><b>News Story URL (not displayed in profile)</b></div>
+					<div>e.g. http://www.ucsf.edu/RainManBrains15777</div>
                 </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td><br /><br /><br /><input type="button" style="margin-bottom: 8px;" value="Save" onClick="saveData();"></td>
+                <td></td>
+			<tr>  
+				<td style="vertical-align: middle;">
+	                <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;">                    
+                </td>				              
+				<td style="vertical-align: middle;">
+                    <input id="linkurl" type="linkurl" name="linkurl" style="width:270px;" value="http://">
+                </td>
+                <td style="width: 60px;vertical-align: middle;">
+                	<input type="button" value="Save" onClick="saveData();">
+                </td>
 			</tr>				
 		</table>			
 	</div>
-    
-    <h4 style="padding-left:10px; padding-top: 0px;">Your Current Stories:</h4>
+    <div style="padding:0px 0px 10px 25px;">
+		<div class="links_body"><b>Date</b><input style="width:80px; margin-left:10px" id="datepicker"/></div>
+		<div>Add release date of news story - Optional</div>
+    </div>
+    <h4 style="padding-left:10px; padding-top: 0px;" >Your Current Stories:</h4>
     <div id="edit_mlinks_table" style="padding:0px 0px 10px 25px;"></div>
             
     <script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));
+    	gadgets.util.registerOnLoadHandler(readData(function(){
+    		displayData();
+    		$( "#datepicker" ).datepicker();    		
+    	}));
     </script>
             
     ]]></Content>
@@ -278,10 +303,12 @@ Fedit_
 	<Content type="html" view="default, profile" preferred_height="100" preferred_width="670">
 	<![CDATA[<!--HTML-->
    
-    <div id="view_mlinks_table" style="padding:0px 0px 10px 20px;"></div>     
+    <div id="view_mlinks_table" style="padding:0px 0px 10px 20px"></div>     
    
 	<script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));
+    	gadgets.util.registerOnLoadHandler(readData(function(){
+    		displayData();
+    	}));
     </script>
     
     ]]></Content>

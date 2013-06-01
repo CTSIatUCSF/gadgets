@@ -27,18 +27,17 @@
     	.links_body { font-family:Arial; font-size: 12px; }
     	.links_credit { font-family:Arial; font-size:10px; }
 		.links_save_button { height:20px; font-size:11px; }
-		.link_date {text-align: right;width: 100px;} 
+		td.link_date {text-align: right;width: 100px} 
+		span.link_date {margin-left:10px;font-size: 12px;white-space:nowrap;} 
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
+    	#view_mlinks_table {overflow:auto;}
     </style>
 	
-	<script type="text/javascript">
-	
-    	var g_max_links = 5;
+	<script type="text/javascript">	
 		var g_oLinks = []; // declare it like this to make json work
 		
-		// ========================================
-		
+		// ========================================		
 		function sort_by (field, reverse, primer) {
 			reverse = (reverse) ? -1 : 1;
 			return function(a,b) {
@@ -108,7 +107,7 @@
 				if (document.getElementById("edit_mlinks_table")){
 				
                 	// EDIT MODE - build table to hold retrieved app data
-                	var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+                	var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'>";
 					var favicon_path_array;
                     
 					for (i in g_oLinks) {
@@ -145,13 +144,13 @@
 				if(document.getElementById("view_mlinks_table")){				
 					
                 	// VIEW MODE - build table to hold retrieved app data
-					links_table_data = '<table cellspacing="10" cellpadding="0" border="0" style="width: 100%;"><tr>';
+					links_table_data = '<table cellspacing="10" cellpadding="0" border="0" style="width: 100%;">';
                     
 					for (i in g_oLinks) {
 						cell_name = g_oLinks[i].link_name;
 						cell_url = g_oLinks[i].link_url;
 						cell_url2 = g_oLinks[i].link_url;
-						cell_date = g_oLinks[i].link_date?cell_date = $.datepicker.formatDate('MM d, yy', new Date(g_oLinks[i].link_date)):'';
+						cell_date = g_oLinks[i].link_date?cell_date = $.datepicker.formatDate('(MM d, yy)', new Date(g_oLinks[i].link_date)):'';
 							
 						favicon_path_array = cell_url.split("//");
 						cell_url2 = favicon_path_array[1];
@@ -162,8 +161,10 @@
 						// build and add table row
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
-							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>" 
-							+ '<td class="link_date">' + cell_date + "</td>"
+							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" 
+							+ "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a>"
+							+ '<span class="link_date">' + cell_date + "</span>"
+							+ "</td>" 
 							+ "</tr>";
 					}
                     
@@ -172,7 +173,17 @@
                         
                 	// put appdata table markup in designated div
 					document.getElementById("view_mlinks_table").innerHTML=links_table_data;
-					gadgets.window.adjustHeight($("#view_mlinks_table").height() + 10);					
+					var h = 0;
+					var cnt = $("#view_mlinks_table tr").length;
+					if(cnt <= 2) {
+						h = $("#view_mlinks_table").height();
+					}
+					else {
+						h = $("#view_mlinks_table tr:nth-child(1)").height();
+						h += $("#view_mlinks_table tr:nth-child(2)").height() + 20;
+					}
+					$("#view_mlinks_table").height(h);
+					gadgets.window.adjustHeight(h + 10);					
 				}
 			} /* end if link data exists */
 		}
@@ -187,41 +198,41 @@
                var new_link_name=document.getElementById("linkname").value;
                var new_link_url=document.getElementById("linkurl").value;
 
-			if (g_oLinks.length < g_max_links || !g_oLinks) {
-				
-				// check for empty input boxes
-				if(new_link_name=="" || new_link_url==""){
-					alert("Please provide both a Link Name and a URL");
-					return;
-				}
-				
-				// prepend http header if missing
-				if(new_link_url.indexOf("://") == -1){new_link_url = "http://" + new_link_url;}
-
-				var newLinkNdx = g_oLinks.length;
-				g_oLinks[newLinkNdx] = {};							
-				g_oLinks[newLinkNdx].link_name = new_link_name;							
-				g_oLinks[newLinkNdx].link_url = new_link_url;
-				g_oLinks[newLinkNdx].link_date = $("#datepicker").val();							
-
-				// write links data to gadget database
-				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {
-					if (result.error) { 
-						alert("Error " + result.error.code + " writing application data: " + result.error.message);
-					} else {
-
-                		// refresh after update, clear input fields - don't need to reset g_oLinks as displayData does this
-                		displayData();
-                		$("#linkname").val("")
-                		$("#linkurl").val("http://")
-                		$("#datepicker").val("")
-						alert("Your media links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
-					}
-				});
-				
-			} else {
-				alert("You already have the maximum number of links.");
+			// check for empty input boxes
+			if(new_link_name=="" || new_link_url==""){
+				alert("Please provide both a Link Name and a URL");
+				return;
 			}
+				
+			// prepend http header if missing
+			if(new_link_url.indexOf("://") == -1)
+			{
+				new_link_url = "http://" + new_link_url;
+			}
+			else if(/^http:\/\/((http|https):\/\/)/.test(new_link_url)) {
+				new_link_url = new_link_url.substr(7);
+			}
+
+			var newLinkNdx = g_oLinks.length;
+			g_oLinks[newLinkNdx] = {};							
+			g_oLinks[newLinkNdx].link_name = new_link_name;							
+			g_oLinks[newLinkNdx].link_url = new_link_url;
+			g_oLinks[newLinkNdx].link_date = $("#datepicker").val();							
+
+			// write links data to gadget database
+			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : gadgets.json.stringify(g_oLinks)} }).execute(function(result) {
+				if (result.error) { 
+					alert("Error " + result.error.code + " writing application data: " + result.error.message);
+				} else {
+
+               		// refresh after update, clear input fields - don't need to reset g_oLinks as displayData does this
+               		displayData();
+               		$("#linkname").val("")
+               		$("#linkurl").val("http://")
+               		$("#datepicker").val("")
+					alert("Your media links information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+				}
+			});
         }
 	// ==============================================================
 

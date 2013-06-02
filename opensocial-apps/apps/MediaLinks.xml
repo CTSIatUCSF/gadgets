@@ -27,10 +27,11 @@
     	.links_body { font-family:Arial; font-size: 12px; }
     	.links_credit { font-family:Arial; font-size:10px; }
 		.links_save_button { height:20px; font-size:11px; }
-		td.link_date {text-align: right;width: 100px} 
+		td.link_date {text-align: right;width: 100px;word-break: normal;} 
 		span.link_date {margin-left:10px;font-size: 12px;white-space:nowrap;} 
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
+    	td{word-break: break-all;}
     	#view_mlinks_table {overflow:auto;}
     </style>
 	
@@ -127,7 +128,7 @@
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
 							+ "<td>" + "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a></td>"
 							+ "<td>" + cell_url + "</td>"
-							+ "<td>" + cell_date + "</td>"
+							+ '<td class="link_date">' + cell_date + "</td>"
 							+ "<td><input type='button' class='links_save_button' value='Delete' onClick='deleteArrayItem(" 
 							+ i + ")'" + "></td>" + "</tr>";
 					}

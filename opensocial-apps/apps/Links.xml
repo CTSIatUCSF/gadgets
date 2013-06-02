@@ -24,9 +24,10 @@
     	.links_title { font-family:Verdana, Arial; font-size: 14px; }
     	.links_body { font-family:Arial; font-size: 12px; }
     	.links_credit { font-family:Arial; font-size:10px; }
-	.links_save_button { height:20px; font-size:11px; } 
+		.links_save_button { height:20px; font-size:11px; } 
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
+    	td{word-break: break-all;}
     </style>
 	
 	<script type="text/javascript">
@@ -103,7 +104,7 @@
 				if (document.getElementById("edit_links_table")){
 				
                 	// EDIT MODE - build table to hold retrieved app data
-                	var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+                	var links_table_data = "<table cellspacing='10' cellpadding='0' border='0'>";
 					var favicon_path_array;
                     
 					for (i in g_oLinks) {
@@ -138,7 +139,7 @@
 				if(document.getElementById("view_links_table")){				
 					
                 	// VIEW MODE - build table to hold retrieved app data
-					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'><tr>";
+					links_table_data = "<table cellspacing='10' cellpadding='0' border='0'>";
                     
 					for (i in g_oLinks) {
 						cell_name = g_oLinks[i].link_name;
@@ -265,7 +266,7 @@
 	</div>
     
     <h4 style="padding-left:10px; padding-top: 0px;">Your Current Websites:</h4>
-    <div id="edit_links_table" style="padding:0px 0px 10px 25px;"></div>
+    <div id="edit_links_table"></div>
             
     <script type="text/javascript">
     	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));

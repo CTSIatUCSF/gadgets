@@ -32,7 +32,7 @@
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
     	td{word-break: break-all;}
-    	#view_mlinks_table {overflow:auto;}
+    	#view_mlinks_table {overflow-y:auto;}
     </style>
 	
 	<script type="text/javascript">	
@@ -145,7 +145,7 @@
 				if(document.getElementById("view_mlinks_table")){				
 					
                 	// VIEW MODE - build table to hold retrieved app data
-					links_table_data = '<table cellspacing="10" cellpadding="0" border="0" style="width: 100%;">';
+					links_table_data = '<table cellspacing="10" cellpadding="0" border="0" >';
                     
 					for (i in g_oLinks) {
 						cell_name = g_oLinks[i].link_name;

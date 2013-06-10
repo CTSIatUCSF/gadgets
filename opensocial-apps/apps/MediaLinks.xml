@@ -18,13 +18,15 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="css/jquery.placeholder.min.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+    <script src="js/jquery.placeholder.min.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<style>
     	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
+    	.links_body { font-family:Arial; font-size: 12px; vertical-align: top;}
     	.links_credit { font-family:Arial; font-size:10px; }
 		.links_save_button { height:20px; font-size:11px; }
 		td.link_date {text-align: right;width: 100px;word-break: normal;} 
@@ -33,6 +35,7 @@
     	a:hover { color: #005580; text-decoration: underline; }
     	td{word-break: break-all;}
     	#view_mlinks_table {overflow-y:auto;}
+    	.placeholder {color: gray;} 
     </style>
 	
 	<script type="text/javascript">	
@@ -204,6 +207,12 @@
 				alert("Please provide both a Link Name and a URL");
 				return;
 			}
+			var releaseDate = $("#datepicker").val();
+			if(releaseDate && !releaseDate.match(/^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/)) {
+				alert("This is not a valid date. Please reenter it.");
+				$("#datepicker").val("");
+				return;
+			}
 				
 			// prepend http header if missing
 			if(new_link_url.indexOf("://") == -1)
@@ -225,7 +234,6 @@
 				if (result.error) { 
 					alert("Error " + result.error.code + " writing application data: " + result.error.message);
 				} else {
-
                		// refresh after update, clear input fields - don't need to reset g_oLinks as displayData does this
                		displayData();
                		$("#linkname").val("")
@@ -255,14 +263,14 @@
 	<!-- ==================== START HOME/EDIT VIEW ==================== -->
 	<Content type="html" view="default, home" preferred_height="300" preferred_width="700">
 	<![CDATA[<!--HTML-->	
-    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to news stories about your work</h3>
+    <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to News Stories about Your Work</h3>
 
     <div style="padding:5px 0px 0px 25px;">
     	Add links to news stories, blogs or other media that feature your research. 
     	Links can be hosted on any external site that is open to the public. 
     	Enter the title or headline as you want it to appear on your UCSF Profiles page, and the related URL. 
     	Add a date of publication if applicable. Some examples would be a story in the SF Chronicle or on UCSF.edu. 
-    	Once you’ve added a story, remember to click "Save" below.
+    	Once you've added a story, remember to click "Save" below.
     	<br /><br />
 	</div>
 	
@@ -272,7 +280,7 @@
 			<tr>
 				<td class="links_body">
 					<div><b>News Story Headline</div>
-					<div style="margin-right:10px;width: 300px;">e.g. 'Rain Man'-like Brains Mapped with Network Analysis</div>
+					<div style="margin-right:10px;width: 300px;">e.g. 'Rain Man'-like Brains Mapped</div>
 					<div>(80 characters max)</div>
                 </td>
 				<td class="links_body">
@@ -294,8 +302,9 @@
 		</table>			
 	</div>
     <div style="padding:0px 0px 10px 25px;">
-		<div class="links_body"><b>Date</b><input style="width:80px; margin-left:10px" id="datepicker"/></div>
+		<div class="links_body"><b>Release Date</b></div>
 		<div>Add release date of news story - Optional</div>
+		<div><input style="width:90px;" id="datepicker" placeholder="MM/DD/YYYY"/></div>
     </div>
     <h4 style="padding-left:10px; padding-top: 0px;" >Your Current Stories:</h4>
     <div id="edit_mlinks_table" style="padding:0px 0px 10px 25px;"></div>
@@ -304,6 +313,7 @@
     	gadgets.util.registerOnLoadHandler(readData(function(){
     		displayData();
     		$( "#datepicker" ).datepicker();    		
+    		$( "#datepicker" ).placeholder();    		
     	}));
     </script>
             

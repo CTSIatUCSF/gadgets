@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Twitter"
+            title="Tweets"
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="Twitter">
@@ -11,7 +11,7 @@
         <Require feature="osapi" />
         <Require feature="dynamic-height" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
@@ -31,54 +31,37 @@
 			};
 			
 			ucsf.twitter.getUsername=function(callback) {
-				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username']})
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username', 'twitter_widget_id']})
 			    	.execute(function(response){
 			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var username = viewer.twitter_username;
-			    		if(username != null && username != '' && callback) {
-			    			callback(username);
+			    		var widget_id = viewer.twitter_widget_id;
+			    		if(widget_id != null && widget_id != '' && callback) {
+			    			callback(widget_id);
 			    		}
 			    	});
 			}
 			
-	        ucsf.twitter.preview=function(username) {
-	        	var options = {
-					version: 2,
-					type: 'profile',
-					rpp: 4,
-					interval: 30000,
-					width: 'auto',
-					height: 200,
-					theme: {
-						shell: {
-					    	background: '#333333',
-					    	color: '#ffffff'
-					   	},
-					    tweets: {
-					      background: '#000000',
-					      color: '#ffffff',
-					      links: '#4aed05'
-					    }
-					  },
-					  features: {
-					    scrollbar: true,
-					    loop: false,
-					    live: true,
-					    behavior: 'all'
-					}
-				};
-				if (ucsf.twitter.preview.instance) {
-					options.id = ucsf.twitter.preview.instance.widgetEl.id;
-				}	
-				ucsf.twitter.preview.instance = new TWTR.Widget(options);
-				ucsf.twitter.preview.instance.render();
-				if(username) {
-					ucsf.twitter.preview.instance.setUser(username).start();	
+			ucsf.twitter.render=function(widget_id) {
+				$("#twitter-wjs").remove();
+				$(".twitter-gadget .content").empty();
+				$(".twitter-gadget .content").append('<a width="520" height="300" class="twitter-timeline" href="https://twitter.com/" data-widget-id="'+widget_id+'"></a>')
+				
+				var fjs=document.getElementsByTagName("script")[0];
+				var p=/^http:/.test(document.location)?'http':'https';
+				js=document.createElement("script");
+				js.id="twitter-wjs";
+				js.src=p+"://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+			
+	        ucsf.twitter.preview=function(widget_id) {
+				if(widget_id) {
+					ucsf.twitter.render(widget_id);
 				}				    			
 	        }		
 		</script>
 	]]></Content>
-    <Content type="html" view="profile" preferred_height="300"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_width="670"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.twitter.profilePageInit = function() {
 	        	gadgets.window.adjustHeight(300);
@@ -86,21 +69,23 @@
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.twitter.profilePageInit);    		
 		</script>	
+		
+	    <!-- Styles -->
+	    <style type="text/css">	    
+	    	.twitter-gadget .content {text-align: center;}	    	
+	    </style>
+		
 		<div class="twitter-gadget">
 			<div class="content">
-				<script>
-					ucsf.twitter.preview();
-				</script>
 			</div>			
 		</div>
 	]]></Content>
-    <Content type="html" view="home" preferred_height="350"><![CDATA[<!--HTML-->	
-	    <script type="text/javascript" src="js/ORNG.js" ></script>
+    <Content type="html" view="home" preferred_width="700"><![CDATA[<!--HTML-->	
     	<script type="text/javascript">	        
 	        $(document).ready(function () {
 		        $(".twitter-gadget .save").click(function() {
 		        	$(".twitter-gadget").block({ message: "Saving..." });
-	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'twitter_username':$('.twitter-gadget input').val()} }).execute(function(response){
+	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'twitter_widget_id':$('.twitter-gadget input').val()} }).execute(function(response){
 	    				$(".twitter-gadget").unblock();
 	    			});		        	
 		        });
@@ -119,6 +104,7 @@
 	        });
 	        	        
 	        ucsf.twitter.homePageInit = function() {
+	        	gadgets.window.adjustHeight(50);
 	           	ucsf.twitter.getUsername(function(username) {
 	    			$('.twitter-gadget input').val(username);
 	        		$('.twitter-gadget .content').show();
@@ -135,18 +121,12 @@
 	    	.twitter-gadget input {width: 400px;}
 	    	.twitter-gadget .label {margin-right: 10px;font-weight: bold;}
 	    	.twitter-gadget .preview, .twitter-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
-	    	.twitter-gadget .content {margin-top: 10px;}	    	
+	    	.twitter-gadget .content {margin-top: 10px; margin-left: 20px;}	    	
 	    </style>
 	    
-		<!-- HideShow -->
-		<div id="hideshow"></div>
-		<!-- HideShow end -->
 		<div class="twitter-gadget">  
-			<span class="label">Username:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
-			<div class="content" style="display:none">
-				<script>
-					ucsf.twitter.preview();
-				</script>
+			<span class="label">Widget Id:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
+			<div class="content" style="display:none">								
 			</div>
 		</div>
 	]]></Content>

@@ -40,8 +40,8 @@
 	    	.nih-grants-profile .content {height:155px;overflow-y: auto; padding: 0px 0px 0px 0px; border-radius: 0px;line-height:1em;}
 	    	.nih-grants-profile table {border-collapse:collapse;width: 100%; margin-bottom: 0px;}
 	    	.nih-grants-profile td, .nih-grants-profile th {text-align: left; padding:2px;}
-	    	.nih-grants-profile th {font-size: 13px; font-weight: bold;}
-	    	.nih-grants-profile td.fy {width: 70px; text-align:right;padding-right: 10px;}
+	    	.nih-grants-profile th {font-size: 13px; font-weight: bold; text-align: left;}
+	    	.nih-grants-profile td.fy {width: 70px; padding-right: 10px;}
 	    	.nih-grants-profile td.pn {width: 140px;}
 	    	.nih-grants-profile a {font-size: 12px;}
 	    	.nih-grants-profile .help  {padding-top: 5px; float: right;cursor:pointer;}
@@ -137,7 +137,7 @@
 			<table>	
 				<tr>
 					<th>Project Title</th>
-					<th>Project Number</th>
+					<th class="pn">Project Number</th>
 					<th>Fiscal Year</th>
 				</tr>
 			</table>			

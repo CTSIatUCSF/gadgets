@@ -31,20 +31,20 @@
 			};
 			
 			ucsf.twitter.getUsername=function(callback) {
-				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username', 'twitter_widget_id']})
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['twitter_username']})
 			    	.execute(function(response){
 			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var widget_id = viewer.twitter_widget_id;
-			    		if(widget_id != null && widget_id != '' && callback) {
-			    			callback(widget_id);
+			    		var username = viewer.twitter_username;
+			    		if(username != null && username != '' && callback) {
+			    			callback(username);
 			    		}
 			    	});
 			}
 			
-			ucsf.twitter.render=function(widget_id) {
+			ucsf.twitter.render=function(username) {
 				$("#twitter-wjs").remove();
 				$(".twitter-gadget .content").empty();
-				$(".twitter-gadget .content").append('<a width="520" height="300" class="twitter-timeline" href="https://twitter.com/" data-widget-id="'+widget_id+'"></a>')
+				$(".twitter-gadget .content").append('<a width="520" height="300" class="twitter-timeline" href="https://twitter.com/'+username+'" data-screen-name="'+username+'" data-widget-id="320982656688996353">Tweets by @'+username+'</a>')
 				
 				var fjs=document.getElementsByTagName("script")[0];
 				var p=/^http:/.test(document.location)?'http':'https';
@@ -85,7 +85,7 @@
 	        $(document).ready(function () {
 		        $(".twitter-gadget .save").click(function() {
 		        	$(".twitter-gadget").block({ message: "Saving..." });
-	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'twitter_widget_id':$('.twitter-gadget input').val()} }).execute(function(response){
+	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'twitter_username':$('.twitter-gadget input').val()} }).execute(function(response){
 	    				$(".twitter-gadget").unblock();
 	    			});		        	
 		        });

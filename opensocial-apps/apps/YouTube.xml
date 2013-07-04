@@ -78,11 +78,10 @@
     <Content type="html" view="profile" preferred_height="260" preferred_width="670">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
-	        ucsf.youtube.profilePageInit = function() {
+    		gadgets.util.registerOnLoadHandler(function() {
 	        	gadgets.window.adjustHeight(260);
 	        	ucsf.youtube.getUserVideos(ucsf.youtube.preview);
-	        }
-    		gadgets.util.registerOnLoadHandler(ucsf.youtube.profilePageInit);    		
+    		});    		
 		</script>
 	    <!-- Styles -->
 	    <style type="text/css">	    
@@ -99,6 +98,8 @@
     <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->	
     	<script type="text/javascript">	        
+	        var ucsf = ucsf || {};
+	        ucsf.youtube = {};
 	        $(document).ready(function () {
 		        $(".youtube-gadget .preview").click(function() {
 		        	var videoId = $('.youtube-gadget input').val();

@@ -18,7 +18,7 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" href="css/jquery.placeholder.min.css" />
+	<link rel="stylesheet" href="css/jquery.placeholder.min.css" type="text/css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     <script src="js/jquery.placeholder.min.js"></script>    
@@ -310,11 +310,11 @@
     <div id="edit_mlinks_table" style="padding:0px 0px 10px 25px;"></div>
             
     <script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){
+    	gadgets.util.registerOnLoadHandler(function() {readData(function(){
     		displayData();
     		$( "#datepicker" ).datepicker();    		
     		$( "#datepicker" ).placeholder();    		
-    	}));
+    	})});
     </script>
             
     ]]></Content>
@@ -328,9 +328,9 @@
     <div id="view_mlinks_table" style="padding:0px 0px 10px 20px"></div>     
    
 	<script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){
-    		displayData();
-    	}));
+    	gadgets.util.registerOnLoadHandler(function() {
+		readData(function(){displayData();
+    	})});
     </script>
     
     ]]></Content>

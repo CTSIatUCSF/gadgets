@@ -64,7 +64,7 @@
 			      width: '350',			      
 			      videoId: ucsf.youtube.videoId,			      
 			      playerVars: { 'autoplay': 0, 'enablejsapi': 1, 'version':3, showinfo:1, 
-			      	playlist: ucsf.youtube.videos.join(','), 
+			      	playlist: ucsf.youtube.videos.join(',')
 			      },
 			      events: {
 		            'onReady': ucsf.youtube.onPlayerReady,
@@ -98,8 +98,6 @@
     <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->	
     	<script type="text/javascript">	        
-	        var ucsf = ucsf || {};
-	        ucsf.youtube = {};
 	        $(document).ready(function () {
 		        $(".youtube-gadget .preview").click(function() {
 		        	var videoId = $('.youtube-gadget input').val();

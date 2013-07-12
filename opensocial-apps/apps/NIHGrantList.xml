@@ -120,9 +120,6 @@
 	    	function buildGrantHtml(grant) {
 	    		var url = 'http://projectreporter.nih.gov/project_info_description.cfm?aid=' + grant.aid;
 	    		var title = grant.t;
-	    		if(title.length > 40) {
-	    			title = title.substring(0, 40) + "...";
-	    		}
 	    		return '<tr><td><a target="_blank" href="' + url + '">' + title+'</a></td><td class="pn">' + grant.fpn + '</td><td  class="fy">' + grant.fy +'</td></tr>'
 	    	}
 		</script>	

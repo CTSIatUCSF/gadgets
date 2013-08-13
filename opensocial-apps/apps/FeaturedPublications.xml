@@ -10,9 +10,10 @@
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
+        <Require feature="rdf"/>        
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
-    <![CDATA[<!--HTML-->
+    <![CDATA[
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
@@ -24,7 +25,7 @@
 	]]>
 	</Content>
     <Content type="html" view="profile" preferred_height="260" preferred_width="670">
-    <![CDATA[<!--HTML-->	
+    <![CDATA[	
 	    <script type="text/javascript">
 		</script>
 	    <!-- Styles -->
@@ -38,17 +39,104 @@
 		</div>
 	]]>
 	</Content>
-    <Content type="html" view="home" preferred_height="350" preferred_width="700">
-    <![CDATA[<!--HTML-->	
+    <Content type="html" view="home" preferred_height="400" preferred_width="700">
+    <![CDATA[	
+	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
+    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
+	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
     	<script type="text/javascript">	        
+        	function loadRDF() {
+            	$(document).ready(function () {
+					$(".pubs-gadget").block({ message: "Loading..." });
+					$(".pubs-gadget #save-selected").click(function() {
+						$(".pub input:checked").each(function() {
+							var title = $(this).parent().text();
+							var pmid = $(this).data("pmid");
+							$('.sel-pubs').append(
+								'<div class="pub">'+ 
+									'<div class="inline">'+
+									' <div>' + title + '</div>'+
+									' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>'+
+									'</div>'+
+									'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
+									'<div class="clear"/>'+
+								'</div>'
+							);
+						});
+						gadgets.window.adjustHeight($(".pubs-gadget").height());
+						$( ".sel-pubs" ).sortable({ axis: "y" });
+					});
+					$(".remove-pub").live("click", function() {
+						$(this).parent().parent().remove();
+						gadgets.window.adjustHeight($(".pubs-gadget").height());
+					});
+					gadgets.window.adjustHeight($(".pubs-gadget").height());
+            	});        
+			    var options = {};
+	            options.output = 'full';
+		    	osapi.rdf.getOwner(options).execute(function(ownerRdf) {
+		    		var pubs = ownerRdf.results[0].authorInAuthorship;
+		    		if($.isArray(pubs)) {
+			    		for(var i=0;i<pubs.length;i++) {
+			    			loadPub(pubs[i]);
+			   	    	}
+		    		}
+		    		else if(pubs){
+		    			loadPub(pubs);
+		    		}
+		    		else {
+						$(".pubs-gadget").unblock();
+		    		}		    		
+	   	    	});
+	      	}
+	      	function loadPub(refUrl) {
+			    var options = {};
+	            options.output = 'full';
+				osapi.rdf.getRDF(refUrl, options).execute(function(refRdf) {
+					if(refRdf.results && refRdf.results.length > 0) {
+						var pubUrl = refRdf.results[0].linkedInformationResource;
+						osapi.rdf.getRDF(pubUrl, options).execute(function(pubRdf) {
+							var title = pubRdf.results[0].informationResourceReference;
+							var pmid = pubRdf.results[0].pmid;
+							$('.result').append('<div class="pub"><input type="checkbox" data-pmid="'+pmid+'"></input>' + title + '</div>');
+							$(".pubs-gadget").unblock();
+		   	    		});	    		
+					}
+   	    		});	    		
+	      	}
+			gadgets.util.registerOnLoadHandler(loadRDF);	
 		</script>
 		
 	    <!-- Styles -->
-	    <style type="text/css">	    
+	    <style type="text/css">
+	    	.pubs-gadget{overflow: auto;}
+	    	.pubs-gadget #save-selected {float:right;}
+	    	.pubs-gadget .desc{color: gray;}
+	    	.clear {clear:both;}
+	    	.result {height: 200px;overflow-y: auto; margin-top: 10px;}
+	    	.result .pub {width: 650px;word-break: break-word;padding-left: 20px; }
+	    	.result .pub input {margin-left: -20px;}
+	    	.sel-pubs .pub {margin: 10px;border: 1px dotted white;}
+	    	.sel-pubs .pub:hover {border: 1px dotted gray; cursor: pointer;}
+	    	.sel-pubs .pm-link {margin-left: 20px;};
+	    	.inline {display:inline-block;width: 600px;}
+	    	.fright {float:right;}
 	    </style>
 	    
 		<div class="pubs-gadget">
-			Home Page
+			<h3 class="header1">Manage Publications to Feature on Your Profile</h3>
+			<div class="desc">Select publications from your profile to showcase in this area.</div>
+			<h4 class="header2">Publications Currently featured:</h4>
+			<div class="sel-pubs"></div>
+			<h4 class="header2">Make Changes:</h4>
+			<div class="desc">Below are all the publications on your profile. Select those you'd like to feature then click Save. 
+				If any of your PubMed publications are missing, add them to your profile first using the Publications link 
+				in the top section of your profile edit screen. 
+			</div>
+			<div><input type="button" value="Save" id="save-selected"></input></div>
+			<div class="clear"/>
+			<div class="result"></div>	
 		</div>
 	]]>
 	</Content>

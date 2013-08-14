@@ -53,24 +53,18 @@
 						$(".pub input:checked").each(function() {
 							var title = $(this).parent().text();
 							var pmid = $(this).data("pmid");
-							$('.sel-pubs').append(
-								'<div class="pub">'+ 
-									'<div class="inline">'+
-									' <div>' + title + '</div>'+
-									' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>'+
-									'</div>'+
-									'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
-									'<div class="clear"/>'+
-								'</div>'
-							);
+							renderFeaturedPub(title, pmid);
 						});
+						$(".pub input:checked").removeAttr("checked");
 						gadgets.window.adjustHeight($(".pubs-gadget").height());
-						$( ".sel-pubs" ).sortable({ axis: "y" });
+						saveFeaturedPubs();						
 					});
 					$(".remove-pub").live("click", function() {
 						$(this).parent().parent().remove();
 						gadgets.window.adjustHeight($(".pubs-gadget").height());
+						saveFeaturedPubs();
 					});
+					$( ".sel-pubs" ).sortable({ axis: "y" });
 					gadgets.window.adjustHeight($(".pubs-gadget").height());
             	});        
 			    var options = {};
@@ -90,6 +84,18 @@
 		    		}		    		
 	   	    	});
 	      	}
+	      	function renderFeaturedPub(title, pmid) {
+				$('.sel-pubs').append(
+					'<div class="pub" data-pmid="'+pmid+'">'+ 
+						'<div class="inline">'+
+						' <div>' + title + '</div>'+
+						' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>'+
+						'</div>'+
+						'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
+						'<div class="clear"/>'+
+					'</div>'
+				);
+	      	};
 	      	function loadPub(refUrl) {
 			    var options = {};
 	            options.output = 'full';
@@ -103,7 +109,33 @@
 							$(".pubs-gadget").unblock();
 		   	    		});	    		
 					}
-   	    		});	    		
+   	    		});
+   	    		loadFeaturedPubs();	    		
+	      	};
+	      	
+ 	    	function loadFeaturedPubs() {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs']})
+			    	.execute(function(response){
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var pubs = gadgets.json.parse(viewer.featured_pubs) || [];
+		    			for(var i=0;i<pubs.length;i++) {
+		    				if(pubs[i].pmid) {
+								renderFeaturedPub(pubs[i].title, pubs[i].pmid);
+		    				}
+		    			}			    		
+			    	}); 	    	
+ 	    	};
+ 	    		    		
+	      	function saveFeaturedPubs() {
+	      		var pubs = [];
+	      		$(".sel-pubs .pub").each(function(index, elem) {
+	      			var pub = {};
+	      			pub.pmid = $(elem).data("pmid");
+	      			pub.title = $(".inline", elem).text();
+	      			pubs.push(pub);
+	      		}); 
+    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'featured_pubs': JSON.stringify(pubs)} }).execute(function(response){
+    			});		        						
 	      	}
 			gadgets.util.registerOnLoadHandler(loadRDF);	
 		</script>

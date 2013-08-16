@@ -17,34 +17,69 @@
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script>
     
-	    <script type="text/javascript" id="ucsf-yt-script">
-	        var ucsf = ucsf || {};
+	    <script type="text/javascript">
+ 	    	function loadFeaturedPubs(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs']})
+			    	.execute(function(response){
+			    		var viewer = os.osapi.getViewerFromResult(response);
+			    		var pubs = gadgets.json.parse(viewer.featured_pubs) || [];
+		    			for(var i=0;i<pubs.length;i++) {
+		    				if(pubs[i].pmid) {
+								renderFeaturedPub(pubs[i].title, pubs[i].pmid);
+		    				}
+		    			}
+		    			if(callback) {
+		    				callback();
+		    			}			    		
+			    	}); 	    	
+ 	    	};
+	      	function renderFeaturedPub(title, pmid) {
+				$('.sel-pubs').append(
+					'<div class="pub" data-pmid="'+pmid+'">'+ 
+						'<div class="inline">'+
+						' <div>' + title + '</div>'+
+						' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>'+
+						'</div>'+
+						'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
+						'<div class="clear"/>'+
+					'</div>'
+				);
+	      	}; 	    		        
 		</script>
 	]]>
 	</Content>
     <Content type="html" view="profile" preferred_height="260" preferred_width="670">
     <![CDATA[	
 	    <script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+            	$(document).ready(function () {
+					$(".pubs-gadget").block({ message: "Loading..." });
+				});
+				loadFeaturedPubs(function() {
+					$(".pubs-gadget").unblock();
+				});
+			});	
 		</script>
 	    <!-- Styles -->
 	    <style type="text/css">	    
+	    	.pubs-gadget .sel-pubs {height: 245px;overflow-y: auto; margin-top: 10px;}
+	    	.fright {display:none;}
+	    	.pubs-gadget .pub {margin: 5px 5px 10px 5px;}	    	
 	    </style>
 			
 		<div class="pubs-gadget">
-			<div class="content">
-				Profile Page
-			</div>			
+			<div class="sel-pubs"></div>			
 		</div>
 	]]>
 	</Content>
     <Content type="html" view="home" preferred_height="400" preferred_width="700">
     <![CDATA[	
 	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
-    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
 	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
-	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
     	<script type="text/javascript">	        
         	function loadRDF() {
             	$(document).ready(function () {
@@ -64,7 +99,12 @@
 						gadgets.window.adjustHeight($(".pubs-gadget").height());
 						saveFeaturedPubs();
 					});
-					$( ".sel-pubs" ).sortable({ axis: "y" });
+					$( ".sel-pubs" ).sortable({ 
+						axis: "y",
+						update: function( event, ui ) {
+							saveFeaturedPubs();
+						}
+					});
 					gadgets.window.adjustHeight($(".pubs-gadget").height());
             	});        
 			    var options = {};
@@ -88,7 +128,7 @@
 				$('.sel-pubs').append(
 					'<div class="pub" data-pmid="'+pmid+'">'+ 
 						'<div class="inline">'+
-						' <div>' + title + '</div>'+
+						' <div class="pub-title">' + title + '</div>'+
 						' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>'+
 						'</div>'+
 						'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
@@ -110,28 +150,17 @@
 		   	    		});	    		
 					}
    	    		});
-   	    		loadFeaturedPubs();	    		
+   	    		loadFeaturedPubs(function() {
+   	    			gadgets.window.adjustHeight($(".pubs-gadget").height());
+   	    		});	    		
 	      	};
-	      	
- 	    	function loadFeaturedPubs() {
-				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs']})
-			    	.execute(function(response){
-			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var pubs = gadgets.json.parse(viewer.featured_pubs) || [];
-		    			for(var i=0;i<pubs.length;i++) {
-		    				if(pubs[i].pmid) {
-								renderFeaturedPub(pubs[i].title, pubs[i].pmid);
-		    				}
-		    			}			    		
-			    	}); 	    	
- 	    	};
- 	    		    		
+	      	 	    		    		
 	      	function saveFeaturedPubs() {
 	      		var pubs = [];
 	      		$(".sel-pubs .pub").each(function(index, elem) {
 	      			var pub = {};
 	      			pub.pmid = $(elem).data("pmid");
-	      			pub.title = $(".inline", elem).text();
+	      			pub.title = $(".pub-title", elem).text();
 	      			pubs.push(pub);
 	      		}); 
     			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'featured_pubs': JSON.stringify(pubs)} }).execute(function(response){
@@ -168,7 +197,8 @@
 			</div>
 			<div><input type="button" value="Save" id="save-selected"></input></div>
 			<div class="clear"/>
-			<div class="result"></div>	
+			<div class="result">
+			</div>	
 		</div>
 	]]>
 	</Content>

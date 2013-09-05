@@ -136,6 +136,9 @@
 					        	$('.youtube-gadget #linkurl').val('http://');
 			    				alert("Your video link information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			    			});		        						
+							// post activity
+							osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': 'addedVideo', 'body': linkName, 
+								'streamUrl': linkUrl,'externalId': videoId, 'postedTime': new Date().getTime()}}).execute();
 			        	}
 		        	});
 		        });		        
@@ -146,6 +149,9 @@
 	    				$(".youtube-gadget").unblock();
 		           		ucsf.youtube.adjustHeight();
 	    			});		        						
+					// post activity
+					osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': 'removedVideo', 'body': ucsf.youtube.getCurrentVideos(), 
+						'postedTime': new Date().getTime()}}).execute();
 		        });		        
 	        });
 	        

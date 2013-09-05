@@ -1,2 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ChatterService.Web.ChatterProxyService" 
-                Factory="System.ServiceModel.Activation.WebServiceHostFactory"%> 

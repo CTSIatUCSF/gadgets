@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="NIH Grant Match"
+            description="Polls NIH Grants for open opportunities based on keywords" scrolling="true" height="480">
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
+        <Require feature="views" />
+        <Require feature="dynamic-height" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
+		<!DOCTYPE html>
+		<base target="_blank"/> 
+		<link rel="stylesheet" media="all" type="text/css" href="css/os.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="css/wfu.css?v=3.4" />
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.xml2json.js"></script>
+		<script type="text/javascript" src="js/os.js" ></script>
+		<script type="text/javascript" src="js/UCSF.js" ></script>
+		<script type="text/javascript">
+			var profileUrl = "http://dev-profiles.ucsf.edu/qa/CustomAPI/v1/JSONProfile.aspx?Person="; 
+			var globalPerson = {};
+
+			function sendRequest(url, success) {
+			  var params = {};
+			  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+			  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+			  		  
+	  		  gadgets.io.makeRequest(url, success, params);
+			}			
+
+			function sendPostRequest(url, post_params, success) {
+			  var params = {};
+			  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(post_params);
+			  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+			  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+			  		  
+	  		  gadgets.io.makeRequest(url, success, params);
+			}			
+		
+			function initGadget() {			
+				globalPerson = opensocial.IdSpec.PersonId.OWNER;
+	            var req = opensocial.newDataRequest();
+	            req.add(req.newFetchPersonRequest(globalPerson),'owner');
+				req.send(loadGrants); 
+			}
+			
+			function grantSearch(){
+				$("#dResults").html("");
+				var strTerm = $("#txtSearchBox").val();
+				if (strTerm != ""){
+				    sendPostRequest(
+						"http://tsi.wfubmc.edu/webservices/grantSearch/search.cfc",
+						{method:"searchGrants", 
+						 keywords:strTerm, 
+						 searchType:"C",
+						 orderBy:"REL",
+						 maxRows:"20"
+						 },
+						function(obj){
+							var dataJSON = obj.data;							
+							if (dataJSON != null && dataJSON.resultCount == 0){
+								sendPostRequest(
+									"http://tsi.wfubmc.edu/webservices/grantSearch/search.cfc",
+									{method:"searchGrants",keywords:strTerm,orderBy:"REL",maxRows:"20"},
+									function(obj){				
+										var dataJSON = obj.data;
+										if(dataJSON != null) {
+											$("#dResults").html("<h2>" + dataJSON.resultCount + " Grant(s) found for \"" + dataJSON.searchTerm + "\"</h2>");
+											$("#dResults").append("<p class=\"pGrantSearchErr\">These results are the closest match to your search term.  Try other terms for better results.</p>");
+											var i = 0;
+											for (i=0;i<dataJSON.resultCount;i++){
+												$("#dResults").append("<p class=\"grantDetails\"><a class=\"grantLink\" href=\"" + dataJSON.results[i].grantLink + "\">" + dataJSON.results[i].grantTitle + "</a> - " + dataJSON.results[i].purpose + "<span class=\"grantInfo\">(Type: " + dataJSON.results[i].docType + ", Release Date: " + dataJSON.results[i].relDate + ", Expiration Date: " + dataJSON.results[i].expDate + ")</span></p>");
+											}
+										}
+										else if(obj.errors != null) {
+											$("#dResults").append(obj.errors);
+										}
+									}
+								);
+							}
+							else{
+								$("#dResults").html("<h2>" + dataJSON.resultCount + " Grant(s) found for \"" + dataJSON.searchTerm + "\"</h2>");
+								var i = 0;
+								for (i=0;i<dataJSON.resultCount;i++){
+									$("#dResults").append("<p class=\"grantDetails\"><a class=\"grantLink\" href=\"" + dataJSON.results[i].grantLink + "\">" + dataJSON.results[i].grantTitle + "</a> - " + dataJSON.results[i].purpose + "<span class=\"grantInfo\">(Type: " + dataJSON.results[i].docType + ", Release Date: " + dataJSON.results[i].relDate + ", Expiration Date: " + dataJSON.results[i].expDate + ")</span></p>");
+								}
+							}
+						}
+					);
+				}
+				else{
+					$("#dResults").html("<p>You must supply a search term.</p>");
+				}
+			}
+		
+			function loadGrants(data){
+				var strTerm = "";
+				var strPubIds = "";
+				
+				var owner = data.get('owner').getData();
+				var profileId = owner.getField(opensocial.Person.Field.ID);
+				sendRequest(profileUrl + profileId, function(obj) {
+					if(obj.data != null) {
+					    var keywords = obj.data.Profiles[0].Keywords;
+						if(keywords.length > 0) {
+							$("#txtSearchBox").val(keywords[0]);
+							grantSearch();
+							var strLink = "";
+							$.each(keywords, function(j,item){
+								strLink = '<a class="aKeywordSearch" href="">' + item + '</a>';
+								$("#pKeywordLinks").append(strLink + "&nbsp;|&nbsp;");
+							});
+							
+							$("a.aKeywordSearch").click(function(event) {
+								event.preventDefault();
+								$("#txtSearchBox").val($(this).html());
+								grantSearch();
+							});
+						}
+					}		  		  		
+   			    });				
+			}
+			
+		</script>
+	    <!-- Styles -->
+    	<style type="text/css">
+    		div#dResults {
+    			height:330px;
+    			overflow-y:auto;
+    		}
+    	</style>
+		
+		<p>Open NIH grant opportunities are listed below, with the most recent postings at the top.  You can search for your keywords by clicking the links below or enter your own search terms.</p>
+		<p>
+			<label for="txtSearchBox">Search for</label>
+			<input type="text" name="txtSearchBox" id="txtSearchBox" value="" />
+			<input type="button" name="btnSearch" id="btnSearch" value="Search" onclick="grantSearch();" />
+		</p>
+		<div id="pKeywordLinks"></div>
+		<hr />
+	
+		<div id="dResults"></div>
+	
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(initGadget());
+		</script>]]></Content>
+</Module>

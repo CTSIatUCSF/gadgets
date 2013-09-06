@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Global Health Experience"
+				 description="Global Health Experience">
+		<Require feature="opensocial-0.9" />
+		<Require feature="dynamic-height" />
+		<Require feature="pubsub" />
+		<Require feature="views" />
+		<Require feature="osapi" />
+	      <Require feature="settitle"/>
+	</ModulePrefs>
+
+	<Content type="html" view="home, profile">
+	<![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    <script type="text/javascript" src="js/os.js" ></script>
+    
+	<script type="text/javascript">
+	
+		function readData() {
+			osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['countries']} ).execute(function(result)		{
+				
+			// get incoming link data (in json string format)
+			var viewer = os.osapi.getViewerFromResult(result);
+			var countries = viewer.countries.split(";");
+			var blist = "<ul>";
+			for (var i = 0; i < countries.length; i++) {
+				blist += "<li>" + countries[i] + "</li>";
+			} 
+			blist += "</ul>";
+			document.getElementById("countries").innerHTML = blist ;
+	
+			gadgets.window.adjustHeight(40 + 14*countries.length);
+				
+			}); /* end osapi.appdata.get */			
+		}
+		// ========================================			        		
+
+	    	gadgets.util.registerOnLoadHandler(readData);
+
+	</script>
+	   <div id="countries" style="padding:0px 0px 10px 10px;"></div>         
+    ]]></Content>
+	<!-- ==================== START HOME VIEW ==================== -->
+	<Content type="html" view="home" preferred_width="700">
+	<![CDATA[<!--HTML-->
+      <!DOCTYPE html>
+      <div style="font-size:11px; padding-left:10px; padding-top: 0px;">Source: UCSF International Database. For changes or more information, email: <a href= "mailto:ghp-ctsi@ucsf.edu" style="font-size:11px;color:#0088CC;text-decoration:none;">ghp-ctsi@ucsf.edu</a></div>
+    ]]></Content>
+	<!-- ==================== START PROFILE VIEW ==================== -->
+	<Content type="html" view="profile" preferred_width="670">
+	<![CDATA[<!--HTML-->
+      <!DOCTYPE html>
+      <div style="font-size:11px; padding-left:10px; padding-top: 0px;">Source: UCSF International Database. For more information, email: <a href= "mailto:ghp-ctsi@ucsf.edu" style="font-size:11px;color:#0088CC;text-decoration:none;">ghp-ctsi@ucsf.edu</a></div>
+    ]]></Content>
+</Module>

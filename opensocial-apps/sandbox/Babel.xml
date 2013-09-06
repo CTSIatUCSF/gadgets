@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Babel" height="400">
-    <Require feature="babel"/>
-    <Require feature="osapi"/>    
-    <Require feature="dynamic-height"/>    
-  </ModulePrefs> 
-  <Content type="html">
+	<ModulePrefs title="Babel" height="400">
+		<Require feature="babel" />
+		<Require feature="osapi" />
+		<Require feature="dynamic-height" />
+	</ModulePrefs>
+	<Content type="html">
   <![CDATA[ 
   <form>
   RDF: <input type="text" id="rdfurl" name="rdfurl" size="80"
@@ -119,6 +119,6 @@
   //Call getData as soon as the gadget finishes loading.
     gadgets.util.registerOnLoadHandler(getData);
   </script>
-  ]]> 
-  </Content>
+  ]]>
+	</Content>
 </Module>

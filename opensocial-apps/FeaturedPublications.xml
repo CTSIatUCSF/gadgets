@@ -48,8 +48,9 @@
 				if(pmid) {
 					html +=	' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>';
 				}		
-				html += '</div>'+
+				html += 
 						'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
+						'</div>'+
 						'<div class="clear"/>'+
 					'</li>'
 	      			      		 
@@ -63,6 +64,7 @@
 	    	.pubs-gadget a:hover {color: #005580; text-decoration: underline;}
 	    	.pubs-gadget ul {padding: 0px 0px 0px 30px;list-style-type: square;}
 	    	.pubs-gadget .pub-title {line-height: 20px;}
+	    	.sel-pubs .pm-link {line-height: 20px;};
 	    	.pubs-gadget .label {font-weight: bold;line-height: 20px;} 		    
 	    </style>
 	]]>
@@ -116,7 +118,7 @@
 						saveFeaturedPubs();						
 					});
 					$(".remove-pub").live("click", function() {
-						var featuredPub = $(this).parent().parent();
+						var featuredPub = $(this).parent().parent().parent();
 						var url = featuredPub.data("url");
 						var pub = findPublication(url);
 						if(pub) {
@@ -169,8 +171,8 @@
 							var title = pubRdf.results[0].informationResourceReference;
 							var label = pubRdf.results[0].label;
 							var repl = '<span class="label">' + label + '</span>';
-							title = title.replace(label.replace(/\./g, "\."), repl);
-							var pmid = pubRdf.results[0].pmid;
+							title = title.replace(label.replace(/\./g, ""), repl);
+							var pmid = pubRdf.results[0].pmid; 
 							var html = '<div class="pub" '+ isVisible+'><input type="checkbox" ';
 							if(pmid) {
 								html += ' data-pmid="' + pmid + '" ';
@@ -246,9 +248,8 @@
 	    	.result .pub input {margin-left: -20px;}
 	    	.sel-pubs .pub {border: 1px dotted white; margin-top: 10px;}
 	    	.sel-pubs .pub:hover {border: 1px dotted gray; cursor: pointer;}
-	    	.sel-pubs .pm-link {};
-	    	.inline {float: left;width: 570px;margin-top: -17px;}
-	    	.fright {float:right;margin-top: -17px;}
+	    	.inline {width: 570px; position: relative;}
+	    	.fright {position: absolute;top: 0px;right: -75px;}
 	    </style>
 	    
 		<div class="pubs-gadget">

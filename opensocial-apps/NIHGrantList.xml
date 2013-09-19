@@ -144,7 +144,6 @@
 			<div>
 		</div>]]></Content>
     <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
-	    <script type="text/javascript" src="js/UCSF.js" ></script>
     	<script type="text/javascript">
 			$(document).ready(function () {
 				$(".nih-grants-home a").click(function(){
@@ -157,9 +156,6 @@
 	    	.nih-grants-home {padding: 15px;}
 	    </style>
 	    
-		<!-- HideShow -->
-		<div id="hideshow"></div>
-		<!-- HideShow end -->
 		<div class="nih-grants-home">   
 			This gadget retrieves NIH-funded grants for display on your profile. If you have questions about this information please 
 			<a href="mailto:profiles@ucsf.edu?subject=UCSF Profiles NIH Grants Awarded Information Request" >contact us.</a>    		    	

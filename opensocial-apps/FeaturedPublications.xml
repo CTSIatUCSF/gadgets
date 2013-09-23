@@ -62,7 +62,6 @@
 	    <style type="text/css">
 	    	.pubs-gadget a, .pubs-gadget a:visited {color: #0088CC;text-decoration: none;}		    
 	    	.pubs-gadget a:hover {color: #005580; text-decoration: underline;}
-	    	.pubs-gadget ul {padding: 0px 0px 0px 30px;list-style-type: square;}
 	    	.pubs-gadget .pub-title {line-height: 20px;}
 	    	.sel-pubs .pm-link {line-height: 20px;};
 	    	.pubs-gadget .label {font-weight: bold;line-height: 20px;} 		    
@@ -90,6 +89,7 @@
 	    	.pubs-gadget .sel-pubs {overflow-y: auto; margin-top: 10px;}
 	    	.fright {display:none;}
 	    	.pubs-gadget .pub {margin: 5px 5px 10px 5px;}	    	
+	    	.pubs-gadget ul {padding: 0px 0px 0px 30px;list-style-type: square;}
 	    </style>
 			
 		<div class="pubs-gadget">
@@ -246,10 +246,11 @@
 	    	.result {overflow-y: auto; margin-top: 10px;}
 	    	.result .pub {width: 650px;word-break: break-word;padding-left: 20px; }
 	    	.result .pub input {margin-left: -20px;}
-	    	.sel-pubs .pub {border: 1px dotted white; margin-top: 10px;}
+	    	.sel-pubs .pub {border: 1px dotted white; margin-top: 10px;margin-left: 10px;}
 	    	.sel-pubs .pub:hover {border: 1px dotted gray; cursor: pointer;}
-	    	.inline {width: 570px; position: relative;}
+	    	.inline {width: 570px; position: relative;background: url(images/draggable.png) no-repeat 0 0;background-position: 0% 50%;padding-left: 20px;}
 	    	.fright {position: absolute;top: 0px;right: -75px;}
+	    	.pubs-gadget ul {padding: 0px;list-style-type: none;}
 	    </style>
 	    
 		<div class="pubs-gadget">

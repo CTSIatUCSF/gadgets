@@ -9,6 +9,7 @@
         <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="osapi" />
+        <Require feature="rdf" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
@@ -33,7 +34,7 @@
     		gadgets.pubsub.publish("analytics", message);
 		}
 	</script>]]></Content>
-    <Content type="html" view="profile" preferred_height="200"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_height="200" preferred_width="670"><![CDATA[<!--HTML-->	
 	    <style type="text/css">
 	    	.nih-grants-profile {font-family: arial, helvetica, verdana, sans-serif; font-size: 12px;}
 	    	.nih-grants-profile .title {padding: 5px 5px 10px 5px;}
@@ -67,11 +68,11 @@
 			});		
 			
 			function updateOwnerDisplayName() {
-				osapi.people.getOwner().execute(function(result) {
+				osapi.rdf.getOwner().execute(function(result) {
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
 					} else {															
-						$(".user-name").html(result.displayName);
+						$(".user-name").html( jsonldHelper.getItem(result).fullName);
 					}				
 				});
 			}
@@ -143,7 +144,7 @@
 			</table>			
 			<div>
 		</div>]]></Content>
-    <Content type="html" view="home" preferred_height="200"><![CDATA[<!--HTML-->	
+    <Content type="html" view="home" preferred_height="200" preferred_width="700"><![CDATA[<!--HTML-->	
     	<script type="text/javascript">
 			$(document).ready(function () {
 				$(".nih-grants-home a").click(function(){

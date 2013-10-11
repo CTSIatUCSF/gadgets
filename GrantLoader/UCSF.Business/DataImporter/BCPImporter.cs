@@ -30,7 +30,7 @@ namespace UCSF.Business.DataImporter
                  string database = GetConnectionSetting("Initial Catalog", connectionString);
 
                  //bcp UCSF.dbo.GrantData in RePORTER_PRJ_C_FY2012_033.csv -f rawdata.xml -E -T -S .\sqlexpress
-                 string output = RunBCP(String.Format("{0}.[UCSF].agGrantData in {1} -f rawdata.xml -m 1000 -T -S {2}", database, file, serverName));
+                 string output = RunBCP(String.Format("{0}.[ORNG.UCSF].agGrantData in {1} -f rawdata.xml -m 1000 -T -S {2}", database, file, serverName));
                  log.Info(output);
              }
 

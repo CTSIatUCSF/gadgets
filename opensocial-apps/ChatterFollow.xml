@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="Follow on UCSF Chatter" author="Eric Meeks" height="100" width="190"
+	<ModulePrefs title="Follow on UCSF Chatter" author="Eric Meeks" height="80" width="190"
 		author_email="alexnv@sbcglobal.net">
 		<Require feature="opensocial-0.9" />
 		<Require feature="pubsub" />
@@ -11,6 +11,7 @@
         <![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="js/os.js" ></script>
 	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="js/environment.js"></script>

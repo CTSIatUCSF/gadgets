@@ -256,7 +256,7 @@
 		<div class="pubs-gadget">
 			<h3 class="header1">Manage Publications to Feature on Your Profile</h3>
 			<div class="desc">Select publications from your profile to showcase in this area.</div>
-			<h4 class="header2">Publications Currently featured:</h4>
+			<h4 class="header2">Publications Currently Featured:</h4>
 			<div class="desc">Drag and drop the featured publications to re-order them. They will show on your UCSF Profiles page in this same order.</div>
 			<ul class="sel-pubs"></ul>
 			<h4 class="header2">Make Changes:</h4>

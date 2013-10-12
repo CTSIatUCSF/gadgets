@@ -1,4 +1,4 @@
-/****** Object:  Table [ORNG.UCSF].[ChatterActivity]    Script Date: 11/09/2012 11:10:31 ******/
+/****** Object:  Table [ORNG.Chatter].[ChatterActivity]    Script Date: 11/09/2012 11:10:31 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -8,7 +8,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [ORNG.UCSF].[ChatterActivity](
+CREATE TABLE [ORNG.Chatter].[ChatterActivity](
 	[activityLogId] [int] NOT NULL,
 	[externalMessage] [bit] NOT NULL,
 	[employeeId] [nvarchar](50) NULL,
@@ -26,17 +26,17 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [ORNG.UCSF].[ChatterActivity]  WITH CHECK ADD  CONSTRAINT [FK_ChatterActivity_ActivityLog] FOREIGN KEY([activityLogId])
+ALTER TABLE [ORNG.Chatter].[ChatterActivity]  WITH CHECK ADD  CONSTRAINT [FK_ChatterActivity_ActivityLog] FOREIGN KEY([activityLogId])
 REFERENCES [UCSF.].[ActivityLog] ([activityLogId])
 GO
 
-ALTER TABLE [ORNG.UCSF].[ChatterActivity] CHECK CONSTRAINT [FK_ChatterActivity_ActivityLog]
+ALTER TABLE [ORNG.Chatter].[ChatterActivity] CHECK CONSTRAINT [FK_ChatterActivity_ActivityLog]
 GO
 
-ALTER TABLE [ORNG.UCSF].[ChatterActivity] ADD  CONSTRAINT [DF_chatterActivity_createdDT]  DEFAULT (getdate()) FOR [createdDT]
+ALTER TABLE [ORNG.Chatter].[ChatterActivity] ADD  CONSTRAINT [DF_chatterActivity_createdDT]  DEFAULT (getdate()) FOR [createdDT]
 GO
 
-CREATE PROCEDURE [ORNG.UCSF].[ActivityLogToChatterActivity] @activityLogId int
+CREATE PROCEDURE [ORNG.Chatter].[ActivityLogToChatterActivity] @activityLogId int
 AS   
 /* Get the range of level for this job type from the jobs table. */
 DECLARE 
@@ -93,19 +93,19 @@ ELSE IF (@methodName = 'ProfilesGetNewHRAndPubs.AddedToProfiles')
 -- if we have @title, then insert
 IF (@title is not NULL)
 	-- for now just set the body to be the same as the title !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	INSERT [ORNG.UCSF].[ChatterActivity] (activityLogId, externalMessage, employeeId, url, title, body)
+	INSERT [ORNG.Chatter].[ChatterActivity] (activityLogId, externalMessage, employeeId, url, title, body)
 		VALUES (@activityLogId, @externalMessage, @employeeId, @url, @title, @body)
 
 -- uncomment to help debut
 --select @activityLogId, @methodName, @title, @privacyCode, @externalMessage, @employeeId, @url, @param1, @param2;
 GO
 
-CREATE TRIGGER [ORNG.UCSF].[addChatterActivity]
+CREATE TRIGGER [ORNG.Chatter].[addChatterActivity]
 ON [UCSF.].[ActivityLog]
 AFTER INSERT
 AS
 DECLARE 
    @activityLogId int
 SELECT @activityLogId = i.activityLogId FROM inserted i 
-EXEC [ORNG.UCSF].[ActivityLogToChatterActivity] @activityLogId
+EXEC [ORNG.Chatter].[ActivityLogToChatterActivity] @activityLogId
 GO

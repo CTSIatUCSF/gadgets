@@ -107,7 +107,7 @@ namespace UCSF.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.UCSF].agGrant")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.Grant].agGrant")]
 	public partial class Grant : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -869,7 +869,7 @@ namespace UCSF.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.UCSF].agPrincipalInvestigator")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.Grant].agPrincipalInvestigator")]
 	public partial class PrincipalInvestigator : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1031,7 +1031,7 @@ namespace UCSF.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.UCSF].agGrantFile")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.Grant].agGrantFile")]
 	public partial class GrantFile : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1141,7 +1141,7 @@ namespace UCSF.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.UCSF].agGrantPrincipal")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="[ORNG.Grant].agGrantPrincipal")]
 	public partial class GrantPrincipal : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		

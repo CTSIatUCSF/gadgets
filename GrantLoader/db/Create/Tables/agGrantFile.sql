@@ -1,6 +1,6 @@
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[UCSF].[agGrantFile]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ORNG.Grant].[agGrantFile]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [UCSF].[agGrantFile](
+CREATE TABLE [ORNG.Grant].[agGrantFile](
 	[FilePK] [uniqueidentifier] NOT NULL,
 	[FileName] [varchar](255) NOT NULL,
 	[Processed] [bit] NOT NULL,

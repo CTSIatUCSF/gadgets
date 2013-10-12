@@ -1,6 +1,6 @@
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[UCSF].[agGrant]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ORNG.Grant].[agGrant]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [UCSF].[agGrant](
+CREATE TABLE [ORNG.Grant].[agGrant](
 	[GrantPK] [uniqueidentifier] NOT NULL,
 	[ApplicationId] [int] NOT NULL,
 	[Activity] [varchar](50) NOT NULL,
@@ -40,8 +40,8 @@ GO
 
 
 /****** Object:  Index [IX_Grant]    Script Date: 05/04/2012 18:27:38 ******/
-IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[UCSF].[agGrant]') AND name = N'IX_Grant')
-CREATE NONCLUSTERED INDEX [IX_Grant] ON [UCSF].[agGrant] 
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[ORNG.Grant].[agGrant]') AND name = N'IX_Grant')
+CREATE NONCLUSTERED INDEX [IX_Grant] ON [ORNG.Grant].[agGrant] 
 (
 	[ApplicationId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]

@@ -15,7 +15,8 @@ div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h
 	font-family: arial, helvetica, verdana, sans-serif; 
 	font-size:13px; line-height:1.1em; 
 	text-indent:0px;
-	border-radius:5px;}
+	/* border-radius:5px; */
+}
 
 h1 { font-size:1.2em; margin-top:1em; padding:.3em; padding-left:0em; color:#CA7C29;}
 h2 { font-size:1.0em; margin-top:0.9em; padding:.3em; padding-left:0em; color:#222;}
@@ -37,6 +38,7 @@ h4 + span { font-size:.9em; font-style:italic; color:#444; }
 div { display:block; }
 span { display:inline; }
 img { display:inline-block; }
+
 
 label { font-size:.8em; font-weight:normal; display:inline-block; }
 label + input { margin-left:1em; margin-right:1em;}

@@ -35,7 +35,7 @@ WITH PERMISSION_SET = UNSAFE
 GO
 
 
-CREATE PROCEDURE [UCSF].[CreateChatterActivity]
+CREATE PROCEDURE [ORNG.Chatter].[CreateChatterActivity]
 @url nvarchar(500),
 @userName nvarchar(50),
 @password nvarchar(50),
@@ -50,6 +50,6 @@ AS EXTERNAL NAME ChatterSoapService.[ChatterService.ChatterSqlProcedures].Create
 GO
 
 
-drop PROCEDURE [UCSF].CreateChatterActivity
+drop PROCEDURE [ORNG.Chatter].CreateChatterActivity
 drop ASSEMBLY [ChatterSoapService.XmlSerializers]
 drop ASSEMBLY ChatterSoapService

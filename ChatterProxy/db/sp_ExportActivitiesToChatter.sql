@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[UCSF.].[ExportActivitiesToChatter]') AND type in (N'P', N'PC')) BEGIN
-	DROP PROCEDURE [UCSF.].[ExportActivitiesToChatter]
+	DROP PROCEDURE [ORNG.Chatter].[ExportActivitiesToChatter]
 END
 GO
 
@@ -15,7 +15,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [UCSF].[ExportActivitiesToChatter] 
+CREATE PROCEDURE [ORNG.Chatter].[ExportActivitiesToChatter] 
 	@url nvarchar(256),
 	@username nvarchar(50),
 	@password nvarchar(50),
@@ -41,7 +41,7 @@ BEGIN
 	
 	DECLARE activityCursor CURSOR FAST_FORWARD FOR 
 	SELECT TOP 100 activityLogId, createdDT, externalMessage, employeeId, url, title, body, chatterAttempts
-	FROM [UCSF].[ChatterActivity] 
+	FROM [ORNG.Chatter].[ChatterActivity] 
 	WHERE chatterFlag is null
 	ORDER BY activityLogId
 
@@ -55,8 +55,8 @@ BEGIN
 		BEGIN TRY
 			set @attempts = ISNULL(@attempts, 0) + 1
 			
-			exec [UCSF].[CreateChatterActivity] @url, @username, @password, @token, @createdDT, @externalMessage, @employeeId, @actUrl, @actTitle, @actBody
-			UPDATE [UCSF].[ChatterActivity] SET chatterFlag = 'S', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
+			exec [ORNG.Chatter].[CreateChatterActivity] @url, @username, @password, @token, @createdDT, @externalMessage, @employeeId, @actUrl, @actTitle, @actBody
+			UPDATE [ORNG.Chatter].[ChatterActivity] SET chatterFlag = 'S', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
 		END TRY
 		BEGIN CATCH
 			set @errorCount = @errorCount + 1
@@ -64,10 +64,10 @@ BEGIN
 			RAISERROR (@errorMsg, 10, 1)
 			
 			IF @attempts > 0 BEGIN
-				UPDATE [UCSF].[ChatterActivity] SET chatterFlag = 'F', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
+				UPDATE [ORNG.Chatter].[ChatterActivity] SET chatterFlag = 'F', chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
 			END	
 			ELSE BEGIN
-				UPDATE [UCSF].[ChatterActivity] SET chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
+				UPDATE [ORNG.Chatter].[ChatterActivity] SET chatterAttempts = @attempts, updatedDT = GETDATE() WHERE activityLogId = @activityLogId
 			END
 						 
 			IF @errorCount > 100 BEGIN

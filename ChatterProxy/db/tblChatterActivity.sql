@@ -1,4 +1,4 @@
-/****** Object:  Table [UCSF].[ChatterActivity]    Script Date: 11/09/2012 11:10:31 ******/
+/****** Object:  Table [ORNG.Chatter].[ChatterActivity]    Script Date: 11/09/2012 11:10:31 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -8,7 +8,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [UCSF].[ChatterActivity](
+CREATE TABLE [ORNG.Chatter].[ChatterActivity](
 	[activityLogId] [int] NOT NULL,
 	[externalMessage] [bit] NOT NULL,
 	[employeeId] [nvarchar](50) NULL,
@@ -26,17 +26,17 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [UCSF].[ChatterActivity]  WITH CHECK ADD  CONSTRAINT [FK_ChatterActivity_ActivityLog] FOREIGN KEY([activityLogId])
-REFERENCES [UCSF].[ActivityLog] ([activityLogId])
+ALTER TABLE [ORNG.Chatter].[ChatterActivity]  WITH CHECK ADD  CONSTRAINT [FK_ChatterActivity_ActivityLog] FOREIGN KEY([activityLogId])
+REFERENCES [UCSF.].[ActivityLog] ([activityLogId])
 GO
 
-ALTER TABLE [UCSF].[ChatterActivity] CHECK CONSTRAINT [FK_ChatterActivity_ActivityLog]
+ALTER TABLE [ORNG.Chatter].[ChatterActivity] CHECK CONSTRAINT [FK_ChatterActivity_ActivityLog]
 GO
 
-ALTER TABLE [UCSF].[ChatterActivity] ADD  CONSTRAINT [DF_chatterActivity_createdDT]  DEFAULT (getdate()) FOR [createdDT]
+ALTER TABLE [ORNG.Chatter].[ChatterActivity] ADD  CONSTRAINT [DF_chatterActivity_createdDT]  DEFAULT (getdate()) FOR [createdDT]
 GO
 
-CREATE PROCEDURE [UCSF].[ActivityLogToChatterActivity] @activityLogId int
+CREATE PROCEDURE [ORNG.Chatter].[ActivityLogToChatterActivity] @activityLogId int
 AS   
 /* Get the range of level for this job type from the jobs table. */
 DECLARE 
@@ -52,7 +52,7 @@ DECLARE
    @journalTitle varchar(1000)
 SELECT @privacyCode = i.privacyCode, @employeeId = ISNULL(p.InternalUserName, ip.internalusername),
 	@methodName = i.methodName, @param1 = i.param1, @param2 = i.param2, @externalMessage = 0
-FROM [UCSF].[ActivityLog] i LEFT OUTER JOIN [Profile.Data].[Person] p ON i.personId = p.personID 
+FROM [UCSF.].[ActivityLog] i LEFT OUTER JOIN [Profile.Data].[Person] p ON i.personId = p.personID 
 LEFT OUTER JOIN [Profile.Import].[Person] ip on i.personId = UCSF.fnGeneratePersonID(ip.internalusername) WHERE i.activityLogId = @activityLogId
 -- if we have a PMID, go ahead and grab that info
 IF (@param1 = 'PMID')
@@ -66,22 +66,22 @@ BEGIN
 		SELECT @title = 'added a PubMed publication', @body = 'added a publication from: ' + @journalTitle
 	ELSE IF (@methodName = 'Profiles.Edit.Utilities.DataIO.AddCustomPublication')
 		SELECT @title = 'added a custom publication', @body = 'added "'  + @param1 + '" to their ' + cp._propertyLabel + ' section : ' + @param2
-			FROM [UCSF].[ActivityLog] al JOIN
+			FROM [UCSF.].[ActivityLog] al JOIN
 			[Ontology.].[ClassProperty] cp ON cp.Property = al.property 		
 			WHERE al.activityLogId = @activityLogId AND al.property IS NOT NULL
 	ELSE IF (@methodName = 'Profiles.Edit.Utilities.DataIO.UpdateSecuritySetting')
 		SELECT @title = 'made a section visible', @body = 'made "'  + cp._propertyLabel + '" visible'
-			FROM [UCSF].[ActivityLog] al JOIN
+			FROM [UCSF.].[ActivityLog] al JOIN
 			[Ontology.].[ClassProperty] cp ON cp.Property = al.property 		
 			WHERE al.activityLogId = @activityLogId AND al.property IS NOT NULL
 	ELSE IF (@methodName like 'Profiles.Edit.Utilities.DataIO.Add%')
 		SELECT @title = 'added an item', @body = 'added '  + isnull('"' + @param1 + '"', 'an item') + ' to their ' + cp._propertyLabel + ' section'
-			FROM [UCSF].[ActivityLog] al JOIN
+			FROM [UCSF.].[ActivityLog] al JOIN
 			[Ontology.].[ClassProperty] cp ON cp.Property = al.property 		
 			WHERE al.activityLogId = @activityLogId AND al.property IS NOT NULL
 	ELSE IF (@methodName like 'Profiles.Edit.Utilities.DataIO.Update%')
 		SELECT @title = 'updated an item', @body = 'updated "' + cp._propertyLabel + '"'
-			FROM [UCSF].[ActivityLog] al JOIN
+			FROM [UCSF.].[ActivityLog] al JOIN
 			[Ontology.].[ClassProperty] cp ON cp.Property = al.property 		
 			WHERE al.activityLogId = @activityLogId AND al.property IS NOT NULL
 END
@@ -93,19 +93,19 @@ ELSE IF (@methodName = 'ProfilesGetNewHRAndPubs.AddedToProfiles')
 -- if we have @title, then insert
 IF (@title is not NULL)
 	-- for now just set the body to be the same as the title !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	INSERT [UCSF].[ChatterActivity] (activityLogId, externalMessage, employeeId, url, title, body)
+	INSERT [ORNG.Chatter].[ChatterActivity] (activityLogId, externalMessage, employeeId, url, title, body)
 		VALUES (@activityLogId, @externalMessage, @employeeId, @url, @title, @body)
 
 -- uncomment to help debut
 --select @activityLogId, @methodName, @title, @privacyCode, @externalMessage, @employeeId, @url, @param1, @param2;
 GO
 
-CREATE TRIGGER [UCSF].[addChatterActivity]
-ON [UCSF].[ActivityLog]
+CREATE TRIGGER [ORNG.Chatter].[addChatterActivity]
+ON [UCSF.].[ActivityLog]
 AFTER INSERT
 AS
 DECLARE 
    @activityLogId int
 SELECT @activityLogId = i.activityLogId FROM inserted i 
-EXEC [UCSF].[ActivityLogToChatterActivity] @activityLogId
+EXEC [ORNG.Chatter].[ActivityLogToChatterActivity] @activityLogId
 GO

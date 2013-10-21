@@ -143,11 +143,11 @@
 			    		var pubs = ownerRdf.results[0].authorInAuthorship;
 			    		if($.isArray(pubs)) {
 				    		for(var i=0;i<pubs.length;i++) {
-				    			loadPub(pubs[i]);
+				    			loadPub(pubs[i], pubs.length);
 				   	    	}
 			    		}
 			    		else if(pubs){
-			    			loadPub(pubs);
+			    			loadPub(pubs, 1);
 			    		}
 			    		else {
 							$(".pubs-gadget").unblock();
@@ -157,7 +157,7 @@
    	    		});	    		
 	   	    	
 	      	}
-	      	function loadPub(refUrl) {
+	      	function loadPub(refUrl, pub_count) {
 			    var options = {};
 	            options.output = 'full';
 				osapi.rdf.getRDF(refUrl, options).execute(function(refRdf) {
@@ -168,12 +168,14 @@
 							isVisible = 'style="display:none"';
 						}
 						osapi.rdf.getRDF(pubUrl, options).execute(function(pubRdf) {
+							var dt = pubRdf.results[0].publicationDate;
+							var pd = new Date(dt);
 							var title = pubRdf.results[0].informationResourceReference;
 							var label = pubRdf.results[0].label;
 							var repl = '<span class="label">' + label + '</span>';
 							title = title.replace(label.replace(/\./g, ""), repl);
 							var pmid = pubRdf.results[0].pmid; 
-							var html = '<div class="pub" '+ isVisible+'><input type="checkbox" ';
+							var html = '<div class="pub" '+ isVisible+' data-pd="' + dt + '"><input type="checkbox" ';
 							if(pmid) {
 								html += ' data-pmid="' + pmid + '" ';
 							}
@@ -181,7 +183,12 @@
 							html += '></input><span class="title">' + title + '</span></div>';
 							$('.result').append(html);
 							adjustHeight();
-							$(".pubs-gadget").unblock();
+							if($('.result .pub').length == pub_count) {
+								$('.result .pub').sort(function(a, b) {
+									return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+								}).appendTo('.result');
+								$(".pubs-gadget").unblock();
+							}
 		   	    		});	    		
 					}
    	    		});

@@ -268,13 +268,14 @@
 	    	.youtube-gadget h3, .youtube-gadget h4	{padding-left:10px; padding-top: 0px;}
 	    	.youtube-gadget .descr{padding:5px 0px 0px 25px;}    	    		
 	    	.youtube-gadget .question{padding:0px 0px 5px 12px;}
-	    	.youtube-gadget .warn{color:red;}    	    		
+	    	.youtube-gadget .warn{color:red;} 
+                .videos td { vertical-align: top; }   	    		
 	    </style>
 	    
 		<div class="youtube-gadget">
 			<h3>Manage Links to Videos</h3>
 			<div class="descr">
-	    		Add video links that will show in your profile. Videos must be hosted on YouTube or UCTV. Enter the video name, as you want it to appear on your profile, and its URL. Some examples might be a lecture or an interview with the media.
+	    		Add video links to your profile. Videos must be hosted on YouTube or UCTV. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
 			</div>
 			<div class="question" style="padding:0px 0px 5px 12px;">
 				<table cellpadding="0" cellspacing="0">

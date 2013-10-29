@@ -38,13 +38,14 @@
 	    <style type="text/css">
 	    	.nih-grants-profile {font-family: arial, helvetica, verdana, sans-serif; font-size: 12px;}
 	    	.nih-grants-profile .title {padding: 5px 5px 10px 5px;}
-	    	.nih-grants-profile .content {height:155px;overflow-y: auto; padding: 0px 0px 0px 0px; border-radius: 0px;line-height:1em;}
+	    	.nih-grants-profile .content {height:160px;overflow-y: auto; padding: 0; border-radius: 0px;line-height:1em;}
 	    	.nih-grants-profile table {border-collapse:collapse;width: 100%; margin-bottom: 0px;}
-	    	.nih-grants-profile td, .nih-grants-profile th {text-align: left; padding:2px;}
-	    	.nih-grants-profile th {font-size: 13px; font-weight: bold; text-align: left;}
+	    	.nih-grants-profile td, .nih-grants-profile th {text-align: left; padding:2px 4px; vertical-align: top;}
+	    	.nih-grants-profile th {font-size: 13px; font-weight: bold; text-align: left;background-color: #F0F0F0;}
 	    	.nih-grants-profile td.fy {width: 70px; padding-right: 10px;}
 	    	.nih-grants-profile td.pn {width: 140px;}
-	    	.nih-grants-profile a {font-size: 12px;}
+	    	.nih-grants-profile a {text-decoration: none; color: #0088CC;}
+	    	.nih-grants-profile a:hover {color: #005580;}
 	    	.nih-grants-profile .help  {padding-top: 5px; float: right;cursor:pointer;}
 	    	.nih-grants-profile .info {padding: 5px 5px 10px 5px;font-size: 10px;line-height: 11px;}
 	    	.nih-grants-profile .info a {font-size: 10px;}
@@ -121,8 +122,8 @@
 	    	function buildGrantHtml(grant) {
 	    		var url = 'http://projectreporter.nih.gov/project_info_description.cfm?aid=' + grant.aid;
 	    		var title = grant.t;
-	    		if(title.length > 40) {
-	    			title = title.substring(0, 40) + "...";
+	    		if(title.length > 99) {
+	    			title = title.substring(0, 99) + "...";
 	    		}
 	    		return '<tr><td><a target="_blank" href="' + url + '">' + title+'</a></td><td class="pn">' + grant.fpn + '</td><td  class="fy">' + grant.fy +'</td></tr>'
 	    	}

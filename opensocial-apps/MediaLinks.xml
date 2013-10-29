@@ -33,7 +33,7 @@
 		span.link_date {margin-left:10px;font-size: 12px;white-space:nowrap;} 
     	a, a:visited { color: #0088CC; text-decoration: none; }
     	a:hover { color: #005580; text-decoration: underline; }
-    	td{word-break: break-all;}
+    	#edit_mlinks_table td{ max-width: 300px; vertical-align: top;}
     	#view_mlinks_table {overflow-y:auto;}
     	.placeholder {color: gray;} 
     </style>

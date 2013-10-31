@@ -23,22 +23,37 @@
     
 	    <script type="text/javascript">
  	    	function loadFeaturedPubs(callback) {
-				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs']})
-			    	.execute(function(response){
-			    		var viewer = os.osapi.getViewerFromResult(response);
-			    		var pubs = gadgets.json.parse(viewer.featured_pubs) || [];
-		    			for(var i=0;i<pubs.length;i++) {
-		    				if(pubs[i].title) {
-								renderFeaturedPub(pubs[i].url, pubs[i].title, pubs[i].pmid);
-		    				}
-		    			}
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs_count']}).execute(function(response){
+		    		var viewer = os.osapi.getViewerFromResult(response);
+		    		var count = viewer.featured_pubs_count;
+		    		if(count > 0) {
+						var fields=[];
+						for(var i=0;i<count;i++) {
+							fields.push('featured_pub_' + i);
+						}
+						osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': fields})
+					    	.execute(function(pub_response){
+					    		var pub_viewer = os.osapi.getViewerFromResult(pub_response);
+				    			for(var i=0;i<count;i++) {
+						    		var pub = gadgets.json.parse(pub_viewer['featured_pub_' + i]) || {};
+				    				if(pub.title) {
+										renderFeaturedPub(pub.id, pub.title, pub.pmid);
+				    				}
+				    			}
+				    			if(callback) {
+				    				callback();
+				    			}			    		
+					    	}); 	    	
+		    		}
+		    		else {
 		    			if(callback) {
 		    				callback();
 		    			}			    		
-			    	}); 	    	
+		    		}
+		    	}); 	    	
  	    	};
-	      	function renderFeaturedPub(url, title, pmid) {
-	      		var html = '<li class="pub" data-url="'+url + '"';
+	      	function renderFeaturedPub(id, title, pmid) {
+	      		var html = '<li class="pub" data-id="'+id + '"';
 				if(pmid) {
 					html += ' data-pmid="'+pmid+ '" ';
 				}
@@ -108,10 +123,10 @@
 					$(".pubs-gadget #save-selected").click(function() {
 						$(".pub input:checked").each(function() {
 							$(this).parent().hide();
-							var url = $(this).data("url");
+							var id = $(this).data("id");
 							var title = $(".title",$(this).parent()).html();
 							var pmid = $(this).data("pmid");
-							renderFeaturedPub(url, title, pmid);
+							renderFeaturedPub(id, title, pmid);
 						});
 						$(".pub input:checked").removeAttr("checked");
 						adjustHeight();
@@ -119,8 +134,8 @@
 					});
 					$(".remove-pub").live("click", function() {
 						var featuredPub = $(this).parent().parent().parent();
-						var url = featuredPub.data("url");
-						var pub = findPublication(url);
+						var id = featuredPub.data("id");
+						var pub = findPublication(id);
 						if(pub) {
 							$(pub).show();
 						}  
@@ -137,68 +152,53 @@
 					adjustHeight();
             	});        
 	   	    	loadFeaturedPubs(function() {
-				    var options = {};
-		            options.output = 'full';
+				    var options = {output:'full'};
 			    	osapi.rdf.getOwner(options).execute(function(ownerRdf) {
-					var owner = jsonldHelper.getItem(ownerRdf);
+						var owner = jsonldHelper.getItem(ownerRdf);
 			    		var pubs = owner.authorInAuthorship;
 			    		if($.isArray(pubs)) {
 				    		for(var i=0;i<pubs.length;i++) {
-				    			loadPub(ownerRdf.base + pubs[i]['@id'], pubs.length);
+				    			loadPub(pubs[i].linkedInformationResource);
 				   	    	}
 			    		}
 			    		else if(pubs){
-			    			loadPub(ownerRdf.base + pubs['@id'], 1);
+			    			loadPub(pubs.linkedInformationResource);
 			    		}
-			    		else {
-							$(".pubs-gadget").unblock();
-			    		}		    		
+			    		
+						$('.result .pub').sort(function(a, b) {
+							return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+						}).appendTo('.result');
+						$(".pubs-gadget").unblock();
+	   	    			adjustHeight();
 		   	    	});
-   	    			adjustHeight();
    	    		});	    		
 	   	    	
 	      	}
-	      	function loadPub(refUrl, pub_count) {
-				osapi.rdf.getRDF(refUrl).execute(function(refRdf) {
-					var ref = jsonldHelper.getItem(refRdf);
-					if (ref) {
-						var pubUrl = refRdf.base + ref.linkedInformationResource;
-						var isVisible = "";
-						if(isFeaturedPublication(pubUrl)) {
-							isVisible = 'style="display:none"';
-						}
-						var options = {};
-						options.output = 'full';
-						osapi.rdf.getRDF(pubUrl).execute(function(pubRdf) {
-							var pub = jsonldHelper.getItem(pubRdf);
-							var title = pub.informationResourceReference;
-							var label = pub.label;
-							var repl = '<span class="label">' + label + '</span>';
-							title = title.replace(label.replace(/\./g, ""), repl);
-							var pmid = pub.pmid; 
-							var html = '<div class="pub" '+ isVisible+'><input type="checkbox" ';
-							if(pmid) {
-								html += ' data-pmid="' + pmid + '" ';
-							}
-							html += ' data-url="' + pubUrl + '" ';
-							html += '></input><span class="title">' + title + '</span></div>';
-							$('.result').append(html);
-							adjustHeight();
-							if($('.result .pub').length == pub_count) {
-								$('.result .pub').sort(function(a, b) {
-									return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
-								}).appendTo('.result');
-							$(".pubs-gadget").unblock();
-							}
-		   	    		});	    		
-					}
-   	    		});
-	      	};
-	      	 
-	      	function isFeaturedPublication(url) {
+	      	function loadPub(pub) {
+	      		var id = pub['@id'];
+				var isVisible = "";
+				if(isFeaturedPublication(id)) {
+					isVisible = 'style="display:none"';
+				}
+	      	
+				var title = pub.informationResourceReference;
+				var label = pub.label;
+				var pd = pub.publicationDate;
+				var repl = '<span class="label">' + label + '</span>';
+				title = title.replace(label.replace(/\./g, ""), repl);
+				var pmid = pub.pmid; 
+				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';
+				if(pmid) {
+					html += ' data-pmid="' + pmid + '" ';
+				}
+				html += ' data-id="' + id + '" ';
+				html += '></input><span class="title">' + title + '</span></div>';
+				$('.result').append(html);
+	      	}	      	 
+	      	function isFeaturedPublication(id) {
 	      		var result = false;
 	      		$(".sel-pubs .pub").each(function(index, value) {
-	      			if($(value).data('url') == url) {
+	      			if($(value).data('id') == id) {
 	      				result = true;
 	      				return false;
 	      			}
@@ -206,10 +206,10 @@
 	      		return result;
 	      	}; 	    		    		
 
-	      	function findPublication(url) {
+	      	function findPublication(id) {
 	      		var result = false;
 	      		$(".result .pub input").each(function(index, value) {
-	      			if($(value).data('url') == url) {
+	      			if($(value).data('id') == id) {
 	      				result = $(value).parent();
 	      				return false;
 	      			}
@@ -218,18 +218,22 @@
 	      	}; 	    		    		
 	      	
 	      	function saveFeaturedPubs() {
-	      		var pubs = [];
+	      		var data = {featured_pubs_count:"0"};
+	      		var count = 0;
 	      		$(".sel-pubs .pub").each(function(index, elem) {
 	      			var pub = {};
 	      			var pmid = $(elem).data("pmid");
 	      			if(pmid) {
 		      			pub.pmid = pmid;
 	      			}
-	      			pub.url = $(elem).data("url");
+	      			pub.id = $(elem).data("id");
 	      			pub.title = $(".pub-title", elem).html();
-	      			pubs.push(pub);
+	      			
+	      			data["featured_pub_" + count] = JSON.stringify(pub);
+	      			count++;
 	      		}); 
-    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'featured_pubs': JSON.stringify(pubs)} }).execute(function(response){
+      			data.featured_pubs_count="" + count;
+    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':data}).execute(function(response){
     			});		        						
 	      	}
 	      	

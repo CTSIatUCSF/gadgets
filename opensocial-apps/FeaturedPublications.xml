@@ -175,6 +175,9 @@
 	   	    	
 	      	}
 	      	function loadPub(pub) {
+				// check if this is an object first!
+				if (pub == null || typeof pub != 'object')
+					return;
 	      		var id = pub['@id'];
 				var isVisible = "";
 				if(isFeaturedPublication(id)) {

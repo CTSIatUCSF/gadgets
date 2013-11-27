@@ -364,7 +364,7 @@
 	     				}
 						document.getElementById("canvas_full_list_textarea").value += peopleData[k].fullName + ";";
 						document.getElementById("canvas_full_list_textarea").value += peopleData[k].preferredTitle + ";";
-						document.getElementById("canvas_full_list_textarea").value += (peopleData[k].email ? peopleData[k].email : "") + ";";              
+						document.getElementById("canvas_full_list_textarea").value += (peopleData[k].email ? peopleData[k].email : "") + ";\n";              
 					}
 		 	    	document.getElementById("progress").style.display="none";
 				}

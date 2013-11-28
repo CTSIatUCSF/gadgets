@@ -83,7 +83,7 @@
 			if (result.error) { 
 				alert("Error " + result.error.code + " updating application data: " + result.error.message);
 			} else {
-				document.getElementById("actions").style.display="none";
+				$("#actions").hide();
 				showToolState();
 			}
 		});
@@ -103,7 +103,7 @@
 				document.getElementById("button_and_help").style.display = "none";
 				document.getElementById("no_button_and_help").style.display = "block";
 				// display the action item table and update it
-				document.getElementById("actions").style.display="block";
+				$("#actions").show();
 				document.getElementById("add_profiles").innerHTML = "Assessing results...";
 				document.getElementById("list_profiles").innerHTML = "Loading profiles...";
 				readData(function(){gadgets.pubsub.subscribe("JSONPersonIds", readPubSubIDsAndUpdateActions)});
@@ -112,7 +112,7 @@
 			else {
 				document.getElementById("button_and_help").style.display = "block";
 				document.getElementById("no_button_and_help").style.display = "none";
-				document.getElementById("actions").style.display="none";
+				$("#actions").hide();
 				gadgets.window.adjustHeight(30);	
 			}
 				
@@ -328,25 +328,21 @@
       
 		// load in groups of ten
 		var batchSize = 10;
-		var batchCount = 0;
-		var peopleData = [];
+		var batchCount = Math.floor(g_arrOldIDs.length/10) + 1;
 		for (i = 0; i < g_arrOldIDs.length; i += batchSize) {
-			batchCount++;
 			var ids = '';
 			for (j = 0; j < batchSize && i+j < g_arrOldIDs.length; j++) {
 			     ids += (j > 0 ? ',' : '') + g_arrOldIDs[i + j];             
 			}
 			osapi.rdf.getRDF(ids).execute(function(data) {
 				var people = data.list;
-				for (j = 0; j < people.length; j++) {
-					// put data we care about in peopleData with simple index
+				if(!people) {
+					people = [data];
+				}
+				for (var j = 0; j < people.length; j++) {
 					var base = people[j].base;
 					people[j] = jsonldHelper.getItem(people[j]);
-					peopleData[i+j] = {};
-					peopleData[i+j].fullName = people[j].fullName;
-					peopleData[i+j].preferredTitle = people[j].preferredTitle;
-					peopleData[i+j].email = people[j].email;
-			     
+					
 					// put in div now so people can see progress
 					var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + people[j].fullName + "</td>";
 					table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[j].preferredTitle + "</td>";
@@ -357,15 +353,26 @@
 				// see if we are done and if so turn off progress bar and
 				// add to export lists 
 				if (--batchCount == 0) {
-					for (k in peopleData) {
-					    // add to the export areas
-						if (peopleData[i].email) {
-					        document.getElementById("canvas_email_list_textarea").value += peopleData[k].email + ";";
-	     				}
-						document.getElementById("canvas_full_list_textarea").value += peopleData[k].fullName + ";";
-						document.getElementById("canvas_full_list_textarea").value += peopleData[k].preferredTitle + ";";
-						document.getElementById("canvas_full_list_textarea").value += (peopleData[k].email ? peopleData[k].email : "") + ";\n";              
-					}
+					var full_list = "";
+					var email_list = "";
+					$("#canvas_profile_list tr").each(function(index, tr){
+						if(!$(tr).attr("id")) {
+							return true;
+						}
+						var row = "";
+						$("td", tr).each(function(fld_index, td){
+							var txt = $(td).text(); 
+							row += txt + ";";
+							if(fld_index == 2 && txt != "") {
+								email_list += txt + "\n";
+							}
+						});
+						full_list += row + "\n";
+						
+					});
+					document.getElementById("canvas_full_list_textarea").value = full_list;
+					document.getElementById("canvas_email_list_textarea").value = email_list;
+					
 		 	    	document.getElementById("progress").style.display="none";
 				}
 			});
@@ -376,27 +383,26 @@
 		
 	function copyEmailDivToClipboard() {
 		
-		document.getElementById("canvas_email_list").style.display = "block";
-		document.getElementById("canvas_email_list_text").style.display = "block";
-		document.getElementById("canvas_full_list").style.display = "none";
-		document.getElementById("canvas_full_list_text").style.display = "none";
-		document.getElementById("canvas_profile_list").style.display = "none";	
-		toggleToolState("Off");
+		$("#canvas_email_list").show();
+		$("#canvas_email_list_text").show();
+		$("#canvas_full_list").hide();
+		$("#canvas_full_list_text").hide();
+		$("#canvas_profile_list").hide();	
+		//toggleToolState("Off");
 	}
 	// ==============================================================		
 		
 	function copyFullDivToClipboard() {
-		
-		document.getElementById("canvas_full_list").style.display = "block";
-		document.getElementById("canvas_full_list_text").style.display = "block";
-		document.getElementById("canvas_email_list").style.display = "none";
-		document.getElementById("canvas_email_list_text").style.display = "none";
-		document.getElementById("canvas_profile_list").style.display = "none";
-		toggleToolState("Off");
+		$("#canvas_full_list").show();
+		$("#canvas_full_list_text").show();
+		$("#canvas_email_list").hide();
+		$("#canvas_email_list_text").hide();
+		$("#canvas_profile_list").hide();
+		//toggleToolState("Off");
 	}	
 	// ==============================================================			
-	
-	var chatterProxyURL = ENV_LOCAL_URL + "/chatter/ChatterProxyService.svc"; 
+	var root = (typeof ENV_LOCAL_URL === 'undefined')? "": ENV_LOCAL_URL;
+	var chatterProxyURL = root + "/chatter/ChatterProxyService.svc"; 
 
         function getNodeIdFromURI(uri) {
            if (typeof uri === 'string') { 

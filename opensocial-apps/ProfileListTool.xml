@@ -8,7 +8,7 @@
         <Require feature="osapi" />
         <Require feature="rdf" />
     </ModulePrefs>
-    <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, canvas, small"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
 	<!-- #includes -->

@@ -11,7 +11,7 @@
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
 
-	<Content type="html" view="home, profile">
+	<Content type="html" view="default, home, profile">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -233,7 +233,7 @@
 	<!-- ==================== END COMBINED VIEWS ==================== -->
 
 	<!-- ==================== START HOME/EDIT VIEW ==================== -->
-	<Content type="html" view="default, home" preferred_height="300" preferred_width="700">
+	<Content type="html" view="home" preferred_height="300" preferred_width="700">
 	<![CDATA[<!--HTML-->
     	
     <h3 style="padding-left:10px; padding-top: 0px;">Manage Links to Other Websites</h3>
@@ -268,7 +268,9 @@
     <div id="edit_links_table" style="padding:0px 0px 10px 25px;"></div>
             
     <script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));
+    	gadgets.util.registerOnLoadHandler(function() {
+			readData(displayData)
+		});
     </script>
             
     ]]></Content>
@@ -276,13 +278,15 @@
 
 
 	<!-- ==================== START PROFILE VIEW ==================== -->
-	<Content type="html" view="default, profile" preferred_height="100" preferred_width="670">
+	<Content type="html" view="profile" preferred_height="100" preferred_width="670">
 	<![CDATA[<!--HTML-->
    
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>     
    
 	<script type="text/javascript">
-    	gadgets.util.registerOnLoadHandler(readData(function(){displayData()}));
+    	gadgets.util.registerOnLoadHandler(function() {
+			readData(displayData)
+		});
     </script>
     
     ]]></Content>

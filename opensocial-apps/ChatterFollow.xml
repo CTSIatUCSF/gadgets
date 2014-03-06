@@ -2,8 +2,6 @@
 <Module>
 	<ModulePrefs title="Follow on UCSF Chatter" author="Eric Meeks" height="80" width="190"
 		author_email="alexnv@sbcglobal.net">
-		<Require feature="opensocial-0.9" />
-		<Require feature="pubsub" />
 		<Require feature="osapi" />
     <Require feature="rdf" />
   </ModulePrefs>

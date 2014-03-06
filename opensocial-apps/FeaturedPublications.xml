@@ -52,6 +52,7 @@
 		    		}
 		    	}); 	    	
  	    	};
+ 	    	
 	      	function renderFeaturedPub(id, title, pmid) {
 	      		var html = '<li class="pub" data-id="'+id + '"';
 				if(pmid) {
@@ -171,9 +172,9 @@
 						$(".pubs-gadget").unblock();
 	   	    			adjustHeight();
 		   	    	});
-   	    		});	    		
-	   	    	
+   	    		});	    			   	    	
 	      	}
+	      	
 	      	function loadPub(pub) {
 				// check if this is an object first!
 				if (pub == null || typeof pub != 'object')

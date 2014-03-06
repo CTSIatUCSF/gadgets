@@ -2,10 +2,9 @@
 <Module>
 	<ModulePrefs title="Websites"
 				 description="Websites">
-		<Require feature="opensocial-0.9" />
+        <Require feature="pubsub-2" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub" />
 		<Require feature="osapi" />
 	</ModulePrefs>
 
@@ -162,10 +161,11 @@
                 			// put appdata table markup in designated div
 					document.getElementById("view_links_table").innerHTML=links_table_data;
 					if (g_oLinks.length > 0) {
-						gadgets.window.adjustHeight( 12 + ((g_oLinks.length - 1) * 30) + 34 );					
+						//gadgets.window.adjustHeight( 12 + ((g_oLinks.length - 1) * 30) + 34 );
+						gadgets.window.adjustHeight();					
 					}
 					else {
-						gadgets.pubsub.publish("hide");
+						//gadgets.Hub.publish("hide");
 					}
 				}
 			} /* end if link data exists */
@@ -223,7 +223,7 @@
 		if (label) {message.label = label;}
 		if (value) {message.value = value;}
 		
-		gadgets.pubsub.publish("analytics", message);
+		gadgets.Hub.publish("analytics", message);
 	}	
 	// ==============================================================
         		
@@ -278,7 +278,7 @@
 
 
 	<!-- ==================== START PROFILE VIEW ==================== -->
-	<Content type="html" view="profile" preferred_height="100" preferred_width="670">
+	<Content type="html" view="profile" preferred_height="100" preferred_width="670" scrolling="false">
 	<![CDATA[<!--HTML-->
    
     <div id="view_links_table" style="padding:0px 0px 10px 20px;"></div>     

@@ -2,9 +2,7 @@
 <Module>
 	<ModulePrefs title="Global Health Experience"
 				 description="Global Health Experience">
-		<Require feature="opensocial-0.9" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub" />
 		<Require feature="views" />
 		<Require feature="osapi" />
 	</ModulePrefs>

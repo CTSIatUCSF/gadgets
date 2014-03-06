@@ -2,10 +2,9 @@
 <Module>
 	<ModulePrefs title="Faculty Mentoring"
 				 description="Faculty Mentoring details">
-		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub" />
+		<Require feature="pubsub-2" />
 		<Require feature="osapi" />
 	</ModulePrefs>
 
@@ -68,7 +67,7 @@
 			if (label) {message.label = label;}
 			if (value) {message.value = value;}
 		
-			gadgets.pubsub.publish("analytics", message);
+			gadgets.Hub.publish("analytics", message);
 		}	
 		// ==============================================================		
     

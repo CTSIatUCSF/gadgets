@@ -4,13 +4,11 @@
             title="Live Updates"
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.net">
-        <Require feature="opensocial-0.9" />
         <Require feature="dynamic-height" />
         <Require feature="views" />
-        <Require feature="pubsub" />
         <Require feature="osapi"/>
     </ModulePrefs>
-    <Content type="html" view="small, canvas, profile, default"><![CDATA[<!--HTML-->
+    <Content type="html" view="small, canvas, profile, default" scrolling="false"><![CDATA[<!--HTML-->
 	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="js/environment.js"></script>
     
@@ -115,7 +113,7 @@
     			   '</div>';
 		}
 	</script>]]></Content>
-    <Content type="html" view="small" preferred_height="350" preferred_width="160"><![CDATA[<!--HTML-->
+    <Content type="html" view="small" preferred_height="350" preferred_width="160" scrolling="false"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     
 	<script type="text/javascript">	
@@ -261,7 +259,7 @@
     	</div>
     </div>]]></Content>
     
-    <Content type="html" view="canvas, profile" preferred_height="520" preferred_width="590"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas, profile" preferred_height="520" preferred_width="590" scrolling="false"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <style type="text/css">        
     	div.act-left-view,
@@ -377,7 +375,7 @@
 	    </div>		
 	]]></Content>
 				
-    <Content type="html" view="profile, home" preferred_height="450"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile, home" preferred_height="450" scrolling="false"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    function getViewMode(callback) {
 		    	var userId = '@owner';
@@ -399,7 +397,7 @@
 		</script>
 	]]></Content>
     
-    <Content type="html" view="profile" preferred_height="450"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile" preferred_height="450" scrolling="false"><![CDATA[<!--HTML-->
 		<script type="text/javascript">
 		    var activities;
 			gadgets.util.registerOnLoadHandler(function(){
@@ -417,7 +415,7 @@
 	    </div>		
 	]]></Content>
 		
-    <Content type="html" view="home" preferred_height="120" preferred_width="700"><![CDATA[
+    <Content type="html" view="home" preferred_height="120" preferred_width="700" scrolling="false"><![CDATA[
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
 	    <script type="text/javascript" src="js/os.js" ></script>

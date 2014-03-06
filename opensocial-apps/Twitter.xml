@@ -5,8 +5,7 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="Twitter">
-        <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
+        <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="dynamic-height" />
@@ -27,7 +26,7 @@
 	    		var message = {'action' : action};
 	    		if (label) {message.label = label;}
 	    		if (value) {message.value = value;}
-	    		gadgets.pubsub.publish("analytics", message);
+	    		gadgets.Hub.publish("analytics", message);
 			};
 			
 			ucsf.twitter.getUsername=function(callback) {

@@ -5,8 +5,7 @@
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
             description="Featured Presentations">
-        <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
+        <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="flash" />
         <!-- Require feature="dynamic-height" / -->
@@ -41,7 +40,7 @@
 	    function gotoSlideshare() {    		
 	        var action = 'go_to_slideshare';
 	        var href = $('div.ss-link a').attr('href');
-    		gadgets.pubsub.subscribe("analytics", function(sender, message){
+    		gadgets.Hub.subscribe("analytics", function(sender, message){
     			if(message.action = action) {
     				window.top.location.href = href;
     			}
@@ -53,7 +52,7 @@
     		var message = {'action' : action};
     		if (label) {message.label = label;}
     		if (value) {message.value = value;}
-    		gadgets.pubsub.publish("analytics", message);
+    		gadgets.Hub.publish("analytics", message);
 		}
 	    
 	    // ========================================

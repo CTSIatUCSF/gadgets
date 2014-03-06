@@ -5,8 +5,7 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="NIH Grants Awarded">
-        <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
+        <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="rdf" />
@@ -31,7 +30,7 @@
     		var message = {'action' : action};
     		if (label) {message.label = label;}
     		if (value) {message.value = value;}
-    		gadgets.pubsub.publish("analytics", message);
+    		gadgets.Hub.publish("analytics", message);
 		}
 	</script>]]></Content>
     <Content type="html" view="profile" preferred_height="200" preferred_width="670"><![CDATA[<!--HTML-->	

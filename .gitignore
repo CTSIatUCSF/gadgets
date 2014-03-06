@@ -31,3 +31,5 @@ UpgradeLog.xml
 .metadata/
 opensocial-apps/target
 *.Publish.xml
+web.config
+.project

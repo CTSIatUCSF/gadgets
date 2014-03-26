@@ -501,9 +501,10 @@
         <div style="width:640px;">
                 <p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">
                 Selected Profiles<p>
-                <p id="canvas_help" style="padding-left:20px"></p>
+                <p id="canvas_help" style="padding-left:20px">Create a UCSF Chatter group or email list that includes the people below. 
+                							To manage your UCSF Chatter group after you create it, such as adding or removing members, go to UCSF Chatter directly.</p>
                 <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-                        <div id="extended_functions" style="display:none;">
+                        <div id="extended_functions" style="display:inline-block; padding:0 0 0 20px">
                                 <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
                                 <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -560,36 +561,10 @@
         
         <script type="text/javascript">
 
-	        function showToolVersion() {
-		         // fetch the extended state
-		         osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['extended', 'count']} )
-	                 .execute(function(result) {                        
-	                         if (os.osapi.getViewerFromResult(result).extended == "True") {
-		                         document.getElementById("extended_functions").style.display = "inline-block";
-		                         document.getElementById("extended_functions").style.padding = "0 0 0 20px";
-		                         document.getElementById("canvas_help").innerHTML =  
-		                                     'Create a UCSF Chatter group or email list that includes the people below. '
-		                                   + 'To manage your UCSF Chatter group after you create it, such as adding or ' 
-		                                   + 'removing members, go to UCSF Chatter directly.' ;
-	                         }
-	                         else {
-		                         // this is what people who have limited functionality (only chatter group) see
-	                             document.getElementById("basic_functions").style.display = "inline-block";
-	                             document.getElementById("basic_functions").style.padding = "0 0 0 20px";
-	                             document.getElementById("canvas_help").innerHTML =  
-	                                         'Create a UCSF Chatter group that includes the people below. '
-	                                       + 'To manage your group after you create it, such as adding or ' 
-	                                       + 'removing members, go to UCSF Chatter directly.' ;
-	                         }
-	                 });
-	        }
-	        // ==============================================================
-
             function init() {
             		// always show in canvas view
                     gadgets.orng.showGadget();                        
                     // update UI
-                    showToolVersion();
                     readIdsFromDB(displayProfileList);                
                     document.getElementById("canvas_profile_list").style.display="block";
                     

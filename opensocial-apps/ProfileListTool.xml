@@ -75,32 +75,12 @@
         }
         // ==============================================================
         
-        function getOwnerStats() {
-        	osapi.rdf.getOwner().execute(function(data) {
-        		if (data && !data.error) {
-        			var owner = jsonldHelper.getItem(data);
-        		} 
-        		if (owner) {
-        		 	var itemsToAdd = {};
-        		 	itemsToAdd.base = data.base;
-        		 	itemsToAdd.uri = data.uri;
-	             	gadgets.orng.showGadget();
-		            $("#actions").show();
-		            //document.getElementById("add_owner").innerHTML = '<a style='font-size:11px;" href="javascript:addOwner("' + gadgets.json.stringify(itemsToAdd) + '");">Add ' + owner[FOAF.firstName] + ' to list</a>';
-		            //document.getElementById("add_owner").innerHTML = '<a style='font-size:11px;" href="javascript:addOwner("' + gadgets.json.stringify(itemsToAdd) + '");">Add ' + owner[FOAF.firstName] + ' to list</a>';
-	                document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addOwner();'>Add " + owner[FOAF.firstName] + " to list</a>";
-        		}
-        	});
-        }
-        
         function newProfilesMetadataCallback(message) {
         	 // only make gadget visible if we have something to show
              if (message) {
              	gadgets.orng.showGadget();
              }
              else {
-             	// this needs to be made better!
-             	getOwnerStats();
              	return;	                        
 			 }             	
         	 var stats = gadgets.json.parse(message);
@@ -133,71 +113,7 @@
             	gadgets.orng.getPeopleList( newProfilesCallback(existingIds));
             });
         }
-        
-        function addOwner() {
-      		showWaiting(true);
-        	osapi.rdf.getOwner().execute(function(data) {
-        		var owner = jsonldHelper.getItem(data); 
-            	var personIds = {};
-            	personIds[data.base] = [];
-       			// just add the owner
-       			personIds[data.base][0] = owner['@id'];
-       			
-	            readIdsFromDB(function(existingIds) {
-	            	var callback = newProfilesCallback(existingIds);
-	            	var message = {};
-	            	message.personIds = personIds;
-	            	callback( gadgets.json.stringify(message) );
-	            });
-        	});
-        }
-
-        function addOwnerItems(itemsToAddStr) {
-      		showWaiting(true);
-
-      		var itemsToAdd = gadgets.json.parse(itemsToAddStr);
-           	var personIds = {};
-           	personIds[itemsToAdd.base] = [];
-
-      		if (itemsToAdd.property) {
-	      		osapi.rdf.getProperties(itemsToAdd.uri, itemsToAdd.property).execute(function(data) {
-	        		var owner = jsonldHelper.getItem(data); 
-	            	var personIds = {};
-	            	personIds[data.base] = [];
-	        		if (!itemsToAdd) {
-	        			// just add the owner
-	        			personIds[data.base][0] = owner['@id'];
-	        		}
-	        		else {
-			            if (owner[itemsToAdd] instanceof Array) {
-			            	for (var i = 0; i <  owner[itemsToAdd].length; i++) {
-			            		personIds[data.base][i] = owner[itemsToAdd][i]['@id'];
-			            	}
-			            }
-			            else {
-							personIds[data.base][0] = owner[itemsToAdd]['@id'];
-						}		            
-	        		}
-		            readIdsFromDB(function(existingIds) {
-		            	var callback = newProfilesCallback(existingIds);
-		            	var message = {};
-		            	message.personIds = personIds;
-		            	callback( gadgets.json.stringify(message) );
-		            });
-	        	});
-      		}
-      		else {
-       			// just add the owner
-       			personIds[itemsToAdd.base][0] = itemsToAdd.uri.substring(itemsToAdd.base.length);
-	            readIdsFromDB(function(existingIds) {
-	            	var callback = newProfilesCallback(existingIds);
-	            	var message = {};
-	            	message.personIds = personIds;
-	            	callback( gadgets.json.stringify(message) );
-	            });
-      		}
-        }
-        
+                
         function newProfilesCallback(existingIds) {
         	return function(message) {
 		        // extract the array of incoming person IDs

@@ -5,6 +5,8 @@
         <Require feature="pubsub-2" />
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />
+		<Require feature="orng" />
+		<Require feature="start-hidden" />
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
@@ -56,31 +58,34 @@
 		function displayData(collaboratorsStr) {
 			var collaborators = gadgets.json.parse(collaboratorsStr.data);				
 			// if links data exists
-			if (collaborators) {
+			if (collaborators && collaborators.length) {
+				// need to tell container that it is OK to show us
+				gadgets.orng.showGadget();
 									
 				var list_data = "<ul>";
-                   
-				for (i in collaborators) {
-					var person = collaborators[i];
-					list_data += "<li>";
-					var imageURL = ENV_PROFILES_URL + "/Profile/Images/default_img.png";//person.thumbnailURL || person.imageURL;
-					if (imageURL) {
-						list_data += "<img src='" + imageURL + "' width='20'>&nbsp;";
-					} 
-					list_data += "<a href='" + person.URL + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', " + person.URL + ")\"> " + person.firstName + " " + person.lastName + "</a>";
-					list_data += "</li>";
+				
+                var includedURLs = [];
+					for (i in collaborators) {
+						var person = collaborators[i];
+						if (includedURLs .indexOf(person.URL) == -1) {
+						includedURLs.push(person.URL);
+						list_data += "<li>";
+						var imageURL = person.thumbnailURL || person.imageURL || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+						if (imageURL) {
+							list_data += "<img src='" + imageURL + "' width='20'>&nbsp;";
+						} 
+						list_data += "<a href='" + person.URL + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
+							person.URL + "')\"> " + person.firstName + " " + person.lastName + "</a>";
+						list_data += "</li>";
+					}
 				}                    
        			// close the table
        			list_data += "</ul>";
                   
           		// put appdata table markup in designated div
 				document.getElementById("collaborators_list").innerHTML=list_data;
-				if (collaborators.length > 0) {
-					gadgets.window.adjustHeight();					
-				}
-				else {
-					//gadgets.Hub.publish("hide");
-				}
+
+				gadgets.window.adjustHeight();					
 			}
 		}
 		// ========================================
@@ -94,6 +99,11 @@
 		}	
 	
 	   	gadgets.util.registerOnLoadHandler(function() {
+	   		gadgets.rpc.register("remote_alert", function(msg, auth_key) {
+            	if (auth_key == auth) {
+                	alert(msg);
+            	}
+        	});
 			readData(displayData)
 		});
     </script>

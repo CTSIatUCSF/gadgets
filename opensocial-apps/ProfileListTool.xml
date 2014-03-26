@@ -6,13 +6,15 @@
         <Require feature="osapi" />
         <Require feature="orng" />
         <Require feature="rdf" />
+		<Require feature="start-hidden" />
     </ModulePrefs>
     <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
         <!-- #includes -->
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" src="js/ontology.js" ></script>
         <script type="text/javascript" src="js/jquery-1.4.4.js"></script>
         <script type="text/javascript" src="js/environment.js"></script>
                 
@@ -73,7 +75,34 @@
         }
         // ==============================================================
         
-        function getNewProfilesStats(message) {
+        function getOwnerStats() {
+        	osapi.rdf.getOwner().execute(function(data) {
+        		if (data && !data.error) {
+        			var owner = jsonldHelper.getItem(data);
+        		} 
+        		if (owner) {
+        		 	var itemsToAdd = {};
+        		 	itemsToAdd.base = data.base;
+        		 	itemsToAdd.uri = data.uri;
+	             	gadgets.orng.showGadget();
+		            $("#actions").show();
+		            //document.getElementById("add_owner").innerHTML = '<a style='font-size:11px;" href="javascript:addOwner("' + gadgets.json.stringify(itemsToAdd) + '");">Add ' + owner[FOAF.firstName] + ' to list</a>';
+		            //document.getElementById("add_owner").innerHTML = '<a style='font-size:11px;" href="javascript:addOwner("' + gadgets.json.stringify(itemsToAdd) + '");">Add ' + owner[FOAF.firstName] + ' to list</a>';
+	                document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addOwner();'>Add " + owner[FOAF.firstName] + " to list</a>";
+        		}
+        	});
+        }
+        
+        function newProfilesMetadataCallback(message) {
+        	 // only make gadget visible if we have something to show
+             if (message) {
+             	gadgets.orng.showGadget();
+             }
+             else {
+             	// this needs to be made better!
+             	getOwnerStats();
+             	return;	                        
+			 }             	
         	 var stats = gadgets.json.parse(message);
              // display the action item table and update it
              $("#actions").show();
@@ -85,15 +114,91 @@
         	 }
         }
         
+        function showWaiting(waiting) {
+        	if (waiting) {
+				$("#actions").hide();
+				$("#waiting").show();
+        	}
+        	else {
+        		$("#actions").show();
+				$("#waiting").hide();
+        	}
+		}        	
+        
         function addNewProfiles() {
-             document.getElementById("add_profiles").innerHTML = "Adding profiles...";		                    
-             document.getElementById("list_profiles").innerHTML = "Merging into list...";		                    
-             readIdsFromDB(function(existingIds) {
-             	gadgets.orng.getCurrentPageItems( getNewIdsCallback(existingIds));
-             });
+      		showWaiting(true);
+            //document.getElementById("add_profiles").innerHTML = "Adding profiles...";		                    
+            //document.getElementById("list_profiles").innerHTML = "Merging into list...";		                    
+            readIdsFromDB(function(existingIds) {
+            	gadgets.orng.getPeopleList( newProfilesCallback(existingIds));
+            });
         }
         
-        function getNewIdsCallback(existingIds) {
+        function addOwner() {
+      		showWaiting(true);
+        	osapi.rdf.getOwner().execute(function(data) {
+        		var owner = jsonldHelper.getItem(data); 
+            	var personIds = {};
+            	personIds[data.base] = [];
+       			// just add the owner
+       			personIds[data.base][0] = owner['@id'];
+       			
+	            readIdsFromDB(function(existingIds) {
+	            	var callback = newProfilesCallback(existingIds);
+	            	var message = {};
+	            	message.personIds = personIds;
+	            	callback( gadgets.json.stringify(message) );
+	            });
+        	});
+        }
+
+        function addOwnerItems(itemsToAddStr) {
+      		showWaiting(true);
+
+      		var itemsToAdd = gadgets.json.parse(itemsToAddStr);
+           	var personIds = {};
+           	personIds[itemsToAdd.base] = [];
+
+      		if (itemsToAdd.property) {
+	      		osapi.rdf.getProperties(itemsToAdd.uri, itemsToAdd.property).execute(function(data) {
+	        		var owner = jsonldHelper.getItem(data); 
+	            	var personIds = {};
+	            	personIds[data.base] = [];
+	        		if (!itemsToAdd) {
+	        			// just add the owner
+	        			personIds[data.base][0] = owner['@id'];
+	        		}
+	        		else {
+			            if (owner[itemsToAdd] instanceof Array) {
+			            	for (var i = 0; i <  owner[itemsToAdd].length; i++) {
+			            		personIds[data.base][i] = owner[itemsToAdd][i]['@id'];
+			            	}
+			            }
+			            else {
+							personIds[data.base][0] = owner[itemsToAdd]['@id'];
+						}		            
+	        		}
+		            readIdsFromDB(function(existingIds) {
+		            	var callback = newProfilesCallback(existingIds);
+		            	var message = {};
+		            	message.personIds = personIds;
+		            	callback( gadgets.json.stringify(message) );
+		            });
+	        	});
+      		}
+      		else {
+       			// just add the owner
+       			personIds[itemsToAdd.base][0] = itemsToAdd.uri.substring(itemsToAdd.base.length);
+	            readIdsFromDB(function(existingIds) {
+	            	var callback = newProfilesCallback(existingIds);
+	            	var message = {};
+	            	message.personIds = personIds;
+	            	callback( gadgets.json.stringify(message) );
+	            });
+      		}
+        }
+        
+        function newProfilesCallback(existingIds) {
         	return function(message) {
 		        // extract the array of incoming person IDs
 		        var newIds =  gadgets.json.parse(message).personIds;
@@ -120,7 +225,8 @@
 				}
 		        else {
 		            document.getElementById("add_profiles").innerHTML = "No new Profiles";
-		        }		                
+		        }	
+		        showWaiting(false);	                
         	};
         }
         // ==============================================================
@@ -136,55 +242,12 @@
                         
         function showCurrentListSize(count) {
         	if (count > 0) {
-        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>" + count + " Profiles in list</a>";
+        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to " + count + " Profiles in list</a>";
         	}
         	else {
         		document.getElementById("list_profiles").innerHTML = "List is currently empty";
         	}		                            		
         }
-
-        function showToolVersion(canvasMode) {
-	        osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['count']}).execute(function(result) {	                        
-			 	// a map of {baseURI1 : ["string", "string"], baseURI2 : ["string", "string"]}
-	        	var count = os.osapi.getViewerFromResult(result).count || 0;
-//	        	callback(count);
-	        });
-                
-                // fetch the extended state
-                osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['extended', 'count']} )
-                        .execute(function(result) {                        
-                                if (os.osapi.getViewerFromResult(result).extended == "True") {
-                                        if (canvasMode) {
-                                                document.getElementById("extended_functions").style.display = "inline-block";
-                                                document.getElementById("extended_functions").style.padding = "0 0 0 20px";
-                                                document.getElementById("canvas_help").innerHTML =  
-                                                            'Create a UCSF Chatter group or email list that includes the people below. '
-                                                          + 'To manage your UCSF Chatter group after you create it, such as adding or ' 
-                                                          + 'removing members, go to UCSF Chatter directly.' ;
-
-                                        }                                                
-                                }
-                                else {
-                                        // this is what people who have limited functionality (only chatter group) see
-                                        if (canvasMode) {
-                                                document.getElementById("basic_functions").style.display = "inline-block";
-                                                document.getElementById("basic_functions").style.padding = "0 0 0 20px";
-                                                document.getElementById("canvas_help").innerHTML =  
-                                                            'Create a UCSF Chatter group that includes the people below. '
-                                                          + 'To manage your group after you create it, such as adding or ' 
-                                                          + 'removing members, go to UCSF Chatter directly.' ;
-                                        }                                                
-                                }
-                                // if we are not in canvas mode, show the On/Off state correctly
-                                if (!canvasMode) {   
-                                	readCountFromDB( function(count) {
-                                		showCurrentListSize(count);
-                                	});                             	
-                                	gadgets.orng.getCurrentPageItemsMetadata(getNewProfilesStats);
-                                }        
-                        });
-        }
-        // ==============================================================
 
         function toURIList(existingIds) {
         	var uriList = [];
@@ -246,11 +309,9 @@
 
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);
-// put these as individual fields in an ontology.js file
-// pass in as options to getRdf call        	
-var fullName = 'http://profiles.catalyst.harvard.edu/ontology/prns#fullName';
-var preferredTitle = 'http://vivoweb.org/ontology/core#preferredTitle';
-var email = 'http://vivoweb.org/ontology/core#email';          
+  
+				var properties = [PRNS.fullName, VIVO.preferredTitle, VIVO.email];
+				     
                 var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
                 
                 // build the table header row
@@ -281,21 +342,16 @@ var email = 'http://vivoweb.org/ontology/core#email';
                         for (j = 0; j < batchSize && i+j < uris.length; j++) {
                              ids += (j > 0 ? ',' : '') + uris[i + j];             
                         }
-                        osapi.rdf.getRDF(ids).execute(function(data) {
-                                var people = data.list;
-                                if(!people) {
-                                        people = [data];
-                                }
-                                for (var j = 0; j < people.length; j++) {
-                                        var base = people[j].base;
-                                        people[j] = jsonldHelper.getItem(people[j]);
-                                        
+                        osapi.rdf.getProperties(ids, properties).execute(function(data) {
+                        		// this allows us to handle the single or multiple case, sort of ugly
+                        		var people = getPeopleFromData(data);
+                                for (var id in people) {
                                         // put in div now so people can see progress
-                                        var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + people[j][fullName] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[j][preferredTitle] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (people[j][email] ? people[j][email] : "") + "</td>";
+                                        var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + people[id]["prns:fullName"] + "</td>";
+                                        table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[id]["vivo:preferredTitle"] + "</td>";
+                                        table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (people[id]["vivo:email"] ? people[id]["vivo:email"] : "") + "</td>";
                              
-                                        document.getElementById(base + people[j]['@id']).innerHTML = table_row;
+                                        document.getElementById(id).innerHTML = table_row;
                                 }
                                 // see if we are done and if so turn off progress bar and
                                 // add to export lists 
@@ -327,6 +383,19 @@ var email = 'http://vivoweb.org/ontology/core#email';
         } /* end displayProfileList */
         
         // ==============================================================                
+        
+        function getPeopleFromData(data) {
+        	var people = {};
+        	if (data.list) {
+	        	for (var i = 0; i < data.list.length; i++) {
+	        		people[data.list[i].uri] = data.list[i].jsonld;
+	        	}
+        	}
+        	else {
+        		people[data.uri] = data.jsonld;
+        	}
+       		return people;
+        }
                 
         function copyEmailDivToClipboard() {
                 
@@ -451,20 +520,27 @@ var email = 'http://vivoweb.org/ontology/core#email';
                         <td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
                 </tr>
         </table>
+        
+        <img id="waiting" src="images/waiting.gif" style="display:none;">
         <table id="actions" style="display:none;clear:right;" cellspacing="2" cellpadding="0">
                 <tr>
-                        <td class="tool_table_cell_small">&nbsp;1.&nbsp;</td>
+						<td class="tool_table_cell_small">&nbsp;1.&nbsp;</td>
                         <td class="tool_table_cell_small"><span id="add_profiles" onClick="gadgetEventTrack('add_profiles')"></span></td>
                 </tr>
                 <tr>
-                        <td class="tool_table_cell_small" valign="top" style="padding-top:4px">&nbsp;2.&nbsp;</td>
+						<td class="tool_table_cell_small">&nbsp;2.&nbsp;</td>
                         <td class="tool_table_cell_small" valign="top" style="padding-top:4px"><span id="list_profiles" onClick="gadgetEventTrack('list_profiles')">Loading...</span></td>
                 </tr>
         </table>
         
         <script type="text/javascript">
                 function init() {
-                        showToolVersion(false);
+                	// see what data we already have
+	               	readCountFromDB( function(count) {
+	               		showCurrentListSize(count);
+	               	});               
+	               	// look for data on the RPC channel, this will overwrite any owner data              	
+	               	gadgets.orng.getPeopleListMetadata(newProfilesMetadataCallback);
                 }        
                 
                 gadgets.util.registerOnLoadHandler(init);
@@ -567,61 +643,89 @@ var email = 'http://vivoweb.org/ontology/core#email';
         <div id="canvas_profile_list" style="display:none; margin-left:20px; height:463px; height:443px\9; width: 660px; overflow:auto;"></div>
         
         <script type="text/javascript">
-                function init() {
-                        // update UI
-                        showToolVersion(true);
-                        readIdsFromDB(displayProfileList);                
-                        document.getElementById("canvas_profile_list").style.display="block";
-                        
-                        $("a#create_group").click(function(event){
-                            event.preventDefault();
-                                $("div.message").addClass("hidden");        
-                                $("div#create_group").removeClass("hidden");
-                        }); 
-                        $("input#close").click(function(event){
-                                $("div#create_group").addClass("hidden");
-                        });
-                         
-                        $("input#create").click(function(event){
-                                $("div.message").addClass("hidden");        
-                                var name = $("div#create_group input#group_name").val();
-                                var description = $("div#create_group #group_description").val();
-                                if(name == null || name == '') {
-                                        showMessage("Please enter a group name.", true);
-                                }
-                                else {                                
-                                        osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
-                                                var users = getUserList();
-                                                createGroup(name, description, getNodeIdFromURI(result.id), users);
-                                        });                        
-                                }
-                        });
-                         
-                        $("#compose-email").click(function(event){
-                        var emails = [];
-                        var emailElem = $("td.email");
-                        if(emailElem.size() > 50) {
-                                if(!confirm("Only the first 50 email addresses can be used. If your list has more, please use the Export function and paste them into email. Do you want to proceed?")) {
-                                        event.preventDefault();
-                                        return false;
-                                }
-                        }        
-                        
-                                emailElem.each(function(index, elem) {
-                                        var email = $.trim($(elem).text());
-                                        if(email != '') {
-                                                emails.push(email);
-                                        }
-                                        if(emails.length >= 50) {
-                                                return false;
-                                        }
-                                });
-                                if(emails.length > 0) {
-                                        $(this).attr("href", "mailto:" + emails.join(';'));
-                                }
-                        });
-                }
+
+	        function showToolVersion() {
+		         // fetch the extended state
+		         osapi.appdata.get({'userId':'@viewer', 'appId':'@app', 'fields':['extended', 'count']} )
+	                 .execute(function(result) {                        
+	                         if (os.osapi.getViewerFromResult(result).extended == "True") {
+		                         document.getElementById("extended_functions").style.display = "inline-block";
+		                         document.getElementById("extended_functions").style.padding = "0 0 0 20px";
+		                         document.getElementById("canvas_help").innerHTML =  
+		                                     'Create a UCSF Chatter group or email list that includes the people below. '
+		                                   + 'To manage your UCSF Chatter group after you create it, such as adding or ' 
+		                                   + 'removing members, go to UCSF Chatter directly.' ;
+	                         }
+	                         else {
+		                         // this is what people who have limited functionality (only chatter group) see
+	                             document.getElementById("basic_functions").style.display = "inline-block";
+	                             document.getElementById("basic_functions").style.padding = "0 0 0 20px";
+	                             document.getElementById("canvas_help").innerHTML =  
+	                                         'Create a UCSF Chatter group that includes the people below. '
+	                                       + 'To manage your group after you create it, such as adding or ' 
+	                                       + 'removing members, go to UCSF Chatter directly.' ;
+	                         }
+	                 });
+	        }
+	        // ==============================================================
+
+            function init() {
+            		// always show in canvas view
+                    gadgets.orng.showGadget();                        
+                    // update UI
+                    showToolVersion();
+                    readIdsFromDB(displayProfileList);                
+                    document.getElementById("canvas_profile_list").style.display="block";
+                    
+                    $("a#create_group").click(function(event){
+                        event.preventDefault();
+                            $("div.message").addClass("hidden");        
+                            $("div#create_group").removeClass("hidden");
+                    }); 
+                    $("input#close").click(function(event){
+                            $("div#create_group").addClass("hidden");
+                    });
+                     
+                    $("input#create").click(function(event){
+                            $("div.message").addClass("hidden");        
+                            var name = $("div#create_group input#group_name").val();
+                            var description = $("div#create_group #group_description").val();
+                            if(name == null || name == '') {
+                                    showMessage("Please enter a group name.", true);
+                            }
+                            else {                                
+                                    osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
+                                            var users = getUserList();
+                                            createGroup(name, description, getNodeIdFromURI(result.id), users);
+                                    });                        
+                            }
+                    });
+                     
+                    $("#compose-email").click(function(event){
+                    var emails = [];
+                    var emailElem = $("td.email");
+                    if(emailElem.size() > 50) {
+                            if(!confirm("Only the first 50 email addresses can be used. If your list has more, please use the Export function and paste them into email. Do you want to proceed?")) {
+                                    event.preventDefault();
+                                    return false;
+                            }
+                    }        
+                    
+                            emailElem.each(function(index, elem) {
+                                    var email = $.trim($(elem).text());
+                                    if(email != '') {
+                                            emails.push(email);
+                                    }
+                                    if(emails.length >= 50) {
+                                            return false;
+                                    }
+                            });
+                            if(emails.length > 0) {
+                                    $(this).attr("href", "mailto:" + emails.join(';'));
+                            }
+                    });
+            }
                 
-                gadgets.util.registerOnLoadHandler(init);
+	        gadgets.util.registerOnLoadHandler(init);
         </script>]]></Content>
 </Module>

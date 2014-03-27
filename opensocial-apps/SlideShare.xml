@@ -11,14 +11,9 @@
         <!-- Require feature="dynamic-height" / -->
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="470" preferred_width="670"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home, profile" preferred_height="500" preferred_width="670"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     <base target="_blank"/>
-    
-    <!-- TODO: Fix height for OSDE. Should be removed --> 
-    <!--script type="text/javascript">
-    	gadgets.window.adjustHeight(700);
-    </script-->
     
     <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
@@ -75,27 +70,8 @@
     			
  			$('#preview').html(
 	 			'<div style="width:577px;margin:auto;">' +
-		    		'<object style="margin:0px" width="600" height="428" ' +
-		    			' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' +
-		    			' codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"' +
-		    			' id="slideshow"' +
-		    			'>' +
-		    		'<param name="movie" value="http://static.slidesharecdn.com/swf/multiwidget.swf"/>' +
-		    		'<param name="allowFullScreen" value="true"/>' +
-		    		'<param name="allowScriptAccess" value="always"/>' +
-		    		'<param name="flashVars" value="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"/>' +
-		    		'<embed src="http://static.slidesharecdn.com/swf/multiwidget.swf" ' +
-		    				' name="slideshow" ' +
-		    				' flashVars="feedurl=user/'+ username + '&widgettitle=Slides%20by%20'+ username +'"' + 
-		    				' type="application/x-shockwave-flash"' +
-		    				' pluginspage="http://www.adobe.com/go/getflashplayer"' + 
-		    				' allowscriptaccess="always"' + 
-		    				' allowfullscreen="true"' + 
-		    				' width="600" ' +
-		    				' height="428">' +
-		    				'</embed>' +
-		    		'</object>' +
-		    	'<div class="ss-link">Having trouble seeing this? <a href="http://www.slideshare.net/'+ username + '" target="_top">View at SlideShare</a><div/>' +
+	 				'<iframe src="http://www.slideshare.net/' + username + 
+	 				'/slideshelf" width="615px" height="470px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:none;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>' +
 		    	'</div>'
 	 		);   	
 	 		
@@ -148,7 +124,6 @@
     <br>
     <div id="preview">
     </div>
-    <br><br>
     ]]>
     </Content>
     <Content type="html" view="home" preferred_height="670" preferred_width="700"><![CDATA[<!--HTML-->	

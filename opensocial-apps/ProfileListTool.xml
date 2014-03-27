@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs title="Create a Group" author="Eric Meeks">
+    <ModulePrefs title="Create My List" author="Eric Meeks">
         <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="osapi" />
@@ -48,26 +48,10 @@
         
         function showHelp() {
         
-                var pop = window.open('Create a Group Help','','top=200,left=200,width=450,height=340,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
-                pop.document.title = "Create a Group Help";
+                var pop = window.open('Create My List Help','','top=200,left=200,width=450,height=120,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
+                pop.document.title = "Create My List Help";
                 pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-                pop.document.write("Create a list of profiles and start a UCSF Chatter group or email list from here. "
-                                + "Here's how:<br><ol>"
-                                + "<li>Click the 'Create Now!' button</li>"
-                                + "<li>Start compiling a list of profiles for your group. "
-                                + "You can add one profile at a time, add a set of search results, "
-                                + "or add a set of co-authors.</li>"
-                                + "<li>Review your list and create your group</li>"
-                                + "<li>Name your group and add a description</li></ol>"
-                                + "<strong>Tips:</strong><br><br>"
-                                + "You are automatically added to the UCSF Chatter group if you create it. "
-                                + "You don't need to add yourself to the list of group members. "
-                                + "This works best if your group is 25 people or less. "
-                                + "If you want to add or remove members after the group is created, "
-                                + "go to UCSF Chatter directly.<br><br>"
-                                + "To learn more about UCSF Chatter, go to "
-                                + "<a href='http://it.ucsf.edu/services/chatter' target='_blank'>"
-                                + "http://it.ucsf.edu/services/chatter</a>");
+                pop.document.write('First add all the profile pages that you’re interested in to your list. Then click “Go to My List” to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
                 pop.document.write("<br><br><center>" 
                         + "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
                         + "</center>");
@@ -158,7 +142,7 @@
                         
         function showCurrentListSize(count) {
         	if (count > 0) {
-        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to " + count + " Profiles in list</a>";
+        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to My List - " + count + " Profile(s)</a>";
         	}
         	else {
         		document.getElementById("list_profiles").innerHTML = "List is currently empty";
@@ -244,7 +228,8 @@
                         
                 // dispay the empty table in canvas view
                 document.getElementById("canvas_profile_list").innerHTML = strTable;
-                document.getElementById("number_selected").innerHTML = "Your list includes (" + uris.length + ")" + " selected profiles";
+		document.getElementById("gadgets-title").innerHTML = "My list of profile pages";
+                document.getElementById("number_selected").innerHTML = "Your have (" + uris.length + ")" + " profile pages in your list.";
 
                 // initialize the export divs
                 document.getElementById("canvas_email_list_textarea").value = "";
@@ -430,9 +415,9 @@
     <Content type="html" view="small" preferred_height="75" preferred_width="190"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
                 
-        <table id="button_and_help" cellspacing="6" cellpadding="5" style="display:block;">
+        <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>
-                        <td class="tool_table_cell_small" style="width:145px">Add profiles to your list</td>
+                        <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profile pages <br />for personal use.</td>
                         <td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
                 </tr>
         </table>
@@ -440,11 +425,9 @@
         <img id="waiting" src="images/waiting.gif" style="display:none;">
         <table id="actions" style="display:none;clear:right;" cellspacing="2" cellpadding="0">
                 <tr>
-						<td class="tool_table_cell_small">&nbsp;1.&nbsp;</td>
                         <td class="tool_table_cell_small"><span id="add_profiles" onClick="gadgetEventTrack('add_profiles')"></span></td>
                 </tr>
                 <tr>
-						<td class="tool_table_cell_small">&nbsp;2.&nbsp;</td>
                         <td class="tool_table_cell_small" valign="top" style="padding-top:4px"><span id="list_profiles" onClick="gadgetEventTrack('list_profiles')">Loading...</span></td>
                 </tr>
         </table>
@@ -506,8 +489,8 @@
                 <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
                         <div id="extended_functions" style="display:inline-block; padding:0 0 0 20px">
                                 <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses only</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-                                <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all data</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+                                <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all contact info</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="" id="compose-email">Compose email to list</a><p>
                         </div>
                         <div id="basic_functions" style="display:none;">

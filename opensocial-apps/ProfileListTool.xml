@@ -3,6 +3,7 @@
     <ModulePrefs title="Create My List" author="Eric Meeks">
         <Require feature="pubsub-2" />
         <Require feature="views" />
+		<Require feature="settitle"/>
         <Require feature="osapi" />
         <Require feature="orng" />
         <Require feature="rdf" />
@@ -51,7 +52,7 @@
                 var pop = window.open('Create My List Help','','top=200,left=200,width=450,height=120,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
                 pop.document.title = "Create My List Help";
                 pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-                pop.document.write('First add all the profile pages that you’re interested in to your list. Then click “Go to My List” to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
+                pop.document.write('First add all the profile pages that youï¿½re interested in to your list. Then click ï¿½Go to My Listï¿½ to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
                 pop.document.write("<br><br><center>" 
                         + "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
                         + "</center>");
@@ -101,7 +102,7 @@
         function newProfilesCallback(existingIds) {
         	return function(message) {
 		        // extract the array of incoming person IDs
-		        var newIds =  gadgets.json.parse(message).personIds;
+		        var newIds =  gadgets.json.parse(message);
 
 	            var priorListSize = getListSize(existingIds);
 	            
@@ -209,7 +210,7 @@
 
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);
-  
+  				
 				var properties = [PRNS.fullName, VIVO.preferredTitle, VIVO.email];
 				     
                 var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
@@ -228,7 +229,6 @@
                         
                 // dispay the empty table in canvas view
                 document.getElementById("canvas_profile_list").innerHTML = strTable;
-		document.getElementById("gadgets-title").innerHTML = "My list of profile pages";
                 document.getElementById("number_selected").innerHTML = "Your have (" + uris.length + ")" + " profile pages in your list.";
 
                 // initialize the export divs
@@ -546,7 +546,8 @@
 
             function init() {
             		// always show in canvas view
-                    gadgets.orng.showGadget();                        
+                    gadgets.orng.showGadget();
+                    gadgets.window.setTitle("My list of profile pages");                
                     // update UI
                     readIdsFromDB(displayProfileList);                
                     document.getElementById("canvas_profile_list").style.display="block";

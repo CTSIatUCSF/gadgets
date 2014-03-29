@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/ontology.js" ></script>
     
     <!-- Styles -->
     <style type="text/css">
@@ -72,7 +73,7 @@
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
 					} else {															
-						$(".user-name").html( jsonldHelper.getSubject(result)['prns:fullName']);
+						$(".user-name").html( osapi.rdf.parse(result)[result.uris[0]][PRNS('fullName')]);
 					}				
 				});
 			}

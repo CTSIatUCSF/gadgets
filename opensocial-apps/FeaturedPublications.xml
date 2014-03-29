@@ -160,9 +160,10 @@
 							var lirUris = jsonldHelper.getObjectUris(aiaData, 'vivo:linkedInformationResource');
 							osapi.rdf.getRDF(lirUris).execute(function(pubData) {
 								// stop								
-								var pub = jsonldHelper.getSubject(pubData);
-								
-								loadPub(pub);
+								var pubs = jsonldHelper.getSubjects(pubData);
+								for (var pubUri in pubs) {								
+									loadPub(pubs[pubUri]);
+								}
 								$('.result .pub').sort(function(a, b) {
 									return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
 								}).appendTo('.result');

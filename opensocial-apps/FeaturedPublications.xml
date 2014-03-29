@@ -152,25 +152,30 @@
 						}
 					});
 					adjustHeight();
-            	});        
+            	});      
+
 	   	    	loadFeaturedPubs(function() {
-			    	osapi.rdf.getOwnerProperties([VIVO.authorInAuthorship]).execute(function(ownerData) {
-			    		var aiaUris = jsonldHelper.getObjectUris(ownerData, 'vivo:authorInAuthorship');
-			    		osapi.rdf.getProperties(aiaUris, [VIVO.linkedInformationResource]).execute(function(aiaData) {
-							var lirUris = jsonldHelper.getObjectUris(aiaData, 'vivo:linkedInformationResource');
-							osapi.rdf.getRDF(lirUris).execute(function(pubData) {
-								// stop								
-								var pubs = jsonldHelper.getSubjects(pubData);
-								for (var pubUri in pubs) {								
-									loadPub(pubs[pubUri]);
-								}
-								$('.result .pub').sort(function(a, b) {
-									return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
-								}).appendTo('.result');
-								$(".pubs-gadget").unblock();
-			   	    			adjustHeight();
-							});
-			      		});
+					var options = {};
+					options.output = "full";            	  
+			    	osapi.rdf.getOwner(options).execute(function(data) {
+			    		// in this case the owner will be the first and only item in the returned list
+			    		var owner = osapi.rdf.parse(data)[data.uris[0]];
+			    		var publications = owner[VIVO('authorInAuthorship')];
+			    		if (publications instanceof Array) {
+				    		for (var i in publications) {
+				    			var pub = publications[i][VIVO('linkedInformationResource')];
+				    			loadPub(pub);
+				    		}
+			    		}
+			    		else if (publications) {
+			    			var pub = publications[VIVO('linkedInformationResource')];
+			    			loadPub(pub);
+			    		}
+						$('.result .pub').sort(function(a, b) {
+							return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+						}).appendTo('.result');
+						$(".pubs-gadget").unblock();
+	   	    			adjustHeight();
 		   	    	});
    	    		});	    			   	    	
 	      	}
@@ -179,18 +184,18 @@
 				// check if this is an object first!
 				if (pub == null || typeof pub != 'object')
 					return;
-	      		var id = pub['@id'];
+	      		var id = pub['@id'].substring(pub['@id'].lastIndexOf('/') +1);
 				var isVisible = "";
 				if(isFeaturedPublication(id)) {
 					isVisible = 'style="display:none"';
 				}
 	      	
-				var title = pub['prns:informationResourceReference'];
-				var label = pub['rdfs:label'];
-				var pd = pub['prns:publicationDate'];
+				var title = pub[PRNS('informationResourceReference')];
+				var label = pub[RDFS('label')];
+				var pd = pub[PRNS('publicationDate')];
 				var repl = '<span class="label">' + label + '</span>';
 				title = title.replace(label.replace(/\./g, ""), repl);
-				var pmid = pub['bibo:pmid']; 
+				var pmid = pub[BIBO('pmid')]; 
 				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';
 				if(pmid) {
 					html += ' data-pmid="' + pmid + '" ';

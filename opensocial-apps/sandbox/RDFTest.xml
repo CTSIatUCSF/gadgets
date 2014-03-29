@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <Module>
    <ModulePrefs title="Hello RDF!" height="800" width="700" scrolling="true">
-     <Require feature="opensocial-0.8" />
 	<Require feature="rdf"/>
 	<Require feature="dynamic-height"/>
    </ModulePrefs>

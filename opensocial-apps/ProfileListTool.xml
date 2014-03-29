@@ -211,7 +211,7 @@
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);
   				
-				var properties = [PRNS.fullName, VIVO.preferredTitle, VIVO.email];
+				var properties = [PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
 				     
                 var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
                 
@@ -244,13 +244,13 @@
                              ids[j] = uris[i + j];             
                         }
                         osapi.rdf.getProperties(ids, properties).execute(function(data) {
-                        		// this allows us to handle the single or multiple case, sort of ugly
-                        		var people = jsonldHelper.getSubjects(data);
-                                for (var id in people) {
+                        		var profiles = osapi.rdf.parse(data);
+                                for (var id in profiles) {
+                                		var profile =  profiles[id];
                                         // put in div now so people can see progress
-                                        var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + people[id]["prns:fullName"] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell'>" + people[id]["vivo:preferredTitle"] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (people[id]["vivo:email"] ? people[id]["vivo:email"] : "") + "</td>";
+                                        var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + profile[PRNS('fullName')] + "</td>";
+                                        table_row += "<td align='left' valign='top' class='tool_table_cell'>" + profile[VIVO('preferredTitle')] + "</td>";
+                                        table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (profile[VIVO('email')] ? profile[VIVO('email')] : "") + "</td>";
                              
                                         document.getElementById(id).innerHTML = table_row;
                                 }

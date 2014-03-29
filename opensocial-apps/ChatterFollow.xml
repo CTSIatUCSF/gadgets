@@ -146,8 +146,8 @@
     	
     		// execute the batch task
 			batch.execute(function(result) {
-				viewer = jsonldHelper.getItem(result.viewer);
-				owner = jsonldHelper.getItem(result.owner);
+				viewer = jsonldHelper.getSubject(result.viewer);
+				owner = jsonldHelper.getSubject(result.owner);
 				getState();
   			});
 	    }

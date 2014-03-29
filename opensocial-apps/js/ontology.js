@@ -12,6 +12,8 @@ var VIVO = {};
 VIVO.ns = "http://vivoweb.org/ontology/core#";
 VIVO.email = VIVO.ns + "email";
 VIVO.preferredTitle = VIVO.ns + "preferredTitle";
+VIVO.authorInAuthorship = VIVO.ns + "authorInAuthorship";
+VIVO.linkedInformationResource = VIVO.ns + "linkedInformationResource";
 
 var PRNS = {};
 PRNS.ns = "http://profiles.catalyst.harvard.edu/ontology/prns#";

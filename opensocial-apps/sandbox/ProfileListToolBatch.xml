@@ -312,7 +312,7 @@
     			for (k in people) {
             // put data we care about in peopleData with simple index
 		        var base = people[k].base;
-		        people[k] = jsonldHelper.getItem(people[k]);
+		        people[k] = jsonldHelper.getSubject(people[k]);
             peopleData[k] = {};
             peopleData[k].fullName = people[k].fullName;
             peopleData[k].preferredTitle = people[k].preferredTitle;

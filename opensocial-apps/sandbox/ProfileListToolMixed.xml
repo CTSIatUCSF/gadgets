@@ -314,7 +314,7 @@
             {
               // put data we care about in peopleData with simple index
 		          var base = people[j].base;
-		          people[j] = jsonldHelper.getItem(people[j]);
+		          people[j] = jsonldHelper.getSubject(people[j]);
               peopleData[i+j] = {};
               peopleData[i+j].fullName = people[j].fullName;
               peopleData[i+j].preferredTitle = people[j].preferredTitle;

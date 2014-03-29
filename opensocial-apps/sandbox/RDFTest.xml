@@ -19,7 +19,7 @@
 	    });
 		// load RDF version, Alexei, please follow this pattern
 	    osapi.rdf.getViewer().execute(function(result) {
-	 	    var person = jsonldHelper.getItem(result);
+	 	    var person = jsonldHelper.getSubject(result);
     		onLoadPeopleRdf(person, 'viewer_rdf');
    	    });
 
@@ -31,7 +31,7 @@
 	    var options = {};
             options.output = 'full';
 	    osapi.rdf.getOwner(options).execute(function(result) {
-	 	    var person = jsonldHelper.getItem(result);
+	 	    var person = jsonldHelper.getSubject(result);
 		    onLoadPeopleRdf(person, 'owner_rdf');
    	    });
       }

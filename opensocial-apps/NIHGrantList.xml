@@ -72,7 +72,7 @@
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
 					} else {															
-						$(".user-name").html( jsonldHelper.getItem(result).fullName);
+						$(".user-name").html( jsonldHelper.getSubject(result)['prns:fullName']);
 					}				
 				});
 			}

@@ -45,7 +45,7 @@
 				if (!result.error) {
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://64.54.132.20/crosslinks/coauthors?authorURL=' + getProductionURL(result.profileUrl) + '&format=JSON';
+					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?authorURL=' + getProductionURL(result.profileUrl) + '&format=JSON';
 					gadgets.io.makeRequest(url, callback, params);
 				}
 			}); /* end osapi.appdata.get */			
@@ -75,7 +75,7 @@
 							list_data += "<img src='" + imageURL + "' width='20'>&nbsp;";
 						} 
 						list_data += "<a href='" + person.URL + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
-							person.URL + "')\"> " + person.firstName + " " + person.lastName + "</a>";
+							person.URL + "')\"> " + person.displayName + "</a>";
 						list_data += "</li>";
 					}
 				}                    

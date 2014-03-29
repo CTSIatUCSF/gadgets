@@ -19,6 +19,7 @@
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/ontology.js" ></script>
 	    <script type="text/javascript" src="js/os.js" ></script>
     
 	    <script type="text/javascript">
@@ -153,28 +154,26 @@
 					adjustHeight();
             	});        
 	   	    	loadFeaturedPubs(function() {
-				    var options = {output:'full'};
-			    	osapi.rdf.getOwner(options).execute(function(ownerRdf) {
-						var owner = jsonldHelper.getItem(ownerRdf);
-			    		var pubs = owner.authorInAuthorship;
-			    		if($.isArray(pubs)) {
-				    		for(var i=0;i<pubs.length;i++) {
-				    			loadPub(pubs[i].linkedInformationResource);
-				   	    	}
-			    		}
-			    		else if(pubs){
-			    			loadPub(pubs.linkedInformationResource);
-			    		}
-			    		
-						$('.result .pub').sort(function(a, b) {
-							return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
-						}).appendTo('.result');
-						$(".pubs-gadget").unblock();
-	   	    			adjustHeight();
+			    	osapi.rdf.getOwnerProperties([VIVO.authorInAuthorship]).execute(function(ownerData) {
+			    		var aiaUris = jsonldHelper.getObjectUris(ownerData, 'vivo:authorInAuthorship');
+			    		osapi.rdf.getProperties(aiaUris, [VIVO.linkedInformationResource]).execute(function(aiaData) {
+							var lirUris = jsonldHelper.getObjectUris(aiaData, 'vivo:linkedInformationResource');
+							osapi.rdf.getRDF(lirUris).execute(function(pubData) {
+								// stop								
+								var pub = jsonldHelper.getSubject(pubData);
+								
+								loadPub(pub);
+								$('.result .pub').sort(function(a, b) {
+									return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+								}).appendTo('.result');
+								$(".pubs-gadget").unblock();
+			   	    			adjustHeight();
+							});
+			      		});
 		   	    	});
    	    		});	    			   	    	
 	      	}
-	      	
+
 	      	function loadPub(pub) {
 				// check if this is an object first!
 				if (pub == null || typeof pub != 'object')
@@ -185,12 +184,12 @@
 					isVisible = 'style="display:none"';
 				}
 	      	
-				var title = pub.informationResourceReference;
-				var label = pub.label;
-				var pd = pub.publicationDate;
+				var title = pub['prns:informationResourceReference'];
+				var label = pub['rdfs:label'];
+				var pd = pub['prns:publicationDate'];
 				var repl = '<span class="label">' + label + '</span>';
 				title = title.replace(label.replace(/\./g, ""), repl);
-				var pmid = pub.pmid; 
+				var pmid = pub['bibo:pmid']; 
 				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';
 				if(pmid) {
 					html += ' data-pmid="' + pmid + '" ';
@@ -198,7 +197,8 @@
 				html += ' data-id="' + id + '" ';
 				html += '></input><span class="title">' + title + '</span></div>';
 				$('.result').append(html);
-	      	}	      	 
+	      	}	      	
+	      	 
 	      	function isFeaturedPublication(id) {
 	      		var result = false;
 	      		$(".sel-pubs .pub").each(function(index, value) {

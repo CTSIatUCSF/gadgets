@@ -52,7 +52,7 @@
                 var pop = window.open('Create My List Help','','top=200,left=200,width=450,height=120,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
                 pop.document.title = "Create My List Help";
                 pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-                pop.document.write('First add all the profile pages that you�re interested in to your list. Then click �Go to My List� to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
+                pop.document.write('First add all the profiles that you�re interested in to your list. Then click �Go to My List� to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
                 pop.document.write("<br><br><center>" 
                         + "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
                         + "</center>");
@@ -229,7 +229,7 @@
                         
                 // dispay the empty table in canvas view
                 document.getElementById("canvas_profile_list").innerHTML = strTable;
-                document.getElementById("number_selected").innerHTML = "Your have (" + uris.length + ")" + " profile pages in your list.";
+                document.getElementById("number_selected").innerHTML = "Your have (" + uris.length + ")" + " profile in your list.";
 
                 // initialize the export divs
                 document.getElementById("canvas_email_list_textarea").value = "";
@@ -239,13 +239,13 @@
                 var batchSize = 10;
                 var batchCount = Math.floor(uris.length/batchSize) + (uris.length % batchSize == 0 ? 0 : 1);
                 for (i = 0; i < uris.length; i += batchSize) {
-                        var ids = '';
+                        var ids = [];
                         for (j = 0; j < batchSize && i+j < uris.length; j++) {
-                             ids += (j > 0 ? ',' : '') + uris[i + j];             
+                             ids[j] = uris[i + j];             
                         }
                         osapi.rdf.getProperties(ids, properties).execute(function(data) {
                         		// this allows us to handle the single or multiple case, sort of ugly
-                        		var people = getPeopleFromData(data);
+                        		var people = jsonldHelper.getSubjects(data);
                                 for (var id in people) {
                                         // put in div now so people can see progress
                                         var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + people[id]["prns:fullName"] + "</td>";
@@ -284,19 +284,6 @@
         } /* end displayProfileList */
         
         // ==============================================================                
-        
-        function getPeopleFromData(data) {
-        	var people = {};
-        	if (data.list) {
-	        	for (var i = 0; i < data.list.length; i++) {
-	        		people[data.list[i].uri] = data.list[i].jsonld;
-	        	}
-        	}
-        	else {
-        		people[data.uri] = data.jsonld;
-        	}
-       		return people;
-        }
                 
         function copyEmailDivToClipboard() {
                 
@@ -417,7 +404,7 @@
                 
         <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>
-                        <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profile pages <br />for personal use.</td>
+                        <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profiles <br />for personal use.</td>
                         <td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
                 </tr>
         </table>
@@ -545,9 +532,9 @@
         <script type="text/javascript">
 
             function init() {
+                    gadgets.window.setTitle("My list of profiles");                
             		// always show in canvas view
                     gadgets.orng.showGadget();
-                    gadgets.window.setTitle("My list of profile pages");                
                     // update UI
                     readIdsFromDB(displayProfileList);                
                     document.getElementById("canvas_profile_list").style.display="block";

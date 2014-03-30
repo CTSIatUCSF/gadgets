@@ -244,15 +244,16 @@
                              ids[j] = uris[i + j];             
                         }
                         osapi.rdf.getProperties(ids, properties).execute(function(data) {
-                        		var profiles = osapi.rdf.parse(data);
-                                for (var id in profiles) {
-                                		var profile =  profiles[id];
+                        		var profiles = [];
+                 	       		profiles.push.apply(profiles, osapi.rdf.parse(data));
+                                for (var k = 0; k < profiles.length; k++) {
+                                		var profile =  profiles[k];
                                         // put in div now so people can see progress
                                         var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + profile[PRNS('fullName')] + "</td>";
                                         table_row += "<td align='left' valign='top' class='tool_table_cell'>" + profile[VIVO('preferredTitle')] + "</td>";
                                         table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (profile[VIVO('email')] ? profile[VIVO('email')] : "") + "</td>";
                              
-                                        document.getElementById(id).innerHTML = table_row;
+                                        document.getElementById(profile['@id']).innerHTML = table_row;
                                 }
                                 // see if we are done and if so turn off progress bar and
                                 // add to export lists 

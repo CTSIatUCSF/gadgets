@@ -142,9 +142,9 @@
 			// but since we do not know the URIs of the people, we do it
 			// one at a time
 			osapi.rdf.getViewer().execute(function(viewerData) {
-				viewer = osapi.rdf.parse(viewerData)[viewerData.uris[0]];
+				viewer = osapi.rdf.parse(viewerData);
 				osapi.rdf.getOwner().execute(function(ownerData) {
-					owner = osapi.rdf.parse(ownerData)[ownerData.uris[0]];
+					owner = osapi.rdf.parse(ownerData);
 					getState();
 				});
 			});

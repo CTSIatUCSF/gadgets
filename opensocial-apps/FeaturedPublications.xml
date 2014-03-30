@@ -159,7 +159,7 @@
 					options.output = "full";            	  
 			    	osapi.rdf.getOwner(options).execute(function(data) {
 			    		// in this case the owner will be the first and only item in the returned list
-			    		var owner = osapi.rdf.parse(data)[data.uris[0]];
+			    		var owner = osapi.rdf.parse(data);
 			    		var publications = owner[VIVO('authorInAuthorship')];
 			    		if (publications instanceof Array) {
 				    		for (var i in publications) {

@@ -73,7 +73,7 @@
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
 					} else {															
-						$(".user-name").html( osapi.rdf.parse(result)[result.uris[0]][PRNS('fullName')]);
+						$(".user-name").html( osapi.rdf.parse(result)[PRNS('fullName')]);
 					}				
 				});
 			}

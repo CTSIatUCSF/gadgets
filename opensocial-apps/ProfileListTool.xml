@@ -244,8 +244,8 @@
                              ids[j] = uris[i + j];             
                         }
                         osapi.rdf.getProperties(ids, properties).execute(function(data) {
-                        		var profiles = [];
-                 	       		profiles.push.apply(profiles, osapi.rdf.parse(data));
+								var p = osapi.rdf.parse(data);
+								var profiles = p instanceof Array ? p : [p];
                                 for (var k = 0; k < profiles.length; k++) {
                                 		var profile =  profiles[k];
                                         // put in div now so people can see progress

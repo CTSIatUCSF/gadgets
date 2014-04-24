@@ -24,7 +24,7 @@ namespace UCSF.GlobalHealth.Services
 	{
 		private static string SQL_SELECT_APP_ID = "select appId from [ORNG.].[Apps] where name = @name";
 		private static string SQL_ALL_DELETE_PROJECTS = "delete from [ORNG.].[AppData] where appId = @appId";
-		private static string SQL_SELECT_NODE_ID = "select nodeid from [Profile.Data].vwPerson where InternalUsername = @employeeId";
+		private static string SQL_SELECT_NODE_ID = "select nodeid from [UCSF.].vwPerson where InternalUsername = @employeeId";
 		private static string SQL_INSERT_APP_DATA = "insert [ORNG.].[AppData] (NodeID, AppID, keyName, value, createdDT, updatedDT) values(@nodeId, @appId, @key, @val, GetDate(), GetDate())";
 
 		private ILog Log { get; set; }

@@ -30,5 +30,8 @@ namespace UCSF.GlobalHealth.Domain
 
 		[DataMember(Name = "EndDate")]
 		public virtual DateTime EndDate { get; set; }
+
+		[DataMember(Name = "InvestigatorId")]
+		public virtual String InvestigatorId { get; set; }
 	}
 }

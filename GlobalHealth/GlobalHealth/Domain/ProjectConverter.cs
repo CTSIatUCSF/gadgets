@@ -21,6 +21,9 @@ namespace UCSF.GlobalHealth.Domain
 					case "nid":
 						project.Id = (string)dictionary[key];
 						break;
+					case "node_field_data_field_investigator_nid":
+						project.InvestigatorId = (string)dictionary[key];
+						break;
 					case "node_title":
 						project.Title = (string)dictionary[key];
 						break;

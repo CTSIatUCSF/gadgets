@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs title="Create My List" author="Eric Meeks">
         <Require feature="pubsub-2" />
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
+        <Require feature="minimessage" />
+        <Require feature="dynamic-height" />
         <Require feature="orng" />
-        <Require feature="rdf" />
+        <Require feature="jsonld"/>
 		<Require feature="start-hidden" />
     </ModulePrefs>
     <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
@@ -48,15 +50,14 @@
         // ==============================================================
         
         function showHelp() {
-        
-                var pop = window.open('Create My List Help','','top=200,left=200,width=450,height=120,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
-                pop.document.title = "Create My List Help";
-                pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-                pop.document.write('First add all the profiles that you�re interested in to your list. Then click �Go to My List� to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.');
-                pop.document.write("<br><br><center>" 
-                        + "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
-                        + "</center>");
-                pop.document.write("</body></html>");
+			var helpHtml = "First add all the profiles that you're interested in to your list. " 
+				  + "Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. "
+				  + "For example you can email them or export contact information.";
+			var msg = new gadgets.MiniMessage();
+        	msg.createDismissibleMessage(helpHtml, function() {
+				gadgets.window.adjustHeight(75);
+				return true;});
+			gadgets.window.adjustHeight();
         }
         // ==============================================================
         
@@ -120,12 +121,12 @@
 	            showCurrentListSize(newListSize);
 	            if (newListSize > priorListSize) {
 		            saveData(existingIds, function() {
-		                    document.getElementById("add_profiles").innerHTML = ((newListSize - priorListSize) === 1 ? "1 new Profile added" : "" + (newListSize - priorListSize) + " new Profiles added");
-		                    showCurrentListSize(newListSize);
+	                    document.getElementById("add_profiles").innerHTML = ((newListSize - priorListSize) === 1 ? "1 new profile added" : "" + (newListSize - priorListSize) + " new profiles added");
+	                    showCurrentListSize(newListSize);
 		            });
 				}
 		        else {
-		            document.getElementById("add_profiles").innerHTML = "No new Profiles";
+		            document.getElementById("add_profiles").innerHTML = "No new profile(s) to add";
 		        }	
 		        showWaiting(false);	                
         	};
@@ -143,7 +144,7 @@
                         
         function showCurrentListSize(count) {
         	if (count > 0) {
-        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to My List - " + count + " Profile(s)</a>";
+        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to my list - " + count + " profile" + (count == 1 ? "" : "s") + "</a>";
         	}
         	else {
         		document.getElementById("list_profiles").innerHTML = "List is currently empty";
@@ -211,7 +212,7 @@
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);
   				
-				var properties = [PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
+				var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
 				     
                 var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
                 
@@ -222,14 +223,16 @@
                 strTable += "</tr>";
                 
                 for (i in uris) {
-                    //strTable += "<tr id='" + uris[i] + "'><div id='displayPerson_" + i + "'></div></tr>";
-                    strTable += "<tr id='" + uris[i] + "'></tr>";
+                    var table_row = "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_name'></td>";
+                    table_row += "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_title'></td>";
+                    table_row += "<td align='left' valign='top' class='tool_table_cell email' id='" + uris[i] + "_email'></td>";
+                    strTable += "<tr id='" + uris[i] + "'>" + table_row + "</tr>";
                 }                
                 strTable += "</table>";
                         
                 // dispay the empty table in canvas view
                 document.getElementById("canvas_profile_list").innerHTML = strTable;
-                document.getElementById("number_selected").innerHTML = "Your have (" + uris.length + ")" + " profile in your list.";
+                document.getElementById("number_selected").innerHTML = "You have (" + uris.length + ")" + " profile" + (uris.length == 1 ? "" : "s") + " in your list.";
 
                 // initialize the export divs
                 document.getElementById("canvas_email_list_textarea").value = "";
@@ -243,17 +246,22 @@
                         for (j = 0; j < batchSize && i+j < uris.length; j++) {
                              ids[j] = uris[i + j];             
                         }
-                        osapi.rdf.getProperties(ids, properties).execute(function(data) {
-								var p = osapi.rdf.parse(data);
-								var profiles = p instanceof Array ? p : [p];
+                        osapi.jsonld.getProperties(ids, properties).execute(function(data) {
+                        	var uriBase = data.base;
+                        	framePeople(data, function(profiles) {
                                 for (var k = 0; k < profiles.length; k++) {
-                                		var profile =  profiles[k];
-                                        // put in div now so people can see progress
-                                        var table_row = "<td align='left' valign='top' class='tool_table_cell'>" + profile[PRNS('fullName')] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell'>" + profile[VIVO('preferredTitle')] + "</td>";
-                                        table_row += "<td align='left' valign='top' class='tool_table_cell email'>" + (profile[VIVO('email')] ? profile[VIVO('email')] : "") + "</td>";
-                             
-                                        document.getElementById(profile['@id']).innerHTML = table_row;
+			                   		var profile =  profiles[k];
+			                   		// this is ugly and should be temporary.  It does work however
+									if (navigator.appVersion.indexOf("MSIE") != -1) {
+	                                       document.getElementById(uriBase + profile['@id'] + '_name').innerText = profile[PRNS('fullName')];
+	                                       document.getElementById(uriBase + profile['@id'] + '_title').innerText = profile[VIVO('preferredTitle')];
+	                                       document.getElementById(uriBase + profile['@id'] + '_email').innerText = profile[VIVO('email')] ? profile[VIVO('email')] : "";
+									}
+									else {
+	                                       document.getElementById(uriBase + profile['@id'] + '_name').innerHTML = profile[PRNS('fullName')];
+	                                       document.getElementById(uriBase + profile['@id'] + '_title').innerHTML = profile[VIVO('preferredTitle')];
+	                                       document.getElementById(uriBase + profile['@id'] + '_email').innerHTML = profile[VIVO('email')] ? profile[VIVO('email')] : "";
+									}
                                 }
                                 // see if we are done and if so turn off progress bar and
                                 // add to export lists 
@@ -280,6 +288,7 @@
                                         
                                      document.getElementById("progress").style.display="none";
                                 }
+                        	});
                         });
                 }
         } /* end displayProfileList */

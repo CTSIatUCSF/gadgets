@@ -60,10 +60,9 @@
 	        }		
 		</script>
 	]]></Content>
-    <Content type="html" view="profile" preferred_width="670"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_width="670" preferred_height="310"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.twitter.profilePageInit = function() {
-	        	gadgets.window.adjustHeight(300);
 	        	ucsf.twitter.getUsername(ucsf.twitter.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.twitter.profilePageInit);    		
@@ -124,7 +123,7 @@
 	    </style>
 	    
 		<div class="twitter-gadget">  
-			<span class="label">Widget Id:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
+			<span class="label">Twitter handle:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
 			<div class="content" style="display:none">								
 			</div>
 		</div>

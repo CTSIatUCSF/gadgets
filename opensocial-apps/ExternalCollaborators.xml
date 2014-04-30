@@ -6,6 +6,7 @@
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />
 		<Require feature="orng" />
+		<Require feature="jsonld" />
 		<Require feature="start-hidden" />
 	</ModulePrefs>
 
@@ -19,6 +20,8 @@
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
+    <script type="text/javascript" src="js/ontology.js" ></script>
+    <script type="text/javascript" src="js/jsonld.js" ></script>
     
 	<style>
     	.links_title { font-family:Verdana, Arial; font-size: 14px; }
@@ -33,19 +36,21 @@
     	
 	<script type="text/javascript">
 	
-		function getProductionURL(url) {
-			if (url.indexOf("http://stage-profiles.ucsf.edu/profiles200") !== -1) {
-				return url.replace("http://stage-profiles.ucsf.edu/profiles200", "http://profiles.ucsf.edu");
+		var COLLABORATED_ON = R2R('collaboratedOn');
+	
+		function getProductionURI(uri) {
+			if (uri.indexOf("http://stage-profiles.ucsf.edu/profiles200") !== -1) {
+				return uri.replace("http://stage-profiles.ucsf.edu/profiles200", "http://profiles.ucsf.edu");
 			}
 			return url;
 		}
 			
 		function readData(callback) {
-			osapi.people.getOwner().execute(function(result){
+			osapi.jsonld.getOwnerProperties([PRNS('fullName')]).execute(function(result) {
 				if (!result.error) {
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?authorURL=' + getProductionURL(result.profileUrl) + '&format=JSON';
+					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON-LD';
 					gadgets.io.makeRequest(url, callback, params);
 				}
 			}); /* end osapi.appdata.get */			
@@ -56,37 +61,43 @@
 		// ========================================
 		
 		function displayData(collaboratorsStr) {
-			var collaborators = gadgets.json.parse(collaboratorsStr.data);				
+			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
 			// if links data exists
-			if (collaborators && collaborators.length) {
-				// need to tell container that it is OK to show us
-				gadgets.orng.showGadget();
-									
-				var list_data = "<ul>";
-				
-                var includedURLs = [];
+			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
+			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
+			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
+				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
+					collaborators = collaborators['@graph'];
+					// need to tell container that it is OK to show us
+					gadgets.orng.showGadget();
+
+					// put ones with the most publications at the top, since these are all shared publications
+					collaborators.sort(function(a, b) {
+						return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
+					});
+										
+					var list_data = "<ul>";					
 					for (i in collaborators) {
 						var person = collaborators[i];
-						if (includedURLs .indexOf(person.URL) == -1) {
-						includedURLs.push(person.URL);
 						list_data += "<li>";
-						var imageURL = person.thumbnailURL || person.imageURL || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+						var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 						if (imageURL) {
 							list_data += "<img src='" + imageURL + "' width='20'>&nbsp;";
 						} 
-						list_data += "<a href='" + person.URL + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
-							person.URL + "')\"> " + person.displayName + "</a>";
+						
+						list_data += "<a href='" + person['@id'] + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
+							person[FOAF('homepage')] + "')\"> " + person[RDFS('label')] + "</a>";
 						list_data += "</li>";
 					}
-				}                    
-       			// close the table
-       			list_data += "</ul>";
-                  
-          		// put appdata table markup in designated div
-				document.getElementById("collaborators_list").innerHTML=list_data;
-
-				gadgets.window.adjustHeight();					
-			}
+	       			// close the table
+	       			list_data += "</ul>";
+	                  
+	          		// put appdata table markup in designated div
+					document.getElementById("collaborators_list").innerHTML=list_data;
+	
+					gadgets.window.adjustHeight();					
+				}				
+			});
 		}
 		// ========================================
 		
@@ -99,11 +110,6 @@
 		}	
 	
 	   	gadgets.util.registerOnLoadHandler(function() {
-	   		gadgets.rpc.register("remote_alert", function(msg, auth_key) {
-            	if (auth_key == auth) {
-                	alert(msg);
-            	}
-        	});
 			readData(displayData)
 		});
     </script>

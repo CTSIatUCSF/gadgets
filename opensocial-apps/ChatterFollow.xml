@@ -3,7 +3,9 @@
 	<ModulePrefs title="Follow on UCSF Chatter" author="Eric Meeks" height="80" width="190"
 		author_email="alexnv@sbcglobal.net">
 		<Require feature="osapi" />
-    <Require feature="rdf" />
+    <Require feature="minimessage" />
+    <Require feature="dynamic-height" />
+    <Require feature="jsonld" />
   </ModulePrefs>
 	<Content type="html">
         <![CDATA[<!--HTML-->
@@ -11,6 +13,7 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="js/os.js" ></script>
+    <script type="text/javascript" src="js/ontology.js" ></script>
 	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="js/environment.js"></script>
 		
@@ -119,21 +122,19 @@
 		}
 
 		function showHelp() {
-	
-			var pop = window.open('Help','','top=200,left=200,width=450,height=200,scrollbars=0,status=0,menubar=0,location=0,resizable=0');
-			pop.document.write("<html><head></head><body><div style='margin:10px; font-family:Arial; font-size:12px;'>");  
-	        	pop.document.write("Follow this person on UCSF Chatter. You can receive UCSF Chatter "
+			var helpHtml = "Follow this person on UCSF Chatter. You can receive UCSF Chatter "
 			      + "updates and/or email when people you follow publish new articles "
 			      + "on UCSF Profiles. <br><br>"
 			      + "You can stop following people at any time from UCSF Profiles or "
 			      + "from UCSF Chatter. <br><br>"
 			      + "To learn more about UCSF Chatter, go to "
 			      + "<a href='http://it.ucsf.edu/services/chatter' target='_blank'>"
-			      + "http://it.ucsf.edu/services/chatter</a>");
-			pop.document.write("<br><br><center>" 
-			   + "<input type = 'button' value = 'Close' onclick = 'window.close();'>" 
-			   + "</center>");
-			pop.document.write("</body></html>");
+			      + "http://it.ucsf.edu/services/chatter</a>";
+			var msg = new gadgets.MiniMessage();
+        		msg.createDismissibleMessage(helpHtml, function() {
+				gadgets.window.adjustHeight(80);
+				return true;});
+			gadgets.window.adjustHeight();
 		}
 
 
@@ -141,11 +142,15 @@
 			// would be nicer to batch
 			// but since we do not know the URIs of the people, we do it
 			// one at a time
-			osapi.rdf.getViewer().execute(function(viewerData) {
-				viewer = osapi.rdf.parse(viewerData);
-				osapi.rdf.getOwner().execute(function(ownerData) {
-					owner = osapi.rdf.parse(ownerData);
-					getState();
+			osapi.jsonld.getViewer().execute(function(viewerData) {
+				framePerson(viewerData, function(viewerObj) {
+					viewer = viewerObj;
+					osapi.jsonld.getOwner().execute(function(ownerData) {
+						framePerson(ownerData, function(ownerObj) {
+							owner = ownerObj;
+							getState(viewer, owner);
+						});
+					});
 				});
 			});
 	    }

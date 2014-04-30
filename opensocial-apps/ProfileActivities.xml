@@ -113,11 +113,10 @@
     			   '</div>';
 		}
 	</script>]]></Content>
-    <Content type="html" view="small" preferred_height="350" preferred_width="160" scrolling="false"><![CDATA[<!--HTML-->
+    <Content type="html" view="small" preferred_height="360" preferred_width="160" scrolling="false"><![CDATA[<!--HTML-->
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     
 	<script type="text/javascript">	
-	    gadgets.window.adjustHeight(350);	
 		$(document).ready(function(){
 			loadProfileActivities(3, function(){
 				var height = 0;
@@ -145,6 +144,7 @@
     <style type="text/css">
 		body {
 			margin: 0px;
+			overflow: hidden;
 		}   
         .gadgets-gadget-title { font-weight: bold; } 	
     	div.act-left-view,

@@ -6,11 +6,10 @@
             author_email="alexnv@sbcglobal.com"
             description="Featured Publications">
         <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
         <Require feature="views" />
-        <Require feature="dynamic-height" />
         <Require feature="osapi" />
-        <Require feature="rdf"/>        
+        <Require feature="dynamic-height" />
+        <Require feature="jsonld"/>        
     </ModulePrefs>
     <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
     <![CDATA[
@@ -157,25 +156,26 @@
 	   	    	loadFeaturedPubs(function() {
 					var options = {};
 					options.output = "full";            	  
-			    	osapi.rdf.getOwner(options).execute(function(data) {
-			    		// in this case the owner will be the first and only item in the returned list
-			    		var owner = osapi.rdf.parse(data);
-			    		var publications = owner[VIVO('authorInAuthorship')];
-			    		if (publications instanceof Array) {
-				    		for (var i in publications) {
-				    			var pub = publications[i][VIVO('linkedInformationResource')];
+			    	osapi.jsonld.getOwner(options).execute(function(data) {
+			    		// in this case the owner will be the first and only item returned
+			    		framePerson(data, function(owner) {
+				    		var publications = owner[VIVO('authorInAuthorship')];
+				    		if (publications instanceof Array) {
+					    		for (var i in publications) {
+					    			var pub = publications[i][VIVO('linkedInformationResource')];
+					    			loadPub(pub);
+					    		}
+				    		}
+				    		else if (publications) {
+				    			var pub = publications[VIVO('linkedInformationResource')];
 				    			loadPub(pub);
 				    		}
-			    		}
-			    		else if (publications) {
-			    			var pub = publications[VIVO('linkedInformationResource')];
-			    			loadPub(pub);
-			    		}
-						$('.result .pub').sort(function(a, b) {
-							return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
-						}).appendTo('.result');
-						$(".pubs-gadget").unblock();
-	   	    			adjustHeight();
+							$('.result .pub').sort(function(a, b) {
+								return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+							}).appendTo('.result');
+							$(".pubs-gadget").unblock();
+		   	    			adjustHeight();
+			    		});
 		   	    	});
    	    		});	    			   	    	
 	      	}

@@ -8,14 +8,10 @@
         <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="osapi" />
-        <Require feature="rdf" />
+        <Require feature="jsonld" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="460"><![CDATA[<!--HTML-->
+    <Content type="html" view="home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
-    <!--script type="text/javascript">
-    	gadgets.window.adjustHeight(200);
-    </script-->
-    
     <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
@@ -34,7 +30,24 @@
     		gadgets.Hub.publish("analytics", message);
 		}
 	</script>]]></Content>
-    <Content type="html" view="profile" preferred_height="200" preferred_width="670"><![CDATA[<!--HTML-->	
+    <Content type="html" view="home"><![CDATA[<!--HTML-->	
+    	<script type="text/javascript">
+			$(document).ready(function () {
+				$(".nih-grants-home a").click(function(){
+					gadgetEventTrack("send_email");
+				});
+			});
+		</script>
+	    <!-- Styles -->
+	    <style type="text/css">
+	    	.nih-grants-home {padding: 15px;}
+	    </style>
+	    
+		<div class="nih-grants-home">   
+			This gadget retrieves NIH-funded grants for display on your profile. If you have questions about this information please 
+			<a href="mailto:profiles@ucsf.edu?subject=UCSF Profiles NIH Grants Awarded Information Request" >contact us.</a>    		    	
+		</div>]]></Content>
+    <Content type="html" view="profile, home" preferred_height="210" preferred_width="670"><![CDATA[<!--HTML-->	
 	    <style type="text/css">
 	    	.nih-grants-profile {font-family: arial, helvetica, verdana, sans-serif; font-size: 12px;}
 	    	.nih-grants-profile .title {padding: 5px 5px 10px 5px;}
@@ -69,11 +82,13 @@
 			});		
 			
 			function updateOwnerDisplayName() {
-				osapi.rdf.getOwner().execute(function(result) {
+				osapi.jsonld.getOwner().execute(function(result) {
 					if (result.error) { 
 						alert("Error " + result.error.code + " reading application data: " + result.error.message);
-					} else {															
-						$(".user-name").html( osapi.rdf.parse(result)[PRNS('fullName')]);
+					} else {	
+						framePerson(result, function(owner) {
+							$(".user-name").html( owner[PRNS('fullName')]);
+						});														
 					}				
 				});
 			}
@@ -145,21 +160,6 @@
 			</table>			
 			<div>
 		</div>]]></Content>
-    <Content type="html" view="home" preferred_height="200" preferred_width="700"><![CDATA[<!--HTML-->	
-    	<script type="text/javascript">
-			$(document).ready(function () {
-				$(".nih-grants-home a").click(function(){
-					gadgetEventTrack("send_email");
-				});
-			});
-		</script>
-	    <!-- Styles -->
-	    <style type="text/css">
-	    	.nih-grants-home {padding: 15px;}
-	    </style>
-	    
-		<div class="nih-grants-home">   
-			This gadget retrieves NIH-funded grants for display on your profile. If you have questions about this information please 
-			<a href="mailto:profiles@ucsf.edu?subject=UCSF Profiles NIH Grants Awarded Information Request" >contact us.</a>    		    	
-		</div>]]></Content>
+    <Content type="html" view="home" preferred_height="300" preferred_width="670"><![CDATA[<!--HTML-->	
+	]]></Content>
 </Module>

@@ -11,12 +11,12 @@
         <!-- Require feature="dynamic-height" / -->
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="500" preferred_width="670"><![CDATA[<!--HTML-->
+    <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
     <base target="_blank"/>
     
     <!-- #includes -->
-    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    <!--link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection"-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
@@ -82,36 +82,6 @@
 	    }
 	    // ========================================
 	    
-	     // ========================================
-   		gadgets.util.registerOnLoadHandler(function(){
-	    	var viewName=gadgets.views.getCurrentView().getName();
-	    	
-	    	if(viewName=='home'){
-	    		var innerDiv=$('#inner_home_settings').html();
-	    		$('#settings').html(innerDiv);
-	    		
-	    		$('#secondHeader').show();
-	    		
-	    		getUserNameAndPreview('@viewer');
-
-		    	$('span.save').click(function(){
-	    			var username = $('input[name=username]').val();
-	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
-	    				.execute(function(response){
-	    				});
-	    				
-	    				$('#preview').html('');
-	    				if(username != null && username != "") {
-	    					preview(username);
-	    				}
-		    	}); //click
-	    	}
-	    	else{
-	    		getUserNameAndPreview('@owner');
-	    	}	    	
-    	}); // registerOnLoadHandler    	
-    	// ========================================
-    	
 	</script>
 	    	
 	    	
@@ -126,7 +96,17 @@
     </div>
     ]]>
     </Content>
-    <Content type="html" view="home" preferred_height="670" preferred_width="700"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_height="500" preferred_width="670"><![CDATA[<!--HTML-->	
+	    <script type="text/javascript">
+		     // ========================================
+	   		gadgets.util.registerOnLoadHandler(function(){
+	    		getUserNameAndPreview('@owner');
+	    	}); // registerOnLoadHandler    	
+	    	// ========================================	
+		</script>
+    ]]>
+    </Content>
+    <Content type="html" view="home" preferred_height="670" preferred_width="725"><![CDATA[<!--HTML-->	
 		<div id="inner_home_settings" style="display:none;">
 			<p class="slideshare_body">
 			If you already have a SlideShare account and have uploaded presentations, simply follow these steps:<br>
@@ -151,6 +131,31 @@
 				SlideShare</a> now to create an account and upload presentations.</span>
 			</div>
 		</div>
+			
+	    <script type="text/javascript">
+		     // ========================================
+	   		gadgets.util.registerOnLoadHandler(function(){
+	    		var innerDiv=$('#inner_home_settings').html();
+	    		$('#settings').html(innerDiv);
+	    		
+	    		$('#secondHeader').show();
+	    		
+	    		getUserNameAndPreview('@viewer');
+
+		    	$('span.save').click(function(){
+	    			var username = $('input[name=username]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'username':username} })
+	    				.execute(function(response){
+	    				});
+	    				
+	    				$('#preview').html('');
+	    				if(username != null && username != "") {
+	    					preview(username);
+	    				}
+		    	}); //click
+	    	}); // registerOnLoadHandler    	
+	    	// ========================================	
+		</script>
 		]]>
 	</Content>
 </Module>

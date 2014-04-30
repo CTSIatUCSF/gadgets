@@ -1,0 +1,105 @@
+<Module>
+<ModulePrefs title="More Research Information" description="Biomedical Industry Profile: Independent Summary by KNODE, Inc." width="670" height="220">
+<Require feature="opensocial-0.9"/>
+<Require feature="osapi"/>
+<Require feature="settitle"/>
+<Require feature="dynamic-height"/>
+<Require feature="minimessage"/>
+<Require feature="pubsub-2"/>
+<Require feature="jsonld"/>
+<Require feature="start-hidden" />
+</ModulePrefs>
+<Content type="html"><![CDATA[
+        
+        <style type="text/css">
+            #profileContent{
+                clear: both;
+                float: left;
+                width: 100%;
+            }
+            h1, h2, h3, h4{
+                margin: 0px;
+                font-weight: normal;
+            }
+            h1{
+                color: #111;
+                font-size: 17px;
+                width: 100%;
+                font-weight: bold;
+            }
+            h2{
+                font-size: 13px;
+                color: #555;
+            }
+            h3{
+                font-size: 12px;
+            }
+            h4{
+                color: #555;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            #footer{
+                position: absolute;
+                bottom: 8px;
+                left: 12px;
+                display: none;
+            }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+        <script type="text/javascript" src="https://search.knodeinc.com/js/plugins/jquery.peity.js"></script>
+	    <script type="text/javascript" src="../js/ontology.js" ></script>
+        <script type="text/javascript">
+            var profileName = "";
+            var profileId = "";
+            var serverUrl = "https://search.knodeinc.com";
+
+            function init(){
+                gadgets.window.adjustHeight('220');
+		    	osapi.jsonld.getOwner().execute(function(data) {
+		    		// in this case the owner will be the first and only item returned
+		    		framePerson(data, function(owner) {
+		    			profileName = owner[PRNS('fullName')] || owner[RDFS('label')];
+                        fetchProfile();
+		    		});
+	   	    	});
+            }
+
+            function fetchProfile(){
+
+                var d = new Date();
+                var params = {};
+                params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+
+                // sign the request
+                params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+
+                var url = serverUrl + '/ws/getProfileWidget.action?profileName=' + encodeURIComponent(profileName) + "&partnerId=UCSF&profileId=" + profileId + "&_d=" + d.getTime();
+                gadgets.io.makeRequest(url, onFetchProfile, params);
+            }
+
+            function onFetchProfile(data){
+                //console.log(data.text);
+                if (data.text.indexOf('No profiles found') == -1) {
+					gadgets.orng.showGadget();                
+                    $("#profileContent").html(data.text);
+                    $("#footer").show();
+                }
+
+            }
+
+            gadgets.util.registerOnLoadHandler(function(){
+                init();
+            });
+
+   </script>
+
+    <div id="profileContent">
+    </div>
+    <div id="footer">
+        <a href="http://www.knodeinc.com" target="_blank"><img src="https://search.knodeinc.com/images/icons/poweredByKnode.png" width="68" height="34" vspace="3" border="0"/></a>
+    </div>
+  
+
+    ]]></Content>
+</Module>

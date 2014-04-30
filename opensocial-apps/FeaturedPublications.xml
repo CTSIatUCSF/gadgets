@@ -6,7 +6,6 @@
             author_email="alexnv@sbcglobal.com"
             description="Featured Publications">
         <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="dynamic-height" />

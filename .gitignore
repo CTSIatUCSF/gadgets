@@ -33,3 +33,4 @@ opensocial-apps/target
 *.Publish.xml
 web.config
 .project
+GlobalHealth/packages

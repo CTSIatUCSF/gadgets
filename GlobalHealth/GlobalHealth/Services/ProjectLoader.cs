@@ -128,17 +128,18 @@ namespace UCSF.GlobalHealth.Services
 		} 
 
 		protected void Save(SqlConnection conn, int applicationID, string employeeId, IList<Project> projects) {
-			int? userId = GetUserId(employeeId);
-			if (!userId.HasValue) {
+            long? nodeId = GetNodeId(employeeId);
+            if (!nodeId.HasValue)
+            {
 				Log.WarnFormat("Person was not found employeeId={0}, projects={1}", employeeId, projects.Count);
 				return; 
 			}
-			Log.InfoFormat("Saving projects for userId={0}, employeeId={1}, projects={2}", userId, employeeId, projects.Count);
+            Log.InfoFormat("Saving projects for userId={0}, employeeId={1}, projects={2}", nodeId, employeeId, projects.Count);
 
 			InsertDataCmd.Parameters.Clear();
 
 			InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationID;
-			InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.Int, 0).Value = userId;
+            InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
 			InsertDataCmd.Parameters.Add("@key", SqlDbType.VarChar, 100).Value = "gh_n";
 			InsertDataCmd.Parameters.Add("@val", SqlDbType.VarChar, 100).Value = projects.Count;
 
@@ -149,7 +150,7 @@ namespace UCSF.GlobalHealth.Services
 				InsertDataCmd.Parameters.Clear();
 
 				InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationID;
-				InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.Int, 0).Value = userId;
+                InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
 				InsertDataCmd.Parameters.Add("@key", SqlDbType.VarChar, 100).Value = "gh_" + i++;
 				InsertDataCmd.Parameters.Add("@val", SqlDbType.VarChar, 4000).Value = GetJson(project);
 
@@ -166,7 +167,7 @@ namespace UCSF.GlobalHealth.Services
 			return json;
 		}
 
-		protected int? GetUserId(String employeeId) {
+		protected long? GetNodeId(String employeeId) {
 			GetNodeIdCmd.Parameters.Clear();
 			GetNodeIdCmd.Parameters.Add("@employeeId", SqlDbType.VarChar, 100).Value = employeeId;
 
@@ -174,7 +175,7 @@ namespace UCSF.GlobalHealth.Services
 			if (userId == null) {
 				return null;
 			}
-			return (int)userId;
+			return (long)userId;
 		}
 
 		protected void PrepareStetements(SqlConnection conn)

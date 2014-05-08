@@ -26,8 +26,8 @@
     	.slideshare_body { font-family: Arial, helvetica; font-size: 11px;}    
     	.slideshare_credit { font-family: Arial, helvetica; font-size: 10px;}
     	.ss-link{ margin:10px 0px 10px 0px; }
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
+	a, a:visited {color: #4D8BA9;text-decoration: none;}
+	a:hover {color: #267196; text-decoration: underline;}
     </style>
     
     <script type="text/javascript">
@@ -106,7 +106,7 @@
 		</script>
     ]]>
     </Content>
-    <Content type="html" view="home" preferred_height="670" preferred_width="725"><![CDATA[<!--HTML-->	
+    <Content type="html" view="home" preferred_height="725" preferred_width="700"><![CDATA[<!--HTML-->	
 		<div id="inner_home_settings" style="display:none;">
 			<p class="slideshare_body">
 			If you already have a SlideShare account and have uploaded presentations, simply follow these steps:<br>

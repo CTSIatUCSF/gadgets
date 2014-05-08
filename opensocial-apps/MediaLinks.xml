@@ -30,8 +30,8 @@
 		.links_save_button { height:20px; font-size:11px; }
 		td.link_date {text-align: right;width: 100px;word-break: normal;} 
 		span.link_date {margin-left:10px;font-size: 12px;white-space:nowrap;} 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
+	a, a:visited {color: #4D8BA9;text-decoration: none;}
+	a:hover {color: #267196; text-decoration: underline;}
     	#edit_mlinks_table td{ max-width: 300px; vertical-align: top;}
     	#view_mlinks_table {overflow-y:auto;}
     	.placeholder {color: gray;} 
@@ -267,8 +267,8 @@
     <div style="padding:5px 0px 0px 25px;">
     	Add links to news stories, blogs or other media that feature your research. 
     	Links can be hosted on any external site that is open to the public. 
-    	Enter the title or headline as you want it to appear on your UCSF Profiles page, and the related URL. 
-    	Add a date of publication if applicable. Some examples would be a story in the SF Chronicle or on UCSF.edu. 
+    	Enter the title or headline as you want it to appear on your USC Profiles page, and the related URL. 
+    	Add a date of publication if applicable. Some examples would be a story in the LA Times or on USC News. 
     	Once you've added a story, remember to click "Save" below.
     	<br /><br />
 	</div>
@@ -284,7 +284,7 @@
                 </td>
 				<td class="links_body">
 					<div><b>News Story URL (not displayed in profile)</b></div>
-					<div>e.g. http://www.ucsf.edu/RainManBrains15777</div>
+					<div>e.g. http://news.usc.edu/RainManBrains15777</div>
                 </td>
                 <td></td>
 			<tr>  

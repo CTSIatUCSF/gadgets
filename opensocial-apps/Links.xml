@@ -24,8 +24,8 @@
     	.links_body { font-family:Arial; font-size: 12px; }
     	.links_credit { font-family:Arial; font-size:10px; }
 	.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
+	a, a:visited {color: #4D8BA9;text-decoration: none;}
+	a:hover {color: #267196; text-decoration: underline;}
     </style>
 	
 	<script type="text/javascript">
@@ -161,8 +161,7 @@
                 			// put appdata table markup in designated div
 					document.getElementById("view_links_table").innerHTML=links_table_data;
 					if (g_oLinks.length > 0) {
-						//gadgets.window.adjustHeight( 12 + ((g_oLinks.length - 1) * 30) + 34 );
-						gadgets.window.adjustHeight();					
+						gadgets.window.adjustHeight( 12 + ((g_oLinks.length - 1) * 30) + 34 );					
 					}
 					else {
 						//gadgets.Hub.publish("hide");
@@ -255,7 +254,7 @@
                 </td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
-					e.g. mylabsite.ucsf.edu<br />
+					e.g. mylabsite.usc.edu<br />
                     <input id="linkurl" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

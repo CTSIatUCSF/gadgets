@@ -71,6 +71,8 @@
 	    <!-- Styles -->
 	    <style type="text/css">	    
 	    	.twitter-gadget .content {text-align: center;}	    	
+		a, a:visited {color: #4D8BA9;text-decoration: none;}
+		a:hover {color: #267196; text-decoration: underline;}
 	    </style>
 		
 		<div class="twitter-gadget">
@@ -118,8 +120,10 @@
 	    	.twitter-gadget {margin-top: 10px;}	
 	    	.twitter-gadget input {width: 400px;}
 	    	.twitter-gadget .label {margin-right: 10px;font-weight: bold;}
-	    	.twitter-gadget .preview, .twitter-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
+	    	.twitter-gadget .preview, .twitter-gadget .save {margin-left: 10px;color: #4D8BA9; cursor:pointer;}
 	    	.twitter-gadget .content {margin-top: 10px; margin-left: 20px;}	    	
+		a, a:visited {color: #4D8BA9;text-decoration: none;}
+		a:hover {color: #267196; text-decoration: underline;}
 	    </style>
 	    
 		<div class="twitter-gadget">  

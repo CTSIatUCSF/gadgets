@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs title="Create My List" author="Eric Meeks">
         <Require feature="pubsub-2" />
@@ -50,14 +50,11 @@
         // ==============================================================
         
         function showHelp() {
-			var helpHtml = "First add all the profiles that you're interested in to your list. " 
-				  + "Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. "
-				  + "For example you can email them or export contact information.";
-			var msg = new gadgets.MiniMessage();
-        	msg.createDismissibleMessage(helpHtml, function() {
-				gadgets.window.adjustHeight(75);
-				return true;});
-			gadgets.window.adjustHeight();
+		var msg = new gadgets.MiniMessage();
+        	msg.createDismissibleMessage("First add all the profiles that you're interested in to your list. Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.", function() {
+			gadgets.window.adjustHeight(75);
+			return true;});
+		gadgets.window.adjustHeight();
         }
         // ==============================================================
         
@@ -250,18 +247,17 @@
                         	var uriBase = data.base;
                         	framePeople(data, function(profiles) {
                                 for (var k = 0; k < profiles.length; k++) {
-			                   		var profile =  profiles[k];
-			                   		// this is ugly and should be temporary.  It does work however
-									if (navigator.appVersion.indexOf("MSIE") != -1) {
-	                                       document.getElementById(uriBase + profile['@id'] + '_name').innerText = profile[PRNS('fullName')];
-	                                       document.getElementById(uriBase + profile['@id'] + '_title').innerText = profile[VIVO('preferredTitle')];
-	                                       document.getElementById(uriBase + profile['@id'] + '_email').innerText = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-									}
-									else {
-	                                       document.getElementById(uriBase + profile['@id'] + '_name').innerHTML = profile[PRNS('fullName')];
-	                                       document.getElementById(uriBase + profile['@id'] + '_title').innerHTML = profile[VIVO('preferredTitle')];
-	                                       document.getElementById(uriBase + profile['@id'] + '_email').innerHTML = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-									}
+                                		var profile =  profiles[k];
+					if (navigator.appVersion.indexOf("MSIE") != -1) {
+                                        document.getElementById(uriBase + profile['@id'] + '_name').innerText = profile[PRNS('fullName')];
+                                        document.getElementById(uriBase + profile['@id'] + '_title').innerText = profile[VIVO('preferredTitle')];
+                                        document.getElementById(uriBase + profile['@id'] + '_email').innerText = profile[VIVO('email')] ? profile[VIVO('email')] : "";
+					}
+					else {
+                                        document.getElementById(uriBase + profile['@id'] + '_name').innerHTML = profile[PRNS('fullName')];
+                                        document.getElementById(uriBase + profile['@id'] + '_title').innerHTML = profile[VIVO('preferredTitle')];
+                                        document.getElementById(uriBase + profile['@id'] + '_email').innerHTML = profile[VIVO('email')] ? profile[VIVO('email')] : "";
+					}
                                 }
                                 // see if we are done and if so turn off progress bar and
                                 // add to export lists 

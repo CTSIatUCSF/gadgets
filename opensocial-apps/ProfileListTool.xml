@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs title="Create My List" author="Eric Meeks">
         <Require feature="pubsub-2" />
@@ -16,23 +16,22 @@
     
         <!-- #includes -->
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+ 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="js/os.js" ></script>
 	    <script type="text/javascript" src="js/ontology.js" ></script>
         <script type="text/javascript" src="js/jquery-1.4.4.js"></script>
         <script type="text/javascript" src="js/environment.js"></script>
                 
         <style>
-            .tool_title {font-family:Arial,Helvetica; font-size:14px;}
-            .tool_title_orange {font-weight:bold; font-family:Arial,Helvetica; font-size:14px; color:#CA7C29;margin-top:-1px;}
-            .tool_body {font-family:Arial; font-size:12px;}
-            .tool_credit {font-family:Arial; font-size:10px;}
-            .tool_table_cell {font-family:Arial,Helvetica; font-size:12px; padding:0 20px 0 0;}
-            .tool_table_cell_small {font-family:Arial,Helvetica;font-size:11px;}
+            .tool_title {font-size:14px;}
+            .tool_title_orange {font-weight:bold; font-size:14px; color:#CA7C29;margin-top:-1px;}
+            .tool_body {font-size:12px;}
+            .tool_credit {font-size:10px;}
+            .tool_table_cell {ffont-size:12px; padding:0 20px 0 0;}
+            .tool_table_cell_small {font-size:11px;}
             .tool_table_cell_small span a {font-size:11px;}
-        .tool_table_cell_small span {font-size:11px;display:inline-block;margin-right: -15px; }
+            .tool_table_cell_small span {font-size:11px;display:inline-block;margin-right: -15px; }
             .tool_toggle_button {font-size: 13px;padding:0 5px;}          
-            a, a:visited { color: #0088CC; text-decoration: none; }
-            a:hover { color: #005580; text-decoration: underline; }
     </style>
 
         <script type="text/javascript">
@@ -51,7 +50,7 @@
         
         function showHelp() {
 		var msg = new gadgets.MiniMessage();
-        	msg.createDismissibleMessage("First add all the profiles that you're interested in to your list. Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.", function() {
+        	msg.createDismissibleMessage("<span class='helptxt'>First add all the profiles that you're interested in to your list. Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.</span>", function() {
 			gadgets.window.adjustHeight(75);
 			return true;});
 		gadgets.window.adjustHeight();
@@ -310,7 +309,6 @@
         }        
         // ==============================================================                        
         var root = (typeof ENV_LOCAL_URL === 'undefined')? "": ENV_LOCAL_URL;
-        var chatterProxyURL = root + "/chatter/ChatterProxyService.svc"; 
 
         function getNodeIdFromURI(uri) {
            if (typeof uri === 'string') { 
@@ -324,31 +322,6 @@
                } 
                 return retval;
            }
-        }
-        
-        function createGroup(name, description, ownerId, users) {
-                document.getElementById("progress").style.display="block";
-
-                var params = {
-                        "name": name,
-                        "description": description,
-                        "ownerId": ownerId,
-                        "users": users};
-                        
-            sendRequest(false, false, chatterProxyURL + "/group/new", params, function(data) {
-                document.getElementById("progress").style.display="none";
-                    if(data.Success) {
-                                showMessage("<strong>Success! Your UCSF Chatter group '" + name + "' has been created.</strong><br> " 
-                                                + "<a target='_blank' href='" + data.URL + "'>Go to UCSF Chatter to start working with your group.</a>");
-                                $("input#goup_name").val("");
-                        }
-                        else {
-                                showMessage("Cannot create a group. " + data.ErrorMessage, true);
-                        }
-            },
-            function(obj) {
-                        showMessage("Server error " + obj.rc + " : " + obj.errors, true);
-            });
         }
                         
         // ==============================================================                        
@@ -437,7 +410,7 @@
                 
                 gadgets.util.registerOnLoadHandler(init);
         </script>]]></Content>
-    <Content type="html" view="canvas" preferred_height="600" preferred_width="700"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas" preferred_height="610" preferred_width="700"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
            <style type="text/css">
                    div#create_group {
@@ -448,7 +421,7 @@
                            padding-bottom:10px;
                            padding-left:10px;
                            padding-right:10px;
-                           border:solid gray 1px;
+                           border:solid #CCC 1px;
                            width:470px;
                         border-radius: 0;
                    }
@@ -467,8 +440,6 @@
                    .hidden {
                            display:none;
                    }
-                     a, a:visited { color: #0088CC; text-decoration: none; }
-                    a:hover { color: #005580; text-decoration: underline; }
                 p { width: 640px; }
                   
            </style>
@@ -477,17 +448,12 @@
         <div style="width:640px;">
                 <p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">
                 Selected Profiles<p>
-                <p id="canvas_help" style="padding-left:20px">Create a UCSF Chatter group or email list that includes the people below. 
-                							To manage your UCSF Chatter group after you create it, such as adding or removing members, go to UCSF Chatter directly.</p>
+                <p id="canvas_help" style="padding-left:20px">Create an email list that includes the people below.</p>
                 <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
                         <div id="extended_functions" style="display:inline-block; padding:0 0 0 20px">
-                                <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
                                 <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all contact info</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="" id="compose-email">Compose email to list</a><p>
-                        </div>
-                        <div id="basic_functions" style="display:none;">
-                                <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
                         </div>
                         <a href="javascript:gadgetEventTrack('delete_list');deleteList();" style="margin-left:20px;">Delete list</a>
                 </p>
@@ -498,17 +464,6 @@
                 <br><br>
                 <b>This may take a minute or two, based on the size of your selected Profiles list.</b></p>
         </div>
-        <div id="create_group" class="hidden">
-                <div class="message hidden"><strong>Success! Your UCSF Chatter group has been created.</strong><br> 
-                        Go to UCSF Chatter to start working with your group.</div>
-                <table><tr>                
-                <td nowrap valign="top">UCSF Chatter Group Name:</td>
-                <td><input id="group_name" type="text" style="width:218px"></input><br><br></td></tr><tr>
-                <td nowrap valign="top" align="right">Group Description:</td>
-                <td><textarea id="group_description" rows="4" cols="25"></textarea><br><br></td></tr><tr><td>&nbsp;</td>
-                <td><input id="create" type="button" value="Create"></input>
-                <input id="close" type="button" value="Cancel/Close"></input></td></tr></table> 
-        </div>
         
         <div id="canvas_email_list" style="display:none; background:#FFF; width:670px; height:50px; margin-left:20px;">
         Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
@@ -517,7 +472,7 @@
         
         <!-- holds the email address list to be copied to the clipboard -->
         <div id="canvas_email_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+        <textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
         </textarea>
         </div>
         
@@ -528,7 +483,7 @@
         
         <!-- holds the full profile list to be copied to the clipboard -->
         <div id="canvas_full_list_text" style="display:none; width:640px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #000; margin: 0px 8px 0px 8px;">
+        <textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
         </textarea>
         </div>        
         
@@ -544,30 +499,6 @@
                     // update UI
                     readIdsFromDB(displayProfileList);                
                     document.getElementById("canvas_profile_list").style.display="block";
-                    
-                    $("a#create_group").click(function(event){
-                        event.preventDefault();
-                            $("div.message").addClass("hidden");        
-                            $("div#create_group").removeClass("hidden");
-                    }); 
-                    $("input#close").click(function(event){
-                            $("div#create_group").addClass("hidden");
-                    });
-                     
-                    $("input#create").click(function(event){
-                            $("div.message").addClass("hidden");        
-                            var name = $("div#create_group input#group_name").val();
-                            var description = $("div#create_group #group_description").val();
-                            if(name == null || name == '') {
-                                    showMessage("Please enter a group name.", true);
-                            }
-                            else {                                
-                                    osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
-                                            var users = getUserList();
-                                            createGroup(name, description, getNodeIdFromURI(result.id), users);
-                                    });                        
-                            }
-                    });
                      
                     $("#compose-email").click(function(event){
                     var emails = [];

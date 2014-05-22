@@ -140,7 +140,7 @@
       	<div class="projects">
       		<div class="content">
 		      	<div class="project-header">
-		      		<div>Current Project(s)</div>
+		      		<div>Active Project(s)</div>
 		      		<div>Locations</div>
 		      	</div>
 	      		<div class="clear"></div>
@@ -149,7 +149,7 @@
 				</div>
 		      	
 		      	<div class="project-header">
-		      		<div>Past Project(s)</div>
+		      		<div>Archived Project(s)</div>
 		      	</div>
 	      		<div class="clear"></div>
 				<div class="past-projects">
@@ -201,7 +201,7 @@
       	<div class="projects">
       		<div class="content">
 		      	<div class="project-header">
-		      		<div>Current Project(s)</div>
+		      		<div>Active Project(s)</div>
 		      		<div>Locations</div>
 		      	</div>
 	      		<div class="clear"></div>
@@ -210,7 +210,7 @@
 				</div>
 		      	
 		      	<div class="project-header">
-		      		<div>Past Project(s)</div>
+		      		<div>Archived Project(s)</div>
 		      	</div>
 	      		<div class="clear"></div>
 				<div class="past-projects">

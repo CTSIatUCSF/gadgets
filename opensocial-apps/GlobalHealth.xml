@@ -78,6 +78,7 @@
 		   if(project.EndDate) {
 		   		var d = new Date(project.EndDate);
 		   		var now = new Date();
+	   			now.setMonth(now.getMonth() - 3)
 		   		if(now - d > 0) {
 			   		$('.past-projects').append(html);   	
 		   		}

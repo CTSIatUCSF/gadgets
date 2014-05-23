@@ -5,7 +5,8 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="Twitter">
-        <Require feature="pubsub-2" />
+        <Require feature="opensocial-0.9" />
+        <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="dynamic-height" />
@@ -26,7 +27,7 @@
 	    		var message = {'action' : action};
 	    		if (label) {message.label = label;}
 	    		if (value) {message.value = value;}
-	    		gadgets.Hub.publish("analytics", message);
+	    		gadgets.pubsub.publish("analytics", message);
 			};
 			
 			ucsf.twitter.getUsername=function(callback) {
@@ -43,7 +44,7 @@
 			ucsf.twitter.render=function(username) {
 				$("#twitter-wjs").remove();
 				$(".twitter-gadget .content").empty();
-				$(".twitter-gadget .content").append('<a width="520" height="300" class="twitter-timeline" href="https://twitter.com/'+username+'" data-screen-name="'+username+'" data-widget-id="320982656688996353">Tweets by @'+username+'</a>')
+				$(".twitter-gadget .content").append('<a width="520" height="300" class="twitter-timeline" href="https://twitter.com/'+username+'" data-screen-name="'+username+'" data-link-color="#4D8BA9" data-widget-id="320982656688996353">Tweets by @'+username+'</a>')
 				
 				var fjs=document.getElementsByTagName("script")[0];
 				var p=/^http:/.test(document.location)?'http':'https';
@@ -60,9 +61,10 @@
 	        }		
 		</script>
 	]]></Content>
-    <Content type="html" view="profile" preferred_width="670" preferred_height="310"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_width="670"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.twitter.profilePageInit = function() {
+	        	gadgets.window.adjustHeight(300);
 	        	ucsf.twitter.getUsername(ucsf.twitter.preview);
 	        }
     		gadgets.util.registerOnLoadHandler(ucsf.twitter.profilePageInit);    		
@@ -127,7 +129,7 @@
 	    </style>
 	    
 		<div class="twitter-gadget">  
-			<span class="label">Twitter handle:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
+			<span class="label">Twitter Name:</span><input type="text" name="keywords"></input><span class="preview">Preview</span><span class="save">Save</span>
 			<div class="content" style="display:none">								
 			</div>
 		</div>

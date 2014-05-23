@@ -2,9 +2,10 @@
 <Module>
 	<ModulePrefs title="In The News"
 				 description="Websites" scrolling="true">
+		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub-2" />
+		<Require feature="pubsub" />
 		<Require feature="osapi" />
 	</ModulePrefs>
 
@@ -250,7 +251,7 @@
 		if (label) {message.label = label;}
 		if (value) {message.value = value;}
 		
-		gadgets.Hub.publish("analytics", message);
+		gadgets.pubsub.publish("analytics", message);
 	}	
 	// ==============================================================
         		

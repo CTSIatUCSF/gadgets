@@ -1,0 +1,7 @@
+div, ul, li, table, tr, td, tbody, span, iframe, a, img, body, h1, h2, h3, h4, h5, h6, h7, h8, h9, fieldset { font-family: arial, helvetica, verdana, sans-serif; }
+
+h1 { color:#CA7C29;}  
+
+a, a:visited, .mmlib_xlink, .save, .preview { text-decoration: none; color: #0088CC; }
+a:hover, .mmlib_xlink:hover, .save:hover, .preview:hover { text-decoration: underline; color: #005580; }
+

@@ -76,10 +76,10 @@ namespace UCSF.GlobalHealth.Services
 				conn.Open();
 				PrepareStetements(conn);
 
-				int applicationID = GetApplicationId(conn, ApplicationName);
-				DeleteProjects(conn, applicationID);
+				int applicationId = GetApplicationId(conn, ApplicationName);
+				DeleteProjects(conn, applicationId);
 				foreach(string employeeId in employeeProjects.Keys) {
-					Save(conn, applicationID, employeeId, employeeProjects[employeeId]);
+					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
 				}
 
 			}
@@ -116,18 +116,18 @@ namespace UCSF.GlobalHealth.Services
 			return (int)id;
 		}
 
-		protected void DeleteProjects(SqlConnection conn, int applicationID)
+		protected void DeleteProjects(SqlConnection conn, int applicationId)
 		{
 			SqlCommand dbcommand = new SqlCommand(SQL_ALL_DELETE_PROJECTS, conn);
 
-			dbcommand.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationID;
+			dbcommand.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
 
 			dbcommand.Prepare();
 			var cnt = dbcommand.ExecuteNonQuery();
 			Log.InfoFormat("Deleted {0} records", cnt);
 		} 
 
-		protected void Save(SqlConnection conn, int applicationID, string employeeId, IList<Project> projects) {
+		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);
             if (!nodeId.HasValue)
             {
@@ -138,7 +138,7 @@ namespace UCSF.GlobalHealth.Services
 
 			InsertDataCmd.Parameters.Clear();
 
-			InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationID;
+			InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
             InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
 			InsertDataCmd.Parameters.Add("@key", SqlDbType.VarChar, 100).Value = "gh_n";
 			InsertDataCmd.Parameters.Add("@val", SqlDbType.VarChar, 100).Value = projects.Count;
@@ -146,10 +146,11 @@ namespace UCSF.GlobalHealth.Services
 			var cnt = InsertDataCmd.ExecuteNonQuery();
 
 			int i = 0;
+			projects = projects.OrderBy(o => o.EndDate).ToList();
 			foreach(Project project in projects) {
 				InsertDataCmd.Parameters.Clear();
 
-				InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationID;
+				InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
                 InsertDataCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
 				InsertDataCmd.Parameters.Add("@key", SqlDbType.VarChar, 100).Value = "gh_" + i++;
 				InsertDataCmd.Parameters.Add("@val", SqlDbType.VarChar, 4000).Value = GetJson(project);
@@ -175,6 +176,7 @@ namespace UCSF.GlobalHealth.Services
 			if (userId == null) {
 				return null;
 			}
+						
 			return (long)userId;
 		}
 

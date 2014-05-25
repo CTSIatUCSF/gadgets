@@ -24,8 +24,10 @@ namespace UCSF.GlobalHealth.Services
 	{
 		private static string SQL_SELECT_APP_ID = "select appId from [ORNG.].[Apps] where name = @name";
 		private static string SQL_ALL_DELETE_PROJECTS = "delete from [ORNG.].[AppData] where appId = @appId";
+		private static string SQL_ALL_DELETE_APP_REGISTRY = "delete from [ORNG.].AppRegistry where appId = @appId";
 		private static string SQL_SELECT_NODE_ID = "select nodeid from [UCSF.].vwPerson where InternalUsername = @employeeId";
 		private static string SQL_INSERT_APP_DATA = "insert [ORNG.].[AppData] (NodeID, AppID, keyName, value, createdDT, updatedDT) values(@nodeId, @appId, @key, @val, GetDate(), GetDate())";
+		private static string SQL_INSERT_APP_REGISTRY = "insert [ORNG.].AppRegistry (NodeID, AppID, createdDT) values(@nodeId, @appId, GetDate())";
 
 		private ILog Log { get; set; }
 
@@ -34,6 +36,7 @@ namespace UCSF.GlobalHealth.Services
 
 		private SqlCommand GetNodeIdCmd { get; set; }
 		private SqlCommand InsertDataCmd { get; set; }
+		private SqlCommand InsertAppRegistryCmd { get; set; }
 
 		public ProjectLoader(string url, string applicationName)
 		{
@@ -78,7 +81,9 @@ namespace UCSF.GlobalHealth.Services
 
 				int applicationId = GetApplicationId(conn, ApplicationName);
 				DeleteProjects(conn, applicationId);
-				foreach(string employeeId in employeeProjects.Keys) {
+				DeleteAppRegistry(conn, applicationId);
+				foreach (string employeeId in employeeProjects.Keys)
+				{
 					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
 				}
 
@@ -125,6 +130,17 @@ namespace UCSF.GlobalHealth.Services
 			dbcommand.Prepare();
 			var cnt = dbcommand.ExecuteNonQuery();
 			Log.InfoFormat("Deleted {0} records", cnt);
+		}
+
+		protected void DeleteAppRegistry(SqlConnection conn, int applicationId)
+		{
+			SqlCommand dbcommand = new SqlCommand(SQL_ALL_DELETE_APP_REGISTRY, conn);
+
+			dbcommand.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
+
+			dbcommand.Prepare();
+			var cnt = dbcommand.ExecuteNonQuery();
+			Log.InfoFormat("Deleted aapp registry records, count={0}", cnt);
 		} 
 
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
@@ -158,12 +174,22 @@ namespace UCSF.GlobalHealth.Services
 				var cnt2 = InsertDataCmd.ExecuteNonQuery();
 			}
 
+			AddAppRegistry(conn, applicationId, nodeId.Value);
+		}
+
+
+		private void AddAppRegistry(SqlConnection conn, int applicationId, long nodeId)
+		{
+			InsertAppRegistryCmd.Parameters.Clear();
+
+			InsertAppRegistryCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
+			InsertAppRegistryCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
+
+			InsertAppRegistryCmd.ExecuteNonQuery();
+			Log.InfoFormat("Added app registry appId={0}, nodeId={1}", applicationId, nodeId);
 		}
 
 		private string GetJson(Project project) {
-			//JavaScriptSerializer serializer = new JavaScriptSerializer();
-			//serializer.RegisterConverters(new JavaScriptConverter[] { new DateStringJSONConverter() });
-
 			string json = JsonConvert.SerializeObject(project);
 			return json;
 		}
@@ -187,6 +213,9 @@ namespace UCSF.GlobalHealth.Services
 
 			InsertDataCmd = new SqlCommand(SQL_INSERT_APP_DATA, conn);
 			InsertDataCmd.Prepare();
+
+			InsertAppRegistryCmd = new SqlCommand(SQL_INSERT_APP_REGISTRY, conn);
+			InsertAppRegistryCmd.Prepare();
 		}
 
 	}

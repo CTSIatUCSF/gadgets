@@ -2,10 +2,10 @@
 
 //For production
 /************
-var ENV_PROFILES_URL = 'http://profiles.ucsf.edu';
-var ENV_LOCAL_URL = 'http://profiles.ucsf.edu';
+var ENV_PROFILES_URL = 'http://profiles.sc-ctsi.org';
+var ENV_LOCAL_URL = 'http://profiles.sc-ctsi.org';
 **************/
 
 //For staging
-var ENV_PROFILES_URL = 'http://stage-profiles.ucsf.edu/profiles200';
-var ENV_LOCAL_URL = 'http://stage-profiles.ucsf.edu';
+var ENV_PROFILES_URL = 'http://profilesstage.sc-ctsi.org';
+var ENV_LOCAL_URL = 'http://profilesstage.sc-ctsi.org';

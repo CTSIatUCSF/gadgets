@@ -28,6 +28,9 @@ namespace UCSF.GlobalHealth.Services
 		private static string SQL_SELECT_NODE_ID = "select nodeid from [UCSF.].vwPerson where InternalUsername = @employeeId";
 		private static string SQL_INSERT_APP_DATA = "insert [ORNG.].[AppData] (NodeID, AppID, keyName, value, createdDT, updatedDT) values(@nodeId, @appId, @key, @val, GetDate(), GetDate())";
 		private static string SQL_INSERT_APP_REGISTRY = "insert [ORNG.].AppRegistry (NodeID, AppID, createdDT) values(@nodeId, @appId, GetDate())";
+		private static string SQL_ADD_APP_TO_PERSON = "exec [ORNG.].AddAppToPerson @SubjectID = @nodeId, @appId = @applicationId";
+		private static string SQL_REMOVE_APP_FROM_PERSON = "exec [ORNG.].RemoveAppFromPerson @SubjectID = @nodeId, @appId = @applicationId";
+		private static string SQL_SELECT_ALL_PERSONS = "select nodeid from [ORNG.].AppRegistry where appId = @appId";
 
 		private ILog Log { get; set; }
 
@@ -37,6 +40,7 @@ namespace UCSF.GlobalHealth.Services
 		private SqlCommand GetNodeIdCmd { get; set; }
 		private SqlCommand InsertDataCmd { get; set; }
 		private SqlCommand InsertAppRegistryCmd { get; set; }
+		private SqlCommand AddAppToPersonCmd { get; set; }
 
 		public ProjectLoader(string url, string applicationName)
 		{
@@ -82,11 +86,11 @@ namespace UCSF.GlobalHealth.Services
 				int applicationId = GetApplicationId(conn, ApplicationName);
 				DeleteProjects(conn, applicationId);
 				DeleteAppRegistry(conn, applicationId);
+				DeleteAppFromAllPersons(conn, applicationId);
 				foreach (string employeeId in employeeProjects.Keys)
 				{
 					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
 				}
-
 			}
 		}
 
@@ -140,8 +144,35 @@ namespace UCSF.GlobalHealth.Services
 
 			dbcommand.Prepare();
 			var cnt = dbcommand.ExecuteNonQuery();
-			Log.InfoFormat("Deleted aapp registry records, count={0}", cnt);
-		} 
+			Log.InfoFormat("Deleted app registry records, count={0}", cnt);
+		}
+
+		private void DeleteAppFromAllPersons(SqlConnection conn, int applicationId)
+		{
+			SqlCommand dbcommand = new SqlCommand(SQL_SELECT_ALL_PERSONS, conn);
+			dbcommand.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
+			dbcommand.Prepare();
+
+			SqlCommand removeAppFromPersonCmd = new SqlCommand(SQL_REMOVE_APP_FROM_PERSON, conn);
+			removeAppFromPersonCmd.Prepare();
+
+			int count = 0;
+			using (SqlDataReader reader = dbcommand.ExecuteReader())
+			{
+				while (reader.Read())
+				{
+					var nodeId = reader["nodeid"];
+					removeAppFromPersonCmd.Parameters.Clear();
+					removeAppFromPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+					removeAppFromPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
+
+					removeAppFromPersonCmd.ExecuteNonQuery();
+					Log.InfoFormat("Removed application from person, appId={0}, nodeId={1}", applicationId, nodeId);
+					count++;
+				}
+			}
+			Log.InfoFormat("Removed application from persons, count={0}", count);
+		}
 
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);
@@ -181,11 +212,15 @@ namespace UCSF.GlobalHealth.Services
 		private void AddAppRegistry(SqlConnection conn, int applicationId, long nodeId)
 		{
 			InsertAppRegistryCmd.Parameters.Clear();
-
 			InsertAppRegistryCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;
 			InsertAppRegistryCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
-
 			InsertAppRegistryCmd.ExecuteNonQuery();
+
+			AddAppToPersonCmd.Parameters.Clear();
+			AddAppToPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+			AddAppToPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
+			AddAppToPersonCmd.ExecuteNonQuery();
+
 			Log.InfoFormat("Added app registry appId={0}, nodeId={1}", applicationId, nodeId);
 		}
 
@@ -216,6 +251,10 @@ namespace UCSF.GlobalHealth.Services
 
 			InsertAppRegistryCmd = new SqlCommand(SQL_INSERT_APP_REGISTRY, conn);
 			InsertAppRegistryCmd.Prepare();
+
+			AddAppToPersonCmd = new SqlCommand(SQL_ADD_APP_TO_PERSON, conn);
+			AddAppToPersonCmd.Prepare();
+
 		}
 
 	}

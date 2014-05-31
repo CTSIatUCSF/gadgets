@@ -28,41 +28,76 @@
     	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 100px; width: 650px;}
 		.links tr:hover {border: 1px dotted gray; cursor: pointer;}
 		.links td {word-break: break-all; padding:5px;}
+		.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px;}
     </style>
 	
 	<script type="text/javascript">
 		// ========================================		
 		function loadLinks(callback) {
 			$(".links-gadget").block({ message: "Loading..." });
-			osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['links']} ).execute(function(result){
+			osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['links', 'links_count']} ).execute(function(result){
 				// get incoming link data (in json string format)
 				var viewer = os.osapi.getViewerFromResult(result);
-		
-				// convert to json object format
-				links = gadgets.json.parse(viewer.links) || [];
-				for (var i=0;i<links.length;i++) {
-					var link = links[i];
-					renderLink(link.link_name, link.link_url);
-				}
 				
+				if(viewer.links_count) {
+					var count = viewer.links_count;
+					if(count > 0) {
+						var fields=[];
+						for(var i=0;i<count;i++) {
+							fields.push('link_' + i);
+						}
+						osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': fields})
+					    	.execute(function(pub_response){
+					    		var pub_viewer = os.osapi.getViewerFromResult(pub_response);
+				    			for(var i=0;i<count;i++) {
+						    		var link = gadgets.json.parse(pub_viewer['link_' + i]) || {};
+				    				if(link.name) {
+										renderLink(link.name, link.url);
+				    				}
+				    			}
+				    			
+								adjustHeight();
+								$(".links-gadget").unblock();
+				    			if(callback) {
+				    				callback();
+				    			}			    		
+					    	}); 	    	
+					}
+				}
+				else {
+					//old data
+					
+					links = gadgets.json.parse(viewer.links) || [];
+					for (var i=0;i<links.length;i++) {
+						var link = links[i];
+						renderLink(link.link_name, link.link_url);
+					}					
+				}
 				adjustHeight();
 				$(".links-gadget").unblock();
 				
-				// execute the callback;
 				if(callback) {
 					callback();
 				}				
+		
 			});			
 		}	
 		
 		// ========================================		
 		function saveLinks(callback) {
-			var links = [];
+      		var data = {links_count:"0"};
+      		var count = 0;
+		
 			$("table.links tr").each(function(index, value) {
-				links.push({link_name: $("a", value).text(), link_url: $("a", value).attr("href")});			
+      			var link = {name: $("a", value).text(), url: $("a", value).attr("href")};
+      			data["link_" + count] = JSON.stringify(link);
+      			count++;
+      			
+				//links.push({link_name: $("a", value).text(), link_url: $("a", value).attr("href")});			
 			});
+			data.links_count="" + count;
 			
-			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': {'links' : JSON.stringify(links)} }).execute(function(result) {
+			osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': data }).execute(function(result) {
 				if (result.error) { 
 					alert("Error " + result.error.code + " writing application data: " + result.error.message);
 				} else {
@@ -75,7 +110,7 @@
         		
 		// ========================================		
 		function renderLink(name, url) {
-			var html = '<tr><td><img height="16" width="16"/></td><td ><a href="' + url + '" target="_blank">' + name + '</a></td>';
+			var html = '<tr><td><span class="handle"/></td><td><img class="favicon" height="16" width="16"/></td><td ><a href="' + url + '" target="_blank">' + name + '</a></td>';
 			if($("#edit-links").length > 0) {
 				html += '<td>' + url + '</td><td><input type="button" value="Delete"></td>';
 			}
@@ -83,7 +118,7 @@
 			
 			var row = $(html).appendTo("table.links tbody");
 			var domain = $("a", row).get(0).hostname;
-			$("img", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);			 
+			$("img.favicon", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);			 
 		}	
 
 		// ========================================		

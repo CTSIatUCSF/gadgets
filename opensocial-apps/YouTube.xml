@@ -5,8 +5,7 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="Featured Videos">
-        <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
+        <Require feature="pubsub-2" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
@@ -29,7 +28,7 @@
 	    		var message = {'action' : action};
 	    		if (label) {message.label = label;}
 	    		if (value) {message.value = value;}
-	    		gadgets.pubsub.publish("analytics", message);
+	    		gadgets.Hub.publish("analytics", message);
 			};			
 			ucsf.youtube.getUserVideos=function(callback) {
 				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['videos']})

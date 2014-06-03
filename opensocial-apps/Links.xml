@@ -110,7 +110,12 @@
         		
 		// ========================================		
 		function renderLink(name, url) {
-			var html = '<tr><td><span class="handle"/></td><td><img class="favicon" height="16" width="16"/></td><td ><a href="' + url + '" target="_blank">' + name + '</a></td>';
+			var html = '<tr>';
+			if($("#edit-links").length > 0) {
+				html += '<td><span class="handle"/></td>';
+			}
+			
+			html += '<td><img class="favicon" height="16" width="16"/></td><td ><a href="' + url + '" target="_blank">' + name + '</a></td>';
 			if($("#edit-links").length > 0) {
 				html += '<td>' + url + '</td><td><input type="button" value="Delete"></td>';
 			}
@@ -124,14 +129,14 @@
 		// ========================================		
 		function adjustHeight(name, link) {
 			var h = $("links-gadget").height()
-			h = h > 300? 300: h; 
+			h = h > 400? 400: h; 
       		gadgets.window.adjustHeight(h);
 		}	
 				
 	</script>]]>
 	</Content>
 	
-    <Content type="html" view="home" preferred_width="700" preferred_height="300"><![CDATA[<!--HTML-->
+    <Content type="html" view="home" preferred_width="700" preferred_height="400"><![CDATA[<!--HTML-->
 	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     	
 		<script type="text/javascript">

@@ -14,21 +14,18 @@
     
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+ 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }
-		.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
-    	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 100px; width: 650px;}
-		.links tr:hover {border: 1px dotted gray; cursor: pointer;}
-		.links td {word-break: break-all; padding:5px;}
-		.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px;}
+    	.links_credit { font-size:10px; }
+	.links_save_button { height:20px; font-size:11px; } 
+    	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 200px; width: 650px;}
+	.links tr:hover {border: 1px dotted gray; cursor: pointer;}
+	.links td {word-break: break-all; padding:5px;}
+	.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px;}
     </style>
 	
 	<script type="text/javascript">
@@ -136,7 +133,7 @@
 	</script>]]>
 	</Content>
 	
-    <Content type="html" view="home" preferred_width="700" preferred_height="400"><![CDATA[<!--HTML-->
+    <Content type="html" view="home" preferred_width="720" preferred_height="500"><![CDATA[<!--HTML-->
 	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     	
 		<script type="text/javascript">
@@ -197,11 +194,11 @@
 		                </td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
-							e.g. mylabsite.ucsf.edu<br />
+							e.g. mylabsite.edu<br />
 		                    <input id="link-url" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
 		                </td>
 		                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		                <td><br /><br /><input id="add-link" type="button" style="margin-bottom: 8px;" value="Save"></td>
+		                <td><br /><br /><input id="add-link" type="button" style="margin-bottom: 8px;" value="Add"></td>
 					</tr>				
 				</table>			
 			</div>
@@ -222,7 +219,7 @@
     </Content>
     
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="100"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[<!--HTML-->
    
     	<div class="links-gadget">
 		    <div id="view_links_table" style="padding:0px 0px 10px 20px;">

@@ -15,6 +15,7 @@
     
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+ 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
@@ -102,8 +103,6 @@
 		.global-health-gadget .projects .content{margin: 0px}
 		.global-health-gadget .project{margin-top: 15px;}
 		.global-health-gadget .project div{float: left;width: 300px; margin-left: 20px;}
-		.global-health-gadget a{color: #0084b4;}
-		.global-health-gadget a:visited{color: #0088CC;}
 		
 	</style>
     ]]></Content>
@@ -128,7 +127,7 @@
 		  });
 	  </script>
   	  <style>
-		.global-health-gadget .projects{border: solid 1px grey;}
+		.global-health-gadget .projects{border: solid 1px #CCC;}
 		.global-health-gadget .info {margin-bottom: 20px;}
   	  </style>
       
@@ -190,9 +189,6 @@
 				});
 		  });
 	  </script>
-  	  <style>
-		.global-health-gadget a:visited, .global-health-gadget a{text-decoration: none;}		
-  	  </style>
 	  
       <div class="global-health-gadget">
       	<div class="info">

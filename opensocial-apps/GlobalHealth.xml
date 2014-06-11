@@ -44,21 +44,28 @@
 			    					 investId = project.InvestigatorId;
 			    					 $("a.gh-profile").attr("href", "http://globalprojects.ucsf.edu/node/" + investId);
 			    				}
+			    			}			    				    			
+			    			if($(".current-projects").children().length > 0) {
+			    				$("#current-projects-header").show();
+			    			}			    		
+			    			if($(".past-projects").children().length > 0) {
+			    				$("#past-projects-header").show();
+			    				if($(".current-projects").children().length == 0) {
+			    					$("#past-projects-header div").show();
+			    				}
 			    			}			    	
+			    			
 			    			if(callback) {
 			    				callback();
-			    			}			    		
+			    			}
+			    				
 				    	}); 	    	
 	    		}
 	    		else {
 	    			if(callback) {
 	    				callback();
 	    			}			    		
-	    		}
-	    		
-	    		if(callback) {
-	    			callback();
-	    		}
+	    		}	    		
 	    	}); 	    	
     	};
     	function renderProject(project) {
@@ -99,7 +106,7 @@
 		.global-health-gadget .info .imp {font-weight: bold;}
 		.global-health-gadget .project-header {margin-top: 15px;}
 		.global-health-gadget .project-header div{float: left;width: 300px; margin-left: 20px; text-decoration: underline;}		
-		.global-health-gadget .projects{margin-left: 0px; height: 400px; overflow: auto;}
+		.global-health-gadget .projects{margin-left: 0px; height: 240px; overflow: auto;}
 		.global-health-gadget .projects .content{margin: 0px}
 		.global-health-gadget .project{margin-top: 15px;}
 		.global-health-gadget .project div{float: left;width: 300px; margin-left: 20px;}
@@ -118,8 +125,8 @@
 				});				
 				loadProjects(function() {
 					var contentHeight = $(".global-health-gadget .content").height();
-					if(contentHeight < 260) {
-						$(".global-health-gadget .projects").height(contentHeight + 40);
+					if(contentHeight < 240) {
+						$(".global-health-gadget .projects").height(contentHeight + 10);
 					}
 			   		gadgets.window.adjustHeight($(".global-health-gadget").height());
 					$(".global-health-gadget").unblock();
@@ -139,7 +146,7 @@
       	
       	<div class="projects">
       		<div class="content">
-		      	<div class="project-header">
+		      	<div class="project-header" id="current-projects-header" style="display:none">
 		      		<div>Active Project(s)</div>
 		      		<div>Locations</div>
 		      	</div>
@@ -148,8 +155,9 @@
 				<div class="current-projects">
 				</div>
 		      	
-		      	<div class="project-header">
+		      	<div class="project-header" id="past-projects-header" style="display:none">
 		      		<div>Archived Project(s)</div>
+		      		<div style="display:none">Locations</div>
 		      	</div>
 	      		<div class="clear"></div>
 				<div class="past-projects">
@@ -197,7 +205,7 @@
       	
       	<div class="projects">
       		<div class="content">
-		      	<div class="project-header">
+		      	<div class="project-header" style="display:none" id="current-projects-header">
 		      		<div>Active Project(s)</div>
 		      		<div>Locations</div>
 		      	</div>
@@ -206,8 +214,9 @@
 				<div class="current-projects">
 				</div>
 		      	
-		      	<div class="project-header">
+		      	<div class="project-header" style="display:none" id="past-projects-header">
 		      		<div>Archived Project(s)</div>
+		      		<div style="display:none">Locations</div>
 		      	</div>
 	      		<div class="clear"></div>
 				<div class="past-projects">

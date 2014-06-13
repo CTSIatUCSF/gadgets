@@ -5,7 +5,7 @@
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="NIH Grants Awarded">
-        <Require feature="pubsub-2" />
+        <Require feature="orng" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="jsonld" />
@@ -27,7 +27,7 @@
     		var message = {'action' : action};
     		if (label) {message.label = label;}
     		if (value) {message.value = value;}
-    		gadgets.Hub.publish("analytics", message);
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}
 	</script>]]></Content>
     <Content type="html" view="home"><![CDATA[<!--HTML-->	

@@ -4,7 +4,6 @@
             title="Websites"
             description="Websites">
         <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
@@ -181,6 +180,7 @@
 		    	Add websites to your profile. 
 				Enter the website name, as you want it to appear on your profile, and its URL. 
 		        Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
+		        You can drag and drop entries to change the order.<br /><br />
 			</div>
 			
 			<!-- display the new link input fields -->

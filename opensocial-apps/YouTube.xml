@@ -182,34 +182,6 @@
 	        	if(video_id) {
  					callback(video_id);
 				}
-				else {
-					var res = videoUrl.match(/http[s]?:\/\/www\.uctv\.tv\/shows\/.*/i);
-					if(res) {
-						ucsf.youtube.sendRequest(videoUrl, function(data) {
-							//var youtubeUrl = $('#movie-player object param[name="movie"]', $(data)).attr('value');
-							var youtubeUrl;
-							$('#movie-player object', $(data)).children().each(function(index, value){
-								if($(value).attr('name') == 'movie') {
-									youtubeUrl = $(value).attr('value');
-									return false;
-								}
-							});
-							
-							if(!youtubeUrl) {
-								callback()	
-							}
-							else {
-								video_id = ucsf.youtube.getVideoIdFromYouTubeUrl(youtubeUrl);
-								callback(video_id);
-							}							
-						}, function(obj) {
-							callback();
-						});
-					}
-					else {
-						callback();
-					}
-				}						
 	        }
 	        	        
 			ucsf.youtube.sendRequest = function(url, success, error) {
@@ -274,7 +246,7 @@
 		<div class="youtube-gadget">
 			<h3>Manage Links to Videos</h3>
 			<div class="descr">
-	    		Add video links to your profile. Videos must be hosted on YouTube or UCTV. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
+	    		Add video links to your profile. Videos must be hosted on YouTube. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
 			</div>
 			<div class="question" style="padding:0px 0px 5px 12px;">
 				<table cellpadding="0" cellspacing="0">
@@ -285,7 +257,7 @@
 		                </td>
 						<td class="links_body" valign="top" colspan="2">
 							<div><b>Video URL</b> (not displayed in profile)</div>
-							<div><span class="warn">This must be a YouTube or UCTV link</span><br/> e.g. http://www.uctv.tv/shows/15777</div>
+							<div><span class="warn">This must be a YouTube link</span><br/> e.g. https://www.youtube.com/watch?v=-7GJstXtIRg</div>
 		                </td>
 					</tr>				
 					<tr>

@@ -188,12 +188,15 @@
 				if(isFeaturedPublication(id)) {
 					isVisible = 'style="display:none"';
 				}
-	      	
-				var title = pub[PRNS('informationResourceReference')];
-				var label = pub[RDFS('label')];
+
+				var authorList = pub[PRNS('hasAuthorList')];
+				var publicationVenue = pub[PRNS('hasPublicationVenue')];
 				var pd = pub[PRNS('publicationDate')];
-				var repl = '<span class="label">' + label + '</span>';
-				title = title.replace(label.replace(/\./g, ""), repl);
+	      		var year = pub[PRNS('year')];
+				var label = pub[RDFS('label')];
+				
+				var title = authorList + '; <span class="label">' + label + '</span>; ' + publicationVenue + '; ' + year
+	      			
 				var pmid = pub[BIBO('pmid')]; 
 				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';
 				if(pmid) {

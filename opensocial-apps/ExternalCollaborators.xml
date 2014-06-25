@@ -2,40 +2,23 @@
 <Module>
 	<ModulePrefs title="External Collaborators"
 				 description="External Collaborators" width="190">
-        <Require feature="pubsub-2" />
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />
 		<Require feature="orng" />
 		<Require feature="jsonld" />
+        <Require feature="views" />
 		<Require feature="start-hidden" />
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
 
-	<Content type="html">
-	<![CDATA[<!--HTML-->
-    <!DOCTYPE html>
-    
-	<!-- #includes -->
-	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <Content type="html" view="verify, profile">
+    <![CDATA[	
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
     <script type="text/javascript" src="js/jsonld.js" ></script>
-    
-	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }
-	.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
-    </style>
-
-    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
-    	
-	<script type="text/javascript">
-	
+   	<script type="text/javascript">	        
 		var COLLABORATED_ON = R2R('collaboratedOn');
 	
 		function getProductionURI(uri) {
@@ -56,10 +39,30 @@
 			}); /* end osapi.appdata.get */			
 		}
 		// ========================================		
+    </script>
+	]]>
+	</Content>
+    <Content type="html" view="profile" preferred_width="190">
+	<![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+    
+	<!-- #includes -->
+	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    
+	<style>
+    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
+    	.links_body { font-family:Arial; font-size: 12px; }
+    	.links_credit { font-family:Arial; font-size:10px; }
+	.links_save_button { height:20px; font-size:11px; } 
+    	a, a:visited { color: #0088CC; text-decoration: none; }
+    	a:hover { color: #005580; text-decoration: underline; }
+    </style>
+
+    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
+    	
+	<script type="text/javascript">
 	
-	
-		// ========================================
-		
+		// ========================================		
 		function displayData(collaboratorsStr) {
 			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
 			// if links data exists
@@ -106,7 +109,7 @@
 			if (label) {message.label = label;}
 			if (value) {message.value = value;}
 			
-			gadgets.Hub.publish("analytics", message);
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}	
 	
 	   	gadgets.util.registerOnLoadHandler(function() {
@@ -115,4 +118,40 @@
     </script>
     
     ]]></Content>
+    <Content type="html" view="verify">
+    <![CDATA[	
+   	<script type="text/javascript">	    
+   		function checkData() {
+   			// see if we already have this person/app combination internally in the system
+   			osapi.orng.getAppInstance().execute(function(result) {
+   				// if we do NOT have this in the system, then automatically add this to the persons if they have data from the service
+   				if (typeof result !== 'string') {
+					readData(registerApp); 					
+   				}
+   			});
+   		}
+   	    
+		function registerApp(collaboratorsStr) {
+			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
+			// if links data exists
+			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
+			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
+			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
+				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
+					// need to tell container that it is OK to show us
+					osapi.orng.addAppToOwner().execute(function(result) {
+					});
+				}
+				else {
+					// this does a "hard delete" and removes the app instance
+					osapi.orng.removeAppFromOwner().execute(function(result) {
+					});					
+				}				
+			});
+		}
+
+	   	gadgets.util.registerOnLoadHandler(checkData);
+    </script>
+	]]>
+	</Content>
 </Module>

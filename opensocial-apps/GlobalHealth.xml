@@ -63,7 +63,7 @@
 	    		}
 	    		else {
 	    			if(callback) {
-	    				callback();
+	    				callback(true);
 	    			}			    		
 	    		}	    		
 	    	}); 	    	
@@ -123,7 +123,14 @@
 	      		$(document).ready(function () {
 					$(".global-health-gadget").block({ message: "Loading..." });
 				});				
-				loadProjects(function() {
+				loadProjects(function(unavailable) {
+					if (unavailable) {
+						$("#unavailable-message").show();
+					}
+					else 
+					{
+						$("#available-message").show();
+					}
 					var contentHeight = $(".global-health-gadget .content").height();
 					if(contentHeight < 240) {
 						$(".global-health-gadget .projects").height(contentHeight + 10);
@@ -140,7 +147,8 @@
       
       <div class="global-health-gadget">
       	<div class="info">
-	      	<div>Your information in this section comes from the UCSF Global Health Sciences Database.</div>
+	      	<div id="available-message" style="display:none">Your information in this section comes from the UCSF Global Health Sciences Database.</div>
+	      	<div id="unavailable-message" style="display:none">We do not have any Global Health information for your profile. If this is incorrect, please contact Global Health at the email below.</div>
 	      	<div class="imp">For changes or more information, please email: <a href="mailto:ghp-ctsi@ucsf.edu" target="_top">ghp-ctsi@ucsf.edu</a></div>
       	</div>
       	

@@ -16,7 +16,8 @@
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
-    	<script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
+ 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+    	    <script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 	    <script type="text/javascript" src="js/ontology.js" ></script>
 	    <script type="text/javascript" src="js/os.js" ></script>
@@ -73,15 +74,13 @@
 				$('.sel-pubs').append(html);
 	      	}; 	    		        
 		</script>
-		
+
 		<!-- Styles -->
 	    <style type="text/css">
-	    	.pubs-gadget a, .pubs-gadget a:visited {color: #0088CC;text-decoration: none;}		    
-	    	.pubs-gadget a:hover {color: #005580; text-decoration: underline;}
 	    	.pubs-gadget .pub-title {line-height: 20px;}
 	    	.sel-pubs .pm-link {line-height: 20px;};
 	    	.pubs-gadget .label {font-weight: bold;line-height: 20px;} 		    
-	    </style>
+	    </style>		
 	]]>
 	</Content>
     <Content type="html" view="profile" preferred_height="260" preferred_width="670">
@@ -151,7 +150,7 @@
 						}
 					});
 					adjustHeight();
-            	});      
+           	});      
 
 	   	    	loadFeaturedPubs(function() {
 					var options = {};
@@ -257,12 +256,12 @@
 	      		gadgets.window.adjustHeight($(".pubs-gadget").height());
 	      	}
 			gadgets.util.registerOnLoadHandler(loadRDF);	
-		</script>
+ 		</script>
 		
 	    <!-- Styles -->
 	    <style type="text/css">
 	    	.pubs-gadget{overflow: auto;}
-	    	.pubs-gadget #save-selected {float:right;margin-right: 15px;}
+	    	.pubs-gadget #save-selected {float:right;margin-right: 25px;}
 	    	.pubs-gadget .desc{color: gray;}
 	    	.clear {clear:both;}
 	    	.result {overflow-y: auto; margin-top: 10px;}
@@ -271,7 +270,7 @@
 	    	.sel-pubs .pub {border: 1px dotted white; margin-top: 10px;margin-left: 10px;}
 	    	.sel-pubs .pub:hover {border: 1px dotted gray; cursor: pointer;}
 	    	.inline {width: 570px; position: relative;background: url(images/draggable.png) no-repeat 0 0;background-position: 0% 50%;padding-left: 20px;}
-	    	.fright {position: absolute;top: 0px;right: -75px;}
+	    	.fright {position: absolute;top: 30%;right: -75px;}
 	    	.pubs-gadget ul {padding: 0px;list-style-type: none;}
 	    </style>
 	    
@@ -279,7 +278,7 @@
 			<h3 class="header1">Manage Publications to Feature on Your Profile</h3>
 			<div class="desc">Select publications from your profile to showcase in this area.</div>
 			<h4 class="header2">Publications Currently Featured:</h4>
-			<div class="desc">Drag and drop the featured publications to re-order them. They will show on your UCSF Profiles page in this same order.</div>
+			<div class="desc">Drag and drop the featured publications to re-order them. They will show on your profile in this same order.</div>
 			<ul class="sel-pubs"></ul>
 			<h4 class="header2">Make Changes:</h4>
 			<div class="desc">Below are all the publications on your profile. Select those you'd like to feature then click Save. 

@@ -16,27 +16,15 @@
     
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+ 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="css/jquery.placeholder.min.css" type="text/css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     <script src="js/jquery.placeholder.min.js"></script>    
+    <script type="text/javascript" src="js/environment.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     
-	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; vertical-align: top;}
-    	.links_credit { font-family:Arial; font-size:10px; }
-		.links_save_button { height:20px; font-size:11px; }
-		td.link_date {text-align: right;width: 100px;word-break: normal;} 
-		span.link_date {margin-left:10px;font-size: 12px;white-space:nowrap;} 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
-    	#edit_mlinks_table td{ max-width: 300px; vertical-align: top;}
-    	#view_mlinks_table {overflow-y:auto;}
-    	.placeholder {color: gray;} 
-    </style>
-	
 	<script type="text/javascript">	
 		var g_oLinks = []; // declare it like this to make json work
 		
@@ -142,6 +130,8 @@
                 	// and set height based on which view view this is
 					document.getElementById("edit_mlinks_table").innerHTML=links_table_data;
 					gadgets.window.adjustHeight($("#edit_mlinks_table").height() + 300);					
+                         // use institute var
+					$('.instAbrv').text(ENV_INST_ABRV);				
 				}
 				
 				if(document.getElementById("view_mlinks_table")){				
@@ -165,7 +155,7 @@
 						links_table_data = links_table_data
 							+ "<tr>" + "<td>" + cell_favicon + "</td>"
 							+ "<td onClick=\"gadgetEventTrack('go_to_website', cell_name)\">" 
-							+ "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a>"
+							+ "<a href='" + cell_url + "' target='_blank'>" + cell_name + "</a> "
 							+ '<span class="link_date">' + cell_date + "</span>"
 							+ "</td>" 
 							+ "</tr>";
@@ -267,8 +257,10 @@
     <div style="padding:5px 0px 0px 25px;">
     	Add links to news stories, blogs or other media that feature your research. 
     	Links can be hosted on any external site that is open to the public. 
-    	Enter the title or headline as you want it to appear on your UCSF Profiles page, and the related URL. 
-    	Add a date of publication if applicable. Some examples would be a story in the SF Chronicle or on UCSF.edu. 
+    	Enter the title or headline as you want it to appear on your 
+	<span class="instAbrv">UCSF</span> Profiles page, and the related URL. 
+    	Add a date of publication if applicable. Some examples would be a story in the 
+	<em>NY Times</em> or on the university news site. 
     	Once you've added a story, remember to click "Save" below.
     	<br /><br />
 	</div>
@@ -279,14 +271,13 @@
 			<tr>
 				<td class="links_body">
 					<div><b>News Story Headline</div>
-					<div style="margin-right:10px;width: 300px;">e.g. 'Rain Man'-like Brains Mapped</div>
+					<div style="margin-right:6px;width: 300px;">e.g. Anorexia Recommendations Challenged</div>
 					<div>(80 characters max)</div>
                 </td>
-				<td class="links_body">
+				<td class="links_body" colspan="2">
 					<div><b>News Story URL (not displayed in profile)</b></div>
-					<div>e.g. http://www.ucsf.edu/RainManBrains15777</div>
+					<div style="white-space:nowrap;">e.g. http://www.medicalnewstoday.com/articles/239033.php</div>
                 </td>
-                <td></td>
 			<tr>  
 				<td style="vertical-align: middle;">
 	                <input id="linkname" type="linkname" name="linkname" style="width:280px; margin-top:4px;">                    

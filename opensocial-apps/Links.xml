@@ -52,7 +52,6 @@
 				    				}
 				    			}
 				    			
-								adjustHeight();
 								$(".links-gadget").unblock();
 				    			if(callback) {
 				    				callback();
@@ -69,7 +68,6 @@
 						renderLink(link.link_name, link.link_url);
 					}					
 				}
-				adjustHeight();
 				$(".links-gadget").unblock();
 				
 				if(callback) {
@@ -124,8 +122,8 @@
 
 		// ========================================		
 		function adjustHeight(name, link) {
-			var h = $("links-gadget").height()
-			h = h > 400? 400: h; 
+			var h = $(".links-gadget").height();
+			h = h > 150? 150: h; 
       		gadgets.window.adjustHeight(h);
 		}	
 				
@@ -232,7 +230,9 @@
 		<script type="text/javascript">
 	    	gadgets.util.registerOnLoadHandler(function() {
 		    	$(document).ready(function () {
-					loadLinks();
+					loadLinks(function(){
+						adjustHeight();					
+					});
 				});
 			});
 	    </script>]]>

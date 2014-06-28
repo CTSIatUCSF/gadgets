@@ -21,7 +21,7 @@
 	<style>
     	.links_credit { font-size:10px; }
 	.links_save_button { height:20px; font-size:11px; } 
-    	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 200px; width: 650px;}
+    #edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 150px; width: 650px;}
 	.links tr:hover {border: 1px dotted gray; cursor: pointer;}
 	.links td {word-break: break-all; padding:5px;}
 	.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px;}
@@ -177,7 +177,7 @@
 		    <div style="padding:5px 0px 0px 25px;">
 		    	Add websites to your profile. 
 				Enter the website name, as you want it to appear on your profile, and its URL. 
-		        Some samples include a link to your lab web site, your research program or your research blog.<br /><br />
+		        Some examples include a link to your lab web site, your research program or your research blog.<br /><br />
 		        You can drag and drop entries to change the order.<br /><br />
 			</div>
 			

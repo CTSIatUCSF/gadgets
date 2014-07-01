@@ -7,6 +7,7 @@
         <Require feature="views" />
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
+        <Require feature="orng" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
@@ -21,13 +22,21 @@
 	<style>
     	.links_credit { font-size:10px; }
 		.links_save_button { height:20px; font-size:11px; } 
-    	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; height: 240px; width: 650px;}
+    	#edit-links {padding: 0px 0px 10px 25px; overflow: auto; width: 650px;}
 		.links tr:hover {border: 1px dotted gray; cursor: pointer;}
 		.links td {word-break: break-all; padding:5px;}
 		.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px;}
     </style>
 	
 	<script type="text/javascript">
+		function gadgetEventTrack(action, label, value) {	
+			var message = {'action' : action};
+			if (label) {message.label = label;}
+			if (value) {message.value = value;}
+			
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
+		}		
+	
 		// ========================================		
 		function loadLinks(callback) {
 			$(".links-gadget").block({ message: "Loading..." });
@@ -121,7 +130,7 @@
 		}	
 
 		// ========================================		
-		function adjustHeight(name, link) {
+		function adjustHeight() {
 			var h = $(".links-gadget").height();
 			h = h > 150? 150: h; 
       		gadgets.window.adjustHeight(h);
@@ -130,17 +139,20 @@
 	</script>]]>
 	</Content>
 	
-    <Content type="html" view="home" preferred_width="720" preferred_height="500"><![CDATA[<!--HTML-->
-		<style>
-			.links-gadget {height: 480px;}
-		</style>
-		
+    <Content type="html" view="home" preferred_width="720" preferred_height="500"><![CDATA[<!--HTML-->		
 	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     	
 		<script type="text/javascript">
+			function adjustHomeHeight() {
+				var h = $(".links-gadget").height();
+	      		gadgets.window.adjustHeight(h+50);
+			}
 			function init() {
 		    	$(document).ready(function () {
-					loadLinks();
+					loadLinks(function() {
+						adjustHomeHeight();
+					});
+					
 		    		$("#add-link").click(function() {
 		    			var name = $("#link-name").val();
 		    			var url = $("#link-url").val();
@@ -153,16 +165,20 @@
 						}
 						
 		    			renderLink(name, url);
+						adjustHomeHeight();
 		    			saveLinks();
-		    			adjustHeight();
 		    			
 		    			$("#link-name").val("");
 		    			$("#link-url").val("");		    			
 		    		});		    		
 		    		$("table.links tr input").live("click", function() {
 		    			$(this).parent().parent().remove();
+						adjustHomeHeight();
 		    			saveLinks();
-		    			adjustHeight();
+		    		});
+		    		
+		    		$("table.links a").live("click", function() {
+		    			gadgetEventTrack('go_to_website', $(this).text());
 		    		});
 		    		
 					$( "table.links tbody" ).sortable({ 
@@ -237,6 +253,9 @@
 					loadLinks(function(){
 						adjustHeight();					
 					});
+		    		$("table.links a").live("click", function() {
+		    			gadgetEventTrack('go_to_website', $(this).text());
+		    		});
 				});
 			});
 	    </script>]]>

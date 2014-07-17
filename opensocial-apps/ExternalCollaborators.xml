@@ -13,7 +13,7 @@
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
 
-    <Content type="html" view="verify, profile, home">
+    <Content type="html" view="verify, small, canvas">
     <![CDATA[	
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
@@ -32,7 +32,7 @@
 		function readData(callback) {
 			osapi.jsonld.getOwnerProperties([PRNS('fullName')]).execute(function(result) {
 				if (!result.error) {
-					alert(result.uris[0]); 
+					$("#see-all").data("ownerURI", getProductionURI(result.uris[0])).show();
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON-LD';
@@ -47,29 +47,12 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_width="190">
+    <Content type="html" view="small" preferred_width="190">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-    
-	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }
-		.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; } 
-    </style>
-
-    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
-    <div>
-    	<a id="see-all" href="#">
-    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="http://stage-profiles.ucsf.edu/profiles200/Framework/Images/icon_squareArrow.gif" width="11" height="11"/>
-    		See all (<span></span>) people
-    	</a>
-    </div>	
 	<script type="text/javascript">
 	
 		// ========================================		
@@ -134,12 +117,31 @@
 	    	$(document).ready(function () {
 	    		$("#see-all").click(function() {
 			        event.preventDefault();
-			    	gadgets.views.requestNavigateTo('canvas');	
+			        var ownerURI = $("#see-all").data("ownerURI");
+			        //alert(ownerURI);
+			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
 	    		});
 	    	});
 			
 		});
     </script>
+    
+	<style>
+    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
+    	.links_body { font-family:Arial; font-size: 12px; }
+    	.links_credit { font-family:Arial; font-size:10px; }
+		.links_save_button { height:20px; font-size:11px; } 
+    	a, a:visited { color: #0088CC; text-decoration: none; }
+    	a:hover { color: #005580; text-decoration: underline; } 
+    </style>
+
+    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
+    <div>
+    	<a id="see-all" href="#" style="display:none">
+    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="http://stage-profiles.ucsf.edu/profiles200/Framework/Images/icon_squareArrow.gif" width="11" height="11"/>
+    		See all (<span></span>) people
+    	</a>
+    </div>	
     
     ]]></Content>
     <Content type="html" view="verify">
@@ -178,7 +180,7 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="home" preferred_height="120" preferred_width="800">
+    <Content type="html" view="canvas" preferred_height="120" preferred_width="800">
     <![CDATA[
 	   	<script type="text/javascript">
 	   		var map;
@@ -224,7 +226,7 @@
 			    		}
 			    		
 			    		if(callback) {
-			    			readData2(callback);
+			    			readData(callback);
 			    		}
 		    		});
 	   	    	});

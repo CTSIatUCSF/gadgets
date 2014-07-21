@@ -26,7 +26,7 @@
 			if (uri.indexOf("http://stage-profiles.ucsf.edu/profiles200") !== -1) {
 				return uri.replace("http://stage-profiles.ucsf.edu/profiles200", "http://profiles.ucsf.edu");
 			}
-			return url;
+			return uri;
 		}
 			
 		function readData(callback) {
@@ -47,7 +47,7 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190">
+    <Content type="html" view="small" preferred_width="190" preferred_height="130">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -98,7 +98,7 @@
 					document.getElementById("collaborators_list").innerHTML=list_data;
 					$("#see-all span").text(collaborators.length);
 	
-					gadgets.window.adjustHeight();					
+					gadgets.window.adjustHeight(130);					
 				}				
 			});
 		}
@@ -199,10 +199,10 @@
 		        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 		        				
 	    	}		   	
-			function readData2(callback) {
+			function readData2(ownerUri, callback) {
 				var params = {};
 				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-				var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI("http://stage-profiles.ucsf.edu/profiles200/profile/368698") + '&format=JSON-LD';
+				var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON-LD';
 				gadgets.io.makeRequest(url, callback, params);
 			}
 	    	
@@ -213,7 +213,9 @@
 		    	osapi.jsonld.getOwner(options).execute(function(data) {
 		    		// in this case the owner will be the first and only item returned
 		    		framePerson(data, function(owner) {
+		    			//alert(JSON.stringify(owner));		    			
 			    		var publications = owner[VIVO('authorInAuthorship')];
+			    		//alert(JSON.stringify(publications));
 			    		if (publications instanceof Array) {
 				    		for (var i in publications) {
 				    			var pub = publications[i][VIVO('linkedInformationResource')];
@@ -226,7 +228,8 @@
 			    		}
 			    		
 			    		if(callback) {
-			    			readData(callback);
+			    			var ownerUri = owner['@id'];
+			    			readData2(ownerUri, callback);
 			    		}
 		    		});
 	   	    	});
@@ -277,7 +280,7 @@
 								return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
 							});
 												
-							for (var i = 0; i<5 && i< collaborators.length;i++) {
+							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
 								var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 								

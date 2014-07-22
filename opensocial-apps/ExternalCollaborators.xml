@@ -350,7 +350,7 @@
 	   		</div>		
    			<div class="list-wrap">
    				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most total publications to leaset. Click on a name to see their profile page in a new window.</div>
+   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most total publications to least. Click on a name to see their profile page in a new window.</div>
    				<div id="coll-list">
    				
    				</div>

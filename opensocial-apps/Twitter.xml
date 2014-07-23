@@ -14,7 +14,7 @@
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
- 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+    	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 		<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
@@ -119,6 +119,7 @@
 	    	.twitter-gadget {margin-top: 10px;}	
 	    	.twitter-gadget input {width: 400px;}
 	    	.twitter-gadget .label {margin-right: 10px;font-weight: bold;}
+	    	.twitter-gadget .preview, .twitter-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
 	    	.twitter-gadget .content {margin-top: 10px; margin-left: 20px;}	    	
 	    </style>
 	    

@@ -209,15 +209,17 @@
 				var options = {};
 				options.output = "full";            	  
 		    	osapi.jsonld.getOwner(options).execute(function(data) {
+		    		//$(".debug").html(JSON.stringify(data));
 		    		// in this case the owner will be the first and only item returned
 		    		framePerson(data, function(owner) {
 		    			//alert(JSON.stringify(owner));		    			
 			    		var publications = owner[VIVO('authorInAuthorship')];
-			    		//alert(JSON.stringify(publications));
 			    		if (publications instanceof Array) {
 				    		for (var i in publications) {
 				    			var pub = publications[i][VIVO('linkedInformationResource')];
-				    			loadPub(pub);
+				    			if(pub) {
+				    				loadPub(pub);
+				    			}					    						    			
 				    		}
 			    		}
 			    		else if (publications) {
@@ -277,6 +279,8 @@
 							collaborators.sort(function(a, b) {
 								return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
 							});
+									
+							$(".total-count").text(collaborators.length);	                  
 												
 							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
@@ -286,17 +290,17 @@
 								var webSite = person[R2R('fromRNWebSite')];
 								var lat = webSite[PRNS('latitude')];
 								var long = webSite[PRNS('longitude')];
+								var university = webSite[RDFS('label')];
 												
 						        var myLatlng = new google.maps.LatLng(lat, long);
 						        var marker = new google.maps.Marker({
 				    				position: myLatlng,
 				    				map: map,
-				    				title: name
+				    				title: university
 								});
 								
 								var profileUrl=person['@id'];
 								var pmUrl = "pubId";
-								var university = webSite[RDFS('label')];
 								
 								var pubs = person[R2R('contributedTo')];
 								if(pubs instanceof Array) {
@@ -308,11 +312,8 @@
 								
 								var pub = findPublication(pmUrl);
 								
-								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pub?pub.title:"", university);
-								
-							}		
-							
-							$(".total-count").text(collaborators.length);	                  
+								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pub?pub.title:"", university);								
+							}									
 						}				
 					});
 				});		   		 

@@ -38,9 +38,6 @@
 					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON-LD';
 					gadgets.io.makeRequest(url, callback, params);
 				}
-				else {
-					//alert(JSON.stringify(result)); 
-				}
 			}); /* end osapi.appdata.get */			
 		}
 		// ========================================		
@@ -209,10 +206,8 @@
 				var options = {};
 				options.output = "full";            	  
 		    	osapi.jsonld.getOwner(options).execute(function(data) {
-		    		//$(".debug").html(JSON.stringify(data));
 		    		// in this case the owner will be the first and only item returned
 		    		framePerson(data, function(owner) {
-		    			//alert(JSON.stringify(owner));		    			
 			    		var publications = owner[VIVO('authorInAuthorship')];
 			    		if (publications instanceof Array) {
 				    		for (var i in publications) {
@@ -252,13 +247,16 @@
 				
 				publication.title = publication.authorList + '; <span class="label">' + publication.label + '</span>; ' + publication.publicationVenue + '; ' + publication.year;
 				publications[publication.pmid] = publication;	 
-				//alert(JSON.stringify(publication));      			
 	      	}	      	
 	    	
 	    	function findPublication(pmUrl) {
-	    		var parts = pmUrl.split("/");
-	    		var id = parts[parts.length-1];
+	    		var id = getPubId(pmUrl);
 	    		return publications[id];
+	    	}
+	    	
+	    	function getPubId(pmUrl) {
+	    		var parts = pmUrl.split("/");
+	    		return parts[parts.length-1];
 	    	}
 	    	
 		   	gadgets.util.registerOnLoadHandler(function() {		   	
@@ -266,8 +264,6 @@
 		   		gadgets.orng.showGadget();
 		   		loadScript();
 				loadPubs(function(collaboratorsStr) {
-					//$(".debug").html(JSON.stringify(collaboratorsStr));
-					//alert(JSON.stringify(collaboratorsStr)); 
 					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
 					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
 						if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
@@ -281,7 +277,7 @@
 							});
 									
 							$(".total-count").text(collaborators.length);	                  
-												
+								
 							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
 								var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
@@ -303,28 +299,33 @@
 								var pmUrl = "pubId";
 								
 								var pubs = person[R2R('contributedTo')];
+								var pubs_count = 1;
 								if(pubs instanceof Array) {
-									pmUrl = pubs[0]['@id'];
+									pubs_count = pubs.length;
+									pmUrl = "http://www.ncbi.nlm.nih.gov/pubmed/?term="									
+									for(var p=0;p<pubs.length;p++) {
+										pmUrl += getPubId(pubs[p]['@id']) + ",";
+									}
 								}
 								else {
 									pmUrl = pubs['@id'];
 								}
 								
-								var pub = findPublication(pmUrl);
+								var pub = null;//findPublication(pmUrl);
 								
-								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pub?pub.title:"", university);								
+								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pub?pub.title:"", university);								
 							}									
 						}				
 					});
 				});		   		 
 		   	});	
 		   	
-		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubTitle, university) {
+		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<div><img src="' + imageURL + '"></img><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span></div>';
-		   		    html +='<div class="pm-title">'+ pubTitle +'</div>';
-		   		    html +='<div class="pm-link">View in: <a href="' + pmUrl + '" target="_blank">PubMed</a></div>';		   				
-		   		    html +='</div>';
+		   		    html +='<img src="' + imageURL + '"></img><div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    //html +='<div class="pm-title">'+ pubTitle +'</div>';
+		   		    html +='. <a href="' + pmUrl + '" target="_blank">See '+ pubs_count +' coauthored papers in PubMed</a>';		   				
+		   		    html +='</div><div style="clear:both"/></div>';
 		   		    
 		   		$("#coll-list").append(html);    
 		   	}	   	 
@@ -339,6 +340,8 @@
 	    	.title{font-weight: bold;} 
 	    	.descr{margin: 10px;color: #777;}
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
+	    	.col {margin-bottom: 5px;}
+	    	.col div {padding-top: 8px;}
 	    	.col img {width: 20px;float: left; margin-right: 10px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}

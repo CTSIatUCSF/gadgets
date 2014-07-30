@@ -133,7 +133,7 @@
     <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
     <div>
     	<a id="see-all" href="#" style="display:none">
-    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="http://stage-profiles.ucsf.edu/profiles200/Framework/Images/icon_squareArrow.gif" width="11" height="11"/>
+    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
     		See all (<span></span>) people
     	</a>
     </div>	
@@ -259,6 +259,16 @@
 	    		return parts[parts.length-1];
 	    	}
 	    	
+	    	var CONTRIBUTED_TO = R2R('contributedTo');
+	    	function getPubCount(person) {
+				var pubs = person[CONTRIBUTED_TO];
+	    		if(pubs instanceof Array) {
+	    			return pubs.length;
+	    		}
+	    		
+	    		return 1;
+	    	}
+	    	
 		   	gadgets.util.registerOnLoadHandler(function() {		   	
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
@@ -273,7 +283,7 @@
 		
 							// put ones with the most publications at the top, since these are all shared publications
 							collaborators.sort(function(a, b) {
-								return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
+								return getPubCount(b) - getPubCount(a);
 							});
 									
 							$(".total-count").text(collaborators.length);	                  

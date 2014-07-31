@@ -1,7 +1,6 @@
 ﻿﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs title="Create My List" author="Eric Meeks">
-        <Require feature="pubsub-2" />
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
@@ -44,7 +43,7 @@
                 if (label) {message.label = label;}
                 if (value) {message.value = value;}
                 
-                gadgets.Hub.publish("analytics", message);
+				gadgets.orng.reportGoogleAnalyticsEvent(message);
         }        
         // ==============================================================
         

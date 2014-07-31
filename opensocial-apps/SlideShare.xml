@@ -5,7 +5,7 @@
             author="Nels Johnson"
             author_email="njohnson@downrecs.com"
             description="Featured Presentations">
-        <Require feature="pubsub-2" />
+        <Require feature="orng" />
         <Require feature="views" />
         <Require feature="flash" />
         <!-- Require feature="dynamic-height" / -->
@@ -35,11 +35,6 @@
 	    function gotoSlideshare() {    		
 	        var action = 'go_to_slideshare';
 	        var href = $('div.ss-link a').attr('href');
-    		gadgets.Hub.subscribe("analytics", function(sender, message){
-    			if(message.action = action) {
-    				window.top.location.href = href;
-    			}
-    		});
     		gadgetEventTrack(action, href);
 	    }
 	    
@@ -47,7 +42,7 @@
     		var message = {'action' : action};
     		if (label) {message.label = label;}
     		if (value) {message.value = value;}
-    		gadgets.Hub.publish("analytics", message);
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}
 	    
 	    // ========================================

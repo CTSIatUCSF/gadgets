@@ -6,7 +6,7 @@
             author_email="alexnv@sbcglobal.com"
             description="Twitter">
         <Require feature="opensocial-0.9" />
-        <Require feature="pubsub" />
+        <Require feature="orng" />
         <Require feature="views" />
         <Require feature="osapi" />
         <Require feature="dynamic-height" />
@@ -27,7 +27,7 @@
 	    		var message = {'action' : action};
 	    		if (label) {message.label = label;}
 	    		if (value) {message.value = value;}
-	    		gadgets.pubsub.publish("analytics", message);
+				gadgets.orng.reportGoogleAnalyticsEvent(message);
 			};
 			
 			ucsf.twitter.getUsername=function(callback) {

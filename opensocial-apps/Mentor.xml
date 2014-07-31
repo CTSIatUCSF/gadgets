@@ -5,7 +5,7 @@
 		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub-2" />
+		<Require feature="orng" />
 		<Require feature="osapi" />
 	</ModulePrefs>
 
@@ -68,7 +68,7 @@
 			if (label) {message.label = label;}
 			if (value) {message.value = value;}
 		
-			gadgets.Hub.publish("analytics", message);
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}	
 		// ==============================================================		
     

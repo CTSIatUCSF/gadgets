@@ -5,8 +5,8 @@
 		<Require feature="opensocial-0.9" />
 		<Require feature="views" />
 		<Require feature="dynamic-height" />
-		<Require feature="pubsub" />
 		<Require feature="osapi" />
+		<Require feature="orng" />
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
@@ -164,9 +164,6 @@
 					if (g_oLinks.length > 0) {
 						gadgets.window.adjustHeight( 12 + ((g_oLinks.length - 1) * 30) + 34 );					
 					}
-					else {
-						gadgets.pubsub.publish("hide");
-					}
 				}
 			} /* end if link data exists */
 		}
@@ -223,7 +220,7 @@
 		if (label) {message.label = label;}
 		if (value) {message.value = value;}
 		
-		gadgets.pubsub.publish("analytics", message);
+		gadgets.orng.reportGoogleAnalyticsEvent(message);
 	}	
 	// ==============================================================
         		

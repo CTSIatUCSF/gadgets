@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Featured Publications"
+            author="Alexei Vassiliev"
+            author_email="alexnv@sbcglobal.com"
+            description="Featured Publications">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="osapi" />
+        <Require feature="dynamic-height" />
+        <Require feature="jsonld"/>        
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
+    <![CDATA[
+	    <!DOCTYPE html>    
+	    <!-- #includes -->
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+ 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+    	    <script type="text/javascript" src="js/jquery-1.4.4.js"></script>    	
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/ontology.js" ></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+    
+	    <script type="text/javascript">
+ 	    	function loadFeaturedPubs(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['featured_pubs_count']}).execute(function(response){
+		    		var viewer = os.osapi.getViewerFromResult(response);
+		    		var count = viewer.featured_pubs_count;
+		    		if(count > 0) {
+						var fields=[];
+						for(var i=0;i<count;i++) {
+							fields.push('featured_pub_' + i);
+						}
+						osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': fields})
+					    	.execute(function(pub_response){
+					    		var pub_viewer = os.osapi.getViewerFromResult(pub_response);
+				    			for(var i=0;i<count;i++) {
+						    		var pub = gadgets.json.parse(pub_viewer['featured_pub_' + i]) || {};
+				    				if(pub.title) {
+										renderFeaturedPub(pub.id, pub.title, pub.pmid);
+				    				}
+				    			}
+				    			if(callback) {
+				    				callback();
+				    			}			    		
+					    	}); 	    	
+		    		}
+		    		else {
+		    			if(callback) {
+		    				callback();
+		    			}			    		
+		    		}
+		    	}); 	    	
+ 	    	};
+ 	    	
+	      	function renderFeaturedPub(id, title, pmid) {
+	      		var html = '<li class="pub" data-id="'+id + '"';
+				if(pmid) {
+					html += ' data-pmid="'+pmid+ '" ';
+				}
+	      		html +=	'>'+ 
+						'<div class="inline">'+
+						' <div class="pub-title">' + title + '</div>';
+				if(pmid) {
+					html +=	' <div class="pm-link">View in: <a href="//www.ncbi.nlm.nih.gov/pubmed/' + pmid + '" target="_blank">PubMed</a></div>';
+				}		
+				html += 
+						'<div class="fright"><input value="remove" type="button" class="remove-pub"></div>' +
+						'</div>'+
+						'<div class="clear"/>'+
+					'</li>'
+	      			      		 
+				$('.sel-pubs').append(html);
+	      	}; 	    		        
+		</script>
+
+		<!-- Styles -->
+	    <style type="text/css">
+	    	.pubs-gadget .pub-title {line-height: 20px;}
+	    	.sel-pubs .pm-link {line-height: 20px;};
+	    	.pubs-gadget .label {font-weight: bold;line-height: 20px;} 		    
+	    </style>		
+	]]>
+	</Content>
+    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
+    <![CDATA[	
+	    <script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+            	$(document).ready(function () {
+					$(".pubs-gadget").block({ message: "Loading..." });
+				});
+				loadFeaturedPubs(function() {
+					var h = $(".pubs-gadget .sel-pubs").height() + 10;
+					h = h > 245 ? 245 : h;
+					$(".pubs-gadget .sel-pubs").height(h); 
+					gadgets.window.adjustHeight(h + 15);										
+					$(".pubs-gadget").unblock();
+				});
+			});	
+		</script>
+	    <!-- Styles -->
+	    <style type="text/css">	    
+	    	.pubs-gadget .sel-pubs {overflow-y: auto; margin-top: 10px;}
+	    	.fright {display:none;}
+	    	.pubs-gadget .pub {margin: 5px 5px 10px 5px;}	    	
+	    	.pubs-gadget ul {padding: 0px 0px 0px 30px;list-style-type: square;}
+	    </style>
+			
+		<div class="pubs-gadget">
+			<ul class="sel-pubs"></ul>			
+		</div>
+	]]>
+	</Content>
+    <Content type="html" view="home" preferred_height="400" preferred_width="700">
+    <![CDATA[	
+	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+    	<script type="text/javascript">	        
+        	function loadRDF() {
+            	$(document).ready(function () {
+					$(".pubs-gadget").block({ message: "Loading..." });
+					$(".pubs-gadget #save-selected").click(function() {
+						$(".pub input:checked").each(function() {
+							$(this).parent().hide();
+							var id = $(this).data("id");
+							var title = $(".title",$(this).parent()).html();
+							var pmid = $(this).data("pmid");
+							renderFeaturedPub(id, title, pmid);
+						});
+						$(".pub input:checked").removeAttr("checked");
+						adjustHeight();
+						saveFeaturedPubs();						
+					});
+					$(".remove-pub").live("click", function() {
+						var featuredPub = $(this).parent().parent().parent();
+						var id = featuredPub.data("id");
+						var pub = findPublication(id);
+						if(pub) {
+							$(pub).show();
+						}  
+						featuredPub.remove();
+						adjustHeight();						
+						saveFeaturedPubs();
+					});
+					$( ".sel-pubs" ).sortable({ 
+						axis: "y",
+						update: function( event, ui ) {
+							saveFeaturedPubs();
+						}
+					});
+					adjustHeight();
+           	});      
+
+	   	    	loadFeaturedPubs(function() {
+					var options = {};
+					options.output = "full";            	  
+			    	osapi.jsonld.getOwner(options).execute(function(data) {
+			    		// in this case the owner will be the first and only item returned
+			    		framePerson(data, function(owner) {
+				    		var publications = owner[VIVO('authorInAuthorship')];
+				    		if (publications instanceof Array) {
+					    		for (var i in publications) {
+					    			var pub = publications[i][VIVO('linkedInformationResource')];
+					    			loadPub(pub);
+					    		}
+				    		}
+				    		else if (publications) {
+				    			var pub = publications[VIVO('linkedInformationResource')];
+				    			loadPub(pub);
+				    		}
+							$('.result .pub').sort(function(a, b) {
+								return $(b).data("pd") > $(a).data("pd") ? 1 : -1;
+							}).appendTo('.result');
+							$(".pubs-gadget").unblock();
+		   	    			adjustHeight();
+			    		});
+		   	    	});
+   	    		});	    			   	    	
+	      	}
+
+	      	function loadPub(pub) {
+				// check if this is an object first!
+				if (pub == null || typeof pub != 'object')
+					return;
+	      		var id = pub['@id'].substring(pub['@id'].lastIndexOf('/') +1);
+				var isVisible = "";
+				if(isFeaturedPublication(id)) {
+					isVisible = 'style="display:none"';
+				}
+
+				var authorList = pub[PRNS('hasAuthorList')];
+				var publicationVenue = pub[PRNS('hasPublicationVenue')];
+				var pd = pub[PRNS('publicationDate')];
+	      		var year = pub[PRNS('year')];
+				var label = pub[RDFS('label')];
+				
+				var title = authorList + '; <span class="label">' + label + '</span>; ' + publicationVenue + '; ' + year
+	      			
+				var pmid = pub[BIBO('pmid')]; 
+				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';
+				if(pmid) {
+					html += ' data-pmid="' + pmid + '" ';
+				}
+				html += ' data-id="' + id + '" ';
+				html += '></input><span class="title">' + title + '</span></div>';
+				$('.result').append(html);
+	      	}	      	
+	      	 
+	      	function isFeaturedPublication(id) {
+	      		var result = false;
+	      		$(".sel-pubs .pub").each(function(index, value) {
+	      			if($(value).data('id') == id) {
+	      				result = true;
+	      				return false;
+	      			}
+	      		});
+	      		return result;
+	      	}; 	    		    		
+
+	      	function findPublication(id) {
+	      		var result = false;
+	      		$(".result .pub input").each(function(index, value) {
+	      			if($(value).data('id') == id) {
+	      				result = $(value).parent();
+	      				return false;
+	      			}
+	      		});
+	      		return result;
+	      	}; 	    		    		
+	      	
+	      	function saveFeaturedPubs() {
+	      		var data = {featured_pubs_count:"0"};
+	      		var count = 0;
+	      		$(".sel-pubs .pub").each(function(index, elem) {
+	      			var pub = {};
+	      			var pmid = $(elem).data("pmid");
+	      			if(pmid) {
+		      			pub.pmid = pmid;
+	      			}
+	      			pub.id = $(elem).data("id");
+	      			pub.title = $(".pub-title", elem).html();
+	      			
+	      			data["featured_pub_" + count] = JSON.stringify(pub);
+	      			count++;
+	      		}); 
+      			data.featured_pubs_count="" + count;
+    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':data}).execute(function(response){
+    			});		        						
+	      	}
+	      	
+	      	function adjustHeight() {
+				var h = 10;
+				$(".result .pub:visible").each(function(){
+					h += $(this).height();
+				});
+				h = h > 200 ? 200 : h;
+				$(".result").height(h); 
+	      		gadgets.window.adjustHeight($(".pubs-gadget").height());
+	      	}
+			gadgets.util.registerOnLoadHandler(loadRDF);	
+ 		</script>
+		
+	    <!-- Styles -->
+	    <style type="text/css">
+	    	.pubs-gadget{overflow: auto;}
+	    	.pubs-gadget #save-selected {float:right;margin-right: 25px;}
+	    	.pubs-gadget .desc{color: gray;}
+	    	.clear {clear:both;}
+	    	.result {overflow-y: auto; margin-top: 10px;}
+	    	.result .pub {width: 650px;word-break: break-word;padding-left: 20px; }
+	    	.result .pub input {margin-left: -20px;}
+	    	.sel-pubs .pub {border: 1px dotted white; margin-top: 10px;margin-left: 10px;}
+	    	.sel-pubs .pub:hover {border: 1px dotted gray; cursor: pointer;}
+	    	.inline {width: 570px; position: relative;background: url(images/draggable.png) no-repeat 0 0;background-position: 0% 50%;padding-left: 20px;}
+	    	.fright {position: absolute;top: 30%;right: -75px;}
+	    	.pubs-gadget ul {padding: 0px;list-style-type: none;}
+	    </style>
+	    
+		<div class="pubs-gadget">
+			<h3 class="header1">Manage Publications to Feature on Your Profile</h3>
+			<div class="desc">Select publications from your profile to showcase in this area.</div>
+			<h4 class="header2">Publications Currently Featured:</h4>
+			<div class="desc">Drag and drop the featured publications to re-order them. They will show on your profile in this same order.</div>
+			<ul class="sel-pubs"></ul>
+			<h4 class="header2">Make Changes:</h4>
+			<div class="desc">Below are all the publications on your profile. Select those you'd like to feature then click Save. 
+				If any of your PubMed publications are missing, add them to your profile first using the Publications link 
+				in the top section of your profile edit screen. 
+			</div>
+			<div><input type="button" value="Save" id="save-selected"></input></div>
+			<div class="clear"/>
+			<div class="result">
+			</div>	
+		</div>
+	]]>
+	</Content>
+</Module>

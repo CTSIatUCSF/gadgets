@@ -27,7 +27,7 @@
 				return uri.replace("http://stage-profiles.ucsf.edu/profiles200", "http://profiles.ucsf.edu");
 			}
 			else if (uri.indexOf("http://profilesstage.sc-ctsi.org") !== -1) {
-				return uri.replace("http://profilesstage.sc-ctsi.org", "http://profiles.sc-ctsi.org/");
+				return uri.replace("http://profilesstage.sc-ctsi.org", "http://profiles.sc-ctsi.org");
 			}
 			return uri;
 		}

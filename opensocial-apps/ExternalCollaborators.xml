@@ -276,15 +276,6 @@
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
 		   		loadScript();
-		   		
-		   		$(document).ready(function () {
-		   			$("a.follow").live("click", function() {
-		   				var item = $(this).parents(".col");
-		   				var uri = $(".col-name").attr("href");
-		   				follow(uri);
-		   			});	
-		   		});
-		   		
 				loadPubs(function(collaboratorsStr) {
 					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
 					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
@@ -342,23 +333,11 @@
 				});		   		 
 		   	});	
 		   	
-		   	function showFollowLink(personUri) {
-		   		return false;
-		   	}
-
-		   	function follow(personUri) {
-		   	}
-		   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
 		   		    html +='<img src="' + imageURL + '"></img><div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
 		   		    //html +='<div class="pm-title">'+ pubTitle +'</div>';
-		   		    html +='. <a href="' + pmUrl + '" target="_blank">See '+ pubs_count +' coauthored papers in PubMed</a>';
-		   		    
-		   		    if(showFollowLink(profileUrl)) {
-		   		    	html += '<a class="follow">Follow</a>'
-		   		    }
-		   		    		   				
+		   		    html +='. <a href="' + pmUrl + '" target="_blank">See '+ pubs_count +' coauthored papers in PubMed</a>';		   				
 		   		    html +='</div><div style="clear:both"/></div>';
 		   		    
 		   		$("#coll-list").append(html);    
@@ -380,7 +359,6 @@
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
-	    	.follow {margin-left: 10px;}	    	
 	    </style>
 	    
    		<div class="content">

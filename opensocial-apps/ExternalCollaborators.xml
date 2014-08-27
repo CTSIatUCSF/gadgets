@@ -43,6 +43,17 @@
 				}
 			}); /* end osapi.appdata.get */			
 		}
+
+		// ========================================
+		
+		function gadgetEventTrack(action, label, value) {		
+			var message = {'action' : action};
+			if (label) {message.label = label;}
+			if (value) {message.value = value;}
+			
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
+		}	
+	
 		// ========================================		
     </script>
 	]]>
@@ -81,7 +92,7 @@
 							list_data += '<img src="' + imageURL + '" width="20px" height="22px"/>';
 						} 
 												
-						list_data += "<a href='" + person['@id'] + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
+						list_data += "<a href='" + person['@id'] + "' target='_blank' onClick=\"gadgetEventTrack('go_to_collaborator_from_small', '" + 
 							person[FOAF('homepage')] + "')\"> " + person[RDFS('label')] + "</a>";
 						list_data += "</div>";
 						
@@ -100,16 +111,7 @@
 				}				
 			});
 		}
-		// ========================================
-		
-		function gadgetEventTrack(action, label, value) {		
-			var message = {'action' : action};
-			if (label) {message.label = label;}
-			if (value) {message.value = value;}
-			
-			gadgets.orng.reportGoogleAnalyticsEvent(message);
-		}	
-	
+
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {

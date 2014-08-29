@@ -43,8 +43,6 @@
 				}
 			}); /* end osapi.appdata.get */			
 		}
-
-		// ========================================
 		
 		function gadgetEventTrack(action, label, value) {		
 			var message = {'action' : action};
@@ -53,8 +51,7 @@
 			
 			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}	
-	
-		// ========================================		
+				
     </script>
 	]]>
 	</Content>
@@ -92,8 +89,7 @@
 							list_data += '<img src="' + imageURL + '" width="20px" height="22px"/>';
 						} 
 												
-						list_data += "<a href='" + person['@id'] + "' target='_blank' onClick=\"gadgetEventTrack('go_to_collaborator_from_small', '" + 
-							person[FOAF('homepage')] + "')\"> " + person[RDFS('label')] + "</a>";
+						list_data += "<a href='" + person['@id'] + "' target='_blank'> " + person[RDFS('label')] + "</a>";
 						list_data += "</div>";
 						
 					}
@@ -111,15 +107,20 @@
 				}				
 			});
 		}
-
+	
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {
 	    		$("#see-all").click(function() {
 			        event.preventDefault();
 			        var ownerURI = $("#see-all").data("ownerURI");
+			        gadgetEventTrack('go_to_see_all', ownerURI);
 			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
 	    		});
+	   			$(".col-item a").live("click", function() {
+	   				gadgetEventTrack('go_to_collaborator_from_small', $(this).attr("href"));
+	   			});
+	    		
 	    	});
 			
 		});
@@ -278,6 +279,17 @@
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
 		   		loadScript();
+		   		
+		   		$(document).ready(function () {		   			
+		   			$("a.col-pubs").live("click", function() {
+		   				gadgetEventTrack('go_to_coauthored_papers', $(this).attr("href"));
+		   			});
+		   			
+		   			$("a.col-name").live("click", function() {
+		   				gadgetEventTrack('go_to_collaborator_from_canvas', $(this).attr("href"));
+		   			});
+		   		});
+		   		
 				loadPubs(function(collaboratorsStr) {
 					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
 					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
@@ -334,12 +346,13 @@
 					});
 				});		   		 
 		   	});	
-		   	
+		   			   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
 		   		    html +='<img src="' + imageURL + '"></img><div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
-		   		    //html +='<div class="pm-title">'+ pubTitle +'</div>';
-		   		    html +='. <a href="' + pmUrl + '" target="_blank">See '+ pubs_count +' coauthored papers in PubMed</a>';		   				
+		   		    
+		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
+		   		    
 		   		    html +='</div><div style="clear:both"/></div>';
 		   		    
 		   		$("#coll-list").append(html);    

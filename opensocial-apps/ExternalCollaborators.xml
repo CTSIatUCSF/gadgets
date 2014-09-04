@@ -18,8 +18,10 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
-    <script type="text/javascript" src="js/jsonld.js" ></script>
-   	<script type="text/javascript">	        
+    <script type="text/javascript" src="js/jsonld.js" ></script>   	
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+	<script type="text/javascript">	        
 		var COLLABORATED_ON = R2R('collaboratedOn');
 	
 		function getProductionURI(uri) {
@@ -60,13 +62,10 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="295">
+    <Content type="html" view="small" preferred_width="190" preferred_height="290">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-	<!-- #includes -->
-	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	<script type="text/javascript">
 	
 		// ========================================		
@@ -350,7 +349,7 @@
 		   			   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<img src="' + imageURL + '"></img><div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    html +='<div><div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
 		   		    
 		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
 		   		    
@@ -359,22 +358,22 @@
 		   		$("#coll-list").append(html);    
 		   	}	   	 
 	    </script>
+
 	    <style type="text/css">
 	    	#map-canvas { height: 450px}
 	    	
 	    	.content{width: 600px;margin-left: 100px;}
-	    	.content a {text-decoration: none; color: #0088CC !important; cursor:pointer;}
 	    	.map-wrap{width:600px;height: 450px; margin-bottom: 20px;}
 	    	.list-wrap{font-size: 13px;line-height: 20px;}	    	 
-	    	.title{font-weight: bold;} 
-	    	.descr{margin: 10px;color: #777;}
+	    	.title{font-weight: bold; color: #666; } 
+	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
 	    	.col {margin-bottom: 5px;}
-	    	.col div {padding-top: 8px;}
-	    	.col img {width: 20px;float: left; margin-right: 10px;}
+	    	.col div {padding-top: 4px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
+		.thumbnail { margin-right: 4px; }
 	    </style>
 	    
    		<div class="content">

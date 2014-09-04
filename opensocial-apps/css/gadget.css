@@ -152,3 +152,21 @@ td.tool_small { font-size:11px; }
   font-weight: normal;
 }
  
+.thumbnail {
+    display: inline-block;
+    height: 15px;
+    margin: 2px 0 -2px 3px;
+    overflow: hidden;
+    position: relative;
+    width: 15px;
+}
+.thumbnail img {
+    width: 15px;
+}
+.passiveSectionHeadDescription {
+    color: #333;
+    display: block;
+    font-size: 10px;
+    line-height: 11px;
+    margin: 4px 0 6px;
+}

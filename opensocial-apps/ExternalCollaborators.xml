@@ -382,7 +382,7 @@
 	   		</div>		
    			<div class="list-wrap">
    				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have worked with this person. They are sorted by most collaborations (publications, grants, etc.) to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
+   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most shared publications to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
    				<div id="coll-list">
    				</div>
 	   		</div>	

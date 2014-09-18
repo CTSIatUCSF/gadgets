@@ -51,6 +51,11 @@
 			
 			gadgets.orng.reportGoogleAnalyticsEvent(message);
 		}	
+		
+		function getLabelValue(person) {
+			var label = person[RDFS('label')];
+			return label['@value'] ? label['@value'] : label;			
+		}
 				
     </script>
 	]]>
@@ -89,7 +94,7 @@
 							list_data += '<img src="' + imageURL + '" width="20px" height="22px"/>';
 						} 
 												
-						list_data += "<a href='" + person['@id'] + "' target='_blank'> " + person[RDFS('label')] + "</a>";
+						list_data += "<a href='" + person['@id'] + "' target='_blank'> " + getLabelValue(person) + "</a>";
 						list_data += "</div>";
 						
 					}
@@ -248,7 +253,7 @@
 				publication.publicationVenue = pub[PRNS('hasPublicationVenue')];
 				publication.pd = pub[PRNS('publicationDate')];
 	      		publication.year = pub[PRNS('year')];
-				publication.label = pub[RDFS('label')];
+				publication.label = getLabelValue(pub);
 				publication.pmid = pub[BIBO('pmid')]; 
 				
 				publication.title = publication.authorList + '; <span class="label">' + publication.label + '</span>; ' + publication.publicationVenue + '; ' + publication.year;
@@ -309,11 +314,11 @@
 								var person = collaborators[i];
 								var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 								
-								var name = person[RDFS('label')];
+								var name = getLabelValue(person);
 								var webSite = person[R2R('fromRNWebSite')];
 								var lat = webSite[PRNS('latitude')];
 								var long = webSite[PRNS('longitude')];
-								var university = webSite[RDFS('label')];
+								var university = getLabelValue(webSite);
 												
 						        var myLatlng = new google.maps.LatLng(lat, long);
 						        var marker = new google.maps.Marker({

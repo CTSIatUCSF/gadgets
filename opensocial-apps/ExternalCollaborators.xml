@@ -116,7 +116,7 @@
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {
-	    		$("#see-all").click(function() {
+	    		$("#see-all").click(function(event) {
 			        event.preventDefault();
 			        var ownerURI = $("#see-all").data("ownerURI");
 			        gadgetEventTrack('go_to_see_all', ownerURI);

@@ -18,8 +18,10 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
-    <script type="text/javascript" src="js/jsonld.js" ></script>
-   	<script type="text/javascript">	        
+    <script type="text/javascript" src="js/jsonld.js" ></script>   	
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+	<script type="text/javascript">	        
 		var COLLABORATED_ON = R2R('collaboratedOn');
 	
 		function getProductionURI(uri) {
@@ -60,12 +62,10 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="300">
+    <Content type="html" view="small" preferred_width="190" preferred_height="290">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-	<!-- #includes -->
-	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
 	<script type="text/javascript">
 	
 		// ========================================		
@@ -85,13 +85,13 @@
 						return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
 					});
 										
-					var list_data = "<div>";					
+					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
 					for (var i = 0; i<5 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
 						var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 						if (imageURL) {
-							list_data += '<img src="' + imageURL + '" width="20px" height="22px"/>';
+							list_data += '<div class="thumbnail"><img src="' + imageURL + '" /></div>';
 						} 
 												
 						list_data += "<a href='" + person['@id'] + "' target='_blank'> " + getLabelValue(person) + "</a>";
@@ -131,20 +131,15 @@
 		});
     </script>
     
-	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }
-		.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; font-size: 13px;}
-    	a:hover { color: #005580; text-decoration: underline; }
-    	.col-item{min-height:22px;} 
+    <style>
+    	.col-item{ min-height:22px; } 
+	#see-all, #see-all span { font-size: 11px; font-weight: bold; }
     </style>
 
-    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
+    <div id="collaborators_list"></div>     
     <div>
     	<a id="see-all" href="#" style="display:none">
-    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
+    		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
     		See all (<span></span>) people
     	</a>
     </div>	
@@ -354,7 +349,7 @@
 		   			   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<img src="' + imageURL + '"></img><div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    html +='<div><div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
 		   		    
 		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
 		   		    
@@ -363,22 +358,22 @@
 		   		$("#coll-list").append(html);    
 		   	}	   	 
 	    </script>
+
 	    <style type="text/css">
 	    	#map-canvas { height: 450px}
 	    	
 	    	.content{width: 600px;margin-left: 100px;}
-	    	.content a {text-decoration: none; color: #0088CC !important; cursor:pointer;}
 	    	.map-wrap{width:600px;height: 450px; margin-bottom: 20px;}
 	    	.list-wrap{font-size: 13px;line-height: 20px;}	    	 
-	    	.title{font-weight: bold;} 
-	    	.descr{margin: 10px;color: #777;}
+	    	.title{font-weight: bold; color: #666; } 
+	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
 	    	.col {margin-bottom: 5px;}
-	    	.col div {padding-top: 8px;}
-	    	.col img {width: 20px;float: left; margin-right: 10px;}
+	    	.col div {padding-top: 4px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
+		.thumbnail { margin-right: 4px; }
 	    </style>
 	    
    		<div class="content">
@@ -387,7 +382,7 @@
 	   		</div>		
    			<div class="list-wrap">
    				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most total publications to least. Click on a name to see their profile page in a new window.</div>
+   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most shared publications to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
    				<div id="coll-list">
    				</div>
 	   		</div>	

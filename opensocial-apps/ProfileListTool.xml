@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs title="Create My List" author="Eric Meeks">
+    <ModulePrefs title="ListMaker" author="Eric Meeks">
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
@@ -15,7 +15,7 @@
     
         <!-- #includes -->
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
- 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="js/os.js" ></script>
 	    <script type="text/javascript" src="js/ontology.js" ></script>
         <script type="text/javascript" src="js/jquery-1.4.4.js"></script>
@@ -31,7 +31,7 @@
             .tool_table_cell_small span a {font-size:11px;}
             .tool_table_cell_small span {font-size:11px;display:inline-block;margin-right: -15px; }
             .tool_toggle_button {font-size: 13px;padding:0 5px;}          
-    </style>
+    	</style>
 
         <script type="text/javascript">
         
@@ -205,42 +205,16 @@
         // ==============================================================     
 
         function displayProfileList(existingIds) {    
-        	var uris = toURIList(existingIds);
-  				
-				var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
-				     
-                var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
-                
-                // build the table header row
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Name</b></u></td>";
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u></td>";
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Email&nbsp;Address</b></u></td>";
-                strTable += "</tr>";
-                
-                for (i in uris) {
-                    var table_row = "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_name'></td>";
-                    table_row += "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_title'></td>";
-                    table_row += "<td align='left' valign='top' class='tool_table_cell email' id='" + uris[i] + "_email'></td>";
-                    strTable += "<tr id='" + uris[i] + "'>" + table_row + "</tr>";
-                }                
-                strTable += "</table>";
-                        
-                // dispay the empty table in canvas view
-                document.getElementById("canvas_profile_list").innerHTML = strTable;
-                document.getElementById("number_selected").innerHTML = "You have (" + uris.length + ")" + " profile" + (uris.length == 1 ? "" : "s") + " in your list.";
-
-                // initialize the export divs
-                document.getElementById("canvas_email_list_textarea").value = "";
-                document.getElementById("canvas_full_list_textarea").value = "";
-      
-			if (uris.length != 0) {
-		        // load in batch by 2nd argument
-				var loaded = 0;
-				displaySubList(uris, 1, properties, loaded);
-			}
-			else {
-				finishLoad();
-			}
+        	var uris = toURIList(existingIds);  				
+			var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
+				                 
+            if (uris.length > 0) {
+                $(document).ready(function () {
+                    $(".list-content").block({ message: "Loading..." });
+                });                
+                displaySubList(uris, 1, properties, 0);
+            }          
+            $("#list-size").text(uris.length);                                
 		} /* end displayProfileList */
 
 		function displaySubList(uris, batchSize, properties, loaded) {
@@ -250,22 +224,17 @@
                 framePeople(data, function(profiles) {
                 	for (var k = 0; k < profiles.length; k++) {
                     	var profile =  profiles[k];
-						if (navigator.appVersion.indexOf("MSIE") != -1) {
-                        	document.getElementById(uriBase + profile['@id'] + '_name').innerText = profile[PRNS('fullName')];
-                            document.getElementById(uriBase + profile['@id'] + '_title').innerText = profile[VIVO('preferredTitle')];
-                            document.getElementById(uriBase + profile['@id'] + '_email').innerText = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-						}
-						else {
-                            document.getElementById(uriBase + profile['@id'] + '_name').innerHTML = profile[PRNS('fullName')];
-                        	document.getElementById(uriBase + profile['@id'] + '_title').innerHTML = profile[VIVO('preferredTitle')];
-                            document.getElementById(uriBase + profile['@id'] + '_email').innerHTML = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-						}
-						document.getElementById("loadedCount").innerHTML = "" + (++loaded) + " profiles loaded so far...";
+		                var table_row = "<tr>" 
+		                table_row +="<td>" + profile[PRNS('fullName')] + "</td>";
+		                table_row +="<td>" + profile[VIVO('preferredTitle')] +"</td>";
+		                table_row +="<td>" + profile[VIVO('email')] + "</td>";
+		                table_row +="</tr>";
+		                $(".list-content table").append(table_row);                                        	
 					}
 	                // see if we are done and if so turn off progress bar and
 	                // add to export lists 
 	                if (uris.length == 0) {
-						finishLoad();
+						$(".list-content").unblock();
 	                }
 					else {
 						displaySubList(uris, batchSize, properties, loaded);
@@ -294,7 +263,7 @@
 	        document.getElementById("canvas_full_list_textarea").value = full_list;
 	        document.getElementById("canvas_email_list_textarea").value = email_list;
 	           
-	        document.getElementById("progress").style.display="none";
+	        //document.getElementById("progress").style.display="none";
 		}
         
         // ==============================================================                
@@ -447,6 +416,8 @@
         </script>]]></Content>
     <Content type="html" view="canvas" preferred_height="620" preferred_width="700"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+           <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
            <style type="text/css">
                    div#create_group {
                            margin-left: 20px;
@@ -458,7 +429,7 @@
                            padding-right:10px;
                            border:solid #CCC 1px;
                            width:470px;
-                        border-radius: 0;
+                           border-radius: 0;
                    }
                    input#close {
                            margin-left:10px;
@@ -476,13 +447,72 @@
                            display:none;
                    }
                 p { width: 640px; }
-                  
+            
+            
+                .list-info {font-weight:bold; font-size:14px; color:#CA7C29;}
+                .list-descr {margin-top: 10px;}
+                #more-info {color: #0088CC !important; cursor: pointer;}
+                .commands {margin-top: 20px;}
+                .commands .row{ margin-top: 10px;}
+                .commands label {width: 100px; text-align: right;font-weight: bold; font-size: 13px; margin-right: 10px;}
+                .list-content {margin-top: 30px; height: 300px; overflow-y: auto;}
+                .list-content th {text-align: left; padding-bottom: 5px;}                
+                .btn:hover{color:white;}
            </style>
     
-    <!-- top menu links -->
         <div style="width:640px;">
-                <p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">
-                Selected Profiles<p>
+        		<div class="list-info">There are currently <span id="list-size">48</span> people in your list.</div>
+        		<div class="list-descr">Choose what you'd like to do with their information. <span id="more-info">More information on the options</span></div>
+        		
+        		<div class="commands">
+        			<div class="row">
+        				<label>Email</label>
+        				<button class="btn btn-sm" id="create-email">
+		      				<span class="glyphicon glyphicon-pencil"></span>
+		      				Compose email
+		    			</button>
+        			</div>
+        			<div class="row">
+        				<label>Open as CSV</label>
+        				<button class="btn btn-sm" id="save-list">
+		      				<span class="glyphicon glyphicon-save"></span>
+		      				Download List
+		    			</button>
+        				<button class="btn btn-sm" id="save-pubs">
+		      				<span class="glyphicon glyphicon-floppy-save"></span>
+		      				Download Pubs
+		    			</button>
+        			</div>
+        			<div class="row">
+        				<label>Connect with</label>
+        				<button class="btn btn-sm" id="create-doodle">
+		      				<span class="glyphicon glyphicon-gift"></span>
+		      				Create Doodle Poll 
+		    			</button>
+        				<button class="btn btn-sm" id="create-chatter-group">
+		      				<span class="glyphicon glyphicon-cloud-upload"></span>
+		      				Create Chatter group
+		    			</button>
+        			</div>
+        			<div class="row">
+        				<label>Manage</label>
+        				<button class="btn btn-sm" id="clear-list">
+		      				<span class="glyphicon glyphicon-trash"></span>
+		      				Clear this list
+		    			</button>
+        			</div>
+        		</div>
+        		<div class="list-content">
+        		  <table cellspacing='0' cellpadding='0'>
+        		      <tr>
+	        		      <th>Name</th>
+	                      <th>Title</th>
+	                      <th>Email Address</th>
+                      </tr>
+        		  </table>
+        		</div>
+        		
+                <!--p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">Selected Profiles<p>
                 <p id="canvas_help" style="padding-left:20px">Create a UCSF Chatter group or email list that includes the people below. 
                 							To manage your UCSF Chatter group after you create it, such as adding or removing members, go to UCSF Chatter directly.</p>
                 <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
@@ -493,17 +523,8 @@
                                 <a href="" id="compose-email">Compose email to list</a><p>
                         </div>
                         <a href="javascript:gadgetEventTrack('delete_list');deleteList();" style="margin-left:20px;">Delete list</a>
-                </p>
-                
-                <div id="progress" style="margin-left:20px;">
-                <table><tr>                
-                <td><img src="images/waiting.gif"></td>
-		<td>&nbsp;</td>
-		<td><b>This may take a minute or two, based on the size of your selected Profiles list.<br><div id="loadedCount"></div></b></td>
-		</tr>
-		</table>
-		</div>		
-        </div>
+                </p-->                
+	    </div>
         <div id="create_group" class="hidden">
                 <div class="message hidden"><strong>Success! Your UCSF Chatter group has been created.</strong><br> 
                         Go to UCSF Chatter to start working with your group.</div>
@@ -539,18 +560,23 @@
         </div>        
         
         <!-- holds the visible profile details list -->
-        <div id="canvas_profile_list" style="display:none; margin-left:20px; height:463px; height:443px\9; width: 660px; overflow:auto;"></div>
+        <!--div id="canvas_profile_list" style="display:none; margin-left:20px; height:463px; height:443px\9; width: 660px; overflow:auto;"></div-->
         
         <script type="text/javascript">
 
             function init() {
-		    // mask all but delete until we are done loading
-                    gadgets.window.setTitle("My list of profiles");                
+		    		// mask all but delete until we are done loading
+                    gadgets.window.setTitle("ListMaker");                
             		// always show in canvas view
                     gadgets.orng.showGadget();
+                    
+	                $(document).ready(function () {
+	                   //$("#more-info").tooltip();
+	                });                
+                    
                     // update UI
                     readIdsFromDB(displayProfileList);                
-                    document.getElementById("canvas_profile_list").style.display="block";
+                    //document.getElementById("canvas_profile_list").style.display="block";
                     
                     $("a#create_group").click(function(event){
                         event.preventDefault();

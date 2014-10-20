@@ -40,7 +40,7 @@
 					$("#see-all").data("ownerURI", getProductionURI(result.uris[0])).show();
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON-LD';
+					var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
 					gadgets.io.makeRequest(url, callback, params);
 				}
 			}); /* end osapi.appdata.get */			
@@ -59,6 +59,38 @@
 			return label['@value'] ? label['@value'] : label;			
 		}
 				
+		function parseCollaborators(collaboratorsStr) {
+			var colArr = gadgets.json.parse(collaboratorsStr.data).results.bindings;
+			var colMap = {};
+
+			for (var i = 0; i < colArr.length; i++) {
+				if (colMap[colArr[i].researcherURI.value]) {
+					colMap[colArr[i].researcherURI.value].contributedWork.push(colArr[i].contributedWork.value);
+				}
+				else {
+					var person = {};
+					person.researcherURI = colArr[i].researcherURI.value;
+					person.contributedWork = [];
+					person.contributedWork[0] = colArr[i].contributedWork.value;
+					person.image = colArr[i].thumbnail ? colArr[i].thumbnail.value : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+					person.researcherHomePage = colArr[i].researcherHomePage ? colArr[i].researcherHomePage.value : colArr[i].researcherURI.value;
+					person.label = colArr[i].researcherLabel.value;
+					person.rns = {};
+					person.rns.url = colArr[i].researchNetworkingSite.value;
+					person.rns.label = colArr[i].affiliation.value;
+					person.rns.lat = colArr[i].lat.value;
+					person.rns.lon = colArr[i].lon.value;
+
+					colMap[colArr[i].researcherURI.value] = person;
+				}
+			}
+			var dataArray = [];
+			for(var o in colMap) {
+			    dataArray.push(colMap[o]);
+			}
+			return dataArray;
+		}
+	
     </script>
 	]]>
 	</Content>
@@ -67,34 +99,25 @@
     <!DOCTYPE html>
     
 	<script type="text/javascript">
-	
+
 		// ========================================		
 		function displayData(collaboratorsStr) {
-			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
-			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
-			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
-			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-					collaborators = collaborators['@graph'];
+			var collaborators = parseCollaborators(collaboratorsStr);
+				if (collaborators && collaborators.length) {
 					// need to tell container that it is OK to show us
 					gadgets.orng.showGadget();
 
 					// put ones with the most publications at the top, since these are all shared publications
 					collaborators.sort(function(a, b) {
-						return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
+						return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 					});
 										
 					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
 					for (var i = 0; i<5 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
-						var imageURL = person[FOAF('img')] ? person[FOAF('img')]['@id'] : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
-						if (imageURL) {
-							list_data += '<div class="thumbnail"><img src="' + imageURL + '" /></div>';
-						} 
-												
-						list_data += "<a href='" + person['@id'] + "' target='_blank'> " + getLabelValue(person) + "</a>";
+						list_data += '<div class="thumbnail"><img src="' + person.image + '" /></div>';						
+						list_data += "<a href='" + person.researcherHomePage+ "' target='_blank'> " + person.label + "</a>";
 						list_data += "</div>";
 						
 					}
@@ -109,8 +132,7 @@
 						var h = $("#collaborators_list").height() + 30;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
-				}				
-			});
+			}				
 		}
 	
 	   	gadgets.util.registerOnLoadHandler(function() {
@@ -144,42 +166,6 @@
     </div>	
     
     ]]></Content>
-    <Content type="html" view="verify">
-    <![CDATA[	
-   	<script type="text/javascript">	    
-   		function checkData() {
-   			// see if we already have this person/app combination internally in the system
-   			osapi.orng.getAppInstance().execute(function(result) {
-   				// if we do NOT have this in the system, then automatically add this to the persons if they have data from the service
-   				if (typeof result !== 'string') {
-					readData(registerApp); 					
-   				}
-   			});
-   		}
-   	    
-		function registerApp(collaboratorsStr) {
-			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
-			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
-			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
-			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-					// need to tell container that it is OK to show us
-					osapi.orng.addAppToOwner().execute(function(result) {
-					});
-				}
-				else {
-					// this does a "hard delete" and removes the app instance
-					osapi.orng.removeAppFromOwner().execute(function(result) {
-					});					
-				}				
-			});
-		}
-
-	   	gadgets.util.registerOnLoadHandler(checkData);
-    </script>
-	]]>
-	</Content>
     <Content type="html" view="canvas" preferred_height="120" preferred_width="800">
     <![CDATA[
 	   	<script type="text/javascript">
@@ -202,7 +188,7 @@
 			function readData2(ownerUri, callback) {
 				var params = {};
 				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-				var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON-LD';
+				var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
 				gadgets.io.makeRequest(url, callback, params);
 			}
 	    	
@@ -290,29 +276,28 @@
 		   		});
 		   		
 				loadPubs(function(collaboratorsStr) {
-					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
-					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-						if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-							collaborators = collaborators['@graph'];
+
+					var collaborators = parseCollaborators(collaboratorsStr);
+						if (collaborators && collaborators.length) {
 							// need to tell container that it is OK to show us
 							gadgets.orng.showGadget();
 		
 							// put ones with the most publications at the top, since these are all shared publications
 							collaborators.sort(function(a, b) {
-								return getPubCount(b) - getPubCount(a);
+								return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 							});
 									
 							$(".total-count").text(collaborators.length);	                  
 								
 							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
-								var imageURL = person[FOAF('img')] ? person[FOAF('img')]['@id'] : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+								var imageURL = person.image;
 								
-								var name = getLabelValue(person);
-								var webSite = person[R2R('hasAffiliation')];
-								var lat = webSite[GEO('lat')];
-								var long = webSite[GEO('long')];
-								var university = getLabelValue(webSite);
+								var name = person.label;
+								var webSite = person.rns.url;
+								var lat = person.rns.lat;
+								var long = person.rns.lon;
+								var university = person.rns.label;
 
 							if (lat && long) {												
 							        var myLatlng = new google.maps.LatLng(lat, long);
@@ -322,16 +307,16 @@
 					    				title: university
 									});
 							}		
-								var profileUrl=person['@id'];
+								var profileUrl = person.researcherHomePage;
 								var pmUrl = "pubId";
 								
-								var pubs = person[FOAF('publications')];
+								var pubs = person.contributedWork;
 								var pubs_count = 1;
 								if(pubs instanceof Array) {
 									pubs_count = pubs.length;
 									pmUrl = "http://www.ncbi.nlm.nih.gov/pubmed/?term="									
 									for(var p=0;p<pubs.length;p++) {
-										pmUrl += getPubId(pubs[p]['@id']) + ",";
+										pmUrl += getPubId(pubs[p]) + ",";
 									}
 								}
 								else {
@@ -343,7 +328,6 @@
 								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pub?pub.title:"", university);								
 							}									
 						}				
-					});
 				});		   		 
 		   	});	
 		   			   	

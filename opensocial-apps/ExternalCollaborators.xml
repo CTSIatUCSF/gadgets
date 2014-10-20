@@ -72,7 +72,7 @@
 		function displayData(collaboratorsStr) {
 			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
 			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
+			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
 			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
 			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
 				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
@@ -89,7 +89,7 @@
 					for (var i = 0; i<5 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
-						var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+						var imageURL = person[FOAF('img')] ? person[FOAF('img')]['@id'] : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 						if (imageURL) {
 							list_data += '<div class="thumbnail"><img src="' + imageURL + '" /></div>';
 						} 
@@ -117,7 +117,6 @@
 			readData(displayData);
 	    	$(document).ready(function () {
 	    		$("#see-all").click(function(event) {
-			        event.preventDefault();
 			        var ownerURI = $("#see-all").data("ownerURI");
 			        gadgetEventTrack('go_to_see_all', ownerURI);
 			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
@@ -161,7 +160,7 @@
 		function registerApp(collaboratorsStr) {
 			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
 			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
+			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
 			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
 			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
 				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
@@ -265,7 +264,7 @@
 	    		return parts[parts.length-1];
 	    	}
 	    	
-	    	var CONTRIBUTED_TO = R2R('contributedTo');
+	    	var CONTRIBUTED_TO = FOAF('publications');
 	    	function getPubCount(person) {
 				var pubs = person[CONTRIBUTED_TO];
 	    		if(pubs instanceof Array) {
@@ -291,7 +290,7 @@
 		   		});
 		   		
 				loadPubs(function(collaboratorsStr) {
-					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
+					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#hasAffiliation": {}}]');
 					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
 						if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
 							collaborators = collaborators['@graph'];
@@ -307,25 +306,26 @@
 								
 							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
-								var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+								var imageURL = person[FOAF('img')] ? person[FOAF('img')]['@id'] : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 								
 								var name = getLabelValue(person);
-								var webSite = person[R2R('fromRNWebSite')];
-								var lat = webSite[PRNS('latitude')];
-								var long = webSite[PRNS('longitude')];
+								var webSite = person[R2R('hasAffiliation')];
+								var lat = webSite[GEO('lat')];
+								var long = webSite[GEO('long')];
 								var university = getLabelValue(webSite);
-												
-						        var myLatlng = new google.maps.LatLng(lat, long);
-						        var marker = new google.maps.Marker({
-				    				position: myLatlng,
-				    				map: map,
-				    				title: university
-								});
-								
+
+							if (lat && long) {												
+							        var myLatlng = new google.maps.LatLng(lat, long);
+							        var marker = new google.maps.Marker({
+					    				position: myLatlng,
+					    				map: map,
+					    				title: university
+									});
+							}		
 								var profileUrl=person['@id'];
 								var pmUrl = "pubId";
 								
-								var pubs = person[R2R('contributedTo')];
+								var pubs = person[FOAF('publications')];
 								var pubs_count = 1;
 								if(pubs instanceof Array) {
 									pubs_count = pubs.length;
@@ -382,7 +382,7 @@
 	   		</div>		
    			<div class="list-wrap">
    				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most shared publications to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
+   				<div class="descr">External Collaborators are people at other institutions who have worked with this person. They are sorted by most collaborations (publications, grants, etc.) to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
    				<div id="coll-list">
    				</div>
 	   		</div>	

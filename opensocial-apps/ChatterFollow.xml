@@ -58,7 +58,8 @@
 		}
     
 		function getNodeId(person) {
-		   return person['@id'];
+		   var parts = person['@id'].split('/');
+		   return parts[parts.length - 1];
 		}
 	
 		function getState() {	

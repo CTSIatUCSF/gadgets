@@ -222,7 +222,7 @@
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
             osapi.jsonld.getProperties(ids, properties).execute(function(data) {
-            	var uriBase = data.base;
+            	var uriBase = '';//data.base;
                 framePeople(data, function(profiles) {
                 	for (var k = 0; k < profiles.length; k++) {
                     	var profile =  profiles[k];

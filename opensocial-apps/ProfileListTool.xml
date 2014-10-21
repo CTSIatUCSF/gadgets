@@ -206,33 +206,36 @@
         }
         // ==============================================================     
 
+        var loadedCount = 0; 
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);  				
 			var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
 				                 
             if (uris.length > 0) {
                 $(document).ready(function () {
-                    $(".list-content").block({ message: "Loading..." });
+                    $(".list-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + uris.length + '</div>'});
                 });                
-                displaySubList(uris, 10, properties, 0);
+                displaySubList(uris, 2, properties, 0);
             }          
             $("#list-size").text(uris.length);                                
 		} /* end displayProfileList */
-
+        
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
             osapi.jsonld.getProperties(ids, properties).execute(function(data) {
-            	var uriBase = '';//data.base;
+            	var uriBase = '';
                 framePeople(data, function(profiles) {
                 	for (var k = 0; k < profiles.length; k++) {
                     	var profile =  profiles[k];
 		                var table_row = '<tr>'; 
-		                table_row +='<td>' + profile[PRNS('fullName')] + '</td>';
-		                table_row +='<td>' + profile[VIVO('preferredTitle')] +'</td>';
+		                table_row +='<td>' + (profile[PRNS('fullName')]?profile[PRNS('fullName')]:"") + '</td>';
+		                table_row +='<td>' + (profile[VIVO('preferredTitle')]?profile[VIVO('preferredTitle')]:"") +'</td>';
 		                table_row +='<td class="email">' + (profile[VIVO('email')]?profile[VIVO('email')]:"") + '</td>';
 		                table_row +='</tr>';
 		                $(".list-content table tbody").append(table_row);                                        	
 					}
+					loadedCount += batchSize;
+					$("#loaded-count").text(loadedCount);
 	                // see if we are done and if so turn off progress bar and
 	                // add to export lists 
 	                if (uris.length == 0) {
@@ -469,6 +472,7 @@
                 .help-content ul {list-style-type: disc; margin-left: 30px;}
                 .help-content li {margin-bottom:5px;}
                 
+                .progress-msg {margin:5px;}
            </style>
     
         <div style="width:640px;">

@@ -119,8 +119,19 @@ ul { list-style-type:none; }
 .answerresponse ul { margin:.2em; }
 .answerresponse li { margin:.2em; margin-left:2em; list-style:disc;}
 
-
-
 .gadget_credits {
     margin: 0px 10px;
-}    
+}
+
+.thumbnail {
+    display: inline-block;
+    height: 15px;
+    margin: 2px 0 -2px 3px;
+    overflow: hidden;
+    position: relative;
+    width: 15px;
+}
+.thumbnail img {
+    width: 15px;
+}
+    

@@ -209,24 +209,35 @@
         var loadedCount = 0; 
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);  				
-			var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
+			var properties = [RDF('type'), FOAF('firstName'), FOAF('lastName'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email'), PRNS('personInPrimaryPosition'), VIVO('mailingAddress'), VIVO('freetextKeyword'), VIVO('authorInAuthorship')];
 				                 
             if (uris.length > 0) {
                 $(document).ready(function () {
                     $(".list-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + uris.length + '</div>'});
                 });                
-                displaySubList(uris, 2, properties, 0);
+                displaySubList(uris, 1, properties, 0);
             }          
             $("#list-size").text(uris.length);                                
 		} /* end displayProfileList */
         
+        var peopleList = [];
+        
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
-            osapi.jsonld.getProperties(ids, properties).execute(function(data) {
+			osapi.jsonld.getRDF(ids).execute(function(result) {
+                framePeople(result, function(profiles) {
+	                var json = JSON.stringify(profiles);
+	                $("#debug").append("<div>" + json + "</div>");
+                });
+			});
+			
+            osapi.jsonld.getProperties(ids, properties).execute(function(data) {                
             	var uriBase = '';
                 framePeople(data, function(profiles) {
+                    $("#debug").append('<div class="props">' + JSON.stringify(profiles) + "</div>");
                 	for (var k = 0; k < profiles.length; k++) {
                     	var profile =  profiles[k];
+                    	peopleList.push(profile);
 		                var table_row = '<tr>'; 
 		                table_row +='<td>' + (profile[PRNS('fullName')]?profile[PRNS('fullName')]:"") + '</td>';
 		                table_row +='<td>' + (profile[VIVO('preferredTitle')]?profile[VIVO('preferredTitle')]:"") +'</td>';
@@ -466,6 +477,7 @@
                 .list-content th.title {width: 180px;}
                 .list-content th.email {width: 200px;}
                 .btn:hover{color:white;}
+                .btn-sm {background-color: lightgray;color: black;}
                 
                 .ui-tooltip {max-width: 500px;}
                 .help-content div {margin-bottom: 10px;}
@@ -475,7 +487,7 @@
                 .progress-msg {margin:5px;}
            </style>
     
-        <div style="width:640px;">
+        <div style="width:640px;" class="gadget-content">
         		<div class="list-info">There are currently <span id="list-size">48</span> people in your list.</div>
         		<div class="list-descr">Choose what you'd like to do with their information. <span id="more-info">More information on the options</span></div>
         		
@@ -489,14 +501,14 @@
         			</div>
         			<div class="row">
         				<label>Open as CSV</label>
-        				<button class="btn btn-sm" id="save-list">
+        				<a class="btn btn-sm" id="save-list">
 		      				<span class="glyphicon glyphicon-save"></span>
 		      				Download List
-		    			</button>
-        				<button class="btn btn-sm" id="save-pubs">
+		    			</a>
+        				<a class="btn btn-sm" id="save-pubs">
 		      				<span class="glyphicon glyphicon-floppy-save"></span>
 		      				Download Pubs
-		    			</button>
+		    			</a>
         			</div>
         			<div class="row">
         				<label>Connect with</label>
@@ -529,6 +541,7 @@
                       <tbody/>
         		  </table>
         		</div>
+        		<div id="debug" style="display:none"></div>
         		
         		<div style="display:none">
         		  <div id="commands-help">
@@ -614,7 +627,8 @@
                     
                 // update UI
                 readIdsFromDB(displayProfileList);                
-                    
+                
+                /*    
                 $("a#create_group").click(function(event){
                     event.preventDefault();
                     $("div.message").addClass("hidden");        
@@ -639,7 +653,234 @@
                                 });                        
                         }
                 });
+                */
+                
+                $("#save-list").click(function(event){
+                    if(!$(this).attr("href") && peopleList.length > 0) {
+                        $(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
+                        loadProfileData(peopleList, 0, "");
+                        event.preventDefault();
+                        return false;
+                    }                    
+                });
+                
+                $("#save-pubs").click(function(event){
+                    if(!$(this).attr("href") && peopleList.length > 0) {
+                        
+                        //$(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
+                        
+                        var authorshipIds = getAuthorshipIds(peopleList);
+                        if(authorshipIds.length > 0) {
+	                        osapi.jsonld.getRDF(authorshipIds).execute(function(result) {
+	                            var json = JSON.stringify(result);
+	                            $("#debug").append('<div class="authorship">' + json + "</div>");
+	                            var gr = result.jsonld["@graph"];
+	                            
+	                            var pubIds = [];
+	                            for(var i=0; i < gr.length; i++) {
+	                               var pubId = gr[i].linkedInformationResource;
+	                               pubIds.push(pubId);
+	                            }
+	                            
+	                            loadPublications(pubIds);	                            
+	                        });
+                        }
+                        
+                        event.preventDefault();
+                        return false;
+                    }                    
+                });
+                
+                function loadPublications(pubIds) {
+                    osapi.jsonld.getRDF(pubIds).execute(function(result) {
+	                    var json = JSON.stringify(result);
+	                    $("#debug").append('<div class="pub">' + json + "</div>");
+                    });
+                }
+                
+                function getAuthorshipIds(peopleList) {
+                    var ids = [];
+                    for(var i=0; i < peopleList.length; i++) {
+                        var publications = peopleList[i][VIVO('authorInAuthorship')];
+                        if (publications instanceof Array) {
+                            for (var p in publications) {
+                                var pubId = publications[p]["@id"];
+                                if(pubId) {
+                                    ids.push(pubId);
+                                }                                                               
+                            }
+                        }
+                        else if (publications) {
+                            var pubId = publications["@id"];
+                            if(pubId) {
+                                ids.push(pubId);
+                            }                                                               
+                        }
+                    }
+                    return ids;                    
+                }
+                
+                function loadProfileData(peopleList, index, csvData) {
+                    $("#loaded-count").text(index + 1);	                
+                    var profile =  peopleList[index];
+                    
+                    loadRequiredIds(profile, function(ids) {
+	                    if(ids.length > 0) {
+	                        osapi.jsonld.getRDF(ids).execute(function(result) {
+	                           var json = JSON.stringify(result);
+	                           $("#debug").append('<div class="additionalData">' + json + '</div>');
+	                            
+	                           loadProfileDataInternal(peopleList, index, csvData, result);
+	                        });                 
+	                    }
+	                    else {
+	                       loadProfileDataInternal(peopleList, index, csvData)
+	                    }                    
+                    })
+                    	                
+                }
+                
+                function loadRequiredIds(profile, callback) {
+                    var ids = [];
+                    if(profile[VIVO('mailingAddress')]) {
+                        ids.push(profile[VIVO('mailingAddress')]["@id"]);
+                    }
+                    
+                    if(profile[PRNS('personInPrimaryPosition')]) {
+                        var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
+                        osapi.jsonld.getRDF(positionId).execute(function(result) {
+                            var json = JSON.stringify(result);
+                            $("#debug").append('<div class="position">' + json + '</div>');
+                            ids.push(result.jsonld.positionInOrganization);
+                            ids.push(result.jsonld.positionInDepartment);
+                            callback(ids);
+                        });
+                    }
+                    else {
+                        callback(ids);
+                    }                                        
+                }
+                
+                function loadProfileDataInternal(peopleList, index, csvData, additionalData) {
+                    var profile =  peopleList[index];
+                    
+                    var address = "";
+                    var organization = "";
+                    var department = "";
+                    if(additionalData) {
+                        address = getAddress(additionalData);                       
+                        organization = getOrganization(additionalData);                       
+                        department = getDepartment(additionalData);                       
+                    }
+                
+	                csvData += createCsvField(profile[FOAF('firstName')]);
+	                csvData += createCsvField(profile[FOAF('lastName')]);
+	                csvData += createCsvField(profile[VIVO('preferredTitle')]);
+	                csvData += createCsvField(profile[VIVO('email')]);	                
+	                
+	                //address, school, department
+	                csvData += createCsvField(address);
+                    csvData += createCsvField(organization);
+                    csvData += createCsvField(department);
+	                
+	                csvData += createCsvField(profile['@id']);//profile URL
+	                csvData += createCsvField(profile[VIVO('freetextKeyword')]);//research interests
+	                	                
+	                //published concepts/MeSH terms
+	
+	                csvData += "\r\n";                  
+	                if(index + 1 < peopleList.length) {
+	                   loadProfileData(peopleList, index + 1, csvData)
+	                }
+	                else {
+	                   exportToCsv($("#save-list"), csvData);
+	                }                                               
+                }
+                
+                function getObjectByType(rdf, type) {
+                    var obj;
+                    if(rdf.jsonld["@graph"]) {
+                        for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
+                            var gr = rdf.jsonld["@graph"][i];
+                            if(gr["@type"] == type) {
+                                obj = gr;
+                                break; 
+                            }
+                        }
+                    }
+                    else if(rdf.jsonld["@type"] == type){
+                        obj = rdf.jsonld;
+                    }
+                    
+                    return obj;
+                }
+                
+                function getAddress(rdf) {
+                    var obj = getObjectByType(rdf, "vivo:Address");                    
+                    if(obj) {
+	                    var address1 = obj.address1;
+	                    var addressCity = obj.addressCity;
+	                    var addressPostalCode = obj.addressPostalCode;
+	                    var addressState = obj.addressState;
+	                    
+	                    return address1 + " " + addressCity + " " + addressState + " " + addressPostalCode;
+                    }
+                }
 
+                function getOrganization(rdf) {
+                    var obj = getObjectByType(rdf, "foaf:Organization");                    
+                    if(obj) {
+                        return obj.label;
+                    }
+                    return "";
+                }
+
+                function getDepartment(rdf) {
+                    var obj;
+                    if(rdf.jsonld["@graph"]) {
+                        for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
+                            var gr = rdf.jsonld["@graph"][i];
+                            if($.inArray("vivo:Department", gr["@type"]) != -1) {
+                                obj = gr;
+                                break; 
+                            }
+                        }
+                    }
+                    else if($.inArray("vivo:Department", rdf.jsonld["@type"])){
+                        obj = rdf.jsonld;
+                    }
+                    
+                    if(obj) {
+                        return obj.label;
+                    }
+                    return "";
+                }
+                
+                function exportToCsv(link, csvData) {
+                    $(".gadget-content").unblock();
+                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
+                    link.attr({
+	                    'href': href,
+	                    'target': '_blank',
+	                    'download': 'list.csv'
+                    }); 
+                    $('<a></a>')
+                        .attr('id','downloadFile')
+                        .attr('href', href)
+                        .attr('download','list.csv')
+                        .appendTo('body');
+                        
+                    $('#downloadFile').ready(function() {
+                        $('#downloadFile').get(0).click();
+                    });                        
+                }
+                
+                function createCsvField(val) {
+                    val = val || "";
+                    return '"' + val + '",';
+                }
+                
+                
                 $("#clear-list").click(function(event){
 		           osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': ['ids', 'count']} ).execute(function(result){
 		                  if (result.error) { 

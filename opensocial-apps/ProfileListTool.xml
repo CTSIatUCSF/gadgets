@@ -320,24 +320,21 @@
         }
         
         function createGroup(name, description, ownerId, users) {
-                document.getElementById("progress").style.display="block";
-
-                var params = {
-                        "name": name,
-                        "description": description,
-                        "ownerId": ownerId,
-                        "users": users};
-                        
+            var params = {
+                    "name": name,
+                    "description": description,
+                    "ownerId": ownerId,
+                    "users": users};
+                    
             sendRequest(false, false, chatterProxyURL + "/group/new", params, function(data) {
-                document.getElementById("progress").style.display="none";
-                    if(data.Success) {
-                                showMessage("<strong>Success! Your UCSF Chatter group '" + name + "' has been created.</strong><br> " 
-                                                + "<a target='_blank' href='" + data.URL + "'>Go to UCSF Chatter to start working with your group.</a>");
-                                $("input#goup_name").val("");
-                        }
-                        else {
-                                showMessage("Cannot create a group. " + data.ErrorMessage, true);
-                        }
+                if(data.Success) {
+                            showMessage("<strong>Success! Your UCSF Chatter group '" + name + "' has been created.</strong><br> " 
+                                            + "<a target='_blank' href='" + data.URL + "'>Go to UCSF Chatter to start working with your group.</a>");
+                            $("input#goup_name").val("");
+                }
+                else {
+                        showMessage("Cannot create a group. " + data.ErrorMessage, true);
+                }
             },
             function(obj) {
                         showMessage("Server error " + obj.rc + " : " + obj.errors, true);
@@ -430,23 +427,11 @@
                 
                 gadgets.util.registerOnLoadHandler(init);
         </script>]]></Content>
-    <Content type="html" view="canvas" preferred_height="620" preferred_width="700"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas" preferred_height="620" preferred_width="800"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
            <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
            <style type="text/css">
-                   div#create_group {
-                           margin-left: 20px;
-                           margin-top:10px;
-                           margin-bottom:10px;
-                           padding-top:10px;
-                           padding-bottom:10px;
-                           padding-left:10px;
-                           padding-right:10px;
-                           border:solid #CCC 1px;
-                           width:470px;
-                           border-radius: 0;
-                   }
                    input#close {
                            margin-left:10px;
                    }
@@ -485,6 +470,8 @@
                 .help-content li {margin-bottom:5px;}
                 
                 .progress-msg {margin:5px;}
+                
+                .gadget-content {margin-left: 50px;margin-top: 20px;}
            </style>
     
         <div style="width:640px;" class="gadget-content">
@@ -558,56 +545,22 @@
                       </div>
         		  </div>
         		</div>
-        		
-                <!--p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">Selected Profiles<p>
-                <p id="canvas_help" style="padding-left:20px">Create a UCSF Chatter group or email list that includes the people below. 
-                							To manage your UCSF Chatter group after you create it, such as adding or removing members, go to UCSF Chatter directly.</p>                							
-                							
-                <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-                        <div id="extended_functions" style="display:inline-block; padding:0 0 0 20px;">
-                                <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-                                <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all contact info</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="" id="compose-email">Compose email to list</a><p>
-                        </div>
-                        <a href="javascript:gadgetEventTrack('delete_list');deleteList();" style="margin-left:20px;">Delete list</a>
-                </p-->                
+        		<iframe id="csvDownloadFrame" style="display:none"></iframe>        		
 	    </div>
-        <div id="create_group" class="hidden">
+        <div id="create_group" style="display:none">
                 <div class="message hidden"><strong>Success! Your UCSF Chatter group has been created.</strong><br> 
                         Go to UCSF Chatter to start working with your group.</div>
-                <table><tr>                
-                <td nowrap valign="top">UCSF Chatter Group Name:</td>
-                <td><input id="group_name" type="text" style="width:218px"></input><br><br></td></tr><tr>
-                <td nowrap valign="top" align="right">Group Description:</td>
-                <td><textarea id="group_description" rows="4" cols="25"></textarea><br><br></td></tr><tr><td>&nbsp;</td>
-                <td><input id="create" type="button" value="Create"></input>
-                <input id="close" type="button" value="Cancel/Close"></input></td></tr></table> 
+                <table>
+                    <tr>                
+                        <td nowrap valign="top" style="padding-right: 10px;">UCSF Chatter Group Name:</td>
+                        <td><input id="group_name" type="text" style="width:218px"></input><br><br></td>
+                    </tr>
+                    <tr>
+                        <td nowrap valign="top" align="right" style="padding-right: 10px;">Group Description:</td>
+                        <td><textarea id="group_description" rows="4" cols="25" style="width:218px"></textarea></td>
+                    </tr>                   
+                </table> 
         </div>
-        
-        <div id="canvas_email_list" style="display:none; background:#FFF; width:670px; height:50px; margin-left:20px;">
-        Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
-        <input type="button" style="height:22px; font-size:10; margin-left:40px; margin-top: 6px;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button>
-        </div>
-        
-        <!-- holds the email address list to be copied to the clipboard -->
-        <div id="canvas_email_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
-        </textarea>
-        </div>
-        
-        <div id="canvas_full_list" style="display:none; background:#FFF; width:640px; height:50px; margin-left: 20px;">
-        Copy and paste the profile data below into an Excel spreadsheet or external text editor.
-        <input type="button" style="height:22px; font-size:10; margin-left:40px; margin-top: 6px;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button>
-        </div>
-        
-        <!-- holds the full profile list to be copied to the clipboard -->
-        <div id="canvas_full_list_text" style="display:none; width:640px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
-        </textarea>
-        </div>        
-        
-        
         <script type="text/javascript">
 
             function init() {
@@ -644,16 +597,46 @@
                         var name = $("div#create_group input#group_name").val();
                         var description = $("div#create_group #group_description").val();
                         if(name == null || name == '') {
-                                showMessage("Please enter a group name.", true);
+                                showMessage("Please enter a group name.", true);                                
                         }
                         else {                                
-                                osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
-                                        var users = getUserList();
-                                        createGroup(name, description, getNodeIdFromURI(result.id), users);
-                                });                        
+                            osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
+                                    var users = getUserList();
+                                    createGroup(name, description, getNodeIdFromURI(result.id), users);
+                            });                        
                         }
                 });
                 */
+
+                $("#create-chatter-group").click(function(event){
+                    $("#create_group .message").addClass("hidden");
+                    $("#create_group").dialog({
+                         modal: true,
+                        minWidth:440,
+                        title: "Create Chatter Group",
+                        buttons: [ 
+                            { text: "Create", 
+                              click: function() {
+		                        var name = $("div#create_group input#group_name").val();
+		                        var description = $("div#create_group #group_description").val();
+		                        if(name == null || name == '') {
+		                                showMessage("Please enter a group name.", true);
+		                                return;
+		                        }
+	                            osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
+	                                    var users = getUserList();
+	                                    createGroup(name, description, getNodeIdFromURI(result.id), users);
+	                            });                                                       
+                              } 
+                            }, 
+                            { text: "Cancel", 
+                              click: function() { 
+                                $( this ).dialog( "close" ); 
+                              } 
+                            } 
+                        ]
+                    });
+                });
                 
                 $("#save-list").click(function(event){
                     if(!$(this).attr("href") && peopleList.length > 0) {
@@ -666,11 +649,10 @@
                 
                 $("#save-pubs").click(function(event){
                     if(!$(this).attr("href") && peopleList.length > 0) {
-                        
-                        //$(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
-                        
+                                                
                         var authorshipIds = getAuthorshipIds(peopleList);
                         if(authorshipIds.length > 0) {
+                            $(".gadget-content").block({ message: '<div class="progress-msg">Loading...</div>'});
 	                        osapi.jsonld.getRDF(authorshipIds).execute(function(result) {
 	                            var json = JSON.stringify(result);
 	                            $("#debug").append('<div class="authorship">' + json + "</div>");
@@ -695,7 +677,39 @@
                     osapi.jsonld.getRDF(pubIds).execute(function(result) {
 	                    var json = JSON.stringify(result);
 	                    $("#debug").append('<div class="pub">' + json + "</div>");
+	                    
+	                    var csvData = ""
+	                    if(result.jsonld["@graph"]) {
+	                       for(var i=0; i < result.jsonld["@graph"].length; i++) {
+	                           csvData += publicationToCsv(result.jsonld["@graph"][i]);
+	                       }
+	                    }
+	                    else {
+	                       csvData += publicationToCsv(result.jsonld);
+	                    }
+	                    exportToCsv($("#save-pubs"), csvData);
                     });
+                }
+                
+                function publicationToCsv(rdf) {
+                    var csvData = "";
+                    
+                    csvData += createCsvField(rdf.hasAuthorList);
+                    var dt = new Date(rdf.publicationDate);
+                    csvData += createCsvField(dt.toLocaleDateString());
+                    csvData += createCsvField(rdf.year);
+                    
+                    //JournalDay, JournalYear
+                    
+                    csvData += createCsvField(rdf.label);
+
+                    //JournalTitle, Issue, MedlinePgn
+                    
+                    csvData += createCsvField(rdf.pmid);
+                    csvData += createCsvField(rdf.pmid?('http://www.ncbi.nlm.nih.gov/pubmed/' + rdf.pmid): "");
+                    
+                    csvData += "\r\n";
+                    return csvData;
                 }
                 
                 function getAuthorshipIds(peopleList) {
@@ -856,23 +870,46 @@
                     return "";
                 }
                 
+                function supportsDataUri() {
+				    var isOldIE = navigator.appName === "Microsoft Internet Explorer";
+				    var isIE11 = !!navigator.userAgent.match(/Trident\/7\./);
+				    return ! (isOldIE || isIE11);  //Return true if not any IE
+				};
+				
                 function exportToCsv(link, csvData) {
                     $(".gadget-content").unblock();
-                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
-                    link.attr({
-	                    'href': href,
-	                    'target': '_blank',
-	                    'download': 'list.csv'
-                    }); 
-                    $('<a></a>')
-                        .attr('id','downloadFile')
-                        .attr('href', href)
-                        .attr('download','list.csv')
-                        .appendTo('body');
-                        
-                    $('#downloadFile').ready(function() {
-                        $('#downloadFile').get(0).click();
-                    });                        
+                    if (!supportsDataUri()) {
+                        var iframe = $('#csvDownloadFrame').get(0);
+                        iframe = iframe.contentWindow || iframe.contentDocument;
+                    
+					    //Optional: If you run into delimiter issues (where the commas are not interpreted and all data is one cell), then use this line to manually specify the delimeter
+					    var tableString = 'sep=,\r\n' + csvData;
+					
+					    iframe.document.open("text/html", "replace");
+					    iframe.document.write(tableString);
+					    iframe.document.close();
+					    iframe.focus();
+					    iframe.document.execCommand('SaveAs', true, 'list.csv');
+					} 
+					else {                    
+	                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
+	                    link.attr({
+		                    'href': href,
+		                    'target': '_blank',
+		                    'download': 'list.csv'
+	                    });
+	                    
+	                    $('#downloadFile').remove(); 
+	                    $('<a></a>')
+	                        .attr('id','downloadFile')
+	                        .attr('href', href)
+	                        .attr('download','list.csv')
+	                        .appendTo('body');
+	                        
+	                    $('#downloadFile').ready(function() {
+	                        $('#downloadFile').get(0).click();
+	                    });
+                    }                        
                 }
                 
                 function createCsvField(val) {

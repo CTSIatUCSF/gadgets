@@ -211,13 +211,13 @@
         	var uris = toURIList(existingIds);  				
 			var properties = [RDF('type'), FOAF('firstName'), FOAF('lastName'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email'), PRNS('personInPrimaryPosition'), VIVO('mailingAddress'), VIVO('freetextKeyword'), VIVO('authorInAuthorship')];
 				                 
+            $("#list-size").text(uris.length);                                
             if (uris.length > 0) {
                 $(document).ready(function () {
                     $(".list-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + uris.length + '</div>'});
                 });                
                 displaySubList(uris, 1, properties, 0);
             }          
-            $("#list-size").text(uris.length);                                
 		} /* end displayProfileList */
         
         var peopleList = [];
@@ -475,7 +475,7 @@
            </style>
     
         <div style="width:640px;" class="gadget-content">
-        		<div class="list-info">There are currently <span id="list-size">48</span> people in your list.</div>
+        		<div class="list-info">There are currently <span id="list-size"></span> people in your list.</div>
         		<div class="list-descr">Choose what you'd like to do with their information. <span id="more-info">More information on the options</span></div>
         		
         		<div class="commands">
@@ -837,7 +837,7 @@
 	                    var addressPostalCode = obj.addressPostalCode;
 	                    var addressState = obj.addressState;
 	                    
-	                    return address1 + " " + addressCity + " " + addressState + " " + addressPostalCode;
+	                    return address1 + "\r\n" + addressCity + "\r\n" + addressState + " " + addressPostalCode;
                     }
                 }
 

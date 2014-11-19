@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-    <ModulePrefs title="Create My List" author="Eric Meeks">
+    <ModulePrefs title="ListMaker" author="Eric Meeks">
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
@@ -15,10 +15,12 @@
     
         <!-- #includes -->
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
- 	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="js/os.js" ></script>
 	    <script type="text/javascript" src="js/ontology.js" ></script>
-        <script type="text/javascript" src="js/jquery-1.4.4.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/environment.js"></script>
                 
         <style>
@@ -31,7 +33,7 @@
             .tool_table_cell_small span a {font-size:11px;}
             .tool_table_cell_small span {font-size:11px;display:inline-block;margin-right: -15px; }
             .tool_toggle_button {font-size: 13px;padding:0 5px;}          
-    </style>
+    	</style>
 
         <script type="text/javascript">
         
@@ -204,68 +206,51 @@
         }
         // ==============================================================     
 
+        var loadedCount = 0; 
         function displayProfileList(existingIds) {    
-        	var uris = toURIList(existingIds);
-  				
-				var properties = [RDF('type'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email')];
-				     
-                var strTable="<table cellspacing='0' cellpadding='0' width='640'><tr>";
-                
-                // build the table header row
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Name</b></u></td>";
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Title</b></u></td>";
-                strTable += "<td align='left' valign='top' class='tool_table_cell'>" + "<u><b>Email&nbsp;Address</b></u></td>";
-                strTable += "</tr>";
-                
-                for (i in uris) {
-                    var table_row = "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_name'></td>";
-                    table_row += "<td align='left' valign='top' class='tool_table_cell' id='" + uris[i] + "_title'></td>";
-                    table_row += "<td align='left' valign='top' class='tool_table_cell email' id='" + uris[i] + "_email'></td>";
-                    strTable += "<tr id='" + uris[i] + "'>" + table_row + "</tr>";
-                }                
-                strTable += "</table>";
-                        
-                // dispay the empty table in canvas view
-                document.getElementById("canvas_profile_list").innerHTML = strTable;
-                document.getElementById("number_selected").innerHTML = "You have (" + uris.length + ")" + " profile" + (uris.length == 1 ? "" : "s") + " in your list.";
-
-                // initialize the export divs
-                document.getElementById("canvas_email_list_textarea").value = "";
-                document.getElementById("canvas_full_list_textarea").value = "";
-      
-			if (uris.length != 0) {
-		        // load in batch by 2nd argument
-				var loaded = 0;
-				displaySubList(uris, 1, properties, loaded);
-			}
-			else {
-				finishLoad();
-			}
+        	var uris = toURIList(existingIds);  				
+			var properties = [RDF('type'), FOAF('firstName'), FOAF('lastName'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email'), PRNS('personInPrimaryPosition'), VIVO('mailingAddress'), VIVO('freetextKeyword'), VIVO('authorInAuthorship')];
+				                 
+            $("#list-size").text(uris.length);                                
+            if (uris.length > 0) {
+                $(document).ready(function () {
+                    $(".list-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + uris.length + '</div>'});
+                });                
+                displaySubList(uris, 1, properties, 0);
+            }          
 		} /* end displayProfileList */
-
+        
+        var peopleList = [];
+        
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
-            osapi.jsonld.getProperties(ids, properties).execute(function(data) {
-            	var uriBase = data.base;
+			osapi.jsonld.getRDF(ids).execute(function(result) {
+                framePeople(result, function(profiles) {
+	                var json = JSON.stringify(profiles);
+	                $("#debug").append("<div>" + json + "</div>");
+                });
+			});
+			
+            osapi.jsonld.getProperties(ids, properties).execute(function(data) {                
+            	var uriBase = '';
                 framePeople(data, function(profiles) {
+                    $("#debug").append('<div class="props">' + JSON.stringify(profiles) + "</div>");
                 	for (var k = 0; k < profiles.length; k++) {
                     	var profile =  profiles[k];
-						if (navigator.appVersion.indexOf("MSIE") != -1) {
-                        	document.getElementById(uriBase + profile['@id'] + '_name').innerText = profile[PRNS('fullName')];
-                            document.getElementById(uriBase + profile['@id'] + '_title').innerText = profile[VIVO('preferredTitle')];
-                            document.getElementById(uriBase + profile['@id'] + '_email').innerText = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-						}
-						else {
-                            document.getElementById(uriBase + profile['@id'] + '_name').innerHTML = profile[PRNS('fullName')];
-                        	document.getElementById(uriBase + profile['@id'] + '_title').innerHTML = profile[VIVO('preferredTitle')];
-                            document.getElementById(uriBase + profile['@id'] + '_email').innerHTML = profile[VIVO('email')] ? profile[VIVO('email')] : "";
-						}
-						document.getElementById("loadedCount").innerHTML = "" + (++loaded) + " profiles loaded so far...";
+                    	peopleList.push(profile);
+		                var table_row = '<tr>'; 
+		                table_row +='<td>' + (profile[PRNS('fullName')]?profile[PRNS('fullName')]:"") + '</td>';
+		                table_row +='<td>' + (profile[VIVO('preferredTitle')]?profile[VIVO('preferredTitle')]:"") +'</td>';
+		                table_row +='<td class="email">' + (profile[VIVO('email')]?profile[VIVO('email')]:"") + '</td>';
+		                table_row +='</tr>';
+		                $(".list-content table tbody").append(table_row);                                        	
 					}
+					loadedCount += batchSize;
+					$("#loaded-count").text(loadedCount);
 	                // see if we are done and if so turn off progress bar and
 	                // add to export lists 
 	                if (uris.length == 0) {
-						finishLoad();
+						$(".list-content").unblock();
 	                }
 					else {
 						displaySubList(uris, batchSize, properties, loaded);
@@ -294,7 +279,7 @@
 	        document.getElementById("canvas_full_list_textarea").value = full_list;
 	        document.getElementById("canvas_email_list_textarea").value = email_list;
 	           
-	        document.getElementById("progress").style.display="none";
+	        //document.getElementById("progress").style.display="none";
 		}
         
         // ==============================================================                
@@ -335,24 +320,21 @@
         }
         
         function createGroup(name, description, ownerId, users) {
-                document.getElementById("progress").style.display="block";
-
-                var params = {
-                        "name": name,
-                        "description": description,
-                        "ownerId": ownerId,
-                        "users": users};
-                        
+            var params = {
+                    "name": name,
+                    "description": description,
+                    "ownerId": ownerId,
+                    "users": users};
+                    
             sendRequest(false, false, chatterProxyURL + "/group/new", params, function(data) {
-                document.getElementById("progress").style.display="none";
-                    if(data.Success) {
-                                showMessage("<strong>Success! Your UCSF Chatter group '" + name + "' has been created.</strong><br> " 
-                                                + "<a target='_blank' href='" + data.URL + "'>Go to UCSF Chatter to start working with your group.</a>");
-                                $("input#goup_name").val("");
-                        }
-                        else {
-                                showMessage("Cannot create a group. " + data.ErrorMessage, true);
-                        }
+                if(data.Success) {
+                            showMessage("<strong>Success! Your UCSF Chatter group '" + name + "' has been created.</strong><br> " 
+                                            + "<a target='_blank' href='" + data.URL + "'>Go to UCSF Chatter to start working with your group.</a>");
+                            $("input#goup_name").val("");
+                }
+                else {
+                        showMessage("Cannot create a group. " + data.ErrorMessage, true);
+                }
             },
             function(obj) {
                         showMessage("Server error " + obj.rc + " : " + obj.errors, true);
@@ -445,21 +427,11 @@
                 
                 gadgets.util.registerOnLoadHandler(init);
         </script>]]></Content>
-    <Content type="html" view="canvas" preferred_height="620" preferred_width="700"><![CDATA[<!--HTML-->
+    <Content type="html" view="canvas" preferred_height="620" preferred_width="800"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+           <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
            <style type="text/css">
-                   div#create_group {
-                           margin-left: 20px;
-                           margin-top:10px;
-                           margin-bottom:10px;
-                           padding-top:10px;
-                           padding-bottom:10px;
-                           padding-left:10px;
-                           padding-right:10px;
-                           border:solid #CCC 1px;
-                           width:470px;
-                        border-radius: 0;
-                   }
                    input#close {
                            margin-left:10px;
                    }
@@ -476,129 +448,508 @@
                            display:none;
                    }
                 p { width: 640px; }
-                  
+            
+            
+                .list-info {font-weight:bold; font-size:14px; color:#CA7C29;}
+                .list-descr {margin-top: 10px;}
+                #more-info {color: #0088CC !important; cursor: pointer;}
+                .commands {margin-top: 20px;}
+                .commands .row{ margin-top: 10px;}
+                .commands label {width: 100px; text-align: right;font-weight: bold; font-size: 13px; margin-right: 10px;}
+                .list-content {margin-top: 30px; height: 300px; overflow-y: auto;}
+                .list-content th {text-align: left; padding-bottom: 5px;}                
+                .list-content th.name {width: 180px;}
+                .list-content th.title {width: 180px;}
+                .list-content th.email {width: 200px;}
+                .btn:hover{color:white;}
+                .btn-sm {background-color: lightgray;color: black;}
+                
+                .ui-tooltip {max-width: 500px;}
+                .help-content div {margin-bottom: 10px;}
+                .help-content ul {list-style-type: disc; margin-left: 30px;}
+                .help-content li {margin-bottom:5px;}
+                
+                .progress-msg {margin:5px;}
+                
+                .gadget-content {margin-left: 50px;margin-top: 20px;}
            </style>
     
-    <!-- top menu links -->
-        <div style="width:640px;">
-                <p id="number_selected" class="tool_title_orange" style="margin-left:20px;margin-top:20px\9;">
-                Selected Profiles<p>
-                <p id="canvas_help" style="padding-left:20px">Create a UCSF Chatter group or email list that includes the people below. 
-                							To manage your UCSF Chatter group after you create it, such as adding or removing members, go to UCSF Chatter directly.</p>
-                <p class="tool_body" style="margin-left:20px; margin-bottom:10px;">
-                        <div id="extended_functions" style="display:inline-block; padding:0 0 0 20px;">
-                                <a href="" id="create_group">Create UCSF Chatter Group</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="javascript:gadgetEventTrack('export_email');copyEmailDivToClipboard();">Export email addresses</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
-                                <a href="javascript:gadgetEventTrack('export_all_data');copyFullDivToClipboard();">Export all contact info</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="" id="compose-email">Compose email to list</a><p>
-                        </div>
-                        <a href="javascript:gadgetEventTrack('delete_list');deleteList();" style="margin-left:20px;">Delete list</a>
-                </p>
-                
-                <div id="progress" style="margin-left:20px;">
-                <table><tr>                
-                <td><img src="images/waiting.gif"></td>
-		<td>&nbsp;</td>
-		<td><b>This may take a minute or two, based on the size of your selected Profiles list.<br><div id="loadedCount"></div></b></td>
-		</tr>
-		</table>
-		</div>		
-        </div>
-        <div id="create_group" class="hidden">
+        <div style="width:640px;" class="gadget-content">
+        		<div class="list-info">There are currently <span id="list-size"></span> people in your list.</div>
+        		<div class="list-descr">Choose what you'd like to do with their information. <span id="more-info">More information on the options</span></div>
+        		
+        		<div class="commands">
+        			<div class="row">
+        				<label>Email</label>
+        				<button class="btn btn-sm" id="create-email">
+		      				<span class="glyphicon glyphicon-pencil"></span>
+		      				Compose email
+		    			</button>
+        			</div>
+        			<div class="row">
+        				<label>Open as CSV</label>
+        				<a class="btn btn-sm" id="save-list">
+		      				<span class="glyphicon glyphicon-save"></span>
+		      				Download List
+		    			</a>
+        				<a class="btn btn-sm" id="save-pubs">
+		      				<span class="glyphicon glyphicon-floppy-save"></span>
+		      				Download Pubs
+		    			</a>
+        			</div>
+        			<div class="row">
+        				<label>Connect with</label>
+        				<button class="btn btn-sm" id="create-doodle">
+		      				<span class="glyphicon glyphicon-gift"></span>
+		      				Create Doodle Poll 
+		    			</button>
+        				<button class="btn btn-sm" id="create-chatter-group">
+		      				<span class="glyphicon glyphicon-cloud-upload"></span>
+		      				Create Chatter group
+		    			</button>
+        			</div>
+        			<div class="row">
+        				<label>Manage</label>
+        				<button class="btn btn-sm" id="clear-list">
+		      				<span class="glyphicon glyphicon-trash"></span>
+		      				Clear this list
+		    			</button>
+        			</div>
+        		</div>
+        		<div class="list-content">
+        		  <table cellspacing='0' cellpadding='0'>
+        		      <thead>
+	        		      <tr>
+		        		      <th class="name">Name</th>
+		                      <th class="title">Title</th>
+		                      <th class="email">Email Address</th>
+	                      </tr>
+                      </thead>
+                      <tbody/>
+        		  </table>
+        		</div>
+        		<div id="debug" style="display:none"></div>
+        		
+        		<div style="display:none">
+        		  <div id="commands-help">
+        		      <div class="help-content">
+	        		      <div>You can see the list you’ve created below. It will be here next time you sign in, but the data in it might go stale as information in Profiles changes. Here’s an explanation of the options:</div>
+	        		      <ul>
+	        		          <li>The Compose Email button opens your default email program and pastes the first 50 email addresses from your list into the To field. This is to help you quickly reach out to people in your list. The number is limited to prevent spam.</li>
+	                          <li>The Download List button exports a CSV-format file that you can save wherever you wish. It will have columns for first name, last name, title, email address, school, department, link to profile page, manually entered research interests and the first ten published concepts (MeSH terms) for everyone in your list. CSV files are easily imported into Excel or most email marketing programs like MailChimp, to help you create personalized emails and track their effectiveness.</li>
+	                          <li>Download Pubs will download a list of publications, duplicates removed, for all the people in the list. It will contain columns for Authors, PubDate, PubYear, JournalMonth, JournalDay, JournalYear, ArticleTitle, JournalTitle, Issue, MedlinePgn, PMID, and Link to PubMed</li>
+	                          <li>Create Doodle Poll is TBD.</li>
+	                          <li>Create Chatter Group will take you to UCSF Chatter to create a group with the people in your list. Within Chatter, you can collaborate online - share documents, post messages to the group, etc.</li>
+	                          <li>Clear this List will remove everyone from your list.</li>
+	        		      </ul>
+                      </div>
+        		  </div>
+        		</div>
+        		<iframe id="csvDownloadFrame" style="display:none"></iframe>        		
+	    </div>
+        <div id="create_group" style="display:none">
                 <div class="message hidden"><strong>Success! Your UCSF Chatter group has been created.</strong><br> 
                         Go to UCSF Chatter to start working with your group.</div>
-                <table><tr>                
-                <td nowrap valign="top">UCSF Chatter Group Name:</td>
-                <td><input id="group_name" type="text" style="width:218px"></input><br><br></td></tr><tr>
-                <td nowrap valign="top" align="right">Group Description:</td>
-                <td><textarea id="group_description" rows="4" cols="25"></textarea><br><br></td></tr><tr><td>&nbsp;</td>
-                <td><input id="create" type="button" value="Create"></input>
-                <input id="close" type="button" value="Cancel/Close"></input></td></tr></table> 
+                <table>
+                    <tr>                
+                        <td nowrap valign="top" style="padding-right: 10px;">UCSF Chatter Group Name:</td>
+                        <td><input id="group_name" type="text" style="width:218px"></input><br><br></td>
+                    </tr>
+                    <tr>
+                        <td nowrap valign="top" align="right" style="padding-right: 10px;">Group Description:</td>
+                        <td><textarea id="group_description" rows="4" cols="25" style="width:218px"></textarea></td>
+                    </tr>                   
+                </table> 
         </div>
-        
-        <div id="canvas_email_list" style="display:none; background:#FFF; width:670px; height:50px; margin-left:20px;">
-        Copy and paste the email addresses below into an Excel spreadsheet or email client "To" field.
-        <input type="button" style="height:22px; font-size:10; margin-left:40px; margin-top: 6px;" value="Close" onClick="document.getElementById('canvas_email_list').style.display='none';document.getElementById('canvas_email_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button>
-        </div>
-        
-        <!-- holds the email address list to be copied to the clipboard -->
-        <div id="canvas_email_list_text" style="display:none; width:658px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_email_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
-        </textarea>
-        </div>
-        
-        <div id="canvas_full_list" style="display:none; background:#FFF; width:640px; height:50px; margin-left: 20px;">
-        Copy and paste the profile data below into an Excel spreadsheet or external text editor.
-        <input type="button" style="height:22px; font-size:10; margin-left:40px; margin-top: 6px;" value="Close" onClick="document.getElementById('canvas_full_list').style.display='none';document.getElementById('canvas_full_list_text').style.display='none';document.getElementById('canvas_profile_list').style.display='block';"></button>
-        </div>
-        
-        <!-- holds the full profile list to be copied to the clipboard -->
-        <div id="canvas_full_list_text" style="display:none; width:640px; height:450px; color:#000; margin:0px 5px 0px 5px;">
-        <textarea id="canvas_full_list_textarea" rows="27" cols="78" style="border:1px solid #CCC; margin: 0px 8px 0px 8px;">
-        </textarea>
-        </div>        
-        
-        <!-- holds the visible profile details list -->
-        <div id="canvas_profile_list" style="display:none; margin-left:20px; height:463px; height:443px\9; width: 660px; overflow:auto;"></div>
-        
         <script type="text/javascript">
 
             function init() {
-		    // mask all but delete until we are done loading
-                    gadgets.window.setTitle("My list of profiles");                
-            		// always show in canvas view
-                    gadgets.orng.showGadget();
-                    // update UI
-                    readIdsFromDB(displayProfileList);                
-                    document.getElementById("canvas_profile_list").style.display="block";
+	    		// mask all but delete until we are done loading
+                   gadgets.window.setTitle("ListMaker");                
+           		// always show in canvas view
+                   gadgets.orng.showGadget();
+                   
+                $(document).ready(function () {
+                   $(document).tooltip({
+                       items:"#more-info",
+                       content: function() {
+                           return $("#commands-help").html();
+                       }
+                   });
+                });                
                     
-                    $("a#create_group").click(function(event){
+                // update UI
+                readIdsFromDB(displayProfileList);                
+                
+                /*    
+                $("a#create_group").click(function(event){
+                    event.preventDefault();
+                    $("div.message").addClass("hidden");        
+                    $("div#create_group").removeClass("hidden");
+                });
+                 
+                $("input#close").click(function(event){
+                        $("div#create_group").addClass("hidden");
+                });
+                     
+                $("input#create").click(function(event){
+                        $("div.message").addClass("hidden");        
+                        var name = $("div#create_group input#group_name").val();
+                        var description = $("div#create_group #group_description").val();
+                        if(name == null || name == '') {
+                                showMessage("Please enter a group name.", true);                                
+                        }
+                        else {                                
+                            osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
+                                    var users = getUserList();
+                                    createGroup(name, description, getNodeIdFromURI(result.id), users);
+                            });                        
+                        }
+                });
+                */
+
+                $("#create-chatter-group").click(function(event){
+                    $("#create_group .message").addClass("hidden");
+                    $("#create_group").dialog({
+                         modal: true,
+                        minWidth:440,
+                        title: "Create Chatter Group",
+                        buttons: [ 
+                            { text: "Create", 
+                              click: function() {
+		                        var name = $("div#create_group input#group_name").val();
+		                        var description = $("div#create_group #group_description").val();
+		                        if(name == null || name == '') {
+		                                showMessage("Please enter a group name.", true);
+		                                return;
+		                        }
+	                            osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
+	                                    var users = getUserList();
+	                                    createGroup(name, description, getNodeIdFromURI(result.id), users);
+	                            });                                                       
+                              } 
+                            }, 
+                            { text: "Cancel", 
+                              click: function() { 
+                                $( this ).dialog( "close" ); 
+                              } 
+                            } 
+                        ]
+                    });
+                });
+                
+                $("#save-list").click(function(event){
+                    if(!$(this).attr("href") && peopleList.length > 0) {
+                        $(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
+                        loadProfileData(peopleList, 0, "");
                         event.preventDefault();
-                            $("div.message").addClass("hidden");        
-                            $("div#create_group").removeClass("hidden");
-                    }); 
-                    $("input#close").click(function(event){
-                            $("div#create_group").addClass("hidden");
+                        return false;
+                    }                    
+                });
+                
+                $("#save-pubs").click(function(event){
+                    if(!$(this).attr("href") && peopleList.length > 0) {
+                                                
+                        var authorshipIds = getAuthorshipIds(peopleList);
+                        if(authorshipIds.length > 0) {
+                            $(".gadget-content").block({ message: '<div class="progress-msg">Loading...</div>'});
+	                        osapi.jsonld.getRDF(authorshipIds).execute(function(result) {
+	                            var json = JSON.stringify(result);
+	                            $("#debug").append('<div class="authorship">' + json + "</div>");
+	                            var gr = result.jsonld["@graph"];
+	                            
+	                            var pubIds = [];
+	                            for(var i=0; i < gr.length; i++) {
+	                               var pubId = gr[i].linkedInformationResource;
+	                               pubIds.push(pubId);
+	                            }
+	                            
+	                            loadPublications(pubIds);	                            
+	                        });
+                        }
+                        
+                        event.preventDefault();
+                        return false;
+                    }                    
+                });
+                
+                function loadPublications(pubIds) {
+                    osapi.jsonld.getRDF(pubIds).execute(function(result) {
+	                    var json = JSON.stringify(result);
+	                    $("#debug").append('<div class="pub">' + json + "</div>");
+	                    
+	                    var csvData = ""
+	                    if(result.jsonld["@graph"]) {
+	                       for(var i=0; i < result.jsonld["@graph"].length; i++) {
+	                           csvData += publicationToCsv(result.jsonld["@graph"][i]);
+	                       }
+	                    }
+	                    else {
+	                       csvData += publicationToCsv(result.jsonld);
+	                    }
+	                    exportToCsv($("#save-pubs"), csvData);
                     });
-                     
-                    $("input#create").click(function(event){
-                            $("div.message").addClass("hidden");        
-                            var name = $("div#create_group input#group_name").val();
-                            var description = $("div#create_group #group_description").val();
-                            if(name == null || name == '') {
-                                    showMessage("Please enter a group name.", true);
-                            }
-                            else {                                
-                                    osapi.people.getViewer({ fields: ['id'] }).execute(function(result) {
-                                            var users = getUserList();
-                                            createGroup(name, description, getNodeIdFromURI(result.id), users);
-                                    });                        
-                            }
-                    });
-                     
-                    $("#compose-email").click(function(event){
-                    var emails = [];
-                    var emailElem = $("td.email");
-                    if(emailElem.size() > 50) {
-                            if(!confirm("Only the first 50 email addresses can be used. If your list has more, please use the Export function and paste them into email. Do you want to proceed?")) {
-                                    event.preventDefault();
-                                    return false;
-                            }
-                    }        
+                }
+                
+                function publicationToCsv(rdf) {
+                    var csvData = "";
                     
-                            emailElem.each(function(index, elem) {
-                                    var email = $.trim($(elem).text());
-                                    if(email != '') {
-                                            emails.push(email);
-                                    }
-                                    if(emails.length >= 50) {
-                                            return false;
-                                    }
-                            });
-                            if(emails.length > 0) {
-                                    $(this).attr("href", "mailto:" + emails.join(';'));
+                    csvData += createCsvField(rdf.hasAuthorList);
+                    var dt = new Date(rdf.publicationDate);
+                    csvData += createCsvField(dt.toLocaleDateString());
+                    csvData += createCsvField(rdf.year);
+                    
+                    //JournalDay, JournalYear
+                    
+                    csvData += createCsvField(rdf.label);
+
+                    //JournalTitle, Issue, MedlinePgn
+                    
+                    csvData += createCsvField(rdf.pmid);
+                    csvData += createCsvField(rdf.pmid?('http://www.ncbi.nlm.nih.gov/pubmed/' + rdf.pmid): "");
+                    
+                    csvData += "\r\n";
+                    return csvData;
+                }
+                
+                function getAuthorshipIds(peopleList) {
+                    var ids = [];
+                    for(var i=0; i < peopleList.length; i++) {
+                        var publications = peopleList[i][VIVO('authorInAuthorship')];
+                        if (publications instanceof Array) {
+                            for (var p in publications) {
+                                var pubId = publications[p]["@id"];
+                                if(pubId) {
+                                    ids.push(pubId);
+                                }                                                               
                             }
-                    });
+                        }
+                        else if (publications) {
+                            var pubId = publications["@id"];
+                            if(pubId) {
+                                ids.push(pubId);
+                            }                                                               
+                        }
+                    }
+                    return ids;                    
+                }
+                
+                function loadProfileData(peopleList, index, csvData) {
+                    $("#loaded-count").text(index + 1);	                
+                    var profile =  peopleList[index];
+                    
+                    loadRequiredIds(profile, function(ids) {
+	                    if(ids.length > 0) {
+	                        osapi.jsonld.getRDF(ids).execute(function(result) {
+	                           var json = JSON.stringify(result);
+	                           $("#debug").append('<div class="additionalData">' + json + '</div>');
+	                            
+	                           loadProfileDataInternal(peopleList, index, csvData, result);
+	                        });                 
+	                    }
+	                    else {
+	                       loadProfileDataInternal(peopleList, index, csvData)
+	                    }                    
+                    })
+                    	                
+                }
+                
+                function loadRequiredIds(profile, callback) {
+                    var ids = [];
+                    if(profile[VIVO('mailingAddress')]) {
+                        ids.push(profile[VIVO('mailingAddress')]["@id"]);
+                    }
+                    
+                    if(profile[PRNS('personInPrimaryPosition')]) {
+                        var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
+                        osapi.jsonld.getRDF(positionId).execute(function(result) {
+                            var json = JSON.stringify(result);
+                            $("#debug").append('<div class="position">' + json + '</div>');
+                            ids.push(result.jsonld.positionInOrganization);
+                            ids.push(result.jsonld.positionInDepartment);
+                            callback(ids);
+                        });
+                    }
+                    else {
+                        callback(ids);
+                    }                                        
+                }
+                
+                function loadProfileDataInternal(peopleList, index, csvData, additionalData) {
+                    var profile =  peopleList[index];
+                    
+                    var address = "";
+                    var organization = "";
+                    var department = "";
+                    if(additionalData) {
+                        address = getAddress(additionalData);                       
+                        organization = getOrganization(additionalData);                       
+                        department = getDepartment(additionalData);                       
+                    }
+                
+	                csvData += createCsvField(profile[FOAF('firstName')]);
+	                csvData += createCsvField(profile[FOAF('lastName')]);
+	                csvData += createCsvField(profile[VIVO('preferredTitle')]);
+	                csvData += createCsvField(profile[VIVO('email')]);	                
+	                
+	                //address, school, department
+	                csvData += createCsvField(address);
+                    csvData += createCsvField(organization);
+                    csvData += createCsvField(department);
+	                
+	                csvData += createCsvField(profile['@id']);//profile URL
+	                csvData += createCsvField(profile[VIVO('freetextKeyword')]);//research interests
+	                	                
+	                //published concepts/MeSH terms
+	
+	                csvData += "\r\n";                  
+	                if(index + 1 < peopleList.length) {
+	                   loadProfileData(peopleList, index + 1, csvData)
+	                }
+	                else {
+	                   exportToCsv($("#save-list"), csvData);
+	                }                                               
+                }
+                
+                function getObjectByType(rdf, type) {
+                    var obj;
+                    if(rdf.jsonld["@graph"]) {
+                        for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
+                            var gr = rdf.jsonld["@graph"][i];
+                            if(gr["@type"] == type) {
+                                obj = gr;
+                                break; 
+                            }
+                        }
+                    }
+                    else if(rdf.jsonld["@type"] == type){
+                        obj = rdf.jsonld;
+                    }
+                    
+                    return obj;
+                }
+                
+                function getAddress(rdf) {
+                    var obj = getObjectByType(rdf, "vivo:Address");                    
+                    if(obj) {
+	                    var address1 = obj.address1;
+	                    var addressCity = obj.addressCity;
+	                    var addressPostalCode = obj.addressPostalCode;
+	                    var addressState = obj.addressState;
+	                    
+	                    return address1 + "\r\n" + addressCity + "\r\n" + addressState + " " + addressPostalCode;
+                    }
+                }
+
+                function getOrganization(rdf) {
+                    var obj = getObjectByType(rdf, "foaf:Organization");                    
+                    if(obj) {
+                        return obj.label;
+                    }
+                    return "";
+                }
+
+                function getDepartment(rdf) {
+                    var obj;
+                    if(rdf.jsonld["@graph"]) {
+                        for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
+                            var gr = rdf.jsonld["@graph"][i];
+                            if($.inArray("vivo:Department", gr["@type"]) != -1) {
+                                obj = gr;
+                                break; 
+                            }
+                        }
+                    }
+                    else if($.inArray("vivo:Department", rdf.jsonld["@type"])){
+                        obj = rdf.jsonld;
+                    }
+                    
+                    if(obj) {
+                        return obj.label;
+                    }
+                    return "";
+                }
+                
+                function supportsDataUri() {
+				    var isOldIE = navigator.appName === "Microsoft Internet Explorer";
+				    var isIE11 = !!navigator.userAgent.match(/Trident\/7\./);
+				    return ! (isOldIE || isIE11);  //Return true if not any IE
+				};
+				
+                function exportToCsv(link, csvData) {
+                    $(".gadget-content").unblock();
+                    if (!supportsDataUri()) {
+                        var iframe = $('#csvDownloadFrame').get(0);
+                        iframe = iframe.contentWindow || iframe.contentDocument;
+                    
+					    //Optional: If you run into delimiter issues (where the commas are not interpreted and all data is one cell), then use this line to manually specify the delimeter
+					    var tableString = 'sep=,\r\n' + csvData;
+					
+					    iframe.document.open("text/html", "replace");
+					    iframe.document.write(tableString);
+					    iframe.document.close();
+					    iframe.focus();
+					    iframe.document.execCommand('SaveAs', true, 'list.csv');
+					} 
+					else {                    
+	                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
+	                    link.attr({
+		                    'href': href,
+		                    'target': '_blank',
+		                    'download': 'list.csv'
+	                    });
+	                    
+	                    $('#downloadFile').remove(); 
+	                    $('<a></a>')
+	                        .attr('id','downloadFile')
+	                        .attr('href', href)
+	                        .attr('download','list.csv')
+	                        .appendTo('body');
+	                        
+	                    $('#downloadFile').ready(function() {
+	                        $('#downloadFile').get(0).click();
+	                    });
+                    }                        
+                }
+                
+                function createCsvField(val) {
+                    val = val || "";
+                    return '"' + val + '",';
+                }
+                
+                
+                $("#clear-list").click(function(event){
+		           osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': ['ids', 'count']} ).execute(function(result){
+		                  if (result.error) { 
+		                          alert("Error " + result.error.code + " deleting application data: " + result.error.message);
+		                  } else {
+		                   $(".list-content tbody tr").remove();
+		                  }                                
+		           });
+                });
+                     
+                $("#create-email").click(function(event){
+	                var emails = [];
+	                var emailElem = $(".list-content td.email");
+	                if(emailElem.size() > 50) {
+	                       if(!confirm("Only the first 50 email addresses can be used. If your list has more, please use the Export function and paste them into email. Do you want to proceed?")) {
+	                          event.preventDefault();
+	                          return false;
+	                       }
+	                }        	                    
+	                emailElem.each(function(index, elem) {
+	                     var email = $.trim($(elem).text());
+	                     if(email != '') {
+	                         emails.push(email);
+	                     }
+	                     if(emails.length >= 50) {
+	                         return false;
+	                     }
+	                });
+	                if(emails.length > 0) {
+	                     window.location.href =  "mailto:" + emails.join(';');
+	                }
+                });
             }
                 
 	        gadgets.util.registerOnLoadHandler(init);

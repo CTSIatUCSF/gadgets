@@ -479,10 +479,6 @@
 	    	}
 	    </style>        
     
-		<!-- HideShow -->
-		<div id="hideshow"></div>
-		<!-- HideShow end -->
-    
 		<div id="inner_home_settings">
 			Profiles related activities are shown by default.<br/>				
 			<br/>

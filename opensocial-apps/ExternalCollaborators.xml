@@ -18,13 +18,18 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
-    <script type="text/javascript" src="js/jsonld.js" ></script>
-   	<script type="text/javascript">	        
+    <script type="text/javascript" src="js/jsonld.js" ></script>   	
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+	<script type="text/javascript">	        
 		var COLLABORATED_ON = R2R('collaboratedOn');
 	
 		function getProductionURI(uri) {
 			if (uri.indexOf("http://stage-profiles.ucsf.edu/profiles200") !== -1) {
 				return uri.replace("http://stage-profiles.ucsf.edu/profiles200", "http://profiles.ucsf.edu");
+			}
+			else if (uri.indexOf("http://profilesstage.sc-ctsi.org") !== -1) {
+				return uri.replace("http://profilesstage.sc-ctsi.org", "http://profiles.sc-ctsi.org");
 			}
 			return uri;
 		}
@@ -35,54 +40,84 @@
 					$("#see-all").data("ownerURI", getProductionURI(result.uris[0])).show();
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON-LD';
+					var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
 					gadgets.io.makeRequest(url, callback, params);
-				}
-				else {
-					//alert(JSON.stringify(result)); 
 				}
 			}); /* end osapi.appdata.get */			
 		}
-		// ========================================		
+		
+		function gadgetEventTrack(action, label, value) {		
+			var message = {'action' : action};
+			if (label) {message.label = label;}
+			if (value) {message.value = value;}
+			
+			gadgets.orng.reportGoogleAnalyticsEvent(message);
+		}	
+		
+		function getLabelValue(person) {
+			var label = person[RDFS('label')];
+			return label['@value'] ? label['@value'] : label;			
+		}
+				
+		function parseCollaborators(collaboratorsStr) {
+			var colArr = gadgets.json.parse(collaboratorsStr.data).results.bindings;
+			var colMap = {};
+
+			for (var i = 0; i < colArr.length; i++) {
+				if (colMap[colArr[i].researcherURI.value]) {
+					colMap[colArr[i].researcherURI.value].contributedWork.push(colArr[i].contributedWork.value);
+				}
+				else {
+					var person = {};
+					person.researcherURI = colArr[i].researcherURI.value;
+					person.contributedWork = [];
+					person.contributedWork[0] = colArr[i].contributedWork.value;
+					person.image = colArr[i].thumbnail ? colArr[i].thumbnail.value : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+					person.researcherHomePage = colArr[i].researcherHomePage ? colArr[i].researcherHomePage.value : colArr[i].researcherURI.value;
+					person.label = colArr[i].researcherLabel.value;
+					person.rns = {};
+					person.rns.url = colArr[i].researchNetworkingSite.value;
+					person.rns.label = colArr[i].affiliation.value;
+					person.rns.lat = colArr[i].lat.value;
+					person.rns.lon = colArr[i].lon.value;
+
+					colMap[colArr[i].researcherURI.value] = person;
+				}
+			}
+			var dataArray = [];
+			for(var o in colMap) {
+			    dataArray.push(colMap[o]);
+			}
+			return dataArray;
+		}
+	
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="300">
+    <Content type="html" view="small" preferred_width="190" preferred_height="290">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
-	<!-- #includes -->
-	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
 	<script type="text/javascript">
-	
+
 		// ========================================		
 		function displayData(collaboratorsStr) {
-			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
-			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
-			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
-			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-					collaborators = collaborators['@graph'];
+			var collaborators = parseCollaborators(collaboratorsStr);
+				if (collaborators && collaborators.length) {
 					// need to tell container that it is OK to show us
 					gadgets.orng.showGadget();
 
 					// put ones with the most publications at the top, since these are all shared publications
 					collaborators.sort(function(a, b) {
-						return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
+						return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 					});
 										
-					var list_data = "<div>";					
+					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
 					for (var i = 0; i<5 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
-						var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
-						if (imageURL) {
-							list_data += '<img src="' + imageURL + '" width="20px" height="22px"/>';
-						} 
-												
-						list_data += "<a href='" + person['@id'] + "' target='_blank' onClick=\"gadgetEventTrack('go_to_website', '" + 
-							person[FOAF('homepage')] + "')\"> " + person[RDFS('label')] + "</a>";
+						list_data += '<div class="thumbnail"><img src="' + person.image + '" /></div>';						
+						list_data += "<a href='" + person.researcherHomePage+ "' target='_blank'> " + person.label + "</a>";
 						list_data += "</div>";
 						
 					}
@@ -97,87 +132,40 @@
 						var h = $("#collaborators_list").height() + 30;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
-				}				
-			});
+			}				
 		}
-		// ========================================
-		
-		function gadgetEventTrack(action, label, value) {		
-			var message = {'action' : action};
-			if (label) {message.label = label;}
-			if (value) {message.value = value;}
-			
-			gadgets.orng.reportGoogleAnalyticsEvent(message);
-		}	
 	
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {
-	    		$("#see-all").click(function() {
-			        event.preventDefault();
+	    		$("#see-all").click(function(event) {
 			        var ownerURI = $("#see-all").data("ownerURI");
+			        gadgetEventTrack('go_to_see_all', ownerURI);
 			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
 	    		});
+	   			$(".col-item a").live("click", function() {
+	   				gadgetEventTrack('go_to_collaborator_from_small', $(this).attr("href"));
+	   			});
+	    		
 	    	});
 			
 		});
     </script>
     
-	<style>
-    	.links_title { font-family:Verdana, Arial; font-size: 14px; }
-    	.links_body { font-family:Arial; font-size: 12px; }
-    	.links_credit { font-family:Arial; font-size:10px; }
-		.links_save_button { height:20px; font-size:11px; } 
-    	a, a:visited { color: #0088CC; text-decoration: none; font-size: 13px;}
-    	a:hover { color: #005580; text-decoration: underline; }
-    	.col-item{min-height:22px;} 
+    <style>
+    	.col-item{ min-height:22px; } 
+	#see-all, #see-all span { font-size: 11px; font-weight: bold; }
     </style>
 
-    <div id="collaborators_list" style="padding:0px 0px 10px 20px;"></div>     
+    <div id="collaborators_list"></div>     
     <div>
     	<a id="see-all" href="#" style="display:none">
-    		<img style="margin-right:2px;position:relative;top:1px;border:0" src="http://stage-profiles.ucsf.edu/profiles200/Framework/Images/icon_squareArrow.gif" width="11" height="11"/>
+    		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
     		See all (<span></span>) people
     	</a>
     </div>	
     
     ]]></Content>
-    <Content type="html" view="verify">
-    <![CDATA[	
-   	<script type="text/javascript">	    
-   		function checkData() {
-   			// see if we already have this person/app combination internally in the system
-   			osapi.orng.getAppInstance().execute(function(result) {
-   				// if we do NOT have this in the system, then automatically add this to the persons if they have data from the service
-   				if (typeof result !== 'string') {
-					readData(registerApp); 					
-   				}
-   			});
-   		}
-   	    
-		function registerApp(collaboratorsStr) {
-			//var collaborators = gadgets.json.parse(collaboratorsStr.data);				
-			// if links data exists
-			var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
-			//var peopleFrame = gadgets.json.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
-			jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-				if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-					// need to tell container that it is OK to show us
-					osapi.orng.addAppToOwner().execute(function(result) {
-					});
-				}
-				else {
-					// this does a "hard delete" and removes the app instance
-					osapi.orng.removeAppFromOwner().execute(function(result) {
-					});					
-				}				
-			});
-		}
-
-	   	gadgets.util.registerOnLoadHandler(checkData);
-    </script>
-	]]>
-	</Content>
     <Content type="html" view="canvas" preferred_height="120" preferred_width="800">
     <![CDATA[
 	   	<script type="text/javascript">
@@ -200,7 +188,7 @@
 			function readData2(ownerUri, callback) {
 				var params = {};
 				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-				var url = 'http://stage-r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON-LD';
+				var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
 				gadgets.io.makeRequest(url, callback, params);
 			}
 	    	
@@ -211,13 +199,13 @@
 		    	osapi.jsonld.getOwner(options).execute(function(data) {
 		    		// in this case the owner will be the first and only item returned
 		    		framePerson(data, function(owner) {
-		    			//alert(JSON.stringify(owner));		    			
 			    		var publications = owner[VIVO('authorInAuthorship')];
-			    		//alert(JSON.stringify(publications));
 			    		if (publications instanceof Array) {
 				    		for (var i in publications) {
 				    			var pub = publications[i][VIVO('linkedInformationResource')];
-				    			loadPub(pub);
+				    			if(pub) {
+				    				loadPub(pub);
+				    			}					    						    			
 				    		}
 			    		}
 			    		else if (publications) {
@@ -245,103 +233,131 @@
 				publication.publicationVenue = pub[PRNS('hasPublicationVenue')];
 				publication.pd = pub[PRNS('publicationDate')];
 	      		publication.year = pub[PRNS('year')];
-				publication.label = pub[RDFS('label')];
+				publication.label = getLabelValue(pub);
 				publication.pmid = pub[BIBO('pmid')]; 
 				
 				publication.title = publication.authorList + '; <span class="label">' + publication.label + '</span>; ' + publication.publicationVenue + '; ' + publication.year;
 				publications[publication.pmid] = publication;	 
-				//alert(JSON.stringify(publication));      			
 	      	}	      	
 	    	
 	    	function findPublication(pmUrl) {
-	    		var parts = pmUrl.split("/");
-	    		var id = parts[parts.length-1];
+	    		var id = getPubId(pmUrl);
 	    		return publications[id];
+	    	}
+	    	
+	    	function getPubId(pmUrl) {
+	    		var parts = pmUrl.split("/");
+	    		return parts[parts.length-1];
+	    	}
+	    	
+	    	var CONTRIBUTED_TO = FOAF('publications');
+	    	function getPubCount(person) {
+				var pubs = person[CONTRIBUTED_TO];
+	    		if(pubs instanceof Array) {
+	    			return pubs.length;
+	    		}
+	    		
+	    		return 1;
 	    	}
 	    	
 		   	gadgets.util.registerOnLoadHandler(function() {		   	
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
 		   		loadScript();
+		   		
+		   		$(document).ready(function () {		   			
+		   			$("a.col-pubs").live("click", function() {
+		   				gadgetEventTrack('go_to_coauthored_papers', $(this).attr("href"));
+		   			});
+		   			
+		   			$("a.col-name").live("click", function() {
+		   				gadgetEventTrack('go_to_collaborator_from_canvas', $(this).attr("href"));
+		   			});
+		   		});
+		   		
 				loadPubs(function(collaboratorsStr) {
-					//$(".debug").html(JSON.stringify(collaboratorsStr));
-					//alert(JSON.stringify(collaboratorsStr)); 
-					var peopleFrame = gadgets.json.parse('[{"http://ucsf.edu/ontology/r2r#contributedTo": {}}]');
-					jsonld.frame(gadgets.json.parse(collaboratorsStr.data), peopleFrame, function(err, collaborators) {				
-						if (collaborators && collaborators['@graph'] && collaborators['@graph'].length) {
-							collaborators = collaborators['@graph'];
+
+					var collaborators = parseCollaborators(collaboratorsStr);
+						if (collaborators && collaborators.length) {
 							// need to tell container that it is OK to show us
 							gadgets.orng.showGadget();
 		
 							// put ones with the most publications at the top, since these are all shared publications
 							collaborators.sort(function(a, b) {
-								return getPropertyAsArray(b, COLLABORATED_ON).length - getPropertyAsArray(a, COLLABORATED_ON).length;
+								return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 							});
-												
+									
+							$(".total-count").text(collaborators.length);	                  
+								
 							for (var i = 0; i< collaborators.length;i++) {
 								var person = collaborators[i];
-								var imageURL = person[R2R('thumbnail')] || person[PRNS('mainImage')] || ENV_PROFILES_URL + "/Profile/Images/default_img.png";
+								var imageURL = person.image;
 								
-								var name = person[RDFS('label')];
-								var webSite = person[R2R('fromRNWebSite')];
-								var lat = webSite[PRNS('latitude')];
-								var long = webSite[PRNS('longitude')];
-												
-						        var myLatlng = new google.maps.LatLng(lat, long);
-						        var marker = new google.maps.Marker({
-				    				position: myLatlng,
-				    				map: map,
-				    				title: name
-								});
-								
-								var profileUrl=person['@id'];
+								var name = person.label;
+								var webSite = person.rns.url;
+								var lat = person.rns.lat;
+								var long = person.rns.lon;
+								var university = person.rns.label;
+
+							if (lat && long) {												
+							        var myLatlng = new google.maps.LatLng(lat, long);
+							        var marker = new google.maps.Marker({
+					    				position: myLatlng,
+					    				map: map,
+					    				title: university
+									});
+							}		
+								var profileUrl = person.researcherHomePage;
 								var pmUrl = "pubId";
-								var university = webSite[RDFS('label')];
 								
-								var pubs = person[R2R('contributedTo')];
+								var pubs = person.contributedWork;
+								var pubs_count = 1;
 								if(pubs instanceof Array) {
-									pmUrl = pubs[0]['@id'];
+									pubs_count = pubs.length;
+									pmUrl = "http://www.ncbi.nlm.nih.gov/pubmed/?term="									
+									for(var p=0;p<pubs.length;p++) {
+										pmUrl += getPubId(pubs[p]) + ",";
+									}
 								}
 								else {
 									pmUrl = pubs['@id'];
 								}
 								
-								var pub = findPublication(pmUrl);
+								var pub = null;//findPublication(pmUrl);
 								
-								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pub?pub.title:"", university);
-								
-							}		
-							
-							$(".total-count").text(collaborators.length);	                  
+								addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pub?pub.title:"", university);								
+							}									
 						}				
-					});
 				});		   		 
 		   	});	
-		   	
-		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubTitle, university) {
+		   			   	
+		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<div><img src="' + imageURL + '"></img><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span></div>';
-		   		    html +='<div class="pm-title">'+ pubTitle +'</div>';
-		   		    html +='<div class="pm-link">View in: <a href="' + pmUrl + '" target="_blank">PubMed</a></div>';		   				
-		   		    html +='</div>';
+		   		    html +='<div><div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    
+		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
+		   		    
+		   		    html +='</div><div style="clear:both"/></div>';
 		   		    
 		   		$("#coll-list").append(html);    
 		   	}	   	 
 	    </script>
+
 	    <style type="text/css">
 	    	#map-canvas { height: 450px}
 	    	
 	    	.content{width: 600px;margin-left: 100px;}
-	    	.content a {text-decoration: none; color: #0088CC !important;}
 	    	.map-wrap{width:600px;height: 450px; margin-bottom: 20px;}
 	    	.list-wrap{font-size: 13px;line-height: 20px;}	    	 
-	    	.title{font-weight: bold;} 
-	    	.descr{margin: 10px;color: #777;}
+	    	.title{font-weight: bold; color: #666; } 
+	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
-	    	.col img {width: 20px;float: left; margin-right: 10px;}
+	    	.col {margin-bottom: 5px;}
+	    	.col div {padding-top: 4px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
+		.thumbnail { margin-right: 4px; }
 	    </style>
 	    
    		<div class="content">
@@ -350,9 +366,8 @@
 	   		</div>		
    			<div class="list-wrap">
    				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have published with this person. They are sorted by most total publications to least. Click on a name to see their profile page in a new window.</div>
+   				<div class="descr">External Collaborators are people at other institutions who have worked with this person. They are sorted by most collaborations (publications, grants, etc.) to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
    				<div id="coll-list">
-   				
    				</div>
 	   		</div>	
 	   		<div class="debug"></div>	

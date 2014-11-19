@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Activity Streams Demo" scrolling="true">
+		<Require feature="osapi" />
+		<OAuth>
+			<Service name="pumpit.info">
+				<Access url="https://pumpit.info/oauth/access_token" method="GET" />
+				<Request url="https://pumpit.info/oauth/request_token"
+					method="GET" />
+				<Authorization url="https://pumpit.info/oauth/authorize" />
+			</Service>
+		</OAuth>
+	</ModulePrefs>
+	<Content type="html" view="home, profile, default">
+  <![CDATA[
+
+    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    <script type="text/javascript" src="js/os.js" ></script>
+      <script type="text/javascript" src="js/prettyprint.js" ></script>
+  <!-- shindig oauth popup handling code -->
+  <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
+
+  <style>
+  #main {
+    margin: 0px;
+    padding: 0px;
+    font-size: small;
+  }
+  </style>
+
+  <div id="approval" style="display: none">
+    <img src="http://gadget-doc-examples.googlecode.com/svn/trunk/images/new.gif">
+    <a href="#" id="personalize">Authorize this Gadget</a>
+  </div>
+
+  <div id="waiting" style="display: none">
+    Please click
+    <a href="#" id="approvaldone">I've approved access</a>
+    once you've approved access to your data.
+  </div>
+
+  <script type="text/javascript">
+    // Display UI depending on OAuth access state of the gadget (see <divs> above).
+    // If user hasn't approved access to data, provide a "Personalize this gadget" link
+    // that contains the oauthApprovalUrl returned from makeRequest.
+    //
+    // If the user has opened the popup window but hasn't yet approved access, display
+    // text prompting the user to confirm that s/he approved access to data.  The user
+    // may not ever need to click this link, if the gadget is able to automatically
+    // detect when the user has approved access, but showing the link gives users
+    // an option to fetch their data even if the automatic detection fails.
+    //
+    // When the user confirms access, the fetchData() function is invoked again to
+    // obtain and display the user's data.
+    function showOneSection(toshow) {
+      var sections = [ 'main', 'approval', 'waiting' ];
+      for (var i=0; i < sections.length; ++i) {
+        var s = sections[i];
+        var el = document.getElementById(s);
+        if (s === toshow) {
+          el.style.display = "block";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    }
+
+    // Process returned JSON feed to display data.
+    function showResults(result) {
+      showOneSection('main');
+	var content = '<b>I hope this is you!</b></p>' + result.displayName + '&nbsp;';	
+	if (result.image.url) {
+		content += '<img src="' + result.image.url + '">';
+	}
+		$('#main').html(content);
+//          var ppTable = prettyPrint(result);
+//          $('#main').html(ppTable);
+    }
+
+    // Invoke makeRequest() to fetch data from the service provider endpoint.
+    // Depending on the results of makeRequest, decide which version of the UI
+    // to ask showOneSection() to display. If user has approved access to his
+    // or her data, display data.
+    // If the user hasn't approved access yet, response.oauthApprovalUrl contains a
+    // URL that includes a Google-supplied request token. This is presented in the
+    // gadget as a link that the user clicks to begin the approval process.
+    function fetchData(username) {
+      var params = {};
+      url = "https://pumpit.info/api/user/" + username + "/profile";
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "pumpit.info";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+
+      gadgets.io.makeRequest(url, function (response) {
+        if (response.oauthApprovalUrl) {
+          // Create the popup handler. The onOpen function is called when the user
+          // opens the popup window. The onClose function is called when the popup
+          // window is closed.
+          var popup = shindig.oauth.popup({
+            destination: response.oauthApprovalUrl,
+            windowOptions: null,
+            onOpen: function() { showOneSection('waiting'); },
+            onClose: function() { fetchData(); }
+          });
+          // Use the popup handler to attach onclick handlers to UI elements.  The
+          // createOpenerOnClick() function returns an onclick handler to open the
+          // popup window.  The createApprovedOnClick function returns an onclick
+          // handler that will close the popup window and attempt to fetch the user's
+          // data again.
+          var personalize = document.getElementById('personalize');
+          personalize.onclick = popup.createOpenerOnClick();
+          var approvaldone = document.getElementById('approvaldone');
+          approvaldone.onclick = popup.createApprovedOnClick();
+          showOneSection('approval');
+        } else if (response.data) {
+            showOneSection('main');
+            showResults(response.data);
+        } else {
+            // The response.oauthError and response.oauthErrorText values may help debug
+            // problems with your gadget.
+            var main = document.getElementById('main');
+            var err = document.createTextNode('OAuth error: ' +
+              response.oauthError + ': ' + response.oauthErrorText);
+            main.appendChild(err);
+            showOneSection('main');
+        }
+      }, params);
+      $('#messageDiv').show();
+
+//	follow(username, "erictest@pumpit.info");
+    }
+
+
+    function follow(username, tofollow) {
+      var params = {};
+      url = "https://pumpit.info/api/user/" + username + "/feed";
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "pumpit.info";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+
+  var postdata = {
+    verb: "follow",
+    object : {
+        "id": "acct:" + tofollow,
+        "objectType": "person"
+    }
+  };
+params['HEADERS'] = {};
+params['HEADERS']['Content-Type'] = 'application/json';
+  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.json.stringify(postdata);//gadgets.io.encodeValues(postdata);
+
+      gadgets.io.makeRequest(url, function (response) {
+        if (response.oauthApprovalUrl) {
+          // Create the popup handler. The onOpen function is called when the user
+          // opens the popup window. The onClose function is called when the popup
+          // window is closed.
+          var popup = shindig.oauth.popup({
+            destination: response.oauthApprovalUrl,
+            windowOptions: null,
+            onOpen: function() { showOneSection('waiting'); },
+            onClose: function() { fetchData(); }
+          });
+          // Use the popup handler to attach onclick handlers to UI elements.  The
+          // createOpenerOnClick() function returns an onclick handler to open the
+          // popup window.  The createApprovedOnClick function returns an onclick
+          // handler that will close the popup window and attempt to fetch the user's
+          // data again.
+          var personalize = document.getElementById('personalize');
+          personalize.onclick = popup.createOpenerOnClick();
+          var approvaldone = document.getElementById('approvaldone');
+          approvaldone.onclick = popup.createApprovedOnClick();
+          showOneSection('approval');
+        } else if (response.data) {
+            showOneSection('main');
+            showResults(response.data);
+        } else {
+            // The response.oauthError and response.oauthErrorText values may help debug
+            // problems with your gadget.
+            var main = document.getElementById('main');
+            var err = document.createTextNode('OAuth error: ' +
+              response.oauthError + ': ' + response.oauthErrorText);
+            main.appendChild(err);
+            showOneSection('main');
+        }
+      }, params);
+    }
+
+
+    function postNote(username, content) {
+      var params = {};
+      url = "https://pumpit.info/api/user/" + username + "/feed";
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "pumpit.info";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+
+  var postdata = {
+    verb: "post",
+    object : {
+        "content": content,
+        "objectType": "note"
+    }
+  };
+params['HEADERS'] = {};
+params['HEADERS']['Content-Type'] = 'application/json';
+  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.json.stringify(postdata);//gadgets.io.encodeValues(postdata);
+
+      gadgets.io.makeRequest(url, function (response) {
+        if (response.oauthApprovalUrl) {
+          // Create the popup handler. The onOpen function is called when the user
+          // opens the popup window. The onClose function is called when the popup
+          // window is closed.
+          var popup = shindig.oauth.popup({
+            destination: response.oauthApprovalUrl,
+            windowOptions: null,
+            onOpen: function() { showOneSection('waiting'); },
+            onClose: function() { fetchData(); }
+          });
+          // Use the popup handler to attach onclick handlers to UI elements.  The
+          // createOpenerOnClick() function returns an onclick handler to open the
+          // popup window.  The createApprovedOnClick function returns an onclick
+          // handler that will close the popup window and attempt to fetch the user's
+          // data again.
+          var personalize = document.getElementById('personalize');
+          personalize.onclick = popup.createOpenerOnClick();
+          var approvaldone = document.getElementById('approvaldone');
+          approvaldone.onclick = popup.createApprovedOnClick();
+          showOneSection('approval');
+        } else if (response.data) {
+//            showOneSection('main');
+//            showResults(response.data);
+        } else {
+            // The response.oauthError and response.oauthErrorText values may help debug
+            // problems with your gadget.
+            var main = document.getElementById('main');
+            var err = document.createTextNode('OAuth error: ' +
+              response.oauthError + ': ' + response.oauthErrorText);
+            main.appendChild(err);
+            showOneSection('main');
+        }
+      }, params);
+    }
+  </script>
+  ]]>
+	</Content>
+	<Content type="html" view="home" preferred_height="725"
+		preferred_width="700"><![CDATA[<!--HTML-->	
+		<div id="inner_home_settings">
+			<p class="slideshare_body" style="padding-left:20px;">
+			<ol>
+				<li class="slideshare_body">Enter your webfinger below and click Save/Preview. 
+			</ol>
+			</p>
+		    <div class="question">
+				<span class="slideshare_body">Webfinger:&nbsp;</span><input type="text" name="webfinger" style="display:inline;width:20em;">
+				&nbsp;&nbsp;&nbsp;</span>
+				<span class="save slideshare_body" title="Save this Webfinger and register.">Save/Preview</span>
+				<br><br>
+			</div>
+		</div>
+
+  <div id="main" style="display: none">
+  </div>
+<div id="messageDiv" style="display: none">
+<span class="slidehare_body" ><textarea rows="4" cols="50" name="message" id="message">
+</textarea></span>
+<span class="preview slideshare_body" id="postNote">Post</span>
+</div>
+
+			
+	    <script type="text/javascript">
+
+	    function getWebfingerAndPreview(userId){
+			osapi.appdata.get({'userId': userId, 'groupId': '@self', 'appId':'@app', 'fields': ['webfinger']})
+		    	.execute(function(response){
+		    		var viewer = os.osapi.getViewerFromResult(response);
+		    		var webfinger = viewer.webfinger;
+		    		$('input[name=webfinger]').val(webfinger);
+		    		if(webfinger != null && webfinger != "") { // only render flash if there's a username
+		    			//preview(webfinger);
+		    		}	    				
+		    });
+		}
+		     // ========================================
+	   		gadgets.util.registerOnLoadHandler(function(){
+	    		var innerDiv=$('#inner_home_settings').html();
+//	    		$('#settings').html(innerDiv);
+	    		
+//	    		$('#secondHeader').show();
+	    		
+	    		getWebfingerAndPreview('@viewer');
+
+		    	$('span.save').click(function(){
+	    			var webfinger= $('input[name=webfinger]').val();
+	    			osapi.appdata.update({'userId': '@viewer', 'groupId': '@self', 'appId':'@app', 'data':{'webfinger':webfinger} })
+	    				.execute(function(response){
+	    				});
+	    				
+	    				$('#preview').html('');
+	    				if(webfinger != null && webfinger != "") {
+	    					fetchData(webfinger.split('@')[0]);
+	    				}
+		    	}); //click
+
+		    	$('span.preview').click(function(){
+				postNote($('input[name=webfinger]').val().split('@')[0], $('textarea#message').val());
+		    	}); //click
+	    	}); // registerOnLoadHandler    	
+	    	// ========================================	
+		</script>
+		]]>
+	</Content>
+	<Content type="html" view="profile" preferred_height="500"
+		preferred_width="670"><![CDATA[<!--HTML-->	
+	    <script type="text/javascript">
+		     // ========================================
+	   		gadgets.util.registerOnLoadHandler(function(){
+			osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['webfinger']})
+		    	.execute(function(response){
+		    		var viewer = os.osapi.getViewerFromResult(response);
+		    		var webfinger = viewer.webfinger;
+		    		if(webfinger  != null && webfinger  != "") { // only render flash if there's a username
+		    			fetchData(webfinger);
+		    		}	    				
+		    	});
+	    	}); // registerOnLoadHandler    	
+	    	// ========================================	
+		</script>
+    ]]>
+	</Content>
+</Module>

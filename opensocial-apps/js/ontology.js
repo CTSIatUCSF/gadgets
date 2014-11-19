@@ -27,6 +27,13 @@ var R2R = function(property) {
 	return "http://ucsf.edu/ontology/r2r#" + property;
 };
 
+var ORNG = function(property) {
+	return "http://orng.info/ontology/orng#" + property;
+};
+
+var GEO = function(property) {
+	return 'http://www.w3.org/2003/01/geo/wgs84_pos#' + property;
+};
 // These are jsonld convenience functions
 
 // returns one person into callback

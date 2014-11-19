@@ -15,6 +15,7 @@
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+ 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script>
@@ -168,10 +169,10 @@
 	        
 	        ucsf.youtube.addVideo = function(linkName, linkUrl, videoId) {
 	        	var html = '<tr>' +  
-					'<td><img src="http://www.google.com/s2/favicons?domain=sc-ctsi.org/" height="16" width="16"/></td>' + 
+					'<td><img src="http://www.google.com/s2/favicons?domain=youtube.com" height="16" width="16"/></td>' + 
 					'<td class="v-name"><a href="'+ linkUrl +'" target="_blank">'+ linkName +'</a></td>' + 
 					'<td class="v-url" id="'+ videoId + '">'+linkUrl+'</td>' + 
-					'<td><input type="button" class="delete-video" value="Delete"/></td>' + 
+					'<td><input type="button" style="margin-top:-4px"class="delete-video" value="Delete"/></td>' + 
 					'</tr>';
 				$(".youtube-gadget .videos table").append(html);
            		ucsf.youtube.adjustHeight();
@@ -182,7 +183,34 @@
 	        	if(video_id) {
  					callback(video_id);
 				}
-					callback();
+				else {
+					var res = videoUrl.match(/http[s]?:\/\/www\.uctv\.tv\/shows\/.*/i);
+					if(res) {
+						ucsf.youtube.sendRequest(videoUrl, function(data) {
+							//var youtubeUrl = $('#movie-player object param[name="movie"]', $(data)).attr('value');
+							var youtubeUrl;
+							$('#movie-player object', $(data)).children().each(function(index, value){
+								if($(value).attr('name') == 'movie') {
+									youtubeUrl = $(value).attr('value');
+									return false;
+								}
+							});
+							
+							if(!youtubeUrl) {
+								callback()	
+							}
+							else {
+								video_id = ucsf.youtube.getVideoIdFromYouTubeUrl(youtubeUrl);
+								callback(video_id);
+							}							
+						}, function(obj) {
+							callback();
+						});
+					}
+					else {
+						callback();
+					}
+				}						
 	        }
 	        	        
 			ucsf.youtube.sendRequest = function(url, success, error) {
@@ -229,25 +257,14 @@
 		</script>
 		
 	    <!-- Styles -->
-	    <style type="text/css">	    
-	    	.youtube-gadget {margin-top: 10px;}	
-	    	.youtube-gadget .label {margin-right: 10px;font-weight: bold;}
-	    	.youtube-gadget .preview, .youtube-gadget .save {margin-left: 10px;color: #3B6394; cursor:pointer;}
-	    	.youtube-gadget .content {margin-top: 10px;text-align: center;}	    
-	    	.youtube-gadget .links_body{width: 295px;}	    	    		
-	    	.youtube-gadget #linkname, .youtube-gadget #linkurl {width: 260px;margin-top:4px;}
-	    	.youtube-gadget #add-video {width: 53px;}
-	    	.youtube-gadget h3, .youtube-gadget h4	{padding-left:10px; padding-top: 0px;}
-	    	.youtube-gadget .descr{padding:5px 0px 0px 25px;}    	    		
-	    	.youtube-gadget .question{padding:0px 0px 5px 12px;}
-	    	.youtube-gadget .warn{color:red;} 
-                .videos td { vertical-align: top; }   	    		
-	    </style>
+	    <style type="text/css">	    	    	    		
+	    	input[type=text] { width: 272px; margin:4px 15px 0 0; }
+	    </style> 
 	    
 		<div class="youtube-gadget">
 			<h3>Manage Links to Videos</h3>
 			<div class="descr">
-	    		Add video links to your profile. Videos must be hosted on YouTube. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
+	    		Add video links to your profile. Videos must be hosted on YouTube or UCTV. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
 			</div>
 			<div class="question" style="padding:0px 0px 5px 12px;">
 				<table cellpadding="0" cellspacing="0">
@@ -258,7 +275,7 @@
 		                </td>
 						<td class="links_body" valign="top" colspan="2">
 							<div><b>Video URL</b> (not displayed in profile)</div>
-							<div><span class="warn">This must be a YouTube link</span><br/> e.g. https://www.youtube.com/watch?v=-7GJstXtIRg</div>
+							<div><span class="warn">This must be a YouTube or UCTV link</span><br/> e.g. http://www.uctv.tv/shows/15777</div>
 		                </td>
 					</tr>				
 					<tr>
@@ -269,7 +286,7 @@
 		                    <input id="linkurl" type="text" value="http://">
 		                </td>
 		                <td>
-		                	<input id="add-video" type="button" value="Save">
+		                	<input id="add-video" type="button" value="Save" style="margin-top:3px">
 		                </td>
 					</tr>				
 				</table>			

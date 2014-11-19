@@ -26,6 +26,9 @@ namespace UCSF.GlobalHealth.Services
 		private static string SQL_ALL_DELETE_PROJECTS = "delete from [ORNG.].[AppData] where appId = @appId";
 		private static string SQL_SELECT_NODE_ID = "select nodeid from [UCSF.].vwPerson where InternalUsername = @employeeId";
 		private static string SQL_INSERT_APP_DATA = "insert [ORNG.].[AppData] (NodeID, AppID, keyName, value, createdDT, updatedDT) values(@nodeId, @appId, @key, @val, GetDate(), GetDate())";
+		private static string SQL_ADD_APP_TO_PERSON = "exec [ORNG.].AddAppToPerson @SubjectID = @nodeId, @appId = @applicationId";
+		private static string SQL_REMOVE_APP_FROM_PERSON = "exec [ORNG.].RemoveAppFromPerson @SubjectID = @nodeId, @appId = @applicationId";
+        private static string SQL_SELECT_ALL_PERSONS = "exec [ORNG.].HasApp @appId = @applicationId";
 
 		private ILog Log { get; set; }
 
@@ -34,6 +37,7 @@ namespace UCSF.GlobalHealth.Services
 
 		private SqlCommand GetNodeIdCmd { get; set; }
 		private SqlCommand InsertDataCmd { get; set; }
+		private SqlCommand AddAppToPersonCmd { get; set; }
 
 		public ProjectLoader(string url, string applicationName)
 		{
@@ -78,10 +82,11 @@ namespace UCSF.GlobalHealth.Services
 
 				int applicationId = GetApplicationId(conn, ApplicationName);
 				DeleteProjects(conn, applicationId);
-				foreach(string employeeId in employeeProjects.Keys) {
+				DeleteAppFromAllPersons(conn, applicationId);
+				foreach (string employeeId in employeeProjects.Keys)
+				{
 					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
 				}
-
 			}
 		}
 
@@ -125,7 +130,34 @@ namespace UCSF.GlobalHealth.Services
 			dbcommand.Prepare();
 			var cnt = dbcommand.ExecuteNonQuery();
 			Log.InfoFormat("Deleted {0} records", cnt);
-		} 
+		}
+
+		private void DeleteAppFromAllPersons(SqlConnection conn, int applicationId)
+		{
+			SqlCommand dbcommand = new SqlCommand(SQL_SELECT_ALL_PERSONS, conn);
+			dbcommand.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+			dbcommand.Prepare();
+
+			SqlCommand removeAppFromPersonCmd = new SqlCommand(SQL_REMOVE_APP_FROM_PERSON, conn);
+			removeAppFromPersonCmd.Prepare();
+
+			int count = 0;
+			using (SqlDataReader reader = dbcommand.ExecuteReader())
+			{
+				while (reader.Read())
+				{
+                    var nodeId = reader[0];// reader["nodeid"];
+					removeAppFromPersonCmd.Parameters.Clear();
+					removeAppFromPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+					removeAppFromPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
+
+					removeAppFromPersonCmd.ExecuteNonQuery();
+					Log.InfoFormat("Removed application from person, appId={0}, nodeId={1}", applicationId, nodeId);
+					count++;
+				}
+			}
+			Log.InfoFormat("Removed application from persons, count={0}", count);
+		}
 
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);
@@ -158,12 +190,21 @@ namespace UCSF.GlobalHealth.Services
 				var cnt2 = InsertDataCmd.ExecuteNonQuery();
 			}
 
+			AddAppToPerson(conn, applicationId, nodeId.Value);
+		}
+
+
+		private void AddAppToPerson(SqlConnection conn, int applicationId, long nodeId)
+		{
+			AddAppToPersonCmd.Parameters.Clear();
+			AddAppToPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+			AddAppToPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
+			AddAppToPersonCmd.ExecuteNonQuery();
+
+			Log.InfoFormat("Added app to person appId={0}, nodeId={1}", applicationId, nodeId);
 		}
 
 		private string GetJson(Project project) {
-			//JavaScriptSerializer serializer = new JavaScriptSerializer();
-			//serializer.RegisterConverters(new JavaScriptConverter[] { new DateStringJSONConverter() });
-
 			string json = JsonConvert.SerializeObject(project);
 			return json;
 		}
@@ -187,6 +228,10 @@ namespace UCSF.GlobalHealth.Services
 
 			InsertDataCmd = new SqlCommand(SQL_INSERT_APP_DATA, conn);
 			InsertDataCmd.Prepare();
+
+			AddAppToPersonCmd = new SqlCommand(SQL_ADD_APP_TO_PERSON, conn);
+			AddAppToPersonCmd.Prepare();
+
 		}
 
 	}

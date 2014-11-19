@@ -17,18 +17,9 @@
     
     <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
-    
-    <!-- Styles -->
-    <style type="text/css">
-    	.slideshare_title {	font-family: Arial, helvetica; font-size: 14px;}
-    	.slideshare_body { font-family: Arial, helvetica; font-size: 11px;}    
-    	.slideshare_credit { font-family: Arial, helvetica; font-size: 10px;}
-    	.ss-link{ margin:10px 0px 10px 0px; }
-    	a, a:visited { color: #0088CC; text-decoration: none; }
-    	a:hover { color: #005580; text-decoration: underline; }
-    </style>
     
     <script type="text/javascript">
 	    
@@ -36,6 +27,7 @@
 	        var action = 'go_to_slideshare';
 	        var href = $('div.ss-link a').attr('href');
     		gadgetEventTrack(action, href);
+			window.top.location.href = href;
 	    }
 	    
 	    function gadgetEventTrack(action, label, value) {
@@ -43,7 +35,7 @@
     		if (label) {message.label = label;}
     		if (value) {message.value = value;}
 			gadgets.orng.reportGoogleAnalyticsEvent(message);
-		}
+            }
 	    
 	    // ========================================
 	    function getUserNameAndPreview(userId){
@@ -139,10 +131,10 @@
 		    <div class="question">
 				<span class="slideshare_body">SlideShare Username:&nbsp;</span><input type="text" name="username" style="display:inline;width:20em;">
 				&nbsp;&nbsp;&nbsp;</span>
-				<span class="save slideshare_body" style="text-decoration:underline;cursor:pointer;color:#44F; display:inline;" title="Save this Username and preview the presentations.">Save/Preview</span>
+				<span class="save slideshare_body" title="Save this Username and preview the presentations.">Save/Preview</span>
 				<br><br>
 				<span class="slideshare_body">Don't have a SlideShare account yet? 
-				Go to <a href="http://www.slideshare.net" target="_blank" style="font-size:12px;text-decoration:none; cursor:pointer;color:#44F;" title="Go to the SlideShare Web site">
+				Go to <a href="http://www.slideshare.net" target="_blank" title="Go to the SlideShare Web site">
 				SlideShare</a> now to create an account and upload presentations.</span>
 			</div>
 		</div>

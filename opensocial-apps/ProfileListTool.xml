@@ -793,7 +793,9 @@
 	                csvData += createCsvField(profile[VIVO('email')]);	                
 	                
 	                //address, school, department
-	                csvData += createCsvField(address);
+	                csvData += createCsvField(address.address1);
+                    csvData += createCsvField(address.address2);
+                    csvData += createCsvField(address.address3);
                     csvData += createCsvField(organization);
                     csvData += createCsvField(department);
 	                
@@ -830,15 +832,19 @@
                 }
                 
                 function getAddress(rdf) {
+                    var address = {};
                     var obj = getObjectByType(rdf, "vivo:Address");                    
                     if(obj) {
-	                    var address1 = obj.address1;
+	                    address.address1 = obj.address1;
+                        address.address2 = obj.address2;
+                        
 	                    var addressCity = obj.addressCity;
 	                    var addressPostalCode = obj.addressPostalCode;
 	                    var addressState = obj.addressState;
 	                    
-	                    return address1 + "\r\n" + addressCity + "\r\n" + addressState + " " + addressPostalCode;
-                    }
+	                    address.address3 = addressCity + ", " + addressState + " " + addressPostalCode;
+                    }                    
+                    return address;
                 }
 
                 function getOrganization(rdf) {

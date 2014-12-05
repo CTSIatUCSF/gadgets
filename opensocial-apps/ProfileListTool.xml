@@ -4,11 +4,11 @@
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
-        <Require feature="minimessage" />
-        <Require feature="dynamic-height" />
+        <!-- Require feature="minimessage" /-->
+        <!-- Require feature="dynamic-height" /-->
         <Require feature="orng" />
         <Require feature="jsonld"/>
-		<Require feature="start-hidden" />
+		<!-- Require feature="start-hidden" /-->
     </ModulePrefs>
     <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
@@ -225,6 +225,7 @@
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
 			osapi.jsonld.getRDF(ids).execute(function(result) {
+			    $("#debug").append('<div data-uri="'+ids+'">' + JSON.stringify(result) + "</div>"); 
                 framePeople(result, function(profiles) {
 	                var json = JSON.stringify(profiles);
 	                $("#debug").append("<div>" + json + "</div>");
@@ -490,7 +491,7 @@
         				<label>Open as CSV</label>
         				<a class="btn btn-sm" id="save-list">
 		      				<span class="glyphicon glyphicon-save"></span>
-		      				Download List
+		      				Download Contact Info
 		    			</a>
         				<a class="btn btn-sm" id="save-pubs">
 		      				<span class="glyphicon glyphicon-floppy-save"></span>
@@ -641,7 +642,8 @@
                 $("#save-list").click(function(event){
                     if(!$(this).attr("href") && peopleList.length > 0) {
                         $(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
-                        loadProfileData(peopleList, 0, "");
+                        var csvData = "First Name,Last Name,Title,Email,Address1,Address2,City State PostalCode,School,Department,Profile URL,Research Interests\r\n";
+                        loadProfileData(peopleList, 0, csvData);
                         event.preventDefault();
                         return false;
                     }                    
@@ -674,11 +676,11 @@
                 });
                 
                 function loadPublications(pubIds) {
-                    osapi.jsonld.getRDF(pubIds).execute(function(result) {
+                    osapi.jsonld.getRDF(pubIds[0]).execute(function(result) {
 	                    var json = JSON.stringify(result);
 	                    $("#debug").append('<div class="pub">' + json + "</div>");
 	                    
-	                    var csvData = ""
+	                    var csvData = "Author List,Publication Date,Publication Year,Title,PMID,Link to PubMed\r\n"
 	                    if(result.jsonld["@graph"]) {
 	                       for(var i=0; i < result.jsonld["@graph"].length; i++) {
 	                           csvData += publicationToCsv(result.jsonld["@graph"][i]);
@@ -687,7 +689,7 @@
 	                    else {
 	                       csvData += publicationToCsv(result.jsonld);
 	                    }
-	                    exportToCsv($("#save-pubs"), csvData);
+	                    exportToCsv($("#save-pubs"), csvData, "Publications.csv");
                     });
                 }
                 
@@ -809,7 +811,7 @@
 	                   loadProfileData(peopleList, index + 1, csvData)
 	                }
 	                else {
-	                   exportToCsv($("#save-list"), csvData);
+	                   exportToCsv($("#save-list"), csvData, "ContactInfo.csv");
 	                }                                               
                 }
                 
@@ -882,7 +884,7 @@
 				    return ! (isOldIE || isIE11);  //Return true if not any IE
 				};
 				
-                function exportToCsv(link, csvData) {
+                function exportToCsv(link, csvData, fileName) {
                     $(".gadget-content").unblock();
                     if (!supportsDataUri()) {
                         var iframe = $('#csvDownloadFrame').get(0);
@@ -895,21 +897,21 @@
 					    iframe.document.write(tableString);
 					    iframe.document.close();
 					    iframe.focus();
-					    iframe.document.execCommand('SaveAs', true, 'list.csv');
+					    iframe.document.execCommand('SaveAs', true, fileName);
 					} 
 					else {                    
 	                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
 	                    link.attr({
 		                    'href': href,
 		                    'target': '_blank',
-		                    'download': 'list.csv'
+		                    'download': fileName
 	                    });
 	                    
 	                    $('#downloadFile').remove(); 
 	                    $('<a></a>')
 	                        .attr('id','downloadFile')
 	                        .attr('href', href)
-	                        .attr('download','list.csv')
+	                        .attr('download',fileName)
 	                        .appendTo('body');
 	                        
 	                    $('#downloadFile').ready(function() {

@@ -16,11 +16,9 @@
 	    <!-- #includes -->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
  	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
-	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
-	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>    
+	    <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script>
-	    <script type="text/javascript" id="ucsf-yt-player"></script>
-	    <!--script type="text/javascript" src="https://www.youtube.com/player_api?enablejsapi=1&version=3" ></script-->
     
 	    <script type="text/javascript" id="ucsf-yt-script">
 	        var ucsf = ucsf || {};
@@ -41,56 +39,145 @@
 			    		}
 			    	});
 			};
-			ucsf.youtube.preview=function(videos) {
-				ucsf.youtube.videoId = videos[0].id;
-				ucsf.youtube.videos = [];
-				for(var i=1;i<videos.length;i++) {
-					ucsf.youtube.videos.push(videos[i].id);	
-				}				
-				$('#ucsf-yt-player').attr('src', '//www.youtube.com/iframe_api');
-			};
-			
-			ucsf.youtube.onPlayerReady = function(event) {
-				ucsf.youtube.player = event.target;
-			}
-			ucsf.youtube.onStateChange = function(event) {
-				if(event.data == YT.PlayerState.PLAYING) {
-					ucsf.gadgetEventTrack('go_to_video');
-				};
-			}
-			function onYouTubeIframeAPIReady() {
-		    	new YT.Player('ytplayer', {
-			      height: '250',
-			      width: '350',			      
-			      videoId: ucsf.youtube.videoId,			      
-			      playerVars: { 'autoplay': 0, 'enablejsapi': 1, 'version':3, showinfo:1, 
-			      	playlist: ucsf.youtube.videos.join(',')
-			      },
-			      events: {
-		            'onReady': ucsf.youtube.onPlayerReady,
-		            'onStateChange': ucsf.youtube.onStateChange
-          		  }
-			    });
-			}						
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
-    <![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_height="400" preferred_width="670">
+    <![CDATA[<!--HTML-->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+        <script id="video-block-template" type="text/x-handlebars-template">
+	        <div class="video_option">
+	            <figure role="group">
+	                <div class="video_thumbnail_wrapper">
+	                    <img src="{{thumbnail_url}}" alt="">
+	                    <span class="video_thumbnail_play">&#9658;</span>
+	                </div>
+	                <figcaption><a href="{{url}}">{{title}}</a></figcaption>
+	            </figure>
+	        </div>
+        </script>
+            	
 	    <script type="text/javascript">
+
+			ucsf.renderVideos = function (videos) {
+				// compile Handlebars template
+				var source   = $("#video-block-template").html();
+				var template = Handlebars.compile(source);
+			
+			    var need_to_show_list_of_videos = true;
+			    if (videos.length == 1) {
+                    $('#video_navigator').detach();
+                    need_to_show_list_of_videos = false;
+			    }
+			
+			    // video iframe should be slightly less than full width and full height
+			    var max_width = 300;
+			    if ($('#current_video_container').width()) {
+                    max_width = $('#current_video_container').width() - 20;
+			    }
+			    var max_height  = 300;
+			
+			    $.each(videos, function(i, video) {
+				    if (video && ("url" in video) && video.url) {
+				        // grab normalized data on each video via Embedly's oEmbed endpoint, via JSONP
+				        var oEmbedURLBase = 'http://api.embed.ly/1/oembed'; // works great, but we need to pay for API key
+				        oEmbedURLBase = 'https://noembed.com/embed'; // works OK, but hobbyist project
+				
+				        var oembedURL = oEmbedURLBase + '?maxheight=' + max_height + '&maxwidth=' + max_width + '&url=' + encodeURIComponent(video.url);
+				        var req = $.ajax({
+					        url : oembedURL,
+					        dataType : "jsonp",
+					        timeout : 10000
+				        });
+				        req.success(function(video_data) {
+					        if (! video_data.error_code && !video_data.error) {
+					
+					            // set video title to the provided label, otherwise use the native title
+					            video_data.title = (video_data.title || video.label);
+					
+					            // use normalized video URL, or fall back to original URL
+					            video_data.url = (video_data.url || video.url);
+					
+					            if (need_to_show_list_of_videos) {
+					            // run video data through Handlebars template, insert into DOM,
+					            //   then save the iframe HTML (video_data.html) to the object's data
+					            $('#video_navigator').append(template(video_data));
+					            var inserted_block = $('#video_navigator .video_option:last');
+					            inserted_block.data('video_html', video_data.html);
+					            }
+					
+					            // if this is the first video on the list, show it big and feature it
+					            if (i == 0) {
+					            $('#current_video_container').html(video_data.html);
+					            if (need_to_show_list_of_videos) {
+					                $('#video_navigator').prepend(inserted_block);
+					                inserted_block.addClass('selected');
+					            }
+					            }
+					        }
+				        });
+				    }
+			    });
+			
+			    // if user clicks on a video option in the video navigator...
+			    $('#videos').on("click", '.video_option', function(e) {
+                    e.preventDefault();
+                    if (e.ctrlKey || e.metaKey) { // open in new tab on right-click
+                        window.open($(this).find('a:first').attr('href'), '_blank');
+                    } else if (! $(this).hasClass('selected')) { // show video, if not shown
+						$('#current_video_container').html($(this).data('video_html'));
+						$('#videos .video_option.selected').removeClass('selected');
+						$(this).addClass('selected');
+						ucsf.gadgetEventTrack('go_to_video')
+	       		    }
+    			    return false;
+			    });
+			
+			    // if, after the first 3 seconds, the first video didn't load, load whichever one we can
+			    window.setTimeout(function(x) {
+				if (! $('#videos .video_option.selected').length) {
+					$('#videos .video_option:first').click();
+					}
+				}, 3000);
+			};
+	       
     		gadgets.util.registerOnLoadHandler(function() {
-	        	gadgets.window.adjustHeight(260);
-	        	ucsf.youtube.getUserVideos(ucsf.youtube.preview);
+	        	gadgets.window.adjustHeight(350);
+	        	ucsf.youtube.getUserVideos(ucsf.renderVideos);
     		});    		
-		</script>
+		</script>		
+		
 	    <!-- Styles -->
 	    <style type="text/css">	    
-	    	.youtube-gadget .content {text-align: center;}	    	    		
+	    	.youtube-gadget .content {text-align: center;}
+	    	.noembed-wrapper {display: inline-block;}
+	    	
+			#example-videos-label { margin: 4em auto 1em auto; font-size: 24px; color: orange; font-weight: bold; font-family: Helvetica, Arial, sans-serif;  }
+			
+			/* this is just to simulate the gadget wrapper. in a real example we wouldn't need to specify this */
+			#videos { width: 670px; height: 330px; margin: 0 auto }
+			
+			#videos { font-family: Helvetica, Arial, sans-serif; font-size: small }
+			#current_video_container { overflow: auto; height: 100% }
+			#current_video_container > iframe, #current_video_container > .noembed-embed { overflow: auto; vertical-align: middle }
+			
+			#video_navigator { width: 150px; float: right; height: 100%; overflow: auto; overflow-x: hidden }
+			#video_navigator { border: 1px solid #e8e8e8 }
+			#video_navigator .video_option { padding: 0.5em; margin: 0 0 0.5em 0; text-align: center; border-radius: 5px; cursor: pointer }
+			#video_navigator .video_option.selected, #video_navigator .video_option:hover { background: #d8d8d8 }
+			#video_navigator .video_thumbnail_wrapper { position: relative }
+			#video_navigator .video_thumbnail_play { position: absolute; bottom: 10%; right: 10%; color: white; font-size: 15px }
+			#video_navigator img { max-width: 90%; border-radius: 5px }
+			#video_navigator a { font-size: small; text-decoration: none }
+			#video_navigator figure { margin: 0 }	    		    	    		
 	    </style>
 			
 		<div class="youtube-gadget">
-			<div class="content">
-				<div id="ytplayer"></div>
+            <div class="content">
+	            <div id="videos">
+	                <div id="video_navigator"></div>
+	                <div id="current_video_container"></div>
+	            </div>   
 			</div>			
 		</div>
 	]]>
@@ -99,19 +186,7 @@
     <![CDATA[<!--HTML-->	
     	<script type="text/javascript">	        
 	        $(document).ready(function () {
-		        $(".youtube-gadget .preview").click(function() {
-		        	var videoId = $('.youtube-gadget input').val();
-		        	if(videoId != null && videoId != '') {
-		        		$('.youtube-gadget .content').show();
-			        	gadgets.window.adjustHeight(450);
-		        		ucsf.youtube.preview(videoId);
-		        	}
-		        	else {
-		        		$('.youtube-gadget .content').hide();
-			        	gadgets.window.adjustHeight(50);
-		        	}
-		        });
-		        $(".youtube-gadget .v-name a").live("click", function() {
+		        $(".youtube-gadget").on("click", ".v-name a", function() {
 		        	ucsf.gadgetEventTrack('go_to_video');
 		        	return true;
 		        });
@@ -142,7 +217,7 @@
 			        	}
 		        	});
 		        });		        
-		        $(".youtube-gadget .delete-video").live('click', function() {
+		        $(".youtube-gadget").on('click', ".delete-video", function() {
 		        	$(".youtube-gadget").block({ message: "Saving..." });
 		        	$(this).parent().parent().remove();
 	    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'videos':ucsf.youtube.getCurrentVideos()} }).execute(function(response){

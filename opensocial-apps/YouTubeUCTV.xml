@@ -79,6 +79,10 @@
 			
 			    $.each(videos, function(i, video) {
 				    if (video && ("url" in video) && video.url) {
+				        if(video.id) {
+				            video.url = "http://www.youtube.com/watch?v=" +video.id; 
+				        }
+				        
 				        // grab normalized data on each video via Embedly's oEmbed endpoint, via JSONP
 				        var oEmbedURLBase = 'http://api.embed.ly/1/oembed'; // works great, but we need to pay for API key
 				        oEmbedURLBase = 'https://noembed.com/embed'; // works OK, but hobbyist project
@@ -184,6 +188,7 @@
 	</Content>
     <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->	
+        <script type="text/javascript" src="js/validator.min.js"></script>
     	<script type="text/javascript">	        
 	        $(document).ready(function () {
 		        $(".youtube-gadget").on("click", ".v-name a", function() {
@@ -192,30 +197,38 @@
 		        });
 		        
 		        $(".youtube-gadget #add-video").click(function() {
-		        	$(".youtube-gadget").block({ message: "Saving..." });
 		        	
 		        	var linkName = $('.youtube-gadget #linkname').val();
-		        	var linkUrl = $('.youtube-gadget #linkurl').val();
+		        	var linkUrl = $('.youtube-gadget #linkurl').val();		        	
+		        	if(!ucsf.youtube.isValidUrl(linkUrl)) {
+	                    alert("This URL is not valid. Please double check your entry.");     
+	                    return;                  
+		        	}
 		        	
-		        	ucsf.youtube.getVideoIdFromUrl(linkUrl, function(videoId){
-			        	if(!videoId) {
-		    				$(".youtube-gadget").unblock();
-			        		alert("Please enter a valid video URL.");		        		
-			        	}
-			        	else {
-				        	ucsf.youtube.addVideo(linkName, linkUrl, videoId);
-				        	
-			    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'videos':ucsf.youtube.getCurrentVideos()} }).execute(function(response){
-			    				$(".youtube-gadget").unblock();
-				    	    	$('.youtube-gadget #linkname').val('');
-					        	$('.youtube-gadget #linkurl').val('http://');
-			    				alert("Your video link information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
-			    			});		        						
-							// post activity
-							osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': 'addedVideo', 'body': linkName, 
-								'streamUrl': linkUrl,'externalId': videoId, 'postedTime': new Date().getTime()}}).execute();
-			        	}
-		        	});
+		        	var domainName = ucsf.youtube.getDomainNameFromUrl(linkUrl);
+		        	if(domainName == "youtube.com" || domainName == "vimeo.com" 
+		        	|| domainName == "ted.com") {
+                        $(".youtube-gadget").block({ message: "Saving..." });                        
+		        	     ucsf.youtube.addAndSaveVideo(linkName, linkUrl, "");
+		        	}
+		        	else if(domainName == "uctv.tv") {
+                        $(".youtube-gadget").block({ message: "Saving..." });
+                        ucsf.youtube.getVideoIdFromUrl(linkUrl, function(videoId){
+	                        if(!videoId) {
+	                            $(".youtube-gadget").unblock();
+	                            alert("This URL is not valid. Please double check your entry.");                       
+	                        }
+	                        else {
+                                ucsf.youtube.addAndSaveVideo(linkName, linkUrl, videoId);
+                            }
+                        });		        	
+		        	}
+		        	else {
+                        alert("This video service might not be supported. Check your profile page to make sure the video shows properly.");     
+                        $(".youtube-gadget").block({ message: "Saving..." });                        
+                         ucsf.youtube.addAndSaveVideo(linkName, linkUrl, "");
+                        return;                  
+		        	} 
 		        });		        
 		        $(".youtube-gadget").on('click', ".delete-video", function() {
 		        	$(".youtube-gadget").block({ message: "Saving..." });
@@ -230,6 +243,20 @@
 		        });		        
 	        });
 	        
+	        ucsf.youtube.isValidUrl = function(url) {
+	           return validator.isURL(url);
+	        }
+	        
+	        ucsf.youtube.getDomainNameFromUrl = function(url) {
+                var a = document.createElement('a');
+                a.href = url;
+                var domain = a.hostname.toLowerCase();
+                if(domain.match(/^www\./)) {
+                    domain = domain.substr(4);
+                }
+                return domain;        
+	        }
+	        
 	        ucsf.youtube.getCurrentVideos = function(){
 	        	var videos = [];
 	        	$(".youtube-gadget .videos table tr").each(function(index, elem) {
@@ -242,15 +269,30 @@
 	        	return JSON.stringify(videos);
 	        }
 	        
+	        ucsf.youtube.addAndSaveVideo = function(linkName, linkUrl, videoId) {
+	           ucsf.youtube.addVideo(linkName, linkUrl, videoId);
+	           
+                osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':{'videos':ucsf.youtube.getCurrentVideos()} }).execute(function(response){
+                    $(".youtube-gadget").unblock();
+                    $('.youtube-gadget #linkname').val('');
+                    $('.youtube-gadget #linkurl').val('http://');
+                    alert("Your video link information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
+                });                                     
+                // post activity
+                osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': 'addedVideo', 'body': linkName, 
+                    'streamUrl': linkUrl,'externalId': videoId, 'postedTime': new Date().getTime()}}).execute();
+	        }
+	         
 	        ucsf.youtube.addVideo = function(linkName, linkUrl, videoId) {
+	           var domainName = ucsf.youtube.getDomainNameFromUrl(linkUrl);
 	        	var html = '<tr>' +  
-					'<td><img src="http://www.google.com/s2/favicons?domain=youtube.com" height="16" width="16"/></td>' + 
+					'<td><img src="http://www.google.com/s2/favicons?domain='+ domainName +'" height="16" width="16"/></td>' + 
 					'<td class="v-name"><a href="'+ linkUrl +'" target="_blank">'+ linkName +'</a></td>' + 
 					'<td class="v-url" id="'+ videoId + '">'+linkUrl+'</td>' + 
 					'<td><input type="button" style="margin-top:-4px"class="delete-video" value="Delete"/></td>' + 
 					'</tr>';
 				$(".youtube-gadget .videos table").append(html);
-           		ucsf.youtube.adjustHeight();
+           		ucsf.youtube.adjustHeight();           		
 		    }
 		    
 	        ucsf.youtube.getVideoIdFromUrl = function(videoUrl, callback) {
@@ -339,7 +381,7 @@
 		<div class="youtube-gadget">
 			<h3>Manage Links to Videos</h3>
 			<div class="descr">
-	    		Add video links to your profile. Videos must be hosted on YouTube or UCTV. Enter the video name (optional) and URL. Some examples might be a lecture or an interview with the media.
+	    		Add links to videos that will show in your profile. Videos must be hosted on YouTube, Vimeo, UCTV or another video hosting service. Enter the video name, as you want it to appear on your profile, and its URL.  Some examples might be a lecture or an interview with the media.
 			</div>
 			<div class="question" style="padding:0px 0px 5px 12px;">
 				<table cellpadding="0" cellspacing="0">
@@ -350,7 +392,7 @@
 		                </td>
 						<td class="links_body" valign="top" colspan="2">
 							<div><b>Video URL</b> (not displayed in profile)</div>
-							<div><span class="warn">This must be a YouTube or UCTV link</span><br/> e.g. http://www.uctv.tv/shows/15777</div>
+							<div><span class="warn">e.g. http://www.uctv.tv/shows/15777</div>
 		                </td>
 					</tr>				
 					<tr>

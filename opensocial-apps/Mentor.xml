@@ -21,7 +21,7 @@
 	
 	<style>
     	.mentor_title {
-    		font-family: Verdana, Arial;
+    		font-family: Arial;
     		font-size: 14px;
     	}
     	.mentor_body {
@@ -433,7 +433,7 @@
 	</div>
 	<br>
     <div>
-		<p id="facultyNarrative" style="margin-left:20px; margin-right:20px; font-family:Arial; font-size:12px; display:none;"></p>
+		<p id="facultyNarrative" style="margin-left:20px; margin-right:20px; font-family: Arial; font-size:13px; line-height: 20px; display:none;"></p>
 	</div>
 				
 	<div id="mentor_as" style="display:none; margin-left:20px;">

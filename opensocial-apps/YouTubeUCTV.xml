@@ -126,8 +126,12 @@
 			    // if user clicks on a video option in the video navigator...
 			    $('#videos').on("click", '.video_option', function(e) {
                     e.preventDefault();
-                    if (e.ctrlKey || e.metaKey) { // open in new tab on right-click
-                        window.open($(this).find('a:first').attr('href'), '_blank');
+                    if (e.ctrlKey || e.metaKey) { 
+                        // open video in new tab on right-click
+                        var url = $(this).find('a:first').attr('href');
+                        window.open(url, '_blank');
+                        ucsf.gadgetEventTrack('open_video_in_new_window', url);
+                        
                     } else if (! $(this).hasClass('selected')) { // show video, if not shown
 						$('#current_video_container').html($(this).data('video_html'));
 						$('#videos .video_option.selected').removeClass('selected');
@@ -137,6 +141,11 @@
     			    return false;
 			    });
 			
+			    $('#videos').on('mouseover', function () {
+                    $('#videos').off('mouseover');
+                    ucsf.gadgetEventTrack('mouseover');
+                });
+ 
 			    // if, after the first 3 seconds, the first video didn't load, load whichever one we can
 			    window.setTimeout(function(x) {
 				if (! $('#videos .video_option.selected').length) {

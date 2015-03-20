@@ -83,7 +83,7 @@
     </div>
     ]]>
     </Content>
-    <Content type="html" view="profile" preferred_height="500" preferred_width="670"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_height="500" preferred_width="590"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 		     // ========================================
 	   		gadgets.util.registerOnLoadHandler(function(){

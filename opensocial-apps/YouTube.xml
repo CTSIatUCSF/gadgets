@@ -74,7 +74,7 @@
 		</script>
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
+    <Content type="html" view="profile" preferred_height="260" preferred_width="590">
     <![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
     		gadgets.util.registerOnLoadHandler(function() {
@@ -133,7 +133,6 @@
 			    				$(".youtube-gadget").unblock();
 				    	    	$('.youtube-gadget #linkname').val('');
 					        	$('.youtube-gadget #linkurl').val('http://');
-			    				alert("Your video link information is saved. Don't forget to use the Hide / Show links to make this section visible or hidden on your profile page.");
 			    			});		        						
 							// post activity
 							osapi.activities.create({'userId':'@viewer', 'appId':'@app', 'activity': {'title': 'addedVideo', 'body': linkName, 

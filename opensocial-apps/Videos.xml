@@ -10,7 +10,7 @@
         <Require feature="dynamic-height" />
         <Require feature="osapi" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="590">
+    <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
     <![CDATA[<!--HTML-->
         <!DOCTYPE html>    
         <!-- #includes -->
@@ -42,7 +42,7 @@
         </script>
     ]]>
     </Content>
-    <Content type="html" view="profile" preferred_height="400" preferred_width="590">
+    <Content type="html" view="profile" preferred_height="400" preferred_width="670">
     <![CDATA[<!--HTML-->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
         <script id="video-block-template" type="text/x-handlebars-template">
@@ -168,7 +168,7 @@
             #example-videos-label { margin: 4em auto 1em auto; font-size: 24px; color: orange; font-weight: bold; font-family: Helvetica, Arial, sans-serif;  }
             
             /* this is just to simulate the gadget wrapper. in a real example we wouldn't need to specify this */
-            #videos { width: 580px; height: 330px; margin: 0 auto }
+            #videos { width: 670px; height: 330px; margin: 0 auto }
             
             #videos { font-family: Helvetica, Arial, sans-serif; font-size: small }
             #current_video_container { overflow: auto; height: 100% }
@@ -195,7 +195,7 @@
         </div>
     ]]>
     </Content>
-    <Content type="html" view="home" preferred_height="350" preferred_width="756">
+    <Content type="html" view="home" preferred_height="350" preferred_width="700">
     <![CDATA[<!--HTML-->    
         <script type="text/javascript" src="js/validator.min.js"></script>
         <script type="text/javascript">         

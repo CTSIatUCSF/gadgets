@@ -433,22 +433,12 @@
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
            <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
            <style type="text/css">
-                   input#close {
-                           margin-left:10px;
-                   }
-                   div.message {
-                           margin-bottom:10px;
-                   }
-                   div.info {
-                           color:green;
-                   }
-                   div.error {
-                           color:red;
-                   }
-                   .hidden {
-                           display:none;
-                   }
-                p { width: 640px; }
+                 input#close {margin-left:10px;}
+                 div.message {margin-bottom:10px;}
+                 div.info {color:green;}
+                 div.error {color:red;}
+                 .hidden {display:none;}
+                 p { width: 640px; }
             
             
                 .list-info {font-weight:bold; font-size:14px; color:#CA7C29;}
@@ -496,7 +486,7 @@
 		      				<span class="glyphicon glyphicon-save"></span>
 		      				Download Contact Info
 		    			</a>
-        				<a class="btn btn-sm" id="save-pubs">
+        				<a class="btn btn-sm" id="save-pubs" style="display:none;">
 		      				<span class="glyphicon glyphicon-floppy-save"></span>
 		      				Download Pubs
 		    			</a>
@@ -651,7 +641,9 @@
                 $("#save-list").click(function(event){
                     if(!$(this).attr("href") && peopleList.length > 0) {
                         $(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
-                        var csvData = "First Name,Last Name,Title,Email,Address1,Address2,City State PostalCode,School,Department,Profile URL,Research Interests\r\n";
+                        //TODO: temporary remove address
+                        //var csvData = "First Name,Last Name,Title,Email,Address1,Address2,City State PostalCode,School,Department,Profile URL,Research Interests\r\n";
+                        var csvData = "First Name,Last Name,Degree,Title,Email,School,Department,Profile URL,Research Interests\r\n";
                         loadProfileData(peopleList, 0, csvData);
                         event.preventDefault();
                         return false;
@@ -767,9 +759,10 @@
                 
                 function loadRequiredIds(profile, callback) {
                     var ids = [];
-                    if(profile[VIVO('mailingAddress')]) {
-                        ids.push(profile[VIVO('mailingAddress')]["@id"]);
-                    }
+                    //TODO: temporary remove address
+                    //if(profile[VIVO('mailingAddress')]) {                    
+                    //    ids.push(profile[VIVO('mailingAddress')]["@id"]);
+                    //}
                     
                     if(profile[PRNS('personInPrimaryPosition')]) {
                         var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
@@ -789,24 +782,27 @@
                 function loadProfileDataInternal(peopleList, index, csvData, additionalData) {
                     var profile =  peopleList[index];
                     
-                    var address = "";
+                    //TODO: temporary remove address
+                    //var address = "";
                     var organization = "";
                     var department = "";
                     if(additionalData) {
-                        address = getAddress(additionalData);                       
+                        //address = getAddress(additionalData);                       
                         organization = getOrganization(additionalData);                       
                         department = getDepartment(additionalData);                       
                     }
                 
 	                csvData += createCsvField(profile[FOAF('firstName')]);
 	                csvData += createCsvField(profile[FOAF('lastName')]);
+                    csvData += createCsvField(getDegree(profile));
 	                csvData += createCsvField(profile[VIVO('preferredTitle')]);
 	                csvData += createCsvField(profile[VIVO('email')]);	                
 	                
+	                //TODO: temporary remove address
 	                //address, school, department
-	                csvData += createCsvField(address.address1);
-                    csvData += createCsvField(address.address2);
-                    csvData += createCsvField(address.address3);
+	                //csvData += createCsvField(address.address1);
+                    //csvData += createCsvField(address.address2);
+                    //csvData += createCsvField(address.address3);
                     csvData += createCsvField(organization);
                     csvData += createCsvField(department);
 	                
@@ -824,6 +820,20 @@
 	                }                                               
                 }
                 
+                function getDegree(profile) {
+                    var fullName = profile[PRNS('fullName')];
+                    var parts = fullName.split(",")
+                    
+                    var degreeList = [];
+                    for(var i=1;i<parts.length;i++) {
+                        var degree = jQuery.trim(parts[i]);
+                        if(degree.toLowerCase().indexOf('jr') <0 ) {
+                            degreeList.push(parts[i]);
+                        }
+                    }
+                    
+                    return degreeList.join(',');
+                }
                 function getObjectByType(rdf, type) {
                     var obj;
                     if(rdf.jsonld["@graph"]) {

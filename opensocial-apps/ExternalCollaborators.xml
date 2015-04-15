@@ -38,9 +38,11 @@
 			osapi.jsonld.getOwnerProperties([PRNS('fullName')]).execute(function(result) {
 				if (!result.error) {
 					$("#see-all").data("ownerURI", getProductionURI(result.uris[0])).show();
+					$(".see-all").show();
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
+					var url = 'http://r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
+                    $("#debug").append('<div class="url">' + url + "</div>"); 
 					gadgets.io.makeRequest(url, callback, params);
 				}
 			}); /* end osapi.appdata.get */			
@@ -64,6 +66,7 @@
 			var colMap = {};
 
 			for (var i = 0; i < colArr.length; i++) {
+			    $("#debug").append('<div>' + JSON.stringify(colArr[i]) + "</div>"); 
 				if (colMap[colArr[i].researcherURI.value]) {
 					colMap[colArr[i].researcherURI.value].contributedWork.push(colArr[i].contributedWork.value);
 				}
@@ -75,6 +78,7 @@
 					person.image = colArr[i].thumbnail ? colArr[i].thumbnail.value : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 					person.researcherHomePage = colArr[i].researcherHomePage ? colArr[i].researcherHomePage.value : colArr[i].researcherURI.value;
 					person.label = colArr[i].researcherLabel.value;
+					person.institutionIcon = colArr[i].icon.value;
 					person.rns = {};
 					person.rns.url = colArr[i].researchNetworkingSite.value;
 					person.rns.label = colArr[i].affiliation.value;
@@ -94,7 +98,7 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="290">
+    <Content type="html" view="small" preferred_width="190" preferred_height="340">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -113,11 +117,12 @@
 					});
 										
 					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
-					for (var i = 0; i<5 && i< collaborators.length;i++) {
+					for (var i = 0; i<3 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
 						list_data += '<div class="thumbnail"><img src="' + person.image + '" /></div>';						
 						list_data += "<a href='" + person.researcherHomePage+ "' target='_blank'> " + person.label + "</a>";
+                        list_data += '<div class="thumbnail"><img src="' + person.institutionIcon + '" /></div>';                     
 						list_data += "</div>";
 						
 					}
@@ -129,7 +134,7 @@
 					$("#see-all span").text(collaborators.length);
 					
 	          		setTimeout(function(){
-						var h = $("#collaborators_list").height() + 30;
+						var h = $("#collaborators_list").height() + 60;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
 			}				
@@ -138,10 +143,11 @@
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {
-	    		$("#see-all").click(function(event) {
+	    		$(".see-all").click(function(event) {
 			        var ownerURI = $("#see-all").data("ownerURI");
 			        gadgetEventTrack('go_to_see_all', ownerURI);
-			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
+			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);
+			    	return false;
 	    		});
 	   			$(".col-item a").live("click", function() {
 	   				gadgetEventTrack('go_to_collaborator_from_small', $(this).attr("href"));
@@ -153,17 +159,20 @@
     </script>
     
     <style>
-    	.col-item{ min-height:22px; } 
-	#see-all, #see-all span { font-size: 11px; font-weight: bold; }
+       .col-item {min-height:22px;} 
+       .col-item a{margin-right: 3px;}
+	   .see-all, .see-all span { font-size: 11px; font-weight: bold; }
     </style>
 
     <div id="collaborators_list"></div>     
     <div>
-    	<a id="see-all" href="#" style="display:none">
+        <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
+    	<a id="see-all" class="see-all" style="display:none" href="#" >
     		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
     		See all (<span></span>) people
     	</a>
-    </div>	
+    </div>
+    <div id="debug" style="display:none"></div>	
     
     ]]></Content>
     <Content type="html" view="canvas" preferred_height="120" preferred_width="800">
@@ -188,7 +197,7 @@
 			function readData2(ownerUri, callback) {
 				var params = {};
 				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-				var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
+				var url = 'http://r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
 				gadgets.io.makeRequest(url, callback, params);
 			}
 	    	
@@ -333,11 +342,11 @@
 		   			   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<div><div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    html +='<div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
 		   		    
 		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
 		   		    
-		   		    html +='</div><div style="clear:both"/></div>';
+		   		    html +='</div>';
 		   		    
 		   		$("#coll-list").append(html);    
 		   	}	   	 
@@ -357,7 +366,7 @@
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
-		.thumbnail { margin-right: 4px; }
+            .thumbnail { margin-right: 4px;}
 	    </style>
 	    
    		<div class="content">
@@ -370,7 +379,7 @@
    				<div id="coll-list">
    				</div>
 	   		</div>	
-	   		<div class="debug"></div>	
+	   		<div id="debug" style="display:none"></div>	
    		</div>
 	]]>
 	</Content>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="External Collaborators"
-				 description="External Collaborators" width="190">
+	<ModulePrefs title="Co-Authors"
+				 description="Co-Authors" width="190">
         <Require feature="opensocial-0.9" />
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />
@@ -116,7 +116,7 @@
 						return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 					});
 										
-					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
+					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have published with this person.</span>";					
 					for (var i = 0; i<3 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
@@ -374,8 +374,8 @@
 	   			<div id="map-canvas"></div>
 	   		</div>		
    			<div class="list-wrap">
-   				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have worked with this person. They are sorted by most collaborations (publications, grants, etc.) to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
+   				<div class="title">External Co-Authors (<span class="total-count">0</span>) found</div>
+   				<div class="descr">External Co-Authors are people at other institutions who have published with this person. They are sorted by most publications to least. Click on a name to open that person's profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may not include all co-authors.</div>
    				<div id="coll-list">
    				</div>
 	   		</div>	

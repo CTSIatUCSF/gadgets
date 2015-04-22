@@ -324,7 +324,7 @@ You can change the URL from 'http://this_server/this_dir/GadgetName.xml' to 'htt
     <div id='AddEdit' style="padding:15px 0px 0px 12px;">
 		Add details about your availability to mentor UCSF faculty. 
 		Learn about the <a href="http://academicaffairs.ucsf.edu/ccfl/faculty_mentoring_program.php" target="_blank" title="Go to the UCSF Faculty Mentoring Website">Faculty Mentoring Program</a> 
-		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI MDP Web page">CTSI&nbsp;Mentor&nbsp;Development&nbsp;Program</a>
+		and the <a href="http://accelerate.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI MDP Web page">CTSI&nbsp;Mentor&nbsp;Development&nbsp;Program</a>
 		<br /><br />
 	</div>
 		
@@ -342,7 +342,7 @@ You can change the URL from 'http://this_server/this_dir/GadgetName.xml' to 'htt
 
 	<div class='question' style="padding: 0px; width:500px;">
 		<br>
-		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
+		<h4>Available to Mentor Faculty as:</h4> <span>(check all that apply)</span> &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <a href="http://accelerate.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page">Review Mentor Role Definitions</a>
 		<table cellspacing="0" cellpadding="15">
 			<tr>
 				<td valign="middle" width="220" class="mentor_list">
@@ -463,7 +463,7 @@ You can change the URL from 'http://this_server/this_dir/GadgetName.xml' to 'htt
 	</div>
 				
 	<div id="mentor_as" style="display:none; margin-left:20px;">
-		<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://ctsi.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page" onClick="gadgetEventTrack('view_mentor_roles', 'http://ctsi.ucsf.edu/training/mdp-seminar1-definitions'); return true">Review Mentor Role Definitions</a>):
+		<span class='detailtitle'>Available to Mentor as: </span> (<a href="http://accelerate.ucsf.edu/training/mdp-seminar1-definitions" target="_blank" title="Go to the Mentor Role Definitions Web page" onClick="gadgetEventTrack('view_mentor_roles', 'http://accelerate.ucsf.edu/training/mdp-seminar1-definitions'); return true">Review Mentor Role Definitions</a>):
 			<span id="mentor_as_career_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Career Mentor</span>
 			<span id="mentor_as_co_mentor" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Co-Mentor</span>
 			<span id="mentor_as_lead_research" style="display:none; padding-botom:3px;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;<b>&middot;</b>&nbsp;</span>Lead Research / Scholarly Mentor</span>
@@ -487,7 +487,7 @@ You can change the URL from 'http://this_server/this_dir/GadgetName.xml' to 'htt
 
     <div style="padding:10px 0px 0px 20px;"> 
 		Learn about the <a href="http://academicaffairs.ucsf.edu/ccfl/faculty_mentoring_program.php" target="_blank" title="Go to the UCSF Faculty Mentoring Website" onClick="gadgetEventTrack('go_to_program', 'http://academicaffairs.ucsf.edu/ccfl/faculty_mentoring_program.php'); return true">Faculty Mentoring Program</a> 
-		and the <a href="http://ctsi.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page" onClick="gadgetEventTrack('go_to_development', 'http://ctsi.ucsf.edu/training/mdp-announcement'); return true">CTSI Mentor Development Program</a>
+		and the <a href="http://accelerate.ucsf.edu/training/mdp-announcement" target="_blank" title="Go to the CTSI | MDP Web page" onClick="gadgetEventTrack('go_to_development', 'http://accelerate.ucsf.edu/training/mdp-announcement'); return true">CTSI Mentor Development Program</a>
 		<br /><br />
 	</div>
 	

@@ -9,6 +9,7 @@
 		<Require feature="jsonld" />
         <Require feature="views" />
 		<Require feature="start-hidden" />
+		<Require feature="settitle"/>
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
@@ -273,6 +274,11 @@
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
 		   		loadScript();
+		   		osapi.jsonld.getOwner().execute(function(ownerData) {
+	                framePerson(ownerData, function(ownerObj) {
+	                    gadgets.window.setTitle(ownerObj[PRNS('fullName')]);
+	                });
+                });		   		
 		   		
 		   		$(document).ready(function () {		   			
 		   			$("a.col-pubs").live("click", function() {
@@ -358,7 +364,7 @@
 	    	.content{width: 600px;margin-left: 100px;}
 	    	.map-wrap{width:600px;height: 450px; margin-bottom: 20px;}
 	    	.list-wrap{font-size: 13px;line-height: 20px;}	    	 
-	    	.title{font-weight: bold; color: #666; } 
+	    	.title{font-weight: bold; color: #666; margin-bottom: 15px;} 
 	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
 	    	.col {margin-bottom: 5px;}
@@ -369,12 +375,12 @@
             .thumbnail { margin-right: 4px;}
 	    </style>
 	    
+        <div class="title">External Co-Authors (<span class="total-count">0</span>) found</div>
    		<div class="content">
    			<div class="map-wrap">	
 	   			<div id="map-canvas"></div>
 	   		</div>		
    			<div class="list-wrap">
-   				<div class="title">External Co-Authors (<span class="total-count">0</span>) found</div>
    				<div class="descr">External Co-Authors are people at other institutions who have published with this person. They are sorted by most publications to least. Click on a name to open that person's profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may not include all co-authors.</div>
    				<div id="coll-list">
    				</div>

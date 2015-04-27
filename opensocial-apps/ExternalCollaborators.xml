@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="Co-Authors"
-				 description="Co-Authors" width="190">
+	<ModulePrefs title="External Co-Authors"
+				 description="External Co-Authors" width="190">
         <Require feature="opensocial-0.9" />
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />

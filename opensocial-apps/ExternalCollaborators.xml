@@ -17,7 +17,25 @@
 	<Content type="html" view="sandbox" preferred_width="590"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
 	<h4 style="padding-left:12px;">Add External Co-authors to Your Profiles Installation!</h4>
-	Still working on this, stay tuned!
+To add do this:<br>
+<code>
+INSERT [ORNG.].Apps ( AppID ,  Name , Url , Enabled)
+VALUES  ( 119 ,' External Co-Authors', 'http://profiles.ucsf.edu/apps_2.6/ExternalCollaborators.xml', 1);
+ 
+INSERT [ORNG.].AppViews ( AppID ,Page ,[View] ,ChromeID , Visibility ,DisplayOrder , OptParams)
+VALUES  ( 119, 'profile/display.aspx' , 'small', 'gadgets-network', 'Public', 1, '{''chrome_class'':''gadgets-gadget-network-chrome''}');
+
+INSERT [ORNG.].AppViews ( AppID ,Page ,[View] ,ChromeID , Visibility ,DisplayOrder , OptParams)
+VALUES  ( 119, 'orng/gadgetdetails.aspx' , 'canvas', 'gadgets-detail', 'Public', 1, NULL);
+</code><br>
+Then you need to add network gadgets to the Profile page by updating the PresentationXML.  Be careful doing this! Instructions are here: 
+<a href='http://profiles.ucsf.edu/apps_2.6/AddGadgetsNetworkToPresentationXML.html' target='_blank'>Adding Network Gadgets</a>
+   	<script type="text/javascript">
+	   	gadgets.util.registerOnLoadHandler(function() {
+			gadgets.orng.showGadget();
+		});
+    </script>
+	
     ]]></Content>
     <Content type="html" view="verify, small, canvas">
     <![CDATA[	

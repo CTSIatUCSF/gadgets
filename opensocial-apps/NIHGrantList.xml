@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="NIH Grants Awarded"
+            title="Grants Awarded"
             author="Alexei Vassiliev"
             author_email="alexnv@sbcglobal.com"
             description="NIH Grants Awarded">
@@ -39,7 +39,7 @@
 		</script>
 	    
 		<div class="nih-grants-home" style="padding: 5px">   
-			This gadget retrieves NIH-funded grants for display on your profile. If you have questions about this information please <span class="contactus"></span>.			   		    	</div>]]></Content>
+			This gadget retrieves grants from NIH RePORTER for display on your profile. If you have questions about this information please <span class="contactus"></span>.			   		    	</div>]]></Content>
     <Content type="html" view="profile, home" preferred_height="210" preferred_width="670"><![CDATA[<!--HTML-->	
 	    <style type="text/css">
 	    	.nih-grants-profile .title {padding: 5px 5px 10px 5px;}
@@ -133,7 +133,7 @@
 		</script>	
 		<div class="nih-grants-profile">
 			<div class="help"><img src="images/Info.png"></img></div>
-			<div class="title"><span class="user-name"></span>&nbsp;was the Principal Investigator (PI) or Co-Principal Investigator (Co-PI) for the following NIH grants.</div>
+			<div class="title"><span class="user-name"></span>&nbsp;was the Principal Investigator (PI) or Co-Principal Investigator (Co-PI) for the following grants. Information provided by the NIH.</div>
 			<div class="clear"></div>
 			<div class="info" style="display:none">This data is sourced from NIH Reporter. Some grant data shown may be less accurate if the principal investigator’s or co-principal investigator’s name is common. 
 			If you believe any of this information is inaccurate, please <span class="contactus"></span>.</a> 

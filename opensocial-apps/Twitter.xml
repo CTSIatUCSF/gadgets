@@ -61,7 +61,7 @@
 	        }		
 		</script>
 	]]></Content>
-    <Content type="html" view="profile" preferred_width="670" preferred_height="310"><![CDATA[<!--HTML-->	
+    <Content type="html" view="profile" preferred_width="590" preferred_height="310"><![CDATA[<!--HTML-->	
 	    <script type="text/javascript">
 	        ucsf.twitter.profilePageInit = function() {
 	        	ucsf.twitter.getUsername(ucsf.twitter.preview);

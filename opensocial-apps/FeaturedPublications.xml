@@ -11,7 +11,40 @@
         <Require feature="dynamic-height" />
         <Require feature="jsonld"/>        
     </ModulePrefs>
-    <Content type="html" view="default, home, profile" preferred_height="460" preferred_width="700">
+  <!-- ==================== START SANDBOX VIEW ==================== -->
+
+  <Content type="html" view="sandbox" preferred_width="590">
+    <![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+	<h4 style="padding-left:12px;">Add Featured Publications to Your Profiles Installation!</h4>
+
+    <div id='AddEdit' style="padding:15px 0px 0px 12px;">
+		This is an ONTOLOGY gadget, the instructions for adding this to your profiles installation are below. This gadget allows researchers to
+    select the publications they care most about, and to show them "above the fold" in whichever order they desire. As with any 
+    gadget that you are going to run in production, we suggest that you install a copy of the source gadget XML on your own webservers so that you can make tweaks and 
+    edits for your institution.
+		<br/>
+
+<ol>
+  <li>Add an entry for this gadget to the [ORNG.].[Apps] table (ex. 118, 'Featured Publications', 'http://profiles.ucsf.edu/apps_2.6/FeaturedPublications.xml', NULL, NULL, 1)</li>
+  <li>Next, run 'exec [ORNG.].[AddAppToOntology] @AppID=118' (or whatever AppID you used) on the Database </li>
+  <li>Log in and check it out!</li>
+  <li>If you ever want to remove the gadget, call 'exec [ORNG.].[RemoveAppFromOntology] @AppID=118' (or whatever AppID you used) before you remove it from the [ORNG.].[Apps] table. This is important!</li>
+</ol>
+    <div id='AddEdit' style="padding:15px 0px 0px 12px;">
+		Note that with ONTOLOGY gadgets the filename is used to embed the gadget into the RDF.
+You can change the URL from 'http://this_server/this_dir/GadgetName.xml' to 'http://that_server/other_dir/GadgetName.xml' by just changing the entry in the [ORNG.].
+
+[Apps] table, but if you want to go from 'http://this_server/this_dir/GadgetName.xml' to 'http://this_server/this_dir/OtherGadgetName.xml' you will need to first 
+
+call [ORNG.].[RemoveAppFromOngology], make the change to the [ORNG.].[Apps] entry and then add the new version of the gadget with [ORNG.].[AddAppToOngology]
+		<br /><br />
+	
+    ]]>
+  </Content>
+
+  <!-- ==================== END SANDBOX VIEW ==================== -->
+  <Content type="html" view="home, profile" preferred_height="460" preferred_width="700">
     <![CDATA[
 	    <!DOCTYPE html>    
 	    <!-- #includes -->
@@ -83,7 +116,7 @@
 	    </style>		
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
+    <Content type="html" view="profile" preferred_height="260" preferred_width="590">
     <![CDATA[	
 	    <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {

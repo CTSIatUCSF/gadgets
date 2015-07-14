@@ -116,7 +116,7 @@ call [ORNG.].[RemoveAppFromOngology], make the change to the [ORNG.].[Apps] entr
 	    </style>		
 	]]>
 	</Content>
-    <Content type="html" view="profile" preferred_height="260" preferred_width="590">
+    <Content type="html" view="profile" preferred_height="260" preferred_width="670">
     <![CDATA[	
 	    <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {

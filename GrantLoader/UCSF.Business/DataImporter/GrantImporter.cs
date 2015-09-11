@@ -25,13 +25,13 @@ namespace UCSF.Business.DataImporter
         {
             try
             {
-                DataContext.SubmitChanges();
+                //DataContext.SubmitChanges();
                 ts.Complete();
             }
             catch (Exception ex)
             {
                 log.Info("Error saving data to server");
-                log.Debug("Error saving data to server", ex);
+                log.Debug(String.Format("Error saving data to server {0}", ex.Message), ex);
             }
             finally
             {

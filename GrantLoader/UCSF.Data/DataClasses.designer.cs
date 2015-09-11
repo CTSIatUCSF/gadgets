@@ -115,13 +115,13 @@ namespace UCSF.Data
 		
 		private System.Guid _GrantPK;
 		
-		private int _ApplicationId;
+		private int _ApplicationId=0;
 		
-		private string _Activity;
+		private string _Activity="XX";
 		
-		private string _AdministeringIC;
+		private string _AdministeringIC="XX";
 		
-		private int _ApplicationType;
+		private int _ApplicationType=0;
 		
 		private System.Nullable<bool> _ARRAFunded;
 		
@@ -135,7 +135,7 @@ namespace UCSF.Data
 		
 		private string _FundingICS;
 		
-		private int _FY;
+		private int _FY=0;
 		
 		private string _OrgCity;
 		
@@ -143,7 +143,7 @@ namespace UCSF.Data
 		
 		private string _OrgDistrict;
 		
-		private int _OrgDUNS;
+		private int _OrgDUNS=0;
 		
 		private string _OrgDept;
 		

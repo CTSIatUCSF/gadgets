@@ -237,7 +237,7 @@
     </Content>
     
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[<!--HTML-->
+    <Content type="html" view="profile" preferred_width="590" preferred_height="200"><![CDATA[<!--HTML-->
    
     	<div class="links-gadget">
 		    <div id="view_links_table" style="padding:0px 0px 10px 20px;">

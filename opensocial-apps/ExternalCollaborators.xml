@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<ModulePrefs title="External Collaborators"
-				 description="External Collaborators" width="190">
+	<ModulePrefs title="External Co-Authors"
+				 description="External Co-Authors" width="190">
         <Require feature="opensocial-0.9" />
 		<Require feature="dynamic-height" />
 		<Require feature="osapi" />
@@ -9,10 +9,34 @@
 		<Require feature="jsonld" />
         <Require feature="views" />
 		<Require feature="start-hidden" />
+		<Require feature="settitle"/>
 	</ModulePrefs>
 
 	<!-- ==================== START COMBINED VIEWS ==================== -->
 
+	<Content type="html" view="sandbox" preferred_width="590"><![CDATA[<!--HTML-->
+    <!DOCTYPE html>
+	<h4 style="padding-left:12px;">Add External Co-authors to Your Profiles Installation!</h4>
+To add do this:<br>
+<code>
+INSERT [ORNG.].Apps ( AppID ,  Name , Url , Enabled)
+VALUES  ( 119 ,' External Co-Authors', 'http://profiles.ucsf.edu/apps_2.6/ExternalCollaborators.xml', 1);
+ 
+INSERT [ORNG.].AppViews ( AppID ,Page ,[View] ,ChromeID , Visibility ,DisplayOrder , OptParams)
+VALUES  ( 119, 'profile/display.aspx' , 'small', 'gadgets-network', 'Public', 1, '{''chrome_class'':''gadgets-gadget-network-chrome''}');
+
+INSERT [ORNG.].AppViews ( AppID ,Page ,[View] ,ChromeID , Visibility ,DisplayOrder , OptParams)
+VALUES  ( 119, 'orng/gadgetdetails.aspx' , 'canvas', 'gadgets-detail', 'Public', 1, NULL);
+</code><br>
+Then you need to add network gadgets to the Profile page by updating the PresentationXML.  Be careful doing this! Instructions are here: 
+<a href='http://profiles.ucsf.edu/apps_2.6/AddGadgetsNetworkToPresentationXML.html' target='_blank'>Adding Network Gadgets</a>
+   	<script type="text/javascript">
+	   	gadgets.util.registerOnLoadHandler(function() {
+			gadgets.orng.showGadget();
+		});
+    </script>
+	
+    ]]></Content>
     <Content type="html" view="verify, small, canvas">
     <![CDATA[	
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
@@ -31,6 +55,9 @@
 			else if (uri.indexOf("http://profilesstage.sc-ctsi.org") !== -1) {
 				return uri.replace("http://profilesstage.sc-ctsi.org", "http://profiles.sc-ctsi.org");
 			}
+			else if (uri == "http://stage-profiles.ucsf.edu/profiles260/profile/190731") {
+				return "http://profiles.ucsf.edu/profile/368698";
+			}
 			return uri;
 		}
 			
@@ -38,9 +65,11 @@
 			osapi.jsonld.getOwnerProperties([PRNS('fullName')]).execute(function(result) {
 				if (!result.error) {
 					$("#see-all").data("ownerURI", getProductionURI(result.uris[0])).show();
+					$(".see-all").show();
 					var params = {};
 					params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-					var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
+					var url = 'http://r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(result.uris[0]) + '&format=JSON';
+                    $("#debug").append('<div class="url">' + url + "</div>"); 
 					gadgets.io.makeRequest(url, callback, params);
 				}
 			}); /* end osapi.appdata.get */			
@@ -64,6 +93,7 @@
 			var colMap = {};
 
 			for (var i = 0; i < colArr.length; i++) {
+			    $("#debug").append('<div>' + JSON.stringify(colArr[i]) + "</div>"); 
 				if (colMap[colArr[i].researcherURI.value]) {
 					colMap[colArr[i].researcherURI.value].contributedWork.push(colArr[i].contributedWork.value);
 				}
@@ -75,6 +105,7 @@
 					person.image = colArr[i].thumbnail ? colArr[i].thumbnail.value : ENV_PROFILES_URL + "/Profile/Images/default_img.png";
 					person.researcherHomePage = colArr[i].researcherHomePage ? colArr[i].researcherHomePage.value : colArr[i].researcherURI.value;
 					person.label = colArr[i].researcherLabel.value;
+					person.institutionIcon = colArr[i].icon.value;
 					person.rns = {};
 					person.rns.url = colArr[i].researchNetworkingSite.value;
 					person.rns.label = colArr[i].affiliation.value;
@@ -94,7 +125,7 @@
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="290">
+    <Content type="html" view="small" preferred_width="190" preferred_height="340">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -112,12 +143,13 @@
 						return getPropertyAsArray(b, 'contributedWork').length - getPropertyAsArray(a, 'contributedWork').length;
 					});
 										
-					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have partnered with this person.</span>";					
-					for (var i = 0; i<5 && i< collaborators.length;i++) {
+					var list_data = "<div><span class='passiveSectionHeadDescription'>People at other institutions who have published with this person.</span>";					
+					for (var i = 0; i<3 && i< collaborators.length;i++) {
 						var person = collaborators[i];
 						list_data += '<div class="col-item">';
 						list_data += '<div class="thumbnail"><img src="' + person.image + '" /></div>';						
 						list_data += "<a href='" + person.researcherHomePage+ "' target='_blank'> " + person.label + "</a>";
+                        list_data += '<div class="thumbnail"><img src="' + person.institutionIcon + '" /></div>';                     
 						list_data += "</div>";
 						
 					}
@@ -129,7 +161,7 @@
 					$("#see-all span").text(collaborators.length);
 					
 	          		setTimeout(function(){
-						var h = $("#collaborators_list").height() + 30;
+						var h = $("#collaborators_list").height() + 60;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
 			}				
@@ -138,10 +170,11 @@
 	   	gadgets.util.registerOnLoadHandler(function() {
 			readData(displayData);
 	    	$(document).ready(function () {
-	    		$("#see-all").click(function(event) {
+	    		$(".see-all").click(function(event) {
 			        var ownerURI = $("#see-all").data("ownerURI");
 			        gadgetEventTrack('go_to_see_all', ownerURI);
-			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);	
+			    	gadgets.views.requestNavigateTo('canvas', {}, ownerURI);
+			    	return false;
 	    		});
 	   			$(".col-item a").live("click", function() {
 	   				gadgetEventTrack('go_to_collaborator_from_small', $(this).attr("href"));
@@ -153,17 +186,20 @@
     </script>
     
     <style>
-    	.col-item{ min-height:22px; } 
-	#see-all, #see-all span { font-size: 11px; font-weight: bold; }
+       .col-item {min-height:22px;} 
+       .col-item a{margin-right: 3px;}
+	   .see-all, .see-all span { font-size: 11px; font-weight: bold; }
     </style>
 
     <div id="collaborators_list"></div>     
     <div>
-    	<a id="see-all" href="#" style="display:none">
+        <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
+    	<a id="see-all" class="see-all" style="display:none" href="#" >
     		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
     		See all (<span></span>) people
     	</a>
-    </div>	
+    </div>
+    <div id="debug" style="display:none"></div>	
     
     ]]></Content>
     <Content type="html" view="canvas" preferred_height="120" preferred_width="800">
@@ -188,7 +224,7 @@
 			function readData2(ownerUri, callback) {
 				var params = {};
 				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-				var url = 'http://profiles.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
+				var url = 'http://r2r.ucsf.edu/crosslinks/coauthors?researcherURI=' + getProductionURI(ownerUri) + '&format=JSON';
 				gadgets.io.makeRequest(url, callback, params);
 			}
 	    	
@@ -264,6 +300,11 @@
 		   		gadgets.window.adjustHeight(900);
 		   		gadgets.orng.showGadget();
 		   		loadScript();
+		   		osapi.jsonld.getOwner().execute(function(ownerData) {
+	                framePerson(ownerData, function(ownerObj) {
+	                    gadgets.window.setTitle(ownerObj[PRNS('fullName')]);
+	                });
+                });		   		
 		   		
 		   		$(document).ready(function () {		   			
 		   			$("a.col-pubs").live("click", function() {
@@ -333,11 +374,11 @@
 		   			   	
 		   	function addColoborator(name, profileUrl, imageURL, webSite, pmUrl, pubs_count, pubTitle, university) {
 		   		var html = '<div class="col">';
-		   		    html +='<div><div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
+		   		    html +='<div class="thumbnail"><img src="' + imageURL + '"></img></div><a href="' + profileUrl + '" target="_blank" class="col-name">'+name+'</a><span class="org">'+university+'</span>';
 		   		    
 		   		    html +='. <a href="' + pmUrl + '" target="_blank" class="col-pubs">See '+ pubs_count +' coauthored papers in PubMed</a>';
 		   		    
-		   		    html +='</div><div style="clear:both"/></div>';
+		   		    html +='</div>';
 		   		    
 		   		$("#coll-list").append(html);    
 		   	}	   	 
@@ -349,7 +390,7 @@
 	    	.content{width: 600px;margin-left: 100px;}
 	    	.map-wrap{width:600px;height: 450px; margin-bottom: 20px;}
 	    	.list-wrap{font-size: 13px;line-height: 20px;}	    	 
-	    	.title{font-weight: bold; color: #666; } 
+	    	.title{font-weight: bold; color: #666; margin-bottom: 15px;} 
 	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
 	    	.col {margin-bottom: 5px;}
@@ -357,20 +398,20 @@
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
-		.thumbnail { margin-right: 4px; }
+            .thumbnail { margin-right: 4px;}
 	    </style>
 	    
+        <div class="title">External Co-Authors (<span class="total-count">0</span>) found</div>
    		<div class="content">
    			<div class="map-wrap">	
 	   			<div id="map-canvas"></div>
 	   		</div>		
    			<div class="list-wrap">
-   				<div class="title">External Collaborators (<span class="total-count">0</span>) found</div>
-   				<div class="descr">External Collaborators are people at other institutions who have worked with this person. They are sorted by most collaborations (publications, grants, etc.) to least. Click on a collaborator's name to open their profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may be incomplete.</div>
+   				<div class="descr">External Co-Authors are people at other institutions who have published with this person. They are sorted by most publications to least. Click on a name to open that person's profile page at their institution in a new window. <strong>Please note</strong>: Data is not available from all institutions so this list may not include all co-authors.</div>
    				<div id="coll-list">
    				</div>
 	   		</div>	
-	   		<div class="debug"></div>	
+	   		<div id="debug" style="display:none"></div>	
    		</div>
 	]]>
 	</Content>

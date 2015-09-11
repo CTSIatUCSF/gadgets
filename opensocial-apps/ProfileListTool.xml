@@ -4,11 +4,11 @@
         <Require feature="views" />
 		<Require feature="settitle"/>
         <Require feature="osapi" />
-        <Require feature="minimessage" />
-        <Require feature="dynamic-height" />
+        <!-- Require feature="minimessage" /-->
+        <!-- Require feature="dynamic-height" /-->
         <Require feature="orng" />
         <Require feature="jsonld"/>
-		<Require feature="start-hidden" />
+		<!-- Require feature="start-hidden" /-->
     </ModulePrefs>
     <Content type="html" view="canvas, small"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
@@ -209,7 +209,7 @@
         var loadedCount = 0; 
         function displayProfileList(existingIds) {    
         	var uris = toURIList(existingIds);  				
-			var properties = [RDF('type'), FOAF('firstName'), FOAF('lastName'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email'), PRNS('personInPrimaryPosition'), VIVO('mailingAddress'), VIVO('freetextKeyword'), VIVO('authorInAuthorship')];
+			var properties = [RDF('type'), FOAF('firstName'), FOAF('lastName'), PRNS('fullName'), VIVO('preferredTitle'), VIVO('email'), PRNS('personInPrimaryPosition'), VIVO('mailingAddress'), VIVO('freetextKeyword'), VIVO('authorInAuthorship'), FOAF('workplaceHomepage')];
 				                 
             $("#list-size").text(uris.length);                                
             if (uris.length > 0) {
@@ -225,6 +225,7 @@
 		function displaySubList(uris, batchSize, properties, loaded) {
 			var ids = uris.splice(0, batchSize);
 			osapi.jsonld.getRDF(ids).execute(function(result) {
+			    $("#debug").append('<div data-uri="'+ids+'">' + JSON.stringify(result) + "</div>"); 
                 framePeople(result, function(profiles) {
 	                var json = JSON.stringify(profiles);
 	                $("#debug").append("<div>" + json + "</div>");
@@ -432,22 +433,12 @@
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
            <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
            <style type="text/css">
-                   input#close {
-                           margin-left:10px;
-                   }
-                   div.message {
-                           margin-bottom:10px;
-                   }
-                   div.info {
-                           color:green;
-                   }
-                   div.error {
-                           color:red;
-                   }
-                   .hidden {
-                           display:none;
-                   }
-                p { width: 640px; }
+                 input#close {margin-left:10px;}
+                 div.message {margin-bottom:10px;}
+                 div.info {color:green;}
+                 div.error {color:red;}
+                 .hidden {display:none;}
+                 p { width: 640px; }
             
             
                 .list-info {font-weight:bold; font-size:14px; color:#CA7C29;}
@@ -472,6 +463,9 @@
                 .progress-msg {margin:5px;}
                 
                 .gadget-content {margin-left: 50px;margin-top: 20px;}
+                
+                #create-doodle-dlg .email-list {width: 410px;height: 130px;}
+                #create-doodle-dlg .instructions {margin-top: 10px; margin-bottom: 10px;}
            </style>
     
         <div style="width:640px;" class="gadget-content">
@@ -490,9 +484,9 @@
         				<label>Open as CSV</label>
         				<a class="btn btn-sm" id="save-list">
 		      				<span class="glyphicon glyphicon-save"></span>
-		      				Download List
+		      				Download Contact Info
 		    			</a>
-        				<a class="btn btn-sm" id="save-pubs">
+        				<a class="btn btn-sm" id="save-pubs" style="display:none;">
 		      				<span class="glyphicon glyphicon-floppy-save"></span>
 		      				Download Pubs
 		    			</a>
@@ -536,9 +530,9 @@
 	        		      <div>You can see the list you’ve created below. It will be here next time you sign in, but the data in it might go stale as information in Profiles changes. Here’s an explanation of the options:</div>
 	        		      <ul>
 	        		          <li>The Compose Email button opens your default email program and pastes the first 50 email addresses from your list into the To field. This is to help you quickly reach out to people in your list. The number is limited to prevent spam.</li>
-	                          <li>The Download List button exports a CSV-format file that you can save wherever you wish. It will have columns for first name, last name, title, email address, school, department, link to profile page, manually entered research interests and the first ten published concepts (MeSH terms) for everyone in your list. CSV files are easily imported into Excel or most email marketing programs like MailChimp, to help you create personalized emails and track their effectiveness.</li>
-	                          <li>Download Pubs will download a list of publications, duplicates removed, for all the people in the list. It will contain columns for Authors, PubDate, PubYear, JournalMonth, JournalDay, JournalYear, ArticleTitle, JournalTitle, Issue, MedlinePgn, PMID, and Link to PubMed</li>
-	                          <li>Create Doodle Poll is TBD.</li>
+	                          <li>The Download Contact Info button exports a CSV-format file that you can save wherever you wish. It will have columns for first name, last name, degrees, title, email address, school, department, link to profile page and manually entered research interests for everyone in your list. CSV files are easily imported into Excel or most email marketing programs like MailChimp, to help you create personalized emails and track their effectiveness.</li>
+	                          <li style="display:none;">Download Pubs will download a list of publications, duplicates removed, for all the people in the list. It will contain columns for Authors, PubDate, PubYear, JournalMonth, JournalDay, JournalYear, ArticleTitle, JournalTitle, Issue, MedlinePgn, PMID, and Link to PubMed</li>
+	                          <li>Create Doodle Poll will give you email addresses that you can paste into the Invite Participants section of your Doodle Poll before you send it.</li>
 	                          <li>Create Chatter Group will take you to UCSF Chatter to create a group with the people in your list. Within Chatter, you can collaborate online - share documents, post messages to the group, etc.</li>
 	                          <li>Clear this List will remove everyone from your list.</li>
 	        		      </ul>
@@ -560,6 +554,12 @@
                         <td><textarea id="group_description" rows="4" cols="25" style="width:218px"></textarea></td>
                     </tr>                   
                 </table> 
+        </div>
+        <div id="create-doodle-dlg" style="display:none">
+            <div class="instructions">After you’ve created a Doodle Poll (selected the date options and other settings), copy and paste these email addresses into the Invite Participants section and send your poll to them.</div>
+            <div>
+                <textarea class="email-list" readonly></textarea>
+            </div>
         </div>
         <script type="text/javascript">
 
@@ -641,7 +641,10 @@
                 $("#save-list").click(function(event){
                     if(!$(this).attr("href") && peopleList.length > 0) {
                         $(".gadget-content").block({ message: '<div class="progress-msg">Loading <span id="loaded-count">1</span> of ' + peopleList.length + '</div>'});
-                        loadProfileData(peopleList, 0, "");
+                        //TODO: temporary remove address
+                        //var csvData = "First Name,Last Name,Title,Email,Address1,Address2,City State PostalCode,School,Department,Profile URL,Research Interests\r\n";
+                        var csvData = "First Name,Last Name,Degree,Title,Email,School,Department,Profile URL,Research Interests\r\n";
+                        loadProfileData(peopleList, 0, csvData);
                         event.preventDefault();
                         return false;
                     }                    
@@ -674,11 +677,11 @@
                 });
                 
                 function loadPublications(pubIds) {
-                    osapi.jsonld.getRDF(pubIds).execute(function(result) {
+                    osapi.jsonld.getRDF(pubIds[0]).execute(function(result) {
 	                    var json = JSON.stringify(result);
 	                    $("#debug").append('<div class="pub">' + json + "</div>");
 	                    
-	                    var csvData = ""
+	                    var csvData = "Author List,Publication Date,Publication Year,Title,PMID,Link to PubMed\r\n"
 	                    if(result.jsonld["@graph"]) {
 	                       for(var i=0; i < result.jsonld["@graph"].length; i++) {
 	                           csvData += publicationToCsv(result.jsonld["@graph"][i]);
@@ -687,7 +690,7 @@
 	                    else {
 	                       csvData += publicationToCsv(result.jsonld);
 	                    }
-	                    exportToCsv($("#save-pubs"), csvData);
+	                    exportToCsv($("#save-pubs"), csvData, "Publications.csv");
                     });
                 }
                 
@@ -756,9 +759,10 @@
                 
                 function loadRequiredIds(profile, callback) {
                     var ids = [];
-                    if(profile[VIVO('mailingAddress')]) {
-                        ids.push(profile[VIVO('mailingAddress')]["@id"]);
-                    }
+                    //TODO: temporary remove address
+                    //if(profile[VIVO('mailingAddress')]) {                    
+                    //    ids.push(profile[VIVO('mailingAddress')]["@id"]);
+                    //}
                     
                     if(profile[PRNS('personInPrimaryPosition')]) {
                         var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
@@ -778,26 +782,31 @@
                 function loadProfileDataInternal(peopleList, index, csvData, additionalData) {
                     var profile =  peopleList[index];
                     
-                    var address = "";
+                    //TODO: temporary remove address
+                    //var address = "";
                     var organization = "";
                     var department = "";
                     if(additionalData) {
-                        address = getAddress(additionalData);                       
+                        //address = getAddress(additionalData);                       
                         organization = getOrganization(additionalData);                       
                         department = getDepartment(additionalData);                       
                     }
                 
 	                csvData += createCsvField(profile[FOAF('firstName')]);
 	                csvData += createCsvField(profile[FOAF('lastName')]);
+                    csvData += createCsvField(getDegree(profile));
 	                csvData += createCsvField(profile[VIVO('preferredTitle')]);
 	                csvData += createCsvField(profile[VIVO('email')]);	                
 	                
+	                //TODO: temporary remove address
 	                //address, school, department
-	                csvData += createCsvField(address);
+	                //csvData += createCsvField(address.address1);
+                    //csvData += createCsvField(address.address2);
+                    //csvData += createCsvField(address.address3);
                     csvData += createCsvField(organization);
                     csvData += createCsvField(department);
 	                
-	                csvData += createCsvField(profile['@id']);//profile URL
+	                csvData += createCsvField(profile[FOAF('workplaceHomepage')]);//profile URL
 	                csvData += createCsvField(profile[VIVO('freetextKeyword')]);//research interests
 	                	                
 	                //published concepts/MeSH terms
@@ -807,10 +816,24 @@
 	                   loadProfileData(peopleList, index + 1, csvData)
 	                }
 	                else {
-	                   exportToCsv($("#save-list"), csvData);
+	                   exportToCsv($("#save-list"), csvData, "ContactInfo.csv");
 	                }                                               
                 }
                 
+                function getDegree(profile) {
+                    var fullName = profile[PRNS('fullName')];
+                    var parts = fullName.split(",")
+                    
+                    var degreeList = [];
+                    for(var i=1;i<parts.length;i++) {
+                        var degree = jQuery.trim(parts[i]);
+                        if(degree.toLowerCase().indexOf('jr') <0 ) {
+                            degreeList.push(parts[i]);
+                        }
+                    }
+                    
+                    return degreeList.join(',');
+                }
                 function getObjectByType(rdf, type) {
                     var obj;
                     if(rdf.jsonld["@graph"]) {
@@ -830,15 +853,19 @@
                 }
                 
                 function getAddress(rdf) {
+                    var address = {};
                     var obj = getObjectByType(rdf, "vivo:Address");                    
                     if(obj) {
-	                    var address1 = obj.address1;
+	                    address.address1 = obj.address1;
+                        address.address2 = obj.address2;
+                        
 	                    var addressCity = obj.addressCity;
 	                    var addressPostalCode = obj.addressPostalCode;
 	                    var addressState = obj.addressState;
 	                    
-	                    return address1 + "\r\n" + addressCity + "\r\n" + addressState + " " + addressPostalCode;
-                    }
+	                    address.address3 = addressCity + ", " + addressState + " " + addressPostalCode;
+                    }                    
+                    return address;
                 }
 
                 function getOrganization(rdf) {
@@ -876,7 +903,7 @@
 				    return ! (isOldIE || isIE11);  //Return true if not any IE
 				};
 				
-                function exportToCsv(link, csvData) {
+                function exportToCsv(link, csvData, fileName) {
                     $(".gadget-content").unblock();
                     if (!supportsDataUri()) {
                         var iframe = $('#csvDownloadFrame').get(0);
@@ -889,21 +916,21 @@
 					    iframe.document.write(tableString);
 					    iframe.document.close();
 					    iframe.focus();
-					    iframe.document.execCommand('SaveAs', true, 'list.csv');
+					    iframe.document.execCommand('SaveAs', true, fileName);
 					} 
 					else {                    
 	                    var href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csvData);
 	                    link.attr({
 		                    'href': href,
 		                    'target': '_blank',
-		                    'download': 'list.csv'
+		                    'download': fileName
 	                    });
 	                    
 	                    $('#downloadFile').remove(); 
 	                    $('<a></a>')
 	                        .attr('id','downloadFile')
 	                        .attr('href', href)
-	                        .attr('download','list.csv')
+	                        .attr('download',fileName)
 	                        .appendTo('body');
 	                        
 	                    $('#downloadFile').ready(function() {
@@ -949,6 +976,31 @@
 	                if(emails.length > 0) {
 	                     window.location.href =  "mailto:" + emails.join(';');
 	                }
+                });
+                
+                $("#create-doodle").click(function(event){
+                    var emailElem = $(".list-content td.email");
+                    
+                    var emails = [];
+                    emailElem.each(function(index, elem) {
+                         var email = $.trim($(elem).text());
+                         if(email != '') {
+                             emails.push(email);
+                         }
+                    });
+                
+                    $("#create-doodle-dlg .email-list").text(emails.join(';'));
+                    
+                    $("#create-doodle-dlg").dialog({
+                        modal: true,
+                        minWidth:440,
+                        title: "Create Doodle Poll",
+                        buttons: {
+                            Close: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    });                    
                 });
             }
                 

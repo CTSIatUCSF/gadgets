@@ -1,6 +1,6 @@
 div, ul, li, table, tr, td, tbody, span, iframe, img, body, h1, h2, h3, h4, h5, h6, h7, h8, h9, fieldset
 { 	margin:0px; padding:0px; border:none; 
-	font-size:13px; line-height:1.1em; 
+	font-size:13px; line-height:1.3em; 
 	text-indent:0px;
 }
 
@@ -48,7 +48,7 @@ ul { list-style-type:none; }
 .viewnav ul,
 .viewnav li  {  }
 .viewnav li  { display:inline; padding:.5em; padding-left:1em; padding-right:1em; }
-.viewnav li:hover  { background:#D0F0FF; }
+.viewnav li:hover  { background:#E8F4FA; }
 
 .section { margin-bottom:1.4em; }
 .moreless { font-size:.7em; 
@@ -66,9 +66,9 @@ ul { list-style-type:none; }
 .infonote { display:none;
 			position:absolute; z-index:30; right:20px; left:33em;
 			margin-left:10px; margin-right:20px; margin-top:20px; 
-			background:#ffd; 
+			background:#FFFCE6; 
 			border-radius:5px;  -moz-border-radius:5px;  -webkit-border-radius:5px;
-			border:1px solid #CA7C29; padding:1em;
+			border:1px solid #F48024; padding:1em;
 			color:#444; line-height:1.5em; }
 
 .roundbox { border:1px solid #ccc; border-radius:5px; -moz-border-radius:5px;  -webkit-border-radius:5px; }
@@ -98,7 +98,7 @@ ul { list-style-type:none; }
 .answer { margin:.5em; display:none;}
 .answer .detail { display:none; }
 
-.answertitle { display:inline-block; font-weight:bold; color:#a60; width:15em; }
+.answertitle { display:inline-block; font-weight:bold; color:#F26D04; width:15em; }
 .detailtitle { font-weight:bold; }
 
 /*.answerresponse { font-style:italic; }*/
@@ -111,7 +111,7 @@ ul { list-style-type:none; }
 #hideshow .hideshow_message	{ display:inline; font-weight:bold; }
 #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer;  }
 #hideshow .hidden_message 	{ color:#CC0000; }
-#hideshow .visible_message 	{ color:#4FAA4F; }
+#hideshow .visible_message 	{ color:#6EA400; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
  old */
 
@@ -119,8 +119,8 @@ ul { list-style-type:none; }
 #hideshow { text-align:center; }
 #hideshow .hideshow_message	{ display:inline; font-weight:bold; visibility:hidden; }
 #hideshow .hideshow_control	{ display:inline; float:right; color:#3B6394 !important; cursor:pointer; }
-#hideshow .hidden_message 	{ color:#CC0000; visibility:hidden; }
-#hideshow .visible_message 	{ color:#4FAA4F; visibility:hidden; }
+#hideshow .hidden_message 	{ color:#EB093C; visibility:hidden; }
+#hideshow .visible_message 	{ color:#6EA400; visibility:hidden; }
 #hideshow .selected			{ color:black; font-weight:bold; cursor:default; }
 
 .gadget_credits {

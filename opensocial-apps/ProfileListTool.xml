@@ -786,7 +786,7 @@
                     //var address = "";
                     var organization = "";
                     var department = "";
-                    if(additionalData) {
+                    if(additionalData && additionalData.jsonld) {
                         //address = getAddress(additionalData);                       
                         organization = getOrganization(additionalData);                       
                         department = getDepartment(additionalData);                       
@@ -836,7 +836,7 @@
                 }
                 function getObjectByType(rdf, type) {
                     var obj;
-                    if(rdf.jsonld["@graph"]) {
+                    if(rdf.jsonld && rdf.jsonld["@graph"]) {
                         for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
                             var gr = rdf.jsonld["@graph"][i];
                             if(gr["@type"] == type) {
@@ -845,7 +845,7 @@
                             }
                         }
                     }
-                    else if(rdf.jsonld["@type"] == type){
+                    else if(rdf.jsonld && rdf.jsonld["@type"] == type){
                         obj = rdf.jsonld;
                     }
                     

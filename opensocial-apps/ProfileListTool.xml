@@ -822,6 +822,9 @@
                 
                 function getDegree(profile) {
                     var fullName = profile[PRNS('fullName')];
+                    if (!fullName) {
+                    	return '';
+                    }
                     var parts = fullName.split(",")
                     
                     var degreeList = [];

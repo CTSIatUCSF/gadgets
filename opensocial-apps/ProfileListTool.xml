@@ -353,7 +353,7 @@
         }
         // ==============================================================                        
         </script>]]></Content>
-    <Content type="html" view="small" preferred_height="95" preferred_width="190"><![CDATA[<!--HTML-->
+    <Content type="html" view="small" preferred_height="100" preferred_width="190"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
         <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>

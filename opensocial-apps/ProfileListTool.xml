@@ -69,13 +69,11 @@
              $("#actions").show();
              if (message === 0) {
                  $('.list-add-msg').text("No Profiles found").show();
-	             //document.getElementById("add_profiles").innerHTML = "No Profiles found";             	
              }
         	 else {
         	     $('.list-add-msg').hide();
         	     $("#add_profiles").show();
         	     $("#add_profiles .list-add-profiles").text(message); 
-	             //  document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addNewProfiles();'>Add " + message + " to list</a>";
         	 }
         }
         
@@ -120,7 +118,6 @@
 		            saveData(existingIds, function() {
                         $("#add_profiles").hide();
 		                $('.list-add-msg').text((newListSize - priorListSize) === 1 ? "1 new profile added" : "" + (newListSize - priorListSize) + " new profiles added").show();  
-	                    //document.getElementById("add_profiles").innerHTML = ((newListSize - priorListSize) === 1 ? "1 new profile added" : "" + (newListSize - priorListSize) + " new profiles added");
 	                    showCurrentListSize(newListSize);
 		            });
 				}
@@ -151,13 +148,11 @@
                 $('.list-size-multi', link).text(count == 1 ? '' : 's');
                 $('#list-clear').show();
                 $('.list-empty-msg').hide();
-        		//document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to my list - " + count + " profile" + (count == 1 ? "" : "s") + "</a>";
         	}
         	else {
                 $('.list-goto-list').hide();
                 $('#list-clear').hide();
                 $('.list-empty-msg').show();
-        		//document.getElementById("list_profiles").innerHTML = "List is currently empty";
         	}		                            		
         }
 
@@ -358,7 +353,7 @@
         }
         // ==============================================================                        
         </script>]]></Content>
-    <Content type="html" view="small" preferred_height="95" preferred_width="190"><![CDATA[<!--HTML-->
+    <Content type="html" view="small" preferred_height="100" preferred_width="190"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
         <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>
@@ -815,8 +810,6 @@
                 function getDegree(profile) {
                     var fullName = profile[PRNS('fullName')];
                     var parts = fullName ? fullName.split(",") : [];
-                    	return '';
-                    }
                     
                     var degreeList = [];
                     for(var i=1;i<parts.length;i++) {

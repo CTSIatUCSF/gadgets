@@ -23,7 +23,8 @@ namespace UCSF.GlobalHealth
 			{
 				ProjectLoader loader = new ProjectLoader(
 					ConfigurationManager.AppSettings["GlobalHealth.Projects.Url"],
-					ConfigurationManager.AppSettings["GlobalHealth.ApplicationName"]);
+					ConfigurationManager.AppSettings["GlobalHealth.ApplicationName"],
+                    ConfigurationManager.AppSettings["GlobalHealth.Url.Timeout"]);
 
 				IList<Project> projects = loader.Load();
 				log.InfoFormat("Recieved {0} projects", projects.Count);

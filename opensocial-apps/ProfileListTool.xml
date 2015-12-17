@@ -858,7 +858,7 @@
                 function getOrganization(rdf) {
                     var obj = getObjectByType(rdf, "foaf:Organization");                    
                     if(obj) {
-                        return obj.label;
+                        return obj["rdfs:label"];
                     }
                     return "";
                 }
@@ -879,7 +879,7 @@
                     }
                     
                     if(obj) {
-                        return obj.label;
+                        return obj["rdfs:label"];
                     }
                     return "";
                 }

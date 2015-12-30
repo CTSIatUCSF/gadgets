@@ -35,22 +35,26 @@ namespace UCSF.GlobalHealth.Services
 		public String Url { get; set; }
 		public String ApplicationName { get; set; }
         public String Timeout { get; set; }
+        public String ExternalID { get;set;}
 
 		private SqlCommand GetNodeIdCmd { get; set; }
 		private SqlCommand InsertDataCmd { get; set; }
 		private SqlCommand AddAppToPersonCmd { get; set; }
 
-		public ProjectLoader(string url, string applicationName,string url_timeout)
+		public ProjectLoader(string url, string applicationName,string url_timeout,string externalid)
 		{
 			Log = LogManager.GetLogger("UCSF.GlobalHealth.ProjectLoader");
 			this.Url = url;
 			this.ApplicationName = applicationName;
             this.Timeout = url_timeout;
+            this.ExternalID = externalid;
 		}
 
 		public IList<Project> Load() {
 			HttpWebRequest request = WebRequest.Create(Url) as HttpWebRequest;
-            request.Timeout = Int32.Parse(this.Timeout);
+            int increazedTimeout =request.Timeout;
+            if (this.Timeout != null ) Int32.Parse(this.Timeout);
+            if (increazedTimeout > request.Timeout) request.Timeout = increazedTimeout;
                      //100000;
 			using (HttpWebResponse response = request.GetResponse() as HttpWebResponse) {
 				{
@@ -89,8 +93,11 @@ namespace UCSF.GlobalHealth.Services
 				DeleteAppFromAllPersons(conn, applicationId);
 				foreach (string employeeId in employeeProjects.Keys)
 				{
-					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
-				}
+                    if (this.ExternalID == null || (this.ExternalID !=null && employeeId.CompareTo(this.ExternalID) != 0))
+                    {
+                        Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
+                    }
+               	}
 			}
 		}
 
@@ -180,6 +187,22 @@ namespace UCSF.GlobalHealth.Services
             return allProjects;
         }
 
+        protected string getProjectsEmployeePrint(IList<Project> projects)
+        {
+            string allProjects = "";
+            foreach (Project project in projects)
+            {
+                if (allProjects.Length == 0)
+                {
+                    allProjects = project.EmployeeId;
+                }
+                else
+                {
+                    allProjects = allProjects + "," + project.EmployeeId;
+                }
+            }
+            return allProjects;
+        }
 
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);

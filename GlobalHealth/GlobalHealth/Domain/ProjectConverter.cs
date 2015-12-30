@@ -61,7 +61,7 @@ namespace UCSF.GlobalHealth.Domain
 						if (dictionary[key] is IDictionary<string, object>)
 						{
 							IDictionary<string, object> employee = (IDictionary<string, object>)dictionary[key];
-							project.EmployeeId = (string)employee["value"];
+                            project.EmployeeId = ((string)employee["value"]).Trim();
       						}
 						break;
 				}

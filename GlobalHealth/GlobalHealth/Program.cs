@@ -14,16 +14,18 @@ namespace UCSF.GlobalHealth
 	class Program
 	{
 
-		static void Main(string[] args)
+		static int Main(string[] args)
 		{
 			log4net.Config.XmlConfigurator.Configure();
 			ILog log = LogManager.GetLogger("UCSF.GlobalHealth");
-
+            int returned = 0;
 			try
 			{
 				ProjectLoader loader = new ProjectLoader(
 					ConfigurationManager.AppSettings["GlobalHealth.Projects.Url"],
-					ConfigurationManager.AppSettings["GlobalHealth.ApplicationName"]);
+					ConfigurationManager.AppSettings["GlobalHealth.ApplicationName"],
+                    ConfigurationManager.AppSettings["GlobalHealth.Url.Timeout"],
+                    ConfigurationManager.AppSettings["GlobalHealth.ExternalID"]);
 
 				IList<Project> projects = loader.Load();
 				log.InfoFormat("Recieved {0} projects", projects.Count);
@@ -34,7 +36,9 @@ namespace UCSF.GlobalHealth
 			}
 			catch (Exception ex) {
 				log.Error("Loading global health projects failed.", ex);
+                returned = 7;
 			}
+            return returned;
 		}
 	}
 }

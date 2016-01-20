@@ -34,20 +34,28 @@ namespace UCSF.GlobalHealth.Services
 
 		public String Url { get; set; }
 		public String ApplicationName { get; set; }
+        public String Timeout { get; set; }
+        public String ExternalID { get;set;}
 
 		private SqlCommand GetNodeIdCmd { get; set; }
 		private SqlCommand InsertDataCmd { get; set; }
 		private SqlCommand AddAppToPersonCmd { get; set; }
 
-		public ProjectLoader(string url, string applicationName)
+		public ProjectLoader(string url, string applicationName,string url_timeout,string externalid)
 		{
 			Log = LogManager.GetLogger("UCSF.GlobalHealth.ProjectLoader");
 			this.Url = url;
 			this.ApplicationName = applicationName;
+            this.Timeout = url_timeout;
+            this.ExternalID = externalid;
 		}
 
 		public IList<Project> Load() {
 			HttpWebRequest request = WebRequest.Create(Url) as HttpWebRequest;
+            int increazedTimeout =request.Timeout;
+            if (this.Timeout != null ) Int32.Parse(this.Timeout);
+            if (increazedTimeout > request.Timeout) request.Timeout = increazedTimeout;
+                     //100000;
 			using (HttpWebResponse response = request.GetResponse() as HttpWebResponse) {
 				{
 					if (response.StatusCode != HttpStatusCode.OK) 
@@ -85,8 +93,11 @@ namespace UCSF.GlobalHealth.Services
 				DeleteAppFromAllPersons(conn, applicationId);
 				foreach (string employeeId in employeeProjects.Keys)
 				{
-					Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
-				}
+                    if (this.ExternalID == null || (this.ExternalID !=null && employeeId.CompareTo(this.ExternalID) != 0))
+                    {
+                        Save(conn, applicationId, employeeId, employeeProjects[employeeId]);
+                    }
+               	}
 			}
 		}
 
@@ -159,11 +170,45 @@ namespace UCSF.GlobalHealth.Services
 			Log.InfoFormat("Removed application from persons, count={0}", count);
 		}
 
+        protected string getProjectsPrint(IList<Project> projects)
+        {
+            string allProjects = "";
+            foreach (Project project in projects)
+            {
+                if (allProjects.Length == 0)
+                {
+                    allProjects = project.Id;
+                }
+                else
+                {
+                    allProjects = allProjects + "," + project.Id;
+                }
+            }
+            return allProjects;
+        }
+
+        protected string getProjectsEmployeePrint(IList<Project> projects)
+        {
+            string allProjects = "";
+            foreach (Project project in projects)
+            {
+                if (allProjects.Length == 0)
+                {
+                    allProjects = project.EmployeeId;
+                }
+                else
+                {
+                    allProjects = allProjects + "," + project.EmployeeId;
+                }
+            }
+            return allProjects;
+        }
+
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);
             if (!nodeId.HasValue)
             {
-				Log.WarnFormat("Person was not found employeeId={0}, projects={1}", employeeId, projects.Count);
+                Log.WarnFormat("Person was not found employeeId={0}, projects={1}", employeeId, getProjectsPrint(projects));//projects.Count);
 				return; 
 			}
             Log.InfoFormat("Saving projects for userId={0}, employeeId={1}, projects={2}", nodeId, employeeId, projects.Count);

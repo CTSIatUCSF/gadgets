@@ -24,7 +24,14 @@ namespace UCSF.GlobalHealth.Domain
 					case "node_field_data_field_investigator_nid":
 						project.InvestigatorId = (string)dictionary[key];
 						break;
-					case "node_title":
+                    case "title":
+                    /*    string tmp = (string)dictionary[key];
+                        int pos = tmp.IndexOf(">");
+                        int pos2 = tmp.IndexOf("a>");
+                        project.Title = tmp.Substring(pos + 1,pos2-pos-3);*/
+                        project.Title = (string)dictionary[key];
+                        break;
+                    case "node_title":
 						project.Title = (string)dictionary[key];
 						break;
 					case "Start date":
@@ -55,8 +62,8 @@ namespace UCSF.GlobalHealth.Domain
 						if (dictionary[key] is IDictionary<string, object>)
 						{
 							IDictionary<string, object> employee = (IDictionary<string, object>)dictionary[key];
-							project.EmployeeId = (string)employee["value"];
-						}
+                            project.EmployeeId = ((string)employee["value"]).Trim();
+      						}
 						break;
 				}
 			}

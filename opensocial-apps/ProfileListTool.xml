@@ -5,7 +5,6 @@
 		<Require feature="settitle"/>
         <Require feature="osapi" />
         <!-- Require feature="minimessage" /-->
-        <!-- Require feature="dynamic-height" /-->
         <Require feature="orng" />
         <Require feature="jsonld"/>
 		<!-- Require feature="start-hidden" /-->
@@ -30,8 +29,8 @@
             .tool_credit {font-size:10px;}
             .tool_table_cell {ffont-size:12px; padding:0 20px 0 0;}
             .tool_table_cell_small {font-size:11px;}
-            .tool_table_cell_small span a {font-size:11px;}
-            .tool_table_cell_small span {font-size:11px;display:inline-block;margin-right: -15px; }
+            .tool_table_cell_small span {font-size:11px;}
+            .tool_table_cell_small .list-loading-msg {font-size:11px;display:inline-block;margin-right: -15px; }
             .tool_toggle_button {font-size: 13px;padding:0 5px;}          
     	</style>
 
@@ -69,10 +68,12 @@
              // display the action item table and update it
              $("#actions").show();
              if (message === 0) {
-	                document.getElementById("add_profiles").innerHTML = "No Profiles found";             	
+                 $('.list-add-msg').text("No Profiles found").show();
              }
         	 else {
-	                document.getElementById("add_profiles").innerHTML = "<a style='font-size:11px;' href='javascript:addNewProfiles();'>Add " + message + " to list</a>";
+        	     $('.list-add-msg').hide();
+        	     $("#add_profiles").show();
+        	     $("#add_profiles .list-add-profiles").text(message); 
         	 }
         }
         
@@ -89,8 +90,6 @@
         
         function addNewProfiles() {
       		showWaiting(true);
-            //document.getElementById("add_profiles").innerHTML = "Adding profiles...";		                    
-            //document.getElementById("list_profiles").innerHTML = "Merging into list...";		                    
             readIdsFromDB(function(existingIds) {
             	gadgets.orng.getPeopleList( newProfilesCallback(existingIds));
             });
@@ -117,12 +116,14 @@
 	            showCurrentListSize(newListSize);
 	            if (newListSize > priorListSize) {
 		            saveData(existingIds, function() {
-	                    document.getElementById("add_profiles").innerHTML = ((newListSize - priorListSize) === 1 ? "1 new profile added" : "" + (newListSize - priorListSize) + " new profiles added");
+                        $("#add_profiles").hide();
+		                $('.list-add-msg').text((newListSize - priorListSize) === 1 ? "1 new profile added" : "" + (newListSize - priorListSize) + " new profiles added").show();  
 	                    showCurrentListSize(newListSize);
 		            });
 				}
 		        else {
-		            document.getElementById("add_profiles").innerHTML = "No new profile(s) to add";
+		            $("#add_profiles").hide();
+		            $('.list-add-msg').text("No new profile(s) to add").show();
 		        }	
 		        showWaiting(false);	                
         	};
@@ -139,11 +140,19 @@
         // ==============================================================
                         
         function showCurrentListSize(count) {
+            $('.list-loading-msg').hide();
         	if (count > 0) {
-        		document.getElementById("list_profiles").innerHTML = "<a href='javascript:gadgets.views.requestNavigateTo(\"canvas\");'>Go to my list - " + count + " profile" + (count == 1 ? "" : "s") + "</a>";
+        	    var link = $('.list-goto-list');  
+                link.show();
+                $('.list-size', link).text(count);
+                $('.list-size-multi', link).text(count == 1 ? '' : 's');
+                $('#list-clear').show();
+                $('.list-empty-msg').hide();
         	}
         	else {
-        		document.getElementById("list_profiles").innerHTML = "List is currently empty";
+                $('.list-goto-list').hide();
+                $('#list-clear').hide();
+                $('.list-empty-msg').show();
         	}		                            		
         }
 
@@ -180,22 +189,6 @@
 	        });
 	    }
         // ==============================================================        
-
-	    function deleteList() {
-		    osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': ['ids', 'count']} )
-		            .execute(function(result){
-		            if (result.error) { 
-		                    alert("Error " + result.error.code + " deleting application data: " + result.error.message);
-		            } else {
-		                    document.getElementById("canvas_email_list_textarea").value = "";
-		                    document.getElementById("canvas_full_list_textarea").value = "";
-		                    document.getElementById("canvas_profile_list").innerHTML = "";
-		                    document.getElementById("number_selected").innerHTML = "Select Profiles";
-		            }                                
-		    }); /* end osapi.appdata.delete */
-			finishLoad();
-	    }    
-        // ==============================================================        
         
         function dedupeArray(arrHasDupes) {
 			var deduped = [];
@@ -223,6 +216,12 @@
         var peopleList = [];
         
 		function displaySubList(uris, batchSize, properties, loaded) {
+		    if(UCSF.ListTool.abortLoading) {
+		      $(".list-content").unblock();
+		      UCSF.ListTool.abortLoading = false;
+		      return; 
+		    }
+		    
 			var ids = uris.splice(0, batchSize);
 			osapi.jsonld.getRDF(ids).execute(function(result) {
 			    $("#debug").append('<div data-uri="'+ids+'">' + JSON.stringify(result) + "</div>"); 
@@ -258,50 +257,8 @@
 					}
 		       	});
 			});
-		}
-
-		function finishLoad() {
-	        var full_list = "";
-	        var email_list = "";
-	        $("#canvas_profile_list tr").each(function(index, tr) {
-	                if(!$(tr).attr("id")) {
-	                        return true;
-	                }
-	                var row = "";
-	                $("td", tr).each(function(fld_index, td){
-	                        var txt = $(td).text(); 
-	                        row += txt + ";";
-	                        if(fld_index == 2 && txt != "") {
-	                                email_list += txt + "\n";
-	                        }
-	                });
-	                full_list += row + "\n";
-	        });
-	        document.getElementById("canvas_full_list_textarea").value = full_list;
-	        document.getElementById("canvas_email_list_textarea").value = email_list;
-	           
-	        //document.getElementById("progress").style.display="none";
-		}
-        
-        // ==============================================================                
-                
-        function copyEmailDivToClipboard() {
-                
-                $("#canvas_email_list").show();
-                $("#canvas_email_list_text").show();
-                $("#canvas_full_list").hide();
-                $("#canvas_full_list_text").hide();
-                $("#canvas_profile_list").hide();        
-        }
-        // ==============================================================                
-                
-        function copyFullDivToClipboard() {
-                $("#canvas_full_list").show();
-                $("#canvas_full_list_text").show();
-                $("#canvas_email_list").hide();
-                $("#canvas_email_list_text").hide();
-                $("#canvas_profile_list").hide();
-        }        
+		}        
+		                
         // ==============================================================                        
         var root = (typeof ENV_LOCAL_URL === 'undefined')? "": ENV_LOCAL_URL;
         var chatterProxyURL = root + "/chatter/ChatterProxyService.svc"; 
@@ -396,9 +353,8 @@
         }
         // ==============================================================                        
         </script>]]></Content>
-    <Content type="html" view="small" preferred_height="75" preferred_width="190"><![CDATA[<!--HTML-->
+    <Content type="html" view="small" preferred_height="100" preferred_width="190"><![CDATA[<!--HTML-->
     <!DOCTYPE html>
-                
         <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>
                         <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profiles <br />for personal use.</td>
@@ -409,10 +365,24 @@
         <img id="waiting" src="images/waiting.gif" style="display:none;">
         <table id="actions" style="display:none;clear:right;" cellspacing="2" cellpadding="0">
                 <tr>
-                        <td class="tool_table_cell_small"><span id="add_profiles" onClick="gadgetEventTrack('add_profiles')"></span></td>
+                        <td class="tool_table_cell_small">
+                            <span id="add_profiles" onClick="gadgetEventTrack('add_profiles')">
+                                <a style='font-size:11px;' href='javascript:addNewProfiles();'>Add <span class="list-add-profiles"></span> to list</a>
+                            </span>
+                            <span class="list-add-msg"></span>
+                        </td>
                 </tr>
                 <tr>
-                        <td class="tool_table_cell_small" valign="top" style="padding-top:4px"><span id="list_profiles" onClick="gadgetEventTrack('list_profiles')">Loading...</span></td>
+                        <td class="tool_table_cell_small" valign="top" style="padding-top:4px">
+                            <span class="list-loading-msg" onClick="gadgetEventTrack('list_profiles')">Loading...</span>
+                            <a style="display:none" class="list-goto-list" href='javascript:gadgets.views.requestNavigateTo("canvas");'>Go to my list - <span class="list-size"></span> profile<span class="list-size-multi"></span></a>
+                            <span style="display:none" class="list-empty-msg">List is currently empty</span>
+                        </td>
+                </tr>
+                <tr>
+                        <td class="tool_table_cell_small" style="padding-top:4px">
+                            <a style="display:none" id="list-clear" href="#">Clear my list - remove all profiles</a>
+                        </td>
                 </tr>
         </table>
         
@@ -424,6 +394,21 @@
 	               	});               
 	               	// look for data on the RPC channel, this will overwrite any owner data              	
 	               	gadgets.orng.getPeopleListMetadata(newProfilesMetadataCallback);
+	               	
+		            $('#list-clear').click(function(event) {
+		               showWaiting(true); 
+	                   osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': ['ids', 'count']} ).execute(function(result){
+                              showWaiting(false); 
+	                          if (result.error) { 
+	                                  alert("Error " + result.error.code + " deleting application data: " + result.error.message);
+	                          } else {
+                                 gadgets.orng.getPeopleListMetadata(newProfilesMetadataCallback);
+	                             showCurrentListSize(0);
+	                          }                                
+	                   });
+                       event.preventDefault();
+                       return false;   
+		            });
                 }        
                 
                 gadgets.util.registerOnLoadHandler(init);
@@ -562,6 +547,8 @@
             </div>
         </div>
         <script type="text/javascript">
+            var UCSF = UCSF || {};
+            UCSF.ListTool = UCSF.ListTool || {}; 
 
             function init() {
 	    		// mask all but delete until we are done loading
@@ -822,7 +809,7 @@
                 
                 function getDegree(profile) {
                     var fullName = profile[PRNS('fullName')];
-                    var parts = fullName.split(",")
+                    var parts = fullName ? fullName.split(",") : [];
                     
                     var degreeList = [];
                     for(var i=1;i<parts.length;i++) {
@@ -859,9 +846,9 @@
 	                    address.address1 = obj.address1;
                         address.address2 = obj.address2;
                         
-	                    var addressCity = obj.addressCity;
-	                    var addressPostalCode = obj.addressPostalCode;
-	                    var addressState = obj.addressState;
+	                    var addressCity = obj.addressCity ? obj.addressCity : "";
+	                    var addressPostalCode = obj.addressPostalCode ? obj.addressPostalCode : "";
+	                    var addressState = obj.addressState ? obj.addressState : "";
 	                    
 	                    address.address3 = addressCity + ", " + addressState + " " + addressPostalCode;
                     }                    
@@ -871,14 +858,14 @@
                 function getOrganization(rdf) {
                     var obj = getObjectByType(rdf, "foaf:Organization");                    
                     if(obj) {
-                        return obj.label;
+                        return obj["rdfs:label"];
                     }
                     return "";
                 }
 
                 function getDepartment(rdf) {
                     var obj;
-                    if(rdf.jsonld["@graph"]) {
+                    if(rdf.jsonld && rdf.jsonld["@graph"]) {
                         for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
                             var gr = rdf.jsonld["@graph"][i];
                             if($.inArray("vivo:Department", gr["@type"]) != -1) {
@@ -892,7 +879,7 @@
                     }
                     
                     if(obj) {
-                        return obj.label;
+                        return obj["rdfs:label"];
                     }
                     return "";
                 }
@@ -946,11 +933,13 @@
                 
                 
                 $("#clear-list").click(function(event){
+                   UCSF.ListTool.abortLoading = true;
 		           osapi.appdata['delete']({'userId':'@viewer', 'appId':'@app', 'fields': ['ids', 'count']} ).execute(function(result){
 		                  if (result.error) { 
 		                          alert("Error " + result.error.code + " deleting application data: " + result.error.message);
 		                  } else {
 		                   $(".list-content tbody tr").remove();
+		                   $("#list-size").text(0);
 		                  }                                
 		           });
                 });

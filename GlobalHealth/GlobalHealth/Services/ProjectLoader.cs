@@ -53,9 +53,9 @@ namespace UCSF.GlobalHealth.Services
 		public IList<Project> Load() {
 			HttpWebRequest request = WebRequest.Create(Url) as HttpWebRequest;
             int increazedTimeout =request.Timeout;
-            if (this.Timeout != null ) Int32.Parse(this.Timeout);
+            if (this.Timeout != null) increazedTimeout=Int32.Parse(this.Timeout);
             if (increazedTimeout > request.Timeout) request.Timeout = increazedTimeout;
-                     //100000;
+            Log.InfoFormat("Starting request at {0}",DateTime.Now);
 			using (HttpWebResponse response = request.GetResponse() as HttpWebResponse) {
 				{
 					if (response.StatusCode != HttpStatusCode.OK) 
@@ -107,7 +107,11 @@ namespace UCSF.GlobalHealth.Services
 				IList<Project> list;
 				if (String.IsNullOrEmpty(project.EmployeeId))
 				{
-					Log.ErrorFormat("EmployeeId is empty, project id={0}", project.Id);
+                    string tmp = project.Title;
+                    int pos = tmp.IndexOf(">");
+                    int pos2 = tmp.IndexOf("a>");
+                    string tmp1="&"+tmp.Substring(pos + 1,pos2-pos-3);
+                    Log.ErrorFormat("EmployeeId is empty, project id={0}", tmp1);
 					continue;
 				}
 				if(!employeeProjects.TryGetValue(project.EmployeeId, out list)) {
@@ -172,47 +176,26 @@ namespace UCSF.GlobalHealth.Services
 
         protected string getProjectsPrint(IList<Project> projects)
         {
-            string allProjects = "";
+            string listed = "";
             foreach (Project project in projects)
             {
-                if (allProjects.Length == 0)
-                {
-                    allProjects = project.Id;
-                }
-                else
-                {
-                    allProjects = allProjects + "," + project.Id;
-                }
+                string tmp = project.Title.Replace("&", "_");
+                int pos = tmp.IndexOf(">");
+                int pos2 = tmp.IndexOf("a>");
+                listed=listed+"&"+tmp.Substring(pos + 1,pos2-pos-3);
             }
-            return allProjects;
+            return listed;
         }
 
-        protected string getProjectsEmployeePrint(IList<Project> projects)
-        {
-            string allProjects = "";
-            foreach (Project project in projects)
-            {
-                if (allProjects.Length == 0)
-                {
-                    allProjects = project.EmployeeId;
-                }
-                else
-                {
-                    allProjects = allProjects + "," + project.EmployeeId;
-                }
-            }
-            return allProjects;
-        }
 
 		protected void Save(SqlConnection conn, int applicationId, string employeeId, IList<Project> projects) {
             long? nodeId = GetNodeId(employeeId);
             if (!nodeId.HasValue)
             {
-                Log.WarnFormat("Person was not found employeeId={0}, projects={1}", employeeId, getProjectsPrint(projects));//projects.Count);
-				return; 
+                Log.WarnFormat("Person employeeId={0} does not have profile, skipping GH projects {1}", employeeId, getProjectsPrint(projects));
+                return; 
 			}
-            Log.InfoFormat("Saving projects for userId={0}, employeeId={1}, projects={2}", nodeId, employeeId, projects.Count);
-
+            Log.InfoFormat("Saving projects for userId={0}, employeeId={1}, projects number={2}", nodeId, employeeId, projects.Count);
 			InsertDataCmd.Parameters.Clear();
 
 			InsertDataCmd.Parameters.Add("@appId", SqlDbType.Int, 0).Value = applicationId;

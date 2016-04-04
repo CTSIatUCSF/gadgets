@@ -78,14 +78,20 @@ namespace UCSF.Business.DataImporter
                             {
                                 if (reader.NodeType == XmlNodeType.Element && !string.IsNullOrEmpty(reader.Name))
                                 {
-                                    XElement node = XNode.ReadFrom(reader) as XElement;
-                                    row.Add(node);
-                                    if (!String.IsNullOrWhiteSpace(node.Value))
+                                    string name=reader.Name;
+                                    string value=null;
+                                    while (reader.NodeType == XmlNodeType.Element)
                                     {
-                                        needContinue = UpdateGrant(grant, node);
-                                        
-                                        if(!needContinue)
-                                            break;
+                                        XElement node = XNode.ReadFrom(reader) as XElement;
+                                        node.Name = name;
+                                        name = reader.Name;
+                                        row.Add(node);
+                                        if (!String.IsNullOrWhiteSpace(node.Value))
+                                        {
+                                            needContinue = UpdateGrant(grant, node);
+                                            if (!needContinue)
+                                                break;
+                                        }
                                     }
                                 }
                             }
@@ -250,7 +256,9 @@ namespace UCSF.Business.DataImporter
                     grant.OrgDistrict = node.Value.SafeTrim();
                     break;
                 case "ORG_DUNS":
-                    grant.OrgDUNS = Convert.ToInt32(node.Value);
+                    int myInt;
+                    bool isNumerical = int.TryParse(node.Value, out myInt);
+                    if (isNumerical) grant.OrgDUNS = Convert.ToInt32(node.Value);
                     break;
                 case "ORG_DEPT":
                     grant.OrgDept = node.Value.SafeTrim();

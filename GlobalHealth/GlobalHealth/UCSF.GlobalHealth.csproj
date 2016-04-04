@@ -89,10 +89,14 @@
     <Compile Include="Services\ProjectLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="GlobalHealth.bat" />
     <None Include="grabErrors.bat" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="UCSF.GlobalHealth_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

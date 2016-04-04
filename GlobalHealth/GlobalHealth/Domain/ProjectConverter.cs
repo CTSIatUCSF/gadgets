@@ -25,10 +25,12 @@ namespace UCSF.GlobalHealth.Domain
 						project.InvestigatorId = (string)dictionary[key];
 						break;
                     case "title":
-                        string tmp = (string)dictionary[key];
+                        /*string tmp = (string)dictionary[key];
                         int pos = tmp.IndexOf(">");
                         int pos2 = tmp.IndexOf("a>");
-                        project.Title = tmp.Substring(pos + 1,pos2-pos-3);
+                         * */
+                        project.Title = (string)dictionary[key];
+                        //tmp.Substring(pos + 1,pos2-pos-3);
                         break;
                     case "node_title":
 						project.Title = (string)dictionary[key];

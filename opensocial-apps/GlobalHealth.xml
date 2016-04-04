@@ -70,8 +70,18 @@
     	};
     	function renderProject(project) {
     		var html = '<div class="project">';
+    		var pos = project.Title.indexOf(">");
+    		if (pos != -1) {    		
+	    		var pos2 = project.Title.indexOf("a>");
+	    		var url = project.Title.substring(9, pos-1);
+	    		var title = project.Title.substring(pos + 1,pos2-2);
+			    html +='	<div><a href="http://globalprojects.ucsf.edu'+ url +'" target="_blank">'+ title +'</a></div>';
+			    html +='	<div>';
+		    }
+		    else {
 			    html +='	<div><a href="http://globalprojects.ucsf.edu/node/'+ project.Id +'" target="_blank">'+ project.Title +'</a></div>';
 			    html +='	<div>';
+			}		    
 			for(var i=0;i<project.Locations.length;i++) {
 				var loc = project.Locations[i];
 				if(i>0) {

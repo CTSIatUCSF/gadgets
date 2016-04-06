@@ -61,29 +61,40 @@ namespace UCSF.Business.DataImporter
             successStream.AutoFlush = true;
 
             StartTransaction();
+            string name="";
             using (XmlReader reader = XmlReader.Create(uri))
             {
                 reader.MoveToContent();
                 while (reader.Read())
                 {
-                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "row")
+                    if (reader.NodeType == XmlNodeType.Element && (reader.Name == "row" || name == "row"))
                     {
                         Grant grant = new Grant { GrantPK = Guid.NewGuid() };
-
                         XElement row = new XElement("row");
                         bool needContinue = true;
+                        if (reader.Name != "row") name = reader.Name;
                         try
                         {
-                            while (reader.Read() && reader.NodeType != XmlNodeType.EndElement)
+                            while (reader.Read() && reader.NodeType != XmlNodeType.EndElement )
                             {
+                                if (reader.Name == "row")
+                                {
+                                    name = reader.Name;
+                                }
                                 if (reader.NodeType == XmlNodeType.Element && !string.IsNullOrEmpty(reader.Name))
                                 {
-                                    string name=reader.Name;
-                                    string value=null;
+                                    if (name == "") name=reader.Name;
                                     while (reader.NodeType == XmlNodeType.Element)
                                     {
+                                        if (reader.Name == "row")
+                                        {
+                                            grant = new Grant { GrantPK = Guid.NewGuid() };
+                                            row = new XElement("row");
+                                            needContinue = true;
+                                            reader.Read();
+                                        }
                                         XElement node = XNode.ReadFrom(reader) as XElement;
-                                        node.Name = name;
+                                        if (name != "row")node.Name = name;
                                         name = reader.Name;
                                         row.Add(node);
                                         if (!String.IsNullOrWhiteSpace(node.Value))

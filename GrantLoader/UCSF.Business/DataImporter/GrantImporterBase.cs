@@ -37,7 +37,7 @@ namespace UCSF.Business.DataImporter
         public int TotalRecords{ get; private set; }
         
         public int TotalProcessed{ get; protected set; }
-
+        public int TotalParsed { get; protected set; }
         public int RecordsPerTransaction { get; protected set; }
 
         private string orgName;
@@ -61,6 +61,7 @@ namespace UCSF.Business.DataImporter
             successStream.AutoFlush = true;
 
             StartTransaction();
+            DateTime starttime = DateTime.Now;
             string name="";
             using (XmlReader reader = XmlReader.Create(uri))
             {
@@ -88,10 +89,8 @@ namespace UCSF.Business.DataImporter
                                     {
                                         if (reader.Name == "row")
                                         {
-                                            grant = new Grant { GrantPK = Guid.NewGuid() };
-                                            row = new XElement("row");
-                                            needContinue = true;
-                                            reader.Read();
+                                            if (!needContinue)
+                                                break;
                                         }
                                         XElement node = XNode.ReadFrom(reader) as XElement;
                                         if (name != "row")node.Name = name;
@@ -105,12 +104,24 @@ namespace UCSF.Business.DataImporter
                                         }
                                     }
                                 }
+                                if (name=="row") break;
                             }
 
                             TotalProcessed++;
+                            TotalParsed++;
 
                             if (!needContinue || (checkOrgName && !String.Equals(grant.OrgName, this.orgName, StringComparison.OrdinalIgnoreCase)))
                                 continue;
+
+                            TimeSpan diff=DateTime.Now -starttime;
+                            if (diff.Minutes>5){
+                                CompleteTransaction();
+                                DataContext = new UCSDDataContext();
+                                StartTransaction();
+                                starttime = DateTime.Now;
+                                log.InfoFormat("after {0} minutes Parsed {1} and Processed {2} rows.", diff.Minutes,TotalParsed,TotalRecords);
+                            }
+
                             
                             if (CheckIfGrantExists(grant))
                             {
@@ -118,6 +129,8 @@ namespace UCSF.Business.DataImporter
                             }
 
                             grant.XML = row.ToString();
+
+                            
 
                             ValidateGrant(grant);
                             AddGrantToRecordset(grant);
@@ -130,9 +143,11 @@ namespace UCSF.Business.DataImporter
                                 DataContext = new UCSDDataContext();
 
                                 StartTransaction();
+                                starttime = DateTime.Now;
 
                                 log.InfoFormat("Processed {0} rows.", TotalRecords);
                             }
+
                         }
                         catch (Exception ex)
                         {

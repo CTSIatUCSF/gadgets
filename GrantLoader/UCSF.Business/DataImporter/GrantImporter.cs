@@ -41,7 +41,9 @@ namespace UCSF.Business.DataImporter
 
         protected override bool CheckIfGrantExists(Grant grant)
         {
-            return DataContext.Grants.Any(it => it.ApplicationId == grant.ApplicationId);
+            bool exists = false; 
+            exists=DataContext.Grants.Any(it => it.ApplicationId == grant.ApplicationId);
+            return exists;
         }
 
         protected override PrincipalInvestigator GetPrincipalInvestigator(int principalInvestigatorId)

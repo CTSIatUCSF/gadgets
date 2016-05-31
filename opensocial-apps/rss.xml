@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="RSS gadget"
+            description="RSS gadget">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="default, home, profile"><![CDATA[<!DOCTYPE html>
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+	    <script type="text/javascript" src="js/jquery-1.4.4.js"></script>       
+        <script type="text/javascript" src="js/jquery.jfeed.js" ></script>
+	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/os.js" ></script]]></Content>
+    <Content type="html" view="home"><![CDATA[<span>HOME</span>]]></Content>
+    <Content type="html" view="profile"><![CDATA[<script type="text/javascript">
+	        $(document).ready(function () {
+	            jQuery.getFeed({
+				   url: 'https://theconversation.com/us/arts/articles.atom',
+				   success: function(feed) {
+				     alert(feed.title);
+				   }
+  			    });
+	        });
+        </script>    
+        <span>PROFILES</span>]]></Content>
+</Module>

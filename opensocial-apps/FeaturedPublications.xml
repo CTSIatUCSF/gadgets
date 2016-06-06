@@ -92,6 +92,15 @@ call [ORNG.].[RemoveAppFromOngology], make the change to the [ORNG.].[Apps] entr
 				if(pmid) {
 					html += ' data-pmid="'+pmid+ '" ';
 				}
+				
+				if(title.indexOf('pub-venue') === -1) {
+				    var parts = title.split('</span>;');
+				    if(parts.length > 1) {
+				        var indx = parts[1].lastIndexOf(';');
+				        title = parts[0] + '</span>;<span class="pub-venue">' + parts[1].substring(0, indx) + '</span>' + parts[1].substring(indx);
+				    }
+				}
+				
 	      		html +=	'>'+ 
 						'<div class="inline">'+
 						' <div class="pub-title">' + title + '</div>';
@@ -138,6 +147,7 @@ call [ORNG.].[RemoveAppFromOngology], make the change to the [ORNG.].[Apps] entr
 	    	.fright {display:none;}
 	    	.pubs-gadget .pub {margin: 5px 5px 10px 5px;}	    	
 	    	.pubs-gadget ul {padding: 0px 0px 0px 30px;list-style-type: square;}
+	    	.pub-venue {text-transform: capitalize;}
 	    </style>
 			
 		<div class="pubs-gadget">
@@ -228,7 +238,7 @@ call [ORNG.].[RemoveAppFromOngology], make the change to the [ORNG.].[Apps] entr
 	      		var year = pub[PRNS('year')];
 				var label = pub[RDFS('label')];
 				
-				var title = authorList + '; <span class="label">' + label + '</span>; ' + publicationVenue + '; ' + year
+				var title = '<span class="author-list">' + authorList + '</span>; <span class="label">' + label + '</span>; <span class="pub-venue">' + publicationVenue + '</span>; <span class="pub-year">' + year + '</span>';
 	      			
 				var pmid = pub[BIBO('pmid')]; 
 				var html = '<div class="pub" '+ isVisible+'data-pd="'+ pd +'"><input type="checkbox" ';

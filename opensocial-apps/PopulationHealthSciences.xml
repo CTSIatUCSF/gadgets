@@ -14,5 +14,5 @@
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script]]></Content>
     <Content type="html" view="home"><![CDATA[<span>HOME</span>]]></Content>
-    <Content type="html" view="profile"><![CDATA[<script type="text/javascript">]]></Content>
+    <Content type="html" view="profile"><![CDATA[<span>PROFILE</span>]]></Content>
 </Module>

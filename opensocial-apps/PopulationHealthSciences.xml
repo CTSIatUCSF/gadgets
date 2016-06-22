@@ -10,13 +10,14 @@
     <Content type="html" view="default, home, profile"><![CDATA[<!DOCTYPE html>
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
         <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
-        <script type="text/javascript" src="js/jquery-1.4.4.js"></script>       
-        <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>       
+        <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+        <script type="text/javascript" src="js/ontology.js" ></script>
         <script type="text/javascript" src="js/os.js" ></script>
         <script type="text/javascript">
             var PIPHS = PIPHS || {};
             PIPHS.loadData = function (callback) {
-                osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['piphs_val1', 'piphs_val2', 'piphs_val3', 'piphs_val4', 'piphs_val5']}).execute(function(response){
+                osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['piphs_val1', 'piphs_val2', 'piphs_val3', 'piphs_val4', 'piphs_val5', 'piphs_sel1', 'piphs_sel2', 'piphs_sel3', 'piphs_sel4', 'piphs_sel5']}).execute(function(response){
                     var viewer = os.osapi.getViewerFromResult(response);
                     callback(viewer);
                     });
@@ -30,6 +31,7 @@
             
             .piphs .fld-container {margin-bottom: 10px;}
             .piphs .fld-title {width: 100px; font-weight: bold;}
+            .piphs .fld-value input {vertical-align: top;}
             .piphs .fld-value textarea{width: 500px; overflow: auto;}
             .piphs .fld-descr{font-style: italic;}
             
@@ -39,24 +41,46 @@
         <script type="text/javascript">
             gadgets.util.registerOnLoadHandler(function() {
                 $(document).ready(function () {
+                    $('.piphs .fld-value input').click(function() {
+                        var editBox = $('textarea', $(this).parent());
+                        if($(this).prop('checked')) {
+                            editBox.prop('disabled', false);
+                        } else {
+                            editBox.prop('disabled', true);
+                        }
+                    });
                     $('.piphs .actions input').click(function() {
-	                    var data = {};
-	                    for(var i = 1; i <= 5; i++  ) {
-	                        data['piphs_val' + i] = $('#piphs-fld' + i).val();
-	                    }
+                        $(".piphs").block({ message: "Saving..." });
+                        var data = {};
+                        for(var i = 1; i <= 5; i++  ) {
+                            var editBox = $('#piphs-fld' + i);
+                            data['piphs_val' + i] = editBox.val();
+                            data['piphs_sel' + i] = $('input', editBox.parent()).prop('checked');
+                        }
                         osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':data}).execute(function(response){
+                            $(".piphs").unblock();
                         });                                                         
                     });    
-                    $(".pubs-gadget").block({ message: "Loading..." });
-	                PIPHS.loadData(function(data) {
-	                    for(var i = 1; i <= 5; i++  ) {
-	                        var val = data['piphs_val' + i]; 
-	                        if(val) {
-	                            $('#piphs-fld' + i).val(val);
-	                        }               
-	                    }
-	                    $(".pubs-gadget").unblock();
-	                });
+                    $(".piphs").block({ message: "Loading..." });
+                    PIPHS.loadData(function(data) {
+                        for(var i = 1; i <= 5; i++  ) {
+                            var val = data['piphs_val' + i];
+                            var editBox = $('#piphs-fld' + i); 
+                            if(val) {
+                                editBox.val(val);
+                            }
+                            
+                            var sel = data['piphs_sel' + i];
+                            if(sel) {
+                                $('input', editBox.parent()).prop('checked', true);
+                                editBox.prop('disabled', false);
+                            }
+                            else {
+                                editBox.prop('disabled', true);
+                            } 
+                        }
+                        $(".piphs").unblock();
+                    });
                 });
             }); 
         </script>
@@ -71,35 +95,35 @@
                        <span class="fld-title">Research Methods</span>
                        <span class="fld-descr"> - Research Methods description</span>
                     </div>
-                    <div class="fld-value"><textarea id="" name=""/></div>
+                    <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld1" disabled="disabled"/></div>
                 </div>
                 <div class="fld-container">
                     <div class="fld-header">
                        <span class="fld-title">Innovations</span>
                        <span class="fld-descr"> - Innovations you and your team have developed that might lend itself to a repository of ideas. Can either an intervention, or a research approach.</span>
                     </div>
-                    <div class="fld-value"><textarea id="" name=""/></div>
+                    <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld2" disabled="disabled"/></div>
                 </div>
                 <div class="fld-container">
                     <div class="fld-header">
                        <span class="fld-title">Dataset Experience</span>
                        <span class="fld-descr"> - Provide information on what datasets you use to analyze data.</span>
                     </div>
-                    <div class="fld-value"><textarea id="" name=""/></div>
+                    <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld3" disabled="disabled"/></div>
                 </div>
                 <div class="fld-container">
                     <div class="fld-header">
                        <span class="fld-title">Seeking Collaborators For</span>
                        <span class="fld-descr"> – Projects/data  for which you are searching a collaborator. Can include data analyses of an existing data set you have that has not been analyzed yet nor written up for publication.</span>
                     </div>
-                    <div class="fld-value"><textarea id="" name=""/></div>
+                    <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld4" disabled="disabled"/></div>
                 </div>
                 <div class="fld-container">
                     <div class="fld-header">
                        <span class="fld-title">Future Project Ideas </span>
                        <span class="fld-descr"> - Ideas or areas for further research exploration. Can include what potential funding might support these ideas. </span>
                     </div>
-                    <div class="fld-value"><textarea id="" name=""/></div>
+                    <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld5" disabled="disabled"/></div>
                 </div>
                 <div class="actions">
                     <input name="save" value="Save" type="button"></input>
@@ -112,59 +136,60 @@
             .piphs .content {margin-top: 10px;}
             .piphs .fld-container {margin-bottom: 10px;}
             .piphs .fld-title {width: 100px; font-weight: bold;}
-            .piphs .fld-value {width: 500px; overflow: auto;}
+            .piphs .fld-value {margin-top: 5px;}
             .piphs .fld-descr{font-style: italic;}
         </style>        
         <script type="text/javascript">
             gadgets.util.registerOnLoadHandler(function() {
                 $(document).ready(function () {
-                    $(".pubs-gadget").block({ message: "Loading..." });
-	                PIPHS.loadData(function(data) {
-	                    for(var i = 1; i <= 5; i++  ) {
-	                        var val = data['piphs_val' + i]; 
-	                        if(val) {
-	                            $('#piphs-fld' + i).text(val).show();
-	                        }               
-	                    }
-	                    var h = $(".piphs .content").height();
-	                    gadgets.window.adjustHeight(h + 50);                                        
-	                    
-	                    $(".pubs-gadget").unblock();
-	                });
+                    $(".piphs").block({ message: "Loading..." });
+                    PIPHS.loadData(function(data) {
+                        for(var i = 1; i <= 5; i++  ) {
+                            var val = data['piphs_val' + i];
+                            var sel = data['piphs_sel' + i]; 
+                            if(val && sel) {
+                                $('#piphs-fld' + i).text(val).parent().show();
+                            }               
+                        }
+                        var h = $(".piphs .content").height();
+                        gadgets.window.adjustHeight(h + 40);                                        
+                        
+                        $(".piphs").unblock();
+                    });
                 });
             }); 
         </script>
         <div class="piphs">
             <div class="content">
-                <div class="fld-container">
+                <div class="fld-container"  style="display:none">
                     <div class="fld-header">
                        <span class="fld-title">Research Methods</span>
                     </div>
-                    <div id="piphs-fld1" class="fld-value" style="display:none">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
+                    <div id="piphs-fld1" class="fld-value">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
                 </div>
-                <div class="fld-container">
+                <div class="fld-container"  style="display:none">
                     <div class="fld-header">
                        <span class="fld-title">Innovations</span>
                     </div>
-                    <div id="piphs-fld2" class="fld-value" style="display:none">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
+                    <div id="piphs-fld2" class="fld-value">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
                 </div>
-                <div class="fld-container">
+                <div class="fld-container"  style="display:none">
                     <div class="fld-header">
                        <span class="fld-title">Dataset Experience</span>
                     </div>
-                    <div id="piphs-fld3" class="fld-value" style="display:none">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
+                    <div id="piphs-fld3" class="fld-value">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
                 </div>
-                <div class="fld-container">
+                <div class="fld-container"  style="display:none">
                     <div class="fld-header">
                        <span class="fld-title">Seeking Collaborators For</span>
                     </div>
-                    <div id="piphs-fld4" class="fld-value" style="display:none">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
+                    <div id="piphs-fld4" class="fld-value">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
                 </div>
-                <div class="fld-container">
+                <div class="fld-container" style="display:none">
                     <div class="fld-header">
                        <span class="fld-title">Future Project Ideas</span>
                     </div>
-                    <div id="piphs-fld5" class="fld-value" style="display:none">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
+                    <div id="piphs-fld5" class="fld-value">Ideas or areas for further research exploration. Can include what potential funding might support these ideas.</div>
                 </div>
             </div>
         </div>

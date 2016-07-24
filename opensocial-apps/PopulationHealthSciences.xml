@@ -30,6 +30,7 @@
             .piphs .header p {margin-bottom: 10px;}
             
             .piphs .fld-container {margin-bottom: 10px;}
+            .piphs .fld-header {margin-bottom: 5px;}
             .piphs .fld-title {width: 100px; font-weight: bold;}
             .piphs .fld-value input {vertical-align: top;}
             .piphs .fld-value textarea{width: 500px; overflow: auto;}
@@ -93,7 +94,7 @@
                 <div class="fld-container">
                     <div class="fld-header">
                        <span class="fld-title">Research Methods</span>
-                       <span class="fld-descr"> - Research Methods description</span>
+                       <span class="fld-descr"> - Please describe the different types of qualitative and quantitative analyses (secondary data analyses, linking of large data sets; electronic medical record analyses) that you conduct, policy studies, case studies, and/or other research methods that you incorporate into your research.</span>
                     </div>
                     <div class="fld-value"><input type="checkbox"/><textarea id="piphs-fld1" disabled="disabled"/></div>
                 </div>
@@ -136,7 +137,7 @@
             .piphs .content {margin-top: 10px;}
             .piphs .fld-container {margin-bottom: 10px;}
             .piphs .fld-title {width: 100px; font-weight: bold;}
-            .piphs .fld-value {margin-top: 5px;}
+            .piphs .fld-value {margin-top: 5px;} 
             .piphs .fld-descr{font-style: italic;}
         </style>        
         <script type="text/javascript">

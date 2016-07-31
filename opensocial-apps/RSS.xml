@@ -6,24 +6,224 @@
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="osapi" />
+        <Require feature="dynamic-height" />
     </ModulePrefs>
-    <Content type="html" view="default, home, profile"><![CDATA[<!DOCTYPE html>
+    <Content type="html" view="default, home, profile"><![CDATA[
+        <!DOCTYPE html>            
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
 	    <script type="text/javascript" src="js/jquery-1.4.4.js"></script>       
-        <script type="text/javascript" src="js/jquery.jfeed.js" ></script>
 	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
-	    <script type="text/javascript" src="js/os.js" ></script]]></Content>
-    <Content type="html" view="home"><![CDATA[<span>HOME</span>]]></Content>
-    <Content type="html" view="profile"><![CDATA[<script type="text/javascript">
-	        $(document).ready(function () {
-	            jQuery.getFeed({
-				   url: 'https://theconversation.com/us/arts/articles.atom',
-				   success: function(feed) {
-				     alert(feed.title);
-				   }
-  			    });
-	        });
-        </script>    
-        <span>PROFILES</span>]]></Content>
+	    <script type="text/javascript" src="js/os.js" ></script>
+        <script type="text/javascript">
+            var RSS = RSS || {}
+            
+            RSS.loadFeeds = function(callback) {
+	            osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['links', 'feeds_count']} ).execute(function(result){
+	                var viewer = os.osapi.getViewerFromResult(result);
+	                
+	                if(viewer.feeds_count) {
+	                    var count = viewer.feeds_count;
+	                    if(count > 0) {
+	                        var fields=[];
+	                        for(var i=0;i<count;i++) {
+	                            fields.push('feed_' + i);
+	                        }
+                            var feeds = [];
+	                        osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': fields})
+	                            .execute(function(pub_response){
+	                                var pub_viewer = os.osapi.getViewerFromResult(pub_response);
+	                                for(var i=0;i<count;i++) {
+	                                    var feed = gadgets.json.parse(pub_viewer['feed_' + i]) || {};
+	                                    feeds.push(feed);
+	                                }	                                
+	                                if(callback) {
+	                                    callback(feeds);
+	                                }                       
+	                            });             
+	                    }
+	                }
+	                else {
+	                    if(callback) {
+	                        callback();
+	                    }                       
+	                }	                
+	            });         
+            };
+            
+        </script>
+        
+   ]]></Content>
+	    
+	    
+    <Content type="html" view="home"  preferred_width="700" preferred_height="600"><![CDATA[
+        <!DOCTYPE html>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+        <script type="text/javascript">
+            gadgets.util.registerOnLoadHandler(function() {
+                RSS.renderFeed = function(name, siteUrl, feedUrl) {
+		            var html = '<tr>';
+	                html += '<td><span class="handle"/></td>';		            
+		            html += '<td><img class="favicon" height="16" width="16"/></td>';
+                    html += '<td ><a href="' + siteUrl + '" target="_blank">' + name + '</a></td>';
+		            html += '<td class="feedUrl">' + feedUrl + '</td>'
+		            
+                    html += '<td><input type="button" value="Delete"></td>';
+		            html += '</tr>';
+		            
+		            var row = $(html).appendTo(".feed-list table tbody");
+		            var domain = $("a", row).get(0).hostname;
+		            $("img.favicon", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);
+		            
+		            $(".rss-gadget .input-fld input").val("");             
+                }
+                RSS.saveFeeds = function(callback) {
+		            var data = {feeds_count:"0"};
+		            var count = 0;
+		        
+		            $(".feed-list table tr").each(function(index, value) {
+		                var feed = {
+		                  name: $("a", value).text(), 
+		                  siteUrl: $("a", value).attr("href"),
+		                  feedUrl: $(".feedUrl", value).text()
+		                };
+		                data["feed_" + count] = JSON.stringify(feed);
+		                count++;		                
+		            });
+		            data.feeds_count="" + count;
+		            
+		            osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': data }).execute(function(result) {
+		                if (result.error) { 
+		                    alert("Error " + result.error.code + " writing application data: " + result.error.message);
+		                } else {
+		                    if(callback) {
+		                        callback();
+		                    }
+		                }
+		            });                
+                };   
+                
+                $(document).ready(function () {
+                    $(".rss-gadget").block({ message: "Loading..." });
+	                RSS.loadFeeds(function(feeds) {
+	                   if(feeds) {
+                           for (var i = 0; i < feeds.length; i++)  {
+                               RSS.renderFeed(feeds[i].name, feeds[i].siteUrl, feeds[i].feedUrl);
+                           }                         
+	                   }
+                       $(".rss-gadget").unblock();
+	                });
+	                
+	                $(".rss-gadget #add-feed").click(function() {
+                        var name = $.trim($("#feed-name").val());
+                        var siteUrl = $.trim($("#site-url").val());
+                        var feedUrl = $.trim($("#feed-url").val());
+	                   
+	                    RSS.renderFeed(name, siteUrl, feedUrl);
+	                    RSS.saveFeeds();   
+	                });
+                    $(".rss-gadget .feeds input").live("click", function() {
+                        $(this).parent().parent().remove();
+                        RSS.saveFeeds();   
+                    });
+                    
+                    $( ".feeds tbody" ).sortable({ 
+                        axis: "y",
+                        update: function( event, ui ) {
+                            RSS.saveFeeds();
+                        }
+                    });                                     
+                });
+            }); 
+        </script>
+        
+        <style type="text/css">
+			.rss-gadget .descr {margin-top: 20px; margin-bottom: 20px;}
+			.rss-gadget .edit-form {margin-left: 20px;}
+			.rss-gadget .bold-txt {font-weight: bold;}
+			.rss-gadget .input-fld {margin-top: 5px; margin-bottom: 3px;}
+			.rss-gadget .input-fld input{width: 400px;} 
+			.rss-gadget .fld-title {margin-top: 20px;}
+			.rss-gadget .edit-form .actions {text-align: right; margin-right: 90px; margin-top: -5px;}
+			
+            .rss-gadget .feed-list {margin-top: 20px; border-top: 1px solid gray;}
+            .rss-gadget .feed-list .list-header {margin-top: 20px;margin-left: 10px;}
+            .rss-gadget .feed-list-wrapper {margin-left: 30px; margin-top: 10px;}
+            .rss-gadget .feed-list table {width: 100%;}
+            .rss-gadget .feed-list td{height: 30px;}
+            .rss-gadget .feed-list .handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px; cursor: pointer;}
+            .rss-gadget .feed-list .favicon {}
+			
+        </style>
+        
+        <div class="rss-gadget">
+            <h4>Manage Your Blogs/Feeds</h4>
+            <div class="descr">Add the name of the blog/feed you want to show on your profile page and its RSS/Atom feed URL. Below that section, you can drag and drop feeds to re-arrange them.</div>
+            <div class="edit-form">
+                <div class="fld-title"><span class="bold-txt">Blog/Feed Name</span> - e.g. The Conversation About Sugar</div>
+                <div class="input-fld"><input id="feed-name" maxlength="60"/></div>
+                <div>(60 Characters Max)</div>
+                
+                <div class="fld-title"><span class="bold-txt">Site URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
+                <div class="input-fld"><input id="site-url"/></div>
+                
+                <div class="fld-title"><span class="bold-txt">Blog/Feed URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
+                <div class="input-fld"><input id="feed-url"/></div>
+                
+                <div class="actions">
+                    <input id="add-feed" type="button" value="Add"/>
+                </div>                                
+            </div>
+            <div class="feed-list">
+                <div class="list-header">Your current Blogs/Feeds</div>
+                <div class="feed-list-wrapper">
+	                <table class="feeds" cellspacing='0' cellpadding='0'>
+	                    <tbody></tbody>
+	                </table>
+                <div>
+            </div>
+        </div>
+    ]]></Content>
+    <Content type="html" view="profile" preferred_width="590" preferred_height="200"><![CDATA[
+        <!DOCTYPE html>
+        <script type="text/javascript">
+            RSS.renderFeed = function(feed) {
+                var html = '<div>'
+                    html += '<div><a href="' + feed.siteUrl + '" target="_blank">' + feed.name + '</a></div>';
+                
+                    html += '</div>';
+                                        
+                var row = $(html).appendTo(".rss-gadget .feed-list");
+                
+            var params = {};
+            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+            params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 0;
+            gadgets.io.makeRequest("https://theconversation.com/us/health/articles.atom", function(data) {
+                $(".rss-gadget .feed-list").append('<div>'+ JSON.stringify(data)+'</div>');
+            }, params);
+                                
+            }
+            $(document).ready(function () {
+                $(".rss-gadget").block({ message: "Loading..." });
+                RSS.loadFeeds(function(feeds) {
+                   if(feeds) {
+                       for (var i = 0; i < feeds.length; i++)  {
+                           RSS.renderFeed(feeds[i]);    
+                       }                         
+                   }
+                   $(".rss-gadget").unblock();
+                });
+            });
+        </script>
+        
+        <style type="text/css">
+        </style>
+        
+        <div class="rss-gadget">
+            <div class="feed-list">
+            </div>        
+        </div>
+        
+    ]]></Content>
 </Module>

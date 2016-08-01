@@ -12,8 +12,8 @@
         <!DOCTYPE html>            
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
-	    <script type="text/javascript" src="js/jquery-1.4.4.js"></script>       
-	    <script type="text/javascript" src="js/jquery.blockUI.js"></script>    
+	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>       
+	    <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
 	    <script type="text/javascript" src="js/os.js" ></script>
         <script type="text/javascript">
             var RSS = RSS || {}
@@ -58,17 +58,18 @@
 	    
     <Content type="html" view="home"  preferred_width="700" preferred_height="600"><![CDATA[
         <!DOCTYPE html>
-        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>    
         <script type="text/javascript">
             gadgets.util.registerOnLoadHandler(function() {
                 RSS.renderFeed = function(name, siteUrl, feedUrl) {
 		            var html = '<tr>';
 	                html += '<td><span class="handle"/></td>';		            
-		            html += '<td><img class="favicon" height="16" width="16"/></td>';
+		            html += '<td class="feed-icon"><img class="favicon" height="16" width="16"/></td>';
                     html += '<td ><a href="' + siteUrl + '" target="_blank">' + name + '</a></td>';
 		            html += '<td class="feedUrl">' + feedUrl + '</td>'
 		            
-                    html += '<td><input type="button" value="Delete"></td>';
+                    html += '<td class="actions"><input type="button" value="Delete"></td>';
 		            html += '</tr>';
 		            
 		            var row = $(html).appendTo(".feed-list table tbody");
@@ -115,14 +116,16 @@
 	                });
 	                
 	                $(".rss-gadget #add-feed").click(function() {
-                        var name = $.trim($("#feed-name").val());
-                        var siteUrl = $.trim($("#site-url").val());
-                        var feedUrl = $.trim($("#feed-url").val());
-	                   
-	                    RSS.renderFeed(name, siteUrl, feedUrl);
-	                    RSS.saveFeeds();   
+	                    if(RSS.formValidator.form()) {
+	                        var name = $.trim($("#feed-name").val());
+	                        var siteUrl = $.trim($("#site-url").val());
+	                        var feedUrl = $.trim($("#feed-url").val());
+	                       
+	                        RSS.renderFeed(name, siteUrl, feedUrl);
+	                        RSS.saveFeeds();   
+	                    }
 	                });
-                    $(".rss-gadget .feeds input").live("click", function() {
+	                $(".rss-gadget").on("click", ".feeds input", function() {
                         $(this).parent().parent().remove();
                         RSS.saveFeeds();   
                     });
@@ -132,7 +135,16 @@
                         update: function( event, ui ) {
                             RSS.saveFeeds();
                         }
-                    });                                     
+                    });               
+                    
+                    RSS.formValidator = $(".edit-form form").validate({
+	                    rules: {
+						    feedName: {
+						      required: true,
+						      maxlength: 60
+						    }
+						}
+					});                      
                 });
             }); 
         </script>
@@ -144,6 +156,7 @@
 			.rss-gadget .input-fld {margin-top: 5px; margin-bottom: 3px;}
 			.rss-gadget .input-fld input{width: 400px;} 
 			.rss-gadget .fld-title {margin-top: 20px;}
+			.rss-gadget .feed-icon {width: 30px; text-align: center;}
 			.rss-gadget .edit-form .actions {text-align: right; margin-right: 90px; margin-top: -5px;}
 			
             .rss-gadget .feed-list {margin-top: 20px; border-top: 1px solid gray;}
@@ -153,6 +166,11 @@
             .rss-gadget .feed-list td{height: 30px;}
             .rss-gadget .feed-list .handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px; cursor: pointer;}
             .rss-gadget .feed-list .favicon {}
+            .rss-gadget .feed-list .actions {width: 60px; text-align: right;}
+            
+            .rss-gadget .error { color: red;}
+            .rss-gadget input.error {border: 1px solid red;}
+            .rss-gadget label.error { margin-left: 10px;}
 			
         </style>
         
@@ -160,19 +178,21 @@
             <h4>Manage Your Blogs/Feeds</h4>
             <div class="descr">Add the name of the blog/feed you want to show on your profile page and its RSS/Atom feed URL. Below that section, you can drag and drop feeds to re-arrange them.</div>
             <div class="edit-form">
-                <div class="fld-title"><span class="bold-txt">Blog/Feed Name</span> - e.g. The Conversation About Sugar</div>
-                <div class="input-fld"><input id="feed-name" maxlength="60"/></div>
-                <div>(60 Characters Max)</div>
-                
-                <div class="fld-title"><span class="bold-txt">Site URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
-                <div class="input-fld"><input id="site-url"/></div>
-                
-                <div class="fld-title"><span class="bold-txt">Blog/Feed URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
-                <div class="input-fld"><input id="feed-url"/></div>
-                
-                <div class="actions">
-                    <input id="add-feed" type="button" value="Add"/>
-                </div>                                
+                <form>
+	                <div class="fld-title"><span class="bold-txt">Blog/Feed Name</span> - e.g. The Conversation About Sugar</div>
+	                <div class="input-fld"><input id="feed-name" type="text" name="feedName" required/></div>
+	                <div>(60 Characters Max)</div>
+	                
+	                <div class="fld-title"><span class="bold-txt">Site URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
+	                <div class="input-fld"><input id="site-url" required type="url" name="siteUrl"/></div>
+	                
+	                <div class="fld-title"><span class="bold-txt">Blog/Feed URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
+	                <div class="input-fld"><input id="feed-url" required type="url" name="feedUrl"/></div>
+	                
+	                <div class="actions">
+	                    <input id="add-feed" type="button" value="Add"/>
+	                </div>
+                </form>                                
             </div>
             <div class="feed-list">
                 <div class="list-header">Your current Blogs/Feeds</div>
@@ -184,14 +204,14 @@
             </div>
         </div>
     ]]></Content>
-    <Content type="html" view="profile" preferred_width="590" preferred_height="200"><![CDATA[
+    <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[
         <!DOCTYPE html>
         <script type="text/javascript">
             RSS.renderFeed = function(feed) {
                 var html = '<div>'
                     html += '<div class="feed-title"><a href="' + feed.siteUrl + '" target="_blank">' + feed.name + '</a></div>';
                 
-                    html += '</div>';
+                    html += '<ul></ul></div>';
                                         
 	                var row = $(html).appendTo(".rss-gadget .feed-list");
                 
@@ -203,8 +223,8 @@
 		                var xml = $(data.data);		                
                         xml.find("entry").each(function () {
                            var feedEntry = $(this);
-                           var feedHtml = '<div class="feed-entry"><a href="' + feedEntry.find('link').attr('href') + '" target="_blank">' + feedEntry.find('title').text() + '</a></div>';
-                           $(row).append(feedHtml);
+                           var feedHtml = '<li class="feed-entry"><a href="' + feedEntry.find('link').attr('href') + '" target="_blank">' + feedEntry.find('title').text() + '</a></li>';
+                           $("ul", row).append(feedHtml);
                         });                    
                         xml.find("item").each(function () {
                            var feedEntry = $(this);
@@ -213,13 +233,14 @@
                             linkUrl = feedEntry.find('guid').text();
                            }
                            
+                           var feedHtml;
                            if(linkUrl) {
-                               var feedHtml = '<div class="feed-entry"><a href="' + linkUrl + '" target="_blank">' + feedEntry.find('title').text() + '</a></div>';
+                               feedHtml = '<li class="feed-entry"><a href="' + linkUrl + '" target="_blank">' + feedEntry.find('title').text() + '</a></li>';
                            }
                            else {
-                               var feedHtml = '<div class="feed-entry">' + feedEntry.find('title').text() + '</div>';
+                               feedHtml = '<li class="feed-entry">' + feedEntry.find('title').text() + '</li>';
                            }
-                           $(row).append(feedHtml);
+                           $("ul", row).append(feedHtml);
                         });                    
 		                                  
 		            }, params);
@@ -240,8 +261,9 @@
         
         <style type="text/css">
             .rss-gadget .feed-list {margin-left: 20px;margin-top: 10px;}
-            .rss-gadget .feed-title {margin-bottom: 5px;}
-            .rss-gadget .feed-entry {margin-left: 20px; margin-bottom: 5px;}
+            .rss-gadget .feed-title {margin-bottom: 10px; font-size: 16px;}
+            .rss-gadget .feed-entry {margin-left: 20px; margin-bottom: 10px;}
+            .rss-gadget ul{list-style-type: disc;margin-left: 20px;margin-bottom: 10px;}
         </style>
         
         <div class="rss-gadget">

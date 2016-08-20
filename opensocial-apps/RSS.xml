@@ -206,55 +206,57 @@
     ]]></Content>
     <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[
         <!DOCTYPE html>
+        <script type="text/javascript" src="js/FeedEk.js"></script>
         <script type="text/javascript">
-            RSS.renderFeed = function(feed) {
-                var html = '<div>'
-                    html += '<div class="feed-title"><a href="' + feed.siteUrl + '" target="_blank">' + feed.name + '</a></div>';
-                
-                    html += '<ul></ul></div>';
-                                        
-	                var row = $(html).appendTo(".rss-gadget .feed-list");
-                
-		            var params = {};
-		            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
-		            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-		            params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 0;
-		            gadgets.io.makeRequest(feed.feedUrl, function(data) {
-		                var xml = $(data.data);		                
-                        xml.find("entry").each(function () {
-                           var feedEntry = $(this);
-                           var feedHtml = '<li class="feed-entry"><a href="' + feedEntry.find('link').attr('href') + '" target="_blank">' + feedEntry.find('title').text() + '</a></li>';
-                           $("ul", row).append(feedHtml);
-                        });                    
-                        xml.find("item").each(function () {
-                           var feedEntry = $(this);
-                           var linkUrl = feedEntry.find('link').text();
-                           if(!linkUrl) {
-                            linkUrl = feedEntry.find('guid').text();
-                           }
-                           
-                           var feedHtml;
-                           if(linkUrl) {
-                               feedHtml = '<li class="feed-entry"><a href="' + linkUrl + '" target="_blank">' + feedEntry.find('title').text() + '</a></li>';
-                           }
-                           else {
-                               feedHtml = '<li class="feed-entry">' + feedEntry.find('title').text() + '</li>';
-                           }
-                           $("ul", row).append(feedHtml);
-                        });                    
-		                                  
-		            }, params);
-                                
+            RSS.renderFeed = function(feed, index) {
+		        var id  = 'feed-number-' + index;
+		
+		        // create container for feed content
+		        var div = $('<div>').attr('class', 'feed-block').attr('id', id).data('feed-num', index);		        
+		        div.appendTo('#feed-content');
+		        
+		        // lookup feed content
+		        $("#" + id).FeedEk({
+		            FeedUrl: feed.feedUrl,
+		            ShowDesc: false,
+		            ShowPubDate: false
+		        });
             }
+            
+            function addTitle(feedElem, title, contentUrl) {
+                var titleHtml = $('<h2>').attr('class', 'feed-heading').text(title);
+                if (contentUrl) {
+                    var anchor = $('<a target="_blank">').attr('href', contentUrl);
+                    $(titleHtml).wrapInner( anchor );
+
+                }               
+                titleHtml.prependTo($(feedElem));
+            }
+            
+		    // add feed title after the fact
+		    RSS.checks = 50;
+		    function fix_title () {
+		        $('.feed-block:has(.feedEkList li):not(:has(.feed-heading))').each(function () {
+		            var index = $(this).data('feed-num');		            
+		            addTitle(this, RSS.feeds[index].name, RSS.feeds[index].siteUrl);		           
+		        });
+		
+		        if (--RSS.checks > 0) {
+		            setTimeout(fix_title, 250);
+		        }
+		    }
+            
             $(document).ready(function () {
                 $(".rss-gadget").block({ message: "Loading..." });
                 RSS.loadFeeds(function(feeds) {
+                   RSS.feeds = feeds;
                    if(feeds) {
                        for (var i = 0; i < feeds.length; i++)  {
-                           RSS.renderFeed(feeds[i]);    
+                           RSS.renderFeed(feeds[i], i);    
                        }                         
                    }
                    $(".rss-gadget").unblock();
+                   setTimeout(fix_title, 250);
                 });
             });
         </script>
@@ -267,7 +269,7 @@
         </style>
         
         <div class="rss-gadget">
-            <div class="feed-list">
+            <div id="feed-content">
             </div>        
         </div>
         

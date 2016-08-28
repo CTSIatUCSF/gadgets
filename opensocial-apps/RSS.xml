@@ -207,6 +207,7 @@
     <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[
         <!DOCTYPE html>
         <script type="text/javascript" src="js/FeedEk.js"></script>
+        <script type="text/javascript" src="js/environment.js"></script>
         <script type="text/javascript">
             RSS.renderFeed = function(feed, index) {
 		        var id  = 'feed-number-' + index;
@@ -222,6 +223,13 @@
 		            ShowPubDate: false
 		        });
             }
+            
+            RSS.gadgetEventTrack = function(action, label, value) {
+	            var message = {'action' : action};
+	            if (label) {message.label = label;}
+	            if (value) {message.value = value;}
+	            gadgets.orng.reportGoogleAnalyticsEvent(message);
+            };
             
             function addTitle(feedElem, title, contentUrl) {
                 var titleHtml = $('<h2>').attr('class', 'feed-heading').text(title);
@@ -249,14 +257,36 @@
             $(document).ready(function () {
                 $(".rss-gadget").block({ message: "Loading..." });
                 RSS.loadFeeds(function(feeds) {
-                   RSS.feeds = feeds;
-                   if(feeds) {
-                       for (var i = 0; i < feeds.length; i++)  {
-                           RSS.renderFeed(feeds[i], i);    
-                       }                         
-                   }
-                   $(".rss-gadget").unblock();
-                   setTimeout(fix_title, 250);
+                    RSS.feeds = feeds;
+	                if(feeds) {
+	                    for (var i = 0; i < feeds.length; i++)  {
+	                        RSS.renderFeed(feeds[i], i);    
+	                    }                         
+	                }
+	                $(".rss-gadget").unblock();
+	                setTimeout(fix_title, 250);
+                   
+                    // did user click on a feed heading? log an event
+					$('.feed-block').on("click", '.feed-heading a', function(event) {
+					    event.stopImmediatePropagation();
+					    RSS.gadgetEventTrack('click_feed', $(this).attr('href'))
+					});
+					
+					// did user clicks on a feed item? log an event
+					$('.feed-block').on("click", '.itemTitle a', function(event) {
+					    event.stopImmediatePropagation();
+                        RSS.gadgetEventTrack('click_feed_item', $(this).attr('href'))
+					});
+					
+					// did user mousover the core feeds block? log an event
+					$('.feed-block').on('mouseover', function (event) {
+					
+					    // delete the mouseover event, so event never triggers more than once
+					    $('.feed-block').off('mouseover');
+					
+					    event.stopImmediatePropagation();
+                        RSS.gadgetEventTrack('mouseover_feed_content', $(this).attr('href'))
+					});                   
                 });
             });
         </script>

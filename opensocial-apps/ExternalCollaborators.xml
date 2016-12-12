@@ -125,7 +125,7 @@ Then you need to add network gadgets to the Profile page by updating the Present
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="340">
+    <Content type="html" view="small" preferred_width="190" preferred_height="352">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     
@@ -192,10 +192,9 @@ Then you need to add network gadgets to the Profile page by updating the Present
     </style>
 
     <div id="collaborators_list"></div>     
-    <div>
+    <div style="border-bottom: 1px solid #CCC; padding: 4px 0 6px;">
         <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
-    	<a id="see-all" class="see-all" style="display:none" href="#" >
-    		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
+    	<a id="see-all" class="see-all dblarrow" style="display:none" href="#" >
     		See all (<span></span>) people
     	</a>
     </div>

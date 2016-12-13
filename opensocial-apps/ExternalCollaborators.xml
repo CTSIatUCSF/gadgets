@@ -122,7 +122,7 @@ Then you need to add network gadgets to the Profile page by updating the Present
     </script>
 	]]>
 	</Content>
-    <Content type="html" view="small" preferred_width="190" preferred_height="352">
+    <Content type="html" view="small" preferred_width="190" preferred_height="362">
 	<![CDATA[<!--HTML-->
     <!DOCTYPE html>
     

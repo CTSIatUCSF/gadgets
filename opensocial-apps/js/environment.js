@@ -7,7 +7,7 @@ var ENV_LOCAL_URL = 'http://profiles.ucsf.edu';
 **************/
 
 //For staging
-var ENV_PROFILES_URL = 'http://stage-profiles.ucsf.edu/profiles200';
+var ENV_PROFILES_URL = 'http://stage-profiles.ucsf.edu/profiles_ucsf_29';
 var ENV_LOCAL_URL = 'http://stage-profiles.ucsf.edu';
 // for ClinicalTrials
 var ENV_GADGET_URL = 'http://sc-ctsi.org/clinical_trials_gadget';

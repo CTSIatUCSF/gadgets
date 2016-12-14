@@ -49,11 +49,11 @@ Then you need to add network gadgets to the Profile page by updating the Present
 		var COLLABORATED_ON = R2R('collaboratedOn');
 	
 		function getProductionURI(uri) {
-			if (uri.indexOf("http://stage-profiles.ucsf.edu/profiles_ucsf_29") !== -1) {
-				return uri.replace("http://stage-profiles.ucsf.edu/profiles_ucsf_29", "http://profiles.ucsf.edu");
-			}
-			else if (uri.indexOf("http://profilesstage.sc-ctsi.org") !== -1) {
+			if (uri.indexOf("http://profilesstage.sc-ctsi.org") !== -1) {
 				return uri.replace("http://profilesstage.sc-ctsi.org", "http://profiles.sc-ctsi.org");
+			}
+			else if (uri.indexOf(ENV_PROFILES_URL) !== -1) {
+				return uri.replace(ENV_PROFILES_URL, "http://profiles.ucsf.edu");
 			}
 			return uri;
 		}

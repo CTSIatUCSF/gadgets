@@ -1,26 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Student Scholarly Projects gadget"
+            title="Student Scholarly Projects"
             description="Student Scholarly Projects gadget">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="osapi" />
+        <Require feature="jsonld"/>
+        <Require feature="orng"/>
         <Require feature="dynamic-height" />
     </ModulePrefs>
     
-    <Content type="html" view="default, home, profile"><![CDATA[
+    <Content type="html" view="verify, default, home, profile"><![CDATA[
         <!DOCTYPE html>            
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	    <script type="text/javascript" src="js/environment.js" ></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" src="js/ontology.js" ></script>
         
+        <script type="text/javascript">
+	        function getAPIUrl(callback){
+	          var nodeId, baseUrl = ENV_API_URL;
+	          osapi.jsonld.getOwner().execute(function(result) {
+	            nodeId = result.uris[0].substring(result.base.length);
+	            if (callback)
+	                callback('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY');
+	          });
+	        }
+	
+	        function getAPIData(callback){
+	          getAPIUrl(function(url){
+	            $('#student-projects .user-name').attr('href', url);
+	            if(url !== null){
+	               $(".descr").text("URL:" + url);
+	              var params = {};
+	              params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+	              params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+	              gadgets.io.makeRequest(url, callback, params);
+	            }
+	          });
+	        }
+        </script>        
    ]]></Content>
 	    
+   <Content type="html" view="verify"><![CDATA[
+   
+   ]]></Content>
 	    
     <Content type="html" view="home"  preferred_width="700" preferred_height="600"><![CDATA[
         <!DOCTYPE html>
-        <div>home view</div>
     ]]></Content>
+    
     <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[
         <!DOCTYPE html>
-        <div>profile view</div>
+        <script type="text/javascript">
+            gadgets.util.registerOnLoadHandler(function() {
+                getAPIData(function(result) {
+                    $(".project-list").text(JSON.stringify(result));
+                });
+            });
+        </script>        
+        
+        <style>
+            #student-projects .descr {margin-top: 10px; margin-bottom: 10px;}
+            #student-projects th.project {width:350px; text-align:left;}            
+        </style>
+        
+        <div id="student-projects">
+            <div class="descr">
+                See <a class="user-name" href="https://ucsf.labspot.io/"></a> <a href="https://ucsf.labspot.io/">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
+            </div>
+            <div class="project-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="project">Active Project(s)</th>
+                            <th class="program">Program</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     ]]></Content>
 </Module>

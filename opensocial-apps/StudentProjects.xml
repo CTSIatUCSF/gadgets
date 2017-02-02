@@ -13,6 +13,8 @@
     
     <Content type="html" view="verify, default, home, profile"><![CDATA[
         <!DOCTYPE html>            
+		<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+		<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >		
 	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	    <script type="text/javascript" src="js/environment.js" ></script>
 	    <script type="text/javascript" src="js/os.js" ></script>

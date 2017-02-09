@@ -82,12 +82,14 @@
     </script>   
    ]]></Content>
 	    
-    <Content type="html" view="home"  preferred_width="700" preferred_height="600"><![CDATA[
+    <Content type="html" view="home"  preferred_width="700" preferred_height="150"><![CDATA[
         <!DOCTYPE html>
     ]]></Content>
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="250"><![CDATA[
+    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
         <!DOCTYPE html>
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
         <script type="text/javascript">
             function loadOpportunities(owner, callback) {
                 getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + owner.nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
@@ -101,7 +103,7 @@
                     result.researcher_opps.forEach(function(opp) {
                         var html = '<tr>' + 
                                    '    <td>' + 
-                                   '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + opp.opportunity_id +'">' + opp.title + '</a></div>' +
+                                   '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + opp.opportunity_id +'" target="_blank">' + opp.title + '</a></div>' +
                                    '        <div class="close-date">closes ' + opp.close_date + '</div>' +
                                    '    </td>' + 
                                    '    <td>' + opp.program + '</td><tr>';
@@ -135,7 +137,7 @@
         
         <style>
             #student-projects .descr {margin-top: 10px; margin-bottom: 10px;}
-            #student-projects .project-list{height: 190px;overflow-y: auto;}            
+            #student-projects .project-list{height: 140px;overflow-y: auto;}            
             #student-projects th.project {width:350px; text-align:left;}     
             #student-projects th.program {text-align:left;}    
             #student-projects .close-date {font-size: 12px;} 
@@ -144,7 +146,7 @@
         
         <div id="student-projects">
             <div class="descr">
-                See <a class="owner-name" href="https://ucsf.labspot.io/u1/research?id="><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
+                See <a class="owner-name" href="https://ucsf.labspot.io/u1/research?id=" target="_blank"><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/" target="_blank">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
             </div>
             <div class="project-list">
                 <table>

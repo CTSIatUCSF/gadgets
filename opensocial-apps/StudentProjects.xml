@@ -9,6 +9,7 @@
         <Require feature="jsonld"/>
         <Require feature="orng"/>
         <Require feature="dynamic-height" />
+        <Require feature="start-hidden"/>
     </ModulePrefs>
     
     <Content type="html" view="verify, default, home, profile"><![CDATA[
@@ -84,8 +85,41 @@
     </script>   
    ]]></Content>
 	    
-    <Content type="html" view="home"  preferred_width="700" preferred_height="150"><![CDATA[
+    <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
         <!DOCTYPE html>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#student-projects").block({ message: "Loading..." });
+            });             
+            gadgets.util.registerOnLoadHandler(function() {
+              osapi.jsonld.getOwner().execute(function(result) {
+                if(!result.error) {
+                    var nodeId = result.uris[0].substring(result.base.length);
+                    getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+                        gadgets.orng.showGadget();
+                        if(result && result.researcher_opps && result.researcher_opps.length > 0) {
+                            $("#student-projects .inactive").hide();
+                            $("#student-projects .active").show();
+                        }
+                        $("#student-projects").unblock();
+                    });
+                }
+              })                      
+            });
+        </script>        
+        
+        <style>
+            #student-projects {margin-top: 10px;}
+        </style>
+        
+        <div id="student-projects">
+            <div class="active" style="display:none">
+                To see your open projects go to View Profile above. To add, remove or edit your projects, go to <a target="_blank" href="https://ucsf.labspot.io/u2/my-opportunities/">UCSF Labspot<a/>
+            </div>    
+            <div class="inactive">
+                This section uses information from UCSF Medical Education’s <a target="_blank" href="https://ucsf.labspot.io/u2/my-opportunities/">Labspot</a> and we were unable to find any data for you there. Therefore, this section is currently unavailable for your profile page. 
+            </div>    
+        </div>
     ]]></Content>
     
     <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
@@ -98,6 +132,8 @@
                     if(!result || !result.researcher_opps || result.researcher_opps.length === 0) {
                         return callback();
                     }
+                    
+                    gadgets.orng.showGadget();
                     
                     result.researcher_opps.sort(function(a,b) {
                         return new Date(a.close_date) - new Date(b.close_date);
@@ -142,7 +178,7 @@
             #student-projects .project-list{height: 140px;overflow-y: auto;}            
             #student-projects th.project {width:350px; text-align:left;}     
             #student-projects th.program {text-align:left;}    
-            #student-projects .close-date {font-size: 12px;} 
+            #student-projects .close-date {font-size: 12px;margin-bottom: 5px;} 
                    
         </style>
         

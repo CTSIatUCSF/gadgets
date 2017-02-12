@@ -101,6 +101,14 @@
                             $("#student-projects .inactive").hide();
                             $("#student-projects .active").show();
                         }
+                        
+                        getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+                            if(result && result.researcher) {
+                                var href = $("#student-projects a").attr("href");
+                                $("#student-projects a").attr("href", href + result.researcher.researcher_id);
+                            }                                
+                        });
+                        
                         $("#student-projects").unblock();
                     });
                 }
@@ -114,10 +122,10 @@
         
         <div id="student-projects">
             <div class="active" style="display:none">
-                To see your open projects go to View Profile above. To add, remove or edit your projects, go to <a target="_blank" href="https://ucsf.labspot.io/u2/my-opportunities/">UCSF Labspot<a/>
+                To see your open projects go to View Profile above. To add, remove or edit your projects, go to <a target="_blank" href="https://ucsf.labspot.io/u1/research?id=">UCSF Labspot<a/>
             </div>    
             <div class="inactive">
-                This section uses information from UCSF Medical Education’s <a target="_blank" href="https://ucsf.labspot.io/u2/my-opportunities/">Labspot</a> and we were unable to find any data for you there. Therefore, this section is currently unavailable for your profile page. 
+                This section uses information from UCSF Medical Education’s <a target="_blank" href="https://ucsf.labspot.io/u1/research?id=">Labspot</a> and we were unable to find any data for you there. Therefore, this section is currently unavailable for your profile page. 
             </div>    
         </div>
     ]]></Content>
@@ -149,6 +157,16 @@
                         $(".project-list tbody").append(html);
                     })
                     
+                    setTimeout(function(){
+	                    var tableHeight = $(".project-list table").height();
+	                    if(tableHeight < 140) {
+	                        var h = $("#student-projects .descr").height();
+	                        gadgets.window.adjustHeight(h + tableHeight + 20);
+	                    }
+	                    else {
+                            $(".project-list").height(140);
+	                    }
+                    })
                     return callback();
                 });
             }        
@@ -175,7 +193,7 @@
         
         <style>
             #student-projects .descr {margin-top: 10px; margin-bottom: 10px;}
-            #student-projects .project-list{height: 140px;overflow-y: auto;}            
+            #student-projects .project-list{overflow-y: auto;}            
             #student-projects th.project {width:350px; text-align:left;}     
             #student-projects th.program {text-align:left;}    
             #student-projects .close-date {font-size: 12px;margin-bottom: 5px;} 

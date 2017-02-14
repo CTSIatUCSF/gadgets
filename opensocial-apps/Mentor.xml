@@ -292,7 +292,7 @@
 	
     <div id='AddEdit' style="padding:15px 0px 0px 12px;">
 		<!-- Add details about your availability to mentor. -->
-		<a href="../../MentoringUCSD.pdf" target="_blank" title="View PDF">Learn about Mentoring at UCSD</a> 
+		<a href="../../App_Themes/UCSD/About/MentoringUCSD.pdf" target="_blank" title="View PDF">Learn about Mentoring at UCSD</a> 
 		<br /><br />
 	</div>
 		

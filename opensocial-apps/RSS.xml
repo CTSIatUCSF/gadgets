@@ -176,17 +176,17 @@
         
         <div class="rss-gadget">
             <h4>Manage Your Blogs/Feeds</h4>
-            <div class="descr">Add the name of the blog/feed you want to show on your profile page and its RSS/Atom feed URL. Below that section, you can drag and drop feeds to re-arrange them.</div>
+            <div class="descr"><span class="bold-txt">Add Your Blogs/Feeds</span> Add the name of the blog/feed you want to show on your profile page and its RSS/Atom feed URL. *All fields are required.</div>
             <div class="edit-form">
                 <form>
-	                <div class="fld-title"><span class="bold-txt">Blog/Feed Name</span> - e.g. The Conversation About Sugar</div>
+	                <div class="fld-title"><span class="bold-txt">Blog/Feed Name*</span> - e.g. The Conversation About Sugar</div>
 	                <div class="input-fld"><input id="feed-name" type="text" name="feedName" required/></div>
 	                <div>(60 Characters Max)</div>
 	                
-	                <div class="fld-title"><span class="bold-txt">Site URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
+	                <div class="fld-title"><span class="bold-txt">Site URL*</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
 	                <div class="input-fld"><input id="site-url" required type="url" name="siteUrl"/></div>
 	                
-	                <div class="fld-title"><span class="bold-txt">Blog/Feed URL</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
+	                <div class="fld-title"><span class="bold-txt">Blog/Feed URL*</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
 	                <div class="input-fld"><input id="feed-url" required type="url" name="feedUrl"/></div>
 	                
 	                <div class="actions">
@@ -195,7 +195,7 @@
                 </form>                                
             </div>
             <div class="feed-list">
-                <div class="list-header">Your current Blogs/Feeds</div>
+                <div class="list-header"><span class="bold-txt">Manage your Existing Blogs/Feeds</span> Below are your currently listed blogs and feeds. Drag and drop them to change the order or delete ones you no longer want to list.</div>
                 <div class="feed-list-wrapper">
 	                <table class="feeds" cellspacing='0' cellpadding='0'>
 	                    <tbody></tbody>

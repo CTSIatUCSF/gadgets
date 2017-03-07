@@ -61,25 +61,21 @@
           osapi.orng.addAppToOwner().execute(function(result) {
           });
         }
-        else {
+        else {            
           osapi.orng.removeAppFromOwner().execute(function(result) {
           });         
         }
       }
     
       function checkData() {
-        osapi.orng.getAppInstance().execute(function(result) {
-          if (typeof result !== 'string') {
-              osapi.jsonld.getOwner().execute(function(result) {
-                if(!result.error) {
-                    var nodeId = result.uris[0].substring(result.base.length);
-	                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
-	                    registerApp(result && result.researcher_opps && result.researcher_opps.length > 0);
-	                });
-                }
-              })          
-          }
-        });
+	      osapi.jsonld.getOwner().execute(function(result) {
+	        if(!result.error) {
+	           var nodeId = result.uris[0].substring(result.base.length);
+	           getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+	               registerApp(result && result.researcher_opps && result.researcher_opps.length > 0);
+	           });
+	        }
+	      })          
       }
       gadgets.util.registerOnLoadHandler(checkData);
     </script>   

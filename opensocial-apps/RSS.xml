@@ -6,6 +6,7 @@
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="osapi" />
+        <Require feature="orng"/>
         <Require feature="dynamic-height" />
     </ModulePrefs>
     <Content type="html" view="default, home, profile"><![CDATA[

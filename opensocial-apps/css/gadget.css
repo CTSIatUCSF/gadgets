@@ -170,3 +170,6 @@ td.tool_small { font-size:11px; }
     line-height: 11px;
     margin: 4px 0 6px;
 }
+
+.dblarrow:before { content: ">>"; font-family: "Courier New", Courier, monospace; letter-spacing: -3px; font-size: 12px; font-weight: bold; display: inline-block; padding: 0 3px; vertical-align: middle; }
+.dblarrow:hover:before { text-decoration: none; }

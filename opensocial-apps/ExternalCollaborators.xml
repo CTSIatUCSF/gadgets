@@ -129,7 +129,7 @@
 					$("#see-all span").text(collaborators.length);
 					
 	          		setTimeout(function(){
-						var h = $("#collaborators_list").height() + 30;
+						var h = $("#collaborators_list").height() + 70;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
 			}				
@@ -154,13 +154,14 @@
     
     <style>
     	.col-item{ min-height:22px; } 
-	#see-all, #see-all span { font-size: 11px; font-weight: bold; }
+		.col-item a{margin-right: 3px;}
+		#see-all, #see-all span { font-size: 11px; font-weight: bold; }
     </style>
 
     <div id="collaborators_list"></div>     
-    <div>
-    	<a id="see-all" href="#" style="display:none">
-    		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
+    <div style="border-bottom: 1px solid #CCC; padding: 4px 0 6px;">
+        <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
+    	<a id="see-all" class="see-all dblarrow" style="display:none" href="#" >
     		See all (<span></span>) people
     	</a>
     </div>	
@@ -352,12 +353,11 @@
 	    	.title{font-weight: bold; color: #666; } 
 	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
-	    	.col {margin-bottom: 5px;}
-	    	.col div {padding-top: 4px;}
+	    	.col {margin-bottom: 10px;padding-left: 20px; text-indent: -19px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
-		.thumbnail { margin-right: 4px; }
+			.thumbnail { margin: 2px 4px -2px 0; }
 	    </style>
 	    
    		<div class="content">

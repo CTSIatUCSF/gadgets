@@ -68,7 +68,7 @@ ul { list-style-type:none; }
 			margin-left:10px; margin-right:20px; margin-top:20px; 
 			background:#ffd; 
 			border-radius:5px;  -moz-border-radius:5px;  -webkit-border-radius:5px;
-			border:1px solid #CA7C29; padding:1em;
+			border:1px solid #771111; padding:1em;
 			color:#444; line-height:1.5em; }
 
 .roundbox { border:1px solid #ccc; border-radius:5px; -moz-border-radius:5px;  -webkit-border-radius:5px; }
@@ -168,3 +168,6 @@ td.tool_small { font-size:11px; }
     line-height: 11px;
     margin: 4px 0 6px;
 }
+
+.dblarrow:before { content: ">>"; font-family: "Courier New", Courier, monospace; letter-spacing: -3px; font-size: 12px; font-weight: bold; display: inline-block; padding: 0 3px; vertical-align: middle; }
+.dblarrow:hover:before { text-decoration: none; }

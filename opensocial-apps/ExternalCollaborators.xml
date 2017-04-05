@@ -161,7 +161,7 @@ Then you need to add network gadgets to the Profile page by updating the Present
 					$("#see-all span").text(collaborators.length);
 					
 	          		setTimeout(function(){
-						var h = $("#collaborators_list").height() + 60;
+						var h = $("#collaborators_list").height() + 70;
 						gadgets.window.adjustHeight(h);
 			    	}, 1);
 			}				
@@ -192,10 +192,9 @@ Then you need to add network gadgets to the Profile page by updating the Present
     </style>
 
     <div id="collaborators_list"></div>     
-    <div>
+    <div style="border-bottom: 1px solid #CCC; padding: 4px 0 6px;">
         <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
-    	<a id="see-all" class="see-all" style="display:none" href="#" >
-    		<img style="margin-right:0;position:relative;top:1px;border:0" src="images/icon_squareArrow.gif" width="11" height="11"/>
+    	<a id="see-all" class="see-all dblarrow" style="display:none" href="#" >
     		See all (<span></span>) people
     	</a>
     </div>
@@ -393,12 +392,11 @@ Then you need to add network gadgets to the Profile page by updating the Present
 	    	.title{font-weight: bold; color: #666; margin-bottom: 15px;} 
 	    	.descr{margin: 10px; }
 	    	#coll-list {margin-left: 10px; height: 300px; overflow-y: auto;}
-	    	.col {margin-bottom: 5px;}
-	    	.col div {padding-top: 4px;}
+	    	.col {margin-bottom: 10px; padding-left: 20px; text-indent: -19px;}
 	    	.org {margin-left: 10px;} 
 	    	.pm-title{margin-left: 30px; width: 500px;}
 	    	.pm-link{margin-left: 50px;}
-            .thumbnail { margin-right: 4px;}
+            .thumbnail {margin: 2px 4px -2px 0;}
 	    </style>
 	    
         <div class="title">External Co-Authors (<span class="total-count">0</span>) found</div>

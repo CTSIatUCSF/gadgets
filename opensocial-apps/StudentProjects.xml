@@ -49,8 +49,17 @@
                           });
                       });                                                     
                   }               
-              });             	           
+              });                           	           
 	        }
+	        
+	        function gadgetEventTrack(action, label, value) {       
+	            var message = {'action' : action};
+	            if (label) {message.label = label;}
+	            if (value) {message.value = value;}
+	            
+	            gadgets.orng.reportGoogleAnalyticsEvent(message);
+	        }   
+	        
         </script>        
    ]]></Content>
 	    
@@ -184,6 +193,17 @@
                     }
                     $("#student-projects").unblock();                    
                 }); 
+            });
+            
+            $(document).ready(function () {
+	            $(".owner-name").click(function() {
+	               gadgetEventTrack("go_to_labspot_profile", $(this).attr("href"))
+	            });
+	            
+                $(".project-list").on('click', 'a', function() {
+                   gadgetEventTrack("go_to_labspot_project", $(this).attr("href"))
+                });
+	             
             });
         </script>        
         

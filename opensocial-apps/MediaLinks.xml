@@ -111,7 +111,7 @@
 						cell_url2 = favicon_path_array[1];
 						favicon_path_array = cell_url2.split("/");
 						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						cell_favicon="<img height='16' width=16' src='https://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
                             
 						// build and add table row
 						links_table_data = links_table_data
@@ -149,7 +149,7 @@
 						cell_url2 = favicon_path_array[1];
 						favicon_path_array = cell_url2.split("/");
 						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						cell_favicon="<img height='16' width=16' src='https://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
 
 						// build and add table row
 						links_table_data = links_table_data

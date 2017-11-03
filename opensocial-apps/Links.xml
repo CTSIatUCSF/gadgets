@@ -126,7 +126,7 @@
 			
 			var row = $(html).appendTo("table.links tbody");
 			var domain = $("a", row).get(0).hostname;
-			$("img.favicon", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);			 
+			$("img.favicon", row).attr("src", "https://www.google.com/s2/favicons?domain=" + domain);			 
 		}	
 
 		// ========================================		

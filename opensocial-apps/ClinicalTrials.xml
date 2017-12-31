@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Clinical Trials"
+				 description="Clinical Trials">
+		<Require feature="dynamic-height" />
+		<Require feature="views" />
+		<Require feature="osapi" />
+	    <Require feature="settitle"/>
+	    <Require feature="jsonld" />	      
+	</ModulePrefs>
+
+	<Content type="html" view="default, home, profile">
+	<![CDATA[<!--HTML-->
+	
+    ]]></Content>
+	<!-- ==================== START HOME VIEW ==================== -->
+	<Content type="html" view="home" preferred_width="700">
+	<![CDATA[<!--HTML-->
+      <!DOCTYPE html>
+	  <p>HOME</p>	
+    ]]></Content>
+	<!-- ==================== START PROFILE VIEW ==================== -->
+	<Content type="html" view="profile" preferred_width="670">
+	<![CDATA[<!--HTML-->
+      <!DOCTYPE html>
+	  <p>PROFILE</p>	
+    ]]></Content>
+</Module>

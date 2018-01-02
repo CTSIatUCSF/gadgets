@@ -29,20 +29,36 @@ namespace ClinicalTrialsApi.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult Index([FromUri] string[] ids)
+        {
+            List<Models.ClinicalTrial> result = new List<Models.ClinicalTrial>();
+            Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
+            foreach(var id in ids) {
+                var clinicalTrial = getTrial(clinicalTrials, id);
+                result.Add(clinicalTrial);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet]
         public IHttpActionResult Get(string id)
         {
-
             Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
+            Models.ClinicalTrial clinicalTrial = getTrial(clinicalTrials, id);
+
+            return Ok(clinicalTrial);
+        }
+
+        private Models.ClinicalTrial getTrial(Dictionary<string, Models.ClinicalTrial> clinicalTrials, string id) {
             Models.ClinicalTrial clinicalTrial = null;
-            if (clinicalTrials.TryGetValue(id, out clinicalTrial)) {
-                return Ok(clinicalTrial);
+            if (clinicalTrials.TryGetValue(id, out clinicalTrial))
+            {
+                return clinicalTrial;
             }
 
             var xml = Task.Run(() => LoadTrial(id)).GetAwaiter().GetResult();
 
-            clinicalTrial = BuildClinicalTrial(id, xml);
-
-            return Ok(clinicalTrial);
+            return BuildClinicalTrial(id, xml);
         }
 
         private async Task<string> LoadTrial(string id) {

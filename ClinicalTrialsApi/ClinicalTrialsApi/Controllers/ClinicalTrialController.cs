@@ -33,9 +33,11 @@ namespace ClinicalTrialsApi.Controllers
         {
             List<Models.ClinicalTrial> result = new List<Models.ClinicalTrial>();
             Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
-            foreach(var id in ids) {
-                var clinicalTrial = getTrial(clinicalTrials, id);
-                result.Add(clinicalTrial);
+            foreach(var trialId in ids[0].Split(',')) {
+                var clinicalTrial = getTrial(clinicalTrials, trialId);
+                if (clinicalTrial != null) {
+                    result.Add(clinicalTrial);
+                }
             }
             return Ok(result);
         }
@@ -45,6 +47,9 @@ namespace ClinicalTrialsApi.Controllers
         {
             Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
             Models.ClinicalTrial clinicalTrial = getTrial(clinicalTrials, id);
+            if (clinicalTrial == null) {
+                return NotFound();
+            }
 
             return Ok(clinicalTrial);
         }
@@ -57,6 +62,9 @@ namespace ClinicalTrialsApi.Controllers
             }
 
             var xml = Task.Run(() => LoadTrial(id)).GetAwaiter().GetResult();
+            if (xml == null) {
+                return null;
+            }
 
             return BuildClinicalTrial(id, xml);
         }
@@ -64,6 +72,9 @@ namespace ClinicalTrialsApi.Controllers
         private async Task<string> LoadTrial(string id) {
             using (var response = await httpClient.GetAsync("https://clinicaltrials.gov/ct2/show/" + id + "?displayxml=true"))
             {
+                if (response.StatusCode == HttpStatusCode.NotFound) {
+                    return null;
+                }
                 response.EnsureSuccessStatusCode();
 
                 var xmlResponse = await response.Content.ReadAsStringAsync();
@@ -91,8 +102,10 @@ namespace ClinicalTrialsApi.Controllers
                 Id = id,
                 Title = doc.DocumentElement.SelectSingleNode("brief_title").InnerText,
                 StartDate = DateTime.Parse(doc.DocumentElement.SelectSingleNode("start_date").InnerText),
+                CompletionDate = DateTime.Parse(doc.DocumentElement.SelectSingleNode("completion_date").InnerText),
                 Status = doc.DocumentElement.SelectSingleNode("overall_status").InnerText,
-                Conditions = conditions.ToString()
+                Conditions = conditions.ToString(),
+                SourceUrl = "https://clinicaltrials.gov/ct2/show/" + id
             };
         }
     }

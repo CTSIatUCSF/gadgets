@@ -13,10 +13,16 @@ namespace ClinicalTrialsApi.Models
 
         public DateTime StartDate { get; set; }
 
+        public DateTime? EstimatedCompletionDate { get; set; }
+
+        public DateTime? CompletionDate { get; set; }
+
         public string Conditions { get; set; }
 
         public string Status { get; set; }
 
         public bool IsMultiSite { get; set; }
+
+        public string SourceUrl { get; set; }
     }
 }

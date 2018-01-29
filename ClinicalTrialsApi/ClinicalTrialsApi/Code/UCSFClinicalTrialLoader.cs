@@ -43,8 +43,11 @@ namespace ClinicalTrialsApi
                         Id = trial.Value.id,
                         Title = trial.Value.title_brief,
                         StartDate = DateTime.ParseExact(trial.Value.start_date, DATE_FORMAT, CultureInfo.InvariantCulture),
+                        EstimatedCompletionDate = trial.Value.estimated_completion_date !=null?  DateTime.ParseExact(trial.Value.estimated_completion_date, DATE_FORMAT, CultureInfo.InvariantCulture) : null,
+                        CompletionDate = trial.Value.completion_date != null? DateTime.ParseExact(trial.Value.completion_date, DATE_FORMAT, CultureInfo.InvariantCulture) : null,
                         Status = trial.Value.recruitment_status,//TODO: need to use correct property
-                        Conditions =  conditions.ToString()  
+                        Conditions =  conditions.ToString(),
+                        SourceUrl = "https://clinicaltrials.ucsf.edu/trial/" + trial.Value.id
                     };
                     ClinicalTrials.Add(clinicalTrial.Id, clinicalTrial);
 

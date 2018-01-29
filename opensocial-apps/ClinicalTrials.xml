@@ -11,18 +11,291 @@
 
 	<Content type="html" view="default, home, profile">
 	<![CDATA[<!--HTML-->
-	
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+ 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>    	
+	    <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+	    <script type="text/javascript" src="js/ontology.js" ></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" src="js/lodash.min.js" ></script>
+	    <script type="text/javascript" src="js/async.min.js" ></script>
+
+		<script type="text/javascript">
+			_.templateSettings = {
+				interpolate: /\{\{=(.+?)\}\}/g,
+				evaluate: /\{\{(.+?)\}\}/g,
+				escape: /\{\{-(.+?)\}\}/g
+			};
+			var UCSF = UCSF || {};			
+			UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
+			UCSF.ClinicalTrials.seviceURL = 'http://107.205.10.101/ClinicalTrialsApi/api/clinicaltrial';
+			UCSF.ClinicalTrials.dateOptions = { year: 'numeric', month: 'short' };
+			
+			function renderTrial(trial) {
+				var tmpl = $("#template-clinical-trial").html();
+				var html = _.template(tmpl)({ m: trial });
+				$('#trial-list').append(html);
+			}
+
+			function loadOwnerTrials(callback) {
+				osapi.jsonld.getOwner().execute(function(ownerData) {					
+					framePerson(ownerData, function(ownerObj) {
+						var ownerUrl = ownerObj[FOAF('workplaceHomepage')];
+						var urlParts = ownerUrl.split('/')
+						ownerUrl = 'http://profiles.ucsf.edu/' + urlParts[urlParts.length -1]
+
+						var params = {};
+						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?profile_uri=' + ownerUrl;
+						gadgets.io.makeRequest(url, function(result) {
+							if(result.data != null) {
+								callback(null, result.data);
+							}
+							else if(result.rc === 404) {
+								callback(null, []);
+							}
+							else if(result.errors != null) {  
+								callback(result.errors, null);
+							}												
+						}, params);						
+					});
+				});			
+			}
+			
+			function loadSavedTrials(callback) {
+				osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': ['clinical_trials_active', 'clinical_trials_deleted']}).execute(function(response){
+		    		var viewer = os.osapi.getViewerFromResult(response);
+					var savedTrials = {
+						active: viewer.clinical_trials_active ? viewer.clinical_trials_active.split(',') : [],
+						deleted: viewer.clinical_trials_deleted ? viewer.clinical_trials_deleted.split(',') : []
+					}					
+					if(viewer.clinical_trials_active) {
+						var params = {};
+						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?ids=' + viewer.clinical_trials_active;
+						gadgets.io.makeRequest(url, function(result) {
+							if(result.data != null) {
+								savedTrials.activeTrials = result.data; 
+								callback(null, savedTrials);
+							}
+							else if(result.errors != null) {  
+								callback(result.errors, null);
+							}													
+						}, params);						
+					}
+					else {
+						callback(null, savedTrials);								
+					}
+					
+				});			
+			}
+			
+			function loadTrials(callback) {
+				$(".clinical-trials").block({ message: "Loading..." });			
+				async.parallel([loadOwnerTrials, loadSavedTrials], function(err, results) {
+					$(".clinical-trials").unblock();
+					if(err) {
+						return;
+					}
+					
+					UCSF.ClinicalTrials.deleted = results[1].deleted;
+					
+					var deleted = results[1].deleted;
+					var active = results[1].active;
+					var activeTrials = results[1].activeTrials;
+					results[0].forEach(function(element) {
+						if(deleted.includes(element.Id)) {
+							return;
+						}
+						
+						if(active.includes(element.Id)) {
+							return;
+						}
+						
+						activeTrials.push(element);
+						
+					})
+					
+					activeTrials.forEach(renderTrial);
+					callback();						
+				});
+				
+			}
+			
+		</script>
+		
+		<script type="text/template" id="template-clinical-trial">
+			<li class="clinical-trial" data-id="{{=m.Id}}">
+				<div class="clinical-trial-wrap" style="float: left; width: 600px;">
+					<a href="{{=m.SourceUrl}}" class="clinical-trial-title" target="_blank">{{=m.Title}}</a>
+					<div class="clinical-trial-details">
+						<div>Start Date: {{=new Date(m.StartDate).toLocaleDateString("en-US", UCSF.ClinicalTrials.dateOptions)}}</div>
+						{{if(m.CompletionDate) {}}
+							<div>Completion Date: {{=new Date(m.CompletionDate).toLocaleDateString("en-US", UCSF.ClinicalTrials.dateOptions)}}</div>
+						{{}}}
+						{{if(m.EstimatedCompletionDate) {}}
+							<div>Estimated Completion Date: {{=new Date(m.EstimatedCompletionDate).toLocaleDateString("en-US", UCSF.ClinicalTrials.dateOptions)}}</div>
+						{{}}}
+						<div>Recruitment Status: {{=m.Status}}</div>
+						<div>Condition(s): {{=m.Conditions}}</div>
+					</div>
+				</div>
+    			<div class="ui-icon ui-icon-trash" style="float: right;"></div>
+				<div style="clear:both;"/>
+			</li>
+		</script>
+
+        <style type="text/css">	 
+		    .clinical-trial {margin-bottom: 15px;}
+			.clinical-trial-details {margin-left: 20px;margin-top: 10px;}
+	    </style>
+		
     ]]></Content>
 	<!-- ==================== START HOME VIEW ==================== -->
-	<Content type="html" view="home" preferred_width="700">
+	<Content type="html" view="home" preferred_width="700" referred_height="700">
 	<![CDATA[<!--HTML-->
       <!DOCTYPE html>
-	  <p>HOME</p>	
+	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+	  
+	    <script type="text/javascript">
+			
+			function saveTrials() {
+				var active = [];
+			
+				$('.clinical-trial').each(function(index, value) {
+					active.push($(value).data('id'));
+				});
+				
+				var data = {
+					clinical_trials_active: active.join(','),
+					clinical_trials_deleted: UCSF.ClinicalTrials.deleted.join(',')
+					};
+					
+    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data': data}).execute(function(response){
+    			});		        										
+			}
+			
+
+			gadgets.util.registerOnLoadHandler(function() {
+				loadTrials(function() {
+					$( "#trial-list" ).sortable({ 
+						axis: "y",
+						update: function( event, ui ) {
+							saveTrials();
+						}
+					});										
+				})
+								
+            	$(document).ready(function () {					
+					$('#add-trial').click(function() {
+						var params = {};
+						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+						var ntc = $.trim($('#ntc-number').val());
+						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc;
+						gadgets.io.makeRequest(url, function(result) {
+							$(".add-trial .error").text('').hide();
+							if(result.data != null) {
+								UCSF.ClinicalTrials.deleted = UCSF.ClinicalTrials.deleted.filter(function(elem) {
+									return $.trim(elem).length > 0 && elem !== ntc;
+								});
+								renderTrial(result.data);
+								saveTrials();
+							}
+							else if(result.rc == 404) {  				
+								$(".add-trial .error").text('Clinical Trial Not Found').show();
+							}						
+							else {
+								$(".add-trial .error").text('Cannot add clinical trial').show();								
+							}
+						}, params);
+						return false;
+					});
+					$('#add-trial-form').click(function() {
+						$('.add-trial-container').toggle();
+						return false;
+					});
+					$('#add-trial-cancel').click(function() {
+						$('.add-trial-container').hide();
+						$(".add-trial .error").text('').hide();
+						$('#ntc-number').val('');
+						return false;
+					});
+					
+					$('#trial-list').on('click', '.ui-icon-trash', function() {
+						var elem = $(this).parents('li.clinical-trial');
+						var id = elem.data('id');
+						UCSF.ClinicalTrials.deleted.push(id);
+						
+						elem.remove();
+						
+						saveTrials();
+					});
+					
+					gadgets.window.adjustHeight(700);
+				});
+			});	
+		</script>
+		
+        <style type="text/css">	 
+		     .error {color: red; margin-top: 5px;}
+            .add-trial {margin-top: 5px;}   		
+			.add-trial .dblarrow {margin-right: 5px;}
+			.add-trial-container {background-color: #F0F4F6; border: solid 1px #999; margin-top: 15px;padding: 15px;}
+			.add-trial-container label {font-weight: bold; margin-left: 10px;}
+			
+			.trial-list-wrap {background-color: #F0F4F6; border: solid 1px #999; margin-top: 15px;padding: 15px;height: 400px; overflow-y: auto;}
+			.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px; float: left;}
+			.ui-icon-trash {display: inline-block;vertical-align: bottom;cursor:pointer;}
+	    </style>
+
+	    <div class="clinical-trials">
+		  <div class="add-trial" >
+			  <a id="add-trial-form" href=""><span class="dblarrow"></span>Add Clinical Trial by NCT Number</a>
+			  <div class="add-trial-container" style="display: none;">
+				  <div>
+					<input id="ntc-number" type="text"/> <label>NCT Number</label>
+					<div class="error" style="display:none;"/>
+				  </div>    		  
+				  <p>Please make sure the recruiting status and contact information are correct for this trial at <a href="clinicaltrials.gov">clinicaltrials.gov</a>.</p>    		  
+				  <div>
+					<a href="" type="button" id="add-trial">Add Trial</a>
+					<span>|</span>
+					<a href="" type="button" id="add-trial-cancel">Cancel</a>
+				  </div>
+			  </div>
+		  </div>		  
+		  <div>
+		      <p>Trial information comes from clinicaltrial.gov. If data is incorrect, please make changes there.</p>
+			  <p>Drag and drop trials to re-order them. Click the trash icon<span class="ui-icon ui-icon-trash"></span> to remove the trial from this section of your page.</p>
+			  <div class="trial-list-wrap">  
+				<ul id="trial-list"></ul>
+			  </div>
+		  </div>
+	    </div>
+	  	
     ]]></Content>
 	<!-- ==================== START PROFILE VIEW ==================== -->
 	<Content type="html" view="profile" preferred_width="670">
 	<![CDATA[<!--HTML-->
       <!DOCTYPE html>
-	  <p>PROFILE</p>	
+	  
+      <script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+				loadTrials(function() {
+				})
+			});
+      </script>
+      <style type="text/css">	 
+      </style>
+	  
+	  <div>
+		  <div class="trial-list-wrap">  
+			<ul id="trial-list"></ul>
+		  </div>
+	  </div>
     ]]></Content>
 </Module>

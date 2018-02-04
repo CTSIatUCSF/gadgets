@@ -9,7 +9,7 @@
 	    <Require feature="jsonld" />	      
 	</ModulePrefs>
 
-	<Content type="html" view="default, home, profile">
+	<Content type="html" view="default, verify, home, profile">
 	<![CDATA[<!--HTML-->
 	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
  	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
@@ -93,11 +93,9 @@
 			}
 			
 			function loadTrials(callback) {
-				$(".clinical-trials").block({ message: "Loading..." });			
 				async.parallel([loadOwnerTrials, loadSavedTrials], function(err, results) {
-					$(".clinical-trials").unblock();
 					if(err) {
-						return;
+						return callback();
 					}
 					
 					UCSF.ClinicalTrials.deleted = results[1].deleted;
@@ -114,15 +112,22 @@
 							return;
 						}
 						
-						activeTrials.push(element);
-						
+						activeTrials.push(element);						
 					})
 					
-					activeTrials.forEach(renderTrial);
-					callback();						
-				});
-				
+					callback(activeTrials);
+				});				
 			}
+			function loadAndRenderTrials(callback) {
+				$(".clinical-trials").block({ message: "Loading..." });			
+				loadTrials(function(activeTrials) {
+					$(".clinical-trials").unblock();
+					if(activeTrials) {
+						activeTrials.forEach(renderTrial);
+					}
+					callback();
+				})
+			}							
 			
 		</script>
 		
@@ -153,6 +158,30 @@
 	    </style>
 		
     ]]></Content>
+	
+	<!-- ==================== START VERIFY VIEW ==================== -->
+   <Content type="html" view="verify"><![CDATA[
+    <script type="text/javascript">
+      function registerApp(register) {
+        if (register) {
+          osapi.orng.addAppToOwner().execute(function(result) {
+          });
+        }
+        else {            
+          osapi.orng.removeAppFromOwner().execute(function(result) {
+          });         
+        }
+      }
+    
+      function checkData() {
+		loadTrials(function(trials) {
+			registerApp(trials && trials.length > 0);
+		});		
+      }
+      gadgets.util.registerOnLoadHandler(checkData);
+    </script>   
+   ]]></Content>
+	
 	<!-- ==================== START HOME VIEW ==================== -->
 	<Content type="html" view="home" preferred_width="700" referred_height="700">
 	<![CDATA[<!--HTML-->
@@ -180,7 +209,7 @@
 			
 
 			gadgets.util.registerOnLoadHandler(function() {
-				loadTrials(function() {
+				loadAndRenderTrials(function() {
 					$( "#trial-list" ).sortable({ 
 						axis: "y",
 						update: function( event, ui ) {
@@ -285,7 +314,7 @@
 	  
       <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {
-				loadTrials(function() {
+				loadAndRenderTrials(function() {
 				})
 			});
       </script>

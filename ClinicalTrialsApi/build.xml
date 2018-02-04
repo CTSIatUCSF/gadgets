@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="build">
+        <Message Text="Rebuild" />
+        <Exec Command=".nuget\nuget restore" />
+        <MSBuild Projects="ClinicalTrialsApi.sln" StopOnFirstFailure="true" Targets="clean;rebuild" Properties="TreatWarningsAsErrors=true;NoWarn=1591"/>
+    </Target>
+</Project>

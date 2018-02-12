@@ -7,6 +7,7 @@
 		<Require feature="osapi" />
 	    <Require feature="settitle"/>
 	    <Require feature="jsonld" />	      
+        <Require feature="orng"/>
 	</ModulePrefs>
 
 	<Content type="html" view="default, verify, home, profile">
@@ -28,7 +29,7 @@
 			};
 			var UCSF = UCSF || {};			
 			UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
-			UCSF.ClinicalTrials.seviceURL = 'http://107.205.10.101/ClinicalTrialsApi/api/clinicaltrial';
+			UCSF.ClinicalTrials.seviceURL = 'http://profiles-qweb02.ist.berkeley.edu/ClinicalTrialsApi/api/clinicaltrial';
 			UCSF.ClinicalTrials.dateOptions = { year: 'numeric', month: 'short' };
 			
 			function renderTrial(trial) {

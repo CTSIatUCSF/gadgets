@@ -8,6 +8,7 @@
 	    <Require feature="settitle"/>
 	    <Require feature="jsonld" />	      
         <Require feature="orng"/>
+        <Require feature="start-hidden"/>
 	</ModulePrefs>
 
 	<Content type="html" view="default, verify, home, profile">

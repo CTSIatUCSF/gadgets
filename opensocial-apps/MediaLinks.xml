@@ -22,7 +22,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     <script src="js/jquery.placeholder.min.js"></script>    
-    <script type="text/javascript" src="js/environment.js"></script>
     <script type="text/javascript" src="js/os.js" ></script>
     
 	<script type="text/javascript">	
@@ -130,8 +129,6 @@
                 	// and set height based on which view view this is
 					document.getElementById("edit_mlinks_table").innerHTML=links_table_data;
 					gadgets.window.adjustHeight($("#edit_mlinks_table").height() + 300);					
-                         // use institute var
-					$('.instAbrv').text(ENV_INST_ABRV);				
 				}
 				
 				if(document.getElementById("view_mlinks_table")){				
@@ -258,7 +255,7 @@
     	Add links to news stories, blogs or other media that feature your research. 
     	Links can be hosted on any external site that is open to the public. 
     	Enter the title or headline as you want it to appear on your 
-	<span class="instAbrv">UCSF</span> Profiles page, and the related URL. 
+		profile page, and the related URL. 
     	Add a date of publication if applicable. Some examples would be a story in the 
 	<em>NY Times</em> or on the university news site. 
     	Once you've added a story, remember to click "Save" below.

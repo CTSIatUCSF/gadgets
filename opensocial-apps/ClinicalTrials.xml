@@ -70,7 +70,8 @@
 		    		var viewer = os.osapi.getViewerFromResult(response);
 					var savedTrials = {
 						active: viewer.clinical_trials_active ? viewer.clinical_trials_active.split(',') : [],
-						deleted: viewer.clinical_trials_deleted ? viewer.clinical_trials_deleted.split(',') : []
+						deleted: viewer.clinical_trials_deleted ? viewer.clinical_trials_deleted.split(',') : [],
+						activeTrials: []
 					}					
 					if(viewer.clinical_trials_active) {
 						var params = {};
@@ -84,7 +85,10 @@
 							}
 							else if(result.errors != null) {  
 								callback(result.errors, null);
-							}													
+							}
+							else {
+							    callback(null, savedTrials);
+							}							
 						}, params);						
 					}
 					else {

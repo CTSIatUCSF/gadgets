@@ -2,6 +2,7 @@ div, ul, li, table, tr, td, tbody, span, iframe, img, body, h1, h2, h3, h4, h5, 
 { 	margin:0px; padding:0px; border:none; 
 	font-size:13px; line-height:1.1em; 
 	text-indent:0px;
+	font-family: arial, helvetica, verdana, sans-serif;
 }
 
 h1 { font-size:1.2em; margin-top:1em; padding:.3em; padding-left:0em; }
@@ -11,6 +12,9 @@ h4 { font-size:0.9em; margin-top:0.7em; padding:.3em; padding-left:0em; color:#3
 h5 { font-size:0.8em; margin-top:0.6em; padding:.3em; padding-left:0em; color:#333;}
 
 h4 + span { font-size:.9em; font-style:italic; color:#444; }
+
+a, a:visited, .mmlib_xlink, .save, .preview { text-decoration: none; color: #007CBE; }
+a:hover, .mmlib_xlink:hover, .save:hover, .preview:hover { text-decoration: underline; color: #007CBE; }
 
 .header { float:left; }
 .header { padding:.5em; }

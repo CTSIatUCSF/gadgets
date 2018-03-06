@@ -191,7 +191,7 @@ Then you need to add network gadgets to the Profile page by updating the Present
     <div id="collaborators_list"></div>     
     <div style="border-bottom: 1px solid #CCC; padding: 4px 0 6px;">
         <a class="see-all" href="#" style="display:none"><img src="images/map.jpg" height="45" width="55"></img></a>
-    	<a id="see-all" class="see-all dblarrow" style="display:none" href="#" >
+    	<a id="see-all" class="see-all" style="display:none" href="#" >
     		See all (<span></span>) people
     	</a>
     </div>

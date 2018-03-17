@@ -193,8 +193,8 @@
 	<Content type="html" view="home" preferred_width="700" referred_height="700">
 	<![CDATA[<!--HTML-->
       <!DOCTYPE html>
-	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
-	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
 	  
 	    <script type="text/javascript">
 			

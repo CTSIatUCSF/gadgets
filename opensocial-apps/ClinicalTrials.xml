@@ -30,7 +30,7 @@
 			};
 			var UCSF = UCSF || {};			
 			UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
-			UCSF.ClinicalTrials.seviceURL = 'http://profiles-qweb02.ist.berkeley.edu/ClinicalTrialsApi/api/clinicaltrial';
+			UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
 			UCSF.ClinicalTrials.dateOptions = { year: 'numeric', month: 'short' };
 			
 			function renderTrial(trial) {

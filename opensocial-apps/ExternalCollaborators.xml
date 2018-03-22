@@ -39,7 +39,7 @@ Then you need to add network gadgets to the Profile page by updating the Present
     ]]></Content>
     <Content type="html" view="verify, small, canvas">
     <![CDATA[	
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/environment.js" ></script>
     <script type="text/javascript" src="js/ontology.js" ></script>
     <script type="text/javascript" src="js/jsonld.js" ></script>   	

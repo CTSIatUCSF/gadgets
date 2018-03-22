@@ -17,10 +17,10 @@
 	<!-- #includes -->
 	<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
  	<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="css/jquery.placeholder.min.css" type="text/css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     <script src="js/jquery.placeholder.min.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
@@ -110,7 +110,7 @@
 						cell_url2 = favicon_path_array[1];
 						favicon_path_array = cell_url2.split("/");
 						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						cell_favicon="<img height='16' width=16' src='//www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
                             
 						// build and add table row
 						links_table_data = links_table_data
@@ -146,7 +146,7 @@
 						cell_url2 = favicon_path_array[1];
 						favicon_path_array = cell_url2.split("/");
 						cell_url2 = favicon_path_array[0];
-						cell_favicon="<img height='16' width=16' src='http://www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
+						cell_favicon="<img height='16' width=16' src='//www.google.com/s2/favicons?domain=" + cell_url2 + "' />";
 
 						// build and add table row
 						links_table_data = links_table_data

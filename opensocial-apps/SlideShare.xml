@@ -18,7 +18,7 @@
     <!-- #includes -->
     <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>    
     <script type="text/javascript" src="js/os.js" ></script>
     
     <script type="text/javascript">
@@ -53,11 +53,11 @@
     
 	    // ========================================
 		function preview(username){
-    		var url = "http://static.slidesharecdn.com/swf/multiwidget.swf";
+    		var url = "//static.slidesharecdn.com/swf/multiwidget.swf";
     			
  			$('#preview').html(
 	 			'<div style="width:577px;margin:auto;">' +
-	 				'<iframe src="http://www.slideshare.net/' + username + 
+	 				'<iframe src="//www.slideshare.net/' + username + 
 	 				'/slideshelf" width="615px" height="470px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:none;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>' +
 		    	'</div>'
 	 		);   	

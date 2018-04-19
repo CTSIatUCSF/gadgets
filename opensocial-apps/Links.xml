@@ -140,7 +140,7 @@
 	</Content>
 	
     <Content type="html" view="home" preferred_width="720" preferred_height="500"><![CDATA[<!--HTML-->		
-	    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+	    <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
     	
 		<script type="text/javascript">
 			function adjustHomeHeight() {

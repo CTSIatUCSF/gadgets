@@ -140,7 +140,7 @@
 		
 		<script type="text/template" id="template-clinical-trial">
 			<li class="clinical-trial" data-id="{{=m.Id}}">
-				<div class="clinical-trial-wrap" style="float: left; width: 600px;">
+				<div class="clinical-trial-wrap">
 					<a href="{{=m.SourceUrl}}" class="clinical-trial-title" target="_blank">{{=m.Title}}</a>
 					<div class="clinical-trial-details">
 						<div>Start Date: {{=new Date(m.StartDate).toLocaleDateString("en-US", UCSF.ClinicalTrials.dateOptions)}}</div>
@@ -154,7 +154,7 @@
 						<div>Condition(s): {{=m.Conditions}}</div>
 					</div>
 				</div>
-    			<div class="ui-icon ui-icon-trash" style="float: right;"></div>
+				<div class="fright" style="float: right;"><input value="remove" type="button" class="remove-trial"></div>    			
 				<div style="clear:both;"/>
 			</li>
 		</script>
@@ -261,7 +261,7 @@
 						return false;
 					});
 					
-					$('#trial-list').on('click', '.ui-icon-trash', function() {
+					$('#trial-list').on('click', '.remove-trial', function() {
 						var elem = $(this).parents('li.clinical-trial');
 						var id = elem.data('id');
 						UCSF.ClinicalTrials.deleted.push(id);
@@ -283,9 +283,10 @@
 			.add-trial-container {background-color: #F0F4F6; border: solid 1px #999; margin-top: 15px;padding: 15px;}
 			.add-trial-container label {font-weight: bold; margin-left: 10px;}
 			
-			.trial-list-wrap {background-color: #F0F4F6; border: solid 1px #999; margin-top: 15px;padding: 15px;height: 400px; overflow-y: auto;}
+			.trial-list-wrap {margin-top: 15px;padding: 15px;height: 400px; overflow-y: auto;}
 			.handle {background: url("images/draggable.png") no-repeat 0 0;display: block; width: 13px; height: 13px; float: left;}
-			.ui-icon-trash {display: inline-block;vertical-align: bottom;cursor:pointer;}
+			.clinical-trial-wrap {background: url(images/draggable.png) no-repeat 0 0;background-position: 0% 50%;padding-left: 30px;}
+			.clinical-trial-wrap { float: left; width: 550px;}
 	    </style>
 
 	    <div class="clinical-trials">
@@ -306,7 +307,7 @@
 		  </div>		  
 		  <div>
 		      <p>Trial information comes from clinicaltrial.gov. If data is incorrect, please make changes there.</p>
-			  <p>Drag and drop trials to re-order them. Click the trash icon<span class="ui-icon ui-icon-trash"></span> to remove the trial from this section of your page.</p>
+			  <p>Drag and drop trials to re-order them. Click the Remove button to remove the trial from this section of your page.</p>
 			  <div class="trial-list-wrap">  
 				<ul id="trial-list"></ul>
 			  </div>
@@ -326,6 +327,8 @@
 			});
       </script>
       <style type="text/css">	 
+	     .remove-trial{display:none;}
+		 .clinical-trial-wrap { float: left; width: 600px;}
       </style>
 	  
 	  <div>

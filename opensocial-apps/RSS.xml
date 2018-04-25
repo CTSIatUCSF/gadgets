@@ -75,7 +75,7 @@
 		            
 		            var row = $(html).appendTo(".feed-list table tbody");
 		            var domain = $("a", row).get(0).hostname;
-		            $("img.favicon", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);
+		            $("img.favicon", row).attr("src", "//www.google.com/s2/favicons?domain=" + domain);
 		            
 		            $(".rss-gadget .input-fld input").val("");             
                 }
@@ -184,10 +184,10 @@
 	                <div class="input-fld"><input id="feed-name" type="text" name="feedName" required/></div>
 	                <div>(60 Characters Max)</div>
 	                
-	                <div class="fld-title"><span class="bold-txt">Site URL*</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu</div>
+	                <div class="fld-title"><span class="bold-txt">Site URL*</span> (not displayed on profile page) - e.g. https://yourblogfeed.edu</div>
 	                <div class="input-fld"><input id="site-url" required type="url" name="siteUrl"/></div>
 	                
-	                <div class="fld-title"><span class="bold-txt">Blog/Feed URL*</span> (not displayed on profile page) - e.g. http://yourblogfeed.edu/feed</div>
+	                <div class="fld-title"><span class="bold-txt">Blog/Feed URL*</span> (not displayed on profile page) - e.g. https://yourblogfeed.edu/feed</div>
 	                <div class="input-fld"><input id="feed-url" required type="url" name="feedUrl"/></div>
 	                
 	                <div class="actions">

@@ -39,6 +39,8 @@ namespace ClinicalTrialsApi
                         conditions.Append(condition.name);
                     }
 
+                    bool isVisible = trial.Value.is_visible;
+
                     var clinicalTrial = new Models.ClinicalTrial { 
                         Id = trial.Value.id,
                         Title = trial.Value.title_brief,
@@ -47,7 +49,7 @@ namespace ClinicalTrialsApi
                         CompletionDate = trial.Value.completion_date != null? DateTime.ParseExact(trial.Value.completion_date, DATE_FORMAT, CultureInfo.InvariantCulture) : null,
                         Status = trial.Value.recruitment_status,//TODO: need to use correct property
                         Conditions =  conditions.ToString(),
-                        SourceUrl = "https://clinicaltrials.ucsf.edu/trial/" + trial.Value.id
+                        SourceUrl = isVisible ? "https://clinicaltrials.ucsf.edu/trial/" + trial.Value.id : "https://clinicaltrials.gov/ct2/show/" + trial.Value.id
                     };
                     ClinicalTrials.Add(clinicalTrial.Id, clinicalTrial);
 

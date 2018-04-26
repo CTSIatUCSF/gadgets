@@ -23,7 +23,7 @@ namespace ClinicalTrialsApi.Controllers
 
             IList<Models.ClinicalTrial> trials = null;
             if (clinicalTrials.TryGetValue(profile_uri, out trials)) {
-                return Ok(trials);
+                return Ok(trials.OrderByDescending(t => t.StartDate).ToArray());
             }
             return NotFound();
         }
@@ -39,6 +39,7 @@ namespace ClinicalTrialsApi.Controllers
                     result.Add(clinicalTrial);
                 }
             }
+            
             return Ok(result);
         }
 

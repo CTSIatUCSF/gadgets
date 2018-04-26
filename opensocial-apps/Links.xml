@@ -126,7 +126,7 @@
 			
 			var row = $(html).appendTo("table.links tbody");
 			var domain = $("a", row).get(0).hostname;
-			$("img.favicon", row).attr("src", "http://www.google.com/s2/favicons?domain=" + domain);			 
+			$("img.favicon", row).attr("src", "//www.google.com/s2/favicons?domain=" + domain);			 
 		}	
 
 		// ========================================		
@@ -161,7 +161,7 @@
 							return;
 						}
 						if(url.indexOf("://") == -1){
-							url = "http://" + url;
+							url = "//" + url;
 						}
 						
 		    			renderLink(name, url);
@@ -213,7 +213,7 @@
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td class="links_body" valign="top"><b>Website URL</b> (not displayed in profile)<br />
 							e.g. mylabsite.edu<br />
-		                    <input id="link-url" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="http://">
+		                    <input id="link-url" type="linkurl" name="linkurl" style="width:250px; margin-top:4px;" value="https://">
 		                </td>
 		                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 		                <td><br /><br /><input id="add-link" type="button" style="margin-bottom: 8px;" value="Add"></td>

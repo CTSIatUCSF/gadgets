@@ -96,7 +96,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <Content Include="Content\__data_export.json" />
+    <Content Include="Content\icts.uci.edu.json" />
+    <Content Include="Content\ucdavis.edu.json" />
+    <Content Include="Content\ucsd.edu.json" />
+    <Content Include="Content\ucsf.edu.json" />
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

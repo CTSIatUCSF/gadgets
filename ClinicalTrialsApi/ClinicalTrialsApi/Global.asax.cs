@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Web.Http;
 using ClinicalTrialsApi.App_Start;
 using System.Web;
+using System.IO;
+using System.Collections.Generic;
 
 namespace ClinicalTrialsApi
 {
@@ -13,12 +15,22 @@ namespace ClinicalTrialsApi
         {
             GlobalConfiguration.Configure(WebApiConfig.Configure);
 
-            string fileName = HttpContext.Current.Server.MapPath(@"~/Content/__data_export.json");
-            var loader = new UCSFClinicalTrialLoader();
-            loader.Load(fileName);
+            string dirName = HttpContext.Current.Server.MapPath(@"~/Content/");
+            string[] files = Directory.GetFiles(dirName, "*.json");
 
-            HttpRuntime.Cache.Insert("ClinicalTrials", loader.ClinicalTrials);
-            HttpRuntime.Cache.Insert("PersonClinicalTrials", loader.PersonClinicalTrials);
+            List<string> domainNames = new List<string>();
+            foreach (string fileName in files) {
+                String domainName = Path.GetFileNameWithoutExtension(fileName);
+                domainNames.Add(domainName);
+
+                var loader = new UCSFClinicalTrialLoader();
+                loader.Load(fileName, domainName);
+
+
+                HttpRuntime.Cache.Insert("ClinicalTrials:" + domainName, loader.ClinicalTrials);
+                HttpRuntime.Cache.Insert("PersonClinicalTrials:" + domainName, loader.PersonClinicalTrials);
+            }
+            HttpRuntime.Cache.Insert("DomainNames", domainNames);
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -28,7 +40,13 @@ namespace ClinicalTrialsApi
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            string dirName = HttpContext.Current.Server.MapPath(@"~/Content/");
+            string[] files = Directory.GetFiles(dirName, "*.json");
+            foreach (string fileName in files)
+            {
+                String domainName = Path.GetFileNameWithoutExtension(fileName);
+                break;
+            }
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

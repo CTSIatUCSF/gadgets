@@ -43,13 +43,11 @@
 				osapi.jsonld.getOwner().execute(function(ownerData) {					
 					framePerson(ownerData, function(ownerObj) {
 						var ownerUrl = ownerObj[FOAF('workplaceHomepage')];
-						var urlParts = ownerUrl.split('/')
-						ownerUrl = 'http://profiles.ucsf.edu/' + urlParts[urlParts.length -1]
 
 						var params = {};
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-						var url = UCSF.ClinicalTrials.seviceURL + '/?profile_uri=' + ownerUrl;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?person_uri=' + ownerUrl;
 						gadgets.io.makeRequest(url, function(result) {
 							if(result.data != null) {
 								callback(null, result.data);
@@ -77,7 +75,7 @@
 						var params = {};
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-						var url = UCSF.ClinicalTrials.seviceURL + '/?ids=' + viewer.clinical_trials_active;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?ids=' + viewer.clinical_trials_active + '&profile_uri=' + document.location.hostname;
 						gadgets.io.makeRequest(url, function(result) {
 							if(result.data != null) {
 								savedTrials.activeTrials = result.data; 
@@ -222,7 +220,7 @@
 						update: function( event, ui ) {
 							saveTrials();
 						}
-					});										
+					});															
 				})
 								
             	$(document).ready(function () {					
@@ -231,7 +229,7 @@
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 						var ntc = $.trim($('#ntc-number').val());
-						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc;
+						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc + '?profile_uri=' + document.location.hostname;
 						gadgets.io.makeRequest(url, function(result) {
 							$(".add-trial .error").text('').hide();
 							if(result.data != null) {

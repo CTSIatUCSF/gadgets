@@ -1,0 +1,3409 @@
+{
+   "NCT00000143" : {
+      "completion_date" : "2000-06-01",
+      "conditions" : [
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Cytomegalovirus Retinitis",
+            "slug" : "cytomegalovirus-retinitis"
+         },
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         }
+      ],
+      "description_html" : "<p>Cytomegalovirus (CMV) is among the most frequently encountered opportunistic infections in patients with AIDS. In the era of prophylaxis for pneumocystic pneumonia, CMV disease is estimated to affect 45 percent of patients with AIDS sometime between the diagnosis of AIDS and death. Retinitis has been estimated to account for up to 85 percent of CMV disease in these patients, making CMV retinitis the most common ocular infection encountered. CMV retinitis is a relatively late-stage manifestation, associated with cluster of differentiation 4 (CD4) + T-cell counts &lt; 100 cells/µL and often &lt; 50 cells/µL.</p>\n\n<p>All currently available treatments for CMV suppress viral replication but do not eliminate the virus from the body. Discontinuation of therapy is associated with a prompt relapse of the retinitis. Despite the use of chronic suppressive therapy, relapse of the retinitis generally occurs, at least with systemically administered anti-CMV drugs.</p>\n\n<p>The first two treatments approved for CMV retinitis were intravenous ganciclovir and intravenous foscarnet. Both are given by daily intravenous infusions and therefore require central venous catheters. The development of newer treatments has focused not only on efficacious treatments, but also on treatments that do not require central venous catheters. Available treatments now include oral ganciclovir, the ganciclovir intraocular device, and intravenous cidofovir.</p>\n\n<p>In vitro data suggest that combination therapies are synergistic in inhibiting viral replication; these therapies include a foscarnet-ganciclovir combination and a cidofovir-ganciclovir combination. In the SOCA--CMV Retinitis Retreatment Trial, the combination of intravenous ganciclovir and foscarnet was more effective than either drug alone for the treatment of relapsed retinitis. Therefore, the combination of intermittent intravenous cidofovir and daily oral ganciclovir may be an attractive therapy for relapsed disease because it may provide synergy for controlling both ocular and visceral disease while not necessitating either a central venous catheter or an intraocular surgical procedure.</p>\n\n<p>The Ganciclovir-Cidofovir CMV Retinitis Trial (GCCRT) is a randomized, multicenter clinical trial. Patients will be assigned to receive one of two regimens: (1) ganciclovir intraocular device plus oral ganciclovir or (2) intravenous cidofovir. The intraocular device will be surgically implanted at baseline and again every 6 to 8 months in eyes with CMV retinitis. Oral ganciclovir is taken at a dose of 1 gram three times daily. Cidofovir will be administered intravenously at 5 mg/kg once weekly for 2 consecutive weeks and once every 2 weeks thereafter. If disease progression occurs in patients receiving cidofovir, patients will be given reinduction therapy, and oral ganciclovir at a dose of 1 gram three times per day will be added to the treatment. If patients assigned to cidofovir are unable to tolerate that regimen, an alternative systemic regimen will be recommended.</p>\n\n<p>Study outcome variables include a decrease of three or more lines from baseline in best corrected visual acuity and rate of visual field loss. The study will also assess other variables including mortality, blood CMV and HIV load, quality of life, and medical costs.</p>\n\n<p>Treatment assignment will not be masked to either patients or clinicians; however, reading of fundus photographs to determine both change in retinal involvement and progression will be masked.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Media opacities that preclude visualization of the fundus of all otherwise eligible\neyes</li>\n<li> Treatment for CMV retinitis with the ganciclovir intraocular implant within 9 months\nof study entry</li>\n<li> Medical problems or drug or alcohol abuse sufficient to hinder adherence to treatment\nor follow up procedures</li>\n<li> Unwillingness to refrain from breast-feeding during the study and for 3 months\nafterwards</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion criteria:</p>\n\n<ul>\n<li> Age 13 years or older</li>\n<li> Diagnosis of AIDS according to current Centers for Disease Control and Prevention\n(CDC) definition</li>\n<li> Diagnosis of active CMV retinitis by a SOCA-certified ophthalmologist (involvement of\nany zone or amount of retina is allowed)</li>\n<li> Best corrected visual acuity of 20/100 or better in at least one eye</li>\n<li> At least one lesion 750 cells/µL or greater</li>\n<li> Platelet count 50,000 cells/µL or greater</li>\n<li> Willingness and ability, with the assistance of a caregiver if necessary to comply\nwith treatment and follow up procedures</li>\n<li> Willingness of all men and women of childbearing potential to practice adequate birth\ncontrol to prevent pregnancies during the study and for 3 months afterwards</li>\n<li> Collection of all baseline data within 5 days prior to randomization</li>\n<li> Signed consent statement</li>\n</ul>\n\n\n<p>Exclusion criteria:</p>\n\n<ul>\n<li> Media opacities that preclude visualization of the fundus of all otherwise eligible\neyes</li>\n<li> Treatment for CMV retinitis with the ganciclovir intraocular implant within 9 months\nof study entry</li>\n<li> Medical problems or drug or alcohol abuse sufficient to hinder adherence to treatment\nor follow up procedures</li>\n<li> Unwillingness to refrain from breast-feeding during the study and for 3 months\nafterwards</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> Age 13 years or older</li>\n<li> Diagnosis of AIDS according to current Centers for Disease Control and Prevention\n(CDC) definition</li>\n<li> Diagnosis of active CMV retinitis by a SOCA-certified ophthalmologist (involvement of\nany zone or amount of retina is allowed)</li>\n<li> Best corrected visual acuity of 20/100 or better in at least one eye</li>\n<li> At least one lesion 750 cells/µL or greater</li>\n<li> Platelet count 50,000 cells/µL or greater</li>\n<li> Willingness and ability, with the assistance of a caregiver if necessary to comply\nwith treatment and follow up procedures</li>\n<li> Willingness of all men and women of childbearing potential to practice adequate birth\ncontrol to prevent pregnancies during the study and for 3 months afterwards</li>\n<li> Collection of all baseline data within 5 days prior to randomization</li>\n<li> Signed consent statement</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 13 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000143",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Cytomegalovirus Retinitis",
+         "HIV Infections",
+         "Retinitis",
+         "Ganciclovir",
+         "Cidofovir",
+         "Ganciclovir triphosphate"
+      ],
+      "last_changed_or_verified_date" : "2016-02-18",
+      "links" : [
+         {
+            "description" : "Other Studies of the Ocular Complications of AIDS (SOCA)]",
+            "url" : "http://www.jhucct.com/soca/default.htm"
+         }
+      ],
+      "locations" : [
+         {
+            "facility_address_city" : "Irvine",
+            "facility_address_coordinates" : {
+               "lat" : "33.66946",
+               "lon" : "-117.82311"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92697-4375",
+            "facility_name" : "Department of Ophthalmology, University of California, Irvine",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033",
+            "facility_name" : "LAC/USC Medical Center, 5P21 Rand Schrader Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90095-7003",
+            "facility_name" : "Jules Stein Eye Institute, University of California, Los Angeles",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "La Jolla",
+            "facility_address_coordinates" : {
+               "lat" : "32.84727",
+               "lon" : "-117.2742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92093-0946",
+            "facility_name" : "Shiley Eye Center Center, 0946, University of California, San Diego",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.77493",
+               "lon" : "-122.41942"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94143",
+            "facility_name" : "Beckman Vision Center, University of California, San Francisco",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Cullen Eye Institute, Baylor College of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "70112",
+            "facility_name" : "LSU Eye Center, Louisiana State University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.893936",
+               "lon" : "-87.614498"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60611",
+            "facility_name" : "Department of Ophthalmology, Northwestern University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202-2879",
+            "facility_name" : "Division of Infectious Diseases, Indiana University, Indianapolis",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.793594",
+               "lon" : "-84.326128"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30322",
+            "facility_name" : "The Emory Clinic, Emory University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "28.050827",
+               "lon" : "-82.449573"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33612-4799",
+            "facility_name" : "University of South Florida, MDC Box 21",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chapel Hill",
+            "facility_address_coordinates" : {
+               "lat" : "35.9132",
+               "lon" : "-79.05584"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27599-7030",
+            "facility_name" : "University of North Carolina at Chapel Hill",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.29038",
+               "lon" : "-76.61219"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21287-9217",
+            "facility_name" : "The Wilmer Ophthalmological Institute, The Johns Hopkins University School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.787247",
+               "lon" : "-80.205296"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33136",
+            "facility_name" : "Bascom Palmer Eye Institute, University of Miami",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07103-2499",
+            "facility_name" : "UMDNJ-New Jersey Medical School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "Department of Ophthalmology, New York University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.769225",
+               "lon" : "-73.958741"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10021",
+            "facility_name" : "Department of Ophthalmology, New York Hospital-Cornell Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029-6574",
+            "facility_name" : "Department of Ophthalmology, Mount Sinai School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.363174",
+               "lon" : "-71.068646"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02114",
+            "facility_name" : "Harvard/BCH AIDS Clinical Trials Unit, Massachusetts General Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000143",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "Johns Hopkins Bloomberg School of Public Health",
+      "sponsor" : "Johns Hopkins Bloomberg School of Public Health",
+      "start_date" : "1997-05-01",
+      "study_type" : "Interventional",
+      "summary" : "To compare the newest CMV retinitis drug, cidofovir, with a regimen of the ganciclovir intraocular device plus oral ganciclovir with respect to efficacy in preventing vision loss. To compare a treatment regimen that incorporates highly active local therapy (ganciclovir device) with a treatment regimen that does not.",
+      "summary_html" : "<p>To compare the newest CMV retinitis drug, cidofovir, with a regimen of the ganciclovir intraocular device plus oral ganciclovir with respect to efficacy in preventing vision loss. To compare a treatment regimen that incorporates highly active local therapy (ganciclovir device) with a treatment regimen that does not.</p>",
+      "title_brief" : "Studies of Ocular Complications of AIDS (SOCA)--Ganciclovir-Cidofovir CMV Retinitis Trial (GCCRT)",
+      "title_official" : "Studies of Ocular Complications of AIDS (SOCA)--Ganciclovir-Cidofovir CMV Retinitis Trial (GCCRT)",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00000168" : {
+      "completion_date" : "2013-08-01",
+      "conditions" : [
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         },
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Cytomegalovirus Retinitis",
+            "slug" : "cytomegalovirus-retinitis"
+         }
+      ],
+      "description_html" : "<p>Ocular abnormalities in patients with AIDS were first reported in 1982. The most common finding is a non-infectious \"HIV retinopathy\", characterized by cotton wool spots, intraretinal hemorrhages, and/or microaneurysms. These changes occur in approximately 50 percent of patients with AIDS. HIV retinopathy alone is not typically associated with clinical loss of vision, but functional deficits in patients with AIDS without other ocular complications may be due to this phenomenon.</p>\n\n<p>CMV retinitis has had the most clinical importance of all the associated complications of AIDS. It is commonly seen in late stage AIDS, and even when treated has the potential to cause substantial loss of vision. CMV retinitis is also the most costly AIDS-related opportunistic infection; the mean monthly cost of treatment has been estimated at $7,825. The incidence of CMV retinitis has varied with changes in the therapeutic and prophylactic strategies for AIDS and its complications. It has been on the decline in recent years related to the increased use of highly active anti-retroviral therapy (HAART).</p>\n\n<p>Other ocular complications of AIDS such as ocular toxoplasmosis, herpes zoster retinitis, and pneumocystis choroidopathy occur less frequently than CMV retinitis and HIV retinopathy. Their frequency has also changed over the course of the AIDS epidemic.</p>\n\n<p>Because the epidemiology of AIDS is rapidly evolving, with HIV becoming more like a chronic disease, new information is needed on the incidence and course of ocular complications. We have little information about the effect of HAART therapy over time on changes in immune status and the risk of ocular complications of AIDS. More information is also needed to determine who is at risk for developing ocular complications of AIDS, and how treatment is affecting their visual function, quality of life, and survival.</p>\n\n<p>The Longitudinal Study of Ocular Complications of AIDS (LSOCA) is prospective observational study of patients with AIDS. Patients with a prior diagnosis of AIDS according to the 1993 Centers for Disease Control and Prevention (CDC) criteria with or without ocular complications will be enrolled over a 4 year period. Approximately 2,000 patients will be enrolled in the study. Enrollment of patients with CMV retinitis at baseline will be between 300 and 600 patients. Followup visits for patients without ocular complications will be scheduled every 6 months. Followup visits for patients with ocular complications at baseline or diagnosed during followup will be every 3 months. Followup data will include eye examinations, fundus photographs, visual function testing, medical history, hematology and serum chemistry, and collection of plasma and blood cells for banking. Analysis of banked specimens will include HIV RNA levels and CMV DNA levels.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li>none.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion criteria:</p>\n\n<ul>\n<li> A diagnosis of AIDS according to the 1993 Centers for Disease Control and Prevention\n(CDC) definition (with or without clinical symptoms of CMV retinitis or other ocular\ncomplications of AIDS)</li>\n<li> Age 13 years or older</li>\n<li> Signed consent statement</li>\n<li> Patients with newly diagnosed (within 45 days of enrollment) Ocular Opportunistic\nInfections (OOIs)</li>\n<li> Patients without a newly diagnosed Ocular Opportunistic Infection (OOI) diagnosed with\nAIDS after 1 Jan 2001</li>\n</ul>\n\n\n<p>Exclusion criteria:</p>\n\n<ul>\n<li>none.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> A diagnosis of AIDS according to the 1993 Centers for Disease Control and Prevention\n(CDC) definition (with or without clinical symptoms of CMV retinitis or other ocular\ncomplications of AIDS)</li>\n<li> Age 13 years or older</li>\n<li> Signed consent statement</li>\n<li> Patients with newly diagnosed (within 45 days of enrollment) Ocular Opportunistic\nInfections (OOIs)</li>\n<li> Patients without a newly diagnosed Ocular Opportunistic Infection (OOI) diagnosed with\nAIDS after 1 Jan 2001</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 13 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000168",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "HIV Infections",
+         "Acquired Immunodeficiency Syndrome",
+         "Cytomegalovirus Retinitis",
+         "Immunologic Deficiency Syndromes",
+         "Retinitis"
+      ],
+      "last_changed_or_verified_date" : "2015-06-10",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Irvine",
+            "facility_address_coordinates" : {
+               "lat" : "33.66946",
+               "lon" : "-117.82311"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92697-4375",
+            "facility_name" : "University of California, Irvine",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033",
+            "facility_name" : "University of Southern California",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90095-7003",
+            "facility_name" : "Jules Stein Eye Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "La Jolla",
+            "facility_address_coordinates" : {
+               "lat" : "32.84727",
+               "lon" : "-117.2742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92093-0946",
+            "facility_name" : "Shiley Eye Center, 0946",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.77493",
+               "lon" : "-122.41942"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94143",
+            "facility_name" : "Francis I. Proctor Foundation",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Cullen Eye Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Galveston",
+            "facility_address_coordinates" : {
+               "lat" : "29.30135",
+               "lon" : "-94.7977"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77555-0835",
+            "facility_name" : "University of Texas Medical Branch",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "70112",
+            "facility_name" : "LSU Eye Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.893936",
+               "lon" : "-87.614498"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60611",
+            "facility_name" : "Northwestern University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202-2879",
+            "facility_name" : "Division of Infectious Diseases, University of Indiana, Indianapolis",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.793594",
+               "lon" : "-84.326128"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30322",
+            "facility_name" : "Emory Eye Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "28.050827",
+               "lon" : "-82.449573"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33612-4799",
+            "facility_name" : "University of South Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chapel Hill",
+            "facility_address_coordinates" : {
+               "lat" : "35.9132",
+               "lon" : "-79.05584"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27599-7040",
+            "facility_name" : "University of North Carolina at Chapel Hill",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.29038",
+               "lon" : "-76.61219"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21287-9217",
+            "facility_name" : "The Wilmer Ophthalmological Institute, The Johns Hopkins University School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.787247",
+               "lon" : "-80.205296"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33136",
+            "facility_name" : "Bascom Palmer Eye Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.958518",
+               "lon" : "-75.198856"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19104",
+            "facility_name" : "Hospital of the University of Pennsylvania",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07103-2499",
+            "facility_name" : "UMDNJ-New Jersey Medical School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "Department of Ophthalmology",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.769225",
+               "lon" : "-73.958741"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10021",
+            "facility_name" : "Department of Ophthalmology",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000168",
+      "phase" : "",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : false,
+      "phase_4" : false,
+      "phase_unspecified" : true,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "Johns Hopkins Bloomberg School of Public Health",
+      "sponsor" : "Johns Hopkins Bloomberg School of Public Health",
+      "start_date" : "1998-08-01",
+      "study_type" : "Observational",
+      "summary" : "To monitor trends over time, in the incidence of CMV retinitis and other ocular complications of AIDS To determine the effect of highly active anti-retroviral therapy (HAART)-induced immune status on the risk of developing CMV retinitis and other ocular complications of AIDS To determine the characteristics (clinical, virologic, hematologic, and biochemical) of a population at high risk for CMV retinitis and other ocular complications of AIDS To evaluate the effects of treatments for CMV retinitis and other ocular complications on visual function, quality of life, and survival.",
+      "summary_html" : "<p>To monitor trends over time, in the incidence of CMV retinitis and other ocular complications of AIDS To determine the effect of highly active anti-retroviral therapy (HAART)-induced immune status on the risk of developing CMV retinitis and other ocular complications of AIDS To determine the characteristics (clinical, virologic, hematologic, and biochemical) of a population at high risk for CMV retinitis and other ocular complications of AIDS To evaluate the effects of treatments for CMV retinitis and other ocular complications on visual function, quality of life, and survival.</p>",
+      "title_brief" : "Longitudinal Study of Ocular Complications of AIDS (LSOCA)",
+      "title_official" : "Studies of Ocular Complications of AIDS (SOCA)",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00000171" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Mental Health",
+               "Brain and Nerves"
+            ],
+            "name" : "Alzheimer's Disease",
+            "slug" : "alzheimers-disease"
+         },
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Dyssomnias",
+            "slug" : "dyssomnias"
+         }
+      ],
+      "description_html" : "<p>In Alzheimer's disease , sleep disruption is one of the most common behavioral problems, occurring in 45 percent of patients. These nocturnal awakenings and agitation lead to considerable burden for caregivers and frequently lead families to the decision of nursing home placement. The proposed study is a randomized, double blind, parallel group, placebo controlled, clinical trial. Placebo will be compared with two doses of melatonin: a 2.5 mg, slow- release preparation and a 10 mg immediate release preparation. One hundred and fifty community-residing AD patients with disrupted sleep will be recruited. Included subjects will meet NINCDS-ADRDA criteria for probable AD. Prior to study entry, disrupted sleep will be documented by clinical history and by 1 to 2 weeks of recording using wrist activity monitors. The treatment period will last 8 weeks. Rest/activity patterns will be recorded by wrist activity monitors. The primary outcome measure will be the change in nocturnal sleep time from baseline to the end of the treatment phase.</p>\n\n<p>Other outcomes also will be examined, including the time awake after sleep onset, sleep latency, sleep efficiency, daytime agitation, and changes in cognition. The relative effectiveness of high and low dose melatonin will be assessed. Adverse events and side effects will be compared by treatment. This study should provide the data necessary to determine whether melatonin is a safe and effective treatment for disrupted sleep associated with AD.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Sleep disturbance is acute (within the last 2 weeks).</li>\n<li> Sleep disturbance is associated with an acute illness with delirium.</li>\n<li> Clinically significant movement disorder that would interfere with the actigraph\nreadings.</li>\n<li> Not having a mobile upper extremity to which to attach an actigraph.</li>\n<li> Severe agitation.</li>\n<li> Pain syndrome affecting sleep.</li>\n<li> Unstable medical condition.</li>\n<li> Use of investigational or unapproved medications within 4 weeks of the screening\nvisit.</li>\n<li> Patient unwilling to maintain caffeine abstinence after 2:00 pm for the duration of\nthe protocol.</li>\n<li> Patient unwilling to comply with the maximum limit of two alcoholic drinks per day,\nand only one alcoholic drink after 6:00 pm for the duration of the protocol.</li>\n<li> Use of melatonin within 2 weeks of screening visit.</li>\n<li> Clinically significant abnormal laboratory findings that have not been approved by the\nProject Director.</li>\n<li> Residing in a facility without a consistent caregiver present during the night who can\nfunction as the primary informant.</li>\n<li> Caregiver deemed too unreliable to supervise the wearing of the actigraph, to maintain\nthe sleep diary, or to bring the patient to the scheduled visits.</li>\n<li> Autoimmune disease, such as rheumatoid arthritis and polymyalgia rheumatica.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion Criteria:</p>\n\n<ul>\n<li> Patients must meet NINCDS-ADRDA criteria for probable Alzheimer's disease (AD).\nPatients must have disrupted sleep, documented by clinical history and by 1 to 2 weeks\nof recording using wrist activity monitors.</li>\n<li> A diagnosis of probable AD.</li>\n<li> MMSE score 0-26.</li>\n<li> Hachinski Ischemia Scale score less than or equal to 4.</li>\n<li> A 2-week history of two or more sleep disorder behaviors, occurring at least once\nweekly, as reported by the caregiver on the Sleep Disorder Inventory.</li>\n<li> CT or MRI since the onset of memory problems showing no more than one lacunar infarct\nin a non-strategic area and no clinical events suggestive of stroke or other\nintracranial disease since the CT or MRI.</li>\n<li> Physically acceptable for study as confirmed by medical history and exam, clinical\nlaboratory results, and EKG.</li>\n<li> Actigraph evidence of a mean nocturnal sleep time of less than 7 hours per night (at\nleast 5 nights of complete actigraph data must be collected over a single week.</li>\n<li> Stable home situation with no planned move during the 13-week investigational period.</li>\n<li> Residing with responsible spouse, family member, or professional caregiver who is\npresent during the night and will agree to assume the role of the principal caregiver\nfor the 13-week protocol, including arranging transport for the patient to and from\nthe investigators' clinic, answering questions regarding the patient's condition, and\nassuming responsibility for medication and actigraph procedures.</li>\n<li> Ability to ingest oral medication and participate in all scheduled evaluations.</li>\n<li> Six grades of education or work history sufficient to exclude mental retardation.</li>\n<li> 55 years of age or older.</li>\n<li> Hamilton Depression Rating Scale score of 15 or less.</li>\n<li> Stable medication (dose and type) for non-excluded concurrent medical conditions for 4\nweeks prior to the screening visit.</li>\n</ul>\n\n\n<p>Exclusion Criteria:</p>\n\n<ul>\n<li> Sleep disturbance is acute (within the last 2 weeks).</li>\n<li> Sleep disturbance is associated with an acute illness with delirium.</li>\n<li> Clinically significant movement disorder that would interfere with the actigraph\nreadings.</li>\n<li> Not having a mobile upper extremity to which to attach an actigraph.</li>\n<li> Severe agitation.</li>\n<li> Pain syndrome affecting sleep.</li>\n<li> Unstable medical condition.</li>\n<li> Use of investigational or unapproved medications within 4 weeks of the screening\nvisit.</li>\n<li> Patient unwilling to maintain caffeine abstinence after 2:00 pm for the duration of\nthe protocol.</li>\n<li> Patient unwilling to comply with the maximum limit of two alcoholic drinks per day,\nand only one alcoholic drink after 6:00 pm for the duration of the protocol.</li>\n<li> Use of melatonin within 2 weeks of screening visit.</li>\n<li> Clinically significant abnormal laboratory findings that have not been approved by the\nProject Director.</li>\n<li> Residing in a facility without a consistent caregiver present during the night who can\nfunction as the primary informant.</li>\n<li> Caregiver deemed too unreliable to supervise the wearing of the actigraph, to maintain\nthe sleep diary, or to bring the patient to the scheduled visits.</li>\n<li> Autoimmune disease, such as rheumatoid arthritis and polymyalgia rheumatica.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> Patients must meet NINCDS-ADRDA criteria for probable Alzheimer's disease (AD).\nPatients must have disrupted sleep, documented by clinical history and by 1 to 2 weeks\nof recording using wrist activity monitors.</li>\n<li> A diagnosis of probable AD.</li>\n<li> MMSE score 0-26.</li>\n<li> Hachinski Ischemia Scale score less than or equal to 4.</li>\n<li> A 2-week history of two or more sleep disorder behaviors, occurring at least once\nweekly, as reported by the caregiver on the Sleep Disorder Inventory.</li>\n<li> CT or MRI since the onset of memory problems showing no more than one lacunar infarct\nin a non-strategic area and no clinical events suggestive of stroke or other\nintracranial disease since the CT or MRI.</li>\n<li> Physically acceptable for study as confirmed by medical history and exam, clinical\nlaboratory results, and EKG.</li>\n<li> Actigraph evidence of a mean nocturnal sleep time of less than 7 hours per night (at\nleast 5 nights of complete actigraph data must be collected over a single week.</li>\n<li> Stable home situation with no planned move during the 13-week investigational period.</li>\n<li> Residing with responsible spouse, family member, or professional caregiver who is\npresent during the night and will agree to assume the role of the principal caregiver\nfor the 13-week protocol, including arranging transport for the patient to and from\nthe investigators' clinic, answering questions regarding the patient's condition, and\nassuming responsibility for medication and actigraph procedures.</li>\n<li> Ability to ingest oral medication and participate in all scheduled evaluations.</li>\n<li> Six grades of education or work history sufficient to exclude mental retardation.</li>\n<li> 55 years of age or older.</li>\n<li> Hamilton Depression Rating Scale score of 15 or less.</li>\n<li> Stable medication (dose and type) for non-excluded concurrent medical conditions for 4\nweeks prior to the screening visit.</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 55 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000171",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Alzheimer Disease",
+         "Dyssomnias",
+         "Alzheimer's disease",
+         "Sleep disorders",
+         "Melatonin"
+      ],
+      "last_changed_or_verified_date" : "2005-06-23",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Irvine",
+            "facility_address_coordinates" : {
+               "lat" : "33.66946",
+               "lon" : "-117.82311"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92697-4285",
+            "facility_name" : "University of California Irvine Institute for Brain Aging and Dementia",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033-1039",
+            "facility_name" : "University of Southern California",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90095-1769",
+            "facility_name" : "University of California, Los Angeles",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "La Jolla",
+            "facility_address_coordinates" : {
+               "lat" : "32.856347",
+               "lon" : "-117.250058"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92037",
+            "facility_name" : "University of California, San Diego",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tucson",
+            "facility_address_coordinates" : {
+               "lat" : "32.240787",
+               "lon" : "-110.945605"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85724-5023",
+            "facility_name" : "University of Arizona",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "34.06175",
+               "lon" : "-103.05078"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11032",
+            "facility_name" : "Columbia University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.507856",
+               "lon" : "-122.690794"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97201-3098",
+            "facility_name" : "Oregon Health Sciences University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.534931",
+               "lon" : "-122.305846"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98108",
+            "facility_name" : "University of Washington",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.832614",
+               "lon" : "-96.849082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75235",
+            "facility_name" : "University of Texas",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Kansas City",
+            "facility_address_coordinates" : {
+               "lat" : "39.11417",
+               "lon" : "-94.62746"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Kansas",
+            "facility_address_zip" : "66160",
+            "facility_name" : "University of Kansas Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Baylor College of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.971982",
+               "lon" : "-93.233441"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55455",
+            "facility_name" : "University of Minnesota",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.625796",
+               "lon" : "-90.266998"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63110",
+            "facility_name" : "Washington University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Springfield",
+            "facility_address_coordinates" : {
+               "lat" : "39.824137",
+               "lon" : "-89.64194"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "62702",
+            "facility_name" : "Southern Illinois University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Nashville",
+            "facility_address_coordinates" : {
+               "lat" : "36.133877",
+               "lon" : "-86.801254"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Tennessee",
+            "facility_address_zip" : "37212-8646",
+            "facility_name" : "Vanderbilt University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lexington",
+            "facility_address_coordinates" : {
+               "lat" : "37.98869",
+               "lon" : "-84.47772"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Kentucky",
+            "facility_address_zip" : "40536-0230",
+            "facility_name" : "University of Kentucky",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.827487",
+               "lon" : "-84.323013"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30329",
+            "facility_name" : "Emory University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ann Arbor",
+            "facility_address_coordinates" : {
+               "lat" : "42.289187",
+               "lon" : "-83.70878"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48109",
+            "facility_name" : "University of Michigan",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.473947",
+               "lon" : "-81.579956"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "44120",
+            "facility_name" : "University Hospitals of Cleveland",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Augusta",
+            "facility_address_coordinates" : {
+               "lat" : "33.478289",
+               "lon" : "-82.014102"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30904",
+            "facility_name" : "Augusta VA Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pittsburgh",
+            "facility_address_coordinates" : {
+               "lat" : "40.444042",
+               "lon" : "-79.955249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "15213",
+            "facility_name" : "University of Pittsburgh",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "27.94752",
+               "lon" : "-82.45843"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_name" : "University of South Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Jacksonville",
+            "facility_address_coordinates" : {
+               "lat" : "30.357756",
+               "lon" : "-81.505829"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32225",
+            "facility_name" : "Mayo Clinic Jacksonville",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.128291",
+               "lon" : "-77.605805"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "14620",
+            "facility_name" : "Mayo Clinic at Rochester",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.128291",
+               "lon" : "-77.605805"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14620",
+            "facility_name" : "University of Rochester Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.27486",
+               "lon" : "-76.542833"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21224",
+            "facility_name" : "Johns Hopkins University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.819714",
+               "lon" : "-80.133711"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33140",
+            "facility_name" : "Mount Sinai (Miami)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.958518",
+               "lon" : "-75.198856"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19104-4283",
+            "facility_name" : "University of Pennsylvania",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "New York University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Haven",
+            "facility_address_coordinates" : {
+               "lat" : "41.30815",
+               "lon" : "-72.92816"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06520-8037",
+            "facility_name" : "Yale University, Alzheimer's Disease ResearchUnit",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pawtucket",
+            "facility_address_coordinates" : {
+               "lat" : "41.870562",
+               "lon" : "-71.388681"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02860",
+            "facility_name" : "Brown University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000171",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "National Institute on Aging (NIA)",
+      "sponsor" : "National Institute on Aging (NIA)",
+      "start_date" : "1999-10-29",
+      "study_type" : "Interventional",
+      "summary" : "This protocol is a multicenter clinical trial of melatonin for sleep disturbances associated with Alzheimer's disease (AD). Frequent nocturnal awakening is a common behavioral symptom of AD. Nighttime wandering and agitated behavior may result in injuries and sleep disruption for caregivers. Alternatives are sorely needed to the currently available sleep medications that have marginal efficacy and serious side effects. Melatonin is a naturally occurring hormone secreted by the pineal gland. It has soporific effects with oral administration and is well tolerated. It enhances sleep in normal older people. Melatonin also may help sleep disturbances associated with AD; however, this remains to be proven.",
+      "summary_html" : "<p>This protocol is a multicenter clinical trial of melatonin for sleep disturbances associated with Alzheimer's disease (AD). Frequent nocturnal awakening is a common behavioral symptom of AD. Nighttime wandering and agitated behavior may result in injuries and sleep disruption for caregivers. Alternatives are sorely needed to the currently available sleep medications that have marginal efficacy and serious side effects. Melatonin is a naturally occurring hormone secreted by the pineal gland. It has soporific effects with oral administration and is well tolerated. It enhances sleep in normal older people. Melatonin also may help sleep disturbances associated with AD; however, this remains to be proven.</p>",
+      "title_brief" : "Study of Melatonin: Sleep Problems in Alzheimer's Disease",
+      "title_official" : "",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00000172" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Mental Health",
+               "Brain and Nerves"
+            ],
+            "name" : "Alzheimer's Disease",
+            "slug" : "alzheimers-disease"
+         }
+      ],
+      "description_html" : "<p>After a 1-month single-blind run in phase, 910 subjects will be titrated, over a period of up to 8 weeks, to target doses of either: 0 (placebo); 24 mg/day galantamine; 16 mg/day galantamine; or 8 mg/day galantamine, in a 2:2:2:1 randomization ratio. Double-blind treatment will continue for a total of 5 months. The change from baseline in ADAS-cog and CIVIC-plus scores at Month 5 will be the primary efficacy endpoints. Tolerability will be evaluated based on adverse event reports, laboratory values, ECG, and vital signs with particular focus on the adverse event rates in the slower titration schedule for 24 mg/day. Efficacy of 24 mg/day and 16 mg/day galantamine will be compared with that of placebo. Information on the dose response relationship of galantamine will be evaluated.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Conditions that could confound diagnosis</li>\n<li> Neurodegenerative disorders</li>\n<li> Acute cerebral trauma</li>\n<li> Psychiatric disease</li>\n<li> More than one infarct on CT/MRI scans</li>\n<li> History of alcohol or drug abuse</li>\n<li> Contradictions for a cholinominetic agent: seizures; ulcers; pulmonary conditions\n(including severe asthma); unstable angina; Afib; bradycardia less than 50; and AV\nblock.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion Criteria:</p>\n\n<ul>\n<li> Probable Alzheimer's disease</li>\n<li> Mini-Mental State Examination (MMSE) 10-22 and ADAS greater than or equal to 18</li>\n<li> Alzheimer's Disease Assessment Scale cognitive portion (ADAS-cog-11) score of at least\n18</li>\n<li> Opportunity for Activities of Daily Living</li>\n<li> Caregiver</li>\n<li> Subjects who live with or have regular daily visits from a responsible caregiver\n(visit frequency: preferably daily but at least 5 days/week). This includes a friend\nor relative or paid personnel. The caregiver should be capable of assisting with the\nsubject's medication, prepared to attend with the subject for assessments, and willing\nto provide information about the subject.</li>\n</ul>\n\n\n<p>Exclusion Criteria:</p>\n\n<ul>\n<li> Conditions that could confound diagnosis</li>\n<li> Neurodegenerative disorders</li>\n<li> Acute cerebral trauma</li>\n<li> Psychiatric disease</li>\n<li> More than one infarct on CT/MRI scans</li>\n<li> History of alcohol or drug abuse</li>\n<li> Contradictions for a cholinominetic agent: seizures; ulcers; pulmonary conditions\n(including severe asthma); unstable angina; Afib; bradycardia less than 50; and AV\nblock.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> Probable Alzheimer's disease</li>\n<li> Mini-Mental State Examination (MMSE) 10-22 and ADAS greater than or equal to 18</li>\n<li> Alzheimer's Disease Assessment Scale cognitive portion (ADAS-cog-11) score of at least\n18</li>\n<li> Opportunity for Activities of Daily Living</li>\n<li> Caregiver</li>\n<li> Subjects who live with or have regular daily visits from a responsible caregiver\n(visit frequency: preferably daily but at least 5 days/week). This includes a friend\nor relative or paid personnel. The caregiver should be capable of assisting with the\nsubject's medication, prepared to attend with the subject for assessments, and willing\nto provide information about the subject.</li>\n</ul>",
+      "eligibility_summary_short" : "",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000172",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Alzheimer Disease",
+         "Alzheimer's disease",
+         "Cholinergic agents",
+         "Cholinergic agonists",
+         "Cholinesterase inhibitors",
+         "Galantamine"
+      ],
+      "last_changed_or_verified_date" : "2005-06-23",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Orange",
+            "facility_address_coordinates" : {
+               "lat" : "33.788145",
+               "lon" : "-117.87655"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92868",
+            "facility_name" : "University of California Irvine Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033-1039",
+            "facility_name" : "University of Southern California",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Oceanside",
+            "facility_address_coordinates" : {
+               "lat" : "33.201242",
+               "lon" : "-117.296984"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92056",
+            "facility_name" : "N. County Neurology Assoc.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "32.861727",
+               "lon" : "-117.171224"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92122",
+            "facility_name" : "INC",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "32.773983",
+               "lon" : "-117.142706"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92108",
+            "facility_name" : "Affiliated Research Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "32.747415",
+               "lon" : "-117.166883"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92103",
+            "facility_name" : "Pacific Research Network (PRN)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Scottsdale",
+            "facility_address_coordinates" : {
+               "lat" : "33.564295",
+               "lon" : "-111.895881"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85258",
+            "facility_name" : "James L. Frey, M.D., Ltd.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Berkeley",
+            "facility_address_coordinates" : {
+               "lat" : "37.865174",
+               "lon" : "-122.238222"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94705",
+            "facility_name" : "East Bay Neurology",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.772047",
+               "lon" : "-105.048027"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "80212",
+            "facility_name" : "The Denver Center for Medical Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.507856",
+               "lon" : "-122.690794"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97201-3098",
+            "facility_name" : "Oregon Health Sciences University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.507856",
+               "lon" : "-122.690794"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97201",
+            "facility_name" : "Pacific NW Clinical Research Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.534931",
+               "lon" : "-122.305846"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98108",
+            "facility_name" : "VAPS Health Care System",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.601883",
+               "lon" : "-122.329451"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98104",
+            "facility_name" : "Seattle Clinical Research Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.832614",
+               "lon" : "-96.849082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "752359070",
+            "facility_name" : "University of Texas",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tulsa",
+            "facility_address_coordinates" : {
+               "lat" : "36.15398",
+               "lon" : "-95.99277"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oklahoma",
+            "facility_address_zip" : "741025428",
+            "facility_name" : "Clinical Pharmaceutical Trials",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Omaha",
+            "facility_address_coordinates" : {
+               "lat" : "41.25626",
+               "lon" : "-95.94043"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Nebraska",
+            "facility_address_zip" : "681985575",
+            "facility_name" : "University of Nebraska",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Paul",
+            "facility_address_coordinates" : {
+               "lat" : "44.951483",
+               "lon" : "-93.090649"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55101",
+            "facility_name" : "Regions Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.644804",
+               "lon" : "-90.253417"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63108",
+            "facility_name" : "Washington University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.611128",
+               "lon" : "-90.214087"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63104",
+            "facility_name" : "St. Louis University School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Peoria",
+            "facility_address_coordinates" : {
+               "lat" : "40.712882",
+               "lon" : "-89.576722"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "616033089",
+            "facility_name" : "OSF Center for Senior Health",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.906772",
+               "lon" : "-87.632231"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "606104234",
+            "facility_name" : "Chicago Center for Clinical Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Birmingham",
+            "facility_address_coordinates" : {
+               "lat" : "33.52066",
+               "lon" : "-86.80249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Alabama",
+            "facility_address_zip" : "35294-0017",
+            "facility_name" : "University of Alabama, Birmingham",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202-5111",
+            "facility_name" : "Indiana Alzheimer's University Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Grand Rapids",
+            "facility_address_coordinates" : {
+               "lat" : "42.96212",
+               "lon" : "-85.659394"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "49503",
+            "facility_name" : "Michigan Medical P.C.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dearborn",
+            "facility_address_coordinates" : {
+               "lat" : "42.298036",
+               "lon" : "-83.24761"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48124",
+            "facility_name" : "Oakwood Hospital and Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Columbus",
+            "facility_address_coordinates" : {
+               "lat" : "40.005435",
+               "lon" : "-83.023227"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "43210",
+            "facility_name" : "Ohio State University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ocala",
+            "facility_address_coordinates" : {
+               "lat" : "29.160555",
+               "lon" : "-82.130765"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "34471",
+            "facility_name" : "Ocala Neurodiagnostic Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Petersburg",
+            "facility_address_coordinates" : {
+               "lat" : "27.770793",
+               "lon" : "-82.632806"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33701",
+            "facility_name" : "Suncoast Neuroscience Associates, Inc.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Sarasota",
+            "facility_address_coordinates" : {
+               "lat" : "27.310893",
+               "lon" : "-82.521168"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "34239",
+            "facility_name" : "Neurological Research Institute of Sarasota, PA",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Greensburg",
+            "facility_address_coordinates" : {
+               "lat" : "40.314981",
+               "lon" : "-79.534803"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "15601",
+            "facility_name" : "Neuroscience Center of Westmoreland Neurology",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "North Charleston",
+            "facility_address_coordinates" : {
+               "lat" : "32.937267",
+               "lon" : "-80.035245"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "294066076",
+            "facility_name" : "Alzheimer's Research and Clinical Programs",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Orlando",
+            "facility_address_coordinates" : {
+               "lat" : "28.511789",
+               "lon" : "-81.360438"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32806",
+            "facility_name" : "Psychiatric Institute of Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.128291",
+               "lon" : "-77.605805"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14620",
+            "facility_name" : "University of Rochester",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Alexandria",
+            "facility_address_coordinates" : {
+               "lat" : "38.813169",
+               "lon" : "-77.112139"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Virginia",
+            "facility_address_zip" : "22304",
+            "facility_name" : "Virginia Neuroscience Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Manassas",
+            "facility_address_coordinates" : {
+               "lat" : "38.933366",
+               "lon" : "-77.030312"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Virginia",
+            "facility_address_zip" : "20010",
+            "facility_name" : "Prince William Neuroscience Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Palm Beach",
+            "facility_address_coordinates" : {
+               "lat" : "26.757692",
+               "lon" : "-80.091172"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33407",
+            "facility_name" : "Premiere Research Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.29038",
+               "lon" : "-76.61219"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21287",
+            "facility_name" : "The Johns Hopkins Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Elkins Park",
+            "facility_address_coordinates" : {
+               "lat" : "40.073118",
+               "lon" : "-75.124431"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19027",
+            "facility_name" : "Institute for Advanced Clinical Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Piscataway",
+            "facility_address_coordinates" : {
+               "lat" : "40.49927",
+               "lon" : "-74.39904"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "088551392",
+            "facility_name" : "University of Medicine and Dentistry of New Jersey",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Summit",
+            "facility_address_coordinates" : {
+               "lat" : "40.714923",
+               "lon" : "-74.366372"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07901",
+            "facility_name" : "Overlook Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ridgewood",
+            "facility_address_coordinates" : {
+               "lat" : "40.981591",
+               "lon" : "-74.113506"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07450",
+            "facility_name" : "Neurology Group of Bergen County",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Long Branch",
+            "facility_address_coordinates" : {
+               "lat" : "40.287904",
+               "lon" : "-74.020019"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07764",
+            "facility_name" : "Medwise Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "NYU Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Albany",
+            "facility_address_coordinates" : {
+               "lat" : "42.653031",
+               "lon" : "-73.809978"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "12208",
+            "facility_name" : "Neurological Associates of Albany, PC",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Far Rockaway",
+            "facility_address_coordinates" : {
+               "lat" : "40.601261",
+               "lon" : "-73.761646"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11691",
+            "facility_name" : "St. John's Episcopal Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Colchester",
+            "facility_address_coordinates" : {
+               "lat" : "44.541259",
+               "lon" : "-73.184415"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Vermont",
+            "facility_address_zip" : "05446",
+            "facility_name" : "Memory Disorder Center of Vermont",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bennington",
+            "facility_address_coordinates" : {
+               "lat" : "42.869211",
+               "lon" : "-73.128516"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Vermont",
+            "facility_address_zip" : "05201",
+            "facility_name" : "Southwestern Vermont Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stony Brook",
+            "facility_address_coordinates" : {
+               "lat" : "40.913615",
+               "lon" : "-73.125246"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11794-8121",
+            "facility_name" : "SUNY Stony Brook",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Centereach",
+            "facility_address_coordinates" : {
+               "lat" : "40.870331",
+               "lon" : "-73.082113"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11720",
+            "facility_name" : "East End Neuropsychiatric Associates",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Haven",
+            "facility_address_coordinates" : {
+               "lat" : "41.30815",
+               "lon" : "-72.92816"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06520",
+            "facility_name" : "Yale University, School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Hamden",
+            "facility_address_coordinates" : {
+               "lat" : "41.430832",
+               "lon" : "-72.912021"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06518",
+            "facility_name" : "Geriatric and Adult Psychiatry",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Worcester",
+            "facility_address_coordinates" : {
+               "lat" : "42.26259",
+               "lon" : "-71.80229"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "01655",
+            "facility_name" : "University of Massachusetts Worcester",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pawtucket",
+            "facility_address_coordinates" : {
+               "lat" : "41.840169",
+               "lon" : "-71.390408"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02906",
+            "facility_name" : "Brown University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Wellesley Hills",
+            "facility_address_coordinates" : {
+               "lat" : "42.311947",
+               "lon" : "-71.275517"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02481",
+            "facility_name" : "Boston Clinical Research Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337105",
+               "lon" : "-71.105696"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02115",
+            "facility_name" : "Brigham Behavioral Neurology Group",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000172",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "National Institute on Aging (NIA)",
+      "sponsor" : "Janssen, LP",
+      "start_date" : "1999-10-29",
+      "study_type" : "Interventional",
+      "summary" : "Galantamine is an experimental drug being evaluated in the United States for the treatment of Alzheimer's disease. Results from previous clinical trials suggest that galantamine may improve cognitive performance in individuals with Alzheimer's disease. It is not a cure for Alzheimer's disease. Nerve cells in the brain responsible for memory and cognitive function communicate using a chemical called acetylcholine. Research has shown that deterioration of cells that produce acetylcholine in the brain affects thought processes. Galantamine is thought to work in two ways to increase the amount of acetylcholine available in the brain. It inhibits an enzyme that breaks down acetylcholine and it also stimulates the nicotinic receptors in the brain to release more acetylcholine.",
+      "summary_html" : "<p>Galantamine is an experimental drug being evaluated in the United States for the treatment of Alzheimer's disease. Results from previous clinical trials suggest that galantamine may improve cognitive performance in individuals with Alzheimer's disease. It is not a cure for Alzheimer's disease. Nerve cells in the brain responsible for memory and cognitive function communicate using a chemical called acetylcholine. Research has shown that deterioration of cells that produce acetylcholine in the brain affects thought processes. Galantamine is thought to work in two ways to increase the amount of acetylcholine available in the brain. It inhibits an enzyme that breaks down acetylcholine and it also stimulates the nicotinic receptors in the brain to release more acetylcholine.</p>",
+      "title_brief" : "Evaluation of Galantamine in the Treatment of Alzheimer's Disease",
+      "title_official" : "Placebo Controlled Evaluation of Galantamine in the Treatment of Alzheimer's Disease: Safety and Efficacy Under a Slow-Titration Regimen",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00000173" : {
+      "completion_date" : "2004-01-01",
+      "conditions" : [
+         {
+            "clusters" : [
+               "Mental Health",
+               "Brain and Nerves"
+            ],
+            "name" : "Alzheimer's Disease",
+            "slug" : "alzheimers-disease"
+         },
+         {
+            "clusters" : [
+               "Mental Health"
+            ],
+            "name" : "Mild Cognitive Impairment",
+            "slug" : "mild-cognitive-impairment"
+         }
+      ],
+      "description_html" : "<p>This clinical trial will be a multicenter, randomized, double-blind, placebo- controlled, parallel-group study of vitamin E and donepezil in 720 subjects with mild cognitive impairment (MCI). Subjects will be randomized to one of three treatment groups (240 subjects per treatment group): 1) Placebo vitamin E and placebo donepezil plus a multivitamin daily. 2) Vitamin E (2,000 I) and placebo donepezil plus a multivitamin daily.3) Donepezil (10 mg) and placebo vitamin E plus a multivitamin daily.</p>\n\n<p>The study will be conducted over three years, with clinical evaluations every 3 months for the first 6 months and then every 6 months. Subjects randomized to donepezil will start a dose of 5 mg daily. Donepezil will be increased to 10 mg after six weeks. Subjects randomized to vitamin E will start at 1,000 I daily. The dose of Vitamin E will be increased to 2,000 I after six weeks. There will be a 12-month recruitment period. The primary endpoint will be time to development of Probable or Possible AD according to NINCDS-ADRDA criteria. Upon determination of a clinical diagnosis of AD, documentation will be sent to the ADCS Coordinating Center and forwarded to the Central Review Committee for verification. Upon verification, of conversion to diagnosis of AD, subjects will stop taking the donepezil study medication or its corresponding placebo, without breaking the blind, and will be offered open label donepezil at a scheduled visit one month after the prior diagnostic visit. Donepezil will be offered to subjects who convert to AD until the subject completes three years from the baseline visit. Based on an estimated incidence of AD of 15% per year, the study has 85% power to detect a 33% or greater reduction in conversion to AD over 3 years. Secondary outcome measures will include change on the Alzheimer's Disease Assessment Scale (ADAS-COG), the Neuropsychological Battery, the Mini-Mental State Exam (MMSE), Clinical Dementia Rating Scale (CDR), the Global Deterioration Scale (GDS), ADCS- Activities of Daily Living Inventory (ADCS-ADL), a Pharmacoeconomics scale, and a Quality of Life scale. Compliance will be monitored through the measurement of alpha-tocopherol levels and pill counts at each visit.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Any significant neurologic disease other than suspected incipient Alzheimer's disease,\nsuch as Parkinson's disease, multi-infarct dementia, Huntington's disease, normal\npressure hydrocephalus, brain tumor, progressive supranuclear palsy, seizure disorder,\nsubdural hematoma, multiple sclerosis, or history of significant head trauma followed\nby persistent neurologic defaults or known structural brain abnormalities.</li>\n<li> Major depression or another major psychiatric disorder as described in DSM IV within\nthe past 2 years.</li>\n<li> Psychotic features, agitation or behavioral problems within the last 3 months which\ncould lead to difficulty complying with the protocol.</li>\n<li> History of alcohol or substance abuse or dependence within the past 2 years (DSM IV\ncriteria).</li>\n<li> History of schizophrenia (DSM IV criteria).</li>\n<li> Any significant systemic illness or unstable medical condition which could lead to\ndifficulty complying with the protocol including: a) History of systemic cancer within\nthe last 5 years (non-metastatic skin cancers are acceptable). b) History of\nmyocardial infarction within the past year or unstable or severe cardiovascular\ndisease including angina or CHF with symptoms at rest. c) Clinically significant\nobstructive pulmonary disease or asthma. d) Clinically significant and unstable\ngastrointestinal disorder such as ulcer disease or a history of active or occult\ngastrointestinal bleeding within two years. e) Clinically significant laboratory test\nabnormalities on the battery of screening tests (hematology, prothrombin time,\nchemistry, urinalysis, ECG). f) Insulin-requiring diabetes or uncontrolled diabetes\nmellitus. g) Uncontrolled hypertension (systolic BP greater than 170 or diastolic\ngreater than 100). h) History of clinically significant liver disease, coagulopathy,\nor vitamin K deficiency within the past 2 years.</li>\n<li> Medications a) Use of centrally active beta-blockers, narcotics, methyldopa and\nclonidine within 4 weeks prior to screening. b) Use of anti-Parkinsonian medications\n(e.g. Sinemet, amantadine, bromocriptine, pergolide and selegiline) within 2 months\nprior to screening. c) Use of neuroleptics or narcotic analgesics within 4 weeks prior\nto screening. d) Use of long-acting benzodiazepines or barbituates within 4 weeks\nprior to screening. e) Use of short-acting anxiolytics or sedative hypnotics more\nfrequently than 2 times per week within 4 weeks prior to screening (note: sedative\nagents should not be used within 72 hours of screening).</li>\n</ul>\n\n\n<p>  f) Initiation or change in dose of an antidepressant lacking significant cholinergic\n  side effects within the 4 weeks prior to screening (use of stable doses of\n  antidepressants for at least 4 weeks prior to screening is acceptable). g) Use of\n  systemic corticosteroids within 3 months prior to screening. h) Medications with\n  significant cholinergic or anticholinergic side effects (e.g. pyridostigmine,\n  tricyclic antidepressants, meclizine, and oxybutynin) within 4 weeks prior to\n  screening. i) Use of anti-convulsants (e.g. Phenytoin, Phenobarbital, Carbamazepine)\n  within 2 months prior to screening. j) Use of warfarin (Coumadin) within 4 weeks prior\n  to screening.</p>\n\n<ul>\n<li> Vitamin Supplements a) Use of vitamin supplements other than standard multivitamin\nincluded as part of the treatment intervention used in this protocol within 2 weeks\nprior to screening.</li>\n<li> Any prior use of any FDA approved medications for the treatment of Alzheimer's disease\n(e.g. tacrine, donepezil, or other newly approved medications).</li>\n<li> Use of any investigational drugs within 30 days or 5 half-lives, whichever is longer,\nprior to screening.</li>\n<li> Subjects who, in the investigator's opinion, will not comply with study procedures.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion Criteria:</p>\n\n<ul>\n<li> Memory complaints and memory difficulties which are verified by an informant.</li>\n<li> Abnormal memory function documented by scoring below the education adjusted cutoff on\nthe Logical Memory II subscale (Delayed Paragraph Recall) from the Wechsler Memory</li>\n</ul>\n\n\n<p>Scale - Revised (the maximum score is 25): a) less than or equal to 8 for 16 or more\n  years of education, b) less than or equal to 4 for 8-15 years of education, c) less\n  than or equal to 2 for 0-7 years of education.</p>\n\n<ul>\n<li> Mini-Mental Exam score between 24 and 30 (inclusive) (Exceptions may be made for\nsubjects with less than 8 years of education at the discretion of the project\ndirector.).</li>\n<li> Clinical Dementia Rating = 0.5. Memory Box score must be at least 0.5.</li>\n<li> General cognition and functional performance sufficiently preserved such that a\ndiagnosis of Alzheimer's disease cannot be made by the site physician at the time of\nthe screening visit.</li>\n<li> No significant cerebrovascular disease: Modified Hachinski score of less than or equal\nto 4.</li>\n<li> Age between 55 and 90 (inclusive).</li>\n<li> Permitted medications stable for at least 1 month prior to screening. In particular:\na) Subjects may take stable doses of antidepressants lacking significant\nanticholinergic side effects (if they are not currently depressed and do not have a\nhistory of major depression within the past 2 years). b) Estrogen replacement therapy\nis permissible. c) Ginkgo biloba is permissible, but discouraged.</li>\n<li> Hamilton Depression rating scale score of less than or equal to 12 on the 17-item\nscale.</li>\n<li> Informant is available who has frequent contact with the subject (e.g. an average of\n10 hours per week or more), agrees to monitor administration of study drug, observe\nfor adverse events, and accompany the subject to all clinic visits for the duration of\nthe protocol.</li>\n<li> CT or MRI scans within 12 months prior to screening without evidence of infection,\ninfarction, or other focal lesions and without clinical symptoms suggestive of\nintervening neurological disease. A lacune in a non-critical brain area which is not\nbelieved to contribute to the subject's cognitive impairment is permissible.</li>\n<li> Adequate visual and auditory acuity to allow neuropsychological testing.</li>\n<li> Good general health with no additional diseases expected to interfere with the study.</li>\n<li> Normal B12, RPR, and Thyroid Function Tests or without any clinically significant\nabnormalities that would be expected to interfere with the study.</li>\n<li> ECG without clinically significant abnormalities that would be expected to interfere\nwith the study.</li>\n<li> Subject is not pregnant, lactating, or of childbearing potential (i.e. women must be\ntwo years post-menopausal or surgically sterile).</li>\n<li> Agreement not to take other vitamin supplements (including Vitamin E), multivitamins,\nother than those provided by the study.</li>\n</ul>\n\n\n<p>Exclusion Criteria:</p>\n\n<ul>\n<li> Any significant neurologic disease other than suspected incipient Alzheimer's disease,\nsuch as Parkinson's disease, multi-infarct dementia, Huntington's disease, normal\npressure hydrocephalus, brain tumor, progressive supranuclear palsy, seizure disorder,\nsubdural hematoma, multiple sclerosis, or history of significant head trauma followed\nby persistent neurologic defaults or known structural brain abnormalities.</li>\n<li> Major depression or another major psychiatric disorder as described in DSM IV within\nthe past 2 years.</li>\n<li> Psychotic features, agitation or behavioral problems within the last 3 months which\ncould lead to difficulty complying with the protocol.</li>\n<li> History of alcohol or substance abuse or dependence within the past 2 years (DSM IV\ncriteria).</li>\n<li> History of schizophrenia (DSM IV criteria).</li>\n<li> Any significant systemic illness or unstable medical condition which could lead to\ndifficulty complying with the protocol including: a) History of systemic cancer within\nthe last 5 years (non-metastatic skin cancers are acceptable). b) History of\nmyocardial infarction within the past year or unstable or severe cardiovascular\ndisease including angina or CHF with symptoms at rest. c) Clinically significant\nobstructive pulmonary disease or asthma. d) Clinically significant and unstable\ngastrointestinal disorder such as ulcer disease or a history of active or occult\ngastrointestinal bleeding within two years. e) Clinically significant laboratory test\nabnormalities on the battery of screening tests (hematology, prothrombin time,\nchemistry, urinalysis, ECG). f) Insulin-requiring diabetes or uncontrolled diabetes\nmellitus. g) Uncontrolled hypertension (systolic BP greater than 170 or diastolic\ngreater than 100). h) History of clinically significant liver disease, coagulopathy,\nor vitamin K deficiency within the past 2 years.</li>\n<li> Medications a) Use of centrally active beta-blockers, narcotics, methyldopa and\nclonidine within 4 weeks prior to screening. b) Use of anti-Parkinsonian medications\n(e.g. Sinemet, amantadine, bromocriptine, pergolide and selegiline) within 2 months\nprior to screening. c) Use of neuroleptics or narcotic analgesics within 4 weeks prior\nto screening. d) Use of long-acting benzodiazepines or barbituates within 4 weeks\nprior to screening. e) Use of short-acting anxiolytics or sedative hypnotics more\nfrequently than 2 times per week within 4 weeks prior to screening (note: sedative\nagents should not be used within 72 hours of screening).</li>\n</ul>\n\n\n<p>  f) Initiation or change in dose of an antidepressant lacking significant cholinergic\n  side effects within the 4 weeks prior to screening (use of stable doses of\n  antidepressants for at least 4 weeks prior to screening is acceptable). g) Use of\n  systemic corticosteroids within 3 months prior to screening. h) Medications with\n  significant cholinergic or anticholinergic side effects (e.g. pyridostigmine,\n  tricyclic antidepressants, meclizine, and oxybutynin) within 4 weeks prior to\n  screening. i) Use of anti-convulsants (e.g. Phenytoin, Phenobarbital, Carbamazepine)\n  within 2 months prior to screening. j) Use of warfarin (Coumadin) within 4 weeks prior\n  to screening.</p>\n\n<ul>\n<li> Vitamin Supplements a) Use of vitamin supplements other than standard multivitamin\nincluded as part of the treatment intervention used in this protocol within 2 weeks\nprior to screening.</li>\n<li> Any prior use of any FDA approved medications for the treatment of Alzheimer's disease\n(e.g. tacrine, donepezil, or other newly approved medications).</li>\n<li> Use of any investigational drugs within 30 days or 5 half-lives, whichever is longer,\nprior to screening.</li>\n<li> Subjects who, in the investigator's opinion, will not comply with study procedures.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> Memory complaints and memory difficulties which are verified by an informant.</li>\n<li> Abnormal memory function documented by scoring below the education adjusted cutoff on\nthe Logical Memory II subscale (Delayed Paragraph Recall) from the Wechsler Memory</li>\n</ul>\n\n\n<p>Scale - Revised (the maximum score is 25): a) less than or equal to 8 for 16 or more\n  years of education, b) less than or equal to 4 for 8-15 years of education, c) less\n  than or equal to 2 for 0-7 years of education.</p>\n\n<ul>\n<li> Mini-Mental Exam score between 24 and 30 (inclusive) (Exceptions may be made for\nsubjects with less than 8 years of education at the discretion of the project\ndirector.).</li>\n<li> Clinical Dementia Rating = 0.5. Memory Box score must be at least 0.5.</li>\n<li> General cognition and functional performance sufficiently preserved such that a\ndiagnosis of Alzheimer's disease cannot be made by the site physician at the time of\nthe screening visit.</li>\n<li> No significant cerebrovascular disease: Modified Hachinski score of less than or equal\nto 4.</li>\n<li> Age between 55 and 90 (inclusive).</li>\n<li> Permitted medications stable for at least 1 month prior to screening. In particular:\na) Subjects may take stable doses of antidepressants lacking significant\nanticholinergic side effects (if they are not currently depressed and do not have a\nhistory of major depression within the past 2 years). b) Estrogen replacement therapy\nis permissible. c) Ginkgo biloba is permissible, but discouraged.</li>\n<li> Hamilton Depression rating scale score of less than or equal to 12 on the 17-item\nscale.</li>\n<li> Informant is available who has frequent contact with the subject (e.g. an average of\n10 hours per week or more), agrees to monitor administration of study drug, observe\nfor adverse events, and accompany the subject to all clinic visits for the duration of\nthe protocol.</li>\n<li> CT or MRI scans within 12 months prior to screening without evidence of infection,\ninfarction, or other focal lesions and without clinical symptoms suggestive of\nintervening neurological disease. A lacune in a non-critical brain area which is not\nbelieved to contribute to the subject's cognitive impairment is permissible.</li>\n<li> Adequate visual and auditory acuity to allow neuropsychological testing.</li>\n<li> Good general health with no additional diseases expected to interfere with the study.</li>\n<li> Normal B12, RPR, and Thyroid Function Tests or without any clinically significant\nabnormalities that would be expected to interfere with the study.</li>\n<li> ECG without clinically significant abnormalities that would be expected to interfere\nwith the study.</li>\n<li> Subject is not pregnant, lactating, or of childbearing potential (i.e. women must be\ntwo years post-menopausal or surgically sterile).</li>\n<li> Agreement not to take other vitamin supplements (including Vitamin E), multivitamins,\nother than those provided by the study.</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 55–90",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000173",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Alzheimer Disease",
+         "Mild cognitive impairment",
+         "Alzheimer's disease",
+         "Memory",
+         "Donepezil",
+         "Vitamin E",
+         "Antioxidants",
+         "Cholinergic agents",
+         "Cholinesterase inhibitors",
+         "Cognitive Dysfunction",
+         "Vitamins",
+         "Tocopherols",
+         "Tocotrienols",
+         "alpha-Tocopherol"
+      ],
+      "last_changed_or_verified_date" : "2009-12-10",
+      "links" : [
+         {
+            "description" : "More information about the study from the Alzheimer's Disease Cooperative Study site at the University of California at San Diego.",
+            "url" : "http://adcs.ucsd.edu/"
+         }
+      ],
+      "locations" : [
+         {
+            "facility_address_city" : "Irvine",
+            "facility_address_coordinates" : {
+               "lat" : "33.66946",
+               "lon" : "-117.82311"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92697-4285",
+            "facility_name" : "UC Irvine Institute for Brain Aging and Dementia",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033",
+            "facility_name" : "University of Southern California",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "33.15809",
+               "lon" : "-117.35059"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92018",
+            "facility_name" : "Affiliated Research Instiute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90095-1769",
+            "facility_name" : "University of California, Los Angeles",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "32.84727",
+               "lon" : "-117.2742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92093-0949",
+            "facility_name" : "University of California, San Diego",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Las Vegas",
+            "facility_address_coordinates" : {
+               "lat" : "36.14543",
+               "lon" : "-115.186825"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Nevada",
+            "facility_address_zip" : "89102",
+            "facility_name" : "University of Nevada",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Albuquerque",
+            "facility_address_coordinates" : {
+               "lat" : "36.205256",
+               "lon" : "-115.223639"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Mexico",
+            "facility_address_zip" : "89108",
+            "facility_name" : "Univ. of New Mexico",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Phoenix",
+            "facility_address_coordinates" : {
+               "lat" : "33.511087",
+               "lon" : "-112.084749"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85013",
+            "facility_name" : "Barrow Neurological Group",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Martinez",
+            "facility_address_coordinates" : {
+               "lat" : "37.993879",
+               "lon" : "-122.136432"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94553",
+            "facility_name" : "East Bay Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.785969",
+               "lon" : "-122.437253"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94115",
+            "facility_name" : "University of California, San Francisco",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.571577",
+               "lon" : "-121.466465"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95816",
+            "facility_name" : "Sutter Institute for Medical Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tucson",
+            "facility_address_coordinates" : {
+               "lat" : "32.240787",
+               "lon" : "-110.945605"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "857245023",
+            "facility_name" : "University of Arizona",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "34.06175",
+               "lon" : "-103.05078"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11032",
+            "facility_name" : "Columbia University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.507856",
+               "lon" : "-122.690794"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97201-3098",
+            "facility_name" : "Oregon Health Sciences University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.534931",
+               "lon" : "-122.305846"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98108",
+            "facility_name" : "University of Washington",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Vancouver",
+            "facility_address_coordinates" : {
+               "lat" : "49.24966",
+               "lon" : "-123.11934"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "British Columbia",
+            "facility_address_zip" : "V6T 2B5",
+            "facility_name" : "University of British Columbia",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Calgary",
+            "facility_address_coordinates" : {
+               "lat" : "52.28333",
+               "lon" : "-117.469"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Alberta",
+            "facility_address_zip" : "T2N 4N1",
+            "facility_name" : "University of Calgary",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Kansas City",
+            "facility_address_coordinates" : {
+               "lat" : "39.11417",
+               "lon" : "-94.62746"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Kansas",
+            "facility_address_zip" : "66160",
+            "facility_name" : "University of Kansas Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Baylor College of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.971982",
+               "lon" : "-93.233441"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55455",
+            "facility_name" : "University of Minnesota",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "44.069818",
+               "lon" : "-92.506581"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55901-0144",
+            "facility_name" : "Mayo Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.625796",
+               "lon" : "-90.266998"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63110",
+            "facility_name" : "Washington University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Springfield",
+            "facility_address_coordinates" : {
+               "lat" : "39.824137",
+               "lon" : "-89.64194"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "62702",
+            "facility_name" : "Southern Illinois University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Marshfield",
+            "facility_address_coordinates" : {
+               "lat" : "44.638422",
+               "lon" : "-90.208361"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Wisconsin",
+            "facility_address_zip" : "54449",
+            "facility_name" : "Marshfield Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Rush Presbyterian St. Luke's Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.893936",
+               "lon" : "-87.614498"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60611",
+            "facility_name" : "Northwestern University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Nashville",
+            "facility_address_coordinates" : {
+               "lat" : "36.133877",
+               "lon" : "-86.801254"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Tennessee",
+            "facility_address_zip" : "37212-8646",
+            "facility_name" : "Vanderbilt University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202-5111",
+            "facility_name" : "Indiana University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lexington",
+            "facility_address_coordinates" : {
+               "lat" : "37.98869",
+               "lon" : "-84.47772"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Kentucky",
+            "facility_address_zip" : "40536-0230",
+            "facility_name" : "University of Kentucky",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.827487",
+               "lon" : "-84.323013"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30329",
+            "facility_name" : "Emory University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ann Arbor",
+            "facility_address_coordinates" : {
+               "lat" : "42.289187",
+               "lon" : "-83.70878"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48109",
+            "facility_name" : "University of Michigan",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.473947",
+               "lon" : "-81.579956"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "44120-1013",
+            "facility_name" : "University Hospitals of Cleveland",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Augusta",
+            "facility_address_coordinates" : {
+               "lat" : "33.478289",
+               "lon" : "-82.014102"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30904",
+            "facility_name" : "Augusta VA Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "28.050827",
+               "lon" : "-82.449573"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33612",
+            "facility_name" : "University of South Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pittsburgh",
+            "facility_address_coordinates" : {
+               "lat" : "40.444042",
+               "lon" : "-79.955249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "15213",
+            "facility_name" : "University of Pittsburgh",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Jacksonville",
+            "facility_address_coordinates" : {
+               "lat" : "30.357756",
+               "lon" : "-81.505829"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32225",
+            "facility_name" : "Mayo Clinic Jacksonville",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "London",
+            "facility_address_coordinates" : {
+               "lat" : "43.70011",
+               "lon" : "-79.4163"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Ontario",
+            "facility_address_zip" : "N6A 4V2",
+            "facility_name" : "St. Joseph's Health Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ottawa",
+            "facility_address_coordinates" : {
+               "lat" : "43.70011",
+               "lon" : "-79.4163"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Ontario",
+            "facility_address_zip" : "K1N 5C8",
+            "facility_name" : "Elizabeth Bruyere Centre",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Toronto",
+            "facility_address_coordinates" : {
+               "lat" : "43.70011",
+               "lon" : "-79.4163"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Ontario",
+            "facility_address_zip" : "M4N 3M5",
+            "facility_name" : "Sunnybrook Health Science Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Port Charlotte",
+            "facility_address_coordinates" : {
+               "lat" : "26.986134",
+               "lon" : "-82.097042"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33952",
+            "facility_name" : "University of Miami",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "North Charleston",
+            "facility_address_coordinates" : {
+               "lat" : "32.937267",
+               "lon" : "-80.035245"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "29406",
+            "facility_name" : "Medical University of South Carolina",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Durham",
+            "facility_address_coordinates" : {
+               "lat" : "36.022136",
+               "lon" : "-78.975659"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27705",
+            "facility_name" : "Duke University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.128291",
+               "lon" : "-77.605805"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14620",
+            "facility_name" : "University of Rochester",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Palm Beach",
+            "facility_address_coordinates" : {
+               "lat" : "26.757692",
+               "lon" : "-80.091172"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33407",
+            "facility_name" : "Premiere Research Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ft. Lauderdale",
+            "facility_address_coordinates" : {
+               "lat" : "26.213579",
+               "lon" : "-80.270272"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33321",
+            "facility_name" : "Baumel-Eisner Neuromedical Institute, Ft. Lauderdale",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boca Raton",
+            "facility_address_coordinates" : {
+               "lat" : "26.347501",
+               "lon" : "-80.112571"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33486",
+            "facility_name" : "Baumel-Eisner Neuromedical Institute, Boca Raton",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.27486",
+               "lon" : "-76.542833"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21224",
+            "facility_name" : "Johns Hopkins University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami Beach",
+            "facility_address_coordinates" : {
+               "lat" : "25.883337",
+               "lon" : "-80.131831"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33154",
+            "facility_name" : "Baumel-Eisner Neuromedical Institute, MiamiBeach",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami Beach",
+            "facility_address_coordinates" : {
+               "lat" : "25.819714",
+               "lon" : "-80.133711"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33140",
+            "facility_name" : "Wein Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.958518",
+               "lon" : "-75.198856"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19104",
+            "facility_name" : "University of Pennsylvania",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "40.013014",
+               "lon" : "-75.185402"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19129",
+            "facility_name" : "MCP Hahnemann",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Princeton",
+            "facility_address_coordinates" : {
+               "lat" : "40.36301",
+               "lon" : "-74.655321"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "08540",
+            "facility_name" : "Princeton Biomedical Research, PA",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Summit",
+            "facility_address_coordinates" : {
+               "lat" : "40.714923",
+               "lon" : "-74.366372"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07901",
+            "facility_name" : "ClinSearch, Inc.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lakehurst",
+            "facility_address_coordinates" : {
+               "lat" : "40.023721",
+               "lon" : "-74.32082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "08733",
+            "facility_name" : "Memory Disorders Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Toms River",
+            "facility_address_coordinates" : {
+               "lat" : "40.008534",
+               "lon" : "-74.221768"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "08755",
+            "facility_name" : "Princeton Biomedical - Toms River",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Long Branch",
+            "facility_address_coordinates" : {
+               "lat" : "40.287904",
+               "lon" : "-74.020019"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07764",
+            "facility_name" : "Alzheimer's Research Corp.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Brooklyn",
+            "facility_address_coordinates" : {
+               "lat" : "40.632667",
+               "lon" : "-73.996669"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11219",
+            "facility_name" : "Maimonides Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "NYU Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Orangeburg",
+            "facility_address_coordinates" : {
+               "lat" : "41.050066",
+               "lon" : "-73.958585"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10962",
+            "facility_name" : "Nathan S. Kline Institute for Psychiatric Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Mount Sinai Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "White Plains",
+            "facility_address_coordinates" : {
+               "lat" : "41.010566",
+               "lon" : "-73.745129"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10605",
+            "facility_name" : "Burke Medical Research Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Burlington",
+            "facility_address_coordinates" : {
+               "lat" : "44.476621",
+               "lon" : "-73.209998"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Vermont",
+            "facility_address_zip" : "05401",
+            "facility_name" : "Clinical Neuroscience Research Unit",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bennington",
+            "facility_address_coordinates" : {
+               "lat" : "42.869211",
+               "lon" : "-73.128516"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Vermont",
+            "facility_address_zip" : "05201",
+            "facility_name" : "Southwestern Vermont Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stony Brook",
+            "facility_address_coordinates" : {
+               "lat" : "40.913615",
+               "lon" : "-73.125246"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11794-8121",
+            "facility_name" : "SUNY Stony Brook",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Haven",
+            "facility_address_coordinates" : {
+               "lat" : "41.30815",
+               "lon" : "-72.92816"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06520",
+            "facility_name" : "Yale University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lebanon",
+            "facility_address_coordinates" : {
+               "lat" : "43.64229",
+               "lon" : "-72.25176"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Hampshire",
+            "facility_address_zip" : "03756",
+            "facility_name" : "Dartmouth Hitchcock Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pawtucket",
+            "facility_address_coordinates" : {
+               "lat" : "41.870562",
+               "lon" : "-71.388681"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02860",
+            "facility_name" : "Brown University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.363174",
+               "lon" : "-71.068646"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02114",
+            "facility_name" : "Massachusetts General Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Montreal",
+            "facility_address_coordinates" : {
+               "lat" : "52.00017",
+               "lon" : "-71.99907"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Quebec",
+            "facility_address_zip" : "H3T 1E2",
+            "facility_name" : "Jewish General Hospital Memory Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Verdun",
+            "facility_address_coordinates" : {
+               "lat" : "52.00017",
+               "lon" : "-71.99907"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Quebec",
+            "facility_address_zip" : "H4H 1R3",
+            "facility_name" : "McGill Centre for Studies in Aging",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Fredericton",
+            "facility_address_coordinates" : {
+               "lat" : "45.94541",
+               "lon" : "-66.66558"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "New Brunswick",
+            "facility_address_zip" : "E3B 6H5",
+            "facility_name" : "Fredericton Medical Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Halifax",
+            "facility_address_coordinates" : {
+               "lat" : "45.00015",
+               "lon" : "-62.99865"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Nova Scotia",
+            "facility_address_zip" : "B3H 2E1",
+            "facility_name" : "Geriatric Medicine Research Group",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000173",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "National Institute on Aging (NIA)",
+      "sponsor" : "National Institute on Aging (NIA)",
+      "start_date" : "1999-03-01",
+      "study_type" : "Interventional",
+      "summary" : "The National Institute on Aging (NIA) is launching a nationwide treatment study targeting individuals with mild cognitive impairment (MCI), a condition characterized by a memory deficit, but not dementia. An NIA-funded study recently confirmed that MCI is different from both dementia and normal age-related changes in memory. Accurate and early evaluation and treatment of MCI individuals might prevent further cognitive decline, including development of Alzheimer's disease (AD). The Memory Impairment Study is the first such AD prevention clinical trial carried out by NIH, and will be conducted at 65-80 medical research institutions located in the United States and Canada. This study will test the usefulness of two drugs to slow or stop the conversion from MCI to AD. The trial will evaluate placebo, vitamin E, and donepezil, an investigational agent approved by the Food and Drug Administration for another use. Vitamin E (alpha-tocopherol) is thought to have antioxidant properties, and was shown in a 1997 study to delay important dementia milestones, such as patients' institutionalization or progression to severe dementia, by about seven months.",
+      "summary_html" : "<p>The National Institute on Aging (NIA) is launching a nationwide treatment study targeting individuals with mild cognitive impairment (MCI), a condition characterized by a memory deficit, but not dementia. An NIA-funded study recently confirmed that MCI is different from both dementia and normal age-related changes in memory. Accurate and early evaluation and treatment of MCI individuals might prevent further cognitive decline, including development of Alzheimer's disease (AD). The Memory Impairment Study is the first such AD prevention clinical trial carried out by NIH, and will be conducted at 65-80 medical research institutions located in the United States and Canada. This study will test the usefulness of two drugs to slow or stop the conversion from MCI to AD. The trial will evaluate placebo, vitamin E, and donepezil, an investigational agent approved by the Food and Drug Administration for another use. Vitamin E (alpha-tocopherol) is thought to have antioxidant properties, and was shown in a 1997 study to delay important dementia milestones, such as patients' institutionalization or progression to severe dementia, by about seven months.</p>",
+      "title_brief" : "Memory Impairment Study (Mild Cognitive Impairment Study)",
+      "title_official" : "A Randomized, Double-Blind, Placebo-Controlled Trial of Vitamin E and Donepezil HCL (Aricept) to Delay Clinical Progression From Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD)",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00000174" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Mental Health",
+               "Brain and Nerves"
+            ],
+            "name" : "Alzheimer's Disease",
+            "slug" : "alzheimers-disease"
+         },
+         {
+            "clusters" : [
+               "Brain and Nerves",
+               "Mental Health"
+            ],
+            "name" : "Cognition Disorders",
+            "slug" : "cognition-disorders"
+         }
+      ],
+      "description_html" : "",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Advanced, severe, and unstable disease of any type that may interfere with primary and\nsecondary variable evaluations including any medical condition that could be expected\nto progress, recur, or change to such an extent that it may bias the assessment of the\nclinical or mental status of the subject to a significant degree or put the subject at\nspecial risk.</li>\n<li> Cognitive impairment sufficient to warrant a diagnosis of dementia.</li>\n<li> Met the DSM-IV and NINCDS-ADRDA criteria for AD.</li>\n<li> A clinical diagnosis of AD.</li>\n<li> A DSM-IV Axis 1 diagnosis. However, subjects with current depression are eligible\nafter appropriate treatment of the depressive episode. A minimum of four weeks washout\nof antidepressant medication should occur prior to screening. Subjects with a prior\nhistory of depression (but not currently depressed) are allowed in the study.</li>\n<li> Fewer than four years of formal education.</li>\n<li> A documented history of transient ischemic attacks.</li>\n<li> Baseline MRI findings or CT-scan findings within a year of screening that are\nconsistent with a process other than AD, e.g., stroke, tumor, brain trauma or\nhydrocephalus, that may contribute to the subject's MCI. Lacunae infarcts present in\nareas affecting cognition (entorhinal cortex, hippocampus, medial temporal lobe) will\nalso exclude the subject from the study.</li>\n<li> A score of greater than 4 on the Modified Hachinski Ischemic Scale.</li>\n<li> A current diagnosis of any primary neurodegenerative disorder, e.g., Parkinson's\ndisease.</li>\n<li> A current diagnosis of uncontrolled seizure disorder.</li>\n<li> A current diagnosis of active peptic ulceration.</li>\n<li> A current diagnosis of severe and unstable cardiovascular disease.</li>\n<li> A current diagnosis of sick-sinus syndrome or conduction deficits (sino-atrial block,\nsecond or third degree atrio-ventricular block).</li>\n<li> A current diagnosis of acute, severe, or unstable asthmatic conditions.</li>\n<li> A known exaggerated pharmacological sensitivity or hypersensitivity to drugs similar\nto Exelon or to other cholinergic compounds (e.g., pilocarpine, bethanechol, tacrine,\nvelnacrine, donepezil, metrifonate, or physostigmine). Subjects who have experienced\nelevations in liver function test parameters on other cholinesterase inhibitors are\nstill eligible.</li>\n<li> Taken any of the following substances: An investigational drug during the past four\nweeks; Metrifonate during the past three months; a drug or treatment known to cause\nmajor organ system toxicity during the past four weeks; other cholinergic drugs (e.g.,\ndonepezil, tacrine, succinylcholine-type muscle relaxants) during the past two weeks\n(topical pilocarpine will be permitted); antidepressant medication during the past\nfour weeks.</li>\n<li> Participated in a previous clinical trial of Exelon.</li>\n<li> Clinically important laboratory abnormalities in serum B12, folate, or T3/T4 at\nscreening. The subject should be excluded if peripheral neuropathy, macrocytic anemia,\nor myxedema is present.</li>\n<li> If screen values do not meet the absolutely exclusionary values given below but are\nstill outside the normal reference range, treatment for folic acid/B12 deficiency or\nthyroid disorder, as appropriate, may be initiated or adjusted with re-evaluation of\nthe subject within three months. Within these three months of treatment, the subject's\ncognitive condition must be clinically unchanged or worse for the subject to be\nacceptable. Once accepted, the subject must remain on the appropriate treatment\nthroughout the study.</li>\n<li> Exclude if T3 uptake is less than 19%; T4 less than 2.9 ((g/dL); free T4 index is less\nthan 0.8</li>\n<li> Exclude if folate less than 1.7 ng/ml (normal range greater than 1.9)</li>\n<li> Exclude if B12 less than 100 pg/ml (normal range greater than 200)</li>\n<li> A positive rapid plasmin reagin test followed up by a positive serological test for\nsyphilis.</li>\n<li> A disability that may prevent the subject from completing all study requirements\n(e.g., blindness, deafness, severe language difficulty).</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>Inclusion Criteria:</p>\n\n<ul>\n<li> Are aged 55-85 years, inclusive. Subjects older than 85 years may be eligible to\nparticipate, with approval of the designated study medical monitor.</li>\n<li> Are male or female without child-bearing potential (i.e., surgically sterilized [via\nbilateral tubal ligation,bilateral oophorectomy, or hysterectomy], at least one year\npostmenopausal, or using adequate birth control).</li>\n<li> Are cooperative, able to ingest oral medication, and willing to complete all aspects\nof the study.</li>\n<li> Will provide written informed consent prior to their participation in the study.</li>\n<li> Show evidence of mild cognitive impairment (MCI) by meeting all of the following\ncriteria: Global CDR score = 0.5, NYU Delayed Paragraph Recall less than 9, 17-item\nHAM-D score less than 13, and HAM-D Item 1 (depressed mood) score =1.</li>\n<li> Have a friend or family member who is willing to participate in the study as an\ninformant. The informant must see the subject at least once a week for several hours\nand be available to accompany the subject to the screening and baseline visits, and at\na minimum, be accessible by telephone for other scheduled visits.</li>\n</ul>\n\n\n<p>Exclusion Criteria:</p>\n\n<ul>\n<li> Advanced, severe, and unstable disease of any type that may interfere with primary and\nsecondary variable evaluations including any medical condition that could be expected\nto progress, recur, or change to such an extent that it may bias the assessment of the\nclinical or mental status of the subject to a significant degree or put the subject at\nspecial risk.</li>\n<li> Cognitive impairment sufficient to warrant a diagnosis of dementia.</li>\n<li> Met the DSM-IV and NINCDS-ADRDA criteria for AD.</li>\n<li> A clinical diagnosis of AD.</li>\n<li> A DSM-IV Axis 1 diagnosis. However, subjects with current depression are eligible\nafter appropriate treatment of the depressive episode. A minimum of four weeks washout\nof antidepressant medication should occur prior to screening. Subjects with a prior\nhistory of depression (but not currently depressed) are allowed in the study.</li>\n<li> Fewer than four years of formal education.</li>\n<li> A documented history of transient ischemic attacks.</li>\n<li> Baseline MRI findings or CT-scan findings within a year of screening that are\nconsistent with a process other than AD, e.g., stroke, tumor, brain trauma or\nhydrocephalus, that may contribute to the subject's MCI. Lacunae infarcts present in\nareas affecting cognition (entorhinal cortex, hippocampus, medial temporal lobe) will\nalso exclude the subject from the study.</li>\n<li> A score of greater than 4 on the Modified Hachinski Ischemic Scale.</li>\n<li> A current diagnosis of any primary neurodegenerative disorder, e.g., Parkinson's\ndisease.</li>\n<li> A current diagnosis of uncontrolled seizure disorder.</li>\n<li> A current diagnosis of active peptic ulceration.</li>\n<li> A current diagnosis of severe and unstable cardiovascular disease.</li>\n<li> A current diagnosis of sick-sinus syndrome or conduction deficits (sino-atrial block,\nsecond or third degree atrio-ventricular block).</li>\n<li> A current diagnosis of acute, severe, or unstable asthmatic conditions.</li>\n<li> A known exaggerated pharmacological sensitivity or hypersensitivity to drugs similar\nto Exelon or to other cholinergic compounds (e.g., pilocarpine, bethanechol, tacrine,\nvelnacrine, donepezil, metrifonate, or physostigmine). Subjects who have experienced\nelevations in liver function test parameters on other cholinesterase inhibitors are\nstill eligible.</li>\n<li> Taken any of the following substances: An investigational drug during the past four\nweeks; Metrifonate during the past three months; a drug or treatment known to cause\nmajor organ system toxicity during the past four weeks; other cholinergic drugs (e.g.,\ndonepezil, tacrine, succinylcholine-type muscle relaxants) during the past two weeks\n(topical pilocarpine will be permitted); antidepressant medication during the past\nfour weeks.</li>\n<li> Participated in a previous clinical trial of Exelon.</li>\n<li> Clinically important laboratory abnormalities in serum B12, folate, or T3/T4 at\nscreening. The subject should be excluded if peripheral neuropathy, macrocytic anemia,\nor myxedema is present.</li>\n<li> If screen values do not meet the absolutely exclusionary values given below but are\nstill outside the normal reference range, treatment for folic acid/B12 deficiency or\nthyroid disorder, as appropriate, may be initiated or adjusted with re-evaluation of\nthe subject within three months. Within these three months of treatment, the subject's\ncognitive condition must be clinically unchanged or worse for the subject to be\nacceptable. Once accepted, the subject must remain on the appropriate treatment\nthroughout the study.</li>\n<li> Exclude if T3 uptake is less than 19%; T4 less than 2.9 ((g/dL); free T4 index is less\nthan 0.8</li>\n<li> Exclude if folate less than 1.7 ng/ml (normal range greater than 1.9)</li>\n<li> Exclude if B12 less than 100 pg/ml (normal range greater than 200)</li>\n<li> A positive rapid plasmin reagin test followed up by a positive serological test for\nsyphilis.</li>\n<li> A disability that may prevent the subject from completing all study requirements\n(e.g., blindness, deafness, severe language difficulty).</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> Are aged 55-85 years, inclusive. Subjects older than 85 years may be eligible to\nparticipate, with approval of the designated study medical monitor.</li>\n<li> Are male or female without child-bearing potential (i.e., surgically sterilized [via\nbilateral tubal ligation,bilateral oophorectomy, or hysterectomy], at least one year\npostmenopausal, or using adequate birth control).</li>\n<li> Are cooperative, able to ingest oral medication, and willing to complete all aspects\nof the study.</li>\n<li> Will provide written informed consent prior to their participation in the study.</li>\n<li> Show evidence of mild cognitive impairment (MCI) by meeting all of the following\ncriteria: Global CDR score = 0.5, NYU Delayed Paragraph Recall less than 9, 17-item\nHAM-D score less than 13, and HAM-D Item 1 (depressed mood) score =1.</li>\n<li> Have a friend or family member who is willing to participate in the study as an\ninformant. The informant must see the subject at least once a week for several hours\nand be available to accompany the subject to the screening and baseline visits, and at\na minimum, be accessible by telephone for other scheduled visits.</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 55–85",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00000174",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Alzheimer Disease",
+         "Cognition Disorders",
+         "Mild cognitive impairment",
+         "Alzheimer's disease",
+         "Memory",
+         "Cholinergic agents",
+         "Cholinesterase inhibitors",
+         "Rivastigmine"
+      ],
+      "last_changed_or_verified_date" : "2005-12-08",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Orange",
+            "facility_address_coordinates" : {
+               "lat" : "33.788145",
+               "lon" : "-117.87655"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92868",
+            "facility_name" : "University of California, Irvine",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Peoria",
+            "facility_address_coordinates" : {
+               "lat" : "33.609172",
+               "lon" : "-112.230381"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85381",
+            "facility_name" : "Medici Research Centers",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.733822",
+               "lon" : "-104.916565"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "80220",
+            "facility_name" : "University of Colorado Health Sciences Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.534931",
+               "lon" : "-122.305846"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98108",
+            "facility_name" : "University of Washington, Seattle",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Oklahoma City",
+            "facility_address_coordinates" : {
+               "lat" : "35.517968",
+               "lon" : "-97.528718"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oklahoma",
+            "facility_address_zip" : "73118",
+            "facility_name" : "Pahl Brain Associates, P.C.",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.832614",
+               "lon" : "-96.849082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75235",
+            "facility_name" : "St. Paul Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.611128",
+               "lon" : "-90.214087"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63104",
+            "facility_name" : "St. Louis University",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202",
+            "facility_name" : "Indiana University Alzheimer's Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Venice",
+            "facility_address_coordinates" : {
+               "lat" : "27.094564",
+               "lon" : "-82.440895"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "34285",
+            "facility_name" : "Center for Clinical Trials and Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Durham",
+            "facility_address_coordinates" : {
+               "lat" : "35.99403",
+               "lon" : "-78.89862"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27710",
+            "facility_name" : "Duke University Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ft. Lauderdale",
+            "facility_address_coordinates" : {
+               "lat" : "26.213579",
+               "lon" : "-80.270272"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33321",
+            "facility_name" : "Neuromedical Research Institute (Offices in Ft. Lauderdale, Miami Beach and Boca Raton)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.659877",
+               "lon" : "-80.358354"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33176",
+            "facility_name" : "Miami Research Associates",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.948629",
+               "lon" : "-75.142789"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19106",
+            "facility_name" : "Clinical Studies, Ltd., Philadelphia",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lakewood",
+            "facility_address_coordinates" : {
+               "lat" : "40.077063",
+               "lon" : "-74.200373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "08701",
+            "facility_name" : "Alzheimer's Research Corporation",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "NYU Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00000174",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "National Institute on Aging (NIA)",
+      "sponsor" : "Novartis",
+      "start_date" : "1999-10-29",
+      "study_type" : "Interventional",
+      "summary" : "This phase IIIb trial is a prospective, randomized, double-blind, placebo-controlled, 36-month study comparing the length of time of progression from mild cognitive impairment (MCI) to a clinical diagnosis of Alzheimer's disease (AD) in subjects taking Exelon vs. placebo. Exelon is currently under review with the U.S. Food and Drug Administration as a treatment for Alzheimer's disease. The drug has been cleared for marketing in more than 40 countries for Alzheimer's disease to date, including all 15 member states of the European Union, New Zealand, Argentina, Brazil and Mexico. Each subject with MCI will be randomly assigned to treatment with either Exelon or placebo. Subjects assigned to Exelon will receive 1.5 to 6.0 mg bid (twice daily) (3.0 to 12 mg/day) for the majority of the study. At every regular visit scheduled every three months, patients will be given basic efficacy and safety assessments. These assessments will include evaluation of adverse events, vital signs, activities of daily living, and clinical staging scales to determine if the subject may have converted to dementia.",
+      "summary_html" : "<p>This phase IIIb trial is a prospective, randomized, double-blind, placebo-controlled, 36-month study comparing the length of time of progression from mild cognitive impairment (MCI) to a clinical diagnosis of Alzheimer's disease (AD) in subjects taking Exelon vs. placebo. Exelon is currently under review with the U.S. Food and Drug Administration as a treatment for Alzheimer's disease. The drug has been cleared for marketing in more than 40 countries for Alzheimer's disease to date, including all 15 member states of the European Union, New Zealand, Argentina, Brazil and Mexico. Each subject with MCI will be randomly assigned to treatment with either Exelon or placebo. Subjects assigned to Exelon will receive 1.5 to 6.0 mg bid (twice daily) (3.0 to 12 mg/day) for the majority of the study. At every regular visit scheduled every three months, patients will be given basic efficacy and safety assessments. These assessments will include evaluation of adverse events, vital signs, activities of daily living, and clinical staging scales to determine if the subject may have converted to dementia.</p>",
+      "title_brief" : "Investigation Into Delay to Diagnosis of Alzheimer's Disease With Exelon (InDDEx)",
+      "title_official" : "",
+      "title_tagline" : null,
+      "visits_description" : null
+   }
+}

@@ -18,35 +18,55 @@ namespace ClinicalTrialsApi.Controllers
         private static HttpClient httpClient = new HttpClient();
 
         [HttpGet]
-        public IHttpActionResult Index([FromUri] string profile_uri) {
-            Dictionary<string, IList<Models.ClinicalTrial>> clinicalTrials = (Dictionary<string, IList<Models.ClinicalTrial>>)HttpRuntime.Cache.Get("PersonClinicalTrials");
+        public IHttpActionResult Index([FromUri] string person_uri) {
+            string domainName = getDomainName(person_uri);
+            if (domainName == null) {
+                return NotFound();
+            }
+
+            Dictionary<string, IList<Models.ClinicalTrial>> clinicalTrials = (Dictionary<string, IList<Models.ClinicalTrial>>)HttpRuntime.Cache.Get("PersonClinicalTrials:" + domainName);
+
+            var url = new Uri(person_uri);
+            person_uri = "http://profiles." + domainName + url.LocalPath;
 
             IList<Models.ClinicalTrial> trials = null;
-            if (clinicalTrials.TryGetValue(profile_uri, out trials)) {
+            if (clinicalTrials.TryGetValue(person_uri, out trials)) {
                 return Ok(trials.OrderByDescending(t => t.StartDate).ToArray());
             }
             return NotFound();
         }
 
         [HttpGet]
-        public IHttpActionResult Index([FromUri] string[] ids)
+        public IHttpActionResult Index([FromUri] string[] ids, [FromUri] string profile_uri)
         {
+            string domainName = getDomainName(profile_uri);
+            if (domainName == null)
+            {
+                return NotFound();
+            }
+
             List<Models.ClinicalTrial> result = new List<Models.ClinicalTrial>();
-            Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
-            foreach(var trialId in ids[0].Split(',')) {
+            Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials:" + domainName);
+            foreach (var trialId in ids[0].Split(',')) {
                 var clinicalTrial = getTrial(clinicalTrials, trialId);
                 if (clinicalTrial != null) {
                     result.Add(clinicalTrial);
                 }
             }
-            
+
             return Ok(result);
         }
 
         [HttpGet]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(string id, [FromUri] string profile_uri)
         {
-            Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials");
+            string domainName = getDomainName(profile_uri);
+            if (domainName == null)
+            {
+                return NotFound();
+            }
+
+            Dictionary<string, Models.ClinicalTrial> clinicalTrials = (Dictionary<string, Models.ClinicalTrial>)HttpRuntime.Cache.Get("ClinicalTrials:" + domainName);
             Models.ClinicalTrial clinicalTrial = getTrial(clinicalTrials, id);
             if (clinicalTrial == null) {
                 return NotFound();
@@ -108,6 +128,16 @@ namespace ClinicalTrialsApi.Controllers
                 Conditions = conditions.ToString(),
                 SourceUrl = "https://clinicaltrials.gov/ct2/show/" + id
             };
+        }
+
+        private string getDomainName(string uri) {
+            List<string> domainNames = (List<string>)HttpRuntime.Cache.Get("DomainNames");
+            foreach (string domainName in domainNames) {
+                if (uri.ToLower().Contains(domainName)) {
+                    return domainName;
+                }
+            }
+            return null;
         }
     }
 }

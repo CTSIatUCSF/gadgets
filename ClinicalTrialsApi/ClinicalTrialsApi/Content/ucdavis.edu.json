@@ -1,0 +1,4376 @@
+{
+   "NCT00001066" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         }
+      ],
+      "description_html" : "<p>Currently, none of the potential treatments for HIV-1 infection has proven to be both nontoxic and effective in long-term use. However, previous studies in both adults and children have shown that 3TC combined with AZT reduced HIV load in blood and increased white blood cells. Additionally, 3TC has demonstrated a favorable safety profile.</p>\n\n<p>Patients are randomized to receive oral 3TC/AZT, ddI/AZT, or ddI alone for at least 24 months. PER AMENDMENT 4/29/96: NOTE: Randomization to ZDV+ddI arm was terminated in Spring of 1996 based upon the results of ACTG 152. Patients on that arm will continue on blinded study drug and will be followed until the end of the study.</p>",
+      "eligibility_by_age_open_to_18_and_over" : false,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Malignancy.</li>\n<li> Hypersensitivity to a nucleoside analog.</li>\n<li> Current grade 2 or higher amylase/lipase toxicity or grade 3 or 4 other toxicity.</li>\n</ul>\n\n\n<p>PER AMENDMENT 4/29/96:</p>\n\n<ul>\n<li> Active opportunistic infection and/or serious bacterial infection at the time of\nentry.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Any other anti-HIV therapy.</li>\n<li> Megestrol acetate ( Megace ).</li>\n<li> Probenecid.</li>\n<li> IV pentamidine.</li>\n<li> Human growth hormone ( hGH ).</li>\n<li> Systemic corticosteroids for more than 2 weeks.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Investigational drug therapy within 14 days prior to study entry.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>  Inclusion Criteria</p>\n\n<p>Concurrent Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> IVIG.</li>\n<li> Prophylaxis for opportunistic infection.</li>\n<li> EPO.</li>\n<li> G-CSF or GM-CSF.</li>\n</ul>\n\n\n<p>Patients must have:</p>\n\n<ul>\n<li> Symptomatic HIV infection.</li>\n<li> Less than 56 days of prior antiretroviral therapy.</li>\n<li> Consent of parent or guardian.</li>\n</ul>\n\n\n<p>NOTE:</p>\n\n<ul>\n<li> Co-enrollment on ACTG 219, ACTG 220, and certain ACTG opportunistic infection\nprotocols is permitted.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> Up to 56 days of prior antiretroviral therapy.</li>\n<li> Prior immunomodulator therapy.</li>\n</ul>\n\n\n<p>Exclusion Criteria</p>\n\n<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Malignancy.</li>\n<li> Hypersensitivity to a nucleoside analog.</li>\n<li> Current grade 2 or higher amylase/lipase toxicity or grade 3 or 4 other toxicity.</li>\n</ul>\n\n\n<p>PER AMENDMENT 4/29/96:</p>\n\n<ul>\n<li> Active opportunistic infection and/or serious bacterial infection at the time of\nentry.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Any other anti-HIV therapy.</li>\n<li> Megestrol acetate ( Megace ).</li>\n<li> Probenecid.</li>\n<li> IV pentamidine.</li>\n<li> Human growth hormone ( hGH ).</li>\n<li> Systemic corticosteroids for more than 2 weeks.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Investigational drug therapy within 14 days prior to study entry.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<p>Concurrent Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> IVIG.</li>\n<li> Prophylaxis for opportunistic infection.</li>\n<li> EPO.</li>\n<li> G-CSF or GM-CSF.</li>\n</ul>\n\n\n<p>Patients must have:</p>\n\n<ul>\n<li> Symptomatic HIV infection.</li>\n<li> Less than 56 days of prior antiretroviral therapy.</li>\n<li> Consent of parent or guardian.</li>\n</ul>\n\n\n<p>NOTE:</p>\n\n<ul>\n<li> Co-enrollment on ACTG 219, ACTG 220, and certain ACTG opportunistic infection\nprotocols is permitted.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> Up to 56 days of prior antiretroviral therapy.</li>\n<li> Prior immunomodulator therapy.</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 3 months to 15 years",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00001066",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "HIV Infections",
+         "Didanosine",
+         "Drug Therapy, Combination",
+         "Acquired Immunodeficiency Syndrome",
+         "AIDS-Related Complex",
+         "Zidovudine",
+         "Lamivudine"
+      ],
+      "last_changed_or_verified_date" : "2011-03-01",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.550547",
+               "lon" : "-121.456373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "958172208",
+            "facility_name" : "Univ of California / Davis",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Oakland",
+            "facility_address_coordinates" : {
+               "lat" : "37.83439",
+               "lon" : "-122.264372"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "946091809",
+            "facility_name" : "Children's Hosp of Oakland",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.77493",
+               "lon" : "-122.41942"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "941430105",
+            "facility_name" : "UCSF / Moffitt Hosp - Pediatric",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stanford",
+            "facility_address_coordinates" : {
+               "lat" : "37.418256",
+               "lon" : "-122.170871"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "943054149",
+            "facility_name" : "Stanford Univ School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "900951752",
+            "facility_name" : "UCLA Med Ctr / Pediatric",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.127607",
+               "lon" : "-118.296387"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "900276016",
+            "facility_name" : "Children's Hosp of Los Angeles/UCLA Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90033",
+            "facility_name" : "Los Angeles County - USC Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "33.833181",
+               "lon" : "-118.292062"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "905022004",
+            "facility_name" : "Harbor - UCLA Med Ctr / UCLA School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Long Beach",
+            "facility_address_coordinates" : {
+               "lat" : "33.76696",
+               "lon" : "-118.18923"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90801",
+            "facility_name" : "Long Beach Memorial (Pediatric)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "La Jolla",
+            "facility_address_coordinates" : {
+               "lat" : "32.84727",
+               "lon" : "-117.2742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "920930672",
+            "facility_name" : "UCSD Med Ctr / Pediatrics / Clinical Sciences",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.659861",
+               "lon" : "-122.284977"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "981050371",
+            "facility_name" : "Children's Hospital & Medical Center / Seattle ACTU",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.73106",
+               "lon" : "-104.970673"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "802181088",
+            "facility_name" : "Children's Hosp of Denver",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Fort Worth",
+            "facility_address_coordinates" : {
+               "lat" : "32.728689",
+               "lon" : "-97.31781"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "76104",
+            "facility_name" : "Cook - Fort Worth Children's Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.832614",
+               "lon" : "-96.849082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75235",
+            "facility_name" : "Children's Med Ctr of Dallas",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Antonio",
+            "facility_address_coordinates" : {
+               "lat" : "29.52502",
+               "lon" : "-98.606564"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "78240",
+            "facility_name" : "Univ of Texas Health Science Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.971982",
+               "lon" : "-93.233441"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55455",
+            "facility_name" : "Univ of Minnesota Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Hermann Hosp / Univ Texas Health Science Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Texas Children's Hosp / Baylor Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Little Rock",
+            "facility_address_coordinates" : {
+               "lat" : "34.737441",
+               "lon" : "-92.304426"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arkansas",
+            "facility_address_zip" : "72202",
+            "facility_name" : "Arkansas Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.625796",
+               "lon" : "-90.266998"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63110",
+            "facility_name" : "St Louis Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Memphis",
+            "facility_address_coordinates" : {
+               "lat" : "35.151419",
+               "lon" : "-90.035468"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Tennessee",
+            "facility_address_zip" : "381052794",
+            "facility_name" : "Saint Jude Children's Research Hosp of Memphis",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Cook County Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Univ of Illinois College of Medicine / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.84688",
+               "lon" : "-87.670664"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60608",
+            "facility_name" : "Mount Sinai Hosp Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.922714",
+               "lon" : "-87.649577"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "606143394",
+            "facility_name" : "Chicago Children's Memorial Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.781621",
+               "lon" : "-87.599876"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "606371470",
+            "facility_name" : "Univ of Chicago Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Jackson",
+            "facility_address_coordinates" : {
+               "lat" : "32.333857",
+               "lon" : "-90.159647"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Mississippi",
+            "facility_address_zip" : "392165405",
+            "facility_name" : "Univ of Mississippi Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "701122699",
+            "facility_name" : "Tulane Univ / Charity Hosp of New Orleans",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Birmingham",
+            "facility_address_coordinates" : {
+               "lat" : "33.52066",
+               "lon" : "-86.80249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Alabama",
+            "facility_address_zip" : "35294",
+            "facility_name" : "Univ of Alabama at Birmingham Schl of Med / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cincinnati",
+            "facility_address_coordinates" : {
+               "lat" : "39.152732",
+               "lon" : "-84.486801"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "452292899",
+            "facility_name" : "Cincinnati Children's Hosp / Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dayton",
+            "facility_address_coordinates" : {
+               "lat" : "39.789502",
+               "lon" : "-84.161815"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "454041518",
+            "facility_name" : "Children's Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Detroit",
+            "facility_address_coordinates" : {
+               "lat" : "42.34702",
+               "lon" : "-83.060185"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48201",
+            "facility_name" : "Children's Hosp of Michigan",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Columbus",
+            "facility_address_coordinates" : {
+               "lat" : "39.957342",
+               "lon" : "-82.962019"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "432052696",
+            "facility_name" : "Columbus Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.78814",
+               "lon" : "-84.352625"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30306",
+            "facility_name" : "Emory Univ Hosp / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.505341",
+               "lon" : "-81.605432"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "44106",
+            "facility_name" : "Case Western Reserve Univ - Pediatric",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Augusta",
+            "facility_address_coordinates" : {
+               "lat" : "33.47051",
+               "lon" : "-81.988094"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30912",
+            "facility_name" : "Med College of Georgia",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Buffalo",
+            "facility_address_coordinates" : {
+               "lat" : "42.919828",
+               "lon" : "-78.876931"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14222",
+            "facility_name" : "Children's Hosp of Buffalo",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Columbia",
+            "facility_address_coordinates" : {
+               "lat" : "34.101723",
+               "lon" : "-81.042085"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "29203",
+            "facility_name" : "Univ of South Carolina School of Med",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.15478",
+               "lon" : "-77.61556"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14642",
+            "facility_name" : "Univ of Rochester Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Gainesville",
+            "facility_address_coordinates" : {
+               "lat" : "29.65163",
+               "lon" : "-82.32483"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32610",
+            "facility_name" : "Univ of Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Savannah",
+            "facility_address_coordinates" : {
+               "lat" : "32.051558",
+               "lon" : "-81.04921"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "31404",
+            "facility_name" : "Mem Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Jacksonville",
+            "facility_address_coordinates" : {
+               "lat" : "30.361015",
+               "lon" : "-81.696254"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32209",
+            "facility_name" : "Univ of Florida Health Science Ctr / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Durham",
+            "facility_address_coordinates" : {
+               "lat" : "35.99403",
+               "lon" : "-78.89862"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "277103499",
+            "facility_name" : "Duke Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Durham",
+            "facility_address_coordinates" : {
+               "lat" : "35.99403",
+               "lon" : "-78.89862"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27710",
+            "facility_name" : "Univ of North Carolina at Chapel Hill / Duke Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "28.004724",
+               "lon" : "-82.506088"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33614",
+            "facility_name" : "Saint Joseph's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charleston",
+            "facility_address_coordinates" : {
+               "lat" : "32.77657",
+               "lon" : "-79.93092"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "294253312",
+            "facility_name" : "Med Univ of South Carolina",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St Petersburg",
+            "facility_address_coordinates" : {
+               "lat" : "27.770793",
+               "lon" : "-82.632806"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33701",
+            "facility_name" : "All Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "27.917452",
+               "lon" : "-82.452279"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33606",
+            "facility_name" : "Univ of South Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Syracuse",
+            "facility_address_coordinates" : {
+               "lat" : "43.031057",
+               "lon" : "-76.127249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "13210",
+            "facility_name" : "SUNY Health Sciences Ctr at Syracuse / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Washington",
+            "facility_address_coordinates" : {
+               "lat" : "38.933366",
+               "lon" : "-77.030312"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "District of Columbia",
+            "facility_address_zip" : "200102916",
+            "facility_name" : "Children's Hosp of Washington DC",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Washington",
+            "facility_address_coordinates" : {
+               "lat" : "38.89511",
+               "lon" : "-77.03637"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "District of Columbia",
+            "facility_address_zip" : "20060",
+            "facility_name" : "Howard Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Richmond",
+            "facility_address_coordinates" : {
+               "lat" : "37.55376",
+               "lon" : "-77.46026"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Virginia",
+            "facility_address_zip" : "232980413",
+            "facility_name" : "Virginia Commonwealth Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.294821",
+               "lon" : "-76.622226"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21201",
+            "facility_name" : "Univ of Maryland at Baltimore / Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.29038",
+               "lon" : "-76.61219"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "212874933",
+            "facility_name" : "Johns Hopkins Hosp - Pediatric",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Orlando",
+            "facility_address_coordinates" : {
+               "lat" : "28.511789",
+               "lon" : "-81.360438"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32806",
+            "facility_name" : "Arnold Palmer Hosp for Children & Women",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Norfolk",
+            "facility_address_coordinates" : {
+               "lat" : "36.864564",
+               "lon" : "-76.303218"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Virginia",
+            "facility_address_zip" : "23507",
+            "facility_name" : "Senetara Norfolk Gen Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.958518",
+               "lon" : "-75.198856"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "191044318",
+            "facility_name" : "Children's Hosp of Philadelphia",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.989604",
+               "lon" : "-75.109091"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "191341095",
+            "facility_name" : "Saint Christopher's Hosp for Children",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Brunswick",
+            "facility_address_coordinates" : {
+               "lat" : "40.48622",
+               "lon" : "-74.45182"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "089030019",
+            "facility_name" : "UMDNJ - Robert Wood Johnson Med School / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Albany",
+            "facility_address_coordinates" : {
+               "lat" : "42.653031",
+               "lon" : "-73.809978"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "12208",
+            "facility_name" : "Children's Hosp at Albany Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "071032714",
+            "facility_name" : "Univ of Medicine & Dentistry of New Jersey / Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07103",
+            "facility_name" : "Saint Joseph's Hosp and Med Ctr/UMDNJ - New Jersey Med Schl",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.762918",
+               "lon" : "-74.186559"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "071072198",
+            "facility_name" : "Children's Hosp of New Jersey / UMDNJ - New Jersey Med Schl",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.731829",
+               "lon" : "-73.989181"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10003",
+            "facility_name" : "Beth Israel Med Ctr / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "Bellevue Hosp / New York Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.798601",
+               "lon" : "-73.966622"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10025",
+            "facility_name" : "Saint Luke's - Roosevelt Hosp Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.838792",
+               "lon" : "-73.94283"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10032",
+            "facility_name" : "Columbia Presbyterian Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Metropolitan Hosp Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Mount Sinai Med Ctr / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.81296",
+               "lon" : "-73.937376"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10037",
+            "facility_name" : "Harlem Hosp Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bronx",
+            "facility_address_coordinates" : {
+               "lat" : "40.847162",
+               "lon" : "-73.898663"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10457",
+            "facility_name" : "Bronx Lebanon Hosp Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Brooklyn",
+            "facility_address_coordinates" : {
+               "lat" : "40.64959",
+               "lon" : "-73.934374"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11203",
+            "facility_name" : "King's County Hosp Ctr / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Brooklyn",
+            "facility_address_coordinates" : {
+               "lat" : "40.64959",
+               "lon" : "-73.934374"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11203",
+            "facility_name" : "SUNY - Brooklyn",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Valhalla",
+            "facility_address_coordinates" : {
+               "lat" : "41.085897",
+               "lon" : "-73.782645"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10595",
+            "facility_name" : "Westchester Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Great Neck",
+            "facility_address_coordinates" : {
+               "lat" : "40.784319",
+               "lon" : "-73.731488"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11021",
+            "facility_name" : "North Shore Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Hyde Park",
+            "facility_address_coordinates" : {
+               "lat" : "40.745347",
+               "lon" : "-73.680292"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "11040",
+            "facility_name" : "Schneider Children's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Palm Beach",
+            "facility_address_coordinates" : {
+               "lat" : "26.757692",
+               "lon" : "-80.091172"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33407",
+            "facility_name" : "HRS Palm Beach County Public Health Unit",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Fort Lauderdale",
+            "facility_address_coordinates" : {
+               "lat" : "26.121323",
+               "lon" : "-80.127909"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33301",
+            "facility_name" : "Children's Diagnostic and Treatment Ctr of South Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stony Brook",
+            "facility_address_coordinates" : {
+               "lat" : "40.913615",
+               "lon" : "-73.125246"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "117948111",
+            "facility_name" : "State Univ of New York at Stony Brook",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.893664",
+               "lon" : "-80.181539"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33161",
+            "facility_name" : "Univ of Miami (Pediatric)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Farmington",
+            "facility_address_coordinates" : {
+               "lat" : "41.731051",
+               "lon" : "-72.857096"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06032",
+            "facility_name" : "Univ of Connecticut / Farmington",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Haven",
+            "facility_address_coordinates" : {
+               "lat" : "41.30815",
+               "lon" : "-72.92816"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "06504",
+            "facility_name" : "Yale Univ Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Springfield",
+            "facility_address_coordinates" : {
+               "lat" : "42.120563",
+               "lon" : "-72.604468"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "01199",
+            "facility_name" : "Baystate Med Ctr of Springfield",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Worcester",
+            "facility_address_coordinates" : {
+               "lat" : "42.26259",
+               "lon" : "-71.80229"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "016550001",
+            "facility_name" : "Univ of Massachusetts Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Providence",
+            "facility_address_coordinates" : {
+               "lat" : "41.81823",
+               "lon" : "-71.409088"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02903",
+            "facility_name" : "Rhode Island Hosp / Brown Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337105",
+               "lon" : "-71.105696"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "021155724",
+            "facility_name" : "Children's Hosp of Boston",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337582",
+               "lon" : "-71.070482"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02118",
+            "facility_name" : "Boston City Hosp / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bayamon",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "00956",
+            "facility_name" : "Ramon Ruiz Arnau Univ Hosp / Pediatrics",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Mayaguez",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "00680",
+            "facility_name" : "Mayaguez Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "009365067",
+            "facility_name" : "Univ of Puerto Rico / Univ Children's Hosp AIDS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "009367344",
+            "facility_name" : "San Juan City Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00001066",
+      "phase" : "2",
+      "phase_1" : false,
+      "phase_2" : true,
+      "phase_3" : false,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "National Institute of Allergy and Infectious Diseases (NIAID)",
+      "sponsor" : "National Institute of Allergy and Infectious Diseases (NIAID)",
+      "start_date" : "1999-11-02",
+      "study_type" : "Interventional",
+      "summary" : "To compare the efficacy of lamivudine (3TC) and zidovudine (AZT) in combination versus the better of didanosine (ddI) monotherapy or ddI/AZT combination, in symptomatic HIV-1 infected children who received less than 56 days of prior antiretroviral therapy. To evaluate the safety and tolerance of 3TC/AZT in this patient population. To determine other measures of diseases in response to the study regimens. Currently, none of the potential treatments for HIV-1 infection has proven to be both nontoxic and effective in long-term use. However, previous studies in both adults and children have shown that 3TC combined with AZT reduced HIV load in blood and increased white blood cells. Additionally, 3TC has demonstrated a favorable safety profile.",
+      "summary_html" : "<p>To compare the efficacy of lamivudine (3TC) and zidovudine (AZT) in combination versus the better of didanosine (ddI) monotherapy or ddI/AZT combination, in symptomatic HIV-1 infected children who received less than 56 days of prior antiretroviral therapy. To evaluate the safety and tolerance of 3TC/AZT in this patient population. To determine other measures of diseases in response to the study regimens. Currently, none of the potential treatments for HIV-1 infection has proven to be both nontoxic and effective in long-term use. However, previous studies in both adults and children have shown that 3TC combined with AZT reduced HIV load in blood and increased white blood cells. Additionally, 3TC has demonstrated a favorable safety profile.</p>",
+      "title_brief" : "A Comparison of Zidovudine Plus Lamivudine Versus ddI Used Alone or in Combination With Zidovudine in HIV-1 Infected Children",
+      "title_official" : "A Randomized Comparative Study of Combined Zidovudine-Lamivudine (3TC) vs. the Better of ddI Monotherapy vs. Zidovudine Plus Ddl in Symptomatic HIV-1 Infected Children",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00001137" : {
+      "completion_date" : "2013-11-01",
+      "conditions" : [
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         }
+      ],
+      "description_html" : "<p>A compilation of outcomes of various antiretroviral therapies would be beneficial when evaluating which strategies are most effective in long-term treatment of HIV-1. Using data from present and recently completed studies, this study will collect information on therapies and their control of HIV infection and maintenance of durable suppression of HIV-1 replication.</p>\n\n<p>No treatment is provided by this study, but patients will continue to receive highly active antiretroviral therapy (HAART) from other studies in which they are coenrolled. Blood and urine collection will occur at study entry and periodically throughout the study. Women may undergo pelvic exams and Pap smears. Portions of blood samples will be stored to evaluate genotypic/phenotypic susceptibility testing. Medical histories, physical exams, and questionnaires will be completed periodically.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<ul>\n<li> Active alcohol or drug abuse that may interfere with the study</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>  Inclusion Criteria</p>\n\n<ul>\n<li> HIV-1 infected</li>\n<li> Enrolled in an AIDS Clinical Trial Group (ACTG) parent study and has enrolled in this\nstudy on or before the Week 16 visit of the parent study, including the visit window\nof the parent study. More information on this criterion can be found in the protocol.</li>\n<li> Willing to provide consent for the release and use of clinical data from the parent\nstudy</li>\n<li> Life expectancy of at least 24 weeks</li>\n<li> Parent or guardian willing to provide informed consent, if applicable</li>\n</ul>\n\n\n<p>Exclusion Criteria</p>\n\n<ul>\n<li> Active alcohol or drug abuse that may interfere with the study</li>\n</ul>",
+      "eligibility_inclusion_html" : "<ul>\n<li> HIV-1 infected</li>\n<li> Enrolled in an AIDS Clinical Trial Group (ACTG) parent study and has enrolled in this\nstudy on or before the Week 16 visit of the parent study, including the visit window\nof the parent study. More information on this criterion can be found in the protocol.</li>\n<li> Willing to provide consent for the release and use of clinical data from the parent\nstudy</li>\n<li> Life expectancy of at least 24 weeks</li>\n<li> Parent or guardian willing to provide informed consent, if applicable</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 13 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00001137",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "HIV Infections",
+         "Treatment Experienced",
+         "Treatment Naive",
+         "Virus Replication",
+         "AIDS-Related Opportunistic Infections",
+         "HIV-1",
+         "Risk Factors",
+         "Incidence",
+         "RNA, Viral",
+         "Anti-HIV Agents",
+         "Viral Load",
+         "Lipodystrophy",
+         "Nervous System",
+         "Cardiovascular System",
+         "Neurologic Symptoms"
+      ],
+      "last_changed_or_verified_date" : "2013-12-05",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.580568",
+               "lon" : "-121.49559"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95814",
+            "facility_name" : "UC Davis Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Rafael",
+            "facility_address_coordinates" : {
+               "lat" : "38.022366",
+               "lon" : "-122.555605"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94903",
+            "facility_name" : "Marin County Specialty Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.750021",
+               "lon" : "-122.415201"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94110",
+            "facility_name" : "Univ of California, San Francisco/San Francisco General Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Menlo Park",
+            "facility_address_coordinates" : {
+               "lat" : "37.457524",
+               "lon" : "-122.176542"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94025",
+            "facility_name" : "Willow Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stanford",
+            "facility_address_coordinates" : {
+               "lat" : "37.418256",
+               "lon" : "-122.170871"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "943055107",
+            "facility_name" : "San Mateo AIDS Program / Stanford Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Stanford",
+            "facility_address_coordinates" : {
+               "lat" : "37.418256",
+               "lon" : "-122.170871"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "943055107",
+            "facility_name" : "Stanford Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Jose",
+            "facility_address_coordinates" : {
+               "lat" : "37.315977",
+               "lon" : "-121.936319"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "951282699",
+            "facility_name" : "Santa Clara Valley Med Ctr / AIDS Community Rsch Consortium",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.071225",
+               "lon" : "-118.443373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90095",
+            "facility_name" : "UCLA CARE Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.127607",
+               "lon" : "-118.296387"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90027",
+            "facility_name" : "Kaiser Permanente LAMC",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Los Angeles",
+            "facility_address_coordinates" : {
+               "lat" : "34.05038",
+               "lon" : "-118.211991"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "900331079",
+            "facility_name" : "Univ of Southern California / LA County USC Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Torrance",
+            "facility_address_coordinates" : {
+               "lat" : "33.833181",
+               "lon" : "-118.292062"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90502",
+            "facility_name" : "Harbor UCLA Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Diego",
+            "facility_address_coordinates" : {
+               "lat" : "32.747415",
+               "lon" : "-117.166883"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "921036325",
+            "facility_name" : "Univ of California / San Diego Treatment Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.544163",
+               "lon" : "-122.726626"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97210",
+            "facility_name" : "The Research & Education Group-Portland CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.601883",
+               "lon" : "-122.329451"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98104",
+            "facility_name" : "Univ of Washington",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.734837",
+               "lon" : "-105.020395"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "80204",
+            "facility_name" : "Denver Public Health CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.73915",
+               "lon" : "-104.9847"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "80262",
+            "facility_name" : "Univ of Colorado Health Sciences Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Omaha",
+            "facility_address_coordinates" : {
+               "lat" : "41.25626",
+               "lon" : "-95.94043"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Nebraska",
+            "facility_address_zip" : "681985130",
+            "facility_name" : "Univ of Nebraska Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.814164",
+               "lon" : "-96.84065"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75390",
+            "facility_name" : "Univ of Texas, Southwestern Med Ctr of Dallas",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.750602",
+               "lon" : "-96.756846"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75215",
+            "facility_name" : "Peabody Health Center CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.9748",
+               "lon" : "-93.257647"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55415",
+            "facility_name" : "Hennepin County Medical Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.971982",
+               "lon" : "-93.233441"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55455",
+            "facility_name" : "Univ of Minnesota",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Iowa City",
+            "facility_address_coordinates" : {
+               "lat" : "41.66188",
+               "lon" : "-91.54594"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Iowa",
+            "facility_address_zip" : "52242",
+            "facility_name" : "Univ of Iowa Hosp and Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Houston AIDS Research Team CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.658935",
+               "lon" : "-90.282668"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63112",
+            "facility_name" : "St Louis Regional Hosp / St Louis Regional Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Cook County Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Rush Presbyterian - Saint Luke's Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.893936",
+               "lon" : "-87.614498"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60611",
+            "facility_name" : "Northwestern Univ Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "70112",
+            "facility_name" : "Tulane Med Ctr Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "462025250",
+            "facility_name" : "Indiana Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202",
+            "facility_name" : "Division of Inf Diseases/ Indiana Univ Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.784102",
+               "lon" : "-86.163477"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46202",
+            "facility_name" : "Methodist Hosp of Indiana / Life Care Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Nashville",
+            "facility_address_coordinates" : {
+               "lat" : "36.149775",
+               "lon" : "-86.789146"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Tennessee",
+            "facility_address_zip" : "37203",
+            "facility_name" : "Vanderbilt Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Birmingham",
+            "facility_address_coordinates" : {
+               "lat" : "33.52066",
+               "lon" : "-86.80249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Alabama",
+            "facility_address_zip" : "35294",
+            "facility_name" : "Univ of Alabama at Birmingham",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cincinnati",
+            "facility_address_coordinates" : {
+               "lat" : "39.12711",
+               "lon" : "-84.51439"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "452670405",
+            "facility_name" : "Univ of Cincinnati",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Detroit",
+            "facility_address_coordinates" : {
+               "lat" : "42.34702",
+               "lon" : "-83.060185"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48201",
+            "facility_name" : "Wayne State Univ. CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Columbus",
+            "facility_address_coordinates" : {
+               "lat" : "40.005435",
+               "lon" : "-83.023227"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "432101228",
+            "facility_name" : "Ohio State Univ Hosp Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.771127",
+               "lon" : "-84.378108"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30308",
+            "facility_name" : "Emory Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.749",
+               "lon" : "-84.38798"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "303652225",
+            "facility_name" : "Emory Hemo Comp Evaluation Clinic / East TN Comp Hemo Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.447671",
+               "lon" : "-81.694403"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "441091998",
+            "facility_name" : "MetroHealth Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.505341",
+               "lon" : "-81.605432"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "44106-5083",
+            "facility_name" : "Cleveland Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pittsburgh",
+            "facility_address_coordinates" : {
+               "lat" : "40.444042",
+               "lon" : "-79.955249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "15213",
+            "facility_name" : "Univ of Pittsburgh",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Buffalo",
+            "facility_address_coordinates" : {
+               "lat" : "42.935339",
+               "lon" : "-78.810681"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14215",
+            "facility_name" : "SUNY / Erie County Med Ctr at Buffalo",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charlotte",
+            "facility_address_coordinates" : {
+               "lat" : "35.208185",
+               "lon" : "-80.859107"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "28203",
+            "facility_name" : "Carolinas Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Columbia",
+            "facility_address_coordinates" : {
+               "lat" : "33.997503",
+               "lon" : "-81.097406"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "29169",
+            "facility_name" : "Julio Arroyo",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Greensboro",
+            "facility_address_coordinates" : {
+               "lat" : "36.069144",
+               "lon" : "-79.765156"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27401",
+            "facility_name" : "Moses H Cone Memorial Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.15478",
+               "lon" : "-77.61556"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14642",
+            "facility_name" : "Community Health Network Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.15478",
+               "lon" : "-77.61556"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14642",
+            "facility_name" : "Univ of Rochester Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester,",
+            "facility_address_coordinates" : {
+               "lat" : "43.150776",
+               "lon" : "-77.586434"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14607",
+            "facility_name" : "AIDS Care CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chapel Hill",
+            "facility_address_coordinates" : {
+               "lat" : "35.966756",
+               "lon" : "-79.052136"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27514",
+            "facility_name" : "Wake County Department of Health",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chapel Hill",
+            "facility_address_coordinates" : {
+               "lat" : "35.9132",
+               "lon" : "-79.05584"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "275997215",
+            "facility_name" : "Univ of North Carolina",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Durham",
+            "facility_address_coordinates" : {
+               "lat" : "35.99403",
+               "lon" : "-78.89862"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27710",
+            "facility_name" : "Duke Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Washington",
+            "facility_address_coordinates" : {
+               "lat" : "38.914363",
+               "lon" : "-77.079339"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "District of Columbia",
+            "facility_address_zip" : "20007",
+            "facility_name" : "Georgetown Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Richmond",
+            "facility_address_coordinates" : {
+               "lat" : "37.539769",
+               "lon" : "-77.435528"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Virginia",
+            "facility_address_zip" : "23219",
+            "facility_name" : "Virginia Commonwealth Univ. Medical Ctr. CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.294821",
+               "lon" : "-76.622226"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21201",
+            "facility_name" : "IHV Baltimore Treatment CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Baltimore",
+            "facility_address_coordinates" : {
+               "lat" : "39.29038",
+               "lon" : "-76.61219"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Maryland",
+            "facility_address_zip" : "21287",
+            "facility_name" : "Johns Hopkins Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Honolulu",
+            "facility_address_coordinates" : {
+               "lat" : "21.290676",
+               "lon" : "-157.788352"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Hawaii",
+            "facility_address_zip" : "96816",
+            "facility_name" : "Univ of Hawaii",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tripler AMC",
+            "facility_address_coordinates" : {
+               "lat" : "21.36046",
+               "lon" : "-157.890628"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Hawaii",
+            "facility_address_zip" : "96859",
+            "facility_name" : "Tripler Army Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Norristown",
+            "facility_address_coordinates" : {
+               "lat" : "40.13018",
+               "lon" : "-75.331629"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19401",
+            "facility_name" : "Presbyterian Medical Center - Univ. of PA",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.958518",
+               "lon" : "-75.198856"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19104",
+            "facility_name" : "Univ of Pennsylvania at Philadelphia",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Camden",
+            "facility_address_coordinates" : {
+               "lat" : "39.935834",
+               "lon" : "-75.113921"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "08103",
+            "facility_name" : "Cooper Univ. Hosp. CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07103",
+            "facility_name" : "New Jersey Medical School- Adult Clinical Research Ctr. CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.731829",
+               "lon" : "-73.989181"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10003",
+            "facility_name" : "Beth Israel Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "Bellevue Hosp / New York Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "NY Univ. HIV/AIDS CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.838792",
+               "lon" : "-73.94283"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10032",
+            "facility_name" : "Columbia Presbyterian Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.769225",
+               "lon" : "-73.958741"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10021",
+            "facility_name" : "Aaron Diamond AIDS Rsch Ctr / Rockefeller Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.769225",
+               "lon" : "-73.958741"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10021",
+            "facility_name" : "Chelsea Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.769225",
+               "lon" : "-73.958741"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10021",
+            "facility_name" : "Cornell Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Mount Sinai Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bronx",
+            "facility_address_coordinates" : {
+               "lat" : "40.847162",
+               "lon" : "-73.898663"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10457",
+            "facility_name" : "Bronx-Lebanon Hosp. Ctr. CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.787247",
+               "lon" : "-80.205296"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "331361013",
+            "facility_name" : "Univ of Miami School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337105",
+               "lon" : "-71.105696"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02115",
+            "facility_name" : "Brigham and Women's Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.347635",
+               "lon" : "-71.103082"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02215",
+            "facility_name" : "Beth Israel Deaconess - West Campus",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.363174",
+               "lon" : "-71.068646"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02114",
+            "facility_name" : "Harvard (Massachusetts Gen Hosp)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337582",
+               "lon" : "-71.070482"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02118",
+            "facility_name" : "Boston Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan,",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "00935",
+            "facility_name" : "Puerto Rico-AIDS CRS",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "009365067",
+            "facility_name" : "Univ of Puerto Rico",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00001137",
+      "phase" : "",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : false,
+      "phase_4" : false,
+      "phase_unspecified" : true,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "AIDS Clinical Trials Group",
+      "sponsor" : "AIDS Clinical Trials Group",
+      "start_date" : "2000-01-01",
+      "study_type" : "Observational",
+      "summary" : "The purpose of this study is to determine what combinations of anti-HIV drugs work best in patients treated over several years. The study will also assess the occurrence of side effects and opportunistic infections in patients with low viral loads compared to those with higher viral loads.",
+      "summary_html" : "<p>The purpose of this study is to determine what combinations of anti-HIV drugs work best in patients treated over several years. The study will also assess the occurrence of side effects and opportunistic infections in patients with low viral loads compared to those with higher viral loads.</p>",
+      "title_brief" : "Long-Term Data Collection From Participants in Adult AIDS Clinical Trials",
+      "title_official" : "Adult AIDS Clinical Trials Group Longitudinal Linked Randomized Trials (ALLRT) Protocol",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00002343" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Mycobacterium Avium-Intracellulare Infection",
+            "slug" : "mycobacterium-avium-intracellulare-infection"
+         },
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         }
+      ],
+      "description_html" : "<p>Patients are randomized to receive oral rifabutin alone or rifabutin/ethambutol daily for 12 months, with possible continuation of medicine lifelong. Doses will be adjusted to maintain minimum blood levels of the drugs.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Positive tuberculin skin test (PPD &gt; 5 mm).</li>\n<li> Active M. tuberculosis.</li>\n<li> Perceived as unreliable or unavailable for frequent monitoring.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Other antiretrovirals not specifically allowed.</li>\n<li> All investigational drugs.</li>\n<li> Other antimycobacterial therapy, such as clarithromycin, azithromycin, rifampin,\nclofazimine, amikacin, streptomycin, isoniazid, cycloserine, ethionamide, and\nciprofloxacin (&gt;= 14 days).</li>\n</ul>\n\n\n<p>Patients with the following prior conditions are excluded:</p>\n\n<p>  Known hypersensitivity to rifabutin, rifampin, or other rifamycins and/or ethambutol.</p>\n\n<p>Prior Medication:</p>\n\n<p>Excluded within 4 weeks prior to study entry:</p>\n\n<ul>\n<li> Rifampin.</li>\n<li> Isoniazid.</li>\n<li> Clofazimine.</li>\n<li> Cycloserine.</li>\n<li> Ethionamide.</li>\n<li> Amikacin.</li>\n<li> Ciprofloxacin.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>  Inclusion Criteria</p>\n\n<p>Concurrent Medication:</p>\n\n<p>Required:</p>\n\n<ul>\n<li> AZT, d4T, ddI, or ddC.</li>\n<li> Antipneumocystis prophylaxis.</li>\n</ul>\n\n\n<p>Allowed:</p>\n\n<ul>\n<li> Short course (&lt; 14 days) of ciprofloxacin for acute infections.</li>\n</ul>\n\n\n<p>Patients must have:</p>\n\n<ul>\n<li> AIDS.</li>\n<li> CD4 count &lt;= 100 cells/mm3.</li>\n<li> NO prior or current MAC infection.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Required:</p>\n\n<ul>\n<li> Antipneumocystis prophylaxis for at least 4 weeks prior to study entry.</li>\n</ul>\n\n\n<p>Allowed:</p>\n\n<ul>\n<li> Prior rifabutin.</li>\n<li> Prior ethambutol.</li>\n<li> Prior clarithromycin.</li>\n</ul>\n\n\n<p>Exclusion Criteria</p>\n\n<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Positive tuberculin skin test (PPD &gt; 5 mm).</li>\n<li> Active M. tuberculosis.</li>\n<li> Perceived as unreliable or unavailable for frequent monitoring.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Other antiretrovirals not specifically allowed.</li>\n<li> All investigational drugs.</li>\n<li> Other antimycobacterial therapy, such as clarithromycin, azithromycin, rifampin,\nclofazimine, amikacin, streptomycin, isoniazid, cycloserine, ethionamide, and\nciprofloxacin (&gt;= 14 days).</li>\n</ul>\n\n\n<p>Patients with the following prior conditions are excluded:</p>\n\n<p>  Known hypersensitivity to rifabutin, rifampin, or other rifamycins and/or ethambutol.</p>\n\n<p>Prior Medication:</p>\n\n<p>Excluded within 4 weeks prior to study entry:</p>\n\n<ul>\n<li> Rifampin.</li>\n<li> Isoniazid.</li>\n<li> Clofazimine.</li>\n<li> Cycloserine.</li>\n<li> Ethionamide.</li>\n<li> Amikacin.</li>\n<li> Ciprofloxacin.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<p>Concurrent Medication:</p>\n\n<p>Required:</p>\n\n<ul>\n<li> AZT, d4T, ddI, or ddC.</li>\n<li> Antipneumocystis prophylaxis.</li>\n</ul>\n\n\n<p>Allowed:</p>\n\n<ul>\n<li> Short course (&lt; 14 days) of ciprofloxacin for acute infections.</li>\n</ul>\n\n\n<p>Patients must have:</p>\n\n<ul>\n<li> AIDS.</li>\n<li> CD4 count &lt;= 100 cells/mm3.</li>\n<li> NO prior or current MAC infection.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Required:</p>\n\n<ul>\n<li> Antipneumocystis prophylaxis for at least 4 weeks prior to study entry.</li>\n</ul>\n\n\n<p>Allowed:</p>\n\n<ul>\n<li> Prior rifabutin.</li>\n<li> Prior ethambutol.</li>\n<li> Prior clarithromycin.</li>\n</ul>",
+      "eligibility_summary_short" : "people ages 18 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00002343",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Mycobacterium Avium-Intracellulare Infection",
+         "HIV Infections",
+         "Rifabutin",
+         "Drug Therapy, Combination",
+         "Ethambutol",
+         "Acquired Immunodeficiency Syndrome",
+         "Infection",
+         "Communicable Diseases",
+         "Bacteremia",
+         "Mycobacterium Infections"
+      ],
+      "last_changed_or_verified_date" : "2005-06-23",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.550547",
+               "lon" : "-121.456373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95817",
+            "facility_name" : "Univ of California - Davis Med Ctr / CARES",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00002343",
+      "phase" : "4",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : false,
+      "phase_4" : true,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "NIH AIDS Clinical Trials Information Service",
+      "sponsor" : "Pharmacia",
+      "start_date" : "1999-11-02",
+      "study_type" : "Interventional",
+      "summary" : "To optimize Mycobacterium avium Complex (MAC) prophylaxis in AIDS patients by measuring serum rifabutin levels and adjusting the dose accordingly. To combine rifabutin with ethambutol to examine the effect of combination therapy in preventing or delaying the incidence of MAC bacteremia in this patient population.",
+      "summary_html" : "<p>To optimize Mycobacterium avium Complex (MAC) prophylaxis in AIDS patients by measuring serum rifabutin levels and adjusting the dose accordingly. To combine rifabutin with ethambutol to examine the effect of combination therapy in preventing or delaying the incidence of MAC bacteremia in this patient population.</p>",
+      "title_brief" : "A Study of Rifabutin, Used Alone or With Ethambutol in the Prevention of Mycobacterium Avium Complex (MAC) Bacteremia in Patients With AIDS",
+      "title_official" : "An Open-Label Randomized Pharmacokinetic/Pharmacodynamic Study of Mycobutin (Rifabutin) or Rifabutin in Combination With Myambutol (Ethambutol) for Prophylaxis of Mycobacterium Avium Complex (MAC) Bacteremia in AIDS Patients With CD4 Counts <= 100 Cells/mm3",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00002345" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Anorexia",
+            "slug" : "anorexia"
+         },
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         },
+         {
+            "clusters" : [
+               "Other"
+            ],
+            "name" : "Cachexia",
+            "slug" : "cachexia"
+         }
+      ],
+      "description_html" : "<p>Patients are randomized to receive 1 of 2 doses of Megace oral suspension daily for 24 weeks; at 12 weeks, those receiving the lower dose who have not gained 5 pounds over baseline or had appetite improvement to good or excellent are escalated to the higher dose. Patients are evaluated at 4-week intervals. Dose may be adjusted to maintain a desired weight.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : false,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : false,
+      "eligibility_exclusion_html" : "<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Poorly controlled hypertension.</li>\n<li> Heart failure.</li>\n<li> Deep vein thrombosis.</li>\n<li> Uncontrolled severe diarrhea.</li>\n<li> Treatable active current infection (excluding chronic low-grade opportunistic\ninfections).</li>\n<li> Unable to intake food.</li>\n<li> Impaired digestive/absorptive function.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Initiation during the study of any therapy to treat HIV or anorexia/cachexia (other\nthan study drug).</li>\n</ul>\n\n\n<p>Patients with the following prior conditions are excluded:</p>\n\n<ul>\n<li> Hospitalization for or exacerbation of illness associated with weight loss within the\npast 2 weeks.</li>\n<li> Participation in other investigational drug studies within the past month.</li>\n<li> Previous abnormal mammogram (if 35-40 years of age) or abnormal mammogram within the\npast year (if over 40 years of age).</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> New antiviral therapy within the past 8 weeks.</li>\n<li> Medications to promote weight gain (e.g., corticosteroid, dronabinol) within the past\n2 months.</li>\n<li> Megestrol acetate within the past 3 months. IV drug abuse not treated for at least 4\nmonths.</li>\n</ul>",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>  Inclusion Criteria</p>\n\n<p>Patient must have:</p>\n\n<ul>\n<li> HIV infection.</li>\n<li> Evidence of HIV wasting syndrome that includes anorexia (appetite fair or poor) and\nweight loss &gt;= 10 percent of pre-illness body weight.</li>\n<li> Perception of weight loss as a detriment.</li>\n<li> Life expectancy of at least 24 weeks.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> Megestrol acetate for weight gain at a dose &lt; 400 mg for &lt; 60 days, provided therapy\nwas discontinued at least 3 months prior to study entry.</li>\n</ul>\n\n\n<p>Exclusion Criteria</p>\n\n<p>Co-existing Condition:</p>\n\n<p>Patients with the following symptoms or conditions are excluded:</p>\n\n<ul>\n<li> Poorly controlled hypertension.</li>\n<li> Heart failure.</li>\n<li> Deep vein thrombosis.</li>\n<li> Uncontrolled severe diarrhea.</li>\n<li> Treatable active current infection (excluding chronic low-grade opportunistic\ninfections).</li>\n<li> Unable to intake food.</li>\n<li> Impaired digestive/absorptive function.</li>\n</ul>\n\n\n<p>Concurrent Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> Initiation during the study of any therapy to treat HIV or anorexia/cachexia (other\nthan study drug).</li>\n</ul>\n\n\n<p>Patients with the following prior conditions are excluded:</p>\n\n<ul>\n<li> Hospitalization for or exacerbation of illness associated with weight loss within the\npast 2 weeks.</li>\n<li> Participation in other investigational drug studies within the past month.</li>\n<li> Previous abnormal mammogram (if 35-40 years of age) or abnormal mammogram within the\npast year (if over 40 years of age).</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Excluded:</p>\n\n<ul>\n<li> New antiviral therapy within the past 8 weeks.</li>\n<li> Medications to promote weight gain (e.g., corticosteroid, dronabinol) within the past\n2 months.</li>\n<li> Megestrol acetate within the past 3 months. IV drug abuse not treated for at least 4\nmonths.</li>\n</ul>",
+      "eligibility_inclusion_html" : "<p>Patient must have:</p>\n\n<ul>\n<li> HIV infection.</li>\n<li> Evidence of HIV wasting syndrome that includes anorexia (appetite fair or poor) and\nweight loss &gt;= 10 percent of pre-illness body weight.</li>\n<li> Perception of weight loss as a detriment.</li>\n<li> Life expectancy of at least 24 weeks.</li>\n</ul>\n\n\n<p>Prior Medication:</p>\n\n<p>Allowed:</p>\n\n<ul>\n<li> Megestrol acetate for weight gain at a dose &lt; 400 mg for &lt; 60 days, provided therapy\nwas discontinued at least 3 months prior to study entry.</li>\n</ul>",
+      "eligibility_summary_short" : "females ages 18 years and up",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00002345",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Anorexia",
+         "Cachexia",
+         "HIV Infections",
+         "Megestrol",
+         "Acquired Immunodeficiency Syndrome",
+         "Suspensions",
+         "Wasting Syndrome",
+         "Megestrol Acetate"
+      ],
+      "last_changed_or_verified_date" : "2007-10-01",
+      "links" : [
+         {
+            "description" : "BMS Clinical Trials Disclosure",
+            "url" : "http://ctr.bms.com/ctd/start.do"
+         },
+         {
+            "description" : "For FDA Safety Alerts and Recalls refer to the following link www.fda.gov/MEDWATCH/safety.htm",
+            "url" : "http://www.fda.gov/MEDWATCH/safety.htm"
+         }
+      ],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.550547",
+               "lon" : "-121.456373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95817",
+            "facility_name" : "Univ of California - Davis Med Ctr / CARES",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Washington",
+            "facility_address_coordinates" : {
+               "lat" : "38.914363",
+               "lon" : "-77.079339"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "District of Columbia",
+            "facility_address_zip" : "200072197",
+            "facility_name" : "Georgetown Univ Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Haven",
+            "facility_address_coordinates" : {
+               "lat" : "41.306502",
+               "lon" : "-72.926013"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Connecticut",
+            "facility_address_zip" : "065102483",
+            "facility_name" : "Yale Univ Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Providence",
+            "facility_address_coordinates" : {
+               "lat" : "41.840169",
+               "lon" : "-71.390408"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02906",
+            "facility_name" : "Miriam Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00002345",
+      "phase" : "4",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : false,
+      "phase_4" : true,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "Bristol-Myers Squibb",
+      "sponsor" : "Bristol-Myers Squibb",
+      "start_date" : "1999-11-02",
+      "study_type" : "Interventional",
+      "summary" : "To further evaluate the safety of megestrol acetate (Megace) oral suspension in the treatment of anorexia and cachexia in HIV-positive women. To compare the effectiveness of 2 doses of Megace by measurement of weight gain, appetite grade, and other parameters at 12 and 24 weeks.",
+      "summary_html" : "<p>To further evaluate the safety of megestrol acetate (Megace) oral suspension in the treatment of anorexia and cachexia in HIV-positive women. To compare the effectiveness of 2 doses of Megace by measurement of weight gain, appetite grade, and other parameters at 12 and 24 weeks.</p>",
+      "title_brief" : "The Safety and Effectiveness of Megace in HIV-Infected Women",
+      "title_official" : "Phase IV Study on the Safety and Efficacy of Megace Oral Suspension in HIV-Positive Females",
+      "title_tagline" : null,
+      "visits_description" : null
+   },
+   "NCT00002441" : {
+      "completion_date" : null,
+      "conditions" : [
+         {
+            "clusters" : [
+               "Infectious Diseases"
+            ],
+            "name" : "HIV/AIDS",
+            "slug" : "hiv-aids"
+         }
+      ],
+      "description_html" : "<p>Volunteers receive 7 blinded, intramuscular vaccinations (at Months 0, 1, 6, 12, 18, 24, 30) containing either the AIDSVAX B/B vaccine or a placebo (aluminum adjuvant only). Volunteers are randomized in a 2 to 1 vaccine-to-placebo ratio. HIV-uninfected persons are followed for a total of 16 visits beginning at screening and continuing until Month 36. Patients who become HIV infected during study are followed every 4 months for at least 24 months.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : false,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "",
+      "eligibility_healthy_volunteers" : true,
+      "eligibility_html" : "<p>Exclusion Criteria</p>\n\n<p>You will not be eligible for this study if you:</p>\n\n<ul>\n<li> Use injection drugs.</li>\n<li> Have a history of any serious diseases or conditions, including lymphoma.</li>\n<li> Have ever received an HIV vaccine.</li>\n<li> Have taken post-exposure treatment to prevent HIV infection within 4 weeks prior to\nstudy entry.</li>\n<li> Are planning to take other HIV vaccines during this study.</li>\n<li> Are pregnant.</li>\n<li> Have taken certain medications or received certain therapies, including chemotherapy\nand radiation.</li>\n<li> Have received certain vaccines within 2-4 weeks prior to study entry.</li>\n</ul>\n\n\n<p>You may be eligible for this study if you:</p>\n\n<ul>\n<li> Are HIV-negative.</li>\n<li> Are between 18 and 60 years old.</li>\n<li> Are available for 3 years of follow-up.</li>\n<li> Agree to use effective methods of birth control during the study and for 90 days\nafter.</li>\n<li> Are one of the following:</li>\n<li> A woman who is currently in a sexual relationship with an HIV-positive man.</li>\n<li> A woman who has had more than one male partner and at least one sexually transmitted\ndisease (STD) within the past 12 months.</li>\n<li> A man who has sex with men and has had anal intercourse within the past 12 months.\n(You will not be eligible if you have been in the same relationship with only one\nHIV-negative man for at least 12 months.)</li>\n</ul>",
+      "eligibility_inclusion_html" : "",
+      "eligibility_summary_short" : "people ages 18–60",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00002441",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "HIV Infections",
+         "HIV Seronegativity",
+         "HIV-1",
+         "Dose-Response Relationship, Drug",
+         "Acquired Immunodeficiency Syndrome",
+         "AIDS Vaccines",
+         "Sexually Transmitted Diseases",
+         "Risk Factors",
+         "Antigens, Viral",
+         "Alum Compounds",
+         "Infection",
+         "Communicable Diseases",
+         "Vaccines"
+      ],
+      "last_changed_or_verified_date" : "2005-06-23",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.550547",
+               "lon" : "-121.456373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95817",
+            "facility_name" : "Univ of California - Davis Med Ctr / CARES",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.779584",
+               "lon" : "-122.419339"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94102",
+            "facility_name" : "San Francisco Dept of Hlth / AIDS Office",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.750021",
+               "lon" : "-122.415201"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "941102859",
+            "facility_name" : "San Francisco Gen Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Francisco",
+            "facility_address_coordinates" : {
+               "lat" : "37.750021",
+               "lon" : "-122.415201"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "94110",
+            "facility_name" : "UCSF - San Francisco Gen Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Jose",
+            "facility_address_coordinates" : {
+               "lat" : "37.315977",
+               "lon" : "-121.936319"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95128",
+            "facility_name" : "Santa Clara Public Health Dept",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Hollywood",
+            "facility_address_coordinates" : {
+               "lat" : "34.093831",
+               "lon" : "-118.381697"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "90069",
+            "facility_name" : "AIDS Research Alliance",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Orange",
+            "facility_address_coordinates" : {
+               "lat" : "33.788145",
+               "lon" : "-117.87655"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92868",
+            "facility_name" : "Univ of California / UCI Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Las Vegas",
+            "facility_address_coordinates" : {
+               "lat" : "36.14543",
+               "lon" : "-115.186825"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Nevada",
+            "facility_address_zip" : "89102",
+            "facility_name" : "Wellness Ctr / Las Vegas",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Palm Springs",
+            "facility_address_coordinates" : {
+               "lat" : "33.860919",
+               "lon" : "-116.56616"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "92262",
+            "facility_name" : "ViRx Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Portland",
+            "facility_address_coordinates" : {
+               "lat" : "45.544163",
+               "lon" : "-122.726626"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oregon",
+            "facility_address_zip" : "97210",
+            "facility_name" : "Research and Education Group",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Seattle",
+            "facility_address_coordinates" : {
+               "lat" : "47.601883",
+               "lon" : "-122.329451"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Washington",
+            "facility_address_zip" : "98104",
+            "facility_name" : "Univ of Washington",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Phoenix",
+            "facility_address_coordinates" : {
+               "lat" : "33.511517",
+               "lon" : "-112.019166"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85016",
+            "facility_name" : "Phoenix Body Positive",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Vancouver",
+            "facility_address_coordinates" : {
+               "lat" : "49.24966",
+               "lon" : "-123.11934"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "British Columbia",
+            "facility_name" : "St Pauls Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tucson",
+            "facility_address_coordinates" : {
+               "lat" : "32.252876",
+               "lon" : "-110.886584"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Arizona",
+            "facility_address_zip" : "85712",
+            "facility_name" : "Arizona Clinical Research Ctr Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Albuquerque",
+            "facility_address_coordinates" : {
+               "lat" : "35.08449",
+               "lon" : "-106.65114"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Mexico",
+            "facility_address_zip" : "87131",
+            "facility_name" : "Univ of New Mexico Hlth Sciences Ctr / Dept of Med",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Denver",
+            "facility_address_coordinates" : {
+               "lat" : "39.734837",
+               "lon" : "-105.020395"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Colorado",
+            "facility_address_zip" : "80204",
+            "facility_name" : "Denver Hlth and Hosp Authority / Dept of Pub Hlth",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tulsa",
+            "facility_address_coordinates" : {
+               "lat" : "36.146466",
+               "lon" : "-95.954002"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oklahoma",
+            "facility_address_zip" : "74104",
+            "facility_name" : "Clinical Pharmaceutical Trials Inc / St Johns Doctors Bldg",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.811813",
+               "lon" : "-96.812898"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75219",
+            "facility_name" : "Nelson Tebedo Health Resource Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.811813",
+               "lon" : "-96.812898"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75219",
+            "facility_name" : "Oak Lawn Physicians / North TX Ctr for AIDS & Cln Rsch",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Kansas City",
+            "facility_address_coordinates" : {
+               "lat" : "39.05758",
+               "lon" : "-94.593879"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "64111",
+            "facility_name" : "Kansas City AIDS Research Consortium",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Louis Park",
+            "facility_address_coordinates" : {
+               "lat" : "44.950191",
+               "lon" : "-93.336325"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55416",
+            "facility_name" : "Park Nicollet Med Ctr / Hlth Education",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.935036",
+               "lon" : "-93.253029"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55407",
+            "facility_name" : "Abbott Northwestern Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Minneapolis",
+            "facility_address_coordinates" : {
+               "lat" : "44.9748",
+               "lon" : "-93.257647"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55415",
+            "facility_name" : "Hennepin County Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "St. Paul",
+            "facility_address_coordinates" : {
+               "lat" : "44.951483",
+               "lon" : "-93.090649"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Minnesota",
+            "facility_address_zip" : "55101",
+            "facility_name" : "St Paul Public Health",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.561579",
+               "lon" : "-95.099626"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77058",
+            "facility_name" : "UTMB Ctr for Clinical Studies / St John Prof Bldg",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Galveston",
+            "facility_address_coordinates" : {
+               "lat" : "29.30135",
+               "lon" : "-94.7977"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77555",
+            "facility_name" : "Univ of Texas Med Branch Ctr for Clinical Studies",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Saint Louis",
+            "facility_address_coordinates" : {
+               "lat" : "38.611128",
+               "lon" : "-90.214087"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Missouri",
+            "facility_address_zip" : "63104",
+            "facility_name" : "Saint Louis Univ Hosp / Ctr for Vacc Dev",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Milwaukee",
+            "facility_address_coordinates" : {
+               "lat" : "43.038097",
+               "lon" : "-87.916734"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Wisconsin",
+            "facility_address_zip" : "53203",
+            "facility_name" : "Wisconsin AIDS Research Consortium",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.880312",
+               "lon" : "-87.687742"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60612",
+            "facility_name" : "Univ of Illinois at Chicago / Dept of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.956949",
+               "lon" : "-87.654272"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60613",
+            "facility_name" : "Howard Brown Health Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Chicago",
+            "facility_address_coordinates" : {
+               "lat" : "41.906772",
+               "lon" : "-87.632231"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Illinois",
+            "facility_address_zip" : "60610",
+            "facility_name" : "Chicago Ctr for Clinical Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "70112",
+            "facility_name" : "Louisiana State Univ Med Ctr / Infect Diseases",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Indianapolis",
+            "facility_address_coordinates" : {
+               "lat" : "39.782412",
+               "lon" : "-86.042939"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Indiana",
+            "facility_address_zip" : "46219",
+            "facility_name" : "Community Hosp Indianapolis",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Birmingham",
+            "facility_address_coordinates" : {
+               "lat" : "33.52066",
+               "lon" : "-86.80249"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Alabama",
+            "facility_address_zip" : "35294",
+            "facility_name" : "Univ of Alabama at Birmingham",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Columbus",
+            "facility_address_coordinates" : {
+               "lat" : "40.005435",
+               "lon" : "-83.023227"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "43210",
+            "facility_name" : "Ohio State Univ / ACTU-Univ Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.771127",
+               "lon" : "-84.378108"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30308",
+            "facility_name" : "AIDS Research Consortium of Atlanta",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Cleveland",
+            "facility_address_coordinates" : {
+               "lat" : "41.505341",
+               "lon" : "-81.605432"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Ohio",
+            "facility_address_zip" : "44106",
+            "facility_name" : "Case Western Reserve Univ",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pittsburgh",
+            "facility_address_coordinates" : {
+               "lat" : "40.44062",
+               "lon" : "-79.99589"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_name" : "Univ of Pittsburgh Med School",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Buffalo",
+            "facility_address_coordinates" : {
+               "lat" : "42.935339",
+               "lon" : "-78.810681"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14215",
+            "facility_name" : "AIDS Services Erie County Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charlotte",
+            "facility_address_coordinates" : {
+               "lat" : "35.194148",
+               "lon" : "-80.824585"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "28207",
+            "facility_name" : "Nalle Clinic / Clinical Research Dept",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Winston Salem",
+            "facility_address_coordinates" : {
+               "lat" : "36.05823",
+               "lon" : "-80.321496"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27103",
+            "facility_name" : "PW Clinical Research / LLC",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Rochester",
+            "facility_address_coordinates" : {
+               "lat" : "43.15478",
+               "lon" : "-77.61556"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "14642",
+            "facility_name" : "Univ of Rochester Med Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Jacksonville",
+            "facility_address_coordinates" : {
+               "lat" : "30.361015",
+               "lon" : "-81.696254"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32209",
+            "facility_name" : "Boulevard Comprehensive Care Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "28.004724",
+               "lon" : "-82.506088"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33614",
+            "facility_name" : "Infectious Disease Research Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Washington",
+            "facility_address_coordinates" : {
+               "lat" : "38.88184",
+               "lon" : "-76.99094"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "District of Columbia",
+            "facility_address_zip" : "20003",
+            "facility_name" : "Johns Hopkins Univ / Ctr for Immun Rsch",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Altamonte Springs",
+            "facility_address_coordinates" : {
+               "lat" : "28.665832",
+               "lon" : "-81.370772"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32701",
+            "facility_name" : "IDC Research Initiative",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Honolulu",
+            "facility_address_coordinates" : {
+               "lat" : "21.290676",
+               "lon" : "-157.788352"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Hawaii",
+            "facility_address_zip" : "96816",
+            "facility_name" : "Univ of Hawaii",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Philadelphia",
+            "facility_address_coordinates" : {
+               "lat" : "39.892401",
+               "lon" : "-75.460137"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Pennsylvania",
+            "facility_address_zip" : "19017",
+            "facility_name" : "Philadelphia FIGHT",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Albany",
+            "facility_address_coordinates" : {
+               "lat" : "42.653031",
+               "lon" : "-73.809978"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "12208",
+            "facility_name" : "Albany Med College / Div of HIV Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Newark",
+            "facility_address_coordinates" : {
+               "lat" : "40.738728",
+               "lon" : "-74.195534"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07103",
+            "facility_name" : "New Jersey Community Research Initiative",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Poughkeepsie",
+            "facility_address_coordinates" : {
+               "lat" : "41.701921",
+               "lon" : "-73.911519"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "12601",
+            "facility_name" : "Dutchess County Dept of Health",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.742042",
+               "lon" : "-74.000622"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10011",
+            "facility_name" : "St Luke Roosevelt Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.745221",
+               "lon" : "-73.978294"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10016",
+            "facility_name" : "New York Univ Med Ctr / Dept of Environmental Med",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Mount Sinai Med Ctr / Jack Martin Fund Clinic",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bronx",
+            "facility_address_coordinates" : {
+               "lat" : "40.829886",
+               "lon" : "-73.908121"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10456",
+            "facility_name" : "New York Blood Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Bronx",
+            "facility_address_coordinates" : {
+               "lat" : "40.829886",
+               "lon" : "-73.908121"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10456",
+            "facility_name" : "Project Achieve - New York Blood Ctr - Women only",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Riviera Beach",
+            "facility_address_coordinates" : {
+               "lat" : "26.781022",
+               "lon" : "-80.063738"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33404",
+            "facility_name" : "Community AIDS Resource Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "West Palm Beach",
+            "facility_address_coordinates" : {
+               "lat" : "26.714559",
+               "lon" : "-80.095821"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33409",
+            "facility_name" : "Palm Beach Research Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Montreal",
+            "facility_address_coordinates" : {
+               "lat" : "52.00017",
+               "lon" : "-71.99907"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Quebec",
+            "facility_name" : "Ctr Hosp de Universite de Montreal (CHUM)",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Fort Lauderdale",
+            "facility_address_coordinates" : {
+               "lat" : "26.188511",
+               "lon" : "-80.104988"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33308",
+            "facility_name" : "Community AIDS Resource Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Coral Gables",
+            "facility_address_coordinates" : {
+               "lat" : "25.72085",
+               "lon" : "-80.272571"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33146",
+            "facility_name" : "Community AIDS Resource Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Providence",
+            "facility_address_coordinates" : {
+               "lat" : "41.798593",
+               "lon" : "-71.42463"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02907",
+            "facility_name" : "Omega Med Research",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Pawtucket",
+            "facility_address_coordinates" : {
+               "lat" : "41.870562",
+               "lon" : "-71.388681"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02860",
+            "facility_name" : "Mem Hosp of Rhode Island",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Providence",
+            "facility_address_coordinates" : {
+               "lat" : "41.840169",
+               "lon" : "-71.390408"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02906",
+            "facility_name" : "Miriam Hosp",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Boston",
+            "facility_address_coordinates" : {
+               "lat" : "42.337105",
+               "lon" : "-71.105696"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Massachusetts",
+            "facility_address_zip" : "02115",
+            "facility_name" : "Fenway Community Health Ctr",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "00909",
+            "facility_name" : "Clinical Research of Puerto Rico Inc",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Amsterdam",
+            "facility_address_coordinates" : {
+               "lat" : "52.25",
+               "lon" : "5.75"
+            },
+            "facility_address_country" : "Netherlands",
+            "facility_name" : "Municipal Health Service",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00002441",
+      "phase" : "3",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : true,
+      "phase_4" : false,
+      "phase_unspecified" : false,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "NIH AIDS Clinical Trials Information Service",
+      "sponsor" : "VaxGen",
+      "start_date" : "1999-11-02",
+      "study_type" : "Interventional",
+      "summary" : "The purpose of this study is to see if an HIV vaccine, AIDSVAX B/B, can protect adults who are at risk from becoming infected with HIV. Patients who become infected despite immunization will be studied to see if receiving the vaccine before becoming infected will help keep HIV levels (viral load) low.",
+      "summary_html" : "<p>The purpose of this study is to see if an HIV vaccine, AIDSVAX B/B, can protect adults who are at risk from becoming infected with HIV. Patients who become infected despite immunization will be studied to see if receiving the vaccine before becoming infected will help keep HIV levels (viral load) low.</p>",
+      "title_brief" : "Effectiveness of an HIV Vaccine in HIV-Negative Adults in North America Who Are at Risk of HIV Infection",
+      "title_official" : "A Phase III Trial to Determine the Efficacy of Bivalent AIDSVAX B/B Vaccine in Adults at Risk of Sexually Transmitted HIV-1 Infection in North America",
+      "title_tagline" : null,
+      "visits_description" : "Might require about 16 visits"
+   },
+   "NCT00002485" : {
+      "completion_date" : "2005-09-01",
+      "conditions" : [
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Brain And Central Nervous System Tumor",
+            "slug" : "brain-and-central-nervous-system-tumor"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Germ Cell Tumor",
+            "slug" : "germ-cell-tumor"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Leukemia",
+            "slug" : "leukemia"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Liver Cancer",
+            "slug" : "liver-cancer"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Lymphoma",
+            "slug" : "lymphoma"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Neuroblastoma",
+            "slug" : "neuroblastoma"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Ovarian Cancer",
+            "slug" : "ovarian-cancer"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Cancer, General",
+            "slug" : "cancer-general"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Sarcoma",
+            "slug" : "sarcoma"
+         },
+         {
+            "clusters" : [
+               "Cancer"
+            ],
+            "name" : "Solid Tumor",
+            "slug" : "solid-tumor"
+         }
+      ],
+      "description_html" : "<p>OBJECTIVES: I. Identify prospectively physician and patient factors associated with reasons why patients who are eligible for Pediatric Oncology Group therapeutic protocols are not enrolled onto such studies. II. Provide information that may be used to develop intervention strategies to decrease barriers to patient enrollment, thus increasing enrollment in therapeutic protocols.</p>\n\n<p>OUTLINE: This is a case-control, multicenter study. Case patients are stratified. Stratum 1 comprises patients for whom there is an appropriate Pediatric Oncology Group (POG) frontline therapeutic protocol that has not yet been submitted to, disapproved by, or approved by the Institutional Review Board (IRB). Stratum 2 comprises patients for whom there is an appropriate POG frontline therapeutic protocol that has been approved by the IRB. Physicians complete an IRB submission form for their patients on stratum 1. Patients/parents on stratum 2 who refused enrollment and their primary physicians complete questionnaires that address reasons for nonenrollment. Control patients/parents who consented to enrollment complete questionnaires that address reasons for enrollment. Demographic information, including the size of the treating institution and the annual number of patients enrolled onto its protocols, is collected. Additional demographic information regarding the patient and his or her family is collected.</p>\n\n<p>PROJECTED ACCRUAL: A total of 595 case patients (12 with soft tissue sarcoma, 34 with osteosarcoma, 19 with brain tumors, 32 with Hodgkin's disease, 60 with non-Hodgkin's lymphoma, 278 with acute lymphoblastic leukemia, 65 with acute non-lymphoblastic leukemia, 56 with neuroblastoma, 14 with hepatoblastoma, and 25 with germ cell tumors) will be accrued for this study within 7 years. Corresponding control patients will be accrued for this study.</p>",
+      "eligibility_by_age_open_to_18_and_over" : true,
+      "eligibility_by_age_open_to_under_18" : true,
+      "eligibility_by_sex_all" : true,
+      "eligibility_by_sex_female" : true,
+      "eligibility_by_sex_male" : true,
+      "eligibility_exclusion_html" : "",
+      "eligibility_healthy_volunteers" : false,
+      "eligibility_html" : "<p>DISEASE CHARACTERISTICS: Case or control patient clinically eligible for a Pediatric\n  Oncology Group (POG) frontline therapeutic protocol, whether or not the protocol was\n  submitted to or approved by the physician's Institutional Review Board Case patients must\n  not have enrolled on the POG frontline protocol due to decision by the physician or\n  patient/parent Control patients must have been enrolled on the POG frontline protocol\n  Ineligible if offered treatment on an in-house therapeutic protocol (institutional review\n  board-approved) rather than the POG protocol</p>\n\n<p>PATIENT CHARACTERISTICS: Age: 21 and under Performance status: Not specified Life\n  expectancy: Not specified Hematopoietic: Not specified Hepatic: Not specified Renal: Not\n  specified</p>\n\n<p>PRIOR CONCURRENT THERAPY: Biologic therapy: Not specified Chemotherapy: Not specified</p>\n\n<p>Endocrine therapy: Not specified Radiotherapy: Not specified Surgery: Not specified</p>",
+      "eligibility_inclusion_html" : "",
+      "eligibility_summary_short" : "people ages up to 21 years",
+      "eligibility_tags" : [],
+      "estimated_completion_date" : null,
+      "id" : "NCT00002485",
+      "institution_names" : [],
+      "institutional_pis" : [],
+      "institutions" : [],
+      "is_contactable" : false,
+      "is_contactable_matches_studywide_status" : true,
+      "is_joinable" : false,
+      "is_joinable_matches_studywide_status" : true,
+      "is_visible" : false,
+      "is_visible_matches_studywide_status" : true,
+      "keywords" : [
+         "Brain and Central Nervous System Tumors",
+         "Childhood Germ Cell Tumor",
+         "Extragonadal Germ Cell Tumor",
+         "Leukemia",
+         "Liver Cancer",
+         "Lymphoma",
+         "Neuroblastoma",
+         "Ovarian Cancer",
+         "Psychosocial Effects of Cancer and Its Treatment",
+         "Sarcoma",
+         "Unspecified Childhood Solid Tumor, Protocol Specific",
+         "localized osteosarcoma",
+         "metastatic osteosarcoma",
+         "recurrent childhood acute lymphoblastic leukemia",
+         "childhood infratentorial ependymoma",
+         "childhood low-grade cerebral astrocytoma",
+         "childhood supratentorial ependymoma",
+         "childhood craniopharyngioma",
+         "localized resectable neuroblastoma",
+         "regional neuroblastoma",
+         "disseminated neuroblastoma",
+         "stage 4S neuroblastoma",
+         "recurrent neuroblastoma",
+         "stage I childhood liver cancer",
+         "stage II childhood liver cancer",
+         "stage III childhood liver cancer",
+         "stage IV childhood liver cancer",
+         "recurrent childhood liver cancer",
+         "childhood hepatoblastoma",
+         "stage I childhood lymphoblastic lymphoma",
+         "stage II childhood lymphoblastic lymphoma",
+         "stage III childhood lymphoblastic lymphoma",
+         "stage IV childhood lymphoblastic lymphoma",
+         "recurrent childhood lymphoblastic lymphoma",
+         "childhood central nervous system germ cell tumor",
+         "recurrent childhood acute myeloid leukemia",
+         "recurrent osteosarcoma",
+         "untreated childhood acute myeloid leukemia and other myeloid malignancies",
+         "untreated childhood acute lymphoblastic leukemia",
+         "childhood acute myeloid leukemia in remission",
+         "childhood acute lymphoblastic leukemia in remission",
+         "stage II childhood Hodgkin lymphoma",
+         "stage I childhood Hodgkin lymphoma",
+         "stage III childhood Hodgkin lymphoma",
+         "stage IV childhood Hodgkin lymphoma",
+         "recurrent/refractory childhood Hodgkin lymphoma",
+         "nonmetastatic childhood soft tissue sarcoma",
+         "metastatic childhood soft tissue sarcoma",
+         "recurrent childhood soft tissue sarcoma",
+         "childhood high-grade cerebral astrocytoma",
+         "childhood oligodendroglioma",
+         "childhood choroid plexus tumor",
+         "childhood meningioma",
+         "localized unresectable neuroblastoma",
+         "stage I childhood small noncleaved cell lymphoma",
+         "stage I childhood large cell lymphoma",
+         "stage II childhood small noncleaved cell lymphoma",
+         "stage II childhood large cell lymphoma",
+         "stage III childhood small noncleaved cell lymphoma",
+         "stage III childhood large cell lymphoma",
+         "stage IV childhood small noncleaved cell lymphoma",
+         "stage IV childhood large cell lymphoma",
+         "recurrent childhood small noncleaved cell lymphoma",
+         "recurrent childhood large cell lymphoma",
+         "untreated childhood brain stem glioma",
+         "recurrent childhood brain stem glioma",
+         "untreated childhood supratentorial primitive neuroectodermal tumor",
+         "recurrent childhood supratentorial primitive neuroectodermal tumor",
+         "untreated childhood cerebellar astrocytoma",
+         "recurrent childhood cerebellar astrocytoma",
+         "recurrent childhood cerebral astrocytoma",
+         "untreated childhood medulloblastoma",
+         "recurrent childhood medulloblastoma",
+         "untreated childhood visual pathway and hypothalamic glioma",
+         "recurrent childhood visual pathway and hypothalamic glioma",
+         "newly diagnosed childhood ependymoma",
+         "recurrent childhood ependymoma",
+         "childhood teratoma",
+         "childhood malignant testicular germ cell tumor",
+         "childhood malignant ovarian germ cell tumor",
+         "childhood extragonadal germ cell tumor",
+         "recurrent childhood malignant germ cell tumor",
+         "childhood atypical teratoid/rhabdoid tumor",
+         "Neoplasms",
+         "Liver Neoplasms",
+         "Neoplasms, Germ Cell and Embryonal",
+         "Nervous System Neoplasms",
+         "Central Nervous System Neoplasms"
+      ],
+      "last_changed_or_verified_date" : "2014-02-12",
+      "links" : [],
+      "locations" : [
+         {
+            "facility_address_city" : "Sacramento",
+            "facility_address_coordinates" : {
+               "lat" : "38.550547",
+               "lon" : "-121.456373"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "California",
+            "facility_address_zip" : "95817",
+            "facility_name" : "University of California Davis Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : true,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Wichita",
+            "facility_address_coordinates" : {
+               "lat" : "37.707178",
+               "lon" : "-97.31775"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Kansas",
+            "facility_address_zip" : "67214-3882",
+            "facility_name" : "CCOP - Wichita",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Oklahoma City",
+            "facility_address_coordinates" : {
+               "lat" : "35.46756",
+               "lon" : "-97.51643"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Oklahoma",
+            "facility_address_zip" : "73126-0307",
+            "facility_name" : "Oklahoma Memorial Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Dallas",
+            "facility_address_coordinates" : {
+               "lat" : "32.902679",
+               "lon" : "-96.793393"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "75230",
+            "facility_name" : "Medical City Dallas Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Lackland Air Force Base",
+            "facility_address_coordinates" : {
+               "lat" : "29.391283",
+               "lon" : "-98.618734"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "78236-5300",
+            "facility_name" : "San Antonio Military Pediatric Cancer and Blood Disorders Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Antonio",
+            "facility_address_coordinates" : {
+               "lat" : "29.42412",
+               "lon" : "-98.49363"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "78284-7811",
+            "facility_name" : "University of Texas Health Science Center at San Antonio",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Houston",
+            "facility_address_coordinates" : {
+               "lat" : "29.706787",
+               "lon" : "-95.401748"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Texas",
+            "facility_address_zip" : "77030",
+            "facility_name" : "Baylor College of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Milwaukee",
+            "facility_address_coordinates" : {
+               "lat" : "43.050631",
+               "lon" : "-88.043161"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Wisconsin",
+            "facility_address_zip" : "53226",
+            "facility_name" : "Midwest Children's Cancer Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New Orleans",
+            "facility_address_coordinates" : {
+               "lat" : "29.957008",
+               "lon" : "-90.076935"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Louisiana",
+            "facility_address_zip" : "70112",
+            "facility_name" : "MBCCOP - LSU Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Flint",
+            "facility_address_coordinates" : {
+               "lat" : "42.999923",
+               "lon" : "-83.708864"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48503",
+            "facility_name" : "Hurley Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Detroit",
+            "facility_address_coordinates" : {
+               "lat" : "42.34702",
+               "lon" : "-83.060185"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Michigan",
+            "facility_address_zip" : "48201",
+            "facility_name" : "Children's Hospital of Michigan",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Atlanta",
+            "facility_address_coordinates" : {
+               "lat" : "33.793594",
+               "lon" : "-84.326128"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Georgia",
+            "facility_address_zip" : "30322",
+            "facility_name" : "Emory University Hospital - Atlanta",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Asheville",
+            "facility_address_coordinates" : {
+               "lat" : "35.594348",
+               "lon" : "-82.557917"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "28801",
+            "facility_name" : "Memorial Mission Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charleston",
+            "facility_address_coordinates" : {
+               "lat" : "38.393184",
+               "lon" : "-81.59547"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "West Virginia",
+            "facility_address_zip" : "25302",
+            "facility_name" : "West Virginia University - Charleston Division",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Ottawa",
+            "facility_address_coordinates" : {
+               "lat" : "43.70011",
+               "lon" : "-79.4163"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Ontario",
+            "facility_address_zip" : "K1H 8L1",
+            "facility_name" : "Children's Hospital of Eastern Ontario",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charlotte",
+            "facility_address_coordinates" : {
+               "lat" : "35.22709",
+               "lon" : "-80.84313"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "28233-3549",
+            "facility_name" : "Presbyterian Healthcare",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Winston-Salem",
+            "facility_address_coordinates" : {
+               "lat" : "36.09986",
+               "lon" : "-80.24422"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27157-1082",
+            "facility_name" : "Comprehensive Cancer Center of Wake Forest University Baptist Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Gainesville",
+            "facility_address_coordinates" : {
+               "lat" : "29.65163",
+               "lon" : "-82.32483"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "32610-100277",
+            "facility_name" : "Shands Hospital and Clinics, University of Florida",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Charleston",
+            "facility_address_coordinates" : {
+               "lat" : "32.77657",
+               "lon" : "-79.93092"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "South Carolina",
+            "facility_address_zip" : "29425-0721",
+            "facility_name" : "Medical University of South Carolina",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Tampa",
+            "facility_address_coordinates" : {
+               "lat" : "27.94752",
+               "lon" : "-82.45843"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33682-7757",
+            "facility_name" : "CCOP - Florida Pediatric",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Greenville",
+            "facility_address_coordinates" : {
+               "lat" : "35.53175",
+               "lon" : "-77.283888"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "North Carolina",
+            "facility_address_zip" : "27858-4354",
+            "facility_name" : "East Carolina University School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Honolulu",
+            "facility_address_coordinates" : {
+               "lat" : "21.36046",
+               "lon" : "-157.890628"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Hawaii",
+            "facility_address_zip" : "96859-5000",
+            "facility_name" : "Tripler Army Medical Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Burlington",
+            "facility_address_coordinates" : {
+               "lat" : "44.476621",
+               "lon" : "-73.209998"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Vermont",
+            "facility_address_zip" : "05401-3498",
+            "facility_name" : "Vermont Cancer Center",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Hackensack",
+            "facility_address_coordinates" : {
+               "lat" : "40.889398",
+               "lon" : "-74.045698"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New Jersey",
+            "facility_address_zip" : "07601",
+            "facility_name" : "Tomorrows Children's Institute",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "New York",
+            "facility_address_coordinates" : {
+               "lat" : "40.791763",
+               "lon" : "-73.94397"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "New York",
+            "facility_address_zip" : "10029",
+            "facility_name" : "Mount Sinai School of Medicine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Montreal",
+            "facility_address_coordinates" : {
+               "lat" : "52.00017",
+               "lon" : "-71.99907"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Quebec",
+            "facility_address_zip" : "H3H 1P3",
+            "facility_name" : "Montreal Children's Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Montreal",
+            "facility_address_coordinates" : {
+               "lat" : "52.00017",
+               "lon" : "-71.99907"
+            },
+            "facility_address_country" : "Canada",
+            "facility_address_state" : "Quebec",
+            "facility_address_zip" : "H3T 1C5",
+            "facility_name" : "Hopital Sainte Justine",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Miami",
+            "facility_address_coordinates" : {
+               "lat" : "25.787247",
+               "lon" : "-80.205296"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Florida",
+            "facility_address_zip" : "33136",
+            "facility_name" : "Sylvester Cancer Center, University of Miami",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Providence",
+            "facility_address_coordinates" : {
+               "lat" : "41.81823",
+               "lon" : "-71.409088"
+            },
+            "facility_address_country" : "United States",
+            "facility_address_state" : "Rhode Island",
+            "facility_address_zip" : "02903",
+            "facility_name" : "Rhode Island Hospital",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "San Juan",
+            "facility_address_coordinates" : {
+               "lat" : "18.24829",
+               "lon" : "-66.49989"
+            },
+            "facility_address_country" : "Puerto Rico",
+            "facility_address_zip" : "00936-5067",
+            "facility_name" : "University of Puerto Rico School of Medicine Medical Sciences Campus",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         },
+         {
+            "facility_address_city" : "Geneva",
+            "facility_address_coordinates" : {
+               "lat" : "47.00016",
+               "lon" : "8.01427"
+            },
+            "facility_address_country" : "Switzerland",
+            "facility_address_zip" : "1211",
+            "facility_name" : "Clinique de Pediatrie",
+            "institutions" : [],
+            "is_institutional_location" : false,
+            "is_joinable" : null
+         }
+      ],
+      "nct_number" : "NCT00002485",
+      "phase" : "",
+      "phase_1" : false,
+      "phase_2" : false,
+      "phase_3" : false,
+      "phase_4" : false,
+      "phase_unspecified" : true,
+      "recruitment_status" : "Completed",
+      "recruitment_status_schema_dot_org" : "Completed",
+      "source" : "Children's Oncology Group",
+      "sponsor" : "Children's Oncology Group",
+      "start_date" : "1992-02-01",
+      "study_type" : "Observational",
+      "summary" : "RATIONALE: Taking part in a clinical trial may help children with cancer receive more effective treatment. PURPOSE: Determine why patients who are eligible for protocols made available through the Pediatric Oncology Group do not enroll in them, and develop strategies to increase enrollment on these clinical trials.",
+      "summary_html" : "<p>RATIONALE: Taking part in a clinical trial may help children with cancer receive more effective treatment.</p>\n\n<p>PURPOSE: Determine why patients who are eligible for protocols made available through the Pediatric Oncology Group do not enroll in them, and develop strategies to increase enrollment on these clinical trials.</p>",
+      "title_brief" : "Development of Strategies to Increase Enrollment in Clinical Trials for Children With Cancer",
+      "title_official" : "Barriers to Patient Enrollment Onto Frontline Therapeutic Clinical Trials and Development of Intervention Strategies to Increase the Proportion of Enrollment",
+      "title_tagline" : null,
+      "visits_description" : null
+   }
+}

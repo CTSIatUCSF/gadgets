@@ -36,7 +36,7 @@
 	        }
 	        
 	        function getOwner(callback) {
-              var nodeId, baseUrl = ENV_API_URL;
+              var nodeId;
               
               osapi.jsonld.getOwner().execute(function(result) {
                   if (result.error) { 

@@ -21,6 +21,7 @@
 	    <script type="text/javascript" src="js/os.js" ></script>
 	    <script type="text/javascript" src="js/lodash.min.js" ></script>
 	    <script type="text/javascript" src="js/async.min.js" ></script>
+	    <script type="text/javascript" src="js/environment.js" ></script>
 
 		<script type="text/javascript">
 			_.templateSettings = {
@@ -28,9 +29,10 @@
 				evaluate: /\{\{(.+?)\}\}/g,
 				escape: /\{\{-(.+?)\}\}/g
 			};
-			var UCSF = UCSF || {};			
-			UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
-			UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
+
+			// Below is read from environment.js
+			//UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
+			
 			UCSF.ClinicalTrials.dateOptions = { year: 'numeric', month: 'short' };
 			
 			function renderTrial(trial) {
@@ -42,12 +44,12 @@
 			function loadOwnerTrials(callback) {
 				osapi.jsonld.getOwner().execute(function(ownerData) {					
 					framePerson(ownerData, function(ownerObj) {
-						var ownerUrl = ownerObj[FOAF('workplaceHomepage')];
+						var ownerUrl = UCSF.ConvertToProductionURL(ownerObj[FOAF('workplaceHomepage')]);
 
 						var params = {};
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-						var url = UCSF.ClinicalTrials.seviceURL + '/?person_uri=' + ownerUrl;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?person_url=' + ownerUrl;
 						gadgets.io.makeRequest(url, function(result) {
 							if(result.data != null) {
 								callback(null, result.data);

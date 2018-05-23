@@ -18,19 +18,16 @@ namespace ClinicalTrialsApi.Controllers
         private static HttpClient httpClient = new HttpClient();
 
         [HttpGet]
-        public IHttpActionResult Index([FromUri] string person_uri) {
-            string domainName = getDomainName(person_uri);
+        public IHttpActionResult Index([FromUri] string person_url) {
+            string domainName = getDomainName(person_url);
             if (domainName == null) {
                 return NotFound();
             }
 
             Dictionary<string, IList<Models.ClinicalTrial>> clinicalTrials = (Dictionary<string, IList<Models.ClinicalTrial>>)HttpRuntime.Cache.Get("PersonClinicalTrials:" + domainName);
 
-            var url = new Uri(person_uri);
-            person_uri = "http://profiles." + domainName + url.LocalPath;
-
             IList<Models.ClinicalTrial> trials = null;
-            if (clinicalTrials.TryGetValue(person_uri, out trials)) {
+            if (clinicalTrials.TryGetValue(person_url, out trials)) {
                 return Ok(trials.OrderByDescending(t => t.StartDate).ToArray());
             }
             return NotFound();

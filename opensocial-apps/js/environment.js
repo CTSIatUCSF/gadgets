@@ -34,7 +34,7 @@ UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
 // DEV
 //UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
 // STAGE
-UCSF.ClinicalTrials.seviceURL = 'https://profiles-qweb02.ist.berkeley.edu/ClinicalTrialsApi/api/clinicaltrial';
+UCSF.ClinicalTrials.seviceURL = 'http://profiles-qweb02.ist.berkeley.edu/ClinicalTrialsApi/api/clinicaltrial';
 // PROD
 //UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
 

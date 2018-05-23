@@ -34,9 +34,9 @@ namespace ClinicalTrialsApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Index([FromUri] string[] ids, [FromUri] string profile_uri)
+        public IHttpActionResult Index([FromUri] string[] ids, [FromUri] string profile_url)
         {
-            string domainName = getDomainName(profile_uri);
+            string domainName = getDomainName(profile_url);
             if (domainName == null)
             {
                 return NotFound();
@@ -55,9 +55,9 @@ namespace ClinicalTrialsApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(string id, [FromUri] string profile_uri)
+        public IHttpActionResult Get(string id, [FromUri] string profile_url)
         {
-            string domainName = getDomainName(profile_uri);
+            string domainName = getDomainName(profile_url);
             if (domainName == null)
             {
                 return NotFound();

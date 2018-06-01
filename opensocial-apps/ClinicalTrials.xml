@@ -31,7 +31,7 @@
 			};
 
 			// Below is read from environment.js
-			//UCSF.ClinicalTrials.seviceURL = 'https://clinicaltrialsapi.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
+			//UCSF.ClinicalTrials.seviceURL = 'https://api.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
 			
 			UCSF.ClinicalTrials.dateOptions = { year: 'numeric', month: 'short' };
 			

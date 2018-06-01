@@ -77,7 +77,7 @@
 						var params = {};
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-						var url = UCSF.ClinicalTrials.seviceURL + '/?ids=' + viewer.clinical_trials_active + '&profile_uri=' + document.location.hostname;
+						var url = UCSF.ClinicalTrials.seviceURL + '/?ids=' + viewer.clinical_trials_active + '&profile_url=' + document.location.hostname;
 						gadgets.io.makeRequest(url, function(result) {
 							if(result.data != null) {
 								savedTrials.activeTrials = result.data; 
@@ -110,11 +110,11 @@
 					var active = results[1].active;
 					var activeTrials = results[1].activeTrials;
 					results[0].forEach(function(element) {
-						if(deleted.includes(element.Id)) {
+						if(deleted.indexOf(element.Id) !== -1) {
 							return;
 						}
 						
-						if(active.includes(element.Id)) {
+						if(active.indexOf(element.Id) !== -1) {
 							return;
 						}
 						
@@ -128,8 +128,8 @@
 				$(".clinical-trials").block({ message: "Loading..." });			
 				loadTrials(function(activeTrials) {
 					$(".clinical-trials").unblock();
+					gadgets.orng.showGadget();
 					if(activeTrials && activeTrials.length > 0) {
-					    gadgets.orng.showGadget();
 						activeTrials.forEach(renderTrial);
 					}
 					callback();
@@ -231,7 +231,7 @@
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 						var ntc = $.trim($('#ntc-number').val());
-						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc + '?profile_uri=' + document.location.hostname;
+						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc + '?profile_url=' + document.location.hostname;
 						gadgets.io.makeRequest(url, function(result) {
 							$(".add-trial .error").text('').hide();
 							if(result.data != null) {

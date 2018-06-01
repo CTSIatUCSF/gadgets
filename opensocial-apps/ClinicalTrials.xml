@@ -322,7 +322,12 @@
 	  
       <script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {
-				loadAndRenderTrials(function() {
+				loadAndRenderTrials(function() {					
+					setTimeout(function() {
+						var h = $('#trial-list').height() + 20;
+						h = h > 300? 300 : h;
+						gadgets.window.adjustHeight(h);
+					}, 500);
 				})
 			});
       </script>

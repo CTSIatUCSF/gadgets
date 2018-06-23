@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="Trainee Career Outcomes"
+                 description="Trainee Career Outcomes">
+        <Require feature="dynamic-height" />
+        <Require feature="views" />
+        <Require feature="osapi" />
+        <Require feature="settitle"/>
+        <Require feature="jsonld" />          
+        <Require feature="orng"/>
+    </ModulePrefs>
+
+    <Content type="html" view="default, verify, home, profile">
+    <![CDATA[
+        <!DOCTYPE html>
+    
+    ]]></Content>
+    
+    <!-- ==================== START VERIFY VIEW ==================== -->
+    <Content type="html" view="verify">
+    <![CDATA[
+        <!DOCTYPE html>
+   
+    ]]></Content>
+    
+    <!-- ==================== START HOME VIEW ==================== -->
+    <Content type="html" view="home" preferred_width="700" referred_height="700">
+    <![CDATA[
+      <!DOCTYPE html>
+        <div>HOME</div>
+    ]]></Content>
+    
+    <!-- ==================== START PROFILE VIEW ==================== -->
+    <Content type="html" view="profile" preferred_width="670">
+    <![CDATA[
+        <!DOCTYPE html>
+        <div>PROFILE</div>    
+    ]]></Content>
+</Module>

@@ -13,6 +13,144 @@
     <Content type="html" view="default, verify, home, profile">
     <![CDATA[
         <!DOCTYPE html>
+	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection">
+ 	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>    	
+	    <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+	    <script type="text/javascript" src="js/ontology.js" ></script>
+	    <script type="text/javascript" src="js/os.js" ></script>
+	    <script type="text/javascript" src="js/lodash.min.js" ></script>
+	    <script type="text/javascript" src="js/async.min.js" ></script>
+	    <script type="text/javascript" src="js/environment.js" ></script>
+		<script type="text/javascript" src="js/papaparse.min.js"></script>
+
+		<script type="text/javascript">
+			_.templateSettings = {
+				interpolate: /\{\{=(.+?)\}\}/g,
+				evaluate: /\{\{(.+?)\}\}/g,
+				escape: /\{\{-(.+?)\}\}/g
+			};
+		</script>
+
+		<script type="text/template" id="template-item">
+			<tr>
+				<td>{{=m.TraneeType}}<br/>{{=m.Decade}}</td>
+				<td>{{=m.InitialPosition}}</td>
+				<td>{{=m.CurrentPosition}}</td>
+			</tr>
+		</script>
+
+		<script type="text/javascript">
+			var DOC_URL = "https://docs.google.com/spreadsheets/d/1LPAfISbzt1WZURg-rYY5xc7ZeaVqwY_dMEvoUaw3UHw/export?format=csv";
+			
+			function renderItem(item) {
+				var tmpl = $("#template-item").html();
+				var html = _.template(tmpl)({ m: item });
+				$('#content table tbody').append(html);
+			}
+			
+			function getDecade(endDate) {
+				if(!endDate) {
+					return '';
+				}
+				
+				endDate = $.trim(endDate);
+				var parts = endDate.split(' ');
+				var yearStr = parts.length == 1 ? parts[0] : parts[1]
+				var year = parseInt(yearStr)
+				return Number.isInteger(year) ? Math.floor(year/10) * 10: '';
+			}
+
+			function getTraineeType(type) {
+				if(!type) {
+					return '';
+				}
+				
+				var types = [];
+				type.split('/').forEach(function(elem) {
+					if(elem.toUpperCase() === 'GS') {
+						types.push('Graduate Student');
+					}
+					else if(elem.toUpperCase() === 'PD') {
+						types.push('Postdoc');
+					}
+					else {
+						types.push(elem);
+					}
+				});
+				
+				return types.join('/');
+			}
+
+			function loadOwner(callback) {
+				osapi.jsonld.getOwner().execute(function(ownerData) {										
+					framePerson(ownerData, function(ownerObj) {
+						var ownerUrl = UCSF.ConvertToProductionURL(ownerObj[FOAF('workplaceHomepage')]);
+						ownerUrl = UCSF.ConvertToProductionURL(ownerUrl).toLowerCase();
+						//TODo: for test: 
+						//ownerUrl = 'https://profiles.ucsf.edu/wendell.lim';
+						
+						callback(null, ownerUrl);
+					});
+				});						
+			}
+			
+			function loadGoogleDoc(callback) {
+				jQuery.get(DOC_URL, function(data) {
+					var obj = Papa.parse(data);
+					callback(null, obj.data);
+				}).fail(function() {
+					callback('Cannot load Google document');
+				});
+			}
+			
+			function loadData() {
+				$("#career-outcome").block({ message: "Loading..." });			
+				async.parallel([loadOwner, loadGoogleDoc], function(err, results) {
+					if(err) {
+						$("#career-outcome").unblock();
+						return;
+					}
+
+					var ownerUrl = results[0];
+					
+					var userItems = []
+					results[1].forEach(function(elem) {
+						if(elem && elem.length > 13 && elem[4] && $.trim(elem[4]).toLowerCase() === ownerUrl) {
+							userItems.push({
+								TraneeType: getTraineeType(elem[5]),
+								Decade: getDecade(elem[8]),
+								InitialPosition: elem[11],
+								CurrentPosition: elem[13]
+							})
+						}
+					});
+					
+					userItems.sort(function (a, b) {
+						return b.Decade - a.Decade;
+					});
+					
+					userItems.forEach(function(elem) {
+						if(elem.Decade) {
+							elem.Decade = elem.Decade + 's';
+						}
+						renderItem(elem)
+					});					
+					$("#career-outcome").unblock();
+				});			
+
+			}			
+        </script>
+		
+        <style type="text/css">	 
+			#descr {margin-top: 10px;margin-bottom: 20px;}
+			#content {height: 150px; overflow: auto;}
+			table {width: 100%;text-align: left;}
+			th {vertical-align: top; padding-bottom: 10px;}	
+			td {padding-bottom: 10px;}
+			.tranee-type {width: 200px;}
+			.init-pos {width: 250px;}
+        </style>	 
     
     ]]></Content>
     
@@ -26,14 +164,62 @@
     <!-- ==================== START HOME VIEW ==================== -->
     <Content type="html" view="home" preferred_width="700" referred_height="700">
     <![CDATA[
-      <!DOCTYPE html>
-        <div>HOME</div>
+		<!DOCTYPE html>
+	  
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+				loadData();
+			});
+        </script>
+
+        <div id="career-outcome">
+			<div id="descr">To update any of this information, please send an email to <a href="mailto:mind@ucsf.edu">mind@ucsf.edu</a></div>
+		   
+		    <div id="content">
+				<table>
+					<thead>
+						<tr>
+							<th class="tranee-type">Trainee Type/<br/>Decade of Exit</td>
+							<th class="init-pos">Initial Position</td>
+							<th class="cur-pos">Current Position</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="debug"></div>
+		</div>
     ]]></Content>
     
     <!-- ==================== START PROFILE VIEW ==================== -->
     <Content type="html" view="profile" preferred_width="670">
     <![CDATA[
         <!DOCTYPE html>
-        <div>PROFILE</div>    
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+				loadData();
+			});
+        </script>
+
+        <style type="text/css">	 
+		    #content {margin-top: 10px;}
+        </style>	 
+		
+        <div id="career-outcome">
+		    <div id="content">
+				<table>
+					<thead>
+						<tr>
+							<th class="tranee-type">Trainee Type/<br/>Decade of Exit</td>
+							<th class="init-pos">Initial Position</td>
+							<th class="cur-pos">Current Position</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
     ]]></Content>
 </Module>

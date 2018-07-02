@@ -8,6 +8,8 @@
         <Require feature="settitle"/>
         <Require feature="jsonld" />          
         <Require feature="orng"/>
+        <Require feature="start-hidden"/>
+		
     </ModulePrefs>
 
     <Content type="html" view="default, verify, home, profile">
@@ -104,8 +106,7 @@
 				});
 			}
 			
-			function loadData() {
-				$("#career-outcome").block({ message: "Loading..." });			
+			function loadData(callback) {
 				async.parallel([loadOwner, loadGoogleDoc], function(err, results) {
 					if(err) {
 						$("#career-outcome").unblock();
@@ -125,7 +126,15 @@
 							})
 						}
 					});
-					
+					callback(userItems);
+				});			
+
+			}
+
+			function loadAndRenderData() {
+				$("#career-outcome").block({ message: "Loading..." });			
+				loadData(function(userItems) {
+					gadgets.orng.showGadget();
 					userItems.sort(function (a, b) {
 						return b.Decade - a.Decade;
 					});
@@ -136,10 +145,9 @@
 						}
 						renderItem(elem)
 					});					
-					$("#career-outcome").unblock();
-				});			
-
-			}			
+					$("#career-outcome").unblock();				
+				});
+			}	
         </script>
 		
         <style type="text/css">	 
@@ -158,6 +166,25 @@
     <Content type="html" view="verify">
     <![CDATA[
         <!DOCTYPE html>
+		<script type="text/javascript">
+		  function registerApp(register) {
+			if (register) {
+			  osapi.orng.addAppToOwner().execute(function(result) {
+			  });
+			}
+			else {            
+			  osapi.orng.removeAppFromOwner().execute(function(result) {
+			  });         
+			}
+		  }
+		
+		  function checkData() {
+			loadData(function(items) {
+				registerApp(items && items.length > 0);
+			});		
+		  }
+		  gadgets.util.registerOnLoadHandler(checkData);
+		</script>   
    
     ]]></Content>
     
@@ -168,7 +195,7 @@
 	  
 		<script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {
-				loadData();
+				loadAndRenderData();
 			});
         </script>
 
@@ -198,7 +225,7 @@
         <!DOCTYPE html>
 		<script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {
-				loadData();
+				loadAndRenderData();
 			});
         </script>
 

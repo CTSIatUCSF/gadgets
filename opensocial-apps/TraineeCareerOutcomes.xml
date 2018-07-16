@@ -36,9 +36,9 @@
 
 		<script type="text/template" id="template-item">
 			<tr>
-				<td>{{=m.TraneeType}}<br/>{{=m.Decade}}</td>
-				<td>{{=m.InitialPosition}}</td>
-				<td>{{=m.CurrentPosition}}</td>
+				<td class="tranee-type">{{=m.TraneeType}}<br/>{{=m.Decade}}</td>
+				<td class="init-pos">{{=m.InitialPosition}}<br/>{{=m.InitialOrg}}</td>
+				<td class="cur-pos">{{=m.CurrentPosition}}<br/>{{=m.CurrentOrg}}</td>
 			</tr>
 		</script>
 
@@ -89,8 +89,6 @@
 					framePerson(ownerData, function(ownerObj) {
 						var ownerUrl = UCSF.ConvertToProductionURL(ownerObj[FOAF('workplaceHomepage')]);
 						ownerUrl = UCSF.ConvertToProductionURL(ownerUrl).toLowerCase();
-						//TODo: for test: 
-						//ownerUrl = 'https://profiles.ucsf.edu/wendell.lim';
 						
 						callback(null, ownerUrl);
 					});
@@ -117,12 +115,14 @@
 					
 					var userItems = []
 					results[1].forEach(function(elem) {
-						if(elem && elem.length > 13 && elem[4] && $.trim(elem[4]).toLowerCase() === ownerUrl) {
+						if(elem && elem.length > 14 && elem[4] && $.trim(elem[4]).toLowerCase() === ownerUrl) {
 							userItems.push({
 								TraneeType: getTraineeType(elem[5]),
 								Decade: getDecade(elem[8]),
 								InitialPosition: elem[11],
-								CurrentPosition: elem[13]
+								InitialOrg: elem[12],
+								CurrentPosition: elem[13],
+								CurrentOrg: elem[14]
 							})
 						}
 					});
@@ -152,9 +152,9 @@
 		
         <style type="text/css">	 
 			#descr {margin-top: 10px;margin-bottom: 20px;}
-			#content {height: 150px; overflow: auto;}
+			#content {height: 100px; overflow: auto;}
+			.headers div {display: inline-block;padding-bottom: 10px;font-weight: bold;vertical-align: top;}
 			table {width: 100%;text-align: left;}
-			th {vertical-align: top; padding-bottom: 10px;}	
 			td {padding-bottom: 10px;}
 			.tranee-type {width: 200px;}
 			.init-pos {width: 250px;}
@@ -189,7 +189,7 @@
     ]]></Content>
     
     <!-- ==================== START HOME VIEW ==================== -->
-    <Content type="html" view="home" preferred_width="700" referred_height="700">
+    <Content type="html" view="home" preferred_width="700" referred_height="900">
     <![CDATA[
 		<!DOCTYPE html>
 	  
@@ -201,16 +201,14 @@
 
         <div id="career-outcome">
 			<div id="descr">To update any of this information, please send an email to <a href="mailto:mind@ucsf.edu">mind@ucsf.edu</a></div>
+			<div class="headers">
+				<div class="tranee-type">Trainee Type/<br/>Decade of Exit</div>
+				<div class="init-pos">Initial Position</div>
+				<div class="cur-pos">Current Position</div>
+			</div>
 		   
 		    <div id="content">
 				<table>
-					<thead>
-						<tr>
-							<th class="tranee-type">Trainee Type/<br/>Decade of Exit</td>
-							<th class="init-pos">Initial Position</td>
-							<th class="cur-pos">Current Position</td>
-						</tr>
-					</thead>
 					<tbody>
 					</tbody>
 				</table>
@@ -234,15 +232,13 @@
         </style>	 
 		
         <div id="career-outcome">
+			<div class="headers">
+				<div class="tranee-type">Trainee Type/<br/>Decade of Exit</div>
+				<div class="init-pos">Initial Position</div>
+				<div class="cur-pos">Current Position</div>
+			</div>
 		    <div id="content">
 				<table>
-					<thead>
-						<tr>
-							<th class="tranee-type">Trainee Type/<br/>Decade of Exit</td>
-							<th class="init-pos">Initial Position</td>
-							<th class="cur-pos">Current Position</td>
-						</tr>
-					</thead>
 					<tbody>
 					</tbody>
 				</table>

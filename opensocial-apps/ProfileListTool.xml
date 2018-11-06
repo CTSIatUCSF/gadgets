@@ -708,14 +708,14 @@
                         var publications = peopleList[i][VIVO('authorInAuthorship')];
                         if (publications instanceof Array) {
                             for (var p in publications) {
-                                var pubId = publications[p]["@id"];
+                                var pubId = getJSONItemId(publications[p]);
                                 if(pubId) {
                                     ids.push(pubId);
                                 }                                                               
                             }
                         }
                         else if (publications) {
-                            var pubId = publications["@id"];
+                            var pubId = getJSONItemId(publications);
                             if(pubId) {
                                 ids.push(pubId);
                             }                                                               
@@ -752,7 +752,7 @@
                     //}
                     
                     if(profile[PRNS('personInPrimaryPosition')]) {
-                        var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
+                        var positionId = getJSONItemId(profile[PRNS('personInPrimaryPosition')]);
                         osapi.jsonld.getRDF(positionId).execute(function(result) {
                             var json = JSON.stringify(result);
                             $("#debug").append('<div class="position">' + json + '</div>');

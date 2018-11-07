@@ -60,5 +60,5 @@ var getPropertyAsArray = function(obj, prop) {
 
 var getJSONItemId = function(obj) {
 	// sometimes these are deeper
-	return obj instanceof Array ? obj["@id"] : obj;
-}
+	return obj["@id"] || obj;
+};

@@ -26,8 +26,8 @@ namespace UCSF.GlobalHealth.Services
 		private static string SQL_ALL_DELETE_PROJECTS = "delete from [ORNG.].[AppData] where appId = @appId";
 		private static string SQL_SELECT_NODE_ID = "select nodeid from [UCSF.].vwPerson where InternalUsername = @employeeId";
 		private static string SQL_INSERT_APP_DATA = "insert [ORNG.].[AppData] (NodeID, AppID, keyName, value, createdDT, updatedDT) values(@nodeId, @appId, @key, @val, GetDate(), GetDate())";
-		private static string SQL_ADD_APP_TO_PERSON = "exec [ORNG.].AddAppToPerson @SubjectID = @nodeId, @appId = @applicationId";
-		private static string SQL_REMOVE_APP_FROM_PERSON = "exec [ORNG.].RemoveAppFromPerson @SubjectID = @nodeId, @appId = @applicationId";
+		private static string SQL_ADD_APP_TO_PERSON = "exec [ORNG.].AddAppToAgent @SubjectID = @nodeId, @appId = @applicationId";
+		private static string SQL_REMOVE_APP_FROM_PERSON = "exec [ORNG.].RemoveAppFromAgent @SubjectID = @nodeId, @appId = @applicationId";
         private static string SQL_SELECT_ALL_PERSONS = "exec [ORNG.].HasApp @appId = @applicationId";
 
 		private ILog Log { get; set; }
@@ -70,7 +70,8 @@ namespace UCSF.GlobalHealth.Services
 					}
 
 					JavaScriptSerializer serializer = new JavaScriptSerializer();
-					serializer.RegisterConverters(new JavaScriptConverter[] { new ProjectConverter() });
+                    serializer.MaxJsonLength = Int32.MaxValue;
+                    serializer.RegisterConverters(new JavaScriptConverter[] { new ProjectConverter() });
 					Project[] projects = serializer.Deserialize<Project[]>(json);
 
 					return projects.ToList();
@@ -108,10 +109,11 @@ namespace UCSF.GlobalHealth.Services
 				if (String.IsNullOrEmpty(project.EmployeeId))
 				{
                     string tmp = project.Title;
+                    string nid = project.Id;
                     int pos = tmp.IndexOf(">");
                     int pos2 = tmp.IndexOf("a>");
                     string tmp1="&"+tmp.Substring(pos + 1,pos2-pos-3);
-                    Log.ErrorFormat("EmployeeId is empty, project id={0}", tmp1);
+                    Log.InfoFormat("Investigator does not have EmployeeId, project #{0}  title={1}", nid,tmp1);
 					continue;
 				}
 				if(!employeeProjects.TryGetValue(project.EmployeeId, out list)) {
@@ -152,27 +154,36 @@ namespace UCSF.GlobalHealth.Services
 			SqlCommand dbcommand = new SqlCommand(SQL_SELECT_ALL_PERSONS, conn);
 			dbcommand.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
 			dbcommand.Prepare();
+            ArrayList nodes = new ArrayList();
+            using (SqlDataReader reader = dbcommand.ExecuteReader())
+            {
+                try
+                {
+                    while (reader.Read())
+                    {
+                        var nodeId = reader[0];// reader["nodeid"];
+                        nodes.Add(nodeId);
 
-			SqlCommand removeAppFromPersonCmd = new SqlCommand(SQL_REMOVE_APP_FROM_PERSON, conn);
-			removeAppFromPersonCmd.Prepare();
+                    }
+                }finally
+                {
+                    reader.Close();
+                }
+            }
+            int count = nodes.Count;
+            SqlCommand removeAppFromPersonCmd = new SqlCommand(SQL_REMOVE_APP_FROM_PERSON, conn);
+            removeAppFromPersonCmd.Prepare();
+            foreach (var node in nodes)
+            {
+                removeAppFromPersonCmd.Parameters.Clear();
+                removeAppFromPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
+                removeAppFromPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = node;
+                removeAppFromPersonCmd.ExecuteNonQuery();
+                Log.InfoFormat("Removed application from person, appId={0}, nodeId={1}", applicationId, node);
+            }
+            Log.InfoFormat("Removed application from persons, count={0}", count);
 
-			int count = 0;
-			using (SqlDataReader reader = dbcommand.ExecuteReader())
-			{
-				while (reader.Read())
-				{
-                    var nodeId = reader[0];// reader["nodeid"];
-					removeAppFromPersonCmd.Parameters.Clear();
-					removeAppFromPersonCmd.Parameters.Add("@applicationId", SqlDbType.Int, 0).Value = applicationId;
-					removeAppFromPersonCmd.Parameters.Add("@nodeId", SqlDbType.BigInt, 0).Value = nodeId;
-
-					removeAppFromPersonCmd.ExecuteNonQuery();
-					Log.InfoFormat("Removed application from person, appId={0}, nodeId={1}", applicationId, nodeId);
-					count++;
-				}
-			}
-			Log.InfoFormat("Removed application from persons, count={0}", count);
-		}
+        }
 
         protected string getProjectsPrint(IList<Project> projects)
         {

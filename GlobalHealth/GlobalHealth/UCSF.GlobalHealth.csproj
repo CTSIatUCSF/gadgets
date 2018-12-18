@@ -51,10 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D1DA1F4B2D945B5B10C1ACAD21BC863721F41F13</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9823E4AA833FA0B0970450C6D2478709D6C9ACFA</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>UCSF.GlobalHealth_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>UCSF.GlobalHealth_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -97,6 +97,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="UCSF.GlobalHealth_1_TemporaryKey.pfx" />
     <None Include="UCSF.GlobalHealth_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,8 @@ namespace UCSF.GlobalHealth
 
 				log.Info("All projects saved successfully");
 			}
-			catch (Exception ex) {
+        
+catch (Exception ex) {
 				log.Error("Loading global health projects failed.", ex);
                 returned = 7;
 			}

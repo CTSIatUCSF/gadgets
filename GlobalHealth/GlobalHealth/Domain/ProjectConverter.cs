@@ -60,11 +60,15 @@ namespace UCSF.GlobalHealth.Domain
 						}
 						break;
 					case "Employee ID":
-						if (dictionary[key] is IDictionary<string, object>)
-						{
-							IDictionary<string, object> employee = (IDictionary<string, object>)dictionary[key];
-                            project.EmployeeId = ((string)employee["value"]).Trim();
-      						}
+                        if (dictionary[key] is IDictionary<string, object>)
+                        {
+                            IDictionary<string, object> employee = (IDictionary<string, object>)dictionary[key];
+                            string UCSF_id = ((string)employee["value"]).Trim();
+                            if (UCSF_id.Substring(0, 3) != "999")
+                            {
+                                project.EmployeeId = UCSF_id.Substring(2, 6) + "@ucsf.edu";
+                            }
+                        }
 						break;
 				}
 			}

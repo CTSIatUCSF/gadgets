@@ -43,7 +43,7 @@
 		</script>
 
 		<script type="text/javascript">
-			var DOC_URL = "https://docs.google.com/spreadsheets/d/1LPAfISbzt1WZURg-rYY5xc7ZeaVqwY_dMEvoUaw3UHw/export?format=csv";
+			var DOC_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS-rLHNwwE0sJ_uE8k8v77rd7c15eFkOj1lOaN2ZVD5FWsN34swP0wWuOwHFJWTNa_-TsQh3WhPaSWg/pub?gid=1013325663&single=true&output=csv";
 			
 			function renderItem(item) {
 				var tmpl = $("#template-item").html();

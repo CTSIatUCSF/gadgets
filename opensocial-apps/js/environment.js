@@ -1,17 +1,23 @@
 window.UCSF 	= window.UCSF || {};
 
+var protocol = location.protocol;
+var slashes = protocol.concat("//");
+var host = slashes.concat(window.location.hostname)
+
 var DEV = 'DEV';
 var STAGE = 'STAGE';
 var PROD = 'PROD';
 
-//PICK ONE FROM BELOW, ADD MORE AS NEEDED
-//UCSF.Environment = DEV;
-UCSF.Environment = STAGE;
-//UCSF.Environment = PROD;
+if (host.includes("dev.") || host.includes("dev-")) {
+	UCSF.Environment = DEV;
+}
+else if (host.includes("stage-")) {
+	UCSF.Enviornment = STAGE;
+}
+else {
+	UCSF.Environment = PROD;
+}
 
-var protocol = location.protocol;
-var slashes = protocol.concat("//");
-var host = slashes.concat(window.location.hostname)
 UCSF.ENV_GADGET_URL = host + '/apps_godzilla';
 
 // To build this run use a spreadsheet and the following query:
@@ -21,20 +27,20 @@ UCSF.ConvertToProductionURL = function(profileURL) {
 
 	if (UCSF.Environment == DEV) {
 		// DEV
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/godzilla', 'https://www.researcherprofiles.org');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/lbl', 'https://profiles.lbl.gov');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/profiles_uc', 'https://profiles.ucbraid.org');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/ucdavis', 'https://profiles.ucdavis.edu');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/uci', 'https://profiles.icts.uci.edu');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/ucla', 'https://ucla.researcherprofiles.org');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/ucsd', 'https://profiles.ucsd.edu');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/ucsf', 'https://profiles.ucsf.edu');
-		productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/usc', 'https://profiles.sc-ctsi.org');
+		productionURL = productionURL.replace('https://dev.researcherprofiles.org', 'https://www.researcherprofiles.org');
+		//productionURL = productionURL.replace('http://stage-profiles.ucsf.edu/lbl', 'https://profiles.lbl.gov');
+		productionURL = productionURL.replace('https://dev-uc.researcherprofiles.org', 'https://profiles.ucbraid.org');
+		productionURL = productionURL.replace('https://dev-ucdavis.researcherprofiles.org', 'https://profiles.ucdavis.edu');
+		productionURL = productionURL.replace('https://dev-uci.researcherprofiles.org', 'https://profiles.icts.uci.edu');
+		productionURL = productionURL.replace('https://dev-ucla.researcherprofiles.org', 'https://ucla.researcherprofiles.org');
+		productionURL = productionURL.replace('https://dev-ucsd.researcherprofiles.org', 'https://profiles.ucsd.edu');
+		productionURL = productionURL.replace('https://dev-ucsf.researcherprofiles.org', 'https://profiles.ucsf.edu');
+		productionURL = productionURL.replace('https://dev-usc.researcherprofiles.org', 'https://profiles.sc-ctsi.org');
 	}
 	else if (UCSF.Environment == STAGE) {
 		// STAGE
 		productionURL = productionURL.replace('https://stage.researcherprofiles.org', 'https://www.researcherprofiles.org');
-		productionURL = productionURL.replace('https://stage-lbl.researcherprofiles.org', 'https://profiles.lbl.gov');
+		//productionURL = productionURL.replace('https://stage-lbl.researcherprofiles.org', 'https://profiles.lbl.gov');
 		productionURL = productionURL.replace('https://stage-profiles.ucbraid.org', 'https://profiles.ucbraid.org');
 		productionURL = productionURL.replace('https://stage-profiles.ucdavis.edu', 'https://profiles.ucdavis.edu');
 		productionURL = productionURL.replace('https://stage-profiles.icts.uci.edu', 'https://profiles.icts.uci.edu');

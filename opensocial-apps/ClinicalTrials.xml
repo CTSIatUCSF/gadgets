@@ -182,7 +182,9 @@
     
       function checkData() {
 		loadTrials(function(trials) {
-			registerApp(trials && trials.length > 0);
+			if(trials) {
+				registerApp(trials.length > 0);
+			}
 		});		
       }
       gadgets.util.registerOnLoadHandler(checkData);
@@ -316,7 +318,7 @@
 	  	
     ]]></Content>
 	<!-- ==================== START PROFILE VIEW ==================== -->
-	<Content type="html" view="profile" preferred_width="670">
+	<Content type="html" view="profile" preferred_width="690">
 	<![CDATA[<!--HTML-->
       <!DOCTYPE html>
 	  

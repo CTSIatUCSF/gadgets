@@ -57,3 +57,8 @@ var getPropertyAsArray = function(obj, prop) {
 		return [];
 	}
 };
+
+var getJSONItemId = function(obj) {
+	// sometimes these are deeper
+	return obj["@id"] || obj;
+};

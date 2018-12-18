@@ -24,7 +24,7 @@
                 
         <style>
             .tool_title {font-size:14px;}
-            .tool_title_orange {font-weight:bold; font-size:14px; color:#CA7C29;margin-top:-1px;}
+            .tool_title_orange {font-weight:bold; font-size:14px; color:#F26D04;margin-top:-1px;}
             .tool_body {font-size:12px;}
             .tool_credit {font-size:10px;}
             .tool_table_cell {ffont-size:12px; padding:0 20px 0 0;}
@@ -48,6 +48,7 @@
         // ==============================================================
         
         function showHelp() {
+		// minimessage feature is disabled
 		var msg = new gadgets.MiniMessage();
         	msg.createDismissibleMessage("<span class='helptxt'>First add all the profiles that you're interested in to your list. Then click 'Go to my list' to go to the screen that shows all the things you can do with your list of profiles. For example you can email them or export contact information.</span>", function() {
 			gadgets.window.adjustHeight(75);
@@ -357,8 +358,7 @@
     <!DOCTYPE html>
         <table id="button_and_help" cellspacing="2" cellpadding="0" style="display:block;">
                 <tr>
-                        <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profiles <br />for personal use.</td>
-                        <td><img src="images/hovertiptarget.png" border="0" onClick="gadgetEventTrack('help');showHelp()"></td>
+                        <td class="tool_table_cell_small" style="width:160px;padding:4px 0">Create a list of profiles for personal use.</td>
                 </tr>
         </table>
         
@@ -426,9 +426,9 @@
                  p { width: 640px; }
             
             
-                .list-info {font-weight:bold; font-size:14px; color:#CA7C29;}
+                .list-info {font-weight:bold; font-size:14px; color:#f26d04;}
                 .list-descr {margin-top: 10px;}
-                #more-info {color: #0088CC !important; cursor: pointer;}
+                #more-info {color: #007CBE !important; cursor: pointer;}
                 .commands {margin-top: 20px;}
                 .commands .row{ margin-top: 10px;}
                 .commands label {width: 100px; text-align: right;font-weight: bold; font-size: 13px; margin-right: 10px;}
@@ -708,14 +708,14 @@
                         var publications = peopleList[i][VIVO('authorInAuthorship')];
                         if (publications instanceof Array) {
                             for (var p in publications) {
-                                var pubId = publications[p]["@id"];
+                                var pubId = getJSONItemId(publications[p]);
                                 if(pubId) {
                                     ids.push(pubId);
                                 }                                                               
                             }
                         }
                         else if (publications) {
-                            var pubId = publications["@id"];
+                            var pubId = getJSONItemId(publications);
                             if(pubId) {
                                 ids.push(pubId);
                             }                                                               
@@ -752,11 +752,11 @@
                     //}
                     
                     if(profile[PRNS('personInPrimaryPosition')]) {
-                        var positionId = profile[PRNS('personInPrimaryPosition')]["@id"];
+                        var positionId = getJSONItemId(profile[PRNS('personInPrimaryPosition')]);
                         osapi.jsonld.getRDF(positionId).execute(function(result) {
                             var json = JSON.stringify(result);
                             $("#debug").append('<div class="position">' + json + '</div>');
-                            ids.push(result.jsonld.positionInOrganization);
+                            ids.push(result.jsonld.positionInDivision);
                             ids.push(result.jsonld.positionInDepartment);
                             callback(ids);
                         });
@@ -771,12 +771,14 @@
                     
                     //TODO: temporary remove address
                     //var address = "";
-                    var organization = "";
+                    var division = "";
                     var department = "";
                     if(additionalData && additionalData.jsonld) {
-                        //address = getAddress(additionalData);                       
-                        organization = getOrganization(additionalData);                       
-                        department = getDepartment(additionalData);                       
+                        //address = getAddress(additionalData);         
+						var obj = getObjectByType(additionalData, "vivo:Division")
+                        division = obj ? obj["label"] : "";                       
+						 obj = getObjectByType(additionalData, "vivo:Department")
+                        department = obj ? obj["label"] : "";                       
                     }
                 
 	                csvData += createCsvField(profile[FOAF('firstName')]);
@@ -790,7 +792,7 @@
 	                //csvData += createCsvField(address.address1);
                     //csvData += createCsvField(address.address2);
                     //csvData += createCsvField(address.address3);
-                    csvData += createCsvField(organization);
+                    csvData += createCsvField(division);
                     csvData += createCsvField(department);
 	                
 	                csvData += createCsvField(profile[FOAF('workplaceHomepage')]);//profile URL
@@ -826,13 +828,13 @@
                     if(rdf.jsonld && rdf.jsonld["@graph"]) {
                         for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
                             var gr = rdf.jsonld["@graph"][i];
-                            if(gr["@type"] == type) {
+                            if(gr["@type"] == type || (gr["@type"] instanceof Array && gr["@type"].includes(type))) {
                                 obj = gr;
                                 break; 
                             }
                         }
                     }
-                    else if(rdf.jsonld && rdf.jsonld["@type"] == type){
+                    else if(rdf.jsonld && rdf.jsonld["@type"] == type || (gr["@type"] instanceof Array && gr["@type"].includes(type))){
                         obj = rdf.jsonld;
                     }
                     
@@ -853,35 +855,6 @@
 	                    address.address3 = addressCity + ", " + addressState + " " + addressPostalCode;
                     }                    
                     return address;
-                }
-
-                function getOrganization(rdf) {
-                    var obj = getObjectByType(rdf, "foaf:Organization");                    
-                    if(obj) {
-                        return obj["label"] || obj["rdfs:label"];
-                    }
-                    return "";
-                }
-
-                function getDepartment(rdf) {
-                    var obj;
-                    if(rdf.jsonld && rdf.jsonld["@graph"]) {
-                        for(var i=0; i < rdf.jsonld["@graph"].length; i++) {
-                            var gr = rdf.jsonld["@graph"][i];
-                            if($.inArray("vivo:Department", gr["@type"]) != -1) {
-                                obj = gr;
-                                break; 
-                            }
-                        }
-                    }
-                    else if($.inArray("vivo:Department", rdf.jsonld["@type"])){
-                        obj = rdf.jsonld;
-                    }
-                    
-                    if(obj) {
-                        return obj["label"] || obj["rdfs:label"];
-                    }
-                    return "";
                 }
                 
                 function supportsDataUri() {

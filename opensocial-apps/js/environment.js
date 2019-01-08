@@ -63,24 +63,15 @@ else {
 	UCSF.ClinicalTrials.seviceURL = 'https://stage-api.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';	
 }
 
+UCSF.GetGoogleAnaltyicsViewId = function() {
+	if (host.includes(".ucsf.") || host.includes("-ucsf.")) {
+		return "23439892"
+	}
+	else if (host.includes(".ucsd.") || host.includes("-ucsd.")) {
+		return "89442630"
+	}
+	return "";
+}
 
-// BELOW IS ALL DEPRECATED!
-// UNCOMMENT OUT THE BLOCK THAT IS APPROPRIATE FOR YOUR ENVIRONMENT!!!!
-
-//For production
-/************
-var ENV_PROFILES_URL = 'http://profiles.ucsf.edu';
-var ENV_LOCAL_URL = 'http://profiles.ucsf.edu';
-**************/
-
-//For staging
-// DEPRECATED? Used by crosslinks var ENV_PROFILES_URL = 'http://stage-profiles.ucsf.edu/profiles_ucsf_29';
-// DEPRECATED? Used by ProfileListTool to create a Chatter group var ENV_LOCAL_URL = 'http://stage-profiles.ucsf.edu';
-//var ENV_API_URL = 'http://base.ctsi.ucsf.edu/experiments/clinical_trials_gadget_api/';
-
-//Institution variables
-//var ENV_INST_ABRV = 'UCSF';
-//var ENV_INST_EMAIL = "<a href='mailto:profiles@ucsf.edu'>profiles@ucsf.edu</a>";
-//var ENV_INST_PUBSCONTACT = "<a href='mailto:profiles@ucsf.edu?subject=Awarded Grant Information in UCSF Profiles'>contact us</a>";
 
 

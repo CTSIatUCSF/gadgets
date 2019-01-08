@@ -107,7 +107,7 @@
                             $("#student-projects .active").show();
                         }
                         
-                        getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+                        getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
                             if(result && result.researcher) {
                                 var href = $("#student-projects a").attr("href");
                                 $("#student-projects a").attr("href", href + result.researcher.researcher_id);
@@ -183,7 +183,7 @@
                     if(owner) {
                         $("#student-projects .owner-name span").html(owner.fullName);
                         loadOpportunities(owner, function() {
-                            getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + owner.nodeId + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+                            getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + owner.nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
 			                    if(result && result.researcher) {
 			                        var href = $(".owner-name").attr("href");
 			                        $(".owner-name").attr("href", href + result.researcher.researcher_id);

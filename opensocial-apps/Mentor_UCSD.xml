@@ -269,6 +269,7 @@
 			md.assistantPhone = document.getElementById("edit_assistant_phone").value;
 			md.narrative = document.getElementById("facultyNarrative").value;
 			md.lastUpdate = current_date;
+			alert("Your Faculty Mentoring information is saved.");
 			
             osapi.appdata.update({'userId': '@viewer', 'appId':'@app', 'data':md }).execute(function(result) {
 				if (result.error) { 

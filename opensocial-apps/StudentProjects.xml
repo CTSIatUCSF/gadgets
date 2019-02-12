@@ -14,28 +14,38 @@
     
     <Content type="html" view="verify, default, home, profile"><![CDATA[
         <!DOCTYPE html>            
-		<link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-		<link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >		
-	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	    <script type="text/javascript" src="js/environment.js" ></script>
-	    <script type="text/javascript" src="js/os.js" ></script>
-	    <script type="text/javascript" src="js/ontology.js" ></script>
+        <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >     
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/environment.js" ></script>
+        <script type="text/javascript" src="js/os.js" ></script>
+        <script type="text/javascript" src="js/ontology.js" ></script>
         <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+        <script type="text/javascript" src="js/async.min.js"></script>    
         
         <script type="text/javascript">
-	        function getAPIData(url, callback){
-	            var params = {};
-	            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-	            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-	            gadgets.io.makeRequest(url, function(result) {
+            function getOpportunities(nodeId, callback){
+                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', callback)
+            }
+            function getPastProjects(nodeId, callback){
+                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', callback)
+            }
+            function getResearcherInfo(nodeId, callback){
+                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '?key=mwRKq3kclotPRG8ywkQY', callback)
+            }
+            function getAPIData(url, callback){
+                var params = {};
+                params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+                params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+                gadgets.io.makeRequest(url, function(result) {
                     if(result && result.data && result.data.data) {
-                        return callback(result.data.data);
+                        return callback(null, result.data.data);
                     }
-	                return callback();   
-	            }, params);
-	        }
-	        
-	        function getOwner(callback) {
+                    return callback();   
+                }, params);
+            }
+            
+            function getOwner(callback) {
               var nodeId;
               
               osapi.jsonld.getOwner().execute(function(result) {
@@ -49,20 +59,20 @@
                           });
                       });                                                     
                   }               
-              });                           	           
-	        }
-	        
-	        function gadgetEventTrack(action, label, value) {       
-	            var message = {'action' : action};
-	            if (label) {message.label = label;}
-	            if (value) {message.value = value;}
-	            
-	            gadgets.orng.reportGoogleAnalyticsEvent(message);
-	        }   
-	        
+              });                                          
+            }
+            
+            function gadgetEventTrack(action, label, value) {       
+                var message = {'action' : action};
+                if (label) {message.label = label;}
+                if (value) {message.value = value;}
+                
+                gadgets.orng.reportGoogleAnalyticsEvent(message);
+            }   
+            
         </script>        
    ]]></Content>
-	    
+        
    <Content type="html" view="verify"><![CDATA[
     <script type="text/javascript">
       function registerApp(register) {
@@ -77,19 +87,25 @@
       }
     
       function checkData() {
-	      osapi.jsonld.getOwner().execute(function(result) {
-	        if(!result.error) {
-	           var nodeId = result.uris[0].substring(result.base.length);
-	           getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
-	               registerApp(result && result.researcher_opps && result.researcher_opps.length > 0);
-	           });
-	        }
-	      })          
+          osapi.jsonld.getOwner().execute(function(result) {
+            if(!result.error) {
+                var nodeId = result.uris[0].substring(result.base.length);
+                async.parallel([
+                    function(callback) {getOpportunities(nodeId, callback)},
+                    function(callback) {getPastProjects(nodeId, callback)}
+                    ], function(err, results) {
+                    
+                    registerApp(results && ((results[0] && results[0].researcher_opps && results[0].researcher_opps.length > 0) ||
+                        (results[1] && results[1].past_projects && results[1].past_projects.length > 0))
+                    );                      
+                });                        
+            }
+          })          
       }
       gadgets.util.registerOnLoadHandler(checkData);
     </script>   
    ]]></Content>
-	    
+        
     <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
         <!DOCTYPE html>
         <script type="text/javascript">
@@ -100,22 +116,26 @@
               osapi.jsonld.getOwner().execute(function(result) {
                 if(!result.error) {
                     var nodeId = result.uris[0].substring(result.base.length);
-                    getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+                    async.parallel([
+                        function(callback) {getOpportunities(nodeId, callback)},
+                        function(callback) {getPastProjects(nodeId, callback)},
+                        function(callback) {getResearcherInfo(nodeId, callback)}
+                        ], function(err, results) {
+                        
                         gadgets.orng.showGadget();
-                        if(result && result.researcher_opps && result.researcher_opps.length > 0) {
+                        if(results && ((results[0] && results[0].researcher_opps && results[0].researcher_opps.length > 0) || 
+                            (results[1] && results[1].past_projects && results[1].past_projects.length > 0))) {
+                            
                             $("#student-projects .inactive").hide();
                             $("#student-projects .active").show();
                         }
-                        
-                        getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
-                            if(result && result.researcher) {
-                                var href = $("#student-projects a").attr("href");
-                                $("#student-projects a").attr("href", href + result.researcher.researcher_id);
-                            }                                
-                        });
-                        
+
+                        if(results && results[2] && results[2].researcher) {
+                            var href = $("#student-projects a").attr("href");
+                            $("#student-projects a").attr("href", href + results[2].researcher.researcher_id);
+                        }                                
                         $("#student-projects").unblock();
-                    });
+                    });                                         
                 }
               })                      
             });
@@ -137,17 +157,14 @@
     
     <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
         <!DOCTYPE html>
-	    <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
-	    <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
         <script type="text/javascript">
-            function loadOpportunities(owner, callback) {
-                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + owner.nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
+            function loadOpportunities(owner, callback) {           
+                getOpportunities(owner.nodeId, function(err, result) {
                     if(!result || !result.researcher_opps || result.researcher_opps.length === 0) {
                         return callback();
                     }
-                    
-                    gadgets.orng.showGadget();
-                    
                     result.researcher_opps.sort(function(a,b) {
                         return new Date(a.close_date) - new Date(b.close_date);
                     });
@@ -159,22 +176,48 @@
                                    '    </td>' + 
                                    '    <td>' + opp.program + '</td><tr>';
                         
-                        $(".project-list tbody").append(html);
-                    })
-                    
-                    setTimeout(function(){
-	                    var tableHeight = $(".project-list table").height();
-	                    if(tableHeight < 140) {
-	                        var h = $("#student-projects .descr").height();
-	                        gadgets.window.adjustHeight(h + tableHeight + 20);
-	                    }
-	                    else {
-                            $(".project-list").height(140);
-	                    }
-                    })
-                    return callback();
+                        $(".current-project-list tbody").append(html);
+                        $(".current-project-list").show();
+                    })                    
+                    return callback(null, result.researcher_opps);
                 });
             }        
+            function loadPastProjects(owner, callback) {
+                getPastProjects(owner.nodeId, function(err, result) {
+                    if(!result || !result.past_projects || result.past_projects.length === 0) {
+                        return callback();
+                    }
+                    
+                    result.past_projects.forEach(function(project) {
+                        var html = '<tr>' + 
+                                   '    <td>' + 
+                                   '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + project.project_summary_id +'" target="_blank">' + project.title + '</a></div>' +
+                                   '        <div class="close-date">completed ' + getDate(project.date) + '</div>' +
+                                   '    </td>';
+                                                                                        
+                        $(".past-project-list tbody").append(html);
+                        $(".past-project-list").show();
+                    });
+                    
+                    return callback(null, result.past_projects);
+                });
+            }
+            function getDate(timestamp) {
+                return timestamp ? timestamp.split(' ')[0] : '';
+            }
+            
+            function updateInfo(owner, callback) {
+            
+                $("#student-projects .owner-name span").html(owner.fullName);
+                getResearcherInfo(owner.nodeId, function(err, result) {
+                    if(result && result.researcher) {
+                        var href = $(".owner-name").attr("href");
+                        $(".owner-name").attr("href", href + result.researcher.researcher_id);
+                    }                                
+                    return callback();
+                });
+            }
+            
             gadgets.util.registerOnLoadHandler(function() {
                 $(document).ready(function () {
                     $("#student-projects").block({ message: "Loading..." });
@@ -182,28 +225,42 @@
                 getOwner(function(owner) {
                     if(owner) {
                         $("#student-projects .owner-name span").html(owner.fullName);
-                        loadOpportunities(owner, function() {
-                            getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + owner.nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', function(result) {
-			                    if(result && result.researcher) {
-			                        var href = $(".owner-name").attr("href");
-			                        $(".owner-name").attr("href", href + result.researcher.researcher_id);
-			                    }                                
-                            });
+                        async.parallel([
+                                function(callback) {loadOpportunities(owner, callback)},
+                                function(callback) {loadPastProjects(owner, callback)},
+                                function(callback) {updateInfo(owner, callback)}
+                                ], function(err, results) {
+                                
+                            $("#student-projects").unblock();                    
+                            
+                            if(results && ((results[0] && results[0].length > 0) || (results[1] && results[1].length > 0))) {
+                                gadgets.orng.showGadget();
+                                setTimeout(function(){
+                                    var tableHeight = $(".project-list").height();
+                                    if(tableHeight < 140) {
+                                        var h = $("#student-projects .descr").height();
+                                        gadgets.window.adjustHeight(h + tableHeight + 20);
+                                    }
+                                })
+                            }
+                                                        
                         })
                     }
-                    $("#student-projects").unblock();                    
+                    else {
+                        $("#student-projects").unblock();                    
+                    }
                 }); 
             });
             
             $(document).ready(function () {
-	            $(".owner-name").click(function() {
-	               gadgetEventTrack("go_to_labspot_profile", $(this).attr("href"))
-	            });
-	            
+                $(".owner-name").click(function() {
+                   gadgetEventTrack("go_to_labspot_profile", $(this).attr("href"))
+                });
+                
                 $(".project-list").on('click', 'a', function() {
                    gadgetEventTrack("go_to_labspot_project", $(this).attr("href"))
                 });
-	             
+                 
             });
         </script>        
         
@@ -221,15 +278,27 @@
                 See <a class="owner-name" href="https://ucsf.labspot.io/u1/research?id=" target="_blank"><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/" target="_blank">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
             </div>
             <div class="project-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="project">Opportunities</th>
-                            <th class="program">Program</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="current-project-list" style="display:none">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="project">Opportunities</th>
+                                <th class="program">Program</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="past-project-list" style="display:none">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="project">Past Projects</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     ]]></Content>

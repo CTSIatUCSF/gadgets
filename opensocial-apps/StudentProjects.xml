@@ -24,6 +24,18 @@
         <script type="text/javascript" src="js/async.min.js"></script>    
         
         <script type="text/javascript">
+			function mapNodeId(nodeId) {
+				if(!UCSF.Enviornment || UCSF.Enviornment == PROD) {
+					return nodeId; 
+				}
+				var stagemapping = {
+					'215328': 189432, //trever.bivona
+					'214101': 180835, //valerie.flaherman
+					'227739': 182727 //tony.yang
+					};
+				return stagemapping.hasOwnProperty(nodeId) ? stagemapping[nodeId]: nodeId; 
+			}
+			
             function getOpportunities(nodeId, callback){
                 getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', callback)
             }
@@ -54,7 +66,7 @@
                   } else {    
                       framePerson(result, function(owner) {
                           callback({
-                            nodeId: result.uris[0].substring(result.base.length),
+                            nodeId: mapNodeId(result.uris[0].substring(result.base.length)),
                             fullName: owner[PRNS('fullName')]
                           });
                       });                                                     
@@ -89,7 +101,7 @@
       function checkData() {
           osapi.jsonld.getOwner().execute(function(result) {
             if(!result.error) {
-                var nodeId = result.uris[0].substring(result.base.length);
+                var nodeId = mapNodeId(result.uris[0].substring(result.base.length));
                 async.parallel([
                     function(callback) {getOpportunities(nodeId, callback)},
                     function(callback) {getPastProjects(nodeId, callback)}
@@ -115,7 +127,7 @@
             gadgets.util.registerOnLoadHandler(function() {
               osapi.jsonld.getOwner().execute(function(result) {
                 if(!result.error) {
-                    var nodeId = result.uris[0].substring(result.base.length);
+                    var nodeId = mapNodeId(result.uris[0].substring(result.base.length));
                     async.parallel([
                         function(callback) {getOpportunities(nodeId, callback)},
                         function(callback) {getPastProjects(nodeId, callback)},

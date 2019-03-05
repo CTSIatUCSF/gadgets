@@ -25,7 +25,7 @@
         
         <script type="text/javascript">
 			function mapNodeId(nodeId) {
-				if(!UCSF.Enviornment || UCSF.Enviornment == PROD) {
+				if(!UCSF.Environment || UCSF.Environment == PROD) {
 					return nodeId; 
 				}
 				var stagemapping = {

@@ -12,7 +12,7 @@ if (host.includes("dev.") || host.includes("dev-")) {
 	UCSF.Environment = DEV;
 }
 else if (host.includes("stage-")) {
-	UCSF.Enviornment = STAGE;
+	UCSF.Environment = STAGE;
 }
 else {
 	UCSF.Environment = PROD;
@@ -56,7 +56,7 @@ UCSF.ConvertToProductionURL = function(profileURL) {
 //Clinical Trials
 UCSF.ClinicalTrials = UCSF.ClinicalTrials || {};
 
-if (UCSF.Enviornment == PROD) {
+if (UCSF.Environment == PROD) {
 	UCSF.ClinicalTrials.seviceURL = 'https://api.researcherprofiles.org/ClinicalTrialsApi/api/clinicaltrial';
 }
 else {

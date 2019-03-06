@@ -182,11 +182,11 @@
                     });
                     result.researcher_opps.forEach(function(opp) {
                         var html = '<tr>' + 
-                                   '    <td>' + 
+                                   '    <td class="project">' + 
                                    '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + opp.opportunity_id +'" target="_blank">' + opp.title + '</a></div>' +
                                    '        <div class="close-date">closes ' + opp.close_date + '</div>' +
                                    '    </td>' + 
-                                   '    <td>' + opp.program + '</td><tr>';
+                                   '    <td class="program">' + opp.program + '</td><tr>';
                         
                         $(".current-project-list tbody").append(html);
                         $(".current-project-list").show();
@@ -199,11 +199,10 @@
                     if(!result || !result.past_projects || result.past_projects.length === 0) {
                         return callback();
                     }
-                    
                     result.past_projects.forEach(function(project) {
                         var html = '<tr>' + 
                                    '    <td>' + 
-                                   '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + project.project_summary_id +'" target="_blank">' + project.title + '</a></div>' +
+                                   '        <div><a class="profile-link" href="https://ucsf.labspot.io/u1/research?id=" target="_blank">' + project.title + '</a></div>' +
                                    '        <div class="close-date">completed ' + getDate(project.date) + '</div>' +
                                    '    </td>';
                                                                                         
@@ -220,13 +219,13 @@
             
             function updateInfo(owner, callback) {
             
-                $("#student-projects .owner-name span").html(owner.fullName);
+                $("#student-projects .profile-link span").html(owner.fullName);
                 getResearcherInfo(owner.nodeId, function(err, result) {
                     if(result && result.researcher) {
-                        var href = $(".owner-name").attr("href");
-                        $(".owner-name").attr("href", href + result.researcher.researcher_id);
+                        var href = $(".profile-link").attr("href");
+                        $(".profile-link").attr("href", href + result.researcher.researcher_id);
                     }                                
-                    return callback();
+                    return callback(null, result.researcher);
                 });
             }
             
@@ -236,7 +235,7 @@
                 });             
                 getOwner(function(owner) {
                     if(owner) {
-                        $("#student-projects .owner-name span").html(owner.fullName);
+                        $("#student-projects .profile-link span").html(owner.fullName);
                         async.parallel([
                                 function(callback) {loadOpportunities(owner, callback)},
                                 function(callback) {loadPastProjects(owner, callback)},
@@ -255,6 +254,11 @@
                                     }
                                 })
                             }
+							
+							if(results && results[2] && results[2].researcher_id) {
+								var href = $(".profile-link").attr("href");
+								$(".profile-link").attr("href", href + results[2].researcher_id);
+							}
                                                         
                         })
                     }
@@ -265,7 +269,7 @@
             });
             
             $(document).ready(function () {
-                $(".owner-name").click(function() {
+                $(".profile-link").click(function() {
                    gadgetEventTrack("go_to_labspot_profile", $(this).attr("href"))
                 });
                 
@@ -279,15 +283,17 @@
         <style>
             #student-projects .descr {margin-top: 10px; margin-bottom: 10px;}
             #student-projects .project-list{overflow-y: auto;}            
-            #student-projects th.project {width:350px; text-align:left;}     
-            #student-projects th.program {text-align:left;}    
+            #student-projects th.project {text-align:left;}     
+            #student-projects th.program {text-align:left;padding-left: 20px;}    
+			#student-projects td.project {width:350px;}     
+            #student-projects td.program {padding-left: 20px;}    
             #student-projects .close-date {font-size: 12px;margin-bottom: 5px;} 
                    
         </style>
         
         <div id="student-projects">
             <div class="descr">
-                See <a class="owner-name" href="https://ucsf.labspot.io/u1/research?id=" target="_blank"><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/" target="_blank">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
+                See <a class="profile-link" href="https://ucsf.labspot.io/u1/research?id=" target="_blank"><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/" target="_blank">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
             </div>
             <div class="project-list">
                 <div class="current-project-list" style="display:none">

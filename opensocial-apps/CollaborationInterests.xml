@@ -128,7 +128,7 @@
 							<li>brainstorm ideas, review research questions, refine approaches, etc. </li>
 							<li>prepare cross-disciplinary grant applications</li>
 						</ul>
-						The UCSF Research Development Office’s <a href="#">Team Science Program</a> has more information.
+						The UCSF Research Development Office’s <a href="https://rdo.ucsf.edu/team-science-program">Team Science Program</a> has more information.
 					</div>
 				</div>
 				<div class="interest-item">
@@ -145,7 +145,7 @@
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="CompaniesAndEntrepreneurs" type="checkbox" /></div>
-					<div class="item-text"><span class="bold">Companies and Entrepreneurs</span> - interested in opportunities vetted by UCSF Health Hub to advise, conduct industry-sponsored research, and/or co-develop products with growth-stage companies. <span class="underline">Note</span>: UCSF Health Hub offers a private, curated match-making service exclusively for UCSF. To get started, <a href="#">click here to apply</a>.</div>
+					<div class="item-text"><span class="bold">Companies and Entrepreneurs</span> - interested in opportunities vetted by UCSF Health Hub to advise, conduct industry-sponsored research, and/or co-develop products with growth-stage companies. <span class="underline">Note</span>: UCSF Health Hub offers a private, curated match-making service exclusively for UCSF. To get started, <a href="https://www.healthhubsf.org/apply">click here to apply</a>.</div>
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="Press" type="checkbox" /></div>

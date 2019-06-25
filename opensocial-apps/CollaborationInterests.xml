@@ -200,6 +200,7 @@
 			ul {list-style-type: disc;padding-left: 20px; margin-top: 10px;}	
 			
 			.last-updated{text-align: right;font-size: smaller;font-style: italic;}
+			#Narrative {margin-top: 10px;text-align: justify;}
         </style>
 
 		<div class="collab-interest">

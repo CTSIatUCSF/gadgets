@@ -13,6 +13,31 @@
     </ModulePrefs>
     
     <Content type="html" view="verify, default, home, profile"><![CDATA[
+        <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >     
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/environment.js" ></script>
+        <script type="text/javascript" src="js/os.js" ></script>
+        <script type="text/javascript" src="js/ontology.js" ></script>
+        <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+        <script type="text/javascript" src="js/moment.min.js"></script>    		
+		
+		<script type="text/javascript">
+			var UCSF = UCSF || {};
+			UCSF.CollaborationInterests = {
+				Items: [
+					'AcademicCollaboration',
+					'AcademicSenateCommitteeService',
+					'ClinicalResearch',
+					'CommunityAndStakeholderOrganizations',
+					'CompaniesAndEntrepreneurs',
+					'Press',
+					'ProspectiveDonors',
+					'Narrative',
+					'UpdatedOn'		
+				]
+			}
+		</script>        
 	]]>
     </Content>
         
@@ -20,12 +45,178 @@
    ]]>
    </Content>
         
-    <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
-		<div>HOME View</div>
+    <Content type="html" view="home"  preferred_width="800" preferred_height="900"><![CDATA[    
+		<!DOCTYPE html>
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+				UCSF.CollaborationInterests.loadInterests = function(callback) {
+					osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': UCSF.CollaborationInterests.Items}).execute(function(response){
+						var viewer = os.osapi.getViewerFromResult(response);
+						UCSF.CollaborationInterests.Items.forEach(function (item, index) {
+							var elem = $('#' + item);
+							if(elem.prop("tagName").toLowerCase() === 'textarea') {
+								elem.val(viewer[item]);
+							}
+							else {
+								elem.prop('checked', viewer[item] === 'true');
+							}		
+						})
+						$('#UpdatedOn').text(viewer.UpdatedOn);							
+						callback();
+					});
+				}
+            	$(document).ready(function () {
+					gadgets.orng.showGadget();
+					gadgets.window.adjustHeight(900);						
+					$(".pubs-gadget").block({ message: "Loading..." });
+					UCSF.CollaborationInterests.loadInterests(function() {
+						$(".pubs-gadget").unblock();
+					});
+										
+					$('#save-btn').click(function() {
+						var data = {};
+						UCSF.CollaborationInterests.Items.forEach(function (item, index) {
+							var elem = $('#' + item);
+							if(elem.prop("tagName").toLowerCase() === 'textarea') {
+								data[item] = elem.val();
+							}
+							else {
+								data[item] = "" + elem.is(":checked");
+							}						
+						});
+						data.UpdatedOn = moment().format('dddd MMMM Do, YYYY');
+						$('#UpdatedOn').text(data.UpdatedOn);
+						
+		    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':data}).execute(function(response){
+						});		        						
+					});
+				});			
+			});
+
+        </script>        
+        <style>
+			.bold {font-weight: bold;}
+			.underline {text-decoration: underline;}
+			
+			.gadget-title{font-weight: bold;background-color: lightgray;margin-bottom: 10px;padding: 5px;}
+			.descr {text-align: justify;}
+			.last-updated{text-align: right;margin-top: 5px;font-size: smaller;font-style: italic;}
+			.areas-title {margin-top: 10px;margin-bottom: 10px;}
+			.interest-item {margin-top: 10px;}
+			.item-sel {position: absolute;margin-top: 1px;}
+			.item-sel input {margin-top: 0px;}
+			.item-text {margin-left: 30px;}
+			.item-text ul{margin-top: 5px;margin-bottom: 5px;}
+			
+			.narrative-title {margin-top: 30px;}
+			textarea {width: 780px; height: 155px;}
+			
+			.actions {text-align: center;margin-top: 10px;}
+			#cancel-btn {margin-left: 20px;}
+        </style>
+
+		<div class="collab-interest">
+			<div class="gadget-title">Collaboration Interests</div>
+			<div class="descr">Use this section to indicate what kinds of collaborations or contacts might interest you. Information saved here may be used by UCSF researchers, employees and organizations, and the public depending on your privacy settings, to contact you. They may contact you by any means visible on your profile page, e.g. phone number or email address listed at the top. Please add specific collaboration interests or experience in the collaboration narrative below.</div>
+			<div class="last-updated">Last Updated: <span id="UpdatedOn">Tuesday June 2, 2015</span></div>
+			<div class="areas-title"><span class="bold">Areas of Interests</span> (check all that apply)</div>
+			<div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="AcademicCollaboration" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Academic Collaboration</span> - interested in talking/meeting with other researchers and potentially working together to 
+						<ul>
+							<li>brainstorm ideas, review research questions, refine approaches, etc. </li>
+							<li>prepare cross-disciplinary grant applications</li>
+						</ul>
+						The UCSF Research Development Office’s <a href="#">Team Science Program</a> has more information.
+					</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="AcademicSenateCommitteeService" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Academic Senate Committee Service</span> - would like to serve on senate academic committees. <span class="underline">Note</span>: Please add any specific interests you have in the Collaboration Narrative below.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="ClinicalResearch" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Clinical Research</span> - interested in hearing from other researchers about collaborating on clinical trials and/or research studies.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="CommunityAndStakeholderOrganizations" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Community and Stakeholder Organizations</span> - interested in working with community organizations, clinics and health systems, public health programs, other community leaders and/or policy makers to advance health for all, with an emphasis on addressing health inequities and disparities.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="CompaniesAndEntrepreneurs" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Companies and Entrepreneurs</span> - interested in opportunities vetted by UCSF Health Hub to advise, conduct industry-sponsored research, and/or co-develop products with growth-stage companies. <span class="underline">Note</span>: UCSF Health Hub offers a private, curated match-making service exclusively for UCSF. To get started, <a href="#">click here to apply</a>.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="Press" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Press</span> - interested in working with University Relations to identify opportunities for publicity around my work or to serve as a topic area expert for media. Note: Please add any press experience and scope of your interests (e.g. commercialization or ethics) to your collaborative narrative.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="ProspectiveDonors" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Prospective Donors</span> - willing to work with the UCSF Development Office to talk to potential donors about your research.</div>
+				</div>
+			</div>
+			<div class="narrative-title"><span class="bold">Add a collaboration narrative</span> - say why you'd make a great collaborator for above sections</div>
+			<div><textarea id="Narrative"></textarea><div>
+			<div>(2000 characters max)</div>
+			<div class="actions">
+				<input id="save-btn" name="save" value="Save" type="button"/>
+				<input id="cancel-btn" name="cancel" value="Cancel" type="button"/>
+			</div>
+			
+		</div>
     ]]>
 	</Content>
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
-		<div>Profile View</div>
+    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[<!--HTML-->
+	    <!DOCTYPE html>
+		<script type="text/javascript">
+			gadgets.util.registerOnLoadHandler(function() {
+				UCSF.CollaborationInterests.loadInterests = function(callback) {
+					osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': UCSF.CollaborationInterests.Items}).execute(function(response){
+						var viewer = os.osapi.getViewerFromResult(response);
+						UCSF.CollaborationInterests.Items.forEach(function (item, index) {
+							if(viewer[item] === 'true') {
+								$('#' + item).show();
+							}
+						})
+						$('#UpdatedOn').text(viewer.UpdatedOn);							
+						$('#Narrative').text(viewer.Narrative);
+						callback();
+					});
+				}
+				
+            	$(document).ready(function () {
+					gadgets.orng.showGadget();
+					gadgets.window.adjustHeight(200);						
+					$(".pubs-gadget").block({ message: "Loading..." });
+					UCSF.CollaborationInterests.loadInterests(function() {
+						$(".pubs-gadget").unblock();
+					});
+				});
+			});
+        </script>        
+        <style>
+			ul {list-style-type: disc;padding-left: 20px; margin-top: 10px;}	
+			
+			.last-updated{text-align: right;font-size: smaller;font-style: italic;}
+        </style>
+
+		<div class="collab-interest">
+			<div class="last-updated">Last Updated: <span id="UpdatedOn">Tuesday June 2, 2015</span></div>
+			<div id="Narrative"></div>
+			<div>				
+				<div>I am interested in:</div>
+				<ul>
+					<li id="AcademicCollaboration" style="display:none">Academic Collaboration</li>
+					<li id="AcademicSenateCommitteeService" style="display:none">Academic Senate Committee Service</li>
+					<li id="ClinicalResearch" style="display:none">Clinical Research</li>
+					<li id="CommunityAndStakeholderOrganizations" style="display:none">Community and Stakeholder Organizations</li>
+					<li id="CompaniesAndEntrepreneurs" style="display:none">Companies and Entrepreneurs</li>
+					<li id="Press" style="display:none">Press</li>
+					<li id="ProspectiveDonors" style="display:none">Prospective Donors</li>
+				</ul>
+			<div>
+		</div>
     ]]></Content>
 </Module>

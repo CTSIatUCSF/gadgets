@@ -88,8 +88,18 @@
 						$('#UpdatedOn').text(data.UpdatedOn);
 						
 		    			osapi.appdata.update({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'data':data}).execute(function(response){
+							if(response && response.error) {
+								alert("Cannot save the changes. Please try again or contact your system administrator.");
+							}
+							else {
+								alert('Your Collaboration Interests information has been saved. Please ensure the "Edit Visibility" setting is correct to make this section visible on your profile page.');
+							}
 						});		        						
 					});
+					$('#cancel-btn').click(function() {
+						window.history.back();
+						return false;
+					})
 				});			
 			});
 

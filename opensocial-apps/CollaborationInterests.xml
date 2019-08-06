@@ -116,7 +116,7 @@
 			.item-sel {position: absolute;margin-top: 1px;}
 			.item-sel input {margin-top: 0px;}
 			.item-text {margin-left: 30px;}
-			.item-text ul{margin-top: 5px;margin-bottom: 5px;}
+			.item-text ul{margin-top: 5px;margin-bottom: 5px;list-style-type: disc; margin-left: 15px;}
 			
 			.narrative-title {margin-top: 30px;}
 			textarea {width: 780px; height: 155px;}
@@ -198,9 +198,9 @@
 				
             	$(document).ready(function () {
 					gadgets.orng.showGadget();
-					gadgets.window.adjustHeight(200);						
 					$(".pubs-gadget").block({ message: "Loading..." });
 					UCSF.CollaborationInterests.loadInterests(function() {
+						gadgets.window.adjustHeight($(".collab-interest").height());						
 						$(".pubs-gadget").unblock();
 					});
 				});
@@ -210,7 +210,7 @@
 			ul {list-style-type: disc;padding-left: 20px; margin-top: 10px;}	
 			
 			.last-updated{text-align: right;font-size: smaller;font-style: italic;}
-			#Narrative {margin-top: 10px;text-align: justify;}
+			#Narrative {margin-top: 10px;margin-bottom: 10px;text-align: justify;}
         </style>
 
 		<div class="collab-interest">

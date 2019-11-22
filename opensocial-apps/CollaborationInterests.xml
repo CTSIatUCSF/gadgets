@@ -28,7 +28,7 @@
 				Items: [
 					'AcademicCollaboration',
 					'AcademicSenateCommitteeService',
-					'ClinicalResearch',
+					'MulticenterClinicalResearch',
 					'CommunityAndStakeholderOrganizations',
 					'CompaniesAndEntrepreneurs',
 					'Press',
@@ -146,8 +146,13 @@
 					<div class="item-text"><span class="bold">Academic Senate Committee Service</span> - would like to serve on senate academic committees. <span class="underline">Note</span>: Please add any specific interests you have in the Collaboration Narrative below.</div>
 				</div>
 				<div class="interest-item">
-					<div class="item-sel"><input id="ClinicalResearch" type="checkbox" /></div>
-					<div class="item-text"><span class="bold">Clinical Research</span> - interested in hearing from other researchers about collaborating on clinical trials and/or research studies.</div>
+					<div class="item-sel"><input id="MulticenterClinicalResearch" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Multicenter Clinical Research</span> -  interested in hearing about opportunities to participate in multicenter clinical research projects, including clinical trials and other types of studies. <font color="red">For example:</font>
+						<ul>
+							<li>Multicenter studies using the Trials Innovation Network (<a href="https://trialinnovationnetwork.org" target="_blank">TIN</a>)</li>
+							<li>Multicenter studies using PCORnet or <a href="https://reachnet.org" target="_blank">REACHNet</a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="CommunityAndStakeholderOrganizations" type="checkbox" /></div>
@@ -221,7 +226,7 @@
 				<ul>
 					<li id="AcademicCollaboration" style="display:none">Academic Collaboration</li>
 					<li id="AcademicSenateCommitteeService" style="display:none">Academic Senate Committee Service</li>
-					<li id="ClinicalResearch" style="display:none">Clinical Research</li>
+					<li id="MulticenterClinicalResearch" style="display:none">Multicenter Clinical Research</li>
 					<li id="CommunityAndStakeholderOrganizations" style="display:none">Community and Stakeholder Organizations</li>
 					<li id="CompaniesAndEntrepreneurs" style="display:none">Companies and Entrepreneurs</li>
 					<li id="Press" style="display:none">Press</li>

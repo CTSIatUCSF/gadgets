@@ -215,7 +215,7 @@
                     }
                     
                     var domainName = ucsf.youtube.getDomainNameFromUrl(linkUrl);
-                    if(domainName == "youtube.com" || domainName == "vimeo.com" 
+                    if(domainName == "youtube.com" || domainName == "vimeo.com" || domainName == "youtu.be" || domainName == "facebook.com"
                     || domainName == "ted.com") {
                         $(".youtube-gadget").block({ message: "Saving..." });                        
                          ucsf.youtube.addAndSaveVideo(linkName, linkUrl, "");
@@ -232,7 +232,7 @@
                         });                 
                     }
                     else {
-                        alert("This video service might not be supported. Check your profile page to make sure the video shows properly.");     
+                        alert("Video information saved. Please view your page to verify that it works correctly.");     
                         $(".youtube-gadget").block({ message: "Saving..." });                        
                         ucsf.youtube.addAndSaveVideo(linkName, linkUrl, "");
                         return;                  
@@ -388,7 +388,7 @@
         <div class="youtube-gadget">
             <h3>Manage Links to Videos</h3>
             <div class="descr">
-                Add links to videos that will show in your profile. Videos must be hosted on YouTube, Vimeo, UCTV or another video hosting service. Enter the video name, as you want it to appear on your profile, and its URL.  Some examples might be a lecture or an interview with the media.
+                Add links to videos that you want to show in your profile page. Videos must be hosted on YouTube, Vimeo, Facebook, or TED. Enter the video name, as you want it to appear on your profile, and its URL from the hosting service. Some examples might be a lecture or an interview with the media.
             </div>
             <div class="question" style="padding:0px 0px 5px 12px;">
                 <table cellpadding="0" cellspacing="0">
@@ -399,7 +399,7 @@
                         </td>
                         <td class="links_body" valign="top" colspan="2">
                             <div><b>Video URL</b> (not displayed in profile)</div>
-                            <div><span>e.g. http://www.uctv.tv/shows/15777</div>
+                            <div><span>e.g. https://youtu.be/fAVsDZasAfM</div>
                         </td>
                     </tr>               
                     <tr>

@@ -49,7 +49,7 @@ namespace ClinicalTrialsApi
                         CompletionDate = trial.Value.completion_date != null? DateTime.ParseExact(trial.Value.completion_date, DATE_FORMAT, CultureInfo.InvariantCulture) : null,
                         Status = trial.Value.recruitment_status,//TODO: need to use correct property
                         Conditions =  conditions.ToString(),
-                        SourceUrl = isVisible ? "https://clinicaltrials." + domainName  + "/trial/" + trial.Value.id : "https://clinicaltrials.gov/ct2/show/" + trial.Value.id
+                        SourceUrl = isVisible ? "https://clinicaltrials." + domainName + "/trial/" + trial.Value.id : "https://clinicaltrials.gov/ct2/show/" + trial.Value.id
                     };
                     ClinicalTrials.Add(clinicalTrial.Id, clinicalTrial);
 

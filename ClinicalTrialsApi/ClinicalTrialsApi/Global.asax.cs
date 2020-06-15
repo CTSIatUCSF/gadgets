@@ -32,6 +32,18 @@ namespace ClinicalTrialsApi
             return ContentDirectory + domainName + ".json";
         }
 
+        public static string GetClinicalTrialsBaseURL(string domainName)
+        {
+            if ("ucla.edu".Equals(domainName))
+            {
+                return "https://ucla.clinicaltrials.researcherprofiles.org";
+            }
+            else
+            {
+                return "https://clinicaltrials." + domainName;
+            }
+        }
+
         protected async Task UpdateContent() {
             Log.Info("Content update started...");
 
@@ -58,7 +70,7 @@ namespace ClinicalTrialsApi
         protected async Task<string> DownloadContentFile(string domainName) {
             var fileName = GetContentFilename(domainName) + ".gz";
 
-            using (var response = await new HttpClient().GetAsync("https://clinicaltrials." + domainName + "/__data_export.json.gz"))
+            using (var response = await new HttpClient().GetAsync(GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz"))
             using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 fileStream.SetLength(0);

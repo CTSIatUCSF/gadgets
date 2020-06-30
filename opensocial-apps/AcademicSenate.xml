@@ -28,28 +28,8 @@
         
         <script type="text/javascript">
 			var UCSF = UCSF || {};
-		    UCSF.RESEARCHER_PROFILE_URL = "https://ucsf.labspot.io/u1/research?id=";
-			function mapNodeId(nodeId) {
-				if(!UCSF.Environment || UCSF.Environment == PROD) {
-					return nodeId; 
-				}
-				var stagemapping = {
-					'215328': 189432, //trever.bivona
-					'214101': 180835, //valerie.flaherman
-					'227739': 182727 //tony.yang
-					};
-				return stagemapping.hasOwnProperty(nodeId) ? stagemapping[nodeId]: nodeId; 
-			}
+		    UCSF.SENATE_SERVICE_URL = "https://senateserviceportal.ucsf.edu/api/profile/";
 			
-            function getOpportunities(nodeId, callback){
-                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/opportunities/active' + '?key=mwRKq3kclotPRG8ywkQY', callback)
-            }
-            function getPastProjects(nodeId, callback){
-                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '/pastprojects' + '?key=mwRKq3kclotPRG8ywkQY', callback)
-            }
-            function getResearcherInfo(nodeId, callback){
-                getAPIData('https://ucsf.labspot.io/api/v1/researchers/' + nodeId + '?key=mwRKq3kclotPRG8ywkQY', callback)
-            }
             function getAPIData(url, callback){
                 var params = {};
                 params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -65,6 +45,36 @@
                     return callback();   
                 }, params);
             }
+			function loadData(callback) {
+				osapi.people.getOwner().execute(function(result) {
+					if (result && result.internalUsername) {
+						var senateUrl = UCSF.SENATE_SERVICE_URL + result.internalUsername + "?fields=email,committees,awards"; 
+						getAPIData(senateUrl, function(err, result) {
+							callback(err, jQuery.parseJSON(result))
+						});
+					}
+					else {
+						callback('cannot get the gadget owner')
+					}
+				})	  
+			}
+			function renderData(data) {
+			    if(data && data.committees) {
+					data.committees.forEach(function(committee) {
+						committee.service.forEach(function(service) {
+							var startDate = new Date(service.start_date);
+							var endDate = new Date(service.end_date);
+							var html = '<tr>' + 
+									   '  <td class="c-title">'+committee.title+'</td>' + 
+									   '  <td class="c-role">'+service.role + '</td>' + 
+									   '  <td class="c-date">'+ startDate.getFullYear() + '-' + endDate.getFullYear() + '</td>' + 
+									   '</tr>';
+							$('.committee-list table').append(html);
+						});
+					});
+					$('.committee-list').show();
+				}
+			}
             
             function getOwner(callback) {
               var nodeId;
@@ -81,17 +91,17 @@
                       });                                                     
                   }               
               });                                          
-            }
-            
-            function gadgetEventTrack(action, label, value) {       
-                var message = {'action' : action};
-                if (label) {message.label = label;}
-                if (value) {message.value = value;}
-                
-                gadgets.orng.reportGoogleAnalyticsEvent(message);
-            }   
-            
+            }            
         </script>        
+		
+        <style>
+            #senate-committees {margin-top: 10px;}
+			.committee-list {height: 200px; overflow-y: auto;margin-top: 20px; border: 1px solid slategray;}
+			.committee-list table {margin: 10px;}
+			.committee-list td {padding: 5px;}
+			.c-date {width: 70px;}
+        </style>
+		
    ]]></Content>
         
    <Content type="html" view="verify"><![CDATA[
@@ -107,102 +117,41 @@
         }
       }
     
-      function checkDataOld() {
-          osapi.jsonld.getOwner().execute(function(result) {
-            if(!result.error) {
-                var nodeId = mapNodeId(result.uris[0].substring(result.base.length));
-                async.parallel([
-                    function(callback) {getOpportunities(nodeId, callback)},
-                    function(callback) {getPastProjects(nodeId, callback)}
-                    ], function(err, results) {
-                    
-                    registerApp(results && ((results[0] && results[0].researcher_opps && results[0].researcher_opps.length > 0) ||
-                        (results[1] && results[1].past_projects && results[1].past_projects.length > 0))
-                    );                      
-                });                        
-            }
-          })          
+      function checkData() {
+			loadData(function(err, result) {
+				registerApp(results && results.committees && results.committees.length > 0)
+			});	
       }
       
-	  function checkData2() {
-			var foo = [PRNS('fullName')];
-	  		osapi.jsonld.getOwnerProperties(foo).execute(function(result) {
-				var foo = result;
-			})
-		}	
-		
-	  function checkData() {
-		osapi.people.getOwner().execute(function(result) {
-			var foo = result;
-			if (result && result.internalUsername) {
-				//var senateUrl = "https://senateserviceportal.ucsf.edu/api/profile/357564@ucsf.edu?fields=email,committees,awards";
-				var senateUrl = "https://senateserviceportal.ucsf.edu/api/profile/" + result.internalUsername; 
-				getAPIData(senateUrl, function(err, result) {
-					window.alert(result);
-				});
-			}
-		})	  
-	  }
-		
-      function testAcademicSenateAPI() {
-      	setTimeout(function() {
-			//var senateUrl = "https://senateserviceportal.ucsf.edu/api/profile/357564@ucsf.edu?fields=email,committees,awards";
-			//getAPIData(senateUrl, function(err, result) {
-      		//var foo = result;
-      		//window.alert(result);
-			checkData();
-      	}, 20000);
-      }
-      
-      gadgets.util.registerOnLoadHandler(testAcademicSenateAPI);
+      gadgets.util.registerOnLoadHandler(checkData);
     </script>   
    ]]></Content>
         
-    <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
+    <Content type="html" view="home"  preferred_width="700" preferred_height="300"><![CDATA[    
         <!DOCTYPE html>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#student-projects").block({ message: "Loading..." });
+                $("#senate-committees").block({ message: "Loading..." });
             });             
             gadgets.util.registerOnLoadHandler(function() {
-              osapi.jsonld.getOwner().execute(function(result) {
-                if(!result.error) {
-                    var nodeId = mapNodeId(result.uris[0].substring(result.base.length));
-                    async.parallel([
-                        function(callback) {getOpportunities(nodeId, callback)},
-                        function(callback) {getPastProjects(nodeId, callback)},
-                        function(callback) {getResearcherInfo(nodeId, callback)}
-                        ], function(err, results) {
-                        
-                        gadgets.orng.showGadget();
-                        if(results && ((results[0] && results[0].researcher_opps && results[0].researcher_opps.length > 0) || 
-                            (results[1] && results[1].past_projects && results[1].past_projects.length > 0))) {
-                            
-                            $("#student-projects .inactive").hide();
-                            $("#student-projects .active").show();
-                        }
-
-                        if(results && results[2] && results[2].researcher) {
-                            $("#student-projects a").attr("href", UCSF.RESEARCHER_PROFILE_URL + results[2].researcher.researcher_id);
-                        }                                
-                        $("#student-projects").unblock();
-                    });                                         
-                }
-              })                      
+				loadData(function(err, result) {
+					gadgets.orng.showGadget();
+					if(result) {
+						renderData(result);						
+						gadgets.window.adjustHeight($('.committee-list').height() + 100);
+						$("#senate-committees").unblock();
+					}
+				});
             });
         </script>        
-        
-        <style>
-            #student-projects {margin-top: 10px;}
-        </style>
-        
-        <div id="student-projects">
-            <div class="active" style="display:none">
-                To see your open projects go to View Profile above. To add, remove or edit your projects, go to <a target="_blank" href="#">UCSF Labspot<a/>
-            </div>    
-            <div class="inactive">
-                This section uses information from UCSF Medical Education’s <a target="_blank" href="https://ucsf.labspot.io/u1/research?id=">Labspot</a> and we were unable to find any data for you there. Therefore, this section is currently unavailable for your profile page. 
-            </div>    
+                
+        <div id="senate-committees">
+			<div class="sc-title">
+				The information in this section comes from the Academic Senate Committee on Committees. If there are errors or omissions, please contact <a href="mail-to:emailcommittee@ucsf.edu">emailcommittee@ucsf.edu</a> to make corrections.
+			</div>    
+			<div class="committee-list" style="display:none">
+				<table></table>
+			</div>
         </div>
     ]]></Content>
     
@@ -211,150 +160,25 @@
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
         <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
         <script type="text/javascript">
-            function loadOpportunities(owner, callback) {           
-                getOpportunities(owner.nodeId, function(err, result) {
-                    if(!result || !result.researcher_opps || result.researcher_opps.length === 0) {
-                        return callback();
-                    }
-                    result.researcher_opps.sort(function(a,b) {
-                        return new Date(a.close_date) - new Date(b.close_date);
-                    });
-                    result.researcher_opps.forEach(function(opp) {
-                        var html = '<tr>' + 
-                                   '    <td class="project">' + 
-                                   '        <div><a href="https://ucsf.labspot.io/u1/opportunity?id=' + opp.opportunity_id +'" target="_blank">' + opp.title + '</a></div>' +
-                                   '        <div class="close-date">closes ' + opp.close_date + '</div>' +
-                                   '    </td>' + 
-                                   '    <td class="program">' + opp.program + '</td><tr>';
-                        
-                        $(".current-project-list tbody").append(html);
-                        $(".current-project-list").show();
-                    })                    
-                    return callback(null, result.researcher_opps);
-                });
-            }        
-            function loadPastProjects(owner, callback) {
-                getPastProjects(owner.nodeId, function(err, result) {
-                    if(!result || !result.past_projects || result.past_projects.length === 0) {
-                        return callback();
-                    }
-                    result.past_projects.forEach(function(project) {
-                        var html = '<tr>' + 
-                                   '    <td>' + 
-                                   '        <div><a class="profile-link" href="#" target="_blank">' + project.title + '</a></div>' +
-                                   '        <div class="close-date">completed ' + getDate(project.date) + '</div>' +
-                                   '    </td>';
-                                                                                        
-                        $(".past-project-list tbody").append(html);
-                        $(".past-project-list").show();
-                    });
-                    
-                    return callback(null, result.past_projects);
-                });
-            }
-            function getDate(timestamp) {
-                return timestamp ? timestamp.split(' ')[0] : '';
-            }
-            
-            function updateInfo(owner, callback) {
-            
-                $("#student-projects .profile-link span").html(owner.fullName);
-                getResearcherInfo(owner.nodeId, function(err, result) {
-                    if(result && result.researcher) {
-                        $(".profile-link").attr("href", UCSF.RESEARCHER_PROFILE_URL  + result.researcher.researcher_id);
-                    }                                
-                    return callback(null, result.researcher);
-                });
-            }
             
             gadgets.util.registerOnLoadHandler(function() {
                 $(document).ready(function () {
-                    $("#student-projects").block({ message: "Loading..." });
+					loadData(function(err, result) {
+						gadgets.orng.showGadget();
+						if(result) {
+							renderData(result);						
+							gadgets.window.adjustHeight($('.committee-list').height() + 50);
+						}
+						$("#senate-committees").unblock();
+					});
                 });             
-                getOwner(function(owner) {
-                    if(owner) {
-                        $("#student-projects .profile-link span").html(owner.fullName);
-                        async.parallel([
-                                function(callback) {loadOpportunities(owner, callback)},
-                                function(callback) {loadPastProjects(owner, callback)},
-                                function(callback) {updateInfo(owner, callback)}
-                                ], function(err, results) {
-                                
-                            $("#student-projects").unblock();                    
-                            
-                            if(results && ((results[0] && results[0].length > 0) || (results[1] && results[1].length > 0))) {
-                                gadgets.orng.showGadget();
-                                setTimeout(function(){
-                                    var tableHeight = $(".project-list").height();
-                                    if(tableHeight < 140) {
-                                        var h = $("#student-projects .descr").height();
-                                        gadgets.window.adjustHeight(h + tableHeight + 20);
-                                    }
-                                })
-                            }
-							
-							if(results && results[2] && results[2].researcher_id) {
-								$(".profile-link").attr("href", UCSF.RESEARCHER_PROFILE_URL + results[2].researcher_id);
-							}
-                                                        
-                        })
-                    }
-                    else {
-                        $("#student-projects").unblock();                    
-                    }
-                }); 
-            });
-            
-            $(document).ready(function () {
-                $(".profile-link").click(function() {
-                   gadgetEventTrack("go_to_labspot_profile", $(this).attr("href"))
-                });
-                
-                $(".project-list").on('click', 'a', function() {
-                   gadgetEventTrack("go_to_labspot_project", $(this).attr("href"))
-                });
-                 
-            });
+            });            
         </script>        
         
-        <style>
-            #student-projects .descr {margin-top: 10px; margin-bottom: 10px;}
-            #student-projects .project-list{overflow-y: auto;}            
-            #student-projects th.project {text-align:left;}     
-            #student-projects th.program {text-align:left;padding-left: 20px;}    
-			#student-projects td.project {width:350px;}     
-            #student-projects td.program {padding-left: 20px;}    
-            #student-projects .close-date {font-size: 12px;margin-bottom: 5px;} 
-                   
-        </style>
-        
-        <div id="student-projects">
-            <div class="descr">
-                See <a class="profile-link" href="#" target="_blank"><span></span>'s profile</a> on <a href="https://ucsf.labspot.io/" target="_blank">UCSF LabSpot</a>, the source of this information. (Requires UCSF MyAccess)
-            </div>
-            <div class="project-list">
-                <div class="current-project-list" style="display:none">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="project">Opportunities</th>
-                                <th class="program">Program</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div class="past-project-list" style="display:none">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="project">Past Projects</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="senate-committees">
+			<div class="committee-list" style="display:none">
+				<table></table>
+			</div>
         </div>
     ]]></Content>
 </Module>

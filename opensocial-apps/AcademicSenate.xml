@@ -50,6 +50,7 @@
 					if (result && result.internalUsername) {
 						var senateUrl = UCSF.SENATE_SERVICE_URL + result.internalUsername + "?fields=email,committees,awards"; 
 						getAPIData(senateUrl, function(err, result) {
+							$('#debug').append('<div>' + result + '</div>');
 							callback(err, jQuery.parseJSON(result))
 						});
 					}
@@ -152,6 +153,7 @@
 			<div class="committee-list" style="display:none">
 				<table></table>
 			</div>
+			<div id="debug" style="display:none"></div>
         </div>
     ]]></Content>
     
@@ -179,6 +181,7 @@
 			<div class="committee-list" style="display:none">
 				<table></table>
 			</div>
+			<div id="debug" style="display:none"></div>
         </div>
     ]]></Content>
 </Module>

@@ -39,20 +39,20 @@
                 params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
 				params[gadgets.io.RequestParameters.HEADERS] =  {"Accept" : "application/json"};
                 gadgets.io.makeRequest(url, function(result) {
+					$('#debug').append('<div>' + JSON.stringify(result)  + '</div>');
                     if(result && result.text ) {
-						$('#debug').append('<div>' + JSON.stringify(result)  + '</div>');
                         return callback(null, result.text);
                     }
-                    return callback();   
+                    return callback('Cannot get the data from the service');   
                 }, params);
             }
 			function loadData(callback) {
 				osapi.people.getOwner().execute(function(result) {
 					if (result && result.internalUsername) {
 						var senateUrl = UCSF.SENATE_SERVICE_URL + result.internalUsername + "?fields=email,committees,awards"; 
-						getAPIData(senateUrl, function(err, result) {
+						getAPIData(senateUrl, function(err, result) {						
 							$('#debug').append('<div>' + result + '</div>');
-							callback(err, jQuery.parseJSON(result))
+							callback(err, !err && result ? jQuery.parseJSON(result): result)
 						});
 					}
 					else {
@@ -121,7 +121,7 @@
     
       function checkData() {
 			loadData(function(err, result) {
-				registerApp(results && results.committees && results.committees.length > 0)
+				registerApp(result && result.committees && result.committees.length > 0)
 			});	
       }
       

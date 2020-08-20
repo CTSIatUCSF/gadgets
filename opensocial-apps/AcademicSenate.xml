@@ -39,7 +39,9 @@
                 params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
 				params[gadgets.io.RequestParameters.HEADERS] =  {"Accept" : "application/json"};
                 gadgets.io.makeRequest(url, function(result) {
-					$('#debug').append('<div>' + JSON.stringify(result)  + '</div>');
+				    $(document).ready(function () {
+						$('#debug').append('<div>' + JSON.stringify(result)  + '</div>');
+					});	
                     if(result && result.text ) {
                         return callback(null, result.text);
                     }
@@ -62,19 +64,20 @@
 			}
 			function renderData(data) {
 			    if(data && data.committees) {
+  					$('.committee-list').show();
+					var html = '';
 					data.committees.forEach(function(committee) {
 						committee.service.forEach(function(service) {
 							var startDate = new Date(service.start_date);
 							var endDate = new Date(service.end_date);
-							var html = '<tr>' + 
+							html += '<tr>' + 
 									   '  <td class="c-title">'+committee.title+'</td>' + 
 									   '  <td class="c-role">'+service.role + '</td>' + 
 									   '  <td class="c-date">'+ startDate.getFullYear() + '-' + endDate.getFullYear() + '</td>' + 
 									   '</tr>';
-							$('.committee-list table').append(html);
 						});
 					});
-					$('.committee-list').show();
+					$('.committee-list table').append(html);					
 				}
 			}
             
@@ -94,6 +97,20 @@
                   }               
               });                                          
             }            
+			
+			function setHeight(addHeight, delay) {
+				var h = $('.committee-list').height();
+				if(h > 0) {
+					gadgets.window.adjustHeight(h + addHeight);
+				}
+				else {
+					if($('.committee-list tr').length > 0) {
+						setTimeout(function(){
+							setHeight(delay);
+						}, delay);							
+					}
+				}
+			}
         </script>        
 		
         <style>
@@ -139,8 +156,8 @@
 				loadData(function(err, result) {
 					gadgets.orng.showGadget();
 					if(result) {
-						renderData(result);						
-						gadgets.window.adjustHeight($('.committee-list').height() + 100);
+						renderData(result);		
+						setHeight(100, 100);		
 						$("#senate-committees").unblock();
 					}
 				});
@@ -158,7 +175,7 @@
         </div>
     ]]></Content>
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
+    <Content type="html" view="profile" preferred_width="690" preferred_height="175"><![CDATA[
         <!DOCTYPE html>
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
         <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
@@ -169,8 +186,8 @@
 					loadData(function(err, result) {
 						gadgets.orng.showGadget();
 						if(result) {
-							renderData(result);						
-							gadgets.window.adjustHeight($('.committee-list').height() + 50);
+							renderData(result);	
+							setHeight(50, 100);
 						}
 						$("#senate-committees").unblock();
 					});

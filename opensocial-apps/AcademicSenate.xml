@@ -115,7 +115,7 @@
 		
         <style>
             #senate-committees {margin-top: 10px;}
-			.committee-list {height: 200px; overflow-y: auto;margin-top: 20px; border: 1px solid slategray;}
+			.committee-list {height: 200px; overflow-y: auto;margin-top: 20px;}
 			.committee-list table {margin: 10px;}
 			.committee-list td {padding: 5px;}
 			.c-date {width: 70px;}

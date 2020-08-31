@@ -187,7 +187,7 @@
       
     ]]></Content>
 	<!-- ==================== START PROFILE VIEW ==================== -->
-	<Content type="html" view="profile" preferred_width="670">
+	<Content type="html" view="profile" preferred_width="690">
 	<![CDATA[<!--HTML-->
       <!DOCTYPE html>
 	  <script>

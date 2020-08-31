@@ -99,14 +99,18 @@
             }            
 			
 			function setHeight(addHeight, delay) {
-				var h = $('.committee-list').height();
+				var h = $('.committee-list table').height();
 				if(h > 0) {
+					if(h > 200) {
+						$('.committee-list').height(200);
+					}
+					h = h > 200 ? 200 : h + 10;
 					gadgets.window.adjustHeight(h + addHeight);
 				}
 				else {
 					if($('.committee-list tr').length > 0) {
 						setTimeout(function(){
-							setHeight(delay);
+							setHeight(addHeight, delay);
 						}, delay);							
 					}
 				}
@@ -115,7 +119,7 @@
 		
         <style>
             #senate-committees {margin-top: 10px;}
-			.committee-list {height: 200px; overflow-y: auto;margin-top: 20px;}
+			.committee-list {overflow-y: auto;margin-top: 20px;}
 			.committee-list table {margin: 10px;}
 			.committee-list td {padding: 5px;}
 			.c-date {width: 70px;}
@@ -166,7 +170,7 @@
                 
         <div id="senate-committees">
 			<div class="sc-title">
-				The information in this section comes from the Academic Senate Committee on Committees. If there are errors or omissions, please contact <a href="mail-to:emailcommittee@ucsf.edu">emailcommittee@ucsf.edu</a> to make corrections.
+				This section uses information from UCSF’s database of Academic Senate faculty service. We were unable to find any data for you there. Therefore, you should not add it to your profile page yourself. Please contact <a href="mailto:Joey.Cheng@ucsf.edu">Joey.Cheng@ucsf.edu</a> with questions about the Academic Senate.
 			</div>    
 			<div class="committee-list" style="display:none">
 				<table></table>
@@ -187,7 +191,7 @@
 						gadgets.orng.showGadget();
 						if(result) {
 							renderData(result);	
-							setHeight(50, 100);
+							setHeight(10, 100);
 						}
 						$("#senate-committees").unblock();
 					});
@@ -195,6 +199,11 @@
             });            
         </script>        
         
+        <style>
+            #senate-committees {margin-top: 0px;}
+			.committee-list {margin-top: 0px;}
+        </style>
+		
         <div id="senate-committees">
 			<div class="committee-list" style="display:none">
 				<table></table>

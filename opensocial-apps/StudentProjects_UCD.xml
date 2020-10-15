@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs
+            title="Student Scholarly Projects"
+            description="Student Scholarly Projects gadget">
+        <Require feature="opensocial-0.9" />
+        <Require feature="views" />
+        <Require feature="osapi" />
+        <Require feature="jsonld"/>
+        <Require feature="orng"/>
+        <Require feature="dynamic-height" />
+        <Require feature="start-hidden"/>
+    </ModulePrefs>
+    
+    <Content type="html" view="verify, default, home, profile"><![CDATA[
+        <!DOCTYPE html>            
+        
+   ]]></Content>
+        
+   <Content type="html" view="verify"><![CDATA[
+   ]]></Content>
+        
+    <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
+        <!DOCTYPE html>
+    ]]></Content>
+    
+    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
+        <!DOCTYPE html>
+    ]]></Content>
+</Module>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
     <ModulePrefs
-            title="Student Scholarly Projects"
-            description="Student Scholarly Projects gadget">
+            title="Student Projects"
+            description="Student Projects gadget">
         <Require feature="opensocial-0.9" />
         <Require feature="views" />
         <Require feature="osapi" />
@@ -14,17 +14,460 @@
     
     <Content type="html" view="verify, default, home, profile"><![CDATA[
         <!DOCTYPE html>            
+        <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >     
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/environment.js" ></script>
+        <script type="text/javascript" src="js/os.js" ></script>
+        <script type="text/javascript" src="js/ontology.js" ></script>
+        <script type="text/javascript" src="js/jquery.blockUI-2.66.0.js"></script>    
+        <script type="text/javascript" src="js/async.min.js"></script>
+	    <script type="text/javascript" src="js/lodash.min.js" ></script>
+		
         
+        <script type="text/javascript">
+			var UCSF = UCSF || {};
+			UCSF.StudentProject = UCSF.StudentProject || {};
+			UCSF.StudentProject.projectsInfo = {
+				researchType: 'Clinical Research',
+				projects: []
+			}
+			
+			_.templateSettings = {
+				interpolate: /\{\{=(.+?)\}\}/g,
+				evaluate: /\{\{(.+?)\}\}/g,
+				escape: /\{\{-(.+?)\}\}/g
+			};
+
+			UCSF.StudentProject.Load = function(callback) {
+				osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['projects_lastUpdated', 'projects_researchType', 'projects_count']} ).execute(function(result){
+					var viewer = os.osapi.getViewerFromResult(result);
+
+					if(viewer.projects_lastUpdated) {
+						UCSF.StudentProject.projectsInfo.lastUpdated = viewer.projects_lastUpdated;						
+					}
+					
+					if(viewer.projects_researchType) {
+						UCSF.StudentProject.projectsInfo.researchType = viewer.projects_researchType;						
+					}
+					
+					if(viewer.projects_count) {
+						var count = viewer.projects_count;
+						if(count > 0) {
+							var fields=[];
+							for(var i=0;i<count;i++) {
+								fields.push('projects_' + i);
+							}
+							osapi.appdata.get({'userId': '@owner', 'groupId': '@self', 'appId':'@app', 'fields': fields})
+								.execute(function(pub_response){
+									var pub_viewer = os.osapi.getViewerFromResult(pub_response);
+									for(var i=0;i<count;i++) {
+										var project = gadgets.json.parse(pub_viewer['projects_' + i]) || {};
+										if(project.name) {
+											UCSF.StudentProject.projectsInfo.projects.push(project);
+										}
+									}
+									
+									if(callback) {
+										callback();
+									}			    		
+								}); 	    	
+						}
+					}
+					
+					if(callback) {
+						callback();
+					}				
+			
+				});			
+			};
+
+        </script>        
    ]]></Content>
         
    <Content type="html" view="verify"><![CDATA[
+    <script type="text/javascript">
+    </script>   
    ]]></Content>
         
-    <Content type="html" view="home"  preferred_width="700" preferred_height="100"><![CDATA[    
-        <!DOCTYPE html>
+    <Content type="html" view="home"  preferred_width="700" preferred_height="500"><![CDATA[    
+        <script type="text/javascript">
+			UCSF.StudentProject.RenderProject = function(project, select) {
+				var tmpl = $("#template-project").html();
+				var html = _.template(tmpl)({ m: project, icons: UCSF.StudentProject.icons});
+				$('.project-list tr').removeClass('selected')
+				$('.project-list tbody').append(html);
+				if(select) {
+					$('.project-list tbody tr').last().addClass('selected');
+				}
+			}
+			UCSF.StudentProject.CopyFormToObject = function(project) {
+				project.name = $('#project-name').val();
+				project.location = $('#project-location').val();
+				project.objectives = $('#project-objectives').val();
+				project.studentResp = $('#project-resp').val();
+				project.link = $('#project-link').val();
+				project.contactInfo = $('#project-contact-info').val();				
+			}
+			
+			UCSF.StudentProject.Save = function(callback) {
+				UCSF.StudentProject.projectsInfo.lastUpdated = new Date().toLocaleDateString();				
+				$('.last-updated-date').text(UCSF.StudentProject.projectsInfo.lastUpdated);
+				var data = {
+					projects_lastUpdated: UCSF.StudentProject.projectsInfo.lastUpdated,
+					projects_count: UCSF.StudentProject.projectsInfo.projects.length,
+					projects_researchType: UCSF.StudentProject.projectsInfo.researchType
+					
+				};
+			
+				UCSF.StudentProject.projectsInfo.projects.forEach(function(value, index) {
+					data["projects_" + index] = JSON.stringify(value);
+				});
+				
+				osapi.appdata.update({'userId': '@viewer', 'appId': '@app', 'data': data }).execute(function(result) {
+					if (result.error) { 
+						alert("Error " + result.error.code + " writing application data: " + result.error.message);
+					} else {
+						if(callback) {
+							callback();
+						}
+					}
+				});
+			};
+			
+			UCSF.StudentProject.ClearForm = function() {
+				$('.project-edit-form input').val('');
+				$('.project-edit-form textarea').val('');
+				$('#project-name').data('id', '');
+				$('.project-list tr').removeClass('selected');
+			};
+			UCSF.StudentProject.adjustHeight = function() {
+				var h = $("#student-projects").height();
+				h = h > 400?h+100:500; 
+	      		gadgets.window.adjustHeight(h);
+			}	
+
+		    gadgets.util.registerOnLoadHandler(function() {
+				gadgets.orng.showGadget();
+				UCSF.StudentProject.Load(function() {
+					UCSF.StudentProject.projectsInfo.projects.forEach(function(value, index) {
+						UCSF.StudentProject.RenderProject(value);
+					});
+					if(UCSF.StudentProject.projectsInfo.lastUpdated) {
+						$('.last-updated-date').text(UCSF.StudentProject.projectsInfo.lastUpdated);
+						$('.last-updated-section').show();
+					}
+					
+					if(UCSF.StudentProject.projectsInfo.researchType) {
+						var elem = $('.research-type[value = "'+ UCSF.StudentProject.projectsInfo.researchType +'"]');
+						if(elem.length > 0) {
+							elem.prop('checked', 'true');
+						}
+						else {
+							$('#other').prop('checked', 'true');
+							$('.other-research-type').val(UCSF.StudentProject.projectsInfo.researchType)
+						}					
+					}
+					
+					UCSF.StudentProject.adjustHeight();
+				});
+				
+                $(document).ready(function () {
+					UCSF.StudentProject.icons = {
+						editIcon: $('#edit-project-link').attr('src'),
+						deleteIcon: $('#delete-project-link').attr('src')
+					}
+					
+					$('#project-save').click(function (){
+						var projectId = $('#project-name').data('id');
+						if(projectId) {
+							var project = UCSF.StudentProject.projectsInfo.projects[projectId - 1];							
+							UCSF.StudentProject.CopyFormToObject(project)
+							//alert(JSON.stringify(project));
+							
+							$('tr.selected .project-name').text(project.name);
+							$('tr.selected .project-location').text(project.location);
+						}
+						else {
+							var project = {};
+							UCSF.StudentProject.CopyFormToObject(project)
+							UCSF.StudentProject.projectsInfo.projects.push(project);
+			
+							UCSF.StudentProject.RenderProject(project, true);
+							$('#project-name').data('id', $('.project-list tbody tr').length);
+							
+						}
+						UCSF.StudentProject.Save();
+						UCSF.StudentProject.adjustHeight()
+						return false;
+					})
+					
+					$('#project-add').click(function (){					
+						UCSF.StudentProject.ClearForm();
+						return false;
+					})
+					$('#project-cancel').click(function (){					
+						UCSF.StudentProject.ClearForm();
+						return false;
+					})
+					$('.project-list').on('click', '.edit-project', function (){					
+						var projectRow = $(this).parents('tr').first();
+						var projectId = projectRow.index();
+						var project = UCSF.StudentProject.projectsInfo.projects[projectId];
+						$('#project-name').data('id', projectId + 1);
+						
+						$('#project-name').val(project.name);
+						$('#project-location').val(project.location);
+						$('#project-objectives').val(project.objectives);
+				        $('#project-resp').val(project.studentResp);
+						$('#project-link').val(project.link);
+						$('#project-contact-info').val(project.contactInfo);				
+						
+						$('.project-list tr').removeClass('selected');
+						projectRow.addClass('selected');
+						
+						return false;
+					})
+					$('.project-list').on('click', '.delete-project', function (){
+						var projectRow = $(this).parents('tr').first();
+						var projectId = projectRow.index();
+						if(projectRow.hasClass('selected')) {
+							UCSF.StudentProject.ClearForm();
+						}
+						projectRow.remove();
+						UCSF.StudentProject.projectsInfo.projects.splice(projectId, 1);
+						
+						UCSF.StudentProject.Save();
+						UCSF.StudentProject.adjustHeight();
+						return false;
+					})
+
+					$('.research-type').change(function() {
+						var reserchType = $(this).val();
+						if(reserchType != 'Other') {
+							$('.other-research-type').val('');
+						}
+					});
+					
+					$('.other-research-type').focus(function() {
+						$('#other').prop('checked', 'true');
+					});
+
+										
+					$('#research-type-save').click(function() {
+						var reserchType = $('.research-type:checked').val();
+						if(reserchType == 'Other') {
+							reserchType= $('.other-research-type').val();
+						}
+						UCSF.StudentProject.projectsInfo.researchType = reserchType;
+						UCSF.StudentProject.Save();
+						
+						return false;
+					});
+				});
+
+			});
+			
+			
+        </script>  
+		
+		<script type="text/template" id="template-project">
+			<tr>
+				<td class="project-name">{{=m.name}}</td>
+				<td class="project-location">{{=m.location}}</td>
+				<td>
+					<input type="image" name="edit-project" class="edit-project" src="{{=icons.editIcon}}" alt="Edit"/>
+					<input type="image" name="delete-project" class="delete-project" src="{{=icons.deleteIcon}}" alt="Delete"/>
+				</td>
+			</tr>
+		</script>
+		
+        
+        <style>
+			.last-updated-section {text-align: right;}
+			.last-updated-date {text-align: right;margin-left: 10px;}
+			.research-type-section {margin-bottom: 10px;}
+			.research-type-section input{vertical-align: middle;}
+			.other-reserch-type {margin-left: 5px;}
+			
+			.project-edit-title {font-weight: bold;margin-left: 10px;margin-bottom: 5px;}
+			.project-edit-form {border: solid 1px gray;padding: 10px;}
+			.project-edit-form div {margin-bottom: 5px;}			
+			.lb-first {width: 70px;}
+			.lb-second {width: 130px;}
+			.project-objectives-label {vertical-align: top;}
+			.project-resp-label {vertical-align: top;}
+			
+			#project-name {margin-left: 0px;width: 250px;}
+			#project-location {width: 250px;margin-right: 0px;}
+			#project-objectives {width: 586px;}
+			#project-resp {width: 527px;margin-left:0px;}
+			#project-link {width: 525px;margin-left:0px;margin-right: 0px;}
+			#project-contact-info {width: 660px;}
+			
+			.project-actions {margin-top: 10px;text-align: center;}
+			.project-actions div {width: 350px; display: inline-block;}
+			#project-save {float: left;}
+			#project-add {}
+			#project-cancel {float: right;}
+			
+			.project-list-title {font-weight: bold;margin-left: 10px;margin-bottom: 5px; margin-top: 20px;}
+			.project-list table {width: 100%;border-spacing: 1px;}
+			.project-list .project-list-header {background-color: rgb(68,114,196);color: white;}
+			.project-list .project-list-header th {text-align:left;padding-left: 5px;}
+			.project-list .actions-col {width: 50px;}
+			.project-list td {text-align:left;padding-left: 5px;background-color: rgb(233,235,245);vertical-align: middle;}
+			.project-list .selected td{background-color: rgb(207,213,234);}
+        </style>
+        
+        <div id="student-projects">
+			<input type="image" name="edit-project" id="edit-project-link" src="images/icon_edit.gif" alt="Edit" style="display:none"/>
+			<input type="image" name="delete-project" id="delete-project-link" src="images/icon_delete.gif" alt="Delete" style="display:none"/>
+            <div class="last-updated-section" style="display:none">
+				Last Updated<span class="last-updated-date">11/11/20</span>
+			</div>    
+			<div class="research-type-section">
+				<div>Type of research, choose one</div>
+				<div>
+					<input id="clinical-research" type="radio" value="Clinical Research" name="research-type" class="research-type"/>
+					<label for="clinical-research">Clinical Research</label>
+					<input id="basic-science" type="radio" value="Basic Science" name="research-type" class="research-type"/>
+					<label for="basic-science">Basic Science</label>
+					<input id="health-delivery" type="radio" value="Health Delivery/Policy" name="research-type" class="research-type"/>
+					<label for="health-delivery">Health Delivery/Policy</label>
+					<input id="other" type="radio" value="Other" name="research-type" class="research-type"/>
+					<label for="other">Other</label>
+					<input type="text" class="other-research-type"></input>
+					<a id="research-type-save" href="#">Save</a>
+				</div>
+			</div>
+			<div class="project-edit-title">Add/Edit Student Projects</div>
+			<div class="project-edit-form">
+				<div>
+					<label class="lb-first" for="project-name">Project Name:</label>
+					<input id="project-name" name="project-name" type="text"/>
+					<label for="project-location">Location:</label>
+					<input id="project-location" name="project-location" type="text"/>
+				</div>
+				<div>
+					<label class="lb-first project-objectives-label" for="project-objectives">Objectives:</label>
+					<textarea id="project-objectives" name="project-objectives"></textarea>
+				</div>
+				<div>
+					<label class="lb-second project-resp-label" for="project-resp">Student Responsibilities:</label>
+					<textarea id="project-resp" name="project-resp"/>
+				</div>
+				<div>
+					<label class="lb-second" for="project-link">Link to related information:</label>
+					<input id="project-link" name="project-link" type="text"></textarea>
+				</div>
+				<div>
+					<label for="project-contact-info">Optional Contact information if different than UC Davis Profile:</label>
+					<textarea id="project-contact-info" name="project-contact-info"></textarea>
+				</div>
+				<div class="project-actions">
+					<div>
+						<a id="project-save" href="#">Save</a>
+						<a id="project-add" href="#">Add Another</a>
+						<a id="project-cancel" href="#">Cancel</a>
+					</div>
+				</div>
+			</div>
+			<div class="project-list-title">Current Student Projects</div>
+			<div class="project-list">
+				<table>
+					<thead>
+						<tr class="project-list-header">
+							<th class="name-col">Name</th>
+							<th class="location-col">Location</th>
+							<th class="actions-col">Action</th>
+						</tr>							
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+        </div>
     ]]></Content>
     
     <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
         <!DOCTYPE html>
+        <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
+        <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
+        <script type="text/javascript">
+		    gadgets.util.registerOnLoadHandler(function() {
+				gadgets.orng.showGadget();
+				UCSF.StudentProject.Load(function() {
+					UCSF.StudentProject.projectsInfo.projects.forEach(function(value, index) {
+						var tmpl = $("#template-project").html();
+						var html = _.template(tmpl)({ m: value});
+						$('.project-list').append(html);				
+					});
+					if(UCSF.StudentProject.projectsInfo.lastUpdated) {
+						$('.last-updated-date').text(UCSF.StudentProject.projectsInfo.lastUpdated);
+						$('.last-updated-section').show();
+					}
+					
+					if(UCSF.StudentProject.projectsInfo.researchType) {
+						$('.research-type').text(UCSF.StudentProject.projectsInfo.researchType)
+						$('.research-type-section').show();
+					}
+					
+					UCSF.StudentProject.adjustHeight();
+				});
+			});
+		
+			UCSF.StudentProject.adjustHeight = function() {
+				var h = $("#student-projects").height();
+				h = h > 150?h+10:175; 
+	      		gadgets.window.adjustHeight(h);
+			}	
+
+        </script>        
+   		<script type="text/template" id="template-project">
+			<div class="project">
+				<div class="project-title" {{=m.name ? '' :'style="display:none"'}}>				
+					<span class="project-name">{{=m.name}}</span>
+					<span>located in</span>
+					<span class="project-location">{{=m.location}}</span>
+				</div>
+				<div class="project-objectives-section" {{=m.objectives ? '' :'style="display:none"'}}>				
+					<span>Objectives:</span><span>{{=m.objectives}}</span>
+				</div>
+				<div class="student-resp-section" {{=m.studentResp ? '' :'style="display:none"'}}>				
+					<span>Student Responsibilities:</span><span>{{=m.studentResp}}</span>
+				</div>
+				<div class="project-link-section" {{=m.link ? '' :'style="display:none"'}}>
+					<a href="{{=m.link}}" >Learn More</a>
+				</div>
+			</div>
+		</script>
+
+        <style>
+			.student-projects-header {margin-bottom: 20px;}
+			.research-type-section {display: inline-block;}
+			.research-type {margin-left: 5px;display: inline-block;font-weight: bold;}
+			.last-updated-section {float: right; display: inline-block;}			
+			.last-updated-date {margin-left: 5px;}
+			.project {margin-top: 15px;}
+			.project-title {margin-bottom: 5px;}
+			.project-name {font-weight: bold;}			
+			.project-location {font-weight: bold;}
+			.project-objectives-section {margin-bottom: 5px;}
+			.student-resp-section {margin-bottom: 5px;}
+        </style>
+        
+        <div id="student-projects">
+			<div class="student-projects-header">
+				<div class="research-type-section" style="display:none">
+					<span>In</span><span class="research-type"></span>
+				</div>
+				<div class="last-updated-section" style="display:none">
+					Last Updated:<span class="last-updated-date">11/11/20</span>
+				</div>
+			</div>
+			<div class="project-list">	
+			</div>
+        </div>
     ]]></Content>
 </Module>

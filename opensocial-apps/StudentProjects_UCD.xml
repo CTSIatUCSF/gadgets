@@ -91,10 +91,14 @@
    ]]></Content>
         
     <Content type="html" view="home"  preferred_width="700" preferred_height="500"><![CDATA[    
+	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="screen, projection">
+	    <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
+	
         <script type="text/javascript">
 			UCSF.StudentProject.RenderProject = function(project, select) {
+				var projectId = $('.project-list tbody tr').length + 1;
 				var tmpl = $("#template-project").html();
-				var html = _.template(tmpl)({ m: project, icons: UCSF.StudentProject.icons});
+				var html = _.template(tmpl)({ m: project, id: projectId, icons: UCSF.StudentProject.icons});
 				$('.project-list tr').removeClass('selected')
 				$('.project-list tbody').append(html);
 				if(select) {
@@ -102,12 +106,12 @@
 				}
 			}
 			UCSF.StudentProject.CopyFormToObject = function(project) {
-				project.name = $('#project-name').val();
-				project.location = $('#project-location').val();
-				project.objectives = $('#project-objectives').val();
-				project.studentResp = $('#project-resp').val();
-				project.link = $('#project-link').val();
-				project.contactInfo = $('#project-contact-info').val();				
+				project.name = $.trim($('#project-name').val());
+				project.location = $.trim($('#project-location').val());
+				project.objectives = $.trim($('#project-objectives').val());
+				project.studentResp = $.trim($('#project-resp').val());
+				project.link = $.trim($('#project-link').val());
+				project.contactInfo = $.trim($('#project-contact-info').val());				
 			}
 			
 			UCSF.StudentProject.Save = function(callback) {
@@ -173,6 +177,21 @@
 				});
 				
                 $(document).ready(function () {
+					$(".project-list table" ).sortable({ 
+						items: "tbody tr",
+						axis: "y",
+						update: function( event, ui ) {
+							 var projects = [];
+							 $(".project-list table tbody tr").each(function(index, elem) {
+								var projectId = $(elem).data('id');
+								projects.push(UCSF.StudentProject.projectsInfo.projects[projectId - 1]);
+								$(elem).data('id', projects.length);
+							 });
+							 UCSF.StudentProject.projectsInfo.projects = projects;
+							 UCSF.StudentProject.Save();
+						}
+					});
+
 					UCSF.StudentProject.icons = {
 						editIcon: $('#edit-project-link').attr('src'),
 						deleteIcon: $('#delete-project-link').attr('src')
@@ -236,6 +255,9 @@
 						}
 						projectRow.remove();
 						UCSF.StudentProject.projectsInfo.projects.splice(projectId, 1);
+						$(".project-list table tbody tr").each(function(index, elem) {
+							$(elem).data('id', index+1);
+						});
 						
 						UCSF.StudentProject.Save();
 						UCSF.StudentProject.adjustHeight();
@@ -272,7 +294,7 @@
         </script>  
 		
 		<script type="text/template" id="template-project">
-			<tr>
+			<tr data-id="{{=id}}">
 				<td class="project-name">{{=m.name}}</td>
 				<td class="project-location">{{=m.location}}</td>
 				<td>
@@ -318,6 +340,8 @@
 			.project-list .actions-col {width: 50px;}
 			.project-list td {text-align:left;padding-left: 5px;background-color: rgb(233,235,245);vertical-align: middle;}
 			.project-list .selected td{background-color: rgb(207,213,234);}
+			.project-name {width:400px;}
+			.project-location {width:230px;}
         </style>
         
         <div id="student-projects">
@@ -432,13 +456,19 @@
 					<span class="project-location">{{=m.location}}</span>
 				</div>
 				<div class="project-objectives-section" {{=m.objectives ? '' :'style="display:none"'}}>				
-					<span>Objectives:</span><span>{{=m.objectives}}</span>
+					<span>Objectives:</span>
+					<span class="project-content">{{=m.objectives}}</span>
 				</div>
 				<div class="student-resp-section" {{=m.studentResp ? '' :'style="display:none"'}}>				
-					<span>Student Responsibilities:</span><span>{{=m.studentResp}}</span>
+					<span>Student Responsibilities:</span>
+					<span class="project-content">{{=m.studentResp}}</span>
+				</div>
+				<div class="contact-info-section" {{=m.contactInfo ? '' :'style="display:none"'}}>				
+					<span>Contact Information:</span>
+					<span class="project-content">{{=m.contactInfo}}</span>
 				</div>
 				<div class="project-link-section" {{=m.link ? '' :'style="display:none"'}}>
-					<a href="{{=m.link}}" >Learn More</a>
+					<a href="{{=m.link}}" target="_blank">Learn More</a>
 				</div>
 			</div>
 		</script>
@@ -450,11 +480,13 @@
 			.last-updated-section {float: right; display: inline-block;}			
 			.last-updated-date {margin-left: 5px;}
 			.project {margin-top: 15px;}
+			.project .project-content{white-space: pre-line;}
 			.project-title {margin-bottom: 5px;}
 			.project-name {font-weight: bold;}			
 			.project-location {font-weight: bold;}
 			.project-objectives-section {margin-bottom: 5px;}
 			.student-resp-section {margin-bottom: 5px;}
+			.contact-info-section {margin-bottom: 5px;}
         </style>
         
         <div id="student-projects">

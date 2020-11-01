@@ -39,6 +39,14 @@
 				escape: /\{\{-(.+?)\}\}/g
 			};
 
+			UCSF.gadgetEventTrack = function (action, label, value) {		
+				var message = {'action' : action};
+				if (label) {message.label = label;}
+				if (value) {message.value = value;}
+				
+				gadgets.orng.reportGoogleAnalyticsEvent(message);
+			}	
+
 			UCSF.StudentProject.Load = function(callback) {
 				osapi.appdata.get({'userId': '@owner', 'appId':'@app', 'fields' : ['projects_lastUpdated', 'projects_researchType', 'projects_count']} ).execute(function(result){
 					var viewer = os.osapi.getViewerFromResult(result);
@@ -163,14 +171,17 @@
 					}
 					
 					if(UCSF.StudentProject.projectsInfo.researchType) {
-						var elem = $('.research-type[value = "'+ UCSF.StudentProject.projectsInfo.researchType +'"]');
-						if(elem.length > 0) {
-							elem.prop('checked', 'true');
-						}
-						else {
-							$('#other').prop('checked', 'true');
-							$('.other-research-type').val(UCSF.StudentProject.projectsInfo.researchType)
-						}					
+						var types = UCSF.StudentProject.projectsInfo.researchType.split(',');
+						types.forEach(function(type, index) {
+							var elem = $('.research-type[value = "'+ type +'"]');
+							if(elem.length > 0) {
+								elem.prop('checked', 'true');
+							}
+							else {
+								$('#other').prop('checked', 'true');
+								$('.other-research-type').val(type)
+							}					
+						});
 					}
 					
 					UCSF.StudentProject.adjustHeight();
@@ -264,9 +275,8 @@
 						return false;
 					})
 
-					$('.research-type').change(function() {
-						var reserchType = $(this).val();
-						if(reserchType != 'Other') {
+					$('#other').change(function() {
+						if(!$(this).prop('checked')) {
 							$('.other-research-type').val('');
 						}
 					});
@@ -277,11 +287,16 @@
 
 										
 					$('#research-type-save').click(function() {
-						var reserchType = $('.research-type:checked').val();
-						if(reserchType == 'Other') {
-							reserchType= $('.other-research-type').val();
-						}
-						UCSF.StudentProject.projectsInfo.researchType = reserchType;
+						var types = [];
+						$('.research-type:checked').each(function(index, elem) {
+							var value = $(elem).val();
+							if(value == 'Other') {
+								value= $('.other-research-type').val();
+							}
+							types.push(value);
+						});
+						
+						UCSF.StudentProject.projectsInfo.researchType = types.join(',');
 						UCSF.StudentProject.Save();
 						
 						return false;
@@ -353,13 +368,13 @@
 			<div class="research-type-section">
 				<div>Type of research, choose one</div>
 				<div>
-					<input id="clinical-research" type="radio" value="Clinical Research" name="research-type" class="research-type"/>
+					<input id="clinical-research" type="checkbox" value="Clinical Research" name="research-type" class="research-type"/>
 					<label for="clinical-research">Clinical Research</label>
-					<input id="basic-science" type="radio" value="Basic Science" name="research-type" class="research-type"/>
+					<input id="basic-science" type="checkbox" value="Basic Science" name="research-type" class="research-type"/>
 					<label for="basic-science">Basic Science</label>
-					<input id="health-delivery" type="radio" value="Health Delivery/Policy" name="research-type" class="research-type"/>
+					<input id="health-delivery" type="checkbox" value="Health Delivery/Policy" name="research-type" class="research-type"/>
 					<label for="health-delivery">Health Delivery/Policy</label>
-					<input id="other" type="radio" value="Other" name="research-type" class="research-type"/>
+					<input id="other" type="checkbox" value="Other" name="research-type" class="research-type"/>
 					<label for="other">Other</label>
 					<input type="text" class="other-research-type"></input>
 					<a id="research-type-save" href="#">Save</a>
@@ -414,7 +429,7 @@
         </div>
     ]]></Content>
     
-    <Content type="html" view="profile" preferred_width="670" preferred_height="175"><![CDATA[
+    <Content type="html" view="profile" preferred_width="670" preferred_height="200"><![CDATA[
         <!DOCTYPE html>
         <link rel="stylesheet" href="css/gadget.css" type="text/css" media="screen, projection" >
         <link rel="stylesheet" href="css/inst.css" type="text/css" media="screen, projection" >
@@ -424,7 +439,8 @@
 				UCSF.StudentProject.Load(function() {
 					UCSF.StudentProject.projectsInfo.projects.forEach(function(value, index) {
 						var tmpl = $("#template-project").html();
-						var html = _.template(tmpl)({ m: value});
+						var num = UCSF.StudentProject.projectsInfo.projects.length > 1? index +1 : 0;
+						var html = _.template(tmpl)({ m: value, num: num});
 						$('.project-list').append(html);				
 					});
 					if(UCSF.StudentProject.projectsInfo.lastUpdated) {
@@ -433,17 +449,25 @@
 					}
 					
 					if(UCSF.StudentProject.projectsInfo.researchType) {
-						$('.research-type').text(UCSF.StudentProject.projectsInfo.researchType)
+						var types = UCSF.StudentProject.projectsInfo.researchType;
+						$('.research-type').text(types.replace(',', ', '));
 						$('.research-type-section').show();
 					}
 					
 					UCSF.StudentProject.adjustHeight();
 				});
+				
+                $(document).ready(function () {
+					$('.project-list').on('click', '.project-link-section a', function (){
+						UCSF.gadgetEventTrack('more_information', $(this).attr("href"));
+					});								
+				});
+
 			});
 		
 			UCSF.StudentProject.adjustHeight = function() {
 				var h = $("#student-projects").height();
-				h = h > 150?h+10:175; 
+				h = h > 170?200:h+10; 
 	      		gadgets.window.adjustHeight(h);
 			}	
 
@@ -451,6 +475,7 @@
    		<script type="text/template" id="template-project">
 			<div class="project">
 				<div class="project-title" {{=m.name ? '' :'style="display:none"'}}>				
+					<span class="project-number" {{=num ? '' :'style="display:none"'}}>Project {{=num}}:</span>
 					<span class="project-name">{{=m.name}}</span>
 					<span>located in</span>
 					<span class="project-location">{{=m.location}}</span>
@@ -482,7 +507,7 @@
 			.project {margin-top: 15px;}
 			.project .project-content{white-space: pre-line;}
 			.project-title {margin-bottom: 5px;}
-			.project-name {font-weight: bold;}			
+			.project-name,.project-number {font-weight: bold;}			
 			.project-location {font-weight: bold;}
 			.project-objectives-section {margin-bottom: 5px;}
 			.student-resp-section {margin-bottom: 5px;}

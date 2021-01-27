@@ -70,14 +70,55 @@ namespace ClinicalTrialsApi
         protected async Task<string> DownloadContentFile(string domainName) {
             var fileName = GetContentFilename(domainName) + ".gz";
 
-            using (var response = await new HttpClient().GetAsync(GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz"))
-            using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            // we now do this via cron script before midnight because of TSL handshake issues
+            if (Boolean.Parse(ConfigurationManager.AppSettings["fetch.trials"]))
             {
-                fileStream.SetLength(0);
-                await response.Content.CopyToAsync(fileStream);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                using (var response = await new HttpClient().GetAsync(GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz"))
+                //using (var response = await new HttpClient().GetAsync("https://ctsi.ucsf.edu/"))
+                using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    fileStream.SetLength(0);
+                    await response.Content.CopyToAsync(fileStream);
+                }
             }
 
             return Decompress(fileName);
+        }
+
+        // install curl and add to path!
+        // Also add IIS_IUSRS as able to read and execute!
+        protected string DownloadContentFile_HACK(string domainName)
+        {
+            var fileName = GetContentFilename(domainName) + ".gz";
+            Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "curl.exe";
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.Arguments = GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz -o " + fileName;
+            process.Start();
+            process.WaitForExit();
+            Process.Start("curl.exe", GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz -o " + fileName);
+            //File.WriteAllText(fileName + ".log", process.StandardOutput.ReadToEnd());
+            return Decompress(fileName);
+            /**
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
+            process.Start();
+
+            process.StandardInput.WriteLine("curl " + GetClinicalTrialsBaseURL(domainName) + "/__data_export.json.gz -o " + fileName);
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
+            process.WaitForExit();
+            System.IO.File.WriteAllText(fileName + ".log", process.StandardOutput.ReadToEnd());
+            //Console.WriteLine(process.StandardOutput.ReadToEnd());
+            return Decompress(fileName);**/
         }
 
         protected string Decompress(string fileName)

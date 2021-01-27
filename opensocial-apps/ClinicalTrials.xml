@@ -233,23 +233,29 @@
 						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
 						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 						var ntc = $.trim($('#ntc-number').val());
-						var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc + '?profile_url=' + document.location.hostname;
-						gadgets.io.makeRequest(url, function(result) {
-							$(".add-trial .error").text('').hide();
-							if(result.data != null) {
-								UCSF.ClinicalTrials.deleted = UCSF.ClinicalTrials.deleted.filter(function(elem) {
-									return $.trim(elem).length > 0 && elem !== ntc;
-								});
-								renderTrial(result.data);
-								saveTrials();
-							}
-							else if(result.rc == 404) {  				
-								$(".add-trial .error").text('Clinical Trial Not Found').show();
-							}						
-							else {
-								$(".add-trial .error").text('Cannot add clinical trial').show();								
-							}
-						}, params);
+						
+						osapi.jsonld.getOwner().execute(function(ownerData) {					
+							framePerson(ownerData, function(ownerObj) {
+								var ownerUrl = UCSF.ConvertToProductionURL(ownerObj[FOAF('workplaceHomepage')]);						
+								var url = UCSF.ClinicalTrials.seviceURL + '/' + ntc + '?profile_url=' + ownerUrl;
+								gadgets.io.makeRequest(url, function(result) {
+									$(".add-trial .error").text('').hide();
+									if(result.data != null) {
+										UCSF.ClinicalTrials.deleted = UCSF.ClinicalTrials.deleted.filter(function(elem) {
+											return $.trim(elem).length > 0 && elem !== ntc;
+										});
+										renderTrial(result.data);
+										saveTrials();
+									}
+									else if(result.rc == 404) {  				
+										$(".add-trial .error").text('Clinical Trial Not Found').show();
+									}						
+									else {
+										$(".add-trial .error").text('Cannot add clinical trial').show();								
+									}
+								}, params);
+							});
+						});
 						return false;
 					});
 					$('#add-trial-form').click(function() {
@@ -299,7 +305,7 @@
 					<input id="ntc-number" type="text"/> <label>NCT Number</label>
 					<div class="error" style="display:none;"/>
 				  </div>    		  
-				  <p>Please make sure the recruiting status and contact information are correct for this trial at <a href="clinicaltrials.gov">clinicaltrials.gov</a>.</p>    		  
+				  <p>Please make sure the recruiting status and contact information are correct for this trial at <a href="https://clinicaltrials.gov">clinicaltrials.gov</a>.</p>    		  
 				  <div>
 					<a href="" type="button" id="add-trial">Add Trial</a>
 					<span>|</span>

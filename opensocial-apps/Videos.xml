@@ -167,12 +167,11 @@
             
             #example-videos-label { margin: 4em auto 1em auto; font-size: 24px; color: orange; font-weight: bold; font-family: Helvetica, Arial, sans-serif;  }
             
-            /* this is just to simulate the gadget wrapper. in a real example we wouldn't need to specify this */
-            #videos { width: 670px; height: 330px; margin: 0 auto }
-            
+            #videos { width: 100%; height: 330px; margin: 0 auto }
             #videos { font-family: Helvetica, Arial, sans-serif; font-size: small }
             #current_video_container { overflow: auto; height: 100% }
             #current_video_container > iframe, #current_video_container > .noembed-embed { overflow: auto; vertical-align: middle }
+            #current_video_container > iframe { max-width: 100% }
             
             #video_navigator { width: 150px; float: right; height: 100%; overflow: auto; overflow-x: hidden }
             #video_navigator { border: 1px solid #e8e8e8 }

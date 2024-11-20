@@ -122,7 +122,6 @@
 			.committee-list {overflow-y: auto;margin-top: 20px;}
 			.committee-list table {margin: 10px;}
 			.committee-list td {padding: 5px;}
-			.c-date {width: 70px;}
         </style>
 		
    ]]></Content>

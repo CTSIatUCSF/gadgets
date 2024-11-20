@@ -4,7 +4,6 @@ using System.Web.Http;
 using ClinicalTrialsApi.App_Start;
 using System.Web;
 using System.IO;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;

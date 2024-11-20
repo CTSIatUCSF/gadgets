@@ -6,9 +6,7 @@ using System.Web.Http;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Xml;
-using System.Globalization;
 using System.Text;
 
 namespace ClinicalTrialsApi.Controllers

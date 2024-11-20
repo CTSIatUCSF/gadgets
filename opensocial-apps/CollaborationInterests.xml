@@ -31,6 +31,7 @@
 					'MulticenterClinicalResearch',
 					'CommunityAndStakeholderOrganizations',
 					'CompaniesAndEntrepreneurs',
+					'PolicyChange',
 					'Press',
 					'ProspectiveDonors',
 					'Narrative',
@@ -45,7 +46,7 @@
    ]]>
    </Content>
         
-    <Content type="html" view="home"  preferred_width="800" preferred_height="900"><![CDATA[    
+    <Content type="html" view="home"  preferred_width="800" preferred_height="1200"><![CDATA[    
 		<!DOCTYPE html>
 		<script type="text/javascript">
 			gadgets.util.registerOnLoadHandler(function() {
@@ -67,7 +68,7 @@
 				}
             	$(document).ready(function () {
 					gadgets.orng.showGadget();
-					gadgets.window.adjustHeight(900);						
+					gadgets.window.adjustHeight(1200);						
 					$(".pubs-gadget").block({ message: "Loading..." });
 					UCSF.CollaborationInterests.loadInterests(function() {
 						$(".pubs-gadget").unblock();
@@ -156,11 +157,15 @@
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="CommunityAndStakeholderOrganizations" type="checkbox" /></div>
-					<div class="item-text"><span class="bold">Community and Stakeholder Organizations</span> - interested in working with community organizations, clinics and health systems, public health programs, other community leaders and/or policy makers to advance health for all, with an emphasis on addressing health inequities and disparities.</div>
+					<div class="item-text"><span class="bold">Community and Partner Organizations</span> - interested in working with community organizations, clinics and health systems, public health programs, other community leaders and/or policy makers to advance health for all, with an emphasis on addressing health inequities and disparities.</div>
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="CompaniesAndEntrepreneurs" type="checkbox" /></div>
 					<div class="item-text"><span class="bold">Companies and Entrepreneurs</span> - interested in opportunities vetted by UCSF Health Hub to advise, conduct industry-sponsored research, and/or co-develop products with growth-stage companies. <span class="underline">Note</span>: UCSF Health Hub offers a private, curated match-making service exclusively for UCSF. To get started, <a target="_blank" href="https://www.healthhubsf.org/apply">click here to apply</a>.</div>
+				</div>
+				<div class="interest-item">
+					<div class="item-sel"><input id="PolicyChange" type="checkbox" /></div>
+					<div class="item-text"><span class="bold">Policy Change</span> - Interested in working with policymakers in government, health systems, professional organizations, advocacy organizations, industry, and other groups to translate evidence into policy, both governmental and non-governmental policy. <a target="_blank" href="https://ctsi.ucsf.edu/about-us/programs/impact">IMPACT</a></div>
 				</div>
 				<div class="interest-item">
 					<div class="item-sel"><input id="Press" type="checkbox" /></div>
@@ -227,8 +232,9 @@
 					<li id="AcademicCollaboration" style="display:none">Academic Collaboration</li>
 					<li id="AcademicSenateCommitteeService" style="display:none">Academic Senate Committee Service</li>
 					<li id="MulticenterClinicalResearch" style="display:none">Multicenter Clinical Research</li>
-					<li id="CommunityAndStakeholderOrganizations" style="display:none">Community and Stakeholder Organizations</li>
+					<li id="CommunityAndStakeholderOrganizations" style="display:none">Community and Partner Organizations</li>
 					<li id="CompaniesAndEntrepreneurs" style="display:none">Companies and Entrepreneurs</li>
+					<li id="PolicyChange" style="display:none">Policy Change</li>
 					<li id="Press" style="display:none">Press</li>
 					<li id="ProspectiveDonors" style="display:none">Prospective Donors</li>
 				</ul>
